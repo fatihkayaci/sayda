@@ -12,7 +12,9 @@ const navLinks = [
 
 <header class="header">
   <div class="header__inner container">
-    <a href="/" class="header__logo">SAYDA<span>İNŞAAT</span></a>
+    <a href="/" class="header__logo">
+      <img src={site.logo} alt="Sayda İnşaat" width="128" height="34" />
+    </a>
 
     <nav class="header__nav" id="mainMenu">
       <ul>
@@ -54,17 +56,14 @@ const navLinks = [
   }
 
   .header__logo {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 0.02em;
-    color: var(--color-navy);
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
   }
 
-  .header__logo span {
-    margin-left: 0.35em;
-    color: var(--color-text);
+  .header__logo img {
+    display: block;
+    height: 34px;
+    width: auto;
   }
 
   .header__nav ul {

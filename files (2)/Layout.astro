@@ -1,0 +1,46 @@
+---
+import "@fontsource/archivo/400.css";
+import "@fontsource/archivo/500.css";
+import "@fontsource/archivo/600.css";
+import "@fontsource/archivo/700.css";
+import "@fontsource/archivo-black/400.css";
+import "@fontsource/syne/700.css";
+import "@fontsource/syne/800.css";
+
+import "../styles/tokens.css";
+import Seo from "../components/Seo.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  gorsel?: string;
+  noindex?: boolean;
+  kurumSemasi?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2b2e83" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Seo {...props} />
+  </head>
+
+  <body>
+    <a class="atla" href="#icerik">İçeriğe atla</a>
+
+    <!-- Header buraya gelecek -->
+
+    <main id="icerik">
+      <slot />
+    </main>
+
+    <!-- Footer buraya gelecek -->
+  </body>
+</html>

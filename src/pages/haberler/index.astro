@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import haberlerData from '../../data/haberler.json';
+
+const sorted = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler ve duyurular.">
+  <section class="haberler-page">
+    <div class="container">
+      <h1>Haberler</h1>
+
+      <div class="haberler-page__grid">
+        {
+          sorted.map((haber) => (
+            <a class="haber-card" href={`/haberler/${haber.slug}`}>
+              <img src={haber.image} alt={haber.title} loading="lazy" />
+              <div class="haber-card__info">
+                <span class="haber-card__date">{formatter.format(new Date(haber.date))}</span>
+                <h2>{haber.title}</h2>
+                <p>{haber.excerpt}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .haberler-page {
+    padding-block: var(--space-xl);
+  }
+
+  .haberler-page h1 {
+    font-size: var(--fs-h1);
+    margin-bottom: var(--space-l);
+  }
+
+  .haberler-page__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .haber-card {
+    display: block;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .haber-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .haber-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .haber-card__info {
+    padding: var(--space-m);
+  }
+
+  .haber-card__date {
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  .haber-card h2 {
+    margin-top: 6px;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+  }
+
+  .haber-card p {
+    margin-top: 6px;
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .haberler-page__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .haberler-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

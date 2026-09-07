@@ -1,26 +1,20 @@
 [
   {
-    "name": "Proje adı (müşteriden bekleniyor)",
-    "location": "İstanbul",
     "type": "Kentsel Dönüşüm",
-    "image": "/img/project-placeholder.svg",
-    "href": "#",
-    "pending": true
+    "location": "İstanbul",
+    "image": "/img/proje-1.jpg",
+    "href": "/projeler"
   },
   {
-    "name": "Proje adı (müşteriden bekleniyor)",
-    "location": "İstanbul",
     "type": "Kat Karşılığı İnşaat",
-    "image": "/img/project-placeholder.svg",
-    "href": "#",
-    "pending": true
+    "location": "İstanbul",
+    "image": "/img/proje-2.jpg",
+    "href": "/projeler"
   },
   {
-    "name": "Proje adı (müşteriden bekleniyor)",
-    "location": "İstanbul",
     "type": "Anahtar Teslim Müteahhitlik",
-    "image": "/img/project-placeholder.svg",
-    "href": "#",
-    "pending": true
+    "location": "İstanbul",
+    "image": "/img/proje-3.jpg",
+    "href": "/projeler"
   }
 ]

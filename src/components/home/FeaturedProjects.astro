@@ -13,10 +13,9 @@ import projects from '../../data/projects.json';
       {
         projects.map((project) => (
           <a class="project-card" href={project.href}>
-            <img src={project.image} alt={project.pending ? 'Proje görseli yakında eklenecek' : project.name} loading="lazy" />
+            <img src={project.image} alt={`${project.type} - Sayda İnşaat tamamlanan proje`} loading="lazy" />
             <div class="project-card__info">
-              <span class="project-card__type">{project.type}</span>
-              <h3>{project.name}</h3>
+              <h3>{project.type}</h3>
               <span class="project-card__location">{project.location}</span>
             </div>
           </a>
@@ -80,14 +79,7 @@ import projects from '../../data/projects.json';
     padding: var(--space-m);
   }
 
-  .project-card__type {
-    font-size: var(--fs-small);
-    font-weight: 700;
-    color: var(--color-navy);
-  }
-
   .project-card h3 {
-    margin-top: 6px;
     font-family: var(--font-heading);
     font-weight: 400;
     font-size: 1.0625rem;

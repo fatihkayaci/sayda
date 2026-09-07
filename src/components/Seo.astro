@@ -21,6 +21,7 @@ const organizationLd = {
   name: site.name,
   legalName: site.legalName,
   url: site.url,
+  logo: new URL(site.logo, site.url).toString(),
   telephone: site.phone,
   email: site.email,
   foundingDate: String(site.foundedYear),
