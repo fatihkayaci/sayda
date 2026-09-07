@@ -1,17 +1,30 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import TwoPaths from '../components/home/TwoPaths.astro';
+import Services from '../components/home/Services.astro';
+import TrustBand from '../components/home/TrustBand.astro';
+import FeaturedProjects from '../components/home/FeaturedProjects.astro';
+import Clients from '../components/home/Clients.astro';
+import Documents from '../components/home/Documents.astro';
+import Process from '../components/home/Process.astro';
+import About from '../components/home/About.astro';
+import QuoteForm from '../components/home/QuoteForm.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Sayda İnşaat | İstanbul Müteahhitlik ve Kentsel Dönüşüm Firması"
+  description="1996'dan bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve anahtar teslim müteahhitlik. İş bitirme belgeli, kurumsal referanslı."
+  organizationSchema
+>
+  <Hero />
+  <TwoPaths />
+  <Services />
+  <TrustBand />
+  <FeaturedProjects />
+  <Clients />
+  <Documents />
+  <Process />
+  <About />
+  <QuoteForm />
+</Layout>

@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Kentsel Dönüşüm",
+    "description": "Riskli yapı tespiti sonrası süreç yönetimi, kat karşılığı anlaşma ve inşaatın anahtar teslim tamamlanması.",
+    "href": "/kentsel-donusum",
+    "icon": "building"
+  },
+  {
+    "title": "Kat Karşılığı İnşaat",
+    "description": "Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç.",
+    "href": "/hizmetler/kat-karsiligi-insaat",
+    "icon": "key"
+  },
+  {
+    "title": "Alt Müteahhitlik",
+    "description": "Ana yükleniciye bağlı olarak kaba veya ince yapı işlerinin taşeronluğu.",
+    "href": "/hizmetler/alt-muteahhitlik",
+    "icon": "helmet"
+  },
+  {
+    "title": "Anahtar Teslim Müteahhitlik",
+    "description": "Projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi.",
+    "href": "/hizmetler/anahtar-teslim-muteahhitlik",
+    "icon": "door"
+  },
+  {
+    "title": "Otel Renovasyonu",
+    "description": "İşletme faaliyetini aksatmadan planlanan, kapsamlı otel yenileme ve modernizasyon projeleri.",
+    "href": "/hizmetler/otel-renovasyonu",
+    "icon": "star"
+  },
+  {
+    "title": "Proje Yönetimi & Danışmanlık",
+    "description": "Bağımsız proje yönetimi, maliyet kontrolü ve teknik danışmanlık hizmetleri.",
+    "href": "/hizmetler/proje-yonetimi-danismanlik",
+    "icon": "chart"
+  }
+]

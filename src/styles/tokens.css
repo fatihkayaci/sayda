@@ -1,0 +1,43 @@
+:root {
+  /* Color */
+  --color-navy: #2b2e83; /* brand primary */
+  --color-navy-dark: #1e2163; /* hover */
+  --color-navy-deep: #191b4a; /* footer background */
+  --color-text: #111318;
+  --color-text-muted: #4a4c58;
+  --color-text-faint: #8a8c98;
+  --color-bg: #ffffff;
+  --color-bg-light: #f4f5fa;
+  --color-border: #e2e3ec;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #b7b8d6;
+
+  /* Typography */
+  --font-body: 'Archivo', sans-serif;
+  --font-heading: 'Archivo Black', sans-serif;
+  --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
+
+  --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
+  --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
+  --fs-h3: 1.375rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+
+  /* Layout */
+  --edge: 48px;
+  --edge-mobile: 20px;
+  --max-width: 1200px;
+  --radius: 4px;
+
+  /* Spacing scale */
+  --space-xs: 8px;
+  --space-s: 16px;
+  --space-m: 24px;
+  --space-l: 40px;
+  --space-xl: 64px;
+  --space-xxl: 96px;
+
+  /* Misc */
+  --transition: 180ms ease;
+  --shadow: 0 8px 24px rgba(17, 19, 24, 0.08);
+}

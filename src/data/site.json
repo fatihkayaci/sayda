@@ -1,0 +1,25 @@
+{
+  "name": "Sayda İnşaat",
+  "legalName": "Sayda İnşaat Taahhüt ve Ticaret A.Ş.",
+  "url": "https://www.sayda.com.tr",
+  "foundedYear": 1996,
+  "foundedYearVerified": false,
+  "phone": "+90 212 223 88 12",
+  "phoneHref": "tel:+902122238812",
+  "email": "info@sayda.com.tr",
+  "address": {
+    "street": "Şalcıkır Cad. Kaydırak Sok. No: 3/1",
+    "postalCode": "34457",
+    "district": "Sarıyer",
+    "city": "İstanbul",
+    "neighborhood": "Tarabya"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/saydainsaat"
+  },
+  "documents": {
+    "catalog": "/katalog.pdf",
+    "certificate": "/sertifikalar/sertifika.pdf"
+  },
+  "web3formsAccessKey": ""
+}

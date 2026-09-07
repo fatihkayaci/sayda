@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Proje adı (müşteriden bekleniyor)",
+    "location": "İstanbul",
+    "type": "Kentsel Dönüşüm",
+    "image": "/img/project-placeholder.svg",
+    "href": "#",
+    "pending": true
+  },
+  {
+    "name": "Proje adı (müşteriden bekleniyor)",
+    "location": "İstanbul",
+    "type": "Kat Karşılığı İnşaat",
+    "image": "/img/project-placeholder.svg",
+    "href": "#",
+    "pending": true
+  },
+  {
+    "name": "Proje adı (müşteriden bekleniyor)",
+    "location": "İstanbul",
+    "type": "Anahtar Teslim Müteahhitlik",
+    "image": "/img/project-placeholder.svg",
+    "href": "#",
+    "pending": true
+  }
+]

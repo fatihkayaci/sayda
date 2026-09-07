@@ -1,0 +1,62 @@
+---
+import clients from '../../data/clients.json';
+---
+
+<section class="clients">
+  <div class="container">
+    <h2 class="clients__title">Kurumsal İşverenlerimiz</h2>
+
+    {
+      clients.length > 0 ? (
+        <ul class="clients__list">
+          {clients.map((client: { name: string; logo: string }) => (
+            <li>
+              <img src={client.logo} alt={client.name} loading="lazy" />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="clients__pending">Kurumsal referanslarımız müşteri onayının ardından burada yer alacak.</p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .clients {
+    padding-block: var(--space-l);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .clients__title {
+    text-align: center;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-faint);
+    margin-bottom: var(--space-m);
+  }
+
+  .clients__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-l);
+  }
+
+  .clients__list img {
+    height: 32px;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.7;
+  }
+
+  .clients__pending {
+    text-align: center;
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+  }
+</style>
