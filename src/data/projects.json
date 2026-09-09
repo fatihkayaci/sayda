@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "proje-1",
+    "type": "Kentsel Dönüşüm",
+    "location": "İstanbul",
+    "status": "tamamlanan",
+    "image": "/img/proje-1.jpg",
+    "href": "/projeler/proje-1"
+  },
+  {
+    "slug": "proje-2",
+    "type": "Kat Karşılığı İnşaat",
+    "location": "İstanbul",
+    "status": "tamamlanan",
+    "image": "/img/proje-2.jpg",
+    "href": "/projeler/proje-2"
+  },
+  {
+    "slug": "proje-3",
+    "type": "Anahtar Teslim Müteahhitlik",
+    "location": "İstanbul",
+    "status": "devam-eden",
+    "image": "/img/proje-3.jpg",
+    "href": "/projeler/proje-3"
+  }
+]

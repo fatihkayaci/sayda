@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+
+const kurumsal = [
+  {
+    title: 'Hakkımızda',
+    description: 'Sayda İnşaat\'ın hikayesi, deneyimi ve çalışma prensipleri.',
+    href: '/hakkimizda',
+    icon: 'building',
+  },
+  {
+    title: 'Vizyon & Misyon',
+    description: 'Sayda İnşaat\'ın vizyonu ve misyonu.',
+    href: '/hakkimizda/vizyon-misyon',
+    icon: 'star',
+  },
+  {
+    title: 'Belgelerimiz',
+    description: 'Belgeler, iş bitirme evrakları ve e-katalog.',
+    href: '/belgeler',
+    icon: 'document',
+  },
+  {
+    title: 'Haberler',
+    description: 'Sayda İnşaat\'tan güncel haberler ve duyurular.',
+    href: '/haberler',
+    icon: 'mail',
+  },
+];
+---
+
+<Layout title="Kurumsal | Sayda İnşaat" description="Sayda İnşaat hakkında, vizyon ve misyonumuz, belgelerimiz ve haberler.">
+  <section class="kurumsal-hub">
+    <div class="container">
+      <h1>Kurumsal</h1>
+      <p class="kurumsal-hub__lead">İçerik hazırlanıyor.</p>
+
+      <div class="kurumsal-hub__grid">
+        {
+          kurumsal.map((item) => (
+            <a class="kurumsal-hub__card" href={item.href}>
+              <Icon name={item.icon} size={28} />
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .kurumsal-hub {
+    padding-block: var(--space-xxl);
+  }
+
+  .kurumsal-hub h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .kurumsal-hub__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .kurumsal-hub__grid {
+    margin-top: var(--space-xl);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+  }
+
+  .kurumsal-hub__card {
+    display: block;
+    padding: var(--space-l);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-navy);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .kurumsal-hub__card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .kurumsal-hub__card h2 {
+    margin-top: var(--space-s);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: var(--color-text);
+  }
+
+  .kurumsal-hub__card p {
+    margin-top: var(--space-xs);
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .kurumsal-hub__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .kurumsal-hub__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

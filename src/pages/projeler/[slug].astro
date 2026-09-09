@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import projects from '../../data/projects.json';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.type} | Sayda İnşaat`} description={`${project.type} - ${project.location}`}>
+  <article class="proje-detail">
+    <div class="container">
+      <a class="proje-detail__back" href="/projeler">← Tüm projeler</a>
+      <h1>{project.type}</h1>
+      <span class="proje-detail__location">{project.location}</span>
+      <img src={project.image} alt={`${project.type} - Sayda İnşaat`} />
+      <p class="proje-detail__note">İçerik hazırlanıyor.</p>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .proje-detail {
+    padding-block: var(--space-xl);
+  }
+
+  .proje-detail .container {
+    max-width: 760px;
+  }
+
+  .proje-detail__back {
+    display: inline-block;
+    margin-bottom: var(--space-m);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .proje-detail h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .proje-detail__location {
+    display: block;
+    margin-top: var(--space-xs);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+  }
+
+  .proje-detail img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-top: var(--space-l);
+  }
+
+  .proje-detail__note {
+    margin-top: var(--space-l);
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    background: var(--color-bg-light);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+</style>

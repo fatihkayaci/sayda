@@ -1,0 +1,88 @@
+---
+interface Project {
+  slug: string;
+  type: string;
+  location: string;
+  status: string;
+  image: string;
+  href: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="project-grid">
+  {
+    projects.map((project) => (
+      <a class="project-card" href={project.href}>
+        <img src={project.image} alt={`${project.type} - Sayda İnşaat`} loading="lazy" />
+        <div class="project-card__info">
+          <h2>{project.type}</h2>
+          <span>{project.location}</span>
+        </div>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .project-card {
+    display: block;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .project-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .project-card__info {
+    padding: var(--space-m);
+  }
+
+  .project-card h2 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.0625rem;
+  }
+
+  .project-card span {
+    display: block;
+    margin-top: 4px;
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  @media (max-width: 1024px) {
+    .project-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

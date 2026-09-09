@@ -1,0 +1,106 @@
+---
+import projects from '../../data/projects.json';
+---
+
+<section class="featured-projects">
+  <div class="container">
+    <div class="featured-projects__header">
+      <h2>Öne Çıkan Projeler</h2>
+      <a class="featured-projects__all" href="/projeler">Tüm projeler</a>
+    </div>
+
+    <div class="featured-projects__grid">
+      {
+        projects.map((project) => (
+          <a class="project-card" href={project.href}>
+            <img src={project.image} alt={`${project.type} - Sayda İnşaat tamamlanan proje`} loading="lazy" />
+            <div class="project-card__info">
+              <h3>{project.type}</h3>
+              <span class="project-card__location">{project.location}</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-projects {
+    padding-block: var(--space-xl);
+  }
+
+  .featured-projects__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--space-l);
+  }
+
+  .featured-projects__header h2 {
+    font-size: var(--fs-h2);
+  }
+
+  .featured-projects__all {
+    font-weight: 700;
+    font-size: var(--fs-small);
+    color: var(--color-navy);
+    white-space: nowrap;
+  }
+
+  .featured-projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .project-card {
+    display: block;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .project-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .project-card__info {
+    padding: var(--space-m);
+  }
+
+  .project-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.0625rem;
+  }
+
+  .project-card__location {
+    display: block;
+    margin-top: 4px;
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  @media (max-width: 1024px) {
+    .featured-projects__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .featured-projects__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

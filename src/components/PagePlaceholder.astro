@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  lead?: string;
+}
+
+const { title, description, heading, lead } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <section class="placeholder">
+    <div class="container">
+      <h1>{heading}</h1>
+      {lead && <p class="placeholder__lead">{lead}</p>}
+      <p class="placeholder__note">İçerik hazırlanıyor.</p>
+      <slot />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .placeholder {
+    padding-block: var(--space-xxl);
+    min-height: 40vh;
+  }
+
+  .placeholder .container {
+    max-width: 760px;
+  }
+
+  .placeholder h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .placeholder__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .placeholder__note {
+    margin-top: var(--space-l);
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    background: var(--color-bg-light);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+</style>

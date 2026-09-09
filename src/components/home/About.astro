@@ -1,0 +1,64 @@
+---
+import site from '../../data/site.json';
+---
+
+<section class="about">
+  <div class="container about__inner">
+    <img class="about__image" src="/img/hakkimizda.png" alt="Sayda İnşaat ekibi" loading="lazy" />
+
+    <div class="about__content">
+      <h2>Hakkımızda</h2>
+      <p>
+        {site.foundedYear} yılından bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve
+        müteahhitlik alanlarında faaliyet gösteriyoruz. İş bitirme belgeli tamamlanmış projeler ve
+        kurumsal iş ortaklıklarıyla sürdürdüğümüz bu süreçte önceliğimiz her zaman sözleşmeye ve
+        zamanına bağlı kalmak oldu.
+      </p>
+      <a class="about__link" href="/hakkimizda">Daha fazla bilgi</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding-block: var(--space-xl);
+  }
+
+  .about__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: var(--space-l);
+    align-items: center;
+  }
+
+  .about__image {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .about__content h2 {
+    font-size: var(--fs-h2);
+  }
+
+  .about__content p {
+    margin-top: var(--space-m);
+    color: var(--color-text-muted);
+    max-width: 60ch;
+  }
+
+  .about__link {
+    display: inline-block;
+    margin-top: var(--space-m);
+    font-weight: 700;
+    font-size: var(--fs-small);
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1024px) {
+    .about__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

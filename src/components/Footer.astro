@@ -1,0 +1,162 @@
+---
+import Icon from './Icon.astro';
+import site from '../data/site.json';
+import services from '../data/services.json';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <p class="footer__logo">SAYDA<span>İNŞAAT</span></p>
+      <p class="footer__tagline">{site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik.</p>
+      {
+        site.social.instagram && (
+          <a class="footer__social" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <Icon name="instagram" size={20} />
+          </a>
+        )
+      }
+    </div>
+
+    <nav class="footer__column" aria-label="Hizmetler">
+      <h2>Hizmetler</h2>
+      <ul>
+        {services.map((service) => (
+          <li><a href={service.href}>{service.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer__column" aria-label="Kurumsal">
+      <h2>Kurumsal</h2>
+      <ul>
+        <li><a href="/hakkimizda">Hakkımızda</a></li>
+        <li><a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a></li>
+        <li><a href="/projeler">Projeler</a></li>
+        <li><a href="/belgeler">Belge &amp; Dökümanlar</a></li>
+        <li><a href="/haberler">Haberler</a></li>
+        <li><a href="/rehber">Rehber</a></li>
+        <li><a href="/kariyer">Kariyer</a></li>
+        <li><a href="/iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+
+    <div class="footer__column">
+      <h2>İletişim</h2>
+      <ul class="footer__contact">
+        <li>
+          <Icon name="pin" size={18} />
+          <span>{site.address.street}, {site.address.neighborhood} / {site.address.city}</span>
+        </li>
+        <li>
+          <Icon name="phone" size={18} />
+          <a href={site.phoneHref}>{site.phone}</a>
+        </li>
+        <li>
+          <Icon name="mail" size={18} />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom container">
+    <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-navy-deep);
+    color: var(--color-on-dark-muted);
+    padding-block: var(--space-xxl) var(--space-l);
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    gap: var(--space-l);
+  }
+
+  .footer__logo {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #fff;
+  }
+
+  .footer__logo span {
+    margin-left: 0.35em;
+    color: var(--color-on-dark-muted);
+  }
+
+  .footer__tagline {
+    margin-top: var(--space-s);
+    max-width: 32ch;
+    font-size: var(--fs-small);
+  }
+
+  .footer__social {
+    display: inline-flex;
+    margin-top: var(--space-m);
+    color: var(--color-on-dark-muted);
+    transition: color var(--transition);
+  }
+
+  .footer__social:hover {
+    color: #fff;
+  }
+
+  .footer__column h2 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: var(--fs-small);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-m);
+  }
+
+  .footer__column ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    font-size: var(--fs-small);
+  }
+
+  .footer__column a {
+    transition: color var(--transition);
+  }
+
+  .footer__column a:hover {
+    color: #fff;
+  }
+
+  .footer__contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer__bottom {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-m);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: var(--fs-small);
+  }
+
+  @media (max-width: 1024px) {
+    .footer__inner {
+      grid-template-columns: 1fr 1fr;
+      row-gap: var(--space-l);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

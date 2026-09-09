@@ -1,0 +1,236 @@
+---
+import services from '../../data/services.json';
+import site from '../../data/site.json';
+---
+
+<section class="quote-form" id="quote-form">
+  <div class="container quote-form__inner">
+    <div class="quote-form__intro">
+      <h2>Teklif Alın</h2>
+      <p>Kentsel dönüşüm, kat karşılığı inşaat veya müteahhitlik ihtiyacınızı anlatın, size dönelim.</p>
+      <ul class="quote-form__contact">
+        <li><a href={site.phoneHref}>{site.phone}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      </ul>
+    </div>
+
+    <form class="quote-form__form" id="quoteForm">
+      <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+      <input type="checkbox" name="botcheck" class="quote-form__honeypot" tabindex="-1" autocomplete="off" />
+
+      <div class="quote-form__row">
+        <label>
+          <span>Ad Soyad</span>
+          <input type="text" name="name" required />
+        </label>
+        <label>
+          <span>Telefon</span>
+          <input type="tel" name="phone" required />
+        </label>
+      </div>
+
+      <label>
+        <span>E-posta</span>
+        <input type="email" name="email" required />
+      </label>
+
+      <label>
+        <span>İlgilendiğiniz Hizmet</span>
+        <select name="service">
+          {services.map((service) => <option value={service.title}>{service.title}</option>)}
+          <option value="Diğer">Diğer</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Mesajınız</span>
+        <textarea name="message" rows="4"></textarea>
+      </label>
+
+      <label class="quote-form__consent">
+        <input type="checkbox" name="kvkk" required />
+        <span>
+          <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni okudum, kişisel
+          verilerimin işlenmesini kabul ediyorum.
+        </span>
+      </label>
+
+      <button type="submit" class="button button--primary">Gönder</button>
+
+      <p class="quote-form__status" id="quoteStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .quote-form {
+    padding-block: var(--space-xl);
+    background: var(--color-bg-light);
+  }
+
+  .quote-form__inner {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--space-xl);
+  }
+
+  .quote-form__intro h2 {
+    font-size: var(--fs-h2);
+  }
+
+  .quote-form__intro p {
+    margin-top: var(--space-s);
+    color: var(--color-text-muted);
+    max-width: 40ch;
+  }
+
+  .quote-form__contact {
+    margin-top: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-weight: 700;
+  }
+
+  .quote-form__contact a {
+    color: var(--color-navy);
+  }
+
+  .quote-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    background: var(--color-bg);
+    padding: var(--space-l);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+  }
+
+  .quote-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-m);
+  }
+
+  .quote-form__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: var(--fs-small);
+    font-weight: 600;
+  }
+
+  .quote-form__form input:not([type='checkbox']),
+  .quote-form__form select,
+  .quote-form__form textarea {
+    font: inherit;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .quote-form__form input:focus,
+  .quote-form__form select:focus,
+  .quote-form__form textarea:focus {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 1px;
+  }
+
+  .quote-form__consent {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .quote-form__consent input {
+    margin-top: 3px;
+  }
+
+  .quote-form__consent a {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .quote-form__honeypot {
+    display: none;
+  }
+
+  .quote-form__form button {
+    align-self: flex-start;
+    border: none;
+  }
+
+  .quote-form__status {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    min-height: 1em;
+  }
+
+  .quote-form__status[data-state='success'] {
+    color: #1b7f3a;
+  }
+
+  .quote-form__status[data-state='error'] {
+    color: #b3261e;
+  }
+
+  @media (max-width: 1024px) {
+    .quote-form__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quote-form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('quoteForm') as HTMLFormElement | null;
+  const status = document.getElementById('quoteStatus');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
+    if (!accessKey) {
+      status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
+      status.setAttribute('data-state', 'error');
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    submitButton.disabled = true;
+    status.textContent = 'Gönderiliyor...';
+    status.removeAttribute('data-state');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        status.textContent = 'Teşekkürler, talebiniz alındı. En kısa sürede dönüş yapacağız.';
+        status.setAttribute('data-state', 'success');
+        form.reset();
+      } else {
+        throw new Error(result.message ?? 'Unknown error');
+      }
+    } catch {
+      status.textContent = 'Gönderilemedi, lütfen telefonla ulaşın.';
+      status.setAttribute('data-state', 'error');
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+</script>

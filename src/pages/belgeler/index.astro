@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import site from '../../data/site.json';
+---
+
+<Layout title="Belgelerimiz | Sayda İnşaat" description="Sayda İnşaat'ın belgeleri, iş bitirme evrakları ve e-katalog.">
+  <section class="belgeler">
+    <div class="container">
+      <h1>Belgelerimiz</h1>
+      <p class="belgeler__lead">İçerik hazırlanıyor.</p>
+
+      <ul class="belgeler__list">
+        <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">E-Katalog (PDF)</a></li>
+        <li><a href={site.documents.certificate} target="_blank" rel="noopener noreferrer">Sertifika (PDF)</a></li>
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .belgeler {
+    padding-block: var(--space-xxl);
+    min-height: 40vh;
+  }
+
+  .belgeler .container {
+    max-width: 760px;
+  }
+
+  .belgeler h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .belgeler__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  .belgeler__list {
+    margin-top: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .belgeler__list a {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .belgeler__list a:hover {
+    text-decoration: underline;
+  }
+</style>
