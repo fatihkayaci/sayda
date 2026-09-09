@@ -70,7 +70,7 @@ import site from '../../data/site.json';
 
   .quote-form__inner {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: var(--space-xl);
   }
 
@@ -108,7 +108,7 @@ import site from '../../data/site.json';
 
   .quote-form__row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-m);
   }
 
@@ -180,13 +180,13 @@ import site from '../../data/site.json';
 
   @media (max-width: 1024px) {
     .quote-form__inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
   @media (max-width: 640px) {
     .quote-form__row {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

@@ -1,37 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
+import QuoteForm from '../../components/home/QuoteForm.astro';
 import site from '../../data/site.json';
 ---
 
-<Layout title="İletişim | Sayda İnşaat" description="Sayda İnşaat iletişim bilgileri." organizationSchema>
+<Layout title="İletişim | Sayda İnşaat" description="Sayda İnşaat iletişim bilgileri ve teklif formu." organizationSchema>
   <section class="iletisim">
     <div class="container">
       <h1>İletişim</h1>
-      <p class="iletisim__lead">İçerik hazırlanıyor.</p>
-
       <ul class="iletisim__list">
         <li>
           <Icon name="pin" size={20} />
           <span>{site.address.street}, {site.address.neighborhood} / {site.address.district}, {site.address.city} {site.address.postalCode}</span>
         </li>
-        <li>
-          <Icon name="phone" size={20} />
-          <a href={site.phoneHref}>{site.phone}</a>
-        </li>
-        <li>
-          <Icon name="mail" size={20} />
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </li>
       </ul>
     </div>
   </section>
+
+  <QuoteForm />
 </Layout>
 
 <style>
   .iletisim {
-    padding-block: var(--space-xxl);
-    min-height: 40vh;
+    padding-block: var(--space-block-compact) 0;
   }
 
   .iletisim .container {
@@ -40,12 +32,6 @@ import site from '../../data/site.json';
 
   .iletisim h1 {
     font-size: var(--fs-h1);
-  }
-
-  .iletisim__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
   }
 
   .iletisim__list {
@@ -60,14 +46,5 @@ import site from '../../data/site.json';
     align-items: flex-start;
     gap: var(--space-s);
     font-size: var(--fs-body);
-  }
-
-  .iletisim__list a {
-    font-weight: 600;
-    color: var(--color-navy);
-  }
-
-  .iletisim__list a:hover {
-    text-decoration: underline;
   }
 </style>

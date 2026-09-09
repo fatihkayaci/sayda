@@ -10,7 +10,6 @@ const navLinks = [
       { label: 'Hakkımızda', href: '/hakkimizda' },
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
       { label: 'Belgelerimiz', href: '/belgeler' },
-      { label: 'Haberler', href: '/haberler' },
     ],
   },
   {
@@ -33,12 +32,13 @@ const navLinks = [
       { label: 'Tamamlanan', href: '/projeler/tamamlanan' },
     ],
   },
+  { label: 'Haberler', href: '/haberler' },
   { label: 'Rehber', href: '/rehber' },
 ];
 ---
 
 <header class="header">
-  <div class="header__inner container">
+  <div class="header__inner">
     <a href="/" class="header__logo">
       <img src={site.logo} alt="Sayda İnşaat" width="128" height="34" />
     </a>
@@ -91,16 +91,18 @@ const navLinks = [
             </li>
           ))
         }
+        <li class="header__nav-item header__nav-contact-item">
+          <a href="/iletisim" class="header__nav-link">İletişim</a>
+        </li>
+        <li class="header__nav-item header__nav-cta-item">
+          <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">Teklif Al</a>
+        </li>
       </ul>
     </nav>
 
     <div class="header__actions">
-      <a class="header__phone" href={site.phoneHref}>
-        <Icon name="phone" size={18} />
-        {site.phone}
-      </a>
       <a class="header__contact-btn" href="/iletisim">İletişim</a>
-      <a class="header__cta" href="#quote-form">Teklif Al</a>
+      <a class="header__cta" href="/iletisim#quote-form">Teklif Al</a>
       <button class="header__hamburger" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
         <Icon name="menu" class="header__hamburger-icon header__hamburger-icon--open" />
         <Icon name="close" class="header__hamburger-icon header__hamburger-icon--close" />
@@ -114,17 +116,27 @@ const navLinks = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--color-bg);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition);
+  }
+
+  .header.is-scrolled {
+    background: rgba(255, 255, 255, 0.55);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: var(--space-m);
     height: 84px;
+    width: 100%;
+    padding-inline: var(--edge);
   }
+
 
   .header__logo {
     display: flex;
@@ -137,6 +149,10 @@ const navLinks = [
     width: auto;
   }
 
+  .header__nav {
+    margin-left: auto;
+  }
+
   .header__nav > ul {
     display: flex;
     align-items: center;
@@ -145,6 +161,11 @@ const navLinks = [
 
   .header__nav-item {
     position: relative;
+  }
+
+  .header__nav-cta-item,
+  .header__nav-contact-item {
+    display: none;
   }
 
   .header__nav-item-row {
@@ -248,16 +269,6 @@ const navLinks = [
     gap: var(--space-m);
   }
 
-  .header__phone {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: var(--fs-small);
-    font-weight: 600;
-    color: var(--color-text);
-    white-space: nowrap;
-  }
-
   .header__contact-btn {
     border: 1px solid var(--color-border);
     color: var(--color-text);
@@ -299,30 +310,26 @@ const navLinks = [
     color: var(--color-text);
   }
 
-  @media (max-width: 1200px) {
-    .header__contact-btn {
-      display: none;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .header__phone {
-      display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
+  @media (max-width: 1180px) {
     .header {
       position: sticky;
     }
 
     .header__inner {
       height: 64px;
+      padding-inline: var(--edge-mobile);
     }
 
     .header__nav {
       position: fixed;
-      inset: 64px 0 0 0;
+      top: 64px;
+      left: 0;
+      right: 0;
+      /* .header has backdrop-filter, which makes it the containing block for this
+         fixed element — `bottom: 0` would resolve against header's own ~64px box
+         instead of the viewport, so height is set explicitly instead. */
+      height: calc(100vh - 64px);
+      margin-left: 0;
       overflow-y: auto;
       background: var(--color-bg);
       padding: var(--space-l) var(--edge-mobile);
@@ -366,10 +373,6 @@ const navLinks = [
       display: block;
     }
 
-    .header__contact-btn {
-      display: none;
-    }
-
     .header__cta {
       padding: 10px 16px;
     }
@@ -377,10 +380,60 @@ const navLinks = [
     .header__hamburger {
       display: block;
     }
+
+    .header__actions {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 470px) {
+    .header__cta {
+      display: none;
+    }
+
+    .header__nav-cta-item {
+      display: block;
+      margin-top: var(--space-s);
+    }
+
+    .header__nav-cta-link {
+      display: flex;
+      justify-content: center;
+      background: var(--color-navy);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-weight: 700;
+      transition: background var(--transition);
+    }
+
+    .header__nav-cta-link:hover {
+      background: var(--color-navy-dark);
+      color: #fff;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .header__contact-btn {
+      display: none;
+    }
+
+    .header__nav-contact-item {
+      display: block;
+    }
   }
 </style>
 
 <script>
+  const header = document.querySelector('.header');
+
+  const updateHeaderBackground = () => {
+    header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  };
+
+  window.addEventListener('scroll', updateHeaderBackground, { passive: true });
+  updateHeaderBackground();
+
   const button = document.getElementById('menuButton');
   const menu = document.getElementById('mainMenu');
 

@@ -37,6 +37,11 @@
   --space-xl: 64px;
   --space-xxl: 96px;
 
+  /* Homepage block rhythm (ANA-SAYFA-KURGUSU.md #5) */
+  --space-block: 100px; /* ana bloklar */
+  --space-block-sm: 52px; /* ara bloklar: işveren şeridi, cta bandı */
+  --space-block-compact: 60px; /* kısaltılmış hakkımızda */
+
   /* Misc */
   --transition: 180ms ease;
   --shadow: 0 8px 24px rgba(17, 19, 24, 0.08);
