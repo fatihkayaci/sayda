@@ -2,24 +2,91 @@
 import Layout from '../../layouts/Layout.astro';
 import haberlerData from '../../data/haberler.json';
 
+const categoryLabels: Record<string, string> = {
+  teslim: 'Teslim & Açılış',
+  'devam-eden': 'Devam Eden İşler',
+  'satis-ofisi': 'Satış Ofisi',
+  kurumsal: 'Kurumsal',
+};
+
 const sorted = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const [featured, ...rest] = sorted;
+
+const tabs = [
+  { key: 'all', label: 'Tümü', count: sorted.length },
+  ...Object.entries(categoryLabels).map(([key, label]) => ({
+    key,
+    label,
+    count: sorted.filter((h) => h.category === key).length,
+  })),
+];
 ---
 
 <Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler ve duyurular.">
+  <section class="haberler-hero">
+    <div class="haberler-hero__grid"></div>
+    <div class="container haberler-hero__inner reveal">
+      <nav class="haberler-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Anasayfa</a>
+        <span>/</span>
+        <span aria-current="page">Haberler</span>
+      </nav>
+
+      <div class="haberler-hero__eyebrow">
+        <span class="haberler-hero__eyebrow-bar"></span>
+        <span>GÜNCEL</span>
+      </div>
+
+      <h1>Haberler</h1>
+      <p class="haberler-hero__lead">Sayda İnşaat'tan güncel haberler ve duyurular.</p>
+    </div>
+  </section>
+
   <section class="haberler-page">
     <div class="container">
-      <h1>Haberler</h1>
+      <a href={`/haberler/${featured.slug}`} class="haber-featured reveal">
+        <div class="haber-featured__image">
+          <img src={featured.image} alt={featured.title} loading="lazy" />
+        </div>
+        <div class="haber-featured__body">
+          <span class="haber-featured__badge">Öne Çıkan</span>
+          <span class="haber-card__date">
+            {categoryLabels[featured.category]} · {formatter.format(new Date(featured.date))}
+          </span>
+          <h2>{featured.title}</h2>
+          <p>{featured.excerpt}</p>
+          <span class="haber-card__more">Devamını Oku →</span>
+        </div>
+      </a>
+
+      <nav class="haberler-filters" aria-label="Haber kategorisi">
+        {
+          tabs.map((tab) => (
+            <button type="button" class="haberler-filters__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'page' : undefined}>
+              {tab.label} ({tab.count})
+            </button>
+          ))
+        }
+      </nav>
 
       <div class="haberler-page__grid">
         {
-          sorted.map((haber) => (
-            <a class="haber-card" href={`/haberler/${haber.slug}`}>
-              <img src={haber.image} alt={haber.title} loading="lazy" />
-              <div class="haber-card__info">
+          rest.map((haber, i) => (
+            <a
+              class={`haber-card reveal reveal-d${(i % 3) + 1}`}
+              href={`/haberler/${haber.slug}`}
+              data-category={haber.category}
+            >
+              <div class="haber-card__image">
+                <img src={haber.image} alt={haber.title} loading="lazy" />
+              </div>
+              <div class="haber-card__body">
                 <span class="haber-card__date">{formatter.format(new Date(haber.date))}</span>
                 <h2>{haber.title}</h2>
                 <p>{haber.excerpt}</p>
+                <span class="haber-card__more">Devamını Oku →</span>
               </div>
             </a>
           ))
@@ -29,14 +96,209 @@ const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'lon
   </section>
 </Layout>
 
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.haberler-filters__btn');
+  const cards = document.querySelectorAll<HTMLElement>('.haberler-page__grid .haber-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      buttons.forEach((b) => b.removeAttribute('aria-current'));
+      btn.setAttribute('aria-current', 'page');
+
+      cards.forEach((card) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+
 <style>
-  .haberler-page {
-    padding-block: var(--space-xl);
+  .haberler-hero {
+    position: relative;
+    padding: 140px var(--edge) 64px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    overflow: hidden;
   }
 
-  .haberler-page h1 {
-    font-size: var(--fs-h1);
+  .haberler-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 72px 72px;
+    pointer-events: none;
+  }
+
+  .haberler-hero__inner {
+    position: relative;
+  }
+
+  .haberler-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--space-m);
+    font-size: var(--fs-small);
+  }
+
+  .haberler-hero__breadcrumb a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color var(--transition);
+  }
+
+  .haberler-hero__breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .haberler-hero__breadcrumb span:first-of-type {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .haberler-hero__breadcrumb span[aria-current] {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .haberler-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--space-m);
+  }
+
+  .haberler-hero__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: #fff;
+  }
+
+  .haberler-hero__eyebrow span:last-child {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .haberler-hero h1 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: var(--space-m);
+  }
+
+  .haberler-hero__lead {
+    max-width: 580px;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .haberler-page {
+    padding-block: var(--space-xl) var(--space-xxl);
+    background: var(--color-bg-light);
+  }
+
+  .haber-featured {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-l);
+    align-items: stretch;
     margin-bottom: var(--space-l);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .haber-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+  }
+
+  .haber-featured__image {
+    overflow: hidden;
+    min-height: 320px;
+  }
+
+  .haber-featured__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .haber-featured:hover .haber-featured__image img {
+    transform: scale(1.05);
+  }
+
+  .haber-featured__body {
+    padding: var(--space-l) var(--space-l) var(--space-l) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .haber-featured__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--color-navy);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .haber-featured__body h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+
+  .haber-featured__body p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .haberler-filters {
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    padding-block: var(--space-m) var(--space-l);
+  }
+
+  .haberler-filters__btn {
+    padding: 10px 24px;
+    border-radius: var(--radius);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    border: 2px solid rgba(43, 46, 131, 0.2);
+    color: var(--color-text-muted);
+    background: transparent;
+    transition:
+      background var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .haberler-filters__btn:hover,
+  .haberler-filters__btn[aria-current='page'] {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
   }
 
   .haberler-page__grid {
@@ -46,48 +308,79 @@ const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'lon
   }
 
   .haber-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--radius);
     overflow: hidden;
     background: var(--color-bg);
-    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
     transition:
-      transform var(--transition),
-      box-shadow var(--transition);
+      transform 220ms ease,
+      box-shadow 220ms ease;
   }
 
   .haber-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
   }
 
-  .haber-card img {
+  .haber-card__image {
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .haber-card__image img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
+    transition: transform 500ms ease;
   }
 
-  .haber-card__info {
-    padding: var(--space-m);
+  .haber-card:hover .haber-card__image img {
+    transform: scale(1.05);
+  }
+
+  .haber-card__body {
+    padding: 22px 22px 26px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .haber-card__date {
-    font-size: var(--fs-small);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     color: var(--color-text-faint);
   }
 
-  .haber-card h2 {
-    margin-top: 6px;
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
+  .haber-card__body h2 {
+    margin-top: 2px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
     line-height: 1.35;
   }
 
-  .haber-card p {
-    margin-top: 6px;
-    font-size: var(--fs-small);
+  .haber-card__body p {
+    font-size: 13px;
     color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .haber-card__more {
+    margin-top: auto;
+    padding-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-navy);
+    transition: color var(--transition);
+  }
+
+  .haber-card:hover .haber-card__more {
+    color: var(--color-navy-dark);
   }
 
   @media (max-width: 1024px) {
@@ -96,7 +389,25 @@ const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'lon
     }
   }
 
+  @media (max-width: 780px) {
+    .haber-featured {
+      grid-template-columns: 1fr;
+    }
+
+    .haber-featured__image {
+      min-height: 220px;
+    }
+
+    .haber-featured__body {
+      padding: var(--space-m);
+    }
+  }
+
   @media (max-width: 640px) {
+    .haberler-hero {
+      padding-top: 108px;
+    }
+
     .haberler-page__grid {
       grid-template-columns: 1fr;
     }

@@ -1,26 +1,138 @@
 [
   {
-    "slug": "haber-1",
-    "title": "Haber başlığı (içerik taşınacak)",
-    "date": "2026-08-25",
+    "slug": "referans-loca-1-teslim",
+    "title": "Referans Loca 1 Projesini Teslim Ettik",
+    "date": "2024-09-06",
+    "image": "/img/proje-2.jpg",
+    "excerpt": "Teslimler yapılmış olup, 205 daire ve 25 dükkanda yaşam başlamıştır.",
+    "content": "Teslimler yapılmış olup, 205 daire ve 25 dükkanda yaşam başlamıştır.",
+    "category": "teslim",
+    "relatedProject": "referans-kartal-loca-1",
+    "_not": "ETAP eşleştirmesi eski sitede net değildi (Loca 1 / Loca 2 isimlendirmesi kontratlardaki etap numaralarıyla ters düşüyor gibi görünüyor) - lütfen doğru projeyle eşleştiğini teyit edin."
+  },
+  {
+    "slug": "referans-besiktas-ince-isler",
+    "title": "Referans Beşiktaş Projesi İnce İşleri Biz Yapıyoruz",
+    "date": "2024-04-02",
+    "image": "/img/proje-1.jpg",
+    "excerpt": "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m² arazi üzerine 10 blok, 295 ünite olarak hazırlanmış.",
+    "content": "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m² arazi üzerine 10 blok, 295 ünite olarak hazırlanmış. Bina Yüksekliği: 2 kat bodrum, 6 kat normal.\n\nDaire Tipleri: 2,5+1 – 3+1 – 3+1 Dubleks – 4+1 – 4,5+1 Dubleks – 4,5+2 Dubleks – 5,5+2 Dubleks\n\nKapalı yüzme havuzu, tasarım dekorasyon havuzları, spor salonu alanı, yeraltı otoparkı. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale ve Vitra Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco ses yalıtım sistemleri kullanılarak Sayda İnşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2025 Nisan ayında hayata geçirilecektir.",
+    "category": "devam-eden",
+    "relatedProject": "referans-besiktas-abbasaga"
+  },
+  {
+    "slug": "kiler-referans-pendik-satis-ofisi",
+    "title": "Kiler Referans Pendik Projesi Satış Ofisini Biz Yaptık",
+    "date": "2023-04-27",
     "image": "/img/haberler/haber-1.jpg",
-    "excerpt": "Bu haberin metni, eski siteden taşınana kadar yer tutucu olarak görünüyor.",
-    "content": "İçerik eski siteden taşınacak."
+    "excerpt": "Yaklaşık 900 m² alana sahip Satış Ofisi, 2 ay gibi kısa zamanda tamamlanarak 15 Nisan 2023'te hizmete girmiştir.",
+    "content": "Yaklaşık 900 m² alana sahip Satış Ofisi, ana salon, toplantı odaları, teşhir salonları, satış ofisleri, mutfak, wc ve yardımcı ünitelerden oluşmaktadır. 2 ay gibi kısa zamanda tamamlanan Satış Ofisi 15 Nisan 2023'te hizmete girmiştir. Satış ofisinden, Referans Pendik projesi Kiler GYO tarafından Pendik Dolayoba bölgesinde hayata geçirilecek 158.486 m² proje kapsamında toplam 513 konut ve 53 ticari birimin satışı yapılacaktır.",
+    "category": "satis-ofisi",
+    "relatedProject": null,
+    "_not": "Bu proje şu anki 18 projelik referans listesinde yok - sadece haber olarak kalabilir."
   },
   {
-    "slug": "haber-2",
-    "title": "Haber başlığı (içerik taşınacak)",
-    "date": "2026-07-10",
+    "slug": "kiler-besiktas-abbasaga-satis-ofisi",
+    "title": "Kiler Beşiktaş Abbasağa Konut Projesi Satış Ofisi Biz Yapıyoruz",
+    "date": "2022-07-27",
+    "image": "/img/proje-1.jpg",
+    "excerpt": "1866'da Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol), Kiler Holding'in Beşiktaş Abbasağa konut projesinin satış ofisine dönüştürülüyor.",
+    "content": "1866 tarihinde Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol) günümüzde Kiler Holding'in Beşiktaş Abbasağa konut projesinin satış ofisine dönüştürülüyor.\n\nFirmamızca yapılacak olan projenin renovasyon ve ince işleri Eylül 2022'de satış ofisi olarak hizmete girecektir.",
+    "category": "satis-ofisi",
+    "relatedProject": "referans-besiktas-abbasaga"
+  },
+  {
+    "slug": "referans-kartal-loca-2-etap-ince-isler",
+    "title": "Referans Kartal Loca Projesi 2. Etap İnce İşlerini de Biz Yapıyoruz",
+    "date": "2022-06-08",
+    "image": "/img/proje-3.jpg",
+    "excerpt": "Devam etmekte olan Referans Kartal Loca Projesi'nin 2. Etap ince işleri firmamız tarafından yapılmaktadır.",
+    "content": "Devam etmekte olan Referans Kartal Loca Projesi'nin 2. Etap ince işleri firmamız tarafından yapılmaktadır.\n\n30.05.2022 tarihinde yapılan sözleşme ile projenin ileri kaba ve ince işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Baumit Mantolama ürünleri, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco ses yalıtım sistemleri kullanılarak Sayda İnşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Haziran'da hayata geçirilecektir.",
+    "category": "devam-eden",
+    "relatedProject": "referans-kartal-loca-2",
+    "_not": "ETAP eşleştirmesi eski sitede net değildi - lütfen doğru projeyle eşleştiğini teyit edin."
+  },
+  {
+    "slug": "referans-kartal-loca-ince-isler",
+    "title": "Referans Kartal Loca Projesi İnce İşleri Biz Yapıyoruz",
+    "date": "2021-12-20",
+    "image": "/img/proje-2.jpg",
+    "excerpt": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36.000 m² arazi üzerine 2 blok, 33 mağaza, 202 daire olarak tasarlanmıştır.",
+    "content": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36.000 m² arazi üzerine 2 blok, sokak dükkan konseptinde 33 mağaza, 202 daire olarak tasarlanmıştır. 25 katlı A blokta 176 daire, 4 katlı B blokta 14 daire, 4 katlı C blokta 12 daire olmak üzere brüt alanları 107 m² ile 357 m² arasında değişmektedir. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco ses yalıtım sistemleri kullanılarak Sayda İnşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Aralık'ta hayata geçirilecektir.",
+    "category": "devam-eden",
+    "relatedProject": "referans-kartal-loca-1",
+    "_not": "ETAP eşleştirmesi eski sitede net değildi - lütfen doğru projeyle eşleştiğini teyit edin."
+  },
+  {
+    "slug": "gaziantep-saglik-kampusu-ince-isler",
+    "title": "Gaziantep Entegre Sağlık Kampüsü'nün İnce İşlerini Biz Yapıyoruz",
+    "date": "2018-03-05",
+    "image": "/img/proje-2.jpg",
+    "excerpt": "Firmamızca ince işleri yapılmakta olan Entegre Sağlık Kampüsü, 1875 yatak kapasitesi ve 580.000 m² inşaat alanı ile Türkiye'nin 4. en büyük hastanesi olacaktır.",
+    "content": "Firmamızca ince işleri yapılmakta olan Entegre Sağlık Kampüsü projesi, 1875 yatak kapasitesi, 580.000 m² inşaat alanı ile Türkiye'nin 4. en büyük hastanesi olacaktır.\n\nKamu-özel işbirliği kapsamında 600.000.000 Euro yatırım değerindeki proje Samsung-Salini-Kayı ortaklığı ile yapılmaktadır. Sağlık kampüsünde il sağlık müdürlüğü binası, il kamu sağlığı müdürlüğü binası, kamu hastaneleri birliğinin genel sekreterliği, 112 acil hizmet binası, sosyal tesis ve çok amaçlı alanlar, otoparklar ve helikopter pisti de bulunmaktadır. Proje sağlık sektörüne üstün kalite anlayışı getirerek Gaziantep'i Orta Doğu bölgesinin sağlık merkezi yapacaktır.",
+    "category": "devam-eden",
+    "relatedProject": "gaziantep-entegre-saglik-kampusu"
+  },
+  {
+    "slug": "buyukyali-ince-isler",
+    "title": "Büyükyalı Projesi'nin İnce İşlerini Biz Yapıyoruz",
+    "date": "2018-03-05",
+    "image": "/img/proje-1.jpg",
+    "excerpt": "İleri kaba işlerini yapmakta olduğumuz Büyükyalı Projesi, Marmara Denizi kıyısındaki Kazlıçeşme sahil yolunda 560.000 m² inşaat alanını kapsamaktadır.",
+    "content": "İleri kaba işlerini yapmakta olduğumuz Büyükyalı Projesi, Özak GYO, Ziylan Gayrimenkul ve Yenigün İnşaat ortaklığı ile Marmara Denizi kıyısındaki Kazlıçeşme sahil yolunda 560.000 m² inşaat alanını kapsamaktadır.\n\nFarklı konsept ve büyüklüklerde ultra lüks konutlar, otel ve otelle birlikte işletilecek markalı rezidans konutlar yer alıyor. Projede sanatsal ve kültürel alanlar, çocuk alanları ve sosyal tesislerin yanı sıra ticari alanlar da bulunuyor.",
+    "category": "devam-eden",
+    "relatedProject": "buyukyali"
+  },
+  {
+    "slug": "vadistanbul-3-etap-ince-isler",
+    "title": "Vadistanbul Projesi 3. Etap İnce İşlerini Biz Yapıyoruz",
+    "date": "2018-04-14",
+    "image": "/img/projects/vadistanbul/vadistanbul.webp",
+    "excerpt": "Firmamızın 3. etabı 'Park' ince işlerini yapmakta olduğu Vadistanbul Projesi; Teras, Bulvar ve Park olmak üzere 3 etaptan oluşmaktadır.",
+    "content": "Firmamızın 3. etabı 'Park' ince işlerini yapmakta olduğu Vadistanbul Projesi; Teras, Bulvar ve Park olmak üzere 3 etaptan oluşmaktadır. Arsası 424.000 m² olan alanda 1.350.000 m² inşaat yapılmaktadır.\n\nToplam 1.900 adet konut, 103.000 m² alışveriş merkezi, 300.000 m² yüksek donatılı ofis alanı, 20.000 m² home office ile 25.500 m² alana sahip 5 yıldızlı otel yer alıyor. Firmamız İnce İşler 'Duvar, Sıva, Şap, Seramik, Alçıpan Asma Tavan ve Bölme Duvar, Boya İşleri' yanı sıra dekorasyon işleri 'Ahşap, Metal, Sinterflex, Ayna Duvar ve Tavan Giydirmeleri, Paslanmaz İşleri, Doğal Taş İşleri'ni de yapmaktadır.",
+    "category": "devam-eden",
+    "relatedProject": "vadistanbul"
+  },
+  {
+    "slug": "bilsem-besiktas-sosyal-sorumluluk",
+    "title": "Sosyal Sorumluluk Projesi Kapsamında Yapılan Sınıflar Hizmete Girdi",
+    "date": "2016-06-22",
     "image": "/img/haberler/haber-2.jpg",
-    "excerpt": "Bu haberin metni, eski siteden taşınana kadar yer tutucu olarak görünüyor.",
-    "content": "İçerik eski siteden taşınacak."
+    "excerpt": "Firmamız, Sosyal Sorumluluk Projesi kapsamında BİLSEM Beşiktaş Bilim ve Sanat Merkezi Okulu'nun 2 sınıfını bitirip, miniklerin hizmetine sunmuştur.",
+    "content": "Firmamız, Sosyal Sorumluluk Projesi kapsamında BİLSEM Beşiktaş Bilim ve Sanat Merkezi Okulu'nun 2 sınıfını bitirip, miniklerin hizmetine sunmuştur.\n\n1962 yılında 14 derslikli olarak yapılan binanın yenileme çalışmalarına firmamız da dahil olmuştur. 2 adet dersliğin altyapı, inşaat, dekorasyon ve tefrişi bedelsiz olarak yapılarak okul yönetimine teslim edilmiştir.",
+    "category": "kurumsal",
+    "relatedProject": null
   },
   {
-    "slug": "haber-3",
-    "title": "Haber başlığı (içerik taşınacak)",
-    "date": "2026-06-02",
+    "slug": "referans-guneşli-ince-islere-basladik",
+    "title": "Kiler GYO'nun Referans Güneşli Projesi'nin İnce İşlerine Başladık",
+    "date": "2016-06-22",
     "image": "/img/haberler/haber-3.jpg",
-    "excerpt": "Bu haberin metni, eski siteden taşınana kadar yer tutucu olarak görünüyor.",
-    "content": "İçerik eski siteden taşınacak."
+    "excerpt": "26.04.2016 tarihli sözleşme ile Referans Güneşli Projesi'nin ince işleri firmamızca üstlenilmiş olup imalatlar başlamıştır.",
+    "content": "26.04.2016 tarihli sözleşme ile Referans Güneşli Projesi'nin ince işleri firmamızca üstlenilmiş olup imalatlar başlamıştır.\n\nİkinci 'Maslak-Büyükdere Hattı', yani İstanbul'un yeni prestij hizmet merkezi olarak değer kazanan Basın Ekspres Yolu ve E5'i TEM otoyoluna bağlayan Mahmutbey Yolu'nun tam ortasında, merkezi bir kavşakta yer alan Referans Güneşli, lüks yaşamın, alışverişin, eğlencenin, ticaretin ve yatırımın kesişim noktası olacaktır.\n\n161 konut ve 32 mağazadan oluşan Referans Güneşli'de; kapalı yüzme havuzu, fitness center, Türk hamamı, sauna, çocuk oyun adası, spor adası, temalı teraslar, yürüyüş parkuru, su aynası, hobi salonu, misafir süitleri, kent meydanı gibi birçok sosyal donatı proje kapsamında bulunmaktadır.",
+    "category": "devam-eden",
+    "relatedProject": null,
+    "_not": "Bu proje şu anki 18 projelik referans listesinde yok - sadece haber olarak kalabilir, isterseniz ayrı proje sayfası da açılabilir."
+  },
+  {
+    "slug": "kapital-tower-10-kat-ofis-teslim",
+    "title": "Kapital Tower 10. Kat Ofisleri Teslim Edildi",
+    "date": "2016-06-22",
+    "image": "/img/projects/kapital-tower-ofis/kapital-tower-ofis.webp",
+    "excerpt": "Projesi tamamlanan Kapital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.",
+    "content": "Projesi tamamlanan Kapital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.\n\n1.000 m²'lik alana yayılan ofis kompleksinin inşaat, elektrik-mekanik, dekorasyon ve ahşap işleri firmamız tarafından yapılmıştır.",
+    "category": "teslim",
+    "relatedProject": "kapital-tower-ofis",
+    "_not": "Eski sitede 'Capitol Tower' yazıyor, doğrusu sitenizde 'Kapital Tower' - başlıkta düzelttim."
+  },
+  {
+    "slug": "atlas-park-avm-hizmete-girdi",
+    "title": "Atlas Park AVM Hizmete Girdi",
+    "date": "2016-06-22",
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
+    "excerpt": "Proje kapsamındaki ince işleri firmamızca yapılan Sultanbeyli Atlas Park AVM hizmete girmiştir.",
+    "content": "Proje kapsamındaki ince işleri firmamızca yapılan Sultanbeyli Atlas Park AVM hizmete girmiştir. Atlas Park AVM 150 mağaza, eğlence merkezi, sinema salonları, Anadolu Yakası'nın ilk ve tek 5M Migros'u ile dikkat çekiyor.\n\nLokasyonu ve 1.400 araçlık kapalı otoparkı ile önemli ölçüde ziyaretçi ağırlamaya hazırlanan Atlas Park AVM; Ziylan Gayrimenkul, Uzman Ticaret ve İnşaat, HD Holding, Azim Gayrimenkul, Enoa İnşaat, Sultanbeyli Gayrimenkul tarafından inşa edilmiştir. Anadolu Yakası'nın yeni buluşma merkezlerinden olacak olan Atlas Park AVM, Sultanbeyli'de TEM kenarında ve Sabiha Gökçen Havalimanı'na 10 dakika mesafede konumlanıyor.",
+    "category": "teslim",
+    "relatedProject": "atlas-park-avm-ofis"
   }
 ]
