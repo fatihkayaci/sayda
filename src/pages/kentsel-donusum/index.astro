@@ -4,23 +4,38 @@ import Layout from '../../layouts/Layout.astro';
 const steps = [
   {
     number: '01',
-    title: 'Görüşme & Keşif',
-    description: 'Arsa, bina veya proje talebinizi yerinde inceler, ilk değerlendirmeyi yaparız.',
+    title: 'Teknik Değerlendirme ve Fizibilite',
+    description: 'Riskli yapı tespiti sonrası teknik değerlendirme ve fizibilite çalışması yapılır.',
   },
   {
     number: '02',
-    title: 'Anlaşma & Planlama',
-    description: 'Kat karşılığı veya sözleşme koşulları netleşir, proje ve ruhsat süreci başlar.',
+    title: 'Şartname ve Sözleşme',
+    description: 'Kat karşılığı veya sözleşme koşulları netleşir.',
   },
   {
     number: '03',
-    title: 'İnşaat',
-    description: 'Saha ekiplerimiz projeyi zaman planına göre yürütür, süreç düzenli raporlanır.',
+    title: 'Projelendirme',
+    description: 'Yeni yapının projesi hazırlanır.',
   },
   {
     number: '04',
-    title: 'Teslim',
-    description: 'İş bitirme belgeleri ile birlikte anahtar teslimi yapılır.',
+    title: 'Ruhsat ve Yasal İzinler',
+    description: 'Gerekli ruhsat ve yasal izin süreçleri yürütülür.',
+  },
+  {
+    number: '05',
+    title: 'İnşaat Süreci',
+    description: 'Saha ekiplerimiz projeyi zaman planına göre yürütür, süreç düzenli raporlanır.',
+  },
+  {
+    number: '06',
+    title: 'Kat İttifakı Süreci',
+    description: 'Kat maliklerinin ittifak süreci yönetilir.',
+  },
+  {
+    number: '07',
+    title: 'İskan Süreci',
+    description: 'İş bitirme belgeleri ile birlikte iskan alınır ve anahtar teslimi yapılır.',
   },
 ];
 ---
@@ -36,7 +51,11 @@ const steps = [
         Riskli yapı tespitinden anahtar teslime kadar kentsel dönüşüm sürecinin tamamında bina ve arsa
         sahiplerinin yanındayız.
       </p>
-      <p class="intro__note">Detaylı içerik hazırlanıyor.</p>
+      <p class="intro__body">
+        Sayda İnşaat, riskli yapıları 6306 sayılı Kentsel Dönüşüm Kanunu çerçevesinde kent dokusuna uygun,
+        sağlam, konforlu, sağlıklı ve güvenli yapılara dönüştürür. Kira ve kredi desteği süreçlerinden kat
+        karşılığı inşaat organizasyonuna kadar tüm adımları bina ve arsa sahipleri adına yönetiyoruz.
+      </p>
     </div>
   </section>
 
@@ -78,15 +97,11 @@ const steps = [
     color: var(--color-text-muted);
   }
 
-  .intro__note {
-    margin-top: var(--space-l);
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: var(--radius);
-    background: var(--color-bg-light);
-    color: var(--color-text-faint);
-    font-size: var(--fs-small);
-    font-weight: 600;
+  .intro__body {
+    margin-top: var(--space-m);
+    font-size: var(--fs-body);
+    line-height: 1.8;
+    color: var(--color-text-muted);
   }
 
   .process {

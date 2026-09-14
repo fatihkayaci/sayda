@@ -1,0 +1,182 @@
+---
+import Icon from '../Icon.astro';
+import site from '../../data/site.json';
+
+interface Props {
+  project: {
+    name: string;
+    employer: string;
+    location: string;
+    area: string;
+    startDate: string;
+    endDate: string;
+  };
+}
+
+const { project } = Astro.props;
+
+const rows = [
+  { label: 'Proje', value: project.name },
+  { label: 'İşveren', value: project.employer },
+  { label: 'Lokasyon', value: project.location },
+  { label: 'Alan', value: project.area, emphasis: true },
+  { label: 'Başlangıç', value: project.startDate },
+  { label: 'Bitiş', value: project.endDate || 'Devam Ediyor' },
+];
+---
+
+<div class="project-sidebar">
+  <div class="project-sidebar__card reveal">
+    <h2>Proje Bilgileri</h2>
+    <div class="project-sidebar__rows">
+      {
+        rows.map((row) => (
+          <div class="project-sidebar__row">
+            <span class="project-sidebar__label">{row.label}</span>
+            <span class:list={['project-sidebar__value', { 'project-sidebar__value--emphasis': row.emphasis }]}>{row.value}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="project-sidebar__cta reveal">
+    <h3>Benzer Proje için Teklif Alın</h3>
+    <p>Uzman ekibimiz projenizi değerlendirsin.</p>
+    <a class="project-sidebar__cta-btn" href="/iletisim#quote-form">Teklif Al →</a>
+    <div class="project-sidebar__contact">
+      <a href={site.phoneHref}>
+        <Icon name="phone" size={16} />
+        {site.phone}
+      </a>
+      <a href={`mailto:${site.email}`}>
+        <Icon name="mail" size={16} />
+        {site.email}
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-sidebar {
+    display: grid;
+    gap: 20px;
+    position: sticky;
+    top: 96px;
+  }
+
+  .project-sidebar__card {
+    background: var(--color-bg);
+    border-radius: 6px;
+    padding: 32px;
+    box-shadow: 0 2px 12px rgba(43, 46, 131, 0.06);
+  }
+
+  .project-sidebar__card h2 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-text);
+    margin-bottom: var(--space-m);
+    padding-bottom: var(--space-s);
+    border-bottom: 2px solid var(--color-bg-light);
+  }
+
+  .project-sidebar__row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-bg-light);
+  }
+
+  .project-sidebar__row:last-child {
+    border-bottom: 0;
+  }
+
+  .project-sidebar__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
+    align-self: start;
+    padding-top: 2px;
+  }
+
+  .project-sidebar__value {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .project-sidebar__value--emphasis {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .project-sidebar__cta {
+    background: var(--color-navy);
+    border-radius: 6px;
+    padding: 28px 28px 32px;
+  }
+
+  .project-sidebar__cta h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .project-sidebar__cta p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: var(--space-m);
+  }
+
+  .project-sidebar__cta-btn {
+    display: block;
+    padding: 14px;
+    background: #fff;
+    color: var(--color-navy);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: background var(--transition);
+  }
+
+  .project-sidebar__cta-btn:hover {
+    background: #e8e9f5;
+  }
+
+  .project-sidebar__contact {
+    margin-top: var(--space-m);
+    padding-top: var(--space-m);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: grid;
+    gap: 12px;
+  }
+
+  .project-sidebar__contact a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    transition: color var(--transition);
+  }
+
+  .project-sidebar__contact a:hover {
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    .project-sidebar {
+      position: static;
+    }
+  }
+</style>

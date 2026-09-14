@@ -10,9 +10,10 @@ interface Props {
   description: string;
   organizationSchema?: boolean;
   ogImage?: string;
+  hideCtaBanner?: boolean;
 }
 
-const { title, description, organizationSchema, ogImage } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,7 +29,28 @@ const { title, description, organizationSchema, ogImage } = Astro.props;
     <main>
       <slot />
     </main>
-    <CtaBanner />
+    {!hideCtaBanner && <CtaBanner />}
     <Footer />
+
+    <script>
+      function initReveal() {
+        const targets = document.querySelectorAll('.reveal:not(.in)');
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+        targets.forEach((el) => io.observe(el));
+      }
+
+      initReveal();
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
   </body>
 </html>

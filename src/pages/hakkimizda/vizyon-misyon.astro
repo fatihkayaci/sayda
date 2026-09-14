@@ -1,9 +1,86 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const items = [
+  {
+    title: 'Misyon',
+    text: 'Toplum ve çevre bilincinde, ahlaki değerler doğrultusunda, müşteri ve çalışanlarının memnuniyetini temel alarak, en yüksek verim ve kaliteyle hizmet ve ürünleri sunmaktır.',
+  },
+  {
+    title: 'Vizyon',
+    text: 'Araştırmacı ve teknolojik gelişimlerin takipçisi olarak daha verimli sistemler oluşturmaktır.',
+  },
+  {
+    title: 'Hedef',
+    text: 'Türkiye ve uluslararası platformda sektöründe önde gelen şirketlerden biri olmaktır.',
+  },
+];
 ---
 
-<PagePlaceholder
-  title="Vizyon & Misyon | Sayda İnşaat"
-  description="Sayda İnşaat'ın vizyonu ve misyonu."
-  heading="Vizyon & Misyon"
-/>
+<Layout title="Vizyon & Misyon | Sayda İnşaat" description="Sayda İnşaat'ın vizyonu ve misyonu.">
+  <section class="intro">
+    <div class="container">
+      <h1>Vizyon &amp; Misyon</h1>
+    </div>
+  </section>
+
+  <section class="items">
+    <div class="container">
+      <ul class="items__grid">
+        {
+          items.map((item) => (
+            <li class="item">
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-block-compact) 0;
+  }
+
+  .intro h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .items {
+    padding-block: var(--space-xl) var(--space-xxl);
+  }
+
+  .items__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .item {
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--color-navy);
+  }
+
+  .item h2 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: var(--fs-h3);
+    color: var(--color-navy);
+  }
+
+  .item p {
+    margin-top: var(--space-s);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .items__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

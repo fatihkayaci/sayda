@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ProjectsHero from '../../components/project/ProjectsHero.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
 import allProjects from '../../data/projects.json';
 
@@ -7,15 +8,10 @@ const projects = allProjects.filter((project) => project.status === 'devam-eden'
 ---
 
 <Layout title="Devam Eden Projeler | Sayda İnşaat" description="Sayda İnşaat'ın devam eden projeleri.">
+  <ProjectsHero active="devam-eden" />
+
   <section class="projeler-page">
     <div class="container">
-      <h1>Devam Eden Projeler</h1>
-
-      <nav class="projeler-page__filters" aria-label="Proje durumu">
-        <a href="/projeler/devam-eden" aria-current="page">Devam Eden</a>
-        <a href="/projeler/tamamlanan">Tamamlanan</a>
-      </nav>
-
       {projects.length > 0 ? <ProjectGrid projects={projects} /> : <p class="projeler-page__empty">İçerik hazırlanıyor.</p>}
     </div>
   </section>
@@ -24,34 +20,7 @@ const projects = allProjects.filter((project) => project.status === 'devam-eden'
 <style>
   .projeler-page {
     padding-block: var(--space-xl);
-  }
-
-  .projeler-page h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .projeler-page__filters {
-    display: flex;
-    gap: var(--space-m);
-    margin-top: var(--space-m);
-    margin-bottom: var(--space-l);
-  }
-
-  .projeler-page__filters a {
-    padding: 10px 20px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    transition:
-      border-color var(--transition),
-      color var(--transition);
-  }
-
-  .projeler-page__filters a:hover,
-  .projeler-page__filters a[aria-current='page'] {
-    border-color: var(--color-navy);
-    color: var(--color-navy);
+    background: var(--color-bg-light);
   }
 
   .projeler-page__empty {

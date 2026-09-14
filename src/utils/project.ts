@@ -3,7 +3,7 @@ export function shortProjectTitle(name: string): string {
 }
 
 export function statusLabel(status: string): string {
-  return status === 'devam-eden' ? 'Devam Ediyor' : 'Tamamlandı';
+  return status === 'devam-eden' ? 'DEVAM EDEN' : 'TAMAMLANDI';
 }
 
 export function formatDateRange(startDate: string, endDate: string): string {

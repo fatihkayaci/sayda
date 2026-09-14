@@ -1,9 +1,145 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+import site from '../../data/site.json';
+
+const certLabel = site.certifications.map((c) => c.name.replace('ISO ', '')).join(' · ');
+
+const stats = [
+  { value: String(site.foundedYear), label: 'Kuruluş Yılı' },
+  { value: String(site.stats.employeeCount), label: 'Çalışan' },
+  { value: String(site.stats.avgAnnualProjects), label: 'Yıllık Ortalama Proje' },
+  { value: site.stats.totalCompletedArea, label: 'Tamamlanan Alan' },
+];
 ---
 
-<PagePlaceholder
+<Layout
   title="Hakkımızda | Sayda İnşaat"
   description="Sayda İnşaat'ın hikayesi, deneyimi ve çalışma prensipleri."
-  heading="Hakkımızda"
-/>
+  organizationSchema
+>
+  <section class="intro">
+    <div class="container">
+      <h1>Hakkımızda</h1>
+      <p class="intro__lead">
+        {site.legalName}, {site.foundedYear} yılında kurulmuştur ve bu tarihten beri birçok büyük projede
+        çeşitli müteahhitlik ve uzman ekip hizmetleri vermiştir.
+      </p>
+      <p class="intro__body">
+        Aradan geçen sürede İstanbul ve Türkiye genelinde konut, ticari yapı, sağlık kampüsü ve otel
+        projelerinde ince işler ile taahhüt hizmetleri sunduk; edindiğimiz deneyimi her yeni projede
+        müşterilerimizin yanında kullanmaya devam ediyoruz. ISO {certLabel} belgelerimiz ve{' '}
+        {site.contractorLicenseGroup} grubu yüklenici yetki belgemizle kaliteyi ve sürdürülebilirliği taahhüt
+        ediyoruz.
+      </p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container">
+      <ul class="stats__grid">
+        {
+          stats.map((stat) => (
+            <li class="stat">
+              <span class="stat__value">{stat.value}</span>
+              <span class="stat__label">{stat.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="more">
+    <div class="container">
+      <p>
+        Şirketimizin görev, vizyon ve hedeflerini <a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a>{' '}
+        sayfamızda, belgelerimizi ise <a href="/belgeler">Belgelerimiz</a> sayfamızda bulabilirsiniz.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-block-compact) 0;
+  }
+
+  .intro .container {
+    max-width: 760px;
+  }
+
+  .intro h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .intro__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+  }
+
+  .intro__body {
+    margin-top: var(--space-m);
+    font-size: var(--fs-body);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .stats {
+    padding-block: var(--space-xl);
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+  }
+
+  .stat {
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--color-navy);
+  }
+
+  .stat__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-navy);
+  }
+
+  .stat__label {
+    display: block;
+    margin-top: 6px;
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  .more {
+    padding-block: 0 var(--space-xxl);
+  }
+
+  .more .container {
+    max-width: 760px;
+  }
+
+  .more p {
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .more a {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .more a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .stats__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
