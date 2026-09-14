@@ -1,20 +1,23 @@
 ---
-import { shortProjectTitle, statusLabel } from '../../utils/project';
+import { shortProjectTitle, statusLabel, projectImageAlt } from '../../utils/project';
 
 interface Props {
   project: {
     name: string;
     status: string;
     image: string;
+    location: string;
+    works?: string[];
   };
 }
 
 const { project } = Astro.props;
 const title = shortProjectTitle(project.name);
+const heroAlt = projectImageAlt(project);
 ---
 
 <div class="project-hero-media">
-  <img src={project.image} alt={`${title} proje görseli`} fetchpriority="high" />
+  <img src={project.image} alt={heroAlt} fetchpriority="high" />
   <div class="project-hero-media__gradient"></div>
   <div class="project-hero-media__top">
     <a class="project-hero-media__back" href="/projeler">

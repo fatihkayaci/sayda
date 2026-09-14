@@ -1,33 +1,54 @@
 ---
+import { projectImageAlt } from '../../utils/project';
+
 interface Props {
   title: string;
   images: string[];
+  project?: { name: string; location: string; works?: string[] };
 }
 
-const { title, images } = Astro.props;
-const thumbs = images.slice(0, 3);
+const { title, images, project } = Astro.props;
+const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : `${title} proje fotoğrafı ${i + 1}`));
 ---
 
 <div class="project-gallery reveal">
   <div class="project-gallery__main">
-    <img data-gallery-main src={thumbs[0]} alt={`${title} proje fotoğrafı`} />
-  </div>
-  <div class="project-gallery__thumbs">
+    <img data-gallery-main src={images[0]} alt={imageAlts[0]} />
     {
-      thumbs.map((src, i) => (
-        <button
-          type="button"
-          class="project-gallery__thumb"
-          class:list={{ 'is-active': i === 0 }}
-          data-gallery-thumb
-          data-src={src}
-          aria-label={`${title} fotoğrafı ${i + 1}`}
-        >
-          <img src={src} alt="" />
-        </button>
-      ))
+      images.length > 1 && (
+        <>
+          <button type="button" class="project-gallery__arrow project-gallery__arrow--prev" data-gallery-prev aria-label="Önceki fotoğraf">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+          </button>
+          <button type="button" class="project-gallery__arrow project-gallery__arrow--next" data-gallery-next aria-label="Sonraki fotoğraf">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </button>
+          <span class="project-gallery__counter" data-gallery-counter>1 / {images.length}</span>
+        </>
+      )
     }
   </div>
+  {
+    images.length > 1 && (
+      <div class="project-gallery__thumbs">
+        <div class="project-gallery__thumbs-track" data-gallery-track>
+          {images.map((src, i) => (
+            <button
+              type="button"
+              class="project-gallery__thumb"
+              class:list={{ 'is-active': i === 0 }}
+              data-gallery-thumb
+              data-src={src}
+              data-alt={imageAlts[i]}
+              aria-label={`${title} fotoğrafı ${i + 1}`}
+            >
+              <img src={src} alt={imageAlts[i]} loading="lazy" />
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
   <p class="project-gallery__caption">* Görseller temsili niteliktedir.</p>
 </div>
 
@@ -35,19 +56,51 @@ const thumbs = images.slice(0, 3);
   function initGalleries() {
     document.querySelectorAll<HTMLElement>('.project-gallery').forEach((gallery) => {
       const main = gallery.querySelector<HTMLImageElement>('[data-gallery-main]');
+      const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
+      const thumbsEl = gallery.querySelector<HTMLElement>('.project-gallery__thumbs');
+      const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
       const thumbs = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-thumb]'));
-      thumbs.forEach((thumb) => {
-        thumb.addEventListener('click', () => {
-          const src = thumb.getAttribute('data-src');
-          if (!main || !src) return;
-          main.style.opacity = '0';
-          setTimeout(() => {
-            main.src = src;
-            main.style.opacity = '1';
-          }, 150);
-          thumbs.forEach((t) => t.classList.toggle('is-active', t === thumb));
-        });
-      });
+      const prevBtn = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+      const nextBtn = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
+      if (!main || thumbs.length === 0) return;
+
+      const visible = 3;
+      const gap = 12;
+      let index = 0;
+      let thumbStep = 0;
+
+      const layout = () => {
+        if (!thumbsEl) return;
+        const width = (thumbsEl.clientWidth - gap * (visible - 1)) / visible;
+        thumbStep = width + gap;
+        thumbs.forEach((t) => (t.style.flex = `0 0 ${width}px`));
+        if (track) track.style.transform = `translateX(-${Math.min(index, Math.max(thumbs.length - visible, 0)) * thumbStep}px)`;
+      };
+
+      const show = (nextIndex: number) => {
+        index = (nextIndex + thumbs.length) % thumbs.length;
+        const src = thumbs[index].getAttribute('data-src');
+        if (!src) return;
+        const alt = thumbs[index].getAttribute('data-alt');
+        main.style.opacity = '0';
+        setTimeout(() => {
+          main.src = src;
+          if (alt) main.alt = alt;
+          main.style.opacity = '1';
+        }, 150);
+        thumbs.forEach((t, i) => t.classList.toggle('is-active', i === index));
+        if (counter) counter.textContent = `${index + 1} / ${thumbs.length}`;
+        if (track) {
+          const windowStart = Math.min(Math.max(index, 0), Math.max(thumbs.length - visible, 0));
+          track.style.transform = `translateX(-${windowStart * thumbStep}px)`;
+        }
+      };
+
+      thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => show(i)));
+      prevBtn?.addEventListener('click', () => show(index - 1));
+      nextBtn?.addEventListener('click', () => show(index + 1));
+      layout();
+      window.addEventListener('resize', layout);
     });
   }
 
@@ -57,6 +110,7 @@ const thumbs = images.slice(0, 3);
 
 <style>
   .project-gallery__main {
+    position: relative;
     height: 420px;
     border-radius: 6px;
     overflow: hidden;
@@ -70,11 +124,60 @@ const thumbs = images.slice(0, 3);
     transition: opacity 300ms;
   }
 
+  .project-gallery__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(19, 21, 74, 0.55);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 150ms;
+  }
+
+  .project-gallery__arrow:hover {
+    background: rgba(19, 21, 74, 0.8);
+  }
+
+  .project-gallery__arrow--prev {
+    left: 16px;
+  }
+
+  .project-gallery__arrow--next {
+    right: 16px;
+  }
+
+  .project-gallery__counter {
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(19, 21, 74, 0.55);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+
   .project-gallery__thumbs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    width: 100%;
     margin-top: 12px;
+    overflow: hidden;
+  }
+
+  .project-gallery__thumbs-track {
+    display: flex;
+    gap: 12px;
+    transition: transform 250ms ease;
   }
 
   .project-gallery__thumb {

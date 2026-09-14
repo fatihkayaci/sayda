@@ -7,9 +7,10 @@ interface Props {
   /** Emit page-level schema.org JSON-LD (e.g. LocalBusiness). */
   organizationSchema?: boolean;
   ogImage?: string;
+  jsonLd?: object[];
 }
 
-const { title, description, organizationSchema = false, ogImage } = Astro.props;
+const { title, description, organizationSchema = false, ogImage, jsonLd = [] } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogImageUrl = ogImage ? new URL(ogImage, site.url).toString() : undefined;
@@ -58,4 +59,9 @@ const organizationLd = {
   organizationSchema && (
     <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationLd)} />
   )
+}
+{
+  jsonLd.map((schema) => (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  ))
 }

@@ -15,6 +15,8 @@
     "startDate": "Ocak 2024",
     "endDate": "",
     "featured": true,
+    "seoTitle": "Beşiktaş Abbasağa İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Beşiktaş Abbasağa'da 79.000 m² lüks rezidans projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat yürütüyor; Kiler GYO'yla 2024'ten beri sahada.",
     "image": "/img/proje-1.jpg",
     "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
     "href": "/projeler/referans-besiktas-abbasaga"
@@ -35,6 +37,8 @@
     "startDate": "Eylül 2022",
     "endDate": "Eylül 2024",
     "featured": false,
+    "seoTitle": "Kartal Loca 1 İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Kartal / İstanbul'da 35.672 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2022-2024 arası sahada.",
     "image": "/img/proje-2.jpg",
     "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
     "href": "/projeler/referans-kartal-loca-1"
@@ -55,6 +59,8 @@
     "startDate": "Eylül 2021",
     "endDate": "Eylül 2023",
     "featured": false,
+    "seoTitle": "Kartal Loca 2 İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Kartal / İstanbul'da 40.437 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2021-2023 arası sahada.",
     "image": "/img/proje-3.jpg",
     "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
     "href": "/projeler/referans-kartal-loca-2"
@@ -75,6 +81,8 @@
     "startDate": "Şubat 2018",
     "endDate": "Şubat 2020",
     "featured": true,
+    "seoTitle": "Büyükyalı İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Zeytinburnu / İstanbul'da 560.000 m² Büyükyalı Garden Zone konut ve sosyal tesis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Özak-Yenigün-Ziylan ortaklığıyla 2018-2020 arası sahada.",
     "image": "/img/proje-1.jpg",
     "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
     "href": "/projeler/buyukyali"
@@ -95,6 +103,8 @@
     "startDate": "Şubat 2018",
     "endDate": "Haziran 2019",
     "featured": true,
+    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Gaziantep'te 640.000 m² Entegre Sağlık Kampüsü T1 Kardiyovasküler Cerrahi Hastanesi'nde alçı-levha, sıva, şap ve seramik işini Sayda İnşaat tamamladı; CCN Altyapı ile 2018-2019 arası sahada.",
     "image": "/img/proje-2.jpg",
     "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
     "href": "/projeler/gaziantep-entegre-saglik-kampusu"
@@ -115,8 +125,10 @@
     "startDate": "Haziran 2017",
     "endDate": "Aralık 2018",
     "featured": false,
-    "image": "/img/proje-3.jpg",
-    "gallery": ["/img/proje-1.jpg", "/img/proje-3.jpg", "/img/proje-2.jpg"],
+    "seoTitle": "Vadistanbul İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Ayazağa / İstanbul'da 450.000 m² Vadistanbul G Blok, otel, konut ve ofis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Artaş-İnvest ortaklığıyla 2017-2018 arası sahada.",
+    "image": "/img/projects/vadistanbul/vadistanbul.webp",
+    "gallery": ["/img/projects/vadistanbul/vadistanbul-01.webp", "/img/projects/vadistanbul/vadistanbul.webp", "/img/projects/vadistanbul/vadistanbul-03.webp", "/img/projects/vadistanbul/vadistanbul-04.webp", "/img/projects/vadistanbul/vadistanbul-05.webp", "/img/projects/vadistanbul/vadistanbul-06.webp"],
     "href": "/projeler/vadistanbul"
   },
   {
@@ -135,8 +147,10 @@
     "startDate": "Ağustos 2013",
     "endDate": "Mart 2015",
     "featured": false,
-    "image": "/img/proje-1.jpg",
-    "gallery": ["/img/proje-2.jpg", "/img/proje-1.jpg", "/img/proje-3.jpg"],
+    "seoTitle": "Atlas Park AVM ve Ofis İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Sultanbeyli / İstanbul'da 160.000 m² Atlas Park AVM ve ofis projesinde bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı; 2013-2015 arası sahada.",
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
+    "gallery": ["/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-01.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-02.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-03.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-04.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-05.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-06.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-07.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-09.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-10.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-11.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-12.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-13.webp", "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-14.webp"],
     "href": "/projeler/atlas-park-avm-ofis"
   },
   {
@@ -155,8 +169,10 @@
     "startDate": "Eylül 2013",
     "endDate": "Eylül 2014",
     "featured": false,
-    "image": "/img/proje-2.jpg",
-    "gallery": ["/img/proje-3.jpg", "/img/proje-2.jpg", "/img/proje-1.jpg"],
+    "seoTitle": "Kapital Tower Ofis Dekorasyonu | Sayda İnşaat",
+    "seoDescription": "Güneşli / İstanbul'da Kapital Tower 10. kat ofisinde anahtar teslim dekorasyon; elektro-mekanik, mermer, ahşap, metal ve cam işlerini Sayda İnşaat tamamladı; 2013-2014 arası sahada.",
+    "image": "/img/projects/kapital-tower-ofis/kapital-tower-ofis.webp",
+    "gallery": ["/img/projects/kapital-tower-ofis/kapital-tower-ofis-01.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-02.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-03.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-04.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-05.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-06.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-07.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-08.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-09.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-10.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-11.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-13.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-14.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-15.webp", "/img/projects/kapital-tower-ofis/kapital-tower-ofis-16.webp"],
     "href": "/projeler/kapital-tower-ofis"
   },
   {
@@ -175,6 +191,8 @@
     "startDate": "Mayıs 2013",
     "endDate": "Ekim 2013",
     "featured": false,
+    "seoTitle": "Torun Tower Ofis İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Gayrettepe / İstanbul'da 97.000 m² Torun Tower 40 katlık kulede shell & core ince işlerini; gazbeton, sıva, şap, seramik ve alçı-levha uygulamalarını Sayda İnşaat tamamladı; 2013 yılında sahada.",
     "image": "/img/proje-3.jpg",
     "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
     "href": "/projeler/torun-tower-ofis"
@@ -195,8 +213,10 @@
     "startDate": "Eylül 2012",
     "endDate": "Şubat 2013",
     "featured": false,
-    "image": "/img/proje-1.jpg",
-    "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
+    "seoTitle": "Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Canik / Samsun'da 135.000 m² Piazza AVM ve Anamon Otel projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Rönesans Teknik ile 2012-2013 arası sahada.",
+    "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel.webp",
+    "gallery": ["/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-01.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-02.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-03.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-04.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-05.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-06.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-07.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-08.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-09.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-11.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-12.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-13.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-14.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-15.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-16.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-17.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-18.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-19.webp", "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-20.webp"],
     "href": "/projeler/piazza-avm-anamon-otel"
   },
   {
@@ -215,8 +235,10 @@
     "startDate": "Ocak 2011",
     "endDate": "Temmuz 2011",
     "featured": false,
-    "image": "/img/proje-2.jpg",
-    "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
+    "seoTitle": "Akbatı AVM ve Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Bahçeşehir / İstanbul'da 250.000 m² Akbatı AVM ve otopark projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Akiş Gayrimenkul ile 2011 yılında sahada.",
+    "image": "/img/projects/akbati-avm-konut/akbati-avm-konut.webp",
+    "gallery": ["/img/projects/akbati-avm-konut/akbati-avm-konut-01.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-02.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-03.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-04.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-05.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-06.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-07.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-08.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-09.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-10.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-12.webp", "/img/projects/akbati-avm-konut/akbati-avm-konut-13.webp"],
     "href": "/projeler/akbati-avm-konut"
   },
   {
@@ -235,8 +257,10 @@
     "startDate": "Temmuz 2010",
     "endDate": "Mart 2011",
     "featured": false,
-    "image": "/img/proje-3.jpg",
-    "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
+    "seoTitle": "Varyap Meridien Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Batı Ataşehir / İstanbul'da 150.000 m² Varyap Meridien E Blok residence projesinde gazbeton duvar, sıva ve şap işini Sayda İnşaat tamamladı; 2010-2011 arası sahada.",
+    "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp",
+    "gallery": ["/img/projects/varyap-meridien-konut/varyap-meridien-konut-01.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-02.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-03.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-04.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-05.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-06.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-07.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-08.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-09.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-10.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-11.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-12.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-13.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-14.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-16.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-17.webp", "/img/projects/varyap-meridien-konut/varyap-meridien-konut-18.webp"],
     "href": "/projeler/varyap-meridien-konut"
   },
   {
@@ -255,8 +279,10 @@
     "startDate": "Şubat 2010",
     "endDate": "Aralık 2010",
     "featured": false,
-    "image": "/img/proje-1.jpg",
-    "gallery": ["/img/proje-2.jpg", "/img/proje-1.jpg", "/img/proje-3.jpg"],
+    "seoTitle": "Terrace Bahçe Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Sarıyer / İstanbul'da 14.000 m² Terrace Bahçe 60 konutluk residence projesinde duvar, sıva, şap, seramik ve alçı-levha asma tavan işini Sayda İnşaat tamamladı; 2010 yılında sahada.",
+    "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp",
+    "gallery": ["/img/projects/terrace-bahce-konut/terrace-bahce-konut-01.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-03.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-04.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-05.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-06.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-07.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-08.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-09.webp", "/img/projects/terrace-bahce-konut/terrace-bahce-konut-10.webp"],
     "href": "/projeler/terrace-bahce-konut"
   },
   {
@@ -275,8 +301,10 @@
     "startDate": "Haziran 2007",
     "endDate": "Nisan 2009",
     "featured": false,
-    "image": "/img/proje-2.jpg",
-    "gallery": ["/img/proje-3.jpg", "/img/proje-2.jpg", "/img/proje-1.jpg"],
+    "seoTitle": "Oyakkent Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Başakşehir / İstanbul'da 650.000 m² Oyakkent 33 blok 1.581 konutluk projede tuğla duvar, teras şap ve çatı işini Sayda İnşaat tamamladı; Oyak İnşaat ile 2007-2009 arası sahada.",
+    "image": "/img/projects/oyakkent-konut/oyakkent-konut.webp",
+    "gallery": ["/img/projects/oyakkent-konut/oyakkent-konut-01.webp", "/img/projects/oyakkent-konut/oyakkent-konut-02.webp", "/img/projects/oyakkent-konut/oyakkent-konut-03.webp", "/img/projects/oyakkent-konut/oyakkent-konut-04.webp", "/img/projects/oyakkent-konut/oyakkent-konut-05.webp", "/img/projects/oyakkent-konut/oyakkent-konut-06.webp", "/img/projects/oyakkent-konut/oyakkent-konut.webp", "/img/projects/oyakkent-konut/oyakkent-konut-08.webp", "/img/projects/oyakkent-konut/oyakkent-konut-09.webp", "/img/projects/oyakkent-konut/oyakkent-konut-10.webp", "/img/projects/oyakkent-konut/oyakkent-konut-11.webp", "/img/projects/oyakkent-konut/oyakkent-konut-12.webp", "/img/projects/oyakkent-konut/oyakkent-konut-13.webp", "/img/projects/oyakkent-konut/oyakkent-konut-14.webp", "/img/projects/oyakkent-konut/oyakkent-konut-15.webp", "/img/projects/oyakkent-konut/oyakkent-konut-16.webp"],
     "href": "/projeler/oyakkent-konut"
   },
   {
@@ -295,8 +323,76 @@
     "startDate": "Kasım 2006",
     "endDate": "Haziran 2008",
     "featured": false,
-    "image": "/img/proje-3.jpg",
-    "gallery": ["/img/proje-1.jpg", "/img/proje-3.jpg", "/img/proje-2.jpg"],
+    "seoTitle": "Omsan Depo ve Lojistik Merkezi İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Şekerpınar / İstanbul'da 100.000 m² Omsan Depo, ek binalar ve yönetim binaları projesinde tuğla duvar, sıva, şap, seramik ve mermer işini Sayda İnşaat tamamladı; Oyak Konut ile 2006-2008 arası sahada.",
+    "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi.webp",
+    "gallery": ["/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-01.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-02.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-03.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-04.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-06.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-07.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-08.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-09.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-10.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-11.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-12.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-13.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-14.webp", "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-15.webp"],
     "href": "/projeler/omsan-depo-lojistik-merkezi"
+  },
+  {
+    "slug": "isisan-buderus-bursa",
+    "name": "Isısan-Buderus Bursa Bölge Binası Projesi",
+    "employer": "Isısan Klima ve Isıtma San. A.Ş.",
+    "scope": "Showroom ve Depo Binası Kaba Yapı İşleri (Çelik Güçlendirme, Çatı Kaplama, Cephe Mantolama, Cam)",
+    "description": [
+      "Isısan-Buderus Bursa Bölge Binası'nın showroom ve depo yapısında kaba yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Çelik Güçlendirme", "Çatı Kaplama", "Cephe Mantolama", "Cam"],
+    "location": "Ovaakça - Bursa",
+    "area": "6.000 m²",
+    "status": "tamamlanan",
+    "startDate": "",
+    "endDate": "Tamamlandı",
+    "featured": false,
+    "seoTitle": "Isısan-Buderus Bursa Bölge Binası Kaba Yapı İşleri | Sayda İnşaat",
+    "seoDescription": "Ovaakça / Bursa'da 6.000 m² Isısan-Buderus showroom ve depo binasında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa.webp",
+    "gallery": ["/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-01.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-02.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-03.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-04.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-05.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-06.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-07.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-08.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-09.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-10.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-12.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-13.webp", "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-14.webp"],
+    "href": "/projeler/isisan-buderus-bursa"
+  },
+  {
+    "slug": "ciragan-otel-renovasyonu",
+    "name": "Çırağan Otel Binası Renovasyon Projesi",
+    "employer": "Çırağan Palace Kempinski Otel A.Ş.",
+    "scope": "Otel Restoranları Renovasyon İşleri (Demir Kutu Konstrüksiyon, Alçıpan Kaplama)",
+    "description": [
+      "Çırağan Palace Kempinski Otel binasının restoran alanlarında renovasyon işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında demir kutu konstrüksiyon ve alçıpan kaplama uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Demir Konstrüksiyon", "Alçıpan Kaplama"],
+    "location": "Ortaköy - İstanbul",
+    "area": "650 m²",
+    "status": "tamamlanan",
+    "startDate": "",
+    "endDate": "Tamamlandı",
+    "featured": false,
+    "seoTitle": "Çırağan Otel Renovasyon Projesi | Sayda İnşaat",
+    "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski Otel restoranlarında 650 m² demir konstrüksiyon ve alçıpan kaplama renovasyon işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp",
+    "gallery": ["/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp", "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-02.webp", "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-03.webp", "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-04.webp", "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-05.webp"],
+    "href": "/projeler/ciragan-otel-renovasyonu"
+  },
+  {
+    "slug": "yasmin-resort-hotel",
+    "name": "Yasmin Resort Hotel Projesi",
+    "employer": "Birmod Turizm İnşaat A.Ş.",
+    "scope": "Otel, Club Binaları ve Sosyal Tesis Proje Koordinasyonu",
+    "description": [
+      "Yasmin Resort Hotel'in otel, club binaları ve sosyal tesis projesinde proje koordinasyonu Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında 29.000 m² sosyal tesis ve otel bloğunda ısı yalıtımlı bitümlü membran kaplama çatı, cephe mantolama, cam, alüminyum kompoze giydirme ve alüminyum doğrama ile alçıpan, sıva, seramik ve boya işleri tamamlanmıştır."
+    ],
+    "works": ["Çatı Kaplama", "Cephe Mantolama", "Cam", "Alüminyum Kompoze Giydirme", "Alüminyum Doğrama", "Alçıpan", "Sıva", "Seramik", "Boya"],
+    "location": "Bodrum - Muğla",
+    "area": "29.000 m²",
+    "status": "tamamlanan",
+    "startDate": "",
+    "endDate": "Tamamlandı",
+    "featured": false,
+    "seoTitle": "Yasmin Resort Hotel Proje Koordinasyonu | Sayda İnşaat",
+    "seoDescription": "Bodrum / Muğla'da 29.000 m² Yasmin Resort Hotel'de otel, club binaları ve sosyal tesis proje koordinasyonu, çatı, cephe mantolama ve ince yapı işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp",
+    "gallery": ["/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-01.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-02.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-03.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-05.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-06.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-07.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-08.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-09.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-10.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-11.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-12.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-13.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-14.webp", "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-15.webp"],
+    "href": "/projeler/yasmin-resort-hotel"
   }
 ]

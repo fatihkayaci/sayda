@@ -6,7 +6,8 @@ import ProjectOverview from '../../components/project/ProjectOverview.astro';
 import ProjectSidebar from '../../components/project/ProjectSidebar.astro';
 import ProjectNavigation from '../../components/project/ProjectNavigation.astro';
 import projects from '../../data/projects.json';
-import { shortProjectTitle } from '../../utils/project';
+import site from '../../data/site.json';
+import { shortProjectTitle, projectSeoTitle, projectSeoDescription } from '../../utils/project';
 
 export function getStaticPaths() {
   return projects.map((project, i) => {
@@ -24,12 +25,37 @@ export function getStaticPaths() {
 
 const { project, related } = Astro.props;
 const title = shortProjectTitle(project.name);
+const seoTitle = projectSeoTitle(project);
+const seoDescription = projectSeoDescription(project);
+const canonical = new URL(project.href, site.url).toString();
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Anasayfa', item: site.url },
+    { '@type': 'ListItem', position: 2, name: 'Projeler', item: new URL('/projeler', site.url).toString() },
+    { '@type': 'ListItem', position: 3, name: project.name, item: canonical },
+  ],
+};
+
+const serviceLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: project.name,
+  serviceType: project.works?.length ? project.works.join(', ') : 'İnce İşler',
+  description: seoDescription,
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+  areaServed: { '@type': 'Place', name: project.location },
+  image: new URL(project.image, site.url).toString(),
+};
 ---
 
 <Layout
-  title={`${title} | Sayda İnşaat`}
-  description={project.description?.[0] ?? `${title} - ${project.location}`}
+  title={seoTitle}
+  description={seoDescription}
   ogImage={project.image}
+  jsonLd={[breadcrumbLd, serviceLd]}
   hideCtaBanner
 >
   <article class="proje-detail">
@@ -39,7 +65,7 @@ const title = shortProjectTitle(project.name);
       <div class="container">
         <div class="proje-detail__grid">
           <div class="proje-detail__content">
-            <ProjectGallery title={title} images={project.gallery} />
+            <ProjectGallery title={title} images={project.gallery} project={project} />
             <ProjectOverview description={project.description} works={project.works} />
           </div>
           <ProjectSidebar project={project} />
@@ -62,6 +88,10 @@ const title = shortProjectTitle(project.name);
     grid-template-columns: 1fr 380px;
     gap: var(--space-l);
     align-items: start;
+  }
+
+  .proje-detail__content {
+    min-width: 0;
   }
 
   @media (max-width: 1024px) {

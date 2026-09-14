@@ -19,3 +19,33 @@ export function splitLocation(location: string): { short: string; full: string }
   }
   return { short: location, full: location };
 }
+
+interface SeoProjectFields {
+  name: string;
+  location: string;
+  works?: string[];
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
+export function projectSeoTitle(project: SeoProjectFields): string {
+  if (project.seoTitle) return project.seoTitle;
+  const title = shortProjectTitle(project.name);
+  return `${title} İnce İşler Projesi | Sayda İnşaat`;
+}
+
+export function projectSeoDescription(project: SeoProjectFields): string {
+  if (project.seoDescription) return project.seoDescription;
+  const title = shortProjectTitle(project.name);
+  const { full } = splitLocation(project.location);
+  const workSample = project.works?.length ? project.works.slice(0, 3).join(', ') : 'ince işler';
+  return `${title} projesinde (${full}) ${workSample} uygulamalarını Sayda İnşaat yürütüyor.`;
+}
+
+export function projectImageAlt(project: SeoProjectFields, index?: number): string {
+  const title = shortProjectTitle(project.name);
+  const { full } = splitLocation(project.location);
+  const workSample = project.works?.length ? project.works.slice(0, 2).join(' ve ') : 'ince işler';
+  const base = `${title} projesi, ${full} - Sayda İnşaat ${workSample} uygulaması`;
+  return index === undefined ? base : `${base} - Fotoğraf ${index + 1}`;
+}

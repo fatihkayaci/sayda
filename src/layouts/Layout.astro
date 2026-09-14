@@ -11,9 +11,10 @@ interface Props {
   organizationSchema?: boolean;
   ogImage?: string;
   hideCtaBanner?: boolean;
+  jsonLd?: object[];
 }
 
-const { title, description, organizationSchema, ogImage, hideCtaBanner } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner } = Astro
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} />
+    <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
   </head>
   <body>
     <Header />
