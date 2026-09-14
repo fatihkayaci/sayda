@@ -1,24 +1,28 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProjectHero from '../../components/project/ProjectHero.astro';
-import ProjectOverview from '../../components/project/ProjectOverview.astro';
 import ProjectGallery from '../../components/project/ProjectGallery.astro';
+import ProjectOverview from '../../components/project/ProjectOverview.astro';
+import ProjectSidebar from '../../components/project/ProjectSidebar.astro';
 import ProjectNavigation from '../../components/project/ProjectNavigation.astro';
 import projects from '../../data/projects.json';
 import { shortProjectTitle } from '../../utils/project';
 
 export function getStaticPaths() {
-  return projects.map((project, i) => ({
-    params: { slug: project.slug },
-    props: {
-      project,
-      prev: projects[i - 1] ?? null,
-      next: projects[i + 1] ?? null,
-    },
-  }));
+  return projects.map((project, i) => {
+    const related = projects
+      .filter((_, otherIndex) => otherIndex !== i)
+      .slice(0, 3)
+      .map(({ href, name, location, area, image }) => ({ href, name, location, area, image }));
+
+    return {
+      params: { slug: project.slug },
+      props: { project, related },
+    };
+  });
 }
 
-const { project, prev, next } = Astro.props;
+const { project, related } = Astro.props;
 const title = shortProjectTitle(project.name);
 ---
 
@@ -26,17 +30,49 @@ const title = shortProjectTitle(project.name);
   title={`${title} | Sayda İnşaat`}
   description={project.description?.[0] ?? `${title} - ${project.location}`}
   ogImage={project.image}
+  hideCtaBanner
 >
   <article class="proje-detail">
     <ProjectHero project={project} />
-    <ProjectOverview description={project.description} works={project.works} />
-    <ProjectGallery title={title} images={project.gallery} />
-    <ProjectNavigation prev={prev} next={next} />
+
+    <section class="proje-detail__main">
+      <div class="container">
+        <div class="proje-detail__grid">
+          <div class="proje-detail__content">
+            <ProjectGallery title={title} images={project.gallery} />
+            <ProjectOverview description={project.description} works={project.works} />
+          </div>
+          <ProjectSidebar project={project} />
+        </div>
+
+        <ProjectNavigation projects={related} />
+      </div>
+    </section>
   </article>
 </Layout>
 
 <style>
-  .proje-detail :global(.container) {
-    max-width: none;
+  .proje-detail__main {
+    padding-block: 72px 96px;
+    background: var(--color-bg-light);
+  }
+
+  .proje-detail__grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: var(--space-l);
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .proje-detail__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .proje-detail__main {
+      padding-block: var(--space-l) var(--space-xl);
+    }
   }
 </style>

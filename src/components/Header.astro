@@ -91,9 +91,6 @@ const navLinks = [
             </li>
           ))
         }
-        <li class="header__nav-item header__nav-contact-item">
-          <a href="/iletisim" class="header__nav-link">İletişim</a>
-        </li>
         <li class="header__nav-item header__nav-cta-item">
           <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">Teklif Al</a>
         </li>
@@ -101,7 +98,6 @@ const navLinks = [
     </nav>
 
     <div class="header__actions">
-      <a class="header__contact-btn" href="/iletisim">İletişim</a>
       <a class="header__cta" href="/iletisim#quote-form">Teklif Al</a>
       <button class="header__hamburger" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
         <Icon name="menu" class="header__hamburger-icon header__hamburger-icon--open" />
@@ -116,15 +112,18 @@ const navLinks = [
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--color-border);
-    transition: background var(--transition);
+    background: rgba(19, 21, 74, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    transition:
+      background 300ms,
+      box-shadow 300ms;
   }
 
   .header.is-scrolled {
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(19, 21, 74, 0.99);
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
   }
 
   .header__inner {
@@ -147,6 +146,7 @@ const navLinks = [
     display: block;
     height: 34px;
     width: auto;
+    filter: brightness(0) invert(1);
   }
 
   .header__nav {
@@ -163,8 +163,7 @@ const navLinks = [
     position: relative;
   }
 
-  .header__nav-cta-item,
-  .header__nav-contact-item {
+  .header__nav-cta-item {
     display: none;
   }
 
@@ -179,7 +178,7 @@ const navLinks = [
     align-items: center;
     font-size: var(--fs-small);
     font-weight: 600;
-    color: var(--color-text);
+    color: rgba(255, 255, 255, 0.88);
     transition: color var(--transition);
   }
 
@@ -190,7 +189,7 @@ const navLinks = [
   }
 
   .header__nav-link:hover {
-    color: var(--color-navy);
+    color: #fff;
   }
 
   .header__dropdown-toggle {
@@ -200,7 +199,7 @@ const navLinks = [
     background: none;
     border: none;
     padding: 4px;
-    color: var(--color-text);
+    color: rgba(255, 255, 255, 0.88);
     transition: transform var(--transition);
   }
 
@@ -269,24 +268,6 @@ const navLinks = [
     gap: var(--space-m);
   }
 
-  .header__contact-btn {
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-    padding: 11px 20px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    white-space: nowrap;
-    transition:
-      border-color var(--transition),
-      color var(--transition);
-  }
-
-  .header__contact-btn:hover {
-    border-color: var(--color-navy);
-    color: var(--color-navy);
-  }
-
   .header__cta {
     background: var(--color-navy);
     color: #fff;
@@ -307,7 +288,7 @@ const navLinks = [
     background: none;
     border: none;
     padding: 4px;
-    color: var(--color-text);
+    color: #fff;
   }
 
   @media (max-width: 1180px) {
@@ -331,7 +312,7 @@ const navLinks = [
       height: calc(100vh - 64px);
       margin-left: 0;
       overflow-y: auto;
-      background: var(--color-bg);
+      background: #13154a;
       padding: var(--space-l) var(--edge-mobile);
       transform: translateX(100%);
       transition: transform var(--transition);
@@ -364,9 +345,19 @@ const navLinks = [
       max-height: none;
       box-shadow: none;
       border: none;
+      background: none;
       margin-top: var(--space-s);
       padding: 0 0 0 var(--space-s);
       transition: none;
+    }
+
+    .header__dropdown li a {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .header__dropdown li a:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
     }
 
     .header__nav-item.is-open .header__dropdown {
@@ -413,15 +404,6 @@ const navLinks = [
     }
   }
 
-  @media (max-width: 425px) {
-    .header__contact-btn {
-      display: none;
-    }
-
-    .header__nav-contact-item {
-      display: block;
-    }
-  }
 </style>
 
 <script>
@@ -494,3 +476,4 @@ const navLinks = [
     }
   });
 </script>
+

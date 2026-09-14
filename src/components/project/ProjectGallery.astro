@@ -5,264 +5,109 @@ interface Props {
 }
 
 const { title, images } = Astro.props;
-
-const SLOT_COUNT = 5;
-const displayImages = images.length > 0
-  ? Array.from({ length: SLOT_COUNT }, (_, i) => images[i % images.length])
-  : [];
+const thumbs = images.slice(0, 3);
 ---
 
-{
-  displayImages.length > 0 && (
-    <section class="project-gallery" aria-labelledby="gallery-title">
-      <div class="container">
-        <div class="project-gallery__header">
-          <div>
-            <span class="project-gallery__index">03</span>
-            <h2 id="gallery-title">Proje Galerisi</h2>
-          </div>
-          <button type="button" class="project-gallery__view-all">
-            Tüm fotoğrafları görüntüle →
-          </button>
-        </div>
-
-        <div class="project-gallery__grid" data-gallery>
-          <button type="button" class="project-gallery__item project-gallery__item--main" data-gallery-open data-index={0} aria-label={`${title} fotoğrafı 1 - büyüt`}>
-            <img src={displayImages[0]} alt={`${title} proje fotoğrafı 1`} loading="eager" />
-          </button>
-          <div class="project-gallery__side">
-            {displayImages.slice(1).map((src, i) => (
-              <button type="button" class="project-gallery__item" data-gallery-open data-index={i + 1} aria-label={`${title} fotoğrafı ${i + 2} - büyüt`}>
-                <img src={src} alt={`${title} proje fotoğrafı ${i + 2}`} loading="lazy" />
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div class="project-gallery__lightbox" data-gallery-lightbox hidden>
-        <button type="button" class="project-gallery__lightbox-close" data-gallery-close aria-label="Kapat">✕</button>
-        <button type="button" class="project-gallery__lightbox-nav project-gallery__lightbox-nav--prev" data-gallery-prev aria-label="Önceki fotoğraf">←</button>
-        <img class="project-gallery__lightbox-img" data-gallery-img src="" alt="" />
-        <button type="button" class="project-gallery__lightbox-nav project-gallery__lightbox-nav--next" data-gallery-next aria-label="Sonraki fotoğraf">→</button>
-        <span class="project-gallery__lightbox-counter" data-gallery-counter />
-      </div>
-    </section>
-  )
-}
+<div class="project-gallery reveal">
+  <div class="project-gallery__main">
+    <img data-gallery-main src={thumbs[0]} alt={`${title} proje fotoğrafı`} />
+  </div>
+  <div class="project-gallery__thumbs">
+    {
+      thumbs.map((src, i) => (
+        <button
+          type="button"
+          class="project-gallery__thumb"
+          class:list={{ 'is-active': i === 0 }}
+          data-gallery-thumb
+          data-src={src}
+          aria-label={`${title} fotoğrafı ${i + 1}`}
+        >
+          <img src={src} alt="" />
+        </button>
+      ))
+    }
+  </div>
+  <p class="project-gallery__caption">* Görseller temsili niteliktedir.</p>
+</div>
 
 <script>
-  function initProjectGalleries() {
-    document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((grid) => {
-      const section = grid.closest('.project-gallery');
-      const lightboxEl = section?.querySelector<HTMLElement>('[data-gallery-lightbox]');
-      if (!lightboxEl) return;
-      const lightbox = lightboxEl;
-
-      const img = lightbox.querySelector<HTMLImageElement>('[data-gallery-img]');
-      const counter = lightbox.querySelector<HTMLElement>('[data-gallery-counter]');
-      const buttons = Array.from(grid.querySelectorAll<HTMLButtonElement>('[data-gallery-open]'));
-      const sources = buttons.map((btn) => btn.querySelector('img')?.getAttribute('src') ?? '');
-      const alts = buttons.map((btn) => btn.querySelector('img')?.getAttribute('alt') ?? '');
-      let current = 0;
-
-      function show(index: number) {
-        current = (index + sources.length) % sources.length;
-        if (img) {
-          img.src = sources[current];
-          img.alt = alts[current];
-        }
-        if (counter) counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(sources.length).padStart(2, '0')}`;
-      }
-
-      function open(index: number) {
-        show(index);
-        lightbox.hidden = false;
-        document.body.style.overflow = 'hidden';
-      }
-
-      function close() {
-        lightbox.hidden = true;
-        document.body.style.overflow = '';
-      }
-
-      buttons.forEach((btn, i) => btn.addEventListener('click', () => open(i)));
-      section?.querySelector('.project-gallery__view-all')?.addEventListener('click', () => open(0));
-      lightbox.querySelector('[data-gallery-close]')?.addEventListener('click', close);
-      lightbox.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(current - 1));
-      lightbox.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(current + 1));
-
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) close();
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (lightbox.hidden) return;
-        if (e.key === 'Escape') close();
-        if (e.key === 'ArrowLeft') show(current - 1);
-        if (e.key === 'ArrowRight') show(current + 1);
+  function initGalleries() {
+    document.querySelectorAll<HTMLElement>('.project-gallery').forEach((gallery) => {
+      const main = gallery.querySelector<HTMLImageElement>('[data-gallery-main]');
+      const thumbs = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-thumb]'));
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const src = thumb.getAttribute('data-src');
+          if (!main || !src) return;
+          main.style.opacity = '0';
+          setTimeout(() => {
+            main.src = src;
+            main.style.opacity = '1';
+          }, 150);
+          thumbs.forEach((t) => t.classList.toggle('is-active', t === thumb));
+        });
       });
     });
   }
 
-  initProjectGalleries();
-  document.addEventListener('astro:page-load', initProjectGalleries);
+  initGalleries();
+  document.addEventListener('astro:page-load', initGalleries);
 </script>
 
 <style>
-  .project-gallery {
-    padding-block: var(--space-xl);
-  }
-  .project-gallery__header {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--space-m);
-    padding-top: var(--space-xl);
-    border-top: 1px solid var(--color-border);
-  }
-  .project-gallery__index {
-    display: block;
-    margin-bottom: var(--space-xs);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    color: var(--color-text-faint);
-  }
-  .project-gallery__header h2 {
-    font-size: var(--fs-h2);
-  }
-  .project-gallery__view-all {
-    flex-shrink: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    font-size: var(--fs-small);
-    font-weight: 600;
-    color: var(--color-navy);
-    transition: opacity var(--transition);
-  }
-  .project-gallery__view-all:hover {
-    opacity: 0.7;
-  }
-
-  .project-gallery__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: var(--space-l);
-    height: 560px;
-  }
-  .project-gallery__side {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .project-gallery__item {
-    display: block;
-    min-height: 0;
-    padding: 0;
-    border: 0;
-    background: var(--color-bg-light);
-    cursor: pointer;
+  .project-gallery__main {
+    height: 420px;
+    border-radius: 6px;
     overflow: hidden;
+    background: var(--color-bg-light);
   }
-  .project-gallery__item img {
+
+  .project-gallery__main img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform 320ms ease, opacity var(--transition);
-  }
-  .project-gallery__item:hover img {
-    transform: scale(1.02);
-  }
-  .project-gallery__item:focus-visible {
-    outline: 2px solid var(--color-navy);
-    outline-offset: -2px;
+    transition: opacity 300ms;
   }
 
-  .project-gallery__lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(10, 10, 14, 0.92);
-    padding: var(--space-l);
+  .project-gallery__thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
   }
-  .project-gallery__lightbox[hidden] {
-    display: none;
-  }
-  .project-gallery__lightbox-img {
-    width: min(1200px, 90vw);
-    height: 86vh;
-    object-fit: contain;
-  }
-  .project-gallery__lightbox-close {
-    position: absolute;
-    top: var(--space-m);
-    right: var(--space-m);
-  }
-  .project-gallery__lightbox-nav--prev {
-    left: var(--space-m);
-  }
-  .project-gallery__lightbox-nav--next {
-    right: var(--space-m);
-  }
-  .project-gallery__lightbox-close,
-  .project-gallery__lightbox-nav {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #fff;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    font-size: 1.125rem;
+
+  .project-gallery__thumb {
+    height: 100px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    overflow: hidden;
     cursor: pointer;
-    transition: background var(--transition);
-  }
-  .project-gallery__lightbox-close:hover,
-  .project-gallery__lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.2);
-  }
-  .project-gallery__lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .project-gallery__lightbox-counter {
-    position: absolute;
-    bottom: var(--space-m);
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--color-on-dark-muted);
-    font-size: var(--fs-small);
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    transition:
+      transform 180ms,
+      box-shadow 180ms;
   }
 
-  @media (max-width: 640px) {
-    .project-gallery__header {
-      align-items: start;
-      flex-direction: column;
-      gap: var(--space-s);
-    }
-    .project-gallery__grid {
-      grid-template-columns: 1fr;
-      height: auto;
-    }
-    .project-gallery__item--main {
-      aspect-ratio: 4 / 3;
-    }
-    .project-gallery__side {
-      aspect-ratio: 4 / 3;
-    }
-    .project-gallery__lightbox-nav {
-      width: 40px;
-      height: 40px;
-    }
+  .project-gallery__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-gallery__thumb:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(43, 46, 131, 0.15);
+  }
+
+  .project-gallery__thumb.is-active {
+    box-shadow: 0 0 0 3px var(--color-navy);
+  }
+
+  .project-gallery__caption {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--color-text-faint);
+    font-style: italic;
   }
 </style>

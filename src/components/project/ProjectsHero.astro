@@ -1,0 +1,212 @@
+---
+import site from '../../data/site.json';
+import projects from '../../data/projects.json';
+
+interface Props {
+  active: 'all' | 'devam-eden' | 'tamamlanan';
+}
+
+const { active } = Astro.props;
+
+const devamEdenCount = projects.filter((p) => p.status === 'devam-eden').length;
+const tamamlananCount = projects.filter((p) => p.status === 'tamamlanan').length;
+
+const tabs = [
+  { key: 'all', label: 'Tümü', count: projects.length, href: '/projeler' },
+  { key: 'devam-eden', label: 'Devam Eden', count: devamEdenCount, href: '/projeler/devam-eden' },
+  { key: 'tamamlanan', label: 'Tamamlanan', count: tamamlananCount, href: '/projeler/tamamlanan' },
+] as const;
+---
+
+<section class="projects-hero">
+  <div class="projects-hero__grid"></div>
+  <div class="container projects-hero__inner reveal">
+    <nav class="projects-hero__breadcrumb" aria-label="Konum">
+      <a href="/">Anasayfa</a>
+      <span>/</span>
+      <span aria-current="page">Projeler</span>
+    </nav>
+
+    <div class="projects-hero__eyebrow">
+      <span class="projects-hero__eyebrow-bar"></span>
+      <span>REFERANSLARIMIZ</span>
+    </div>
+
+    <h1>Projelerimiz</h1>
+    <p class="projects-hero__lead">
+      {site.foundedYear}'dan bu yana İstanbul ve Türkiye genelinde tamamladığımız büyük ölçekli projelerin tamamı.
+    </p>
+
+    <dl class="projects-hero__stats">
+      <div>
+        <dd>{site.stats.totalCompletedArea}</dd>
+        <dt>Toplam Alan</dt>
+      </div>
+      <div>
+        <dd>{tamamlananCount}</dd>
+        <dt>Tamamlanan Proje</dt>
+      </div>
+      <div>
+        <dd>{devamEdenCount}</dd>
+        <dt>Devam Eden Proje</dt>
+      </div>
+      <div>
+        <dd>{site.completionCertificatesCount}</dd>
+        <dt>İş Bitirme Belgesi</dt>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<nav class="projects-filters container" aria-label="Proje durumu">
+  {
+    tabs.map((tab) => (
+      <a href={tab.href} class="projects-filters__btn" aria-current={active === tab.key ? 'page' : undefined}>
+        {tab.label} ({tab.count})
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .projects-hero {
+    position: relative;
+    padding: 140px var(--edge) 64px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .projects-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 72px 72px;
+    pointer-events: none;
+  }
+
+  .projects-hero__inner {
+    position: relative;
+  }
+
+  .projects-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--space-m);
+    font-size: var(--fs-small);
+  }
+
+  .projects-hero__breadcrumb a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color var(--transition);
+  }
+
+  .projects-hero__breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .projects-hero__breadcrumb span:first-of-type {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .projects-hero__breadcrumb span[aria-current] {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .projects-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--space-m);
+  }
+
+  .projects-hero__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: #fff;
+  }
+
+  .projects-hero__eyebrow span:last-child {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .projects-hero h1 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: var(--space-m);
+  }
+
+  .projects-hero__lead {
+    max-width: 580px;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .projects-hero__stats {
+    display: flex;
+    gap: var(--space-l);
+    margin-top: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .projects-hero__stats dd {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .projects-hero__stats dt {
+    margin-top: var(--space-xs);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .projects-filters {
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    padding-block: var(--space-l);
+  }
+
+  .projects-filters__btn {
+    padding: 10px 24px;
+    border-radius: var(--radius);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    border: 2px solid rgba(43, 46, 131, 0.2);
+    color: var(--color-text-muted);
+    transition:
+      background var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .projects-filters__btn:hover,
+  .projects-filters__btn[aria-current='page'] {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
+  }
+
+  @media (max-width: 640px) {
+    .projects-hero {
+      padding-top: 108px;
+    }
+
+    .projects-hero__stats {
+      gap: var(--space-m);
+    }
+  }
+</style>

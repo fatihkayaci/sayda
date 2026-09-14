@@ -4,15 +4,16 @@ import site from '../../data/site.json';
 
 <section class="hero">
   <div class="hero__media">
-    <img class="hero__image" src="/img/hero.jpg" alt="Sayda İnşaat şantiye görünümü" />
+    <img class="hero__image" src="/img/hero.jpg" alt="Sayda İnşaat şantiye görünümü" fetchpriority="high" />
+    <div class="hero__overlay-diagonal"></div>
+    <div class="hero__overlay-bottom"></div>
   </div>
-  <div class="hero__overlay"></div>
   <div class="hero__grid"></div>
 
   <div class="hero__inner">
     <div class="hero__eyebrow">
       <span class="hero__eyebrow-bar"></span>
-      <span class="hero__eyebrow-text">{site.foundedYear}'DAN BUGÜNE</span>
+      <span class="hero__eyebrow-text">{site.foundedYear}'DAN BU YANA</span>
     </div>
     <h1 class="hero__title">
       <span class="hero__title-line">SAYDA</span>
@@ -23,173 +24,218 @@ import site from '../../data/site.json';
       anahtar teslim müteahhitlik hizmeti veriyoruz.
     </p>
     <div class="hero__cta">
-      <a class="button button--primary" href="/kentsel-donusum">Kentsel Dönüşüm</a>
-      <a class="button button--secondary" href="/projeler">Projelerimiz</a>
+      <a class="hero__btn hero__btn--primary" href="/projeler">Projelerimizi İnceleyin →</a>
+      <a class="hero__btn hero__btn--outline" href="/iletisim#quote-form">Teklif Alın</a>
     </div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>SCROLL</span>
+    <span class="hero__scroll-line"></span>
   </div>
 </section>
 
 <style>
   .hero {
     position: relative;
+    height: 100vh;
+    min-height: 640px;
     display: flex;
-    align-items: center;
-    min-height: 88vh;
-    background: var(--color-bg-light);
-    color: var(--color-text);
+    align-items: flex-end;
+    color: #fff;
     overflow: hidden;
   }
 
   .hero__media {
     position: absolute;
     inset: 0;
+    z-index: 0;
   }
 
   .hero__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right center;
+    object-position: center;
+    animation: heroPan 12s ease-out both;
   }
 
-  .hero__overlay {
+  .hero__overlay-diagonal {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      90deg,
-      var(--color-bg-light) 0%,
-      var(--color-bg-light) 12%,
-      rgba(244, 245, 250, 0) 55%
+      105deg,
+      rgba(19, 21, 74, 0.9) 0%,
+      rgba(19, 21, 74, 0.6) 45%,
+      rgba(19, 21, 74, 0.25) 100%
     );
-    pointer-events: none;
+  }
+
+  .hero__overlay-bottom {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(19, 21, 74, 0.75) 0%, transparent 40%);
   }
 
   .hero__grid {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background-image:
-      linear-gradient(rgba(43, 46, 131, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(43, 46, 131, 0.06) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 55%);
-    mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 55%);
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 72px 72px;
     pointer-events: none;
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
   }
 
   .hero__inner {
     position: relative;
-    padding: var(--space-xxl) var(--edge) var(--space-xxl) 72px;
-    max-width: 620px;
+    z-index: 2;
+    padding: 0 var(--edge) 96px 72px;
+    max-width: 720px;
   }
 
   .hero__eyebrow {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
     margin-bottom: var(--space-m);
+    animation: heroFadeUp 0.8s 0.2s both;
   }
 
   .hero__eyebrow-bar {
     display: block;
-    width: 44px;
+    width: 48px;
     height: 3px;
-    background: var(--color-navy);
+    background: #fff;
   }
 
   .hero__eyebrow-text {
     font-size: var(--fs-small);
     font-weight: 700;
-    letter-spacing: 0.28em;
-    color: var(--color-navy);
+    letter-spacing: 0.32em;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
   }
 
   .hero__title {
     font-family: var(--font-accent);
     font-weight: 800;
-    line-height: 0.9;
+    line-height: 0.87;
     letter-spacing: -0.04em;
-    text-wrap: balance;
+    animation: heroFadeUp 0.8s 0.3s both;
   }
 
   .hero__title-line {
     display: block;
-    font-size: clamp(56px, 7.2vw, 108px);
-    color: var(--color-navy);
+    font-size: clamp(64px, 9vw, 128px);
+    color: #fff;
   }
 
   .hero__title-line--outline {
     color: transparent;
-    -webkit-text-stroke: 1.5px var(--color-navy);
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.55);
   }
 
   .hero__subtitle {
+    max-width: 500px;
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.82);
     margin-top: 36px;
-    max-width: 440px;
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
     text-wrap: pretty;
+    animation: heroFadeUp 0.8s 0.45s both;
   }
 
   .hero__cta {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--space-s);
-    margin-top: var(--space-l);
+    flex-wrap: wrap;
+    margin-top: 44px;
+    animation: heroFadeUp 0.8s 0.6s both;
   }
 
-  .hero .button {
-    padding: 16px 34px;
+  .hero__btn {
+    display: inline-block;
+    padding: 16px 36px;
+    border-radius: var(--radius);
     font-size: 15px;
+    font-weight: 700;
     letter-spacing: 0.04em;
+    transition:
+      background var(--transition),
+      border-color var(--transition);
   }
 
-  .hero .button--secondary {
-    color: var(--color-navy);
-    border: 2px solid rgba(43, 46, 131, 0.3);
+  .hero__btn--primary {
+    background: var(--color-navy);
+    color: #fff;
   }
 
-  .hero .button--secondary:hover {
-    background: rgba(43, 46, 131, 0.06);
-    border-color: var(--color-navy);
+  .hero__btn--primary:hover {
+    background: var(--color-navy-dark);
   }
 
-  @media (max-width: 770px) {
-    .hero__inner {
-      padding-left: var(--edge);
-    }
+  .hero__btn--outline {
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
 
-    .hero__overlay {
+  .hero__btn--outline:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 40px;
+    right: 72px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: heroFadeUp 1s 0.8s both;
+  }
+
+  .hero__scroll span:first-child {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.45);
+    writing-mode: vertical-rl;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 56px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+  }
+
+  @media (max-width: 900px) {
+    .hero__scroll {
       display: none;
     }
+  }
 
-    .hero__grid {
-      display: none;
-    }
-
-    .hero .button--secondary {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.7);
-    }
-
-    .hero .button--secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: #fff;
+  @media (max-width: 700px) {
+    .hero__inner {
+      padding: 0 var(--edge-mobile) 80px;
     }
   }
 
-  @media (max-width: 640px) {
-    .hero {
-      min-height: 520px;
+  @media (prefers-reduced-motion: reduce) {
+    .hero__image {
+      animation: none;
     }
 
-    .hero__inner {
-      padding-inline: var(--edge-mobile);
-    }
-
-    .hero__cta {
-      flex-direction: column;
-      align-items: stretch;
+    .hero__eyebrow,
+    .hero__title,
+    .hero__subtitle,
+    .hero__cta,
+    .hero__scroll {
+      animation: none;
     }
   }
 </style>

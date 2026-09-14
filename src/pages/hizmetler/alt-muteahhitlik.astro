@@ -1,9 +1,68 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const kategoriler = [
+  'Kaba Yapı İmalatları',
+  'İleri Kaba ve İnce Yapı İmalatları',
+  'Çatı İmalatları',
+  'Asma Tavan & Bölme Duvar İmalatları',
+  'Cephe Mantolama & Seramik / Metal / Cam Giydirme İmalatları',
+  'Dekorasyon Uygulamaları',
+];
 ---
 
-<PagePlaceholder
+<Layout
   title="Alt Müteahhitlik | Sayda İnşaat"
   description="Ana yükleniciye bağlı olarak kaba veya ince yapı işlerinin taşeronluğu."
-  heading="Alt Müteahhitlik"
-/>
+>
+  <section class="intro">
+    <div class="container">
+      <h1>Alt Müteahhitlik</h1>
+      <p class="intro__lead">
+        Ana yükleniciye bağlı olarak, uzman ekiplerimizle kaba ve ince yapı işlerinin taşeronluğunu üstleniyoruz.
+        Alt müteahhitlik kapsamında görev aldığımız başlıca imalat grupları:
+      </p>
+
+      <ul class="kategoriler">
+        {kategoriler.map((k) => <li>{k}</li>)}
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-block-compact) var(--space-xxl);
+  }
+
+  .intro .container {
+    max-width: 760px;
+  }
+
+  .intro h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .intro__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .kategoriler {
+    margin-top: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .kategoriler li {
+    padding: var(--space-s) var(--space-m);
+    border-left: 2px solid var(--color-navy);
+    background: var(--color-bg-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+</style>

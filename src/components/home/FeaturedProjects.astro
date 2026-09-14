@@ -1,24 +1,37 @@
 ---
 import allProjects from '../../data/projects.json';
+import { statusLabel, formatDateRange } from '../../utils/project';
 
-const projects = allProjects.filter((project) => project.featured);
+const featured = allProjects.filter((project) => project.featured);
+const rest = allProjects.filter((project) => !project.featured).slice(0, 2);
+const projects = [...featured, ...rest].slice(0, 3);
 ---
 
-<section class="featured-projects">
+<section class="featured-projects" id="projeler">
   <div class="container">
-    <div class="featured-projects__header">
-      <h2>Öne Çıkan Projeler</h2>
-      <a class="featured-projects__all" href="/projeler">Tüm projeler →</a>
+    <div class="featured-projects__header reveal">
+      <div>
+        <div class="featured-projects__eyebrow">
+          <span class="featured-projects__eyebrow-bar"></span>
+          <span>ÖNE ÇIKAN PROJELER</span>
+        </div>
+        <h2>Gerçek Projeler,<br />Gerçek Sonuçlar</h2>
+      </div>
+      <a class="featured-projects__all" href="/projeler">Tüm Projeler →</a>
     </div>
 
     <div class="featured-projects__grid">
       {
-        projects.map((project) => (
-          <a class="project-card" href={project.href}>
-            <img src={project.image} alt={`${project.name} - Sayda İnşaat tamamlanan proje`} loading="lazy" />
+        projects.map((project, i) => (
+          <a class={`project-card reveal reveal-d${i + 1}`} href={project.href}>
+            <div class="project-card__media">
+              <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+              <span class={`project-card__badge project-card__badge--${project.status}`}>{statusLabel(project.status)}</span>
+            </div>
             <div class="project-card__info">
               <h3>{project.name}</h3>
-              <span class="project-card__location">{project.location}</span>
+              {project.employer && <p class="project-card__employer">{project.employer} · {project.location}</p>}
+              <p class="project-card__meta">{project.area} · {formatDateRange(project.startDate, project.endDate)}</p>
             </div>
           </a>
         ))
@@ -29,69 +42,160 @@ const projects = allProjects.filter((project) => project.featured);
 
 <style>
   .featured-projects {
-    padding-block: var(--space-block);
+    padding-block: 112px;
+    background: var(--color-bg-light);
   }
 
   .featured-projects__header {
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: var(--space-l);
+    gap: var(--space-m);
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+
+  .featured-projects__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .featured-projects__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: var(--color-navy);
+  }
+
+  .featured-projects__eyebrow span:last-child {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--color-navy);
   }
 
   .featured-projects__header h2 {
-    font-size: var(--fs-h2);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 42px);
+    line-height: 1.1;
   }
 
   .featured-projects__all {
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: var(--radius);
     font-size: var(--fs-small);
-    color: var(--color-navy);
+    font-weight: 700;
     white-space: nowrap;
+    flex-shrink: 0;
+    border: 2px solid var(--color-navy);
+    color: var(--color-navy);
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .featured-projects__all:hover {
+    background: var(--color-navy);
+    color: #fff;
   }
 
   .featured-projects__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
+    gap: 24px;
   }
 
   .project-card {
-    display: block;
-    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-bg);
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
     transition:
-      transform var(--transition),
-      box-shadow var(--transition);
+      transform 220ms ease,
+      box-shadow 220ms ease;
   }
 
   .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
   }
 
-  .project-card img {
+  .project-card__media {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+  }
+
+  .project-card__media img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .project-card:hover .project-card__media img {
+    transform: scale(1.05);
+  }
+
+  .project-card__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(19, 21, 74, 0.85) 0%, transparent 55%);
+  }
+
+  .project-card__badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #fff;
+  }
+
+  .project-card__badge--devam-eden {
+    background: var(--color-navy);
+  }
+
+  .project-card__badge--tamamlanan {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
   }
 
   .project-card__info {
-    padding: var(--space-m);
+    padding: 24px;
+    background: var(--color-bg);
   }
 
   .project-card h3 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
   }
 
-  .project-card__location {
-    display: block;
-    margin-top: 4px;
-    font-size: var(--fs-small);
+  .project-card__employer {
+    font-size: 13px;
     color: var(--color-text-faint);
+    margin-bottom: 4px;
+  }
+
+  .project-card__meta {
+    font-size: 13px;
+    color: var(--color-navy);
+    font-weight: 600;
   }
 
   @media (max-width: 1024px) {
@@ -100,24 +204,9 @@ const projects = allProjects.filter((project) => project.featured);
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 700px) {
     .featured-projects__grid {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: var(--space-xs);
-      margin: 0 calc(var(--edge-mobile) * -1);
-      padding-inline: var(--edge-mobile);
-    }
-
-    .featured-projects__grid::-webkit-scrollbar {
-      display: none;
-    }
-
-    .project-card {
-      flex: 0 0 78%;
-      scroll-snap-align: start;
+      grid-template-columns: 1fr;
     }
   }
 </style>

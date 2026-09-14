@@ -1,9 +1,127 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const steps = [
+  { number: '01', title: 'Teknik Değerlendirme ve Fizibilite', description: 'Projenin teknik ve mali fizibilite çalışması yapılır.' },
+  { number: '02', title: 'Bütçe ve Maliyet Belirleme', description: 'Proje bütçesi ve maliyet kalemleri netleştirilir.' },
+  { number: '03', title: 'Şartname ve Sözleşme', description: 'Şartname ve sözleşme dokümanları hazırlanır.' },
+  { number: '04', title: 'Master İş Programı', description: 'Projenin genel iş programı ve takvimi oluşturulur.' },
+  { number: '05', title: 'İhale Yönetimi', description: 'Yüklenici ve tedarikçi ihale süreçleri yönetilir.' },
+  { number: '06', title: 'Satın Alma ve Lojistik', description: 'Satın alma ve lojistik koordinasyonu sağlanır.' },
+  { number: '07', title: 'Kalite Güvence Takibi', description: 'Kalite güvence süreçleri sahada takip edilir.' },
+  { number: '08', title: 'Raporlama ve İlerleme Takibi', description: 'Raporlama sistemi kurulur, ilerleme düzenli takip edilir.' },
+  { number: '09', title: 'Denetim ve Saha Kontrolü', description: 'Saha denetimleri ve kontrolleri gerçekleştirilir.' },
+  { number: '10', title: 'Geçici ve Kesin Kabul', description: 'Geçici kabul ve kesin kabul süreçleri tamamlanır.' },
+];
 ---
 
-<PagePlaceholder
+<Layout
   title="Proje Yönetimi & Danışmanlık | Sayda İnşaat"
   description="Bağımsız proje yönetimi, maliyet kontrolü ve teknik danışmanlık hizmetleri."
-  heading="Proje Yönetimi & Danışmanlık"
-/>
+>
+  <section class="intro">
+    <div class="container">
+      <h1>Proje Yönetimi &amp; Danışmanlık</h1>
+      <p class="intro__lead">
+        Sayda İnşaat, "Yüksek Kalite, Zamanında Teslim, Düşük Maliyet" felsefesiyle yatırımcı ve finansör
+        kuruluşlara; inşaat, yatırım ve geliştirme projelerinde proje yönetimi ve danışmanlık hizmetleri sunar.
+      </p>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <h2>Süreç Nasıl İşliyor?</h2>
+
+      <ol class="process__grid">
+        {
+          steps.map((step) => (
+            <li class="process-step">
+              <span class="process-step__number">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .intro {
+    padding-block: var(--space-block-compact) 0;
+  }
+
+  .intro .container {
+    max-width: 760px;
+  }
+
+  .intro h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .intro__lead {
+    margin-top: var(--space-m);
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .process {
+    padding-block: var(--space-block);
+  }
+
+  .process h2 {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-l);
+  }
+
+  .process__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+  }
+
+  .process-step {
+    position: relative;
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--color-navy);
+  }
+
+  .process-step__number {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text-faint);
+  }
+
+  .process-step h3 {
+    margin-top: var(--space-xs);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.0625rem;
+  }
+
+  .process-step p {
+    margin-top: 6px;
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .process h2 {
+      text-align: center;
+    }
+
+    .process__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .process__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
