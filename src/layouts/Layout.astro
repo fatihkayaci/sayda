@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
+import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -27,6 +28,7 @@ const { title, description, organizationSchema, ogImage } = Astro.props;
     <main>
       <slot />
     </main>
+    <CtaBanner />
     <Footer />
   </body>
 </html>

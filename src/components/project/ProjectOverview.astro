@@ -1,0 +1,141 @@
+---
+interface Props {
+  description: string[];
+  works: string[];
+}
+
+const { description, works } = Astro.props;
+
+const half = Math.ceil(works.length / 2);
+const columnA = works.slice(0, half);
+const columnB = works.slice(half);
+---
+
+<section class="project-overview">
+  <div class="container project-overview__inner">
+    <div class="project-overview__col">
+      <span class="project-overview__index">01</span>
+      <h2>Proje Hakkında</h2>
+      {description.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    {
+      works.length > 0 && (
+        <div class="project-overview__col">
+          <span class="project-overview__index">02</span>
+          <h2>Gerçekleştirilen İşler</h2>
+          <div class="project-overview__works">
+            <ol start={1}>
+              {columnA.map((item) => (
+                <li>
+                  <span class="project-overview__num">{String(works.indexOf(item) + 1).padStart(2, '0')}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+            <ol>
+              {columnB.map((item) => (
+                <li>
+                  <span class="project-overview__num">{String(works.indexOf(item) + 1).padStart(2, '0')}</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .project-overview {
+    padding-block: var(--space-xl);
+  }
+
+  .project-overview__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-overview__index {
+    display: block;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--color-text-faint);
+    margin-bottom: var(--space-xs);
+  }
+
+  .project-overview__col h2 {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-m);
+  }
+
+  .project-overview__col:first-child {
+    padding-right: clamp(32px, 5vw, 80px);
+    border-right: 1px solid var(--color-border);
+  }
+
+  .project-overview__col + .project-overview__col {
+    padding-left: clamp(32px, 5vw, 80px);
+  }
+
+  .project-overview__col p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .project-overview__col p + p {
+    margin-top: var(--space-s);
+  }
+
+  .project-overview__works {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-l);
+  }
+
+  .project-overview__works ol li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+  }
+
+  .project-overview__num {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--color-text-faint);
+  }
+
+  @media (max-width: 1024px) {
+    .project-overview__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-l);
+    }
+
+    .project-overview__col:first-child {
+      padding-right: 0;
+      padding-bottom: var(--space-l);
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .project-overview__col + .project-overview__col {
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-overview__works {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

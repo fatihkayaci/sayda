@@ -1,0 +1,150 @@
+---
+import { shortProjectTitle, splitLocation } from '../../utils/project';
+
+interface NavProject {
+  href: string;
+  name: string;
+  location: string;
+  image: string;
+}
+
+interface Props {
+  prev: NavProject | null;
+  next: NavProject | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{
+  (prev || next) && (
+    <section class="project-nav">
+      <div class="container">
+        <span class="project-nav__index">04</span>
+        <h2>Diğer Projeler</h2>
+
+        <div class="project-nav__grid">
+          {prev ? (
+            <a class="project-nav__item project-nav__item--prev" href={prev.href}>
+              <img src={prev.image} alt={`${shortProjectTitle(prev.name)} - Sayda İnşaat`} loading="lazy" />
+              <div>
+                <span class="project-nav__label">← Önceki Proje</span>
+                <span class="project-nav__name">{shortProjectTitle(prev.name)}</span>
+                <span class="project-nav__location">{splitLocation(prev.location).short}</span>
+              </div>
+            </a>
+          ) : (
+            <span />
+          )}
+
+          {next ? (
+            <a class="project-nav__item project-nav__item--next" href={next.href}>
+              <div>
+                <span class="project-nav__label">Sonraki Proje →</span>
+                <span class="project-nav__name">{shortProjectTitle(next.name)}</span>
+                <span class="project-nav__location">{splitLocation(next.location).short}</span>
+              </div>
+              <img src={next.image} alt={`${shortProjectTitle(next.name)} - Sayda İnşaat`} loading="lazy" />
+            </a>
+          ) : (
+            <span />
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .project-nav {
+    padding-block: var(--space-xl);
+  }
+
+  .project-nav .container {
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-nav__index {
+    display: block;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--color-text-faint);
+    margin-bottom: var(--space-xs);
+  }
+
+  .project-nav h2 {
+    font-size: var(--fs-h3);
+    margin-bottom: var(--space-l);
+  }
+
+  .project-nav__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-l);
+  }
+
+  .project-nav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    transition: opacity var(--transition);
+  }
+
+  .project-nav__item:hover {
+    opacity: 0.75;
+  }
+
+  .project-nav__item--next {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  .project-nav__item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+
+  .project-nav__item div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .project-nav__label {
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  .project-nav__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.125rem;
+  }
+
+  .project-nav__location {
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  @media (max-width: 640px) {
+    .project-nav__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-m);
+    }
+
+    .project-nav__item--next {
+      justify-content: flex-start;
+      text-align: left;
+      flex-direction: row-reverse;
+    }
+
+    .project-nav__item img {
+      width: 90px;
+      height: 65px;
+    }
+  }
+</style>
