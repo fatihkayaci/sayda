@@ -1,9 +1,8 @@
 {
   "name": "Sayda İnşaat",
-  "legalName": "Sayda İnşaat Taahhüt ve Ticaret A.Ş.",
+  "legalName": "Sayda İnşaat Taahhüt San. ve Tic. Ltd. Şti.",
   "url": "https://www.sayda.com.tr",
   "foundedYear": 1996,
-  "foundedYearVerified": false,
   "logo": "/img/logo.png",
   "phone": "+90 212 223 88 12",
   "phoneHref": "tel:+902122238812",
@@ -16,8 +15,21 @@
     "neighborhood": "Tarabya"
   },
   "social": {
-    "instagram": "https://www.instagram.com/saydainsaat"
+    "instagram": "https://www.instagram.com/saydainsaat",
+    "linkedin": "https://www.linkedin.com/in/sayda-inşaat-75a716198"
   },
+  "stats": {
+    "employeeCount": 8,
+    "avgAnnualProjects": 2,
+    "totalCompletedArea": "4.250.000 m²"
+  },
+  "certifications": [
+    { "name": "ISO 9001", "validUntil": "20.03.2027", "verified": false },
+    { "name": "ISO 14001", "validUntil": "20.03.2027", "verified": false },
+    { "name": "ISO 10002", "validUntil": "20.03.2027", "verified": false }
+  ],
+  "contractorLicenseGroup": "G",
+  "completionCertificatesCount": 33,
   "documents": {
     "catalog": "/katalog.pdf",
     "certificate": "/sertifikalar/sertifika.pdf"

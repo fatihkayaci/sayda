@@ -11,13 +11,22 @@ const year = new Date().getFullYear();
     <div class="footer__brand">
       <p class="footer__logo">SAYDA<span>İNŞAAT</span></p>
       <p class="footer__tagline">{site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik.</p>
-      {
-        site.social.instagram && (
-          <a class="footer__social" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <Icon name="instagram" size={20} />
-          </a>
-        )
-      }
+      <div class="footer__social-list">
+        {
+          site.social.instagram && (
+            <a class="footer__social" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Icon name="instagram" size={20} />
+            </a>
+          )
+        }
+        {
+          site.social.linkedin && (
+            <a class="footer__social" href={site.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Icon name="linkedin" size={20} />
+            </a>
+          )
+        }
+      </div>
     </div>
 
     <nav class="footer__column" aria-label="Hizmetler">
@@ -98,9 +107,14 @@ const year = new Date().getFullYear();
     font-size: var(--fs-small);
   }
 
+  .footer__social-list {
+    display: flex;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+  }
+
   .footer__social {
     display: inline-flex;
-    margin-top: var(--space-m);
     color: var(--color-on-dark-muted);
     transition: color var(--transition);
   }

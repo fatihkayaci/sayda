@@ -1,15 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
+import QuoteForm from '../../components/home/QuoteForm.astro';
 import site from '../../data/site.json';
 ---
 
-<Layout title="İletişim | Sayda İnşaat" description="Sayda İnşaat iletişim bilgileri." organizationSchema>
+<Layout title="İletişim | Sayda İnşaat" description="Sayda İnşaat iletişim bilgileri ve teklif formu." organizationSchema>
   <section class="iletisim">
     <div class="container">
       <h1>İletişim</h1>
-      <p class="iletisim__lead">İçerik hazırlanıyor.</p>
-
+      <p class="iletisim__legal-name">{site.legalName}</p>
       <ul class="iletisim__list">
         <li>
           <Icon name="pin" size={20} />
@@ -23,15 +23,32 @@ import site from '../../data/site.json';
           <Icon name="mail" size={20} />
           <a href={`mailto:${site.email}`}>{site.email}</a>
         </li>
+        {
+          site.social.instagram && (
+            <li>
+              <Icon name="instagram" size={20} />
+              <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+            </li>
+          )
+        }
+        {
+          site.social.linkedin && (
+            <li>
+              <Icon name="linkedin" size={20} />
+              <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </li>
+          )
+        }
       </ul>
     </div>
   </section>
+
+  <QuoteForm />
 </Layout>
 
 <style>
   .iletisim {
-    padding-block: var(--space-xxl);
-    min-height: 40vh;
+    padding-block: var(--space-block-compact) 0;
   }
 
   .iletisim .container {
@@ -42,10 +59,10 @@ import site from '../../data/site.json';
     font-size: var(--fs-h1);
   }
 
-  .iletisim__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
+  .iletisim__legal-name {
+    margin-top: var(--space-s);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
   }
 
   .iletisim__list {
@@ -60,14 +77,5 @@ import site from '../../data/site.json';
     align-items: flex-start;
     gap: var(--space-s);
     font-size: var(--fs-body);
-  }
-
-  .iletisim__list a {
-    font-weight: 600;
-    color: var(--color-navy);
-  }
-
-  .iletisim__list a:hover {
-    text-decoration: underline;
   }
 </style>

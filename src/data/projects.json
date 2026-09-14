@@ -1,26 +1,302 @@
 [
   {
-    "slug": "proje-1",
-    "type": "Kentsel Dönüşüm",
-    "location": "İstanbul",
-    "status": "tamamlanan",
-    "image": "/img/proje-1.jpg",
-    "href": "/projeler/proje-1"
-  },
-  {
-    "slug": "proje-2",
-    "type": "Kat Karşılığı İnşaat",
-    "location": "İstanbul",
-    "status": "tamamlanan",
-    "image": "/img/proje-2.jpg",
-    "href": "/projeler/proje-2"
-  },
-  {
-    "slug": "proje-3",
-    "type": "Anahtar Teslim Müteahhitlik",
-    "location": "İstanbul",
+    "slug": "referans-besiktas-abbasaga",
+    "name": "Referans Beşiktaş Abbasağa Projesi",
+    "employer": "Kiler GYO, Biskon Yapı A.Ş. İş Ortaklığı",
+    "scope": "Lüks Konut Residance Projesi İnce İşleri (Duvar, Mantolama, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "description": [
+      "Beşiktaş Abbasağa'da yer alan bu lüks konut / residence projesinde ince işler Sayda İnşaat tarafından yürütülmektedir.",
+      "Proje kapsamında duvar, mantolama, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları gerçekleştirilmektedir."
+    ],
+    "works": ["Duvar", "Mantolama", "Sıva", "Şap", "Seramik", "Alçı Levha", "Boya", "Kartonpiyer", "Duvar Kağıdı"],
+    "location": "Beşiktaş - İstanbul",
+    "area": "79.000 m²",
     "status": "devam-eden",
+    "startDate": "Ocak 2024",
+    "endDate": "",
+    "featured": true,
+    "image": "/img/proje-1.jpg",
+    "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
+    "href": "/projeler/referans-besiktas-abbasaga"
+  },
+  {
+    "slug": "referans-kartal-loca-1",
+    "name": "Referans Kartal Loca 1 Projesi",
+    "employer": "Kiler GYO, Biskon Yapı A.Ş.",
+    "scope": "2. Etap Konut & Cadde Dükkan İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "description": [
+      "Kartal Loca 1 projesinin 2. etap konut ve cadde dükkanlarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Duvar", "Sıva", "Şap", "Seramik", "Alçı Levha", "Boya", "Kartonpiyer", "Duvar Kağıdı"],
+    "location": "Kartal - İstanbul",
+    "area": "35.672 m²",
+    "status": "tamamlanan",
+    "startDate": "Eylül 2022",
+    "endDate": "Eylül 2024",
+    "featured": false,
+    "image": "/img/proje-2.jpg",
+    "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
+    "href": "/projeler/referans-kartal-loca-1"
+  },
+  {
+    "slug": "referans-kartal-loca-2",
+    "name": "Referans Kartal Loca 2 Projesi",
+    "employer": "Kiler GYO, Biskon Yapı A.Ş.",
+    "scope": "1. Etap Konut & Cadde Dükkan İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "description": [
+      "Kartal Loca 2 projesinin 1. etap konut ve cadde dükkanlarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Duvar", "Sıva", "Şap", "Seramik", "Alçı Levha", "Boya", "Kartonpiyer", "Duvar Kağıdı"],
+    "location": "Kartal - İstanbul",
+    "area": "40.437 m²",
+    "status": "tamamlanan",
+    "startDate": "Eylül 2021",
+    "endDate": "Eylül 2023",
+    "featured": false,
     "image": "/img/proje-3.jpg",
-    "href": "/projeler/proje-3"
+    "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
+    "href": "/projeler/referans-kartal-loca-2"
+  },
+  {
+    "slug": "buyukyali",
+    "name": "Büyükyalı Projesi",
+    "employer": "Özak - Yenigün - Ziylan Ortaklığı",
+    "scope": "Garden Zone H, I, L Blokları Konut, Sosyal Tesisleri İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "description": [
+      "Büyükyalı projesinin Garden Zone H, I, L blokları konut ve sosyal tesislerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Duvar", "Sıva", "Şap", "Seramik", "Alçı Levha", "Boya", "Kartonpiyer", "Duvar Kağıdı"],
+    "location": "Zeytinburnu - İstanbul",
+    "area": "560.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Şubat 2018",
+    "endDate": "Şubat 2020",
+    "featured": true,
+    "image": "/img/proje-1.jpg",
+    "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
+    "href": "/projeler/buyukyali"
+  },
+  {
+    "slug": "gaziantep-entegre-saglik-kampusu",
+    "name": "Gaziantep Entegre Sağlık Kampüsü Projesi",
+    "employer": "CCN Altyapı Yatırımları ve İnşaat A.Ş.",
+    "scope": "T1 Kardiyovasküler Cerrahi Hastanesi İnce İşleri (Alçı-levha işleri, Sıva, Şap, Seramik, Boya İşleri)",
+    "description": [
+      "Gaziantep Entegre Sağlık Kampüsü bünyesindeki T1 Kardiyovasküler Cerrahi Hastanesi'nde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında alçı levha, sıva, şap, seramik ve boya uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Alçı Levha", "Sıva", "Şap", "Seramik", "Boya"],
+    "location": "Gaziantep",
+    "area": "640.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Şubat 2018",
+    "endDate": "Haziran 2019",
+    "featured": true,
+    "image": "/img/proje-2.jpg",
+    "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
+    "href": "/projeler/gaziantep-entegre-saglik-kampusu"
+  },
+  {
+    "slug": "vadistanbul",
+    "name": "Vadistanbul Projesi",
+    "employer": "Artaş - İnvest Ortak Girişimi",
+    "scope": "2. Etap G Blok ve Otel, 3. Etap Konut, Ofis ve Sosyal Tesis İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "description": [
+      "Vadistanbul projesinin 2. etap G Blok ve otel, 3. etap konut, ofis ve sosyal tesislerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Duvar", "Sıva", "Şap", "Seramik", "Alçı Levha", "Boya", "Kartonpiyer", "Duvar Kağıdı"],
+    "location": "Ayazağa - İstanbul",
+    "area": "450.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Haziran 2017",
+    "endDate": "Aralık 2018",
+    "featured": false,
+    "image": "/img/proje-3.jpg",
+    "gallery": ["/img/proje-1.jpg", "/img/proje-3.jpg", "/img/proje-2.jpg"],
+    "href": "/projeler/vadistanbul"
+  },
+  {
+    "slug": "atlas-park-avm-ofis",
+    "name": "Atlas Park AVM ve Ofis Projesi",
+    "employer": "Mesturkuaz, Canovate, Uzman İnş., HD Gayrimenkul Geliştirme Ortak Girişimi",
+    "scope": "AVM & Ofis İnce İşleri (Bims Duvar, Sıva, Şap + Alçı-levha İşleri)",
+    "description": [
+      "Atlas Park AVM ve Ofis projesinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında bims duvar, sıva, şap ve alçı levha uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Bims Duvar", "Sıva", "Şap", "Alçı Levha"],
+    "location": "Sultanbeyli - İstanbul",
+    "area": "160.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Ağustos 2013",
+    "endDate": "Mart 2015",
+    "featured": false,
+    "image": "/img/proje-1.jpg",
+    "gallery": ["/img/proje-2.jpg", "/img/proje-1.jpg", "/img/proje-3.jpg"],
+    "href": "/projeler/atlas-park-avm-ofis"
+  },
+  {
+    "slug": "kapital-tower-ofis",
+    "name": "Kapital Tower 10. Kat Ofis Projesi",
+    "employer": "Uzman İnşaat A.Ş. & Mesturkuaz Madencilik A.Ş.",
+    "scope": "Ofis Dekorasyonu Anahtar Teslimi (Elektro-mekanik, İnce işler, Mermer işleri, Ahşap işleri, Metal ve Cam işleri)",
+    "description": [
+      "Kapital Tower 10. Kat Ofis projesinde anahtar teslim ofis dekorasyonu Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında elektro-mekanik, ince işler, mermer, ahşap, metal ve cam işleri tamamlanmıştır."
+    ],
+    "works": ["Elektro-mekanik", "İnce İşler", "Mermer İşleri", "Ahşap İşleri", "Metal İşleri", "Cam İşleri"],
+    "location": "Basınekspres, Güneşli - İstanbul",
+    "area": "4.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Eylül 2013",
+    "endDate": "Eylül 2014",
+    "featured": false,
+    "image": "/img/proje-2.jpg",
+    "gallery": ["/img/proje-3.jpg", "/img/proje-2.jpg", "/img/proje-1.jpg"],
+    "href": "/projeler/kapital-tower-ofis"
+  },
+  {
+    "slug": "torun-tower-ofis",
+    "name": "Torun Tower Ofis Projesi",
+    "employer": "Torunlar Gayrimenkul Yatırım Ortaklığı A.Ş.",
+    "scope": "Tower 40 Kat Shell & Core İnce İşleri (Gazbeton, Sıva, Şap, Seramik, Alçı-Levha İşleri)",
+    "description": [
+      "Torun Tower Ofis projesinin 40 katlık kulesinde shell & core ince işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında gazbeton, sıva, şap, seramik ve alçı levha uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Gazbeton", "Sıva", "Şap", "Seramik", "Alçı Levha"],
+    "location": "Gayrettepe - İstanbul",
+    "area": "97.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Mayıs 2013",
+    "endDate": "Ekim 2013",
+    "featured": false,
+    "image": "/img/proje-3.jpg",
+    "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
+    "href": "/projeler/torun-tower-ofis"
+  },
+  {
+    "slug": "piazza-avm-anamon-otel",
+    "name": "Piazza AVM & Anamon Otel Projesi",
+    "employer": "Rönesans Teknik İnşaat A.Ş.",
+    "scope": "AVM & Otel İnce İşleri (Alçı-Levha Bölme Duvar, Asma Tavan, Alçı ve Kara Sıva, Boya İşleri)",
+    "description": [
+      "Piazza AVM & Anamon Otel projesinde AVM ve otel ince işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında alçı levha bölme duvar, asma tavan, alçı ve kara sıva ile boya uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Alçı Levha Bölme Duvar", "Asma Tavan", "Alçı Sıva", "Kara Sıva", "Boya"],
+    "location": "Canik - Samsun",
+    "area": "135.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Eylül 2012",
+    "endDate": "Şubat 2013",
+    "featured": false,
+    "image": "/img/proje-1.jpg",
+    "gallery": ["/img/proje-2.jpg", "/img/proje-3.jpg", "/img/proje-1.jpg"],
+    "href": "/projeler/piazza-avm-anamon-otel"
+  },
+  {
+    "slug": "akbati-avm-konut",
+    "name": "Akbatı AVM & Konut Projesi",
+    "employer": "Akiş Gayrimenkul Yatırım A.Ş.",
+    "scope": "AVM & Otoparklar İnce İşleri (Alçı-Levha Bölme Duvar, Asma Tavan, Sıva, Boya İşleri)",
+    "description": [
+      "Akbatı AVM & Konut projesinin AVM ve otopark bölümlerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında alçı levha bölme duvar, asma tavan, sıva ve boya uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Alçı Levha Bölme Duvar", "Asma Tavan", "Sıva", "Boya"],
+    "location": "Bahçeşehir - İstanbul",
+    "area": "250.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Ocak 2011",
+    "endDate": "Temmuz 2011",
+    "featured": false,
+    "image": "/img/proje-2.jpg",
+    "gallery": ["/img/proje-3.jpg", "/img/proje-1.jpg", "/img/proje-2.jpg"],
+    "href": "/projeler/akbati-avm-konut"
+  },
+  {
+    "slug": "varyap-meridien-konut",
+    "name": "Varyap Meridien Konut Projesi",
+    "employer": "Varyap İnşaat Turizm A.Ş.",
+    "scope": "Residance E Blok İnce İşleri (Gazbeton Duvar, Sıva, Şap İşleri)",
+    "description": [
+      "Varyap Meridien Konut projesinin Residance E Blok'unda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında gazbeton duvar, sıva ve şap uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Gazbeton Duvar", "Sıva", "Şap"],
+    "location": "Batı Ataşehir - İstanbul",
+    "area": "150.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Temmuz 2010",
+    "endDate": "Mart 2011",
+    "featured": false,
+    "image": "/img/proje-3.jpg",
+    "gallery": ["/img/proje-1.jpg", "/img/proje-2.jpg", "/img/proje-3.jpg"],
+    "href": "/projeler/varyap-meridien-konut"
+  },
+  {
+    "slug": "terrace-bahce-konut",
+    "name": "Terrace Bahçe Konut Projesi",
+    "employer": "İnanlar İnşaat A.Ş.",
+    "scope": "Residance 60 Konut İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-Levha Asma Tavan, Boya İşleri)",
+    "description": [
+      "Terrace Bahçe Konut projesinin Residance 60 konutunda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha asma tavan ve boya uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Duvar", "Sıva", "Şap", "Seramik", "Alçı Levha Asma Tavan", "Boya"],
+    "location": "Sarıyer - İstanbul",
+    "area": "14.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Şubat 2010",
+    "endDate": "Aralık 2010",
+    "featured": false,
+    "image": "/img/proje-1.jpg",
+    "gallery": ["/img/proje-2.jpg", "/img/proje-1.jpg", "/img/proje-3.jpg"],
+    "href": "/projeler/terrace-bahce-konut"
+  },
+  {
+    "slug": "oyakkent-konut",
+    "name": "Oyakkent Konut Projesi",
+    "employer": "Oyak İnşaat A.Ş.",
+    "scope": "33 Blok 1581 Konut İnce İşleri (Tuğla Duvar, Teras Şap, Çatı İşleri)",
+    "description": [
+      "Oyakkent Konut projesinin 33 blok 1.581 konutunda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında tuğla duvar, teras şap ve çatı işleri uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Tuğla Duvar", "Teras Şap", "Çatı İşleri"],
+    "location": "Başakşehir - İstanbul",
+    "area": "650.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Haziran 2007",
+    "endDate": "Nisan 2009",
+    "featured": false,
+    "image": "/img/proje-2.jpg",
+    "gallery": ["/img/proje-3.jpg", "/img/proje-2.jpg", "/img/proje-1.jpg"],
+    "href": "/projeler/oyakkent-konut"
+  },
+  {
+    "slug": "omsan-depo-lojistik-merkezi",
+    "name": "Omsan Depo & Lojistik Merkezi Projesi",
+    "employer": "Oyak Konut A.Ş.",
+    "scope": "Depo, Ek Binalar & Yönetim Binaları İnce İşleri (Tuğla Duvar, Sıva, Şap, Seramik, Mermer, Alçı-Levha Asma Tavan, Sıva, Boya İşleri)",
+    "description": [
+      "Omsan Depo & Lojistik Merkezi projesinin depo, ek binalar ve yönetim binalarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında tuğla duvar, sıva, şap, seramik, mermer, alçı levha asma tavan ve boya uygulamaları tamamlanmıştır."
+    ],
+    "works": ["Tuğla Duvar", "Sıva", "Şap", "Seramik", "Mermer", "Alçı Levha Asma Tavan", "Boya"],
+    "location": "Şekerpınar - İstanbul",
+    "area": "100.000 m²",
+    "status": "tamamlanan",
+    "startDate": "Kasım 2006",
+    "endDate": "Haziran 2008",
+    "featured": false,
+    "image": "/img/proje-3.jpg",
+    "gallery": ["/img/proje-1.jpg", "/img/proje-3.jpg", "/img/proje-2.jpg"],
+    "href": "/projeler/omsan-depo-lojistik-merkezi"
   }
 ]

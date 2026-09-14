@@ -7,7 +7,24 @@ import site from '../../data/site.json';
   <section class="belgeler">
     <div class="container">
       <h1>Belgelerimiz</h1>
-      <p class="belgeler__lead">İçerik hazırlanıyor.</p>
+
+      <ul class="belgeler__certs">
+        {
+          site.certifications.map((cert: { name: string; validUntil: string }) => (
+            <li>
+              <span class="belgeler__cert-name">{cert.name}</span>
+              <span class="belgeler__cert-date">Geçerlilik: {cert.validUntil}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <dl class="belgeler__info">
+        <dt>Müteahhitlik Yetki Belgesi Grubu</dt>
+        <dd>{site.contractorLicenseGroup}</dd>
+        <dt>İş Bitirme Belgesi Sayısı</dt>
+        <dd>{site.completionCertificatesCount}</dd>
+      </dl>
 
       <ul class="belgeler__list">
         <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">E-Katalog (PDF)</a></li>
@@ -31,14 +48,50 @@ import site from '../../data/site.json';
     font-size: var(--fs-h1);
   }
 
-  .belgeler__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
+  .belgeler__certs {
+    margin-top: var(--space-l);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .belgeler__certs li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-s);
+    padding: var(--space-s) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .belgeler__cert-name {
+    font-weight: 700;
+  }
+
+  .belgeler__cert-date {
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+  }
+
+  .belgeler__info {
+    margin-top: var(--space-l);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-xs) var(--space-m);
+  }
+
+  .belgeler__info dt {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--color-text-faint);
+  }
+
+  .belgeler__info dd {
+    font-size: var(--fs-small);
     color: var(--color-text-muted);
   }
 
   .belgeler__list {
-    margin-top: var(--space-l);
+    margin-top: var(--space-xl);
     display: flex;
     flex-direction: column;
     gap: var(--space-s);
