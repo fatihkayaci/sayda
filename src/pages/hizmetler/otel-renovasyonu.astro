@@ -1,9 +1,74 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
+import ServicePanel from '../../components/service/ServicePanel.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import ChecklistBox from '../../components/service/ChecklistBox.astro';
+import Callout from '../../components/service/Callout.astro';
+
+const steps = [
+  { title: 'Oda & Süit Yenileme', description: 'Zemin, duvar, tavan, banyo armatürleri, mobilya ve aydınlatma tamamen yenilenir.' },
+  { title: 'Lobi & Ortak Alanlar', description: 'Resepsiyon, lobi, koridor, restoran ve toplantı alanları yenilenir.' },
+  { title: 'Teknik Altyapı', description: 'Elektrik, tesisat, ısıtma-soğutma sistemleri, yangın tesisat güncellenir.' },
+  { title: 'Fasad & Dış Cephe', description: 'Cephe kaplama, mantolama ve peyzaj düzenlemesi dahil dış görünüm iyileştirme.' },
+];
+
+const surdurulebilirlik = [
+  'Aşamalı bölüm yenileme',
+  'Gece/gündüz vardiya planı',
+  'Misafir odası önceliklendirme',
+  'Toz & gürültü yönetimi',
+];
 ---
 
-<PagePlaceholder
+<Layout
   title="Otel Renovasyonu | Sayda İnşaat"
   description="İşletme faaliyetini aksatmadan planlanan, kapsamlı otel yenileme ve modernizasyon projeleri."
-  heading="Otel Renovasyonu"
-/>
+>
+  <ServiceHero />
+
+  <section class="svc-main">
+    <div class="container svc-main__layout">
+      <ServiceSidebar active={4} />
+
+      <ServicePanel
+        number="05"
+        title="Otel Renovasyonu"
+        lead="İşletme faaliyetini aksatmadan, bölüm bölüm çalışarak kapsamlı otel yenileme ve modernizasyon projeleri gerçekleştiriyoruz. Hızlı ve titiz."
+      >
+        <ProcessSteps heading="Yenileme Kapsamı" steps={steps} color="navy-deep" />
+        <ChecklistBox
+          heading="İşletme Sürekliliği Taahhüdü"
+          lead="Oteliniz açık kalırken aşamalı çalışma ile kesinti minimuma indirilir. Gürültü yönetimi, toz önlemi ve misafir konfor planı hazırlanır."
+          items={surdurulebilirlik}
+          iconFill="#fff"
+        />
+        <Callout
+          title="Referans"
+          text="Piazza AVM & Anamon Otel (Samsun, 135.000 m²) projesinde Rönesans Teknik İnşaat A.Ş. bünyesinde edinilen kapsamlı otel yenileme deneyimi."
+        />
+      </ServicePanel>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .svc-main {
+    background: var(--color-bg-light);
+    padding-block: 64px 112px;
+  }
+
+  .svc-main__layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-main__layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

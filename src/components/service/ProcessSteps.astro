@@ -1,0 +1,99 @@
+---
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  heading: string;
+  steps: Step[];
+  color?: 'navy' | 'navy-deep';
+}
+
+const { heading, steps, color = 'navy' } = Astro.props;
+---
+
+<h3 class="process-steps__heading">{heading}</h3>
+<div class="process-steps">
+  {
+    steps.map((step, i) => (
+      <>
+        <div class="process-step">
+          <div class:list={['process-step__num', { 'process-step__num--deep': color === 'navy-deep' }]}>
+            {String(i + 1).padStart(2, '0')}
+          </div>
+          <div class="process-step__body">
+            <h4>{step.title}</h4>
+            <p>{step.description}</p>
+          </div>
+        </div>
+        {i < steps.length - 1 && <div class="process-step__line" />}
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .process-steps__heading {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .process-steps {
+    display: grid;
+    gap: 0;
+    margin-bottom: 48px;
+  }
+
+  .process-step {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .process-step__num {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: #fff;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .process-step__num--deep {
+    background: #191b4a;
+  }
+
+  .process-step__body {
+    padding-top: 12px;
+  }
+
+  .process-step__body h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  .process-step__body p {
+    font-size: 14px;
+    color: #6b6d7a;
+    line-height: 1.7;
+  }
+
+  .process-step__line {
+    width: 2px;
+    height: 40px;
+    background: rgba(43, 46, 131, 0.15);
+    margin: 8px 0 8px 27px;
+  }
+</style>

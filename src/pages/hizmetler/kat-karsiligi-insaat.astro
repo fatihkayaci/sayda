@@ -1,13 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
+import ServicePanel from '../../components/service/ServicePanel.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import ChecklistBox from '../../components/service/ChecklistBox.astro';
+import Callout from '../../components/service/Callout.astro';
 
 const steps = [
-  { number: '01', title: 'Teknik Değerlendirme ve Fizibilite', description: 'Arsa veya bina üzerinde teknik değerlendirme ve fizibilite çalışması yapılır.' },
-  { number: '02', title: 'Şartname ve Sözleşme', description: 'Kat karşılığı anlaşmasının şartname ve sözleşmesi hazırlanır.' },
-  { number: '03', title: 'Projelendirme', description: 'Yeni yapının projesi hazırlanır.' },
-  { number: '04', title: 'Ruhsat ve Yasal İzinler', description: 'Gerekli ruhsat ve yasal izin süreçleri yürütülür.' },
-  { number: '05', title: 'İnşaat Süreci', description: 'Saha ekiplerimiz projeyi zaman planına göre yürütür, süreç düzenli raporlanır.' },
-  { number: '06', title: 'İskan Süreci', description: 'İş bitirme belgeleri ile birlikte iskan alınır ve anahtar teslimi yapılır.' },
+  { title: 'Arsa / Bina Değerleme', description: 'Arsanın imar durumu, tapu analizi ve piyasa değeri incelenir; fizibilite raporu hazırlanır.' },
+  { title: 'Kat Karşılığı Sözleşmesi', description: 'Noterde resmi sözleşme imzalanır; paylaşım oranları ve teslim tarihleri netleştirilir.' },
+  { title: 'Proje & Ruhsat', description: 'Mimari ve statik proje, belediye ruhsatı ve tüm izinler Sayda tarafından alınır.' },
+  { title: 'İnşaat & İnce İşler', description: 'Kaba yapıdan ince işlere, iç mekân bitimine kadar tüm inşaat Sayda ekibiyle yürütülür.' },
+  { title: 'Teslim & İskan', description: 'İskan belgesi ve anahtarlar, belirlenen paylaşım planına göre sahiplerine teslim edilir.' },
+];
+
+const kapsam = [
+  'Arsa analizi ve fizibilite',
+  'Mimari & statik proje',
+  'Belediye ruhsat işlemleri',
+  'Kaba yapı',
+  'İnce işler (sıva, şap, seramik)',
+  'Boya & duvar kağıdı',
+  'Elektro-mekanik altyapı',
+  'İskan belgesi temini',
 ];
 ---
 
@@ -15,108 +31,43 @@ const steps = [
   title="Kat Karşılığı İnşaat | Sayda İnşaat"
   description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
 >
-  <section class="intro">
-    <div class="container">
-      <h1>Kat Karşılığı İnşaat</h1>
-      <p class="intro__lead">
-        Sayda İnşaat, arsa veya bina sahipleriyle kat karşılığı anlaşma yaparak tasarımdan teslim aşamasına
-        kadar tüm süreci yönetir.
-      </p>
-    </div>
-  </section>
+  <ServiceHero />
 
-  <section class="process">
-    <div class="container">
-      <h2>Süreç Nasıl İşliyor?</h2>
+  <section class="svc-main">
+    <div class="container svc-main__layout">
+      <ServiceSidebar active={0} />
 
-      <ol class="process__grid">
-        {
-          steps.map((step) => (
-            <li class="process-step">
-              <span class="process-step__number">{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </li>
-          ))
-        }
-      </ol>
+      <ServicePanel
+        number="01"
+        title="Kat Karşılığı İnşaat"
+        lead="Arsa veya bina sahipleriyle kat karşılığı anlaşma yaparak, projenin tamamını üstleniyoruz. Tasarım, ruhsat, inşaat ve teslim süreçlerini eksiksiz yönetiyoruz — siz sadece anahtarınızı teslim alıyorsunuz."
+      >
+        <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+        <ChecklistBox heading="Kapsama Dahil İşler" items={kapsam} />
+        <Callout
+          title="Neden Sayda İnşaat?"
+          text="30 yıllık deneyim, 33 iş bitirme belgesi ve G grubu yüklenici yetki belgesiyle güven veren tek adres."
+        />
+      </ServicePanel>
     </div>
   </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-block: var(--space-block-compact) 0;
+  .svc-main {
+    background: var(--color-bg-light);
+    padding-block: 64px 112px;
   }
 
-  .intro .container {
-    max-width: 760px;
-  }
-
-  .intro h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .intro__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  .process {
-    padding-block: var(--space-block);
-  }
-
-  .process h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-l);
-  }
-
-  .process__grid {
+  .svc-main__layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
-  }
-
-  .process-step {
-    position: relative;
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
-  }
-
-  .process-step__number {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-text-faint);
-  }
-
-  .process-step h3 {
-    margin-top: var(--space-xs);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
-  }
-
-  .process-step p {
-    margin-top: 6px;
-    font-size: var(--fs-small);
-    color: var(--color-text-muted);
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
   }
 
   @media (max-width: 1024px) {
-    .process h2 {
-      text-align: center;
-    }
-
-    .process__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .process__grid {
+    .svc-main__layout {
       grid-template-columns: 1fr;
     }
   }

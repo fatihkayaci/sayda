@@ -1,96 +1,73 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Icon from '../../components/Icon.astro';
-import services from '../../data/services.json';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
+import ServicePanel from '../../components/service/ServicePanel.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import ChecklistBox from '../../components/service/ChecklistBox.astro';
+import Callout from '../../components/service/Callout.astro';
 
-const hizmetler = services.filter((service) => service.href.startsWith('/hizmetler/'));
+const steps = [
+  { title: 'Arsa / Bina Değerleme', description: 'Arsanın imar durumu, tapu analizi ve piyasa değeri incelenir; fizibilite raporu hazırlanır.' },
+  { title: 'Kat Karşılığı Sözleşmesi', description: 'Noterde resmi sözleşme imzalanır; paylaşım oranları ve teslim tarihleri netleştirilir.' },
+  { title: 'Proje & Ruhsat', description: 'Mimari ve statik proje, belediye ruhsatı ve tüm izinler Sayda tarafından alınır.' },
+  { title: 'İnşaat & İnce İşler', description: 'Kaba yapıdan ince işlere, iç mekân bitimine kadar tüm inşaat Sayda ekibiyle yürütülür.' },
+  { title: 'Teslim & İskan', description: 'İskan belgesi ve anahtarlar, belirlenen paylaşım planına göre sahiplerine teslim edilir.' },
+];
+
+const kapsam = [
+  'Arsa analizi ve fizibilite',
+  'Mimari & statik proje',
+  'Belediye ruhsat işlemleri',
+  'Kaba yapı',
+  'İnce işler (sıva, şap, seramik)',
+  'Boya & duvar kağıdı',
+  'Elektro-mekanik altyapı',
+  'İskan belgesi temini',
+];
 ---
 
-<Layout title="Hizmetler | Sayda İnşaat" description="Sayda İnşaat'ın müteahhitlik ve inşaat hizmetleri.">
-  <section class="hizmetler-hub">
-    <div class="container">
-      <h1>Hizmetler</h1>
-      <p class="hizmetler-hub__lead">
-        Anahtar teslim müteahhitlikten proje yönetimine, kentsel dönüşümden otel renovasyonuna kadar Sayda
-        İnşaat'ın sunduğu hizmetler.
-      </p>
+<Layout
+  title="Kat Karşılığı İnşaat | Sayda İnşaat"
+  description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
+>
+  <ServiceHero />
 
-      <div class="hizmetler-hub__grid">
-        {
-          hizmetler.map((service) => (
-            <a class="hizmetler-hub__card" href={service.href}>
-              <Icon name={service.icon} size={28} />
-              <h2>{service.title}</h2>
-              <p>{service.description}</p>
-            </a>
-          ))
-        }
-      </div>
+  <section class="svc-main">
+    <div class="container svc-main__layout">
+      <ServiceSidebar active={0} />
+
+      <ServicePanel
+        number="01"
+        title="Kat Karşılığı İnşaat"
+        lead="Arsa veya bina sahipleriyle kat karşılığı anlaşma yaparak, projenin tamamını üstleniyoruz. Tasarım, ruhsat, inşaat ve teslim süreçlerini eksiksiz yönetiyoruz — siz sadece anahtarınızı teslim alıyorsunuz."
+      >
+        <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+        <ChecklistBox heading="Kapsama Dahil İşler" items={kapsam} />
+        <Callout
+          title="Neden Sayda İnşaat?"
+          text="30 yıllık deneyim, 33 iş bitirme belgesi ve G grubu yüklenici yetki belgesiyle güven veren tek adres."
+        />
+      </ServicePanel>
     </div>
   </section>
 </Layout>
 
 <style>
-  .hizmetler-hub {
-    padding-block: var(--space-xxl);
+  .svc-main {
+    background: var(--color-bg-light);
+    padding-block: 64px 112px;
   }
 
-  .hizmetler-hub h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .hizmetler-hub__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    max-width: 60ch;
-  }
-
-  .hizmetler-hub__grid {
-    margin-top: var(--space-xl);
+  .svc-main__layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
-  }
-
-  .hizmetler-hub__card {
-    display: block;
-    padding: var(--space-l);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    color: var(--color-navy);
-    transition:
-      transform var(--transition),
-      box-shadow var(--transition);
-  }
-
-  .hizmetler-hub__card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-  }
-
-  .hizmetler-hub__card h2 {
-    margin-top: var(--space-s);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.125rem;
-    color: var(--color-text);
-  }
-
-  .hizmetler-hub__card p {
-    margin-top: var(--space-xs);
-    font-size: var(--fs-small);
-    color: var(--color-text-muted);
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
   }
 
   @media (max-width: 1024px) {
-    .hizmetler-hub__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .hizmetler-hub__grid {
+    .svc-main__layout {
       grid-template-columns: 1fr;
     }
   }

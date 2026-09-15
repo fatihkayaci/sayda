@@ -1,0 +1,170 @@
+---
+const pills = [
+  { label: 'Kat Karşılığı', href: '/hizmetler/kat-karsiligi-insaat' },
+  { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
+  { label: 'Anahtar Teslim', href: '/hizmetler/anahtar-teslim-muteahhitlik' },
+  { label: 'Proje Yönetimi', href: '/hizmetler/proje-yonetimi-danismanlik' },
+  { label: 'Otel Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
+];
+---
+
+<section class="svc-hero">
+  <div class="svc-hero__grid"></div>
+  <div class="container svc-hero__inner">
+    <nav class="svc-hero__breadcrumb" aria-label="Konum">
+      <a href="/">Anasayfa</a>
+      <span>/</span>
+      <span aria-current="page">Hizmetler</span>
+    </nav>
+
+    <div class="svc-hero__eyebrow">
+      <span class="svc-hero__eyebrow-bar"></span>
+      <span>NE YAPIYORUZ</span>
+    </div>
+
+    <div class="svc-hero__row">
+      <div>
+        <h1>Hizmet&shy;lerimiz</h1>
+        <p class="svc-hero__lead">Planlamadan teslimata, tek taşeronluktan anahtar teslime kadar her aşamada yanınızdayız.</p>
+      </div>
+
+      <div class="svc-hero__pills">
+        {pills.map((pill) => <a href={pill.href} class="svc-hero__pill">{pill.label}</a>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .svc-hero {
+    position: relative;
+    padding-top: 76px;
+    background: #191b4a;
+    overflow: hidden;
+  }
+
+  .svc-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 72px 72px;
+    pointer-events: none;
+  }
+
+  .svc-hero__inner {
+    position: relative;
+    padding: 72px var(--edge) 80px;
+  }
+
+  .svc-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .svc-hero__breadcrumb a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 150ms;
+  }
+
+  .svc-hero__breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .svc-hero__breadcrumb span:first-of-type {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .svc-hero__breadcrumb span[aria-current] {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .svc-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .svc-hero__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: #fff;
+  }
+
+  .svc-hero__eyebrow span:last-child {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .svc-hero__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+
+  .svc-hero h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 0.95;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+
+  .svc-hero__lead {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 24px;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .svc-hero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .svc-hero__pill {
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    font-weight: 600;
+    background: transparent;
+    transition: background 180ms;
+  }
+
+  .svc-hero__pill:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  @media (max-width: 900px) {
+    .svc-hero__row {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 28px;
+    }
+
+    .svc-hero__pills {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .svc-hero__inner {
+      padding: 56px 24px 64px;
+    }
+  }
+</style>

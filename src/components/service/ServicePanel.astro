@@ -1,0 +1,71 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  lead: string;
+}
+
+const { number, title, lead } = Astro.props;
+---
+
+<div class="svc-panel">
+  <div class="svc-panel__eyebrow">
+    <span class="svc-panel__eyebrow-bar"></span>
+    <span>HİZMET {number}</span>
+  </div>
+  <h2>{title}</h2>
+  <p class="svc-panel__lead">{lead}</p>
+  <slot />
+</div>
+
+<style>
+  .svc-panel {
+    background: #fff;
+    border-radius: 8px;
+    padding: 48px;
+    box-shadow: 0 4px 24px rgba(43, 46, 131, 0.07);
+  }
+
+  .svc-panel__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .svc-panel__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: var(--color-navy);
+  }
+
+  .svc-panel__eyebrow span:last-child {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--color-navy);
+  }
+
+  .svc-panel h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: clamp(28px, 3vw, 38px);
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .svc-panel__lead {
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+    max-width: 660px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 700px) {
+    .svc-panel {
+      padding: 32px 24px;
+    }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+interface Props {
+  heading: string;
+  lead?: string;
+  items: string[];
+  iconFill?: string;
+}
+
+const { heading, lead, items, iconFill = '#eef0f9' } = Astro.props;
+---
+
+<div class="checklist-box">
+  <h3>{heading}</h3>
+  {lead && <p class="checklist-box__lead">{lead}</p>}
+  <div class="checklist-box__grid">
+    {
+      items.map((item) => (
+        <div class="check-item">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18" class="check-item__icon">
+            <circle cx="10" cy="10" r="9" fill={iconFill} />
+            <path d="M6 10l3 3 5-5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>{item}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .checklist-box {
+    background: var(--color-bg-light);
+    border-radius: 6px;
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+
+  .checklist-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 20px;
+  }
+
+  .checklist-box__lead {
+    font-size: 14px;
+    color: #6b6d7a;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+
+  .checklist-box__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-bg-light);
+  }
+
+  .check-item__icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .check-item span {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .checklist-box__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

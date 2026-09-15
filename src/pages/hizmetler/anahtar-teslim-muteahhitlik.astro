@@ -1,14 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
+import ServicePanel from '../../components/service/ServicePanel.astro';
+import ProcessSteps from '../../components/service/ProcessSteps.astro';
+import ChecklistBox from '../../components/service/ChecklistBox.astro';
+import Callout from '../../components/service/Callout.astro';
 
-const principles = ['Uzman Ekip', 'Zamanında Teslim', 'Yüksek Kalite', 'Düşük Maliyet', 'Çevre ve Doğaya Saygı'];
+const steps = [
+  { title: 'Ön Fizibilite & Brifing', description: 'İhtiyaç analizi, bütçe planlaması ve proje kapsamı belirlenir.' },
+  { title: 'Mimari & Mühendislik Projesi', description: 'Mimari, statik, mekanik ve elektrik projeleri koordineli hazırlanır.' },
+  { title: 'Ruhsat & İzinler', description: 'Tüm belediye ve resmi izinler Sayda tarafından takip edilir.' },
+  { title: 'İnşaat & Kalite Kontrol', description: 'ISO 9001 standartlarında süreç yönetimi ve sahada günlük denetim.' },
+  { title: 'Teslim & Garanti', description: 'İskan belgesiyle birlikte teslim; garanti ve bakım desteği devam eder.' },
+];
 
-const references = [
-  'Yasmin Bodrum Hotel',
-  'Çırağan Palace Hotel Kempinski',
-  'Enternasyonal Turizm Yatırım A.Ş.',
-  'Visa International EU',
-  'Nestle Gıda Sanayi A.Ş.',
+const projeTurleri = [
+  'Konut & rezidans projeleri',
+  'Ticari yapılar & AVM',
+  'Ofis & kuleleri',
+  'Sağlık kampüsleri & hastaneler',
+  'Otel & turizm yapıları',
+  'Lojistik & depo tesisleri',
 ];
 ---
 
@@ -16,91 +29,44 @@ const references = [
   title="Anahtar Teslim Müteahhitlik | Sayda İnşaat"
   description="Projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi."
 >
-  <section class="intro">
-    <div class="container">
-      <h1>Anahtar Teslim Müteahhitlik</h1>
-      <p class="intro__lead">
-        Sayda İnşaat, her türlü bina ve üst yapıyı proje, şartname ve sözleşmeler doğrultusunda uzman ekip,
-        zamanında teslim, yüksek kalite, düşük maliyet, çevre ve doğaya saygı anlayışıyla anahtar teslim
-        müteahhitlik ile hayata geçirir.
-      </p>
+  <ServiceHero />
 
-      <ul class="principles">
-        {principles.map((p) => <li>{p}</li>)}
-      </ul>
-    </div>
-  </section>
+  <section class="svc-main">
+    <div class="container svc-main__layout">
+      <ServiceSidebar active={2} />
 
-  <section class="refs">
-    <div class="container">
-      <h2>Referanslarımızdan Bazıları</h2>
-      <ul class="refs__list">
-        {references.map((r) => <li>{r}</li>)}
-      </ul>
+      <ServicePanel
+        number="03"
+        title="Anahtar Teslim Müteahhitlik"
+        lead="Projelendirmeden teslime kadar tüm inşaat sürecini tek elden yönetiyoruz. Tek muhatap, tek sorumluluk."
+      >
+        <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+        <ChecklistBox heading="Proje Türleri" items={projeTurleri} />
+        <Callout
+          title="Tek Muhatap Avantajı"
+          text="Tasarımdan teslime tek sözleşme, tek iletişim noktası. Koordinasyon sorunu yok, zaman ve maliyet kontrolü Sayda'da."
+        />
+      </ServicePanel>
     </div>
   </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-block: var(--space-block-compact) 0;
-  }
-
-  .intro .container {
-    max-width: 760px;
-  }
-
-  .intro h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .intro__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  .principles {
-    margin-top: var(--space-l);
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-  }
-
-  .principles li {
-    padding: 8px 16px;
-    border-radius: var(--radius);
+  .svc-main {
     background: var(--color-bg-light);
-    color: var(--color-navy);
-    font-size: var(--fs-small);
-    font-weight: 700;
+    padding-block: 64px 112px;
   }
 
-  .refs {
-    padding-block: var(--space-xl) var(--space-xxl);
+  .svc-main__layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
   }
 
-  .refs .container {
-    max-width: 760px;
-  }
-
-  .refs h2 {
-    font-size: var(--fs-h3);
-    color: var(--color-navy);
-  }
-
-  .refs__list {
-    margin-top: var(--space-m);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .refs__list li {
-    padding: var(--space-s) 0;
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-text-muted);
-    font-size: var(--fs-body);
+  @media (max-width: 1024px) {
+    .svc-main__layout {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

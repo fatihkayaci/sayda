@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  text: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<div class="callout">
+  <h4>{title}</h4>
+  <p>{text}</p>
+</div>
+
+<style>
+  .callout {
+    border-left: 4px solid var(--color-navy);
+    padding-left: 24px;
+  }
+
+  .callout h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    font-size: 14px;
+    color: #6b6d7a;
+    line-height: 1.75;
+  }
+</style>

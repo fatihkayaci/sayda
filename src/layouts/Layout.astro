@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import CtaBanner from '../components/CtaBanner.astro';
@@ -24,14 +25,15 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
+    <ClientRouter />
   </head>
   <body>
-    <Header />
+    <Header transition:persist />
     <main>
       <slot />
     </main>
     {!hideCtaBanner && <CtaBanner />}
-    <Footer />
+    <Footer transition:persist />
 
     <script>
       function initReveal() {
@@ -52,6 +54,33 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
 
       initReveal();
       document.addEventListener('astro:page-load', initReveal);
+
+      // Hizmet sekmeleri arasında geçişte scroll konumunu koru (üste atlamasın).
+      let preserveScrollY: number | null = null;
+
+      document.addEventListener('click', (event) => {
+        const link = (event.target as Element)?.closest?.('a.svc-tab, a.svc-hero__pill');
+        if (link) {
+          preserveScrollY = window.scrollY;
+        }
+      });
+
+      // Yeni doküman canlıya alınmadan ÖNCE hedef scroll konumunu üzerine yazıyoruz,
+      // böylece geçiş animasyonu "sayfa başı" durumunu hiç yakalamıyor (üste zıplama görünmüyor).
+      document.addEventListener('astro:before-swap', (event) => {
+        if (preserveScrollY !== null) {
+          const swapEvent = event as unknown as { newDocument: Document };
+          swapEvent.newDocument.documentElement.scrollTop = preserveScrollY;
+          swapEvent.newDocument.body.scrollTop = preserveScrollY;
+        }
+      });
+
+      document.addEventListener('astro:after-swap', () => {
+        if (preserveScrollY !== null) {
+          window.scrollTo({ left: 0, top: preserveScrollY, behavior: 'instant' });
+          preserveScrollY = null;
+        }
+      });
     </script>
   </body>
 </html>

@@ -1,17 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
+import ServicePanel from '../../components/service/ServicePanel.astro';
+import Callout from '../../components/service/Callout.astro';
 
-const steps = [
-  { number: '01', title: 'Teknik Değerlendirme ve Fizibilite', description: 'Projenin teknik ve mali fizibilite çalışması yapılır.' },
-  { number: '02', title: 'Bütçe ve Maliyet Belirleme', description: 'Proje bütçesi ve maliyet kalemleri netleştirilir.' },
-  { number: '03', title: 'Şartname ve Sözleşme', description: 'Şartname ve sözleşme dokümanları hazırlanır.' },
-  { number: '04', title: 'Master İş Programı', description: 'Projenin genel iş programı ve takvimi oluşturulur.' },
-  { number: '05', title: 'İhale Yönetimi', description: 'Yüklenici ve tedarikçi ihale süreçleri yönetilir.' },
-  { number: '06', title: 'Satın Alma ve Lojistik', description: 'Satın alma ve lojistik koordinasyonu sağlanır.' },
-  { number: '07', title: 'Kalite Güvence Takibi', description: 'Kalite güvence süreçleri sahada takip edilir.' },
-  { number: '08', title: 'Raporlama ve İlerleme Takibi', description: 'Raporlama sistemi kurulur, ilerleme düzenli takip edilir.' },
-  { number: '09', title: 'Denetim ve Saha Kontrolü', description: 'Saha denetimleri ve kontrolleri gerçekleştirilir.' },
-  { number: '10', title: 'Geçici ve Kesin Kabul', description: 'Geçici kabul ve kesin kabul süreçleri tamamlanır.' },
+const projeYonetimi = [
+  'Takvim & milestone takibi',
+  'Kaynak ve iş gücü planlaması',
+  'Saha denetimi ve raporlama',
+  'Tedarikçi koordinasyonu',
+  'Risk yönetimi',
+];
+
+const teknikDanismanlik = [
+  'Bütçe analizi ve maliyet kontrolü',
+  'Teknik şartname hazırlama',
+  'İhale dosyası & teklif analizi',
+  'Yapı denetim koordinasyonu',
+  'Teslim & hakediş kontrolü',
 ];
 ---
 
@@ -19,109 +26,170 @@ const steps = [
   title="Proje Yönetimi & Danışmanlık | Sayda İnşaat"
   description="Bağımsız proje yönetimi, maliyet kontrolü ve teknik danışmanlık hizmetleri."
 >
-  <section class="intro">
-    <div class="container">
-      <h1>Proje Yönetimi &amp; Danışmanlık</h1>
-      <p class="intro__lead">
-        Sayda İnşaat, "Yüksek Kalite, Zamanında Teslim, Düşük Maliyet" felsefesiyle yatırımcı ve finansör
-        kuruluşlara; inşaat, yatırım ve geliştirme projelerinde proje yönetimi ve danışmanlık hizmetleri sunar.
-      </p>
-    </div>
-  </section>
+  <ServiceHero />
 
-  <section class="process">
-    <div class="container">
-      <h2>Süreç Nasıl İşliyor?</h2>
+  <section class="svc-main">
+    <div class="container svc-main__layout">
+      <ServiceSidebar active={3} />
 
-      <ol class="process__grid">
-        {
-          steps.map((step) => (
-            <li class="process-step">
-              <span class="process-step__number">{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </li>
-          ))
-        }
-      </ol>
+      <ServicePanel
+        number="04"
+        title="Proje Yönetimi & Danışmanlık"
+        lead={`Kendi müteahhidiniz olsa bile uzman gözetimi istiyorsanız; bütçe kontrolü, takvim takibi ve teknik danışmanlık için yanınızdayız.`}
+      >
+        <div class="svc-cards">
+          <div class="svc-card svc-card--navy">
+            <h4>Proje Yönetimi</h4>
+            <ul>
+              {projeYonetimi.map((item) => <li><span class="svc-card__dot" />{item}</li>)}
+            </ul>
+          </div>
+          <div class="svc-card svc-card--deep">
+            <h4>Teknik Danışmanlık</h4>
+            <ul>
+              {teknikDanismanlik.map((item) => <li><span class="svc-card__dot svc-card__dot--deep" />{item}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="stats-panel">
+          <div class="stats-panel__item">
+            <span class="stats-panel__value">%15</span>
+            <span class="stats-panel__label">ORTALAMA MALİYET TASARRUFU</span>
+          </div>
+          <div class="stats-panel__item stats-panel__item--bordered">
+            <span class="stats-panel__value">30+</span>
+            <span class="stats-panel__label">YIL SAHA DENEYİMİ</span>
+          </div>
+          <div class="stats-panel__item">
+            <span class="stats-panel__value">ISO</span>
+            <span class="stats-panel__label">9001 · 14001 · 10002</span>
+          </div>
+        </div>
+
+        <Callout
+          title="Bağımsız Bakış Açısı"
+          text="Müteahhidinizden bağımsız teknik gözetim; hak kayıplarınızı önler, takvim ve bütçeyi korur."
+        />
+      </ServicePanel>
     </div>
   </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-block: var(--space-block-compact) 0;
+  .svc-main {
+    background: var(--color-bg-light);
+    padding-block: 64px 112px;
   }
 
-  .intro .container {
-    max-width: 760px;
-  }
-
-  .intro h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .intro__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    line-height: 1.7;
-  }
-
-  .process {
-    padding-block: var(--space-block);
-  }
-
-  .process h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-l);
-  }
-
-  .process__grid {
+  .svc-main__layout {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
   }
 
-  .process-step {
-    position: relative;
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
+  .svc-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
   }
 
-  .process-step__number {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-text-faint);
+  .svc-card {
+    padding: 28px;
+    background: var(--color-bg-light);
+    border-radius: 6px;
+    border-top: 3px solid var(--color-navy);
   }
 
-  .process-step h3 {
-    margin-top: var(--space-xs);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
+  .svc-card--deep {
+    border-top-color: #191b4a;
   }
 
-  .process-step p {
-    margin-top: 6px;
-    font-size: var(--fs-small);
+  .svc-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+
+  .svc-card ul {
+    display: grid;
+    gap: 10px;
+  }
+
+  .svc-card li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
     color: var(--color-text-muted);
+  }
+
+  .svc-card__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    flex-shrink: 0;
+  }
+
+  .svc-card__dot--deep {
+    background: #191b4a;
+  }
+
+  .stats-panel {
+    background: #191b4a;
+    border-radius: 6px;
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .stats-panel__item--bordered {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .stats-panel__value {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 32px;
+    color: #fff;
+    display: block;
+    line-height: 1;
+  }
+
+  .stats-panel__label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.1em;
   }
 
   @media (max-width: 1024px) {
-    .process h2 {
-      text-align: center;
-    }
-
-    .process__grid {
-      grid-template-columns: 1fr 1fr;
+    .svc-main__layout {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 640px) {
-    .process__grid {
+    .svc-cards {
       grid-template-columns: 1fr;
+    }
+
+    .stats-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-panel__item--bordered {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-block: 16px;
     }
   }
 </style>
