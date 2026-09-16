@@ -36,6 +36,16 @@ const navLinks = [
   { label: 'Haberler', href: '/haberler' },
   { label: 'Rehber', href: '/rehber' },
 ];
+
+const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
+const currentPath = normalizePath(Astro.url.pathname);
+
+const isPathActive = (href?: string) => {
+  if (!href) return false;
+  const h = normalizePath(href);
+  if (h === '/') return currentPath === '/';
+  return currentPath === h || currentPath.startsWith(`${h}/`);
+};
 ---
 
 <header class="header" transition:persist="sayda-header">
@@ -47,50 +57,57 @@ const navLinks = [
     <nav class="header__nav" id="mainMenu">
       <ul>
         {
-          navLinks.map((item, i) => (
-            <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
-              {item.children ? (
-                <div class="header__nav-item-row">
-                  {item.href ? (
-                    <a href={item.href} class="header__nav-link">
-                      {item.label}
-                    </a>
-                  ) : (
+          navLinks.map((item, i) => {
+            const childActive = item.children?.some((child) => isPathActive(child.href)) ?? false;
+            const itemActive = isPathActive(item.href) || childActive;
+            return (
+              <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
+                {item.children ? (
+                  <div class="header__nav-item-row">
+                    {item.href ? (
+                      <a href={item.href} class="header__nav-link" class:list={{ 'is-active': itemActive }}>
+                        {item.label}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        class="header__nav-link header__nav-link--label"
+                        class:list={{ 'is-active': itemActive }}
+                        aria-expanded="false"
+                        aria-controls={`dropdown-${i}`}
+                      >
+                        {item.label}
+                      </button>
+                    )}
                     <button
                       type="button"
-                      class="header__nav-link header__nav-link--label"
+                      class="header__dropdown-toggle"
                       aria-expanded="false"
                       aria-controls={`dropdown-${i}`}
+                      aria-label={`${item.label} alt menüsünü aç`}
                     >
-                      {item.label}
+                      <Icon name="chevronDown" size={16} />
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    class="header__dropdown-toggle"
-                    aria-expanded="false"
-                    aria-controls={`dropdown-${i}`}
-                    aria-label={`${item.label} alt menüsünü aç`}
-                  >
-                    <Icon name="chevronDown" size={16} />
-                  </button>
-                </div>
-              ) : (
-                <a href={item.href} class="header__nav-link">
-                  {item.label}
-                </a>
-              )}
-              {item.children && (
-                <ul class="header__dropdown" id={`dropdown-${i}`}>
-                  {item.children.map((child) => (
-                    <li>
-                      <a href={child.href}>{child.label}</a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))
+                  </div>
+                ) : (
+                  <a href={item.href} class="header__nav-link" class:list={{ 'is-active': itemActive }}>
+                    {item.label}
+                  </a>
+                )}
+                {item.children && (
+                  <ul class="header__dropdown" id={`dropdown-${i}`}>
+                    {item.children.map((child) => (
+                      <li>
+                        <a href={child.href} class:list={{ 'is-active': isPathActive(child.href) }}>
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })
         }
         <li class="header__nav-item header__nav-cta-item">
           <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">Teklif Al</a>
@@ -175,6 +192,7 @@ const navLinks = [
   }
 
   .header__nav-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
     font-size: var(--fs-small);
@@ -191,6 +209,27 @@ const navLinks = [
 
   .header__nav-link:hover {
     color: #fff;
+  }
+
+  .header__nav-link.is-active {
+    color: #fff;
+  }
+
+  .header__nav-link.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -9px;
+    height: 2px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.25));
+  }
+
+  .header__dropdown li a.is-active {
+    color: var(--color-navy);
+    font-weight: 700;
+    background: var(--color-bg-light);
   }
 
   .header__dropdown-toggle {
@@ -469,6 +508,34 @@ const navLinks = [
     els().header?.classList.toggle('is-scrolled', window.scrollY > 40);
   };
 
+  const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
+
+  const updateActiveNav = () => {
+    const current = normalizePath(window.location.pathname);
+    const isPathActive = (href: string | null) => {
+      if (!href) return false;
+      const h = normalizePath(href);
+      if (h === '/') return current === '/';
+      return current === h || current.startsWith(`${h}/`);
+    };
+
+    document.querySelectorAll<HTMLElement>('.header__nav-item').forEach((item) => {
+      let childActive = false;
+      item.querySelectorAll<HTMLAnchorElement>('.header__dropdown a').forEach((child) => {
+        const active = isPathActive(child.getAttribute('href'));
+        child.classList.toggle('is-active', active);
+        if (active) childActive = true;
+      });
+
+      const topLink = item.querySelector<HTMLElement>(
+        '.header__nav-item-row > .header__nav-link, :scope > a.header__nav-link'
+      );
+      if (topLink) {
+        topLink.classList.toggle('is-active', childActive || isPathActive(topLink.getAttribute('href')));
+      }
+    });
+  };
+
   const toggleDropdown = (toggle: Element) => {
     const item = toggle.closest('.header__nav-item');
     if (!item) return;
@@ -517,6 +584,7 @@ const navLinks = [
   const resetMenu = () => {
     setMenuOpen(false);
     updateHeaderBackground();
+    updateActiveNav();
   };
 
   const win = window as Window & { __saydaHeaderNavV2?: boolean };
