@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import rehberData from '../../data/rehber.json';
+
+export function getStaticPaths() {
+  return rehberData.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+const paragraphs = post.content.split('\n\n');
+---
+
+<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt}>
+  <article class="rehber-detail">
+    <div class="container">
+      <a class="rehber-detail__back" href="/rehber">← Tüm rehber yazıları</a>
+      <span class="rehber-detail__date">{formatter.format(new Date(post.date))}</span>
+      <h1>{post.title}</h1>
+      <img src={post.image} alt={post.title} />
+      <div class="rehber-detail__content">
+        {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .rehber-detail {
+    padding-top: calc(var(--header-h) + var(--space-l));
+    padding-bottom: var(--space-xl);
+  }
+
+  .rehber-detail .container {
+    max-width: 760px;
+  }
+
+  .rehber-detail__back {
+    display: inline-block;
+    margin-bottom: var(--space-m);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .rehber-detail__date {
+    display: block;
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  .rehber-detail h1 {
+    margin-top: var(--space-xs);
+    font-size: var(--fs-h1);
+  }
+
+  .rehber-detail img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-top: var(--space-l);
+  }
+
+  .rehber-detail__content {
+    margin-top: var(--space-l);
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  .rehber-detail__content p + p {
+    margin-top: 1.2em;
+  }
+</style>

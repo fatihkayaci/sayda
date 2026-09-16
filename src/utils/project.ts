@@ -42,6 +42,40 @@ export function projectSeoDescription(project: SeoProjectFields): string {
   return `${title} projesinde (${full}) ${workSample} uygulamalarını Sayda İnşaat yürütüyor.`;
 }
 
+function hashString(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash) || 1;
+}
+
+function seededShuffle<T>(items: T[], seed: number): T[] {
+  const result = [...items];
+  let s = seed % 2147483647;
+  if (s <= 0) s += 2147483646;
+  for (let i = result.length - 1; i > 0; i--) {
+    s = (s * 16807) % 2147483647;
+    const j = Math.floor(((s - 1) / 2147483646) * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+export function pickRelatedProjects<T extends { slug: string; image?: string }>(
+  projects: T[],
+  currentSlug: string,
+  count = 3
+): T[] {
+  const others = projects.filter((project) => project.slug !== currentSlug);
+  const withImage = others.filter((project) => project.image);
+  const withoutImage = others.filter((project) => !project.image);
+  const seed = hashString(currentSlug);
+  const ordered = [...seededShuffle(withImage, seed), ...seededShuffle(withoutImage, seed + 1)];
+  return ordered.slice(0, count);
+}
+
 export function projectImageAlt(project: SeoProjectFields, index?: number): string {
   const title = shortProjectTitle(project.name);
   const { full } = splitLocation(project.location);

@@ -75,6 +75,7 @@ const { heading, steps, color = 'navy' } = Astro.props;
 
   .process-step__body {
     padding-top: 12px;
+    min-width: 0;
   }
 
   .process-step__body h4 {
@@ -95,5 +96,31 @@ const { heading, steps, color = 'navy' } = Astro.props;
     height: 40px;
     background: rgba(43, 46, 131, 0.15);
     margin: 8px 0 8px 27px;
+  }
+
+  @media (max-width: 640px) {
+    .process-steps {
+      margin-bottom: 36px;
+    }
+
+    .process-step {
+      grid-template-columns: 44px minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .process-step__num {
+      width: 44px;
+      height: 44px;
+      font-size: 14px;
+    }
+
+    .process-step__line {
+      height: 24px;
+      margin: 6px 0 6px 21px;
+    }
+
+    .process-step__body {
+      padding-top: 6px;
+    }
   }
 </style>

@@ -1,4 +1,5 @@
 ---
+import Icon from '../Icon.astro';
 import { shortProjectTitle, statusLabel, projectImageAlt } from '../../utils/project';
 
 interface Props {
@@ -17,7 +18,13 @@ const heroAlt = projectImageAlt(project);
 ---
 
 <div class="project-hero-media">
-  <img src={project.image} alt={heroAlt} fetchpriority="high" />
+  {project.image ? (
+    <img src={project.image} alt={heroAlt} fetchpriority="high" />
+  ) : (
+    <div class="project-hero-media__empty">
+      <Icon name="photo" size={48} />
+    </div>
+  )}
   <div class="project-hero-media__gradient"></div>
   <div class="project-hero-media__top">
     <a class="project-hero-media__back" href="/projeler">
@@ -55,6 +62,16 @@ const heroAlt = projectImageAlt(project);
     object-fit: cover;
   }
 
+  .project-hero-media__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--color-navy);
+    color: rgba(255, 255, 255, 0.35);
+  }
+
   .project-hero-media__gradient {
     position: absolute;
     inset: 0;
@@ -67,6 +84,7 @@ const heroAlt = projectImageAlt(project);
     left: 48px;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 12px;
   }
 

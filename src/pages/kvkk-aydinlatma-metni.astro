@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+
+const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
+---
+
+<Layout
+  title="KVKK Aydınlatma Metni | Sayda İnşaat"
+  description="Sayda İnşaat kişisel verilerin korunması kanunu (KVKK) kapsamında aydınlatma metni."
+>
+  <section class="kvkk">
+    <div class="container">
+      <h1>KVKK Aydınlatma Metni</h1>
+      <p class="kvkk__updated">Son güncelleme: {lastUpdated}</p>
+
+      <div class="kvkk__body">
+        <h2>1. Veri Sorumlusunun Kimliği</h2>
+        <p>
+          6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, kişisel verileriniz veri sorumlusu
+          sıfatıyla <strong>{site.legalName}</strong> ("Sayda İnşaat" veya "Şirket") tarafından aşağıda
+          açıklanan kapsamda işlenebilecektir.
+        </p>
+        <ul class="kvkk__list">
+          <li>Adres: {site.address.street}, {site.address.neighborhood} / {site.address.district}, {site.address.city} {site.address.postalCode}</li>
+          <li>Telefon: {site.phone}</li>
+          <li>E-posta: {site.email}</li>
+          <li>Vergi Dairesi / Vergi No: [DOLDURULACAK]</li>
+          <li>Mersis No: [DOLDURULACAK — varsa]</li>
+        </ul>
+
+        <h2>2. İşlenen Kişisel Veriler</h2>
+        <p>İletişim/teklif formu üzerinden aşağıdaki kişisel verileriniz işlenmektedir:</p>
+        <ul class="kvkk__list">
+          <li>Kimlik bilgisi: Ad, soyad</li>
+          <li>İletişim bilgisi: Telefon numarası, e-posta adresi</li>
+          <li>İşlem güvenliği bilgisi: Form gönderim tarihi/saati, IP adresi [SUNUCU LOGLARINDA TUTULUYORSA]</li>
+          <li>Diğer: Talep ettiğiniz hizmet, mesaj içeriğinde paylaştığınız bilgiler</li>
+        </ul>
+
+        <h2>3. Kişisel Verilerin İşlenme Amaçları</h2>
+        <ul class="kvkk__list">
+          <li>Tarafınızca iletilen teklif/bilgi taleplerinin değerlendirilmesi ve yanıtlanması</li>
+          <li>Sizinle iletişime geçilmesi, teklif ve bilgilendirme süreçlerinin yürütülmesi</li>
+          <li>Talep ve şikayetlerin takibi</li>
+          <li>Şirket faaliyetlerinin mevzuata uygun yürütülmesi</li>
+        </ul>
+
+        <h2>4. Kişisel Veri İşlemenin Hukuki Sebebi</h2>
+        <p>
+          Kişisel verileriniz, KVKK'nın 5. maddesinde yer alan "ilgili kişinin temel hak ve özgürlüklerine
+          zarar vermemek kaydıyla veri sorumlusunun meşru menfaati için veri işlenmesinin zorunlu olması" ve
+          talep formunu göndermeniz halinde verdiğiniz açık rıza hukuki sebeplerine dayanılarak işlenmektedir.
+        </p>
+
+        <h2>5. Kişisel Verilerin Toplanma Yöntemi</h2>
+        <p>
+          Kişisel verileriniz, internet sitemizdeki iletişim/teklif formunu doldurmanız yoluyla elektronik
+          ortamda toplanmaktadır. Form verileriniz sitemizin barındırıldığı sunucu üzerinde çalışan bir yazılım
+          aracılığıyla işlenerek tarafımıza e-posta yoluyla iletilmektedir.
+        </p>
+
+        <h2>6. Kişisel Verilerin Aktarılması</h2>
+        <p>
+          Kişisel verileriniz, yukarıda belirtilen amaçlar dışında üçüncü kişilerle paylaşılmamaktadır.
+          Verileriniz, sitemizin barındırma (hosting) hizmetini aldığımız [HOSTING FİRMASI ADI] ve gerekmesi
+          halinde yasal yükümlülüklerimiz çerçevesinde yetkili kamu kurum ve kuruluşlarıyla
+          paylaşılabilecektir.
+        </p>
+
+        <h2>7. Saklama Süresi</h2>
+        <p>
+          Kişisel verileriniz, işlenme amacının gerektirdiği süre boyunca ve ilgili mevzuatta öngörülen
+          zamanaşımı süreleri saklı kalmak kaydıyla en fazla [X YIL] süreyle saklanmakta, bu sürenin sonunda
+          silinmekte, yok edilmekte veya anonim hale getirilmektedir.
+        </p>
+
+        <h2>8. KVKK Kapsamındaki Haklarınız</h2>
+        <p>KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+        <ul class="kvkk__list">
+          <li>Kişisel verinizin işlenip işlenmediğini öğrenme</li>
+          <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+          <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
+          <li>Yurt içinde/yurt dışında aktarıldığı üçüncü kişileri bilme</li>
+          <li>Eksik/yanlış işlenmişse düzeltilmesini isteme</li>
+          <li>KVKK'nın 7. maddesindeki şartlar çerçevesinde silinmesini/yok edilmesini isteme</li>
+          <li>Düzeltme, silme, yok etme işlemlerinin aktarılan üçüncü kişilere bildirilmesini isteme</li>
+          <li>İşlenen verilerin münhasıran otomatik sistemlerle analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme</li>
+          <li>Kanuna aykırı işleme nedeniyle zarara uğramanız halinde zararın giderilmesini talep etme</li>
+        </ul>
+
+        <h2>9. Başvuru Yöntemi</h2>
+        <p>
+          Yukarıda sayılan haklarınıza ilişkin taleplerinizi, kimliğinizi tevsik edici belgelerle birlikte{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> adresine e-posta yoluyla veya yukarıda belirtilen
+          adresimize yazılı olarak iletebilirsiniz. Talebiniz en geç otuz gün içinde ücretsiz olarak
+          sonuçlandırılacaktır.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .kvkk {
+    padding-block: var(--space-block-compact) var(--space-xxl);
+  }
+
+  .kvkk .container {
+    max-width: 760px;
+  }
+
+  .kvkk h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .kvkk__updated {
+    margin-top: var(--space-xs);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+  }
+
+  .kvkk__body {
+    margin-top: var(--space-l);
+  }
+
+  .kvkk__body h2 {
+    margin-top: var(--space-l);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--color-navy);
+  }
+
+  .kvkk__body p {
+    margin-top: var(--space-xs);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .kvkk__list {
+    margin-top: var(--space-xs);
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    list-style: disc;
+  }
+
+  .kvkk__body a {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .kvkk__body a:hover {
+    text-decoration: underline;
+  }
+</style>

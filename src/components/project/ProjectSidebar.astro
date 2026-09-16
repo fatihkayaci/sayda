@@ -7,6 +7,7 @@ interface Props {
     name: string;
     employer: string;
     location: string;
+    district?: string;
     area: string;
     startDate: string;
     endDate: string;
@@ -19,10 +20,11 @@ const rows = [
   { label: 'Proje', value: project.name },
   { label: 'İşveren', value: project.employer },
   { label: 'Lokasyon', value: project.location },
+  { label: 'İlçe', value: project.district },
   { label: 'Alan', value: project.area, emphasis: true },
   { label: 'Başlangıç', value: project.startDate },
   { label: 'Bitiş', value: project.endDate || 'Devam Ediyor' },
-];
+].filter((row) => row.value);
 ---
 
 <div class="project-sidebar">

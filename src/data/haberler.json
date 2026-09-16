@@ -116,14 +116,13 @@
   },
   {
     "slug": "kapital-tower-10-kat-ofis-teslim",
-    "title": "Kapital Tower 10. Kat Ofisleri Teslim Edildi",
+    "title": "Capital Tower 10. Kat Ofisleri Teslim Edildi",
     "date": "2016-06-22",
     "image": "/img/haberler/kapital-tower-10-kat-ofis-teslim.webp",
-    "excerpt": "Projesi tamamlanan Kapital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.",
-    "content": "Projesi tamamlanan Kapital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.\n\n1.000 m²'lik alana yayılan ofis kompleksinin inşaat, elektrik-mekanik, dekorasyon ve ahşap işleri firmamız tarafından yapılmıştır.",
+    "excerpt": "Projesi tamamlanan Capital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.",
+    "content": "Projesi tamamlanan Capital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.\n\n1.000 m²'lik alana yayılan ofis kompleksinin inşaat, elektrik-mekanik, dekorasyon ve ahşap işleri firmamız tarafından yapılmıştır.",
     "category": "teslim",
-    "relatedProject": "kapital-tower-ofis",
-    "_not": "Eski sitede 'Capitol Tower' yazıyor, doğrusu sitenizde 'Kapital Tower' - başlıkta düzelttim."
+    "relatedProject": "capital-tower-ofis"
   },
   {
     "slug": "atlas-park-avm-hizmete-girdi",

@@ -7,14 +7,17 @@ import ProjectSidebar from '../../components/project/ProjectSidebar.astro';
 import ProjectNavigation from '../../components/project/ProjectNavigation.astro';
 import projects from '../../data/projects.json';
 import site from '../../data/site.json';
-import { shortProjectTitle, projectSeoTitle, projectSeoDescription } from '../../utils/project';
+import { shortProjectTitle, projectSeoTitle, projectSeoDescription, pickRelatedProjects } from '../../utils/project';
 
 export function getStaticPaths() {
-  return projects.map((project, i) => {
-    const related = projects
-      .filter((_, otherIndex) => otherIndex !== i)
-      .slice(0, 3)
-      .map(({ href, name, location, area, image }) => ({ href, name, location, area, image }));
+  return projects.map((project) => {
+    const related = pickRelatedProjects(projects, project.slug).map(({ href, name, location, area, image }) => ({
+      href,
+      name,
+      location,
+      area,
+      image,
+    }));
 
     return {
       params: { slug: project.slug },
@@ -46,8 +49,14 @@ const serviceLd = {
   serviceType: project.works?.length ? project.works.join(', ') : 'İnce İşler',
   description: seoDescription,
   provider: { '@type': 'Organization', name: site.name, url: site.url },
-  areaServed: { '@type': 'Place', name: project.location },
-  image: new URL(project.image, site.url).toString(),
+  areaServed: {
+    '@type': 'Place',
+    name: project.location,
+    ...(project.district
+      ? { address: { '@type': 'PostalAddress', addressLocality: project.district, addressCountry: 'TR' } }
+      : {}),
+  },
+  ...(project.image ? { image: new URL(project.image, site.url).toString() } : {}),
 };
 ---
 

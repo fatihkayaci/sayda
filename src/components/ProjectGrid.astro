@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { statusLabel, formatDateRange } from '../utils/project';
 
 interface Project {
@@ -6,6 +7,7 @@ interface Project {
   name: string;
   employer: string;
   location: string;
+  district?: string;
   area: string;
   status: string;
   startDate: string;
@@ -24,10 +26,17 @@ const { projects } = Astro.props;
 <div class="project-grid">
   {
     projects.map((project, i) => (
-      <a class={`project-card reveal reveal-d${(i % 4) + 1}`} href={project.href}>
+      <a class={`project-card reveal reveal-d${(i % 4) + 1}`} href={project.href} data-district={project.district || ''}>
         <div class="project-card__media">
-          <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+          {project.image ? (
+            <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+          ) : (
+            <div class="project-card__media-empty">
+              <Icon name="photo" size={32} />
+            </div>
+          )}
           <span class={`project-card__badge project-card__badge--${project.status}`}>{statusLabel(project.status)}</span>
+          {project.district && <span class="project-card__district-badge">{project.district}</span>}
         </div>
         <div class="project-card__info">
           <h2>{project.name}</h2>
@@ -79,6 +88,16 @@ const { projects } = Astro.props;
     transition: transform 500ms ease;
   }
 
+  .project-card__media-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--color-bg-light);
+    color: var(--color-border);
+  }
+
   .project-card:hover .project-card__media img {
     transform: scale(1.05);
   }
@@ -109,6 +128,21 @@ const { projects } = Astro.props;
 
   .project-card__badge--tamamlanan {
     background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+  }
+
+  .project-card__district-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 1;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    background: rgba(19, 21, 74, 0.55);
     backdrop-filter: blur(4px);
   }
 

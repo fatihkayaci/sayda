@@ -28,6 +28,8 @@
   --edge-mobile: 20px;
   --max-width: 1200px;
   --radius: 4px;
+  --header-h: 84px;
+  --header-h-compact: 64px;
 
   /* Spacing scale */
   --space-xs: 8px;

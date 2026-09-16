@@ -1,4 +1,5 @@
 ---
+import Icon from '../Icon.astro';
 import { shortProjectTitle } from '../../utils/project';
 
 interface RelatedProject {
@@ -28,7 +29,13 @@ const { projects } = Astro.props;
         {projects.map((project) => (
           <a class="related-card" href={project.href}>
             <div class="related-card__media">
-              <img src={project.image} alt={`${shortProjectTitle(project.name)} - Sayda İnşaat`} loading="lazy" />
+              {project.image ? (
+                <img src={project.image} alt={`${shortProjectTitle(project.name)} - Sayda İnşaat`} loading="lazy" />
+              ) : (
+                <div class="related-card__media-empty">
+                  <Icon name="photo" size={28} />
+                </div>
+              )}
             </div>
             <div class="related-card__info">
               <h3>{shortProjectTitle(project.name)}</h3>
@@ -107,6 +114,16 @@ const { projects } = Astro.props;
     height: 100%;
     object-fit: cover;
     transition: transform 450ms ease;
+  }
+
+  .related-card__media-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-light);
+    color: var(--color-border);
   }
 
   .related-card:hover .related-card__media img {

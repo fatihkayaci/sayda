@@ -1,4 +1,5 @@
 ---
+import Icon from '../Icon.astro';
 import allProjects from '../../data/projects.json';
 import { statusLabel, formatDateRange } from '../../utils/project';
 
@@ -25,7 +26,13 @@ const projects = [...featured, ...rest].slice(0, 3);
         projects.map((project, i) => (
           <a class={`project-card reveal reveal-d${i + 1}`} href={project.href}>
             <div class="project-card__media">
-              <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+              {project.image ? (
+                <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+              ) : (
+                <div class="project-card__media-empty">
+                  <Icon name="photo" size={36} />
+                </div>
+              )}
               <span class={`project-card__badge project-card__badge--${project.status}`}>{statusLabel(project.status)}</span>
             </div>
             <div class="project-card__info">
@@ -139,6 +146,16 @@ const projects = [...featured, ...rest].slice(0, 3);
     height: 100%;
     object-fit: cover;
     transition: transform 500ms ease;
+  }
+
+  .project-card__media-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-light);
+    color: var(--color-border);
   }
 
   .project-card:hover .project-card__media img {

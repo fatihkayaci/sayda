@@ -253,6 +253,22 @@ import site from '../../data/site.json';
     }
   }
 
+  @media (max-width: 480px) {
+    .hero__title-line {
+      font-size: clamp(40px, 15vw, 64px);
+    }
+
+    .hero__eyebrow-text {
+      letter-spacing: 0.16em;
+      font-size: 0.75rem;
+    }
+
+    .hero__btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero__image {
       animation: none;

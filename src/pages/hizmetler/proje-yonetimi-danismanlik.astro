@@ -77,18 +77,6 @@ const teknikDanismanlik = [
 </Layout>
 
 <style>
-  .svc-main {
-    background: var(--color-bg-light);
-    padding-block: 64px 112px;
-  }
-
-  .svc-main__layout {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-
   .svc-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -170,18 +158,33 @@ const teknikDanismanlik = [
   }
 
   @media (max-width: 1024px) {
-    .svc-main__layout {
-      grid-template-columns: 1fr;
+    .stats-panel {
+      grid-template-columns: 1fr 1fr;
+      padding: 28px 20px;
+    }
+
+    .stats-panel__item:last-child {
+      grid-column: 1 / -1;
     }
   }
 
   @media (max-width: 640px) {
     .svc-cards {
       grid-template-columns: 1fr;
+      margin-bottom: 28px;
+    }
+
+    .svc-card {
+      padding: 20px;
     }
 
     .stats-panel {
       grid-template-columns: 1fr;
+      padding: 24px 16px;
+    }
+
+    .stats-panel__value {
+      font-size: 28px;
     }
 
     .stats-panel__item--bordered {

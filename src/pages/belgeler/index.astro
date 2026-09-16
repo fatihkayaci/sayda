@@ -36,7 +36,8 @@ import site from '../../data/site.json';
 
 <style>
   .belgeler {
-    padding-block: var(--space-xxl);
+    padding-top: calc(var(--header-h) + var(--space-l));
+    padding-bottom: var(--space-xxl);
     min-height: 40vh;
   }
 
@@ -67,9 +68,12 @@ import site from '../../data/site.json';
     font-weight: 700;
   }
 
-  .belgeler__cert-date {
-    color: var(--color-text-faint);
-    font-size: var(--fs-small);
+  @media (max-width: 640px) {
+    .belgeler__certs li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
   }
 
   .belgeler__info {

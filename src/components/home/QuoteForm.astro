@@ -138,7 +138,7 @@ const { id = 'quote-form' } = Astro.props;
   .quote-form__intro h2 {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: 28px;
+    font-size: clamp(22px, 5vw, 28px);
     line-height: 1.2;
     color: #fff;
   }
@@ -221,7 +221,7 @@ const { id = 'quote-form' } = Astro.props;
     outline-offset: 1px;
   }
 
-  .quote-form__consent {
+  .quote-form__form .quote-form__consent {
     flex-direction: row;
     align-items: flex-start;
     gap: 10px;
@@ -272,11 +272,14 @@ const { id = 'quote-form' } = Astro.props;
     .quote-form__form {
       padding: var(--space-l) var(--edge-mobile);
     }
-  }
 
-  @media (max-width: 640px) {
     .quote-form__row {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .quote-form__form button {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

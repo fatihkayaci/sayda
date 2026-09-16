@@ -38,6 +38,42 @@ const steps = [
     description: 'İş bitirme belgeleri ile birlikte iskan alınır ve anahtar teslimi yapılır.',
   },
 ];
+
+const whySayda = [
+  "1996'dan bu yana İstanbul'da müteahhitlik ve alt müteahhitlik alanında faaliyet",
+  'G grubu müteahhitlik yetki belgesi',
+  '33 iş bitirme belgesi ile kanıtlanmış saha deneyimi',
+  'Rönesans, Kiler GYO, Oyak, Varyap, Torunlar gibi kurumsal yapılarla tamamlanan projeler',
+  'Süreç boyunca tek muhatap: teknik değerlendirmeden iskana kadar aynı ekip',
+];
+
+const faqs = [
+  {
+    question: 'Kat karşılığı oranı nasıl belirlenir?',
+    answer:
+      'Arsanın/binanın bulunduğu bölgenin emsal değerleri, imar durumu ve inşaat maliyeti birlikte değerlendirilerek hak sahipleri ile müteahhit arasında karşılıklı olarak belirlenir. Bölgeden bölgeye oran değişebilir.',
+  },
+  {
+    question: 'Süreç ortalama ne kadar sürer?',
+    answer:
+      'Risk raporu alımından iskana kadar geçen süre binanın büyüklüğüne, kat maliklerinin anlaşma hızına ve ruhsat sürecine bağlı olarak değişir; genellikle teknik değerlendirme ve anlaşma aşaması birkaç ay, inşaat süreci ise proje ölçeğine göre 1-2 yıl arasında tamamlanır.',
+  },
+  {
+    question: 'Kira yardımından kim, nasıl yararlanır?',
+    answer:
+      "6306 sayılı kanun kapsamında risk raporu alınan binalardaki hak sahipleri, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'na başvurarak kira yardımı veya kredi desteğinden yararlanabilir. Başvuru için risk raporu, tapu ve hak sahipliğini gösteren belgeler gereklidir.",
+  },
+  {
+    question: 'Kat maliklerinin tamamı anlaşmak zorunda mı?',
+    answer:
+      'Hayır. 6306 sayılı kanun gereği kat maliklerinin en az 2/3 çoğunluğunun kararı yeterlidir; azınlıkta kalanlar bu karara uymak zorundadır.',
+  },
+  {
+    question: 'Müteahhit seçerken nelere dikkat edilmeli?',
+    answer:
+      'İş bitirme belgesi geçmişi, müteahhitlik yetki belgesi grubu, tamamlanan proje referansları ve sözleşme şartlarının netliği (teslim tarihi, malzeme kalitesi, kat karşılığı oranı) en önemli kriterlerdir.',
+  },
+];
 ---
 
 <Layout
@@ -76,11 +112,46 @@ const steps = [
       </ol>
     </div>
   </section>
+
+  <section class="why-sayda">
+    <div class="container">
+      <h2>Neden Sayda?</h2>
+
+      <ul class="why-sayda__list">
+        {
+          whySayda.map((item) => (
+            <li>
+              <span class="why-sayda__marker" aria-hidden="true" />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <h2>Sıkça Sorulan Sorular</h2>
+
+      <dl class="faq__list">
+        {
+          faqs.map((faq) => (
+            <div class="faq__item">
+              <dt>{faq.question}</dt>
+              <dd>{faq.answer}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
 </Layout>
 
 <style>
   .intro {
-    padding-block: var(--space-block-compact) 0;
+    padding-top: calc(var(--header-h) + var(--space-l));
+    padding-bottom: 0;
   }
 
   .intro .container {
@@ -117,6 +188,7 @@ const steps = [
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-m);
+    list-style: none;
   }
 
   .process-step {
@@ -159,5 +231,81 @@ const steps = [
     .process__grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .why-sayda {
+    padding-block: var(--space-block);
+    background: var(--color-bg-light);
+  }
+
+  .why-sayda .container {
+    max-width: 760px;
+  }
+
+  .why-sayda h2 {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-l);
+  }
+
+  .why-sayda__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  .why-sayda__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: var(--fs-body);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .why-sayda__marker {
+    flex-shrink: 0;
+    margin-top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-navy);
+  }
+
+  .faq {
+    padding-block: var(--space-block);
+  }
+
+  .faq .container {
+    max-width: 760px;
+  }
+
+  .faq h2 {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-l);
+  }
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+
+  .faq__item {
+    padding-top: var(--space-m);
+    border-top: 2px solid var(--color-navy);
+  }
+
+  .faq__item dt {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .faq__item dd {
+    margin-top: var(--space-xs);
+    font-size: var(--fs-body);
+    line-height: 1.8;
+    color: var(--color-text-muted);
   }
 </style>

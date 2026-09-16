@@ -61,7 +61,8 @@ const stats = [
 
 <style>
   .intro {
-    padding-block: var(--space-block-compact) 0;
+    padding-top: calc(var(--header-h) + var(--space-l));
+    padding-bottom: 0;
   }
 
   .intro .container {
@@ -135,6 +136,12 @@ const stats = [
 
   .more a:hover {
     text-decoration: underline;
+  }
+
+  @media (max-width: 1024px) {
+    .stats__grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   @media (max-width: 640px) {

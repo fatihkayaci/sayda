@@ -78,18 +78,6 @@ const uzmanlik = [
 </Layout>
 
 <style>
-  .svc-main {
-    background: var(--color-bg-light);
-    padding-block: 64px 112px;
-  }
-
-  .svc-main__layout {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-
   .partners__heading {
     font-size: 16px;
     font-weight: 700;
@@ -142,18 +130,28 @@ const uzmanlik = [
     color: rgba(255, 255, 255, 0.55);
   }
 
-  @media (max-width: 1024px) {
-    .svc-main__layout {
-      grid-template-columns: 1fr;
+  @media (max-width: 900px) {
+    .partners__grid {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
   @media (max-width: 640px) {
-    .partners__grid {
-      grid-template-columns: 1fr 1fr;
+    .stats-cards {
+      grid-template-columns: 1fr;
     }
 
-    .stats-cards {
+    .stats-card {
+      padding: 20px 16px;
+    }
+
+    .stats-card__value {
+      font-size: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .partners__grid {
       grid-template-columns: 1fr;
     }
   }

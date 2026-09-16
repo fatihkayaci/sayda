@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+
+const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
+---
+
+<Layout
+  title="Gizlilik Politikası | Sayda İnşaat"
+  description="Sayda İnşaat internet sitesi gizlilik politikası."
+>
+  <section class="privacy">
+    <div class="container">
+      <h1>Gizlilik Politikası</h1>
+      <p class="privacy__updated">Son güncelleme: {lastUpdated}</p>
+
+      <div class="privacy__body">
+        <p>
+          Bu Gizlilik Politikası, <strong>{site.legalName}</strong> ("Sayda İnşaat", "Şirket", "biz")
+          tarafından işletilen <a href={site.url}>{site.url}</a> internet sitesini ("Site") ziyaret
+          ettiğinizde kişisel verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklamak
+          amacıyla hazırlanmıştır. Kişisel verilerinizin 6698 sayılı Kişisel Verilerin Korunması Kanunu
+          ("KVKK") kapsamındaki işlenme esasları için ayrıca{' '}
+          <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>'ni inceleyebilirsiniz.
+        </p>
+
+        <h2>1. Bu Politika Kimler İçin Geçerlidir</h2>
+        <p>
+          Bu politika, Site'yi ziyaret eden tüm kullanıcılar ile Site üzerindeki iletişim/teklif formunu
+          dolduran kişiler için geçerlidir.
+        </p>
+
+        <h2>2. Topladığımız Bilgiler</h2>
+        <p>Site üzerinden iki şekilde bilgi toplanmaktadır:</p>
+        <ul class="privacy__list">
+          <li>
+            <strong>Doğrudan sizin sağladığınız bilgiler:</strong> İletişim/teklif formunu doldurduğunuzda ad,
+            soyad, telefon numarası, e-posta adresi ve mesaj içeriğiniz gibi bilgiler tarafımıza iletilir.
+          </li>
+          <li>
+            <strong>Otomatik olarak toplanan bilgiler:</strong> Siteyi ziyaret ettiğinizde tarayıcı türü,
+            işletim sistemi, IP adresi, ziyaret edilen sayfalar ve ziyaret süresi gibi teknik veriler
+            çerezler ve benzeri teknolojiler aracılığıyla toplanabilir. Bu verilerin toplanma amaçları ve
+            yönetimi ile ilgili ayrıntılı bilgi için bkz. <a href="/cerez-politikasi">Çerez Politikası</a>.
+          </li>
+        </ul>
+
+        <h2>3. Bilgileri Kullanma Amaçlarımız</h2>
+        <ul class="privacy__list">
+          <li>Teklif ve bilgi taleplerinizi yanıtlamak, sizinle iletişime geçmek</li>
+          <li>Site'nin işlevselliğini, güvenliğini ve performansını sağlamak</li>
+          <li>Site trafiğini ve kullanıcı davranışlarını analiz ederek hizmet kalitesini iyileştirmek
+            (Google Analytics gibi analiz araçları kullanıldığında)</li>
+          <li>Google Ads, Meta (Facebook/Instagram) gibi platformlarda reklamlarımızın performansını ölçmek
+            ve ilgi alanlarınıza uygun reklam gösterimi yapmak (bu araçlar kullanıldığında)</li>
+          <li>Yasal yükümlülüklerimizi yerine getirmek</li>
+        </ul>
+
+        <h2>4. Üçüncü Taraf Hizmet Sağlayıcılar</h2>
+        <p>
+          Site'nin işletilmesi ve pazarlama faaliyetlerimiz kapsamında aşağıdaki gibi üçüncü taraf
+          hizmetlerden faydalanılabilmektedir. Bu hizmet sağlayıcılar kendi gizlilik politikaları
+          çerçevesinde veri işleyebilir:
+        </p>
+        <ul class="privacy__list">
+          <li><strong>Google Analytics</strong> (Google LLC) — site trafiği ve kullanıcı davranışı analizi</li>
+          <li><strong>Google Ads</strong> (Google LLC) — reklam performans ölçümü ve yeniden pazarlama</li>
+          <li><strong>Meta Pixel</strong> (Meta Platforms Inc.) — reklam performans ölçümü ve yeniden pazarlama</li>
+          <li><strong>[HOSTING FİRMASI ADI]</strong> — sitenin barındırılması</li>
+        </ul>
+        <p>
+          Bu araçlar aracılığıyla toplanan veriler, ilgili sağlayıcının sunucularına (bazı durumlarda yurt
+          dışına) aktarılabilir. Google ve Meta'nın kendi gizlilik politikalarını incelemenizi öneririz.
+        </p>
+
+        <h2>5. Çerezler</h2>
+        <p>
+          Site'de kullanıcı deneyimini iyileştirmek, site trafiğini analiz etmek ve reklam performansını
+          ölçmek amacıyla çerezler kullanılmaktadır. Çerez türleri, kullanım amaçları ve tercihlerinizi
+          nasıl yönetebileceğiniz hakkında ayrıntılı bilgi için{' '}
+          <a href="/cerez-politikasi">Çerez Politikası</a> sayfamızı inceleyebilirsiniz.
+        </p>
+
+        <h2>6. Verilerin Saklanması ve Güvenliği</h2>
+        <p>
+          Kişisel verileriniz, yetkisiz erişim, kayıp, kötüye kullanım veya ifşaya karşı korumak amacıyla
+          makul teknik ve idari güvenlik önlemleri ile saklanmaktadır. Verileriniz, işlenme amacının
+          gerektirdiği süre boyunca saklanır; bu süre sona erdiğinde silinir, yok edilir veya anonim hale
+          getirilir.
+        </p>
+
+        <h2>7. Haklarınız</h2>
+        <p>
+          KVKK kapsamındaki haklarınız (bilgi talep etme, düzeltme, silme vb.) hakkında ayrıntılı bilgiye{' '}
+          <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>'nden ulaşabilirsiniz. Taleplerinizi{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> adresine iletebilirsiniz.
+        </p>
+
+        <h2>8. Diğer Sitelere Bağlantılar</h2>
+        <p>
+          Site, üçüncü taraf internet sitelerine bağlantılar (örn. sosyal medya hesaplarımız) içerebilir.
+          Bu sitelerin gizlilik uygulamalarından Sayda İnşaat sorumlu değildir; bu siteleri ziyaret
+          etmeden önce ilgili sitenin kendi gizlilik politikasını incelemenizi öneririz.
+        </p>
+
+        <h2>9. Politikadaki Değişiklikler</h2>
+        <p>
+          Bu Gizlilik Politikası, yasal düzenlemelerdeki değişiklikler veya Site'deki güncellemeler
+          doğrultusunda zaman zaman revize edilebilir. Güncel sürüm her zaman bu sayfada yayınlanır.
+        </p>
+
+        <h2>10. İletişim</h2>
+        <p>
+          Bu politika ile ilgili sorularınız için bizimle{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> veya {site.phone} üzerinden iletişime
+          geçebilirsiniz.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .privacy {
+    padding-block: var(--space-block-compact) var(--space-xxl);
+  }
+
+  .privacy .container {
+    max-width: 760px;
+  }
+
+  .privacy h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .privacy__updated {
+    margin-top: var(--space-xs);
+    color: var(--color-text-faint);
+    font-size: var(--fs-small);
+  }
+
+  .privacy__body {
+    margin-top: var(--space-l);
+  }
+
+  .privacy__body h2 {
+    margin-top: var(--space-l);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--color-navy);
+  }
+
+  .privacy__body p {
+    margin-top: var(--space-xs);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .privacy__list {
+    margin-top: var(--space-xs);
+    padding-left: 20px;
+    display: grid;
+    gap: 6px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    list-style: disc;
+  }
+
+  .privacy__body a {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .privacy__body a:hover {
+    text-decoration: underline;
+  }
+</style>

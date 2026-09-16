@@ -24,6 +24,8 @@ const { number, title, lead } = Astro.props;
     border-radius: 8px;
     padding: 48px;
     box-shadow: 0 4px 24px rgba(43, 46, 131, 0.07);
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .svc-panel__eyebrow {
@@ -49,9 +51,9 @@ const { number, title, lead } = Astro.props;
 
   .svc-panel h2 {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(28px, 3vw, 38px);
+    font-size: clamp(24px, 5vw, 38px);
     color: var(--color-text);
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 20px;
   }
 
@@ -63,9 +65,24 @@ const { number, title, lead } = Astro.props;
     margin-bottom: 40px;
   }
 
+  @media (max-width: 1024px) {
+    .svc-panel {
+      padding: 36px 28px;
+    }
+  }
+
   @media (max-width: 700px) {
     .svc-panel {
-      padding: 32px 24px;
+      padding: var(--space-l) var(--edge-mobile);
+    }
+
+    .svc-panel__lead {
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    .svc-panel__eyebrow span:last-child {
+      letter-spacing: 0.14em;
     }
   }
 </style>

@@ -33,6 +33,7 @@ const { heading, lead, items, iconFill = '#eef0f9' } = Astro.props;
     border-radius: 6px;
     padding: 32px;
     margin-bottom: 40px;
+    min-width: 0;
   }
 
   .checklist-box h3 {
@@ -74,6 +75,11 @@ const { heading, lead, items, iconFill = '#eef0f9' } = Astro.props;
   }
 
   @media (max-width: 640px) {
+    .checklist-box {
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
     .checklist-box__grid {
       grid-template-columns: 1fr;
     }

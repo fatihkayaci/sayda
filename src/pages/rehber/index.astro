@@ -1,9 +1,433 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+import rehberData from '../../data/rehber.json';
+
+const categoryLabels: Record<string, string> = {
+  'kentsel-donusum': 'Kentsel Dönüşüm',
+  'kat-karsiligi': 'Kat Karşılığı',
+};
+
+const sorted = [...rehberData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const [featured, ...rest] = sorted;
+
+const tabs = [
+  { key: 'all', label: 'Tümü', count: sorted.length },
+  ...Object.entries(categoryLabels).map(([key, label]) => ({
+    key,
+    label,
+    count: sorted.filter((r) => r.category === key).length,
+  })),
+];
 ---
 
-<PagePlaceholder
+<Layout
   title="Rehber | Sayda İnşaat"
   description="Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri."
-  heading="Rehber"
-/>
+>
+  <section class="rehber-hero">
+    <div class="rehber-hero__grid"></div>
+    <div class="container rehber-hero__inner reveal">
+      <nav class="rehber-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Anasayfa</a>
+        <span>/</span>
+        <span aria-current="page">Rehber</span>
+      </nav>
+
+      <div class="rehber-hero__eyebrow">
+        <span class="rehber-hero__eyebrow-bar"></span>
+        <span>REHBER</span>
+      </div>
+
+      <h1>Rehber <span class="rehber-hero__count">{sorted.length}</span></h1>
+      <p class="rehber-hero__lead">Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri.</p>
+    </div>
+  </section>
+
+  <section class="rehber-page">
+    <div class="container">
+      <a href={`/rehber/${featured.slug}`} class="rehber-featured reveal" data-category={featured.category}>
+        <div class="rehber-featured__image">
+          <img src={featured.image} alt={featured.title} loading="lazy" />
+        </div>
+        <div class="rehber-featured__body">
+          <span class="rehber-featured__badge">Öne Çıkan</span>
+          <span class="rehber-card__date">
+            {categoryLabels[featured.category]} · {formatter.format(new Date(featured.date))}
+          </span>
+          <h2>{featured.title}</h2>
+          <p>{featured.excerpt}</p>
+          <span class="rehber-card__more">Devamını Oku →</span>
+        </div>
+      </a>
+
+      <nav class="rehber-filters" aria-label="Rehber kategorisi">
+        {
+          tabs.map((tab) => (
+            <button type="button" class="rehber-filters__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'page' : undefined}>
+              {tab.label} ({tab.count})
+            </button>
+          ))
+        }
+      </nav>
+
+      <div class="rehber-page__grid">
+        {
+          rest.map((post, i) => (
+            <a
+              class={`rehber-card reveal reveal-d${(i % 3) + 1}`}
+              href={`/rehber/${post.slug}`}
+              data-category={post.category}
+            >
+              <div class="rehber-card__image">
+                <img src={post.image} alt={post.title} loading="lazy" />
+              </div>
+              <div class="rehber-card__body">
+                <span class="rehber-card__date">{formatter.format(new Date(post.date))}</span>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+                <span class="rehber-card__more">Devamını Oku →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.rehber-filters__btn');
+  const cards = document.querySelectorAll<HTMLElement>('.rehber-featured, .rehber-page__grid .rehber-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      buttons.forEach((b) => b.removeAttribute('aria-current'));
+      btn.setAttribute('aria-current', 'page');
+
+      cards.forEach((card) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+
+<style>
+  .rehber-hero {
+    position: relative;
+    padding: 140px 0 64px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .rehber-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 72px 72px;
+    pointer-events: none;
+  }
+
+  .rehber-hero__inner {
+    position: relative;
+  }
+
+  .rehber-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--space-m);
+    font-size: var(--fs-small);
+  }
+
+  .rehber-hero__breadcrumb a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: color var(--transition);
+  }
+
+  .rehber-hero__breadcrumb a:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .rehber-hero__breadcrumb span:first-of-type {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .rehber-hero__breadcrumb span[aria-current] {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .rehber-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--space-m);
+  }
+
+  .rehber-hero__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: #fff;
+  }
+
+  .rehber-hero__eyebrow span:last-child {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .rehber-hero h1 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: var(--space-m);
+  }
+
+  .rehber-hero__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4em;
+    padding: 0.15em 0.35em;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.4em;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .rehber-hero__lead {
+    max-width: 580px;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .rehber-page {
+    padding-block: var(--space-xl) var(--space-xxl);
+    background: var(--color-bg-light);
+  }
+
+  .rehber-featured {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-l);
+    align-items: stretch;
+    margin-bottom: var(--space-l);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .rehber-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+  }
+
+  .rehber-featured__image {
+    overflow: hidden;
+    min-height: 320px;
+  }
+
+  .rehber-featured__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .rehber-featured:hover .rehber-featured__image img {
+    transform: scale(1.05);
+  }
+
+  .rehber-featured__body {
+    padding: var(--space-l) var(--space-l) var(--space-l) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .rehber-featured__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--color-navy);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .rehber-featured__body h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+
+  .rehber-featured__body p {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-filters {
+    display: flex;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    padding-block: var(--space-m) var(--space-l);
+  }
+
+  .rehber-filters__btn {
+    padding: 10px 24px;
+    border-radius: var(--radius);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    border: 2px solid rgba(43, 46, 131, 0.2);
+    color: var(--color-text-muted);
+    background: transparent;
+    transition:
+      background var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .rehber-filters__btn:hover,
+  .rehber-filters__btn[aria-current='page'] {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
+  }
+
+  .rehber-page__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .rehber-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--color-bg);
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
+    transition:
+      transform 220ms ease,
+      box-shadow 220ms ease;
+  }
+
+  .rehber-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+  }
+
+  .rehber-card__image {
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .rehber-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .rehber-card:hover .rehber-card__image img {
+    transform: scale(1.05);
+  }
+
+  .rehber-card__body {
+    padding: 22px 22px 26px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rehber-card__date {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-text-faint);
+  }
+
+  .rehber-card__body h2 {
+    margin-top: 2px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.35;
+  }
+
+  .rehber-card__body p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .rehber-card__more {
+    margin-top: auto;
+    padding-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-navy);
+    transition: color var(--transition);
+  }
+
+  .rehber-card:hover .rehber-card__more {
+    color: var(--color-navy-dark);
+  }
+
+  @media (max-width: 1024px) {
+    .rehber-page__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 780px) {
+    .rehber-featured {
+      grid-template-columns: 1fr;
+    }
+
+    .rehber-featured__image {
+      min-height: 220px;
+    }
+
+    .rehber-featured__body {
+      padding: var(--space-m);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .rehber-hero {
+      padding-top: 108px;
+    }
+
+    .rehber-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -73,6 +73,10 @@ const year = new Date().getFullYear();
 
   <div class="footer__bottom container">
     <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
+    <nav class="footer__legal" aria-label="Yasal">
+      <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
+      <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>
+    </nav>
   </div>
 </footer>
 
@@ -159,6 +163,24 @@ const year = new Date().getFullYear();
     padding-top: var(--space-m);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: var(--fs-small);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--space-m);
+  }
+
+  .footer__legal a {
+    transition: color var(--transition);
+  }
+
+  .footer__legal a:hover {
+    color: #fff;
   }
 
   @media (max-width: 1024px) {
@@ -169,6 +191,10 @@ const year = new Date().getFullYear();
   }
 
   @media (max-width: 640px) {
+    .footer {
+      padding-block: var(--space-xl) var(--space-l);
+    }
+
     .footer__inner {
       grid-template-columns: 1fr;
     }

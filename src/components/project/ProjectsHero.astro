@@ -16,6 +16,10 @@ const tabs = [
   { key: 'devam-eden', label: 'Devam Eden', count: devamEdenCount, href: '/projeler/devam-eden' },
   { key: 'tamamlanan', label: 'Tamamlanan', count: tamamlananCount, href: '/projeler/tamamlanan' },
 ] as const;
+
+const districts = [...new Set(projects.map((p) => p.district).filter((d): d is string => Boolean(d)))].sort((a, b) =>
+  a.localeCompare(b, 'tr'),
+);
 ---
 
 <section class="projects-hero">
@@ -66,12 +70,47 @@ const tabs = [
       </a>
     ))
   }
+
+  {
+    districts.length > 0 && (
+      <label class="projects-filters__district">
+        <span class="sr-only">İlçeye göre filtrele</span>
+        <select data-district-filter>
+          <option value="all">Tüm İlçeler</option>
+          {districts.map((district) => (
+            <option value={district}>{district}</option>
+          ))}
+        </select>
+      </label>
+    )
+  }
 </nav>
+
+<script>
+  function initDistrictFilter() {
+    const select = document.querySelector<HTMLSelectElement>('[data-district-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('.project-card[data-district]');
+    if (!select || cards.length === 0) return;
+
+    const applyFilter = (value: string) => {
+      cards.forEach((card) => {
+        const matches = value === 'all' || card.getAttribute('data-district') === value;
+        card.hidden = !matches;
+      });
+    };
+
+    select.value = 'all';
+    select.addEventListener('change', () => applyFilter(select.value));
+  }
+
+  initDistrictFilter();
+  document.addEventListener('astro:page-load', initDistrictFilter);
+</script>
 
 <style>
   .projects-hero {
     position: relative;
-    padding: 140px var(--edge) 64px;
+    padding: 140px 0 64px;
     background: var(--color-navy-deep);
     color: #fff;
     overflow: hidden;
@@ -198,6 +237,34 @@ const tabs = [
     background: var(--color-navy);
     color: #fff;
     border-color: var(--color-navy);
+  }
+
+  .projects-filters__district {
+    margin-left: auto;
+  }
+
+  .projects-filters__district select {
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    border: 2px solid rgba(43, 46, 131, 0.2);
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    font: inherit;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (max-width: 640px) {

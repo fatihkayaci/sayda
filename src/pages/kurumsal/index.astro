@@ -21,12 +21,6 @@ const kurumsal = [
     href: '/belgeler',
     icon: 'document',
   },
-  {
-    title: 'Haberler',
-    description: 'Sayda İnşaat\'tan güncel haberler ve duyurular.',
-    href: '/haberler',
-    icon: 'mail',
-  },
 ];
 ---
 
@@ -53,7 +47,8 @@ const kurumsal = [
 
 <style>
   .kurumsal-hub {
-    padding-block: var(--space-xxl);
+    padding-top: calc(var(--header-h) + var(--space-l));
+    padding-bottom: var(--space-xxl);
   }
 
   .kurumsal-hub h1 {
@@ -70,7 +65,7 @@ const kurumsal = [
   .kurumsal-hub__grid {
     margin-top: var(--space-xl);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-m);
   }
 

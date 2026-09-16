@@ -3,6 +3,7 @@ import Icon from './Icon.astro';
 import site from '../data/site.json';
 
 const navLinks = [
+  { label: 'Ana Sayfa', href: '/' },
   {
     label: 'Kurumsal',
     href: '/kurumsal',
@@ -37,7 +38,7 @@ const navLinks = [
 ];
 ---
 
-<header class="header">
+<header class="header" transition:persist="sayda-header">
   <div class="header__inner">
     <a href="/" class="header__logo">
       <img src={site.logo} alt="Sayda İnşaat" width="148" height="34" />
@@ -243,14 +244,16 @@ const navLinks = [
     color: var(--color-navy);
   }
 
-  .header__nav-item.is-open .header__dropdown,
-  .header__nav-item:focus-within .header__dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  @media (min-width: 1281px) {
+    .header__nav-item.is-open .header__dropdown,
+    .header__nav-item:focus-within .header__dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (min-width: 1281px) {
     .header__nav-item:hover .header__dropdown {
       opacity: 1;
       visibility: visible;
@@ -291,35 +294,59 @@ const navLinks = [
     color: #fff;
   }
 
-  @media (max-width: 1180px) {
+  @media (max-width: 1280px) {
     .header {
       position: sticky;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: #13154a;
+    }
+
+    :global(body.menu-open) .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+
+    .header.is-scrolled {
+      background: #13154a;
     }
 
     .header__inner {
-      height: 64px;
+      height: var(--header-h-compact);
       padding-inline: var(--edge-mobile);
+    }
+
+    .header__logo,
+    .header__actions {
+      position: relative;
+      z-index: 2;
     }
 
     .header__nav {
       position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      /* .header has backdrop-filter, which makes it the containing block for this
-         fixed element — `bottom: 0` would resolve against header's own ~64px box
-         instead of the viewport, so height is set explicitly instead. */
-      height: calc(100vh - 64px);
+      inset: 0;
+      width: 100%;
+      height: 100dvh;
+      z-index: 1;
       margin-left: 0;
       overflow-y: auto;
       background: #13154a;
-      padding: var(--space-l) var(--edge-mobile);
+      padding: calc(var(--header-h-compact) + var(--space-l)) var(--edge-mobile) var(--space-l);
       transform: translateX(100%);
-      transition: transform var(--transition);
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        transform var(--transition),
+        visibility var(--transition);
     }
 
     .header__nav.is-open {
       transform: translateX(0);
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .header__nav > ul {
@@ -407,73 +434,109 @@ const navLinks = [
 </style>
 
 <script>
-  const header = document.querySelector('.header');
+  const els = () => ({
+    header: document.querySelector('.header'),
+    button: document.getElementById('menuButton'),
+    menu: document.getElementById('mainMenu'),
+  });
 
-  const updateHeaderBackground = () => {
-    header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  const closeDropdowns = () => {
+    document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
+      openItem.classList.remove('is-open');
+      openItem
+        .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
+        .forEach((el) => el.setAttribute('aria-expanded', 'false'));
+    });
   };
 
-  window.addEventListener('scroll', updateHeaderBackground, { passive: true });
-  updateHeaderBackground();
+  const isCompactNav = () => window.matchMedia('(max-width: 1280px)').matches;
 
-  const button = document.getElementById('menuButton');
-  const menu = document.getElementById('mainMenu');
+  const setMenuOpen = (open: boolean) => {
+    const { button, menu } = els();
+    menu?.classList.toggle('is-open', open);
+    button?.setAttribute('aria-expanded', String(open));
+    button?.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+    document.body.classList.toggle('menu-open', open);
+    if (isCompactNav()) {
+      menu?.setAttribute('aria-hidden', String(!open));
+    } else {
+      menu?.removeAttribute('aria-hidden');
+    }
+    if (!open) closeDropdowns();
+  };
 
-  button?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('is-open');
-    button.setAttribute('aria-expanded', String(Boolean(isOpen)));
-  });
+  const updateHeaderBackground = () => {
+    els().header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  };
 
-  menu?.querySelectorAll(':scope > ul > li > a, .header__dropdown a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('is-open');
-      button?.setAttribute('aria-expanded', 'false');
-    });
-  });
+  const toggleDropdown = (toggle: Element) => {
+    const item = toggle.closest('.header__nav-item');
+    if (!item) return;
+    const isOpen = item.classList.contains('is-open');
 
-  const dropdownToggles = document.querySelectorAll<HTMLButtonElement>(
-    '.header__dropdown-toggle, .header__nav-link--label',
-  );
-
-  dropdownToggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      const item = toggle.closest('.header__nav-item');
-      if (!item) return;
-      const isOpen = item.classList.contains('is-open');
-
-      document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
-        if (openItem !== item) {
-          openItem.classList.remove('is-open');
-          openItem
-            .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
-            .forEach((el) => el.setAttribute('aria-expanded', 'false'));
-        }
-      });
-
-      item.classList.toggle('is-open', !isOpen);
-      item
-        .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
-        .forEach((el) => el.setAttribute('aria-expanded', String(!isOpen)));
-    });
-  });
-
-  document.addEventListener('click', (event) => {
-    const target = event.target as Node;
     document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
-      if (!openItem.contains(target)) {
+      if (openItem !== item) {
         openItem.classList.remove('is-open');
-        openItem.querySelector('.header__dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+        openItem
+          .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
+          .forEach((el) => el.setAttribute('aria-expanded', 'false'));
       }
     });
-  });
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
-        openItem.classList.remove('is-open');
-        openItem.querySelector('.header__dropdown-toggle')?.setAttribute('aria-expanded', 'false');
-      });
+    item.classList.toggle('is-open', !isOpen);
+    item
+      .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
+      .forEach((el) => el.setAttribute('aria-expanded', String(!isOpen)));
+  };
+
+  const onDocumentClick = (event: Event) => {
+    const target = event.target as Element | null;
+    if (!target) return;
+
+    if (target.closest('#menuButton')) {
+      const { menu } = els();
+      setMenuOpen(!menu?.classList.contains('is-open'));
+      return;
     }
-  });
+
+    const dropdownToggle = target.closest('.header__dropdown-toggle, .header__nav-link--label');
+    if (dropdownToggle) {
+      toggleDropdown(dropdownToggle);
+      return;
+    }
+
+    if (target.closest('#mainMenu a')) {
+      return;
+    }
+
+    const { menu, button } = els();
+    if (menu?.contains(target) || button?.contains(target)) return;
+    closeDropdowns();
+  };
+
+  const resetMenu = () => {
+    setMenuOpen(false);
+    updateHeaderBackground();
+  };
+
+  const win = window as Window & { __saydaHeaderNavV2?: boolean };
+
+  if (!win.__saydaHeaderNavV2) {
+    win.__saydaHeaderNavV2 = true;
+
+    window.addEventListener('click', onDocumentClick, true);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    });
+    window.addEventListener('scroll', updateHeaderBackground, { passive: true });
+    window.matchMedia('(min-width: 1281px)').addEventListener('change', (event) => {
+      if (event.matches) setMenuOpen(false);
+    });
+    document.addEventListener('astro:before-preparation', resetMenu);
+    document.addEventListener('astro:after-swap', resetMenu);
+    document.addEventListener('astro:page-load', resetMenu);
+  }
+
+  resetMenu();
 </script>
 

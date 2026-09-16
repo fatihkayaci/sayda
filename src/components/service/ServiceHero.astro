@@ -1,4 +1,6 @@
 ---
+import '../../styles/services.css';
+
 const pills = [
   { label: 'Kat Karşılığı', href: '/hizmetler/kat-karsiligi-insaat' },
   { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
@@ -24,7 +26,7 @@ const pills = [
 
     <div class="svc-hero__row">
       <div>
-        <h1>Hizmet&shy;lerimiz</h1>
+        <h1>Hizmetlerimiz</h1>
         <p class="svc-hero__lead">Planlamadan teslimata, tek taşeronluktan anahtar teslime kadar her aşamada yanınızdayız.</p>
       </div>
 
@@ -38,7 +40,7 @@ const pills = [
 <style>
   .svc-hero {
     position: relative;
-    padding-top: 76px;
+    padding-top: var(--header-h);
     background: #191b4a;
     overflow: hidden;
   }
@@ -55,7 +57,7 @@ const pills = [
 
   .svc-hero__inner {
     position: relative;
-    padding: 72px var(--edge) 80px;
+    padding: 72px 0 80px;
   }
 
   .svc-hero__breadcrumb {
@@ -107,21 +109,22 @@ const pills = [
 
   .svc-hero__row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 64px;
     align-items: end;
   }
 
   .svc-hero h1 {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(40px, 6vw, 72px);
+    font-size: clamp(32px, 9vw, 72px);
     line-height: 0.95;
     color: #fff;
     letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
   }
 
   .svc-hero__lead {
-    font-size: 18px;
+    font-size: clamp(15px, 2.4vw, 18px);
     color: rgba(255, 255, 255, 0.65);
     margin-top: 24px;
     max-width: 480px;
@@ -133,6 +136,7 @@ const pills = [
     flex-wrap: wrap;
     gap: 10px;
     justify-content: flex-end;
+    min-width: 0;
   }
 
   .svc-hero__pill {
@@ -160,11 +164,24 @@ const pills = [
     .svc-hero__pills {
       justify-content: flex-start;
     }
+
+    .svc-hero__lead {
+      margin-top: 16px;
+    }
   }
 
   @media (max-width: 700px) {
     .svc-hero__inner {
-      padding: 56px 24px 64px;
+      padding: 40px 0 48px;
+    }
+
+    .svc-hero__eyebrow span:last-child {
+      letter-spacing: 0.18em;
+    }
+
+    .svc-hero__pill {
+      padding: 8px 14px;
+      font-size: 12px;
     }
   }
 </style>

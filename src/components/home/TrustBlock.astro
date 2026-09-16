@@ -26,16 +26,11 @@ const stats = [
   },
 ];
 
-const documents = [
-  { title: 'İş Bitirme Belgeleri', href: site.documents.certificate },
-  { title: 'Katalog', href: site.documents.catalog },
-  { title: 'Tüm Belgeler', href: '/belgeler' },
-];
 ---
 
 <section class="trust">
   <div class="trust__decor" aria-hidden="true"></div>
-  <div class="container trust__inner">
+  <div class="trust__inner">
     <div class="trust__intro reveal">
       <div class="trust__eyebrow">
         <span class="trust__eyebrow-bar"></span>
@@ -56,19 +51,6 @@ const documents = [
       }
     </div>
   </div>
-
-  <div class="container trust__documents">
-    {
-      documents.map((doc, i) => (
-        <>
-          {i > 0 && <span class="trust__documents-sep" aria-hidden="true">·</span>}
-          <a href={doc.href} target={doc.href.endsWith('.pdf') ? '_blank' : undefined} rel="noopener noreferrer">
-            {doc.title}
-          </a>
-        </>
-      ))
-    }
-  </div>
 </section>
 
 <style>
@@ -76,7 +58,7 @@ const documents = [
     position: relative;
     background: var(--color-navy);
     color: #fff;
-    padding-block: var(--space-block);
+    padding-block: 0;
     overflow: hidden;
   }
 
@@ -90,9 +72,21 @@ const documents = [
   .trust__inner {
     position: relative;
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: var(--space-l);
-    align-items: center;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+    gap: 0;
+    padding-left: var(--edge);
+    padding-right: 0;
+    align-items: stretch;
+  }
+
+  .trust__intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 28px;
   }
 
   .trust__eyebrow {
@@ -121,11 +115,12 @@ const documents = [
     font-weight: 400;
     font-size: clamp(24px, 3vw, 34px);
     line-height: 1.2;
+    max-width: 260px;
   }
 
   .trust__stats {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1px;
     background: rgba(255, 255, 255, 0.12);
   }
@@ -135,13 +130,17 @@ const documents = [
     padding: 36px 28px;
     display: grid;
     gap: 10px;
+    justify-items: center;
+    text-align: center;
+    min-width: 0;
   }
 
   .trust__stat-value {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: 44px;
+    font-size: clamp(16px, 6vw, 44px);
     line-height: 1;
+    overflow-wrap: anywhere;
   }
 
   .trust__stat-label {
@@ -150,50 +149,40 @@ const documents = [
     color: rgba(255, 255, 255, 0.65);
   }
 
-  .trust__documents {
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-l);
-    padding-top: var(--space-l);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    font-size: var(--fs-small);
-    font-weight: 700;
-  }
-
-  .trust__documents a {
-    color: #fff;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-color: rgba(255, 255, 255, 0.4);
-    transition: text-decoration-color var(--transition);
-  }
-
-  .trust__documents a:hover {
-    text-decoration-color: #fff;
-  }
-
-  .trust__documents-sep {
-    opacity: 0.5;
-  }
-
   @media (max-width: 1024px) {
     .trust__inner {
       grid-template-columns: 1fr;
+      gap: var(--space-l);
+      padding-right: var(--edge);
+    }
+
+    .trust__intro {
+      padding-right: 0;
+    }
+
+    .trust__stats {
+      margin-inline: calc(var(--edge) * -1);
     }
   }
 
   @media (max-width: 700px) {
+    .trust__inner {
+      padding-left: var(--edge-mobile);
+      padding-right: var(--edge-mobile);
+    }
+
     .trust__stats {
-      grid-template-columns: 1fr 1fr;
+      margin-inline: calc(var(--edge-mobile) * -1);
+    }
+
+    .trust__stat {
+      padding: 30px 24px;
     }
   }
 
   @media (max-width: 480px) {
-    .trust__stats {
-      grid-template-columns: 1fr 1fr;
+    .trust__stat {
+      padding: 24px 16px;
     }
   }
 </style>

@@ -42,17 +42,19 @@ const tabs = [
 ---
 
 <div class="svc-sidebar">
-  {
-    tabs.map((tab, i) => (
-      <a href={tab.href} class="svc-tab" class:list={{ active: i === active }} aria-current={i === active ? 'page' : undefined}>
-        <span class="svc-tab__icon" set:html={`<svg viewBox="0 0 24 24" fill="none" width="22" height="22">${tab.icon}</svg>`} />
-        <span>
-          <span class="svc-tab__num">{tab.number}</span>
-          <span class="svc-tab__title">{tab.title}</span>
-        </span>
-      </a>
-    ))
-  }
+  <div class="svc-sidebar__tabs">
+    {
+      tabs.map((tab, i) => (
+        <a href={tab.href} class="svc-tab" class:list={{ active: i === active }} aria-current={i === active ? 'page' : undefined}>
+          <span class="svc-tab__icon" set:html={`<svg viewBox="0 0 24 24" fill="none" width="22" height="22">${tab.icon}</svg>`} />
+          <span>
+            <span class="svc-tab__num">{tab.number}</span>
+            <span class="svc-tab__title">{tab.title}</span>
+          </span>
+        </a>
+      ))
+    }
+  </div>
 
   <div class="svc-sidebar__cta">
     <h3>Bu hizmet için teklif almak ister misiniz?</h3>
@@ -71,7 +73,15 @@ const tabs = [
     flex-direction: column;
     gap: 8px;
     position: sticky;
-    top: 96px;
+    top: calc(var(--header-h) + 16px);
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .svc-sidebar__tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .svc-tab {
@@ -153,9 +163,10 @@ const tabs = [
 
   .svc-sidebar__cta h3 {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 17px;
+    font-size: clamp(15px, 4vw, 17px);
     color: #fff;
-    line-height: 1.2;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   .svc-sidebar__cta p {
@@ -197,17 +208,69 @@ const tabs = [
   @media (max-width: 1024px) {
     .svc-sidebar {
       position: static;
+      flex-direction: column;
+      overflow: visible;
+      gap: var(--space-m);
+    }
+
+    .svc-sidebar__tabs {
       flex-direction: row;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
       gap: 8px;
       padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .svc-sidebar__tabs::-webkit-scrollbar {
+      display: none;
     }
 
     .svc-tab {
-      min-width: 180px;
+      width: auto;
+      min-width: 168px;
+      max-width: 240px;
+      flex: 0 0 auto;
       flex-direction: column;
       align-items: flex-start;
       padding: 14px 16px;
+      scroll-snap-align: start;
+      scroll-margin-inline: 8px;
+    }
+
+    .svc-sidebar__cta {
+      padding: 24px 20px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .svc-tab {
+      min-width: 148px;
+      padding: 12px 14px;
+      gap: 10px;
+    }
+
+    .svc-tab__icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .svc-tab__title {
+      font-size: 13px;
     }
   }
 </style>
+
+<script>
+  const revealActiveTab = () => {
+    if (!window.matchMedia('(max-width: 1024px)').matches) return;
+    const tab = document.querySelector('.svc-tab[aria-current="page"]');
+    if (!(tab instanceof HTMLElement)) return;
+    tab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
+  };
+
+  document.addEventListener('astro:page-load', revealActiveTab);
+  revealActiveTab();
+</script>
