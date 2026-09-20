@@ -7,8 +7,8 @@ const certLabel = site.certifications.map((c) => c.name.replace('ISO ', '')).joi
 
 <section class="about" id="hakkimizda">
   <div class="about__grid" aria-hidden="true"></div>
-  <div class="container about__inner reveal">
-    <div class="about__media">
+  <div class="container about__inner">
+    <div class="about__media reveal reveal-left">
       <img src="/img/hakkimizda.png" alt="Sayda İnşaat" loading="lazy" />
       <div class="about__badge">
         <span class="about__badge-year">{site.foundedYear}</span>
@@ -16,7 +16,7 @@ const certLabel = site.certifications.map((c) => c.name.replace('ISO ', '')).joi
       </div>
     </div>
 
-    <div class="about__content">
+    <div class="about__content reveal reveal-right">
       <div class="about__eyebrow">
         <span class="about__eyebrow-bar"></span>
         <span>HAKKIMIZDA</span>

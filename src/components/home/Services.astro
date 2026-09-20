@@ -5,7 +5,7 @@ import services from '../../data/services.json';
 
 <section class="services" id="hizmetler">
   <div class="container services__inner">
-    <div class="services__intro reveal">
+    <div class="services__intro reveal reveal-left">
       <div class="services__eyebrow">
         <span class="services__eyebrow-bar"></span>
         <span>HİZMETLERİMİZ</span>
@@ -18,7 +18,7 @@ import services from '../../data/services.json';
     <div class="services__grid">
       {
         services.map((service, i) => (
-          <a class={`svc-card reveal reveal-d${(i % 4) + 1}`} href={service.href}>
+          <a class={`svc-card reveal reveal-right reveal-d${(i % 4) + 1}`} href={service.href}>
             <span class="svc-card__icon">
               <Icon name={service.icon} size={26} />
             </span>

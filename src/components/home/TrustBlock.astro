@@ -31,7 +31,7 @@ const stats = [
 <section class="trust">
   <div class="trust__decor" aria-hidden="true"></div>
   <div class="trust__inner">
-    <div class="trust__intro reveal">
+    <div class="trust__intro reveal reveal-left">
       <div class="trust__eyebrow">
         <span class="trust__eyebrow-bar"></span>
         <span class="trust__eyebrow-text">SAYILARLA SAYDA</span>
@@ -42,7 +42,7 @@ const stats = [
     <div class="trust__stats">
       {
         stats.map((stat, i) => (
-          <div class={`trust__stat reveal reveal-d${i + 1}`}>
+          <div class={`trust__stat reveal reveal-right reveal-d${i + 1}`}>
             <svg viewBox="0 0 48 48" fill="none" width="26" height="26" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" set:html={stat.icon} />
             <span class="trust__stat-value">{stat.value}</span>
             <span class="trust__stat-label">{stat.label}</span>

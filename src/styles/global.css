@@ -175,8 +175,26 @@ button {
   transition-delay: 0.4s;
 }
 
+.reveal.reveal-left {
+  transform: translateX(-56px);
+}
+
+.reveal.reveal-left.in {
+  transform: translateX(0);
+}
+
+.reveal.reveal-right {
+  transform: translateX(56px);
+}
+
+.reveal.reveal-right.in {
+  transform: translateX(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal.reveal-left,
+  .reveal.reveal-right {
     opacity: 1;
     transform: none;
     transition: none;
