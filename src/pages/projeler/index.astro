@@ -6,11 +6,8 @@ import ProjectFeatured from '../../components/project/ProjectFeatured.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
 import allProjects from '../../data/projects.json';
 
-const imageFirst = (projects: typeof allProjects) =>
-  [...projects.filter((project) => project.image), ...projects.filter((project) => !project.image)];
-
 const devamEden = allProjects.filter((project) => project.status === 'devam-eden');
-const tamamlanan = imageFirst(allProjects.filter((project) => project.status === 'tamamlanan'));
+const tamamlanan = allProjects.filter((project) => project.status === 'tamamlanan');
 ---
 
 <Layout title="Projeler | Sayda İnşaat" description="Sayda İnşaat'ın devam eden ve tamamlanan projeleri.">
