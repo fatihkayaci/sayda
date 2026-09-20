@@ -1,6 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
 import rehberData from '../../data/rehber.json';
+import site from '../../data/site.json';
+
+const categories: { key: string; label: string }[] = [
+  { key: 'kentsel-donusum', label: 'Kentsel Dönüşüm' },
+  { key: 'kat-karsiligi', label: 'Kat Karşılığı' },
+];
+const categoryLabels: Record<string, string> = Object.fromEntries(categories.map((c) => [c.key, c.label]));
 
 export function getStaticPaths() {
   return rehberData.map((post) => ({
@@ -11,67 +20,873 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
-const paragraphs = post.content.split('\n\n');
+
+const sorted = [...rehberData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const others = sorted.filter((item) => item.slug !== post.slug);
+
+// İçerik `rehber.json` içinde bloklar halinde tutulur; okuma süresi `readMinutes` ile elle verilebilir.
+type Block =
+  | { type: 'lead' | 'p' | 'heading' | 'note'; text: string }
+  | { type: 'quote'; text: string; author?: string }
+  | { type: 'steps'; items: { title?: string; text: string }[] };
+const blocks = post.blocks as Block[];
+
+const blockText = (block: Block) => (block.type === 'steps' ? block.items.map((i) => `${i.title ?? ''} ${i.text}`).join(' ') : block.text);
+const words = blocks.map(blockText).join(' ').split(/\s+/).filter(Boolean).length;
+const readMinutes = (post as { readMinutes?: number }).readMinutes ?? Math.max(1, Math.round(words / 200));
+
+const url = new URL(`/rehber/${post.slug}`, site.url).toString();
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(post.title);
+const shares = [
+  { name: 'LinkedIn', icon: 'linkedin', className: 'linkedin', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
+  { name: 'X', icon: 'x', className: 'x', href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}` },
+  { name: 'Facebook', icon: 'facebook', className: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+  { name: 'WhatsApp', icon: 'whatsapp', className: 'whatsapp', href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
+];
+
+const categoryTabs = [
+  { key: 'all', label: 'Tümü', count: sorted.length },
+  ...categories.map((c) => ({ ...c, count: sorted.filter((item) => item.category === c.key).length })),
+];
+
+const related = others.slice(0, 3);
 ---
 
-<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt}>
+<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image} hideCtaBanner>
   <article class="rehber-detail">
-    <div class="container">
-      <a class="rehber-detail__back" href="/rehber">← Tüm rehber yazıları</a>
-      <span class="rehber-detail__date">{formatter.format(new Date(post.date))}</span>
-      <h1>{post.title}</h1>
-      <img src={post.image} alt={post.title} />
-      <div class="rehber-detail__content">
-        {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <header class="rehber-hero">
+      <img src={post.image} alt="" fetchpriority="high" />
+      <div class="rehber-hero__overlay"></div>
+
+      <div class="container rehber-hero__inner">
+        <nav class="rehber-hero__breadcrumb" aria-label="Konum">
+          <a href="/">Anasayfa</a>
+          <span>/</span>
+          <a href="/rehber">Rehber</a>
+          <span>/</span>
+          <span aria-current="page">{post.title}</span>
+        </nav>
+
+        <div class="rehber-hero__eyebrow">
+          <span></span>
+          REHBER İÇERİĞİ
+        </div>
+        <h1>{post.title}</h1>
+        <p class="rehber-hero__lead">{post.excerpt}</p>
+
+        <ul class="rehber-hero__meta">
+          <li>
+            <Icon name="calendar" size={22} />
+            {formatter.format(new Date(post.date))}
+          </li>
+          <li>
+            <Icon name="clock" size={22} />
+            {readMinutes} dk okuma süresi
+          </li>
+          <li>
+            <Icon name="document" size={22} />
+            {categoryLabels[post.category]}
+          </li>
+        </ul>
       </div>
-    </div>
+    </header>
+
+    <section class="rehber-body">
+      <div class="container rehber-body__layout">
+        <div class="rehber-content">
+          {
+            blocks.map((block) => {
+              switch (block.type) {
+                case 'lead':
+                  return <p class="rehber-content__lead">{block.text}</p>;
+                case 'heading':
+                  return <h2 class="rehber-content__heading">{block.text}</h2>;
+                case 'quote':
+                  return (
+                    <blockquote class="rehber-quote">
+                      <span class="rehber-quote__mark" aria-hidden="true">“</span>
+                      <p>{block.text}</p>
+                      {block.author && <cite>— {block.author}</cite>}
+                    </blockquote>
+                  );
+                case 'note':
+                  return (
+                    <div class="rehber-note">
+                      <span class="rehber-note__icon" aria-hidden="true">i</span>
+                      <p>{block.text}</p>
+                    </div>
+                  );
+                case 'steps':
+                  return (
+                    <ol class="rehber-steps">
+                      {block.items.map((item, index) => (
+                        <li>
+                          <span class="rehber-steps__num">{index + 1}</span>
+                          <span>
+                            {item.title && <strong>{item.title}: </strong>}
+                            {item.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  );
+                default:
+                  return <p>{block.text}</p>;
+              }
+            })
+          }
+        </div>
+
+        <aside class="rehber-side">
+          <div class="rehber-side__card">
+            <h2>Bu Yazıyı Paylaş</h2>
+            <div class="rehber-share">
+              {
+                shares.map((share) => (
+                  <a
+                    class={`rehber-share__btn rehber-share__btn--${share.className}`}
+                    href={share.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${share.name} ile paylaş`}
+                  >
+                    <Icon name={share.icon} size={22} />
+                  </a>
+                ))
+              }
+              <button type="button" class="rehber-share__btn rehber-share__btn--copy" data-copy-link={url} aria-label="Bağlantıyı kopyala">
+                <Icon name="link" size={22} />
+              </button>
+            </div>
+            <p class="rehber-share__status" data-copy-status role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="rehber-side__card">
+            <h2>Rehber Kategorileri</h2>
+            <ul class="rehber-cats">
+              {
+                categoryTabs.map((tab) => (
+                  <li>
+                    <a
+                      href={tab.key === 'all' ? '/rehber' : `/rehber?kategori=${tab.key}`}
+                      class:list={{ 'is-active': tab.key === post.category }}
+                    >
+                      {tab.label}
+                      <span>{tab.count}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          {
+            related.length > 0 && (
+              <div class="rehber-side__card rehber-related">
+                <h2>İlgili Rehberler</h2>
+                <ul>
+                  {related.map((item) => (
+                    <li>
+                      <a href={`/rehber/${item.slug}`}>
+                        <img src={item.image} alt="" loading="lazy" />
+                        <span>
+                          <strong>{item.title}</strong>
+                          {formatter.format(new Date(item.date))}
+                        </span>
+                        <Icon name="arrow" size={16} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+
+          <div class="rehber-side__card rehber-help">
+            <span class="rehber-help__icon">
+              <Icon name="help" size={30} />
+            </span>
+            <h2>Sorularınız mı var?</h2>
+            <p>Uzman ekibimiz size yardımcı olmaktan memnuniyet duyar.</p>
+            <a href="/iletisim">
+              İletişim Sayfasına Git <Icon name="arrow" size={16} />
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="rehber-more">
+      <div class="container">
+        {
+          others.length > 0 && (
+            <>
+              <div class="rehber-more__head">
+                <h2>Diğer Rehberler</h2>
+                <a href="/rehber">
+                  Tüm Rehberleri Gör <Icon name="arrow" size={16} />
+                </a>
+              </div>
+
+              <div class="rehber-more__grid">
+                {others.slice(0, 3).map((item) => (
+                  <a class="rehber-more__card" href={`/rehber/${item.slug}`}>
+                    <img src={item.image} alt="" loading="lazy" />
+                    <span class="rehber-more__text">
+                      <small>{formatter.format(new Date(item.date))}</small>
+                      <strong>{item.title}</strong>
+                      <em>
+                        Devamını Oku <Icon name="arrow" size={13} />
+                      </em>
+                    </span>
+                    <span class="rehber-more__arrow" aria-hidden="true">
+                      <Icon name="arrow" size={16} />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </>
+          )
+        }
+
+        <NewsletterBand
+          eyebrow="Güncel rehberlerden haberdar olun"
+          title="E-posta bültenimize abone olun"
+          text="Yeni rehber içerikleri ve kentsel dönüşüm ile ilgili güncel gelişmeler doğrudan gelen kutunuza gelsin."
+          subject="Rehber bülteni aboneliği"
+          icon="mail"
+          note="E-posta adresinizin güvenliği bizim için önemlidir."
+        />
+      </div>
+    </section>
   </article>
 </Layout>
 
+<script>
+  function initCopyLink() {
+    const button = document.querySelector<HTMLButtonElement>('[data-copy-link]');
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    if (!button || !status) return;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyLink ?? location.href);
+        status.textContent = 'Bağlantı kopyalandı.';
+      } catch {
+        status.textContent = 'Bağlantı kopyalanamadı.';
+      }
+    });
+  }
+
+  initCopyLink();
+  document.addEventListener('astro:page-load', initCopyLink);
+</script>
+
 <style>
-  .rehber-detail {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: var(--space-xl);
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .rehber-detail .container {
-    max-width: 760px;
+  /* Hero */
+  .rehber-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 381px;
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
-  .rehber-detail__back {
-    display: inline-block;
-    margin-bottom: var(--space-m);
-    font-size: var(--fs-small);
+  .rehber-hero > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .rehber-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(19, 21, 74, 0.92) 0%, rgba(19, 21, 74, 0.6) 55%, rgba(19, 21, 74, 0.2) 100%);
+  }
+
+  .rehber-hero__inner {
+    position: relative;
+    padding-block: 36px 45px;
+  }
+
+  .rehber-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 40px;
+    font-size: 0.77rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .rehber-hero__breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .rehber-hero__breadcrumb span:not([aria-current]) {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .rehber-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .rehber-hero__eyebrow span {
+    width: 31px;
+    height: 2px;
+    background: #fff;
+  }
+
+  .rehber-hero h1 {
+    max-width: 20ch;
+    font-size: clamp(1.96rem, 3.808vw, 3.08rem);
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .rehber-hero__lead {
+    max-width: 62ch;
+    margin-top: 21px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .rehber-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px 0;
+    margin-top: 31px;
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+
+  .rehber-hero__meta li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 31px;
+  }
+
+  .rehber-hero__meta li + li {
+    padding-left: 31px;
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  /* Body */
+  .rehber-body {
+    padding-block: 40px 63px;
+    background: #fff;
+  }
+
+  .rehber-body__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 426px;
+    gap: 54px;
+    align-items: start;
+  }
+
+  .rehber-content {
+    min-width: 0;
+    max-width: 874px;
+  }
+
+  .rehber-content > p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-content > * + * {
+    margin-top: 22px;
+  }
+
+  .rehber-content > * + .rehber-content__heading {
+    margin-top: 43px;
+  }
+
+  .rehber-content > .rehber-content__heading + * {
+    margin-top: 16px;
+  }
+
+  .rehber-content > p.rehber-content__lead {
+    font-size: 1.19rem;
+    line-height: 1.75;
+    color: var(--color-text);
+  }
+
+  .rehber-content__heading {
+    padding-left: 16px;
+    border-left: 4px solid var(--color-navy);
+    font-family: var(--font-body);
+    font-size: 1.344rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-quote {
+    position: relative;
+    margin-inline: 0;
+    padding: 25px 29px 25px 75px;
+    border-radius: 4px;
+    background: #f1f3fb;
+  }
+
+  .rehber-quote__mark {
+    position: absolute;
+    top: 13px;
+    left: 28px;
+    font-family: Georgia, serif;
+    font-size: 4.032rem;
+    line-height: 1;
+    color: var(--color-navy);
+  }
+
+  .rehber-quote p {
+    font-size: 1.12rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-quote cite {
+    display: block;
+    margin-top: 13px;
+    font-size: 0.896rem;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 25px;
+    border-radius: 4px;
+    background: #eef1fb;
+  }
+
+  .rehber-note__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 27px;
+    height: 27px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: #d9def4;
+    font-family: Georgia, serif;
+    font-size: 0.896rem;
+    font-style: italic;
     font-weight: 700;
     color: var(--color-navy);
   }
 
-  .rehber-detail__date {
-    display: block;
-    font-size: var(--fs-small);
+  .rehber-note p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-steps {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .rehber-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-steps strong {
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-steps__num {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    margin-top: 2px;
+    border-radius: 50%;
+    background: #e3e6f3;
+    color: var(--color-navy-deep);
+    font-size: 0.77rem;
+    font-weight: 800;
+  }
+
+  /* Sidebar */
+  .rehber-side {
+    display: grid;
+    gap: 27px;
+    position: sticky;
+    top: calc(var(--header-h) + 18px);
+  }
+
+  .rehber-side__card {
+    padding: 25px 25px 27px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(43, 46, 131, 0.09);
+  }
+
+  .rehber-side__card h2 {
+    margin-bottom: 21px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-share {
+    display: flex;
+    gap: 13px;
+  }
+
+  .rehber-share__btn {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity var(--transition);
+  }
+
+  .rehber-share__btn:hover {
+    opacity: 0.85;
+  }
+
+  .rehber-share__btn--linkedin {
+    background: #0a66c2;
+  }
+
+  .rehber-share__btn--x {
+    border-color: var(--color-border);
+    background: #fff;
+    color: #111;
+  }
+
+  .rehber-share__btn--facebook {
+    background: #1877f2;
+  }
+
+  .rehber-share__btn--whatsapp {
+    background: #25d366;
+  }
+
+  .rehber-share__btn--copy {
+    border-color: var(--color-border);
+    background: #f4f6fb;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-share__status {
+    margin-top: 12px;
+    font-size: 0.77rem;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-share__status:empty {
+    display: none;
+  }
+
+  .rehber-cats {
+    display: grid;
+    gap: 9px;
+  }
+
+  .rehber-cats a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border-radius: 3px;
+    background: #f4f6fb;
+    font-size: 0.84rem;
+    color: var(--color-navy-deep);
+    transition: background var(--transition);
+  }
+
+  .rehber-cats a:hover {
+    background: #eceefa;
+  }
+
+  .rehber-cats a.is-active {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .rehber-cats span {
+    display: grid;
+    place-items: center;
+    min-width: 27px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 10px;
+    background: #e3e6f3;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .rehber-cats a.is-active span {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .rehber-related ul {
+    display: grid;
+  }
+
+  .rehber-related li + li {
+    border-top: 1px solid #eef0f6;
+  }
+
+  .rehber-related a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 0;
+  }
+
+  .rehber-related img {
+    flex: none;
+    width: 85px;
+    height: 70px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .rehber-related a > span {
+    display: grid;
+    flex: 1;
+    gap: 4px;
+    min-width: 0;
+    font-size: 0.7rem;
     color: var(--color-text-faint);
   }
 
-  .rehber-detail h1 {
-    margin-top: var(--space-xs);
-    font-size: var(--fs-h1);
+  .rehber-related strong {
+    font-size: 0.77rem;
+    line-height: 1.35;
+    color: var(--color-navy-deep);
   }
 
-  .rehber-detail img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: var(--radius);
-    margin-top: var(--space-l);
+  .rehber-related a > :global(svg) {
+    flex: none;
+    color: var(--color-navy);
   }
 
-  .rehber-detail__content {
-    margin-top: var(--space-l);
+  .rehber-help {
+    display: grid;
+    justify-items: start;
+    gap: 7px;
+  }
+
+  .rehber-help__icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 9px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .rehber-help h2 {
+    margin-bottom: 0;
+    font-size: 1.12rem;
+  }
+
+  .rehber-help p {
+    font-size: 0.84rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
-    max-width: 65ch;
   }
 
-  .rehber-detail__content p + p {
-    margin-top: 1.2em;
+  .rehber-help a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    align-self: stretch;
+    margin-top: 13px;
+    padding: 13px;
+    border: 1px solid var(--color-navy);
+    border-radius: 3px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .rehber-help a:hover {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  /* More */
+  .rehber-more {
+    padding-block: 45px 54px;
+    background: #f4f6fb;
+  }
+
+  .rehber-more__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    margin-bottom: 25px;
+  }
+
+  .rehber-more__head h2 {
+    padding-left: 16px;
+    border-left: 3px solid var(--color-navy);
+    font-family: var(--font-body);
+    font-size: 1.54rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-more__head a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-more__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 31px;
+  }
+
+  .rehber-more__card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 13px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
+    transition:
+      transform 200ms,
+      box-shadow 200ms;
+  }
+
+  .rehber-more__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(43, 46, 131, 0.12);
+  }
+
+  .rehber-more__card img {
+    flex: none;
+    width: 108px;
+    height: 108px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .rehber-more__text {
+    display: grid;
+    flex: 1;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .rehber-more__text small {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+  }
+
+  .rehber-more__text strong {
+    font-size: 0.91rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-more__text em {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.77rem;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .rehber-more__arrow {
+    display: grid;
+    place-items: center;
+    flex: none;
+    align-self: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1100px) {
+    .rehber-body__layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .rehber-side {
+      position: static;
+    }
+
+    .rehber-more__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .rehber-hero__meta li,
+    .rehber-hero__meta li + li {
+      padding-inline: 0 22px;
+      border-left: 0;
+    }
+
+    .rehber-more__head a {
+      display: none;
+    }
   }
 </style>

@@ -30,16 +30,16 @@ const { title, description, heading, lead } = Astro.props;
   }
 
   .placeholder .container {
-    max-width: 760px;
+    max-width: 851px;
   }
 
   .placeholder h1 {
-    font-size: var(--fs-h1);
+    font-size: calc(var(--fs-h1) * 1.12);
   }
 
   .placeholder__lead {
     margin-top: var(--space-m);
-    font-size: 1.125rem;
+    font-size: 1.26rem;
     color: var(--color-text-muted);
     max-width: 60ch;
   }
@@ -47,11 +47,11 @@ const { title, description, heading, lead } = Astro.props;
   .placeholder__note {
     margin-top: var(--space-l);
     display: inline-block;
-    padding: 8px 16px;
+    padding: 9px 18px;
     border-radius: var(--radius);
     background: var(--color-bg-light);
     color: var(--color-text-faint);
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
     font-weight: 600;
   }
 </style>

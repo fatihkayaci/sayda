@@ -7,6 +7,7 @@
   "phone": "+90 212 223 88 12",
   "phoneHref": "tel:+902122238812",
   "email": "info@sayda.com.tr",
+  "workingHours": ["Pzt – Cum 09:00 – 18:00", "Cts – Paz Kapalı"],
   "address": {
     "street": "Şalcıkır Cad. Kaydırak Sok. No: 3/1",
     "postalCode": "34457",
@@ -14,6 +15,13 @@
     "city": "İstanbul",
     "neighborhood": "Tarabya"
   },
+  "offices": [
+    {
+      "name": "İstanbul (Merkez)",
+      "street": "Şalcıkır Cad. Kaydırak Sok. No: 3/1",
+      "area": "Tarabya / Sarıyer, İstanbul 34457"
+    }
+  ],
   "social": {
     "instagram": "https://www.instagram.com/saydainsaat",
     "linkedin": "https://www.linkedin.com/in/sayda-inşaat-75a716198"

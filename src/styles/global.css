@@ -9,6 +9,9 @@
 /* Archivo Black (headings) */
 @import '@fontsource/archivo-black/400.css';
 
+/* Caveat (handwritten quote accents) */
+@import '@fontsource/caveat/400.css';
+
 /* Syne (SAYDA logotype only) */
 @import '@fontsource/syne/700.css';
 @import '@fontsource/syne/800.css';

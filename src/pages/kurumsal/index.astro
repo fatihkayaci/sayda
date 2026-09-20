@@ -34,7 +34,7 @@ const kurumsal = [
         {
           kurumsal.map((item) => (
             <a class="kurumsal-hub__card" href={item.href}>
-              <Icon name={item.icon} size={28} />
+              <Icon name={item.icon} size={31} />
               <h2>{item.title}</h2>
               <p>{item.description}</p>
             </a>
@@ -52,12 +52,12 @@ const kurumsal = [
   }
 
   .kurumsal-hub h1 {
-    font-size: var(--fs-h1);
+    font-size: calc(var(--fs-h1) * 1.12);
   }
 
   .kurumsal-hub__lead {
     margin-top: var(--space-m);
-    font-size: 1.125rem;
+    font-size: 1.26rem;
     color: var(--color-text-muted);
     max-width: 60ch;
   }
@@ -89,13 +89,13 @@ const kurumsal = [
     margin-top: var(--space-s);
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: 1.125rem;
+    font-size: 1.26rem;
     color: var(--color-text);
   }
 
   .kurumsal-hub__card p {
     margin-top: var(--space-xs);
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
     color: var(--color-text-muted);
   }
 

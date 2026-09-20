@@ -8,6 +8,9 @@ interface Props {
     employer: string;
     location: string;
     district?: string;
+    type?: string;
+    services?: string[];
+    status: string;
     area: string;
     startDate: string;
     endDate: string;
@@ -15,6 +18,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const ongoing = project.status === 'devam-eden';
 
 const rows = [
   { label: 'Proje', value: project.name },
@@ -23,7 +27,10 @@ const rows = [
   { label: 'İlçe', value: project.district },
   { label: 'Alan', value: project.area, emphasis: true },
   { label: 'Başlangıç', value: project.startDate },
-  { label: 'Bitiş', value: project.endDate || 'Devam Ediyor' },
+  { label: 'Bitiş', value: project.endDate || (ongoing ? 'Devam Ediyor' : '') },
+  { label: 'Durum', value: ongoing ? 'Devam Ediyor' : 'Tamamlandı', status: true },
+  { label: 'Proje Türü', value: project.type },
+  { label: 'Hizmetlerimiz', value: project.services?.join(', ') },
 ].filter((row) => row.value);
 ---
 
@@ -35,7 +42,10 @@ const rows = [
         rows.map((row) => (
           <div class="project-sidebar__row">
             <span class="project-sidebar__label">{row.label}</span>
-            <span class:list={['project-sidebar__value', { 'project-sidebar__value--emphasis': row.emphasis }]}>{row.value}</span>
+            <span class:list={['project-sidebar__value', { 'project-sidebar__value--emphasis': row.emphasis }]}>
+              {row.status && <span class:list={['project-sidebar__dot', { 'project-sidebar__dot--ongoing': ongoing }]} />}
+              {row.value}
+            </span>
           </div>
         ))
       }
@@ -45,14 +55,16 @@ const rows = [
   <div class="project-sidebar__cta reveal">
     <h3>Benzer Proje için Teklif Alın</h3>
     <p>Uzman ekibimiz projenizi değerlendirsin.</p>
-    <a class="project-sidebar__cta-btn" href="/iletisim#quote-form">Teklif Al →</a>
+    <a class="project-sidebar__cta-btn" href="/iletisim#quote-form">
+      Teklif Al <Icon name="arrow" size={18} />
+    </a>
     <div class="project-sidebar__contact">
       <a href={site.phoneHref}>
-        <Icon name="phone" size={16} />
+        <Icon name="phone" size={21} />
         {site.phone}
       </a>
       <a href={`mailto:${site.email}`}>
-        <Icon name="mail" size={16} />
+        <Icon name="mail" size={21} />
         {site.email}
       </a>
     </div>
@@ -62,34 +74,34 @@ const rows = [
 <style>
   .project-sidebar {
     display: grid;
-    gap: 20px;
+    gap: 18px;
     position: sticky;
-    top: 96px;
+    top: calc(var(--header-h) + 18px);
   }
 
   .project-sidebar__card {
     background: var(--color-bg);
-    border-radius: 6px;
-    padding: 32px;
-    box-shadow: 0 2px 12px rgba(43, 46, 131, 0.06);
+    border-radius: 4px;
+    padding: 27px 31px 13px;
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.06);
   }
 
   .project-sidebar__card h2 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 18px;
-    color: var(--color-text);
-    margin-bottom: var(--space-m);
-    padding-bottom: var(--space-s);
-    border-bottom: 2px solid var(--color-bg-light);
+    margin-bottom: 9px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.26rem;
+    color: var(--color-navy-deep);
   }
 
   .project-sidebar__row {
     display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 12px;
+    grid-template-columns: 124px 1fr;
+    gap: 13px;
     padding: 14px 0;
-    border-bottom: 1px solid var(--color-bg-light);
+    border-bottom: 1px solid #eef0f6;
   }
 
   .project-sidebar__row:last-child {
@@ -97,19 +109,22 @@ const rows = [
   }
 
   .project-sidebar__label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: var(--color-text-faint);
-    text-transform: uppercase;
     align-self: start;
     padding-top: 2px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-text-faint);
+    text-transform: uppercase;
   }
 
   .project-sidebar__value {
-    font-size: 14px;
-    color: var(--color-text-muted);
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    font-size: 0.84rem;
     line-height: 1.5;
+    color: var(--color-text-muted);
   }
 
   .project-sidebar__value--emphasis {
@@ -117,37 +132,50 @@ const rows = [
     color: var(--color-navy);
   }
 
+  .project-sidebar__dot {
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22a45d;
+  }
+
+  .project-sidebar__dot--ongoing {
+    background: #e0a020;
+  }
+
   .project-sidebar__cta {
+    padding: 30px 31px 31px;
+    border-radius: 4px;
     background: var(--color-navy);
-    border-radius: 6px;
-    padding: 28px 28px 32px;
   }
 
   .project-sidebar__cta h3 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 18px;
+    margin-bottom: 9px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.26rem;
     color: #fff;
-    margin-bottom: 10px;
   }
 
   .project-sidebar__cta p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 22px;
+    font-size: 0.91rem;
     line-height: 1.6;
-    margin-bottom: var(--space-m);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .project-sidebar__cta-btn {
-    display: block;
-    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 3px;
     background: #fff;
     color: var(--color-navy);
-    font-size: 14px;
+    font-size: 0.91rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    border-radius: var(--radius);
-    text-align: center;
     transition: background var(--transition);
   }
 
@@ -156,19 +184,17 @@ const rows = [
   }
 
   .project-sidebar__contact {
-    margin-top: var(--space-m);
-    padding-top: var(--space-m);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
     display: grid;
-    gap: 12px;
+    gap: 16px;
+    margin-top: 25px;
   }
 
   .project-sidebar__contact a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 14px;
+    gap: 16px;
+    font-size: 0.91rem;
+    color: rgba(255, 255, 255, 0.9);
     transition: color var(--transition);
   }
 

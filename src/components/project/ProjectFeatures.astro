@@ -1,0 +1,96 @@
+---
+import Icon from '../Icon.astro';
+
+interface Feature {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  features?: Feature[];
+}
+
+const { features = [] } = Astro.props;
+---
+
+{
+  features.length > 0 && (
+    <section class="project-features reveal">
+      <h2>Proje Özellikleri</h2>
+      <ul>
+        {features.map((feature) => (
+          <li>
+            <Icon name={feature.icon} size={43} />
+            <span>
+              <strong>{feature.title}</strong>
+              {feature.text}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .project-features {
+    margin-top: 63px;
+  }
+
+  .project-features h2 {
+    margin-bottom: 22px;
+    padding-left: 16px;
+    border-left: 3px solid var(--color-navy);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.54rem;
+    line-height: 1.2;
+    color: var(--color-navy-deep);
+  }
+
+  .project-features ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px 18px;
+  }
+
+  .project-features li {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    padding: 21px 25px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(43, 46, 131, 0.05);
+    color: var(--color-navy);
+  }
+
+  .project-features li :global(svg) {
+    flex: none;
+  }
+
+  .project-features li span {
+    display: grid;
+    gap: 4px;
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+  }
+
+  .project-features li strong {
+    font-size: 0.91rem;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 1024px) {
+    .project-features ul {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-features ul {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

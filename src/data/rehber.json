@@ -5,8 +5,46 @@
     "date": "2025-01-10",
     "image": "/img/sayda-insaat-hero01.webp",
     "excerpt": "Deprem riski taşıyan yapıların yenilenmesini düzenleyen 6306 sayılı kanunun kapsamı, hak sahiplerine sağladığı destekler ve süreç nasıl başlar.",
-    "content": "6306 sayılı \"Afet Riski Altındaki Alanların Dönüştürülmesi Hakkında Kanun\", 2012 yılında yürürlüğe girmiş ve riskli yapıların tespit edilip güvenli, sağlam yapılarla değiştirilmesini amaçlayan temel yasal çerçevedir.\n\nKanun kapsamına, zemin etüdü veya yapı analizi sonucunda \"riskli yapı\" olarak tespit edilen binalar girer. Bu tespit, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'nca lisanslandırılmış kurumlarca yapılır ve sonucu resmi bir \"Risk Raporu\" ile belgelenir.\n\nRisk raporu alan hak sahipleri; kira yardımı, kredi desteği ve belirli vergi/harç muafiyetlerinden yararlanabilir. Süreç, bina yıkımı ve yeni yapının inşası ile devam eder; kat karşılığı anlaşma bu noktada devreye girer.\n\nSayda İnşaat olarak bu süreçte teknik değerlendirme, projelendirme ve inşaat aşamalarında hak sahiplerinin yanında yer alıyoruz.",
-    "category": "kentsel-donusum"
+    "category": "kentsel-donusum",
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "6306 sayılı \"Afet Riski Altındaki Alanların Dönüştürülmesi Hakkında Kanun\", 2012 yılında yürürlüğe girmiş ve riskli yapıların tespit edilip güvenli, sağlam yapılarla değiştirilmesini amaçlayan temel yasal çerçevedir."
+      },
+      {
+        "type": "quote",
+        "text": "Bu süreçte teknik değerlendirme, projelendirme ve inşaat aşamalarında hak sahiplerinin yanında yer alıyoruz.",
+        "author": "Sayda İnşaat"
+      },
+      {
+        "type": "heading",
+        "text": "Kimleri Kapsar?"
+      },
+      {
+        "type": "p",
+        "text": "Kanun kapsamına, zemin etüdü veya yapı analizi sonucunda \"riskli yapı\" olarak tespit edilen binalar girer."
+      },
+      {
+        "type": "note",
+        "text": "Bu tespit, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı'nca lisanslandırılmış kurumlarca yapılır ve sonucu resmi bir \"Risk Raporu\" ile belgelenir."
+      },
+      {
+        "type": "heading",
+        "text": "Hak Sahiplerine Sağlanan Destekler"
+      },
+      {
+        "type": "p",
+        "text": "Risk raporu alan hak sahipleri; kira yardımı, kredi desteği ve belirli vergi/harç muafiyetlerinden yararlanabilir."
+      },
+      {
+        "type": "heading",
+        "text": "Süreç Nasıl İlerler?"
+      },
+      {
+        "type": "p",
+        "text": "Süreç, bina yıkımı ve yeni yapının inşası ile devam eder; kat karşılığı anlaşma bu noktada devreye girer."
+      }
+    ]
   },
   {
     "slug": "riskli-yapi-tespiti-nasil-yapilir",
@@ -14,8 +52,43 @@
     "date": "2025-02-14",
     "image": "/img/sayda-insaat-hero02.webp",
     "excerpt": "Riskli yapı tespiti sürecinin adımları, gerekli evraklar ve ortalama süre.",
-    "content": "Riskli yapı tespiti, bir binanın deprem güvenliği açısından incelenmesi ve resmi olarak raporlanması sürecidir. Süreç şu adımlarla ilerler:\n\n1. Başvuru: Bina maliki, lisanslı bir kuruluşa veya bakanlığa başvurur.\n2. Zemin ve yapı incelemesi: Karot numunesi alımı, donatı taraması ve statik hesaplamalar yapılır.\n3. Rapor hazırlığı: İnceleme sonuçları teknik bir rapor haline getirilir.\n4. Bakanlık onayı: Rapor, ilgili bakanlığa sunulur ve onaylanması halinde bina resmi olarak \"riskli yapı\" ilan edilir.\n5. Tebligat: Karar, tapu kaydına işlenir ve hak sahiplerine tebliğ edilir.\n\nSürecin tamamı, binanın büyüklüğüne ve incelemeyi yapan kuruma göre değişmekle birlikte genellikle birkaç hafta ile bir-iki ay arasında tamamlanır.\n\nRisk raporu çıktıktan sonraki adım, kat maliklerinin bir araya gelerek süreç hakkında karar almasıdır — kat karşılığı inşaat veya diğer dönüşüm seçenekleri bu aşamada değerlendirilir.",
-    "category": "kentsel-donusum"
+    "category": "kentsel-donusum",
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Riskli yapı tespiti, bir binanın deprem güvenliği açısından incelenmesi ve resmi olarak raporlanması sürecidir."
+      },
+      {
+        "type": "heading",
+        "text": "Süreç Nasıl İşler?"
+      },
+      {
+        "type": "steps",
+        "items": [
+          { "title": "Başvuru", "text": "Bina maliki, lisanslı bir kuruluşa veya bakanlığa başvurur." },
+          { "title": "Zemin ve yapı incelemesi", "text": "Karot numunesi alımı, donatı taraması ve statik hesaplamalar yapılır." },
+          { "title": "Rapor hazırlığı", "text": "İnceleme sonuçları teknik bir rapor haline getirilir." },
+          { "title": "Bakanlık onayı", "text": "Rapor, ilgili bakanlığa sunulur ve onaylanması halinde bina resmi olarak \"riskli yapı\" ilan edilir." },
+          { "title": "Tebligat", "text": "Karar, tapu kaydına işlenir ve hak sahiplerine tebliğ edilir." }
+        ]
+      },
+      {
+        "type": "heading",
+        "text": "Ne Kadar Sürer?"
+      },
+      {
+        "type": "note",
+        "text": "Sürecin tamamı, binanın büyüklüğüne ve incelemeyi yapan kuruma göre değişmekle birlikte genellikle birkaç hafta ile bir-iki ay arasında tamamlanır."
+      },
+      {
+        "type": "heading",
+        "text": "Risk Raporundan Sonraki Adım"
+      },
+      {
+        "type": "p",
+        "text": "Risk raporu çıktıktan sonraki adım, kat maliklerinin bir araya gelerek süreç hakkında karar almasıdır — kat karşılığı inşaat veya diğer dönüşüm seçenekleri bu aşamada değerlendirilir."
+      }
+    ]
   },
   {
     "slug": "kat-karsiligi-insaat-sozlesmesinde-dikkat-edilmesi-gerekenler",
@@ -23,7 +96,35 @@
     "date": "2025-03-21",
     "image": "/img/proje-1.jpg",
     "excerpt": "Kat karşılığı inşaat sözleşmesi imzalamadan önce hak sahiplerinin mutlaka kontrol etmesi gereken maddeler.",
-    "content": "Kat karşılığı inşaat, arsa veya bina sahiplerinin mülklerini müteahhide devrederek karşılığında yeni yapıdan pay almasıdır. Sözleşme, sürecin en kritik belgesidir. Dikkat edilmesi gereken başlıca maddeler:\n\n1. Kat karşılığı oranı ve dağılım planı: Hangi bağımsız bölümün kime ait olacağı, kura veya anlaşma yoluyla nasıl belirleneceği net yazılmalı.\n\n2. Teslim tarihi ve gecikme cezası: Projenin bitiş tarihi ve müteahhidin gecikmesi halinde uygulanacak ceza şartı sözleşmede yer almalı.\n\n3. Malzeme ve kalite standardı: Kullanılacak malzemelerin (seramik, mutfak-banyo donanımı, ısı yalıtımı vb.) marka veya kalite sınıfı belirtilmeli; belirsizlik ileride anlaşmazlık yaratır.\n\n4. Teminat mektubu: Müteahhidin projeyi tamamlayamaması ihtimaline karşı banka teminat mektubu talep edilmesi hak sahiplerini korur.\n\n5. Kira yardımı ve geçici konaklama: İnşaat süresince hak sahiplerinin nerede kalacağı, kira yardımının kimin tarafından karşılanacağı açıkça belirtilmeli.\n\nSözleşme imzalamadan önce bir avukat veya teknik danışmandan destek alınması, ileride yaşanabilecek anlaşmazlıkların önüne geçer.",
-    "category": "kat-karsiligi"
+    "category": "kat-karsiligi",
+    "blocks": [
+      {
+        "type": "lead",
+        "text": "Kat karşılığı inşaat, arsa veya bina sahiplerinin mülklerini müteahhide devrederek karşılığında yeni yapıdan pay almasıdır."
+      },
+      {
+        "type": "quote",
+        "text": "Sözleşme, sürecin en kritik belgesidir.",
+        "author": "Sayda İnşaat"
+      },
+      {
+        "type": "heading",
+        "text": "Dikkat Edilmesi Gereken Başlıca Maddeler"
+      },
+      {
+        "type": "steps",
+        "items": [
+          { "title": "Kat karşılığı oranı ve dağılım planı", "text": "Hangi bağımsız bölümün kime ait olacağı, kura veya anlaşma yoluyla nasıl belirleneceği net yazılmalı." },
+          { "title": "Teslim tarihi ve gecikme cezası", "text": "Projenin bitiş tarihi ve müteahhidin gecikmesi halinde uygulanacak ceza şartı sözleşmede yer almalı." },
+          { "title": "Malzeme ve kalite standardı", "text": "Kullanılacak malzemelerin (seramik, mutfak-banyo donanımı, ısı yalıtımı vb.) marka veya kalite sınıfı belirtilmeli; belirsizlik ileride anlaşmazlık yaratır." },
+          { "title": "Teminat mektubu", "text": "Müteahhidin projeyi tamamlayamaması ihtimaline karşı banka teminat mektubu talep edilmesi hak sahiplerini korur." },
+          { "title": "Kira yardımı ve geçici konaklama", "text": "İnşaat süresince hak sahiplerinin nerede kalacağı, kira yardımının kimin tarafından karşılanacağı açıkça belirtilmeli." }
+        ]
+      },
+      {
+        "type": "note",
+        "text": "Sözleşme imzalamadan önce bir avukat veya teknik danışmandan destek alınması, ileride yaşanabilecek anlaşmazlıkların önüne geçer."
+      }
+    ]
   }
 ]

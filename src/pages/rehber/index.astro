@@ -1,33 +1,35 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 import rehberData from '../../data/rehber.json';
+import site from '../../data/site.json';
 
-const categoryLabels: Record<string, string> = {
-  'kentsel-donusum': 'Kentsel Dönüşüm',
-  'kat-karsiligi': 'Kat Karşılığı',
-};
+const categories: { key: string; label: string; icon: string }[] = [
+  { key: 'kentsel-donusum', label: 'Kentsel Dönüşüm', icon: 'building' },
+  { key: 'kat-karsiligi', label: 'Kat Karşılığı', icon: 'document' },
+];
+const categoryLabels = Object.fromEntries(categories.map((c) => [c.key, c.label]));
 
 const sorted = [...rehberData].sort((a, b) => (a.date < b.date ? 1 : -1));
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
 
-const [featured, ...rest] = sorted;
-
 const tabs = [
-  { key: 'all', label: 'Tümü', count: sorted.length },
-  ...Object.entries(categoryLabels).map(([key, label]) => ({
-    key,
-    label,
-    count: sorted.filter((r) => r.category === key).length,
-  })),
+  { key: 'all', label: 'Tümü', icon: 'grid', count: sorted.length },
+  ...categories.map((c) => ({ ...c, count: sorted.filter((r) => r.category === c.key).length })),
 ];
+
+const popular = sorted.slice(0, 5);
 ---
 
 <Layout
   title="Rehber | Sayda İnşaat"
   description="Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri."
+  hideCtaBanner
 >
   <section class="rehber-hero">
-    <div class="rehber-hero__grid"></div>
+    <div class="rehber-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
     <div class="container rehber-hero__inner reveal">
       <nav class="rehber-hero__breadcrumb" aria-label="Konum">
         <a href="/">Anasayfa</a>
@@ -37,313 +39,621 @@ const tabs = [
 
       <div class="rehber-hero__eyebrow">
         <span class="rehber-hero__eyebrow-bar"></span>
-        <span>REHBER</span>
+        <span>BİLGİ MERKEZİ</span>
       </div>
 
       <h1>Rehber <span class="rehber-hero__count">{sorted.length}</span></h1>
-      <p class="rehber-hero__lead">Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri.</p>
+      <p class="rehber-hero__lead">
+        Kentsel dönüşüm ve inşaat süreçleri hakkında uzman içerikleri, rehber niteliğindeki yazılarla keşfedin.
+      </p>
+
+      <p class="rehber-hero__quote" aria-hidden="true">
+        Doğru bilgi,<br />daha güvenli<br /><strong>yarınlar</strong> inşa eder.
+      </p>
     </div>
   </section>
 
   <section class="rehber-page">
-    <div class="container">
-      <a href={`/rehber/${featured.slug}`} class="rehber-featured reveal" data-category={featured.category}>
-        <div class="rehber-featured__image">
-          <img src={featured.image} alt={featured.title} loading="lazy" />
+    <div class="container rehber-page__layout">
+      <aside class="rehber-side">
+        <div class="rehber-side__card">
+          <h2>Kategoriler</h2>
+          <nav aria-label="Rehber kategorisi">
+            {
+              tabs.map((tab) => (
+                <button type="button" class="rehber-side__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'true' : undefined}>
+                  <Icon name={tab.icon} size={22} />
+                  {tab.label} ({tab.count})
+                </button>
+              ))
+            }
+          </nav>
         </div>
-        <div class="rehber-featured__body">
-          <span class="rehber-featured__badge">Öne Çıkan</span>
-          <span class="rehber-card__date">
-            {categoryLabels[featured.category]} · {formatter.format(new Date(featured.date))}
-          </span>
-          <h2>{featured.title}</h2>
-          <p>{featured.excerpt}</p>
-          <span class="rehber-card__more">Devamını Oku →</span>
+
+        <div class="rehber-side__card rehber-popular">
+          <h2>Popüler Başlıklar</h2>
+          <ul>
+            {
+              popular.map((post) => (
+                <li>
+                  <a href={`/rehber/${post.slug}`}>
+                    <img src={post.image} alt="" loading="lazy" />
+                    <span>{post.title}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
-      </a>
+      </aside>
 
-      <nav class="rehber-filters" aria-label="Rehber kategorisi">
-        {
-          tabs.map((tab) => (
-            <button type="button" class="rehber-filters__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'page' : undefined}>
-              {tab.label} ({tab.count})
-            </button>
-          ))
-        }
-      </nav>
+      <div class="rehber-main">
+        <div class="rehber-toolbar">
+          <label class="rehber-toolbar__search">
+            <span class="sr-only">Rehber içeriklerinde ara</span>
+            <Icon name="search" size={21} />
+            <input type="search" placeholder="Rehber içeriklerinde ara..." data-guide-search autocomplete="off" />
+          </label>
+          <label class="rehber-toolbar__sort">
+            <span class="sr-only">Sırala</span>
+            <select data-guide-sort>
+              <option value="newest">En Yeni</option>
+              <option value="oldest">En Eski</option>
+            </select>
+          </label>
+        </div>
 
-      <div class="rehber-page__grid">
-        {
-          rest.map((post, i) => (
-            <a
-              class={`rehber-card reveal reveal-d${(i % 3) + 1}`}
-              href={`/rehber/${post.slug}`}
-              data-category={post.category}
-            >
-              <div class="rehber-card__image">
-                <img src={post.image} alt={post.title} loading="lazy" />
-              </div>
-              <div class="rehber-card__body">
-                <span class="rehber-card__date">{formatter.format(new Date(post.date))}</span>
-                <h2>{post.title}</h2>
-                <p>{post.excerpt}</p>
-                <span class="rehber-card__more">Devamını Oku →</span>
-              </div>
-            </a>
-          ))
-        }
+        <div class="rehber-page__grid" data-guide-grid>
+          {
+            sorted.map((post) => (
+              <a
+                class="rehber-card"
+                href={`/rehber/${post.slug}`}
+                data-category={post.category}
+                data-date={post.date}
+                data-search={`${post.title} ${post.excerpt}`}
+              >
+                <div class="rehber-card__image">
+                  <img src={post.image} alt={post.title} loading="lazy" />
+                </div>
+                <div class="rehber-card__body">
+                  <div class="rehber-card__top">
+                    <span class="rehber-card__date">{formatter.format(new Date(post.date))}</span>
+                    <span class="rehber-card__tag">{categoryLabels[post.category]}</span>
+                  </div>
+                  <h2>{post.title}</h2>
+                  <p>{post.excerpt}</p>
+                  <span class="rehber-card__more">Devamını Oku →</span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+
+        <p class="rehber-empty" data-guide-empty hidden>Aramanıza uygun içerik bulunamadı.</p>
+
+        <nav class="rehber-pager" aria-label="Sayfalar" data-guide-pager hidden></nav>
       </div>
+    </div>
+
+    <div class="container">
+      <form class="rehber-news" id="rehberNewsForm">
+        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="subject" value="Rehber bülteni aboneliği" />
+        <input type="checkbox" name="botcheck" class="rehber-news__honeypot" tabindex="-1" autocomplete="off" />
+
+        <div class="rehber-news__intro">
+          <div class="rehber-news__eyebrow">
+            <span></span>
+            BİLGİDEN HABERDAR OLUN
+          </div>
+          <h2>Yeni rehber içeriklerini kaçırmayın</h2>
+          <p>
+            Kentsel dönüşüm, inşaat süreçleri ve güncel düzenlemeler hakkında rehber içeriklerimizi e-posta
+            bültenimizle takip edin.
+          </p>
+        </div>
+
+        <div class="rehber-news__form">
+          <span class="rehber-news__icon">
+            <Icon name="mail" size={27} />
+          </span>
+          <h3>E-posta bültenimize abone olun</h3>
+          <p>Yeni rehber içerikleri ve güncel bilgilendirmeler doğrudan gelen kutunuza gelsin.</p>
+          <div class="rehber-news__row">
+            <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
+            <button type="submit">
+              Abone Ol <Icon name="arrow" size={16} />
+            </button>
+          </div>
+          <p class="rehber-news__secure">
+            <Icon name="lock" size={16} />
+            E-posta adresiniz güvende, üçüncü taraflarla paylaşılmaz.
+          </p>
+          <p class="rehber-news__status" id="rehberNewsStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </div>
   </section>
 </Layout>
 
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.rehber-filters__btn');
-  const cards = document.querySelectorAll<HTMLElement>('.rehber-featured, .rehber-page__grid .rehber-card');
+  const PAGE_SIZE = 9;
 
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter;
+  function initGuides() {
+    const grid = document.querySelector<HTMLElement>('[data-guide-grid]');
+    if (!grid) return;
 
-      buttons.forEach((b) => b.removeAttribute('aria-current'));
-      btn.setAttribute('aria-current', 'page');
+    const cards = [...grid.querySelectorAll<HTMLElement>('.rehber-card')];
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.rehber-side__btn');
+    const search = document.querySelector<HTMLInputElement>('[data-guide-search]');
+    const sort = document.querySelector<HTMLSelectElement>('[data-guide-sort]');
+    const pager = document.querySelector<HTMLElement>('[data-guide-pager]');
+    const empty = document.querySelector<HTMLElement>('[data-guide-empty]');
+    if (!search || !sort || !pager) return;
 
-      cards.forEach((card) => {
-        const show = filter === 'all' || card.dataset.category === filter;
-        card.style.display = show ? '' : 'none';
+    const normalize = (value: string) => value.toLocaleLowerCase('tr').trim();
+    let category = 'all';
+    let page = 1;
+
+    const render = () => {
+      const query = normalize(search.value);
+      const ordered = [...cards].sort((a, b) => {
+        const diff = (a.dataset.date ?? '').localeCompare(b.dataset.date ?? '');
+        return sort.value === 'oldest' ? diff : -diff;
       });
+      ordered.forEach((card) => grid.appendChild(card));
+
+      const matches = ordered.filter(
+        (card) =>
+          (category === 'all' || card.dataset.category === category) &&
+          (!query || normalize(card.dataset.search ?? '').includes(query)),
+      );
+
+      const pageCount = Math.max(1, Math.ceil(matches.length / PAGE_SIZE));
+      page = Math.min(page, pageCount);
+      const start = (page - 1) * PAGE_SIZE;
+      const visible = new Set(matches.slice(start, start + PAGE_SIZE));
+      cards.forEach((card) => (card.hidden = !visible.has(card)));
+      if (empty) empty.hidden = matches.length > 0;
+
+      pager.replaceChildren();
+      pager.hidden = pageCount <= 1;
+      if (pageCount <= 1) return;
+
+      const add = (label: string, target: number | null, opts: { active?: boolean; aria?: string } = {}) => {
+        const el = document.createElement(target === null ? 'span' : 'button');
+        el.textContent = label;
+        el.className = 'rehber-pager__btn';
+        if (opts.aria) el.setAttribute('aria-label', opts.aria);
+        if (opts.active) el.classList.add('is-active');
+        if (target === null) {
+          el.classList.add('is-gap');
+        } else {
+          (el as HTMLButtonElement).type = 'button';
+          el.addEventListener('click', () => {
+            page = target;
+            render();
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        }
+        pager.appendChild(el);
+      };
+
+      if (page > 1) add('‹', page - 1, { aria: 'Önceki sayfa' });
+      for (let i = 1; i <= pageCount; i++) {
+        const near = i === 1 || i === pageCount || Math.abs(i - page) <= 1;
+        if (near) add(String(i), i, { active: i === page });
+        else if (i === 2 || i === pageCount - 1) add('…', null);
+      }
+      if (page < pageCount) add('›', page + 1, { aria: 'Sonraki sayfa' });
+    };
+
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        category = btn.dataset.filter ?? 'all';
+        page = 1;
+        buttons.forEach((b) => b.removeAttribute('aria-current'));
+        btn.setAttribute('aria-current', 'true');
+        render();
+      }),
+    );
+    search.addEventListener('input', () => {
+      page = 1;
+      render();
     });
-  });
+    sort.addEventListener('change', () => {
+      page = 1;
+      render();
+    });
+
+    search.value = '';
+    sort.value = 'newest';
+
+    const requested = new URLSearchParams(location.search).get('kategori');
+    const requestedButton = requested ? [...buttons].find((btn) => btn.dataset.filter === requested) : undefined;
+    if (requestedButton) requestedButton.click();
+    else render();
+  }
+
+  function initNewsletter() {
+    const form = document.getElementById('rehberNewsForm') as HTMLFormElement | null;
+    const status = document.getElementById('rehberNewsStatus');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
+      if (!accessKey) {
+        status.textContent = 'Abonelik şu an kapalı, lütfen daha sonra tekrar deneyin.';
+        status.setAttribute('data-state', 'error');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitButton.disabled = true;
+      status.textContent = 'Gönderiliyor...';
+      status.removeAttribute('data-state');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message ?? 'Unknown error');
+        status.textContent = 'Teşekkürler, aboneliğiniz alındı.';
+        status.setAttribute('data-state', 'success');
+        form.reset();
+      } catch {
+        status.textContent = 'Gönderilemedi, lütfen daha sonra tekrar deneyin.';
+        status.setAttribute('data-state', 'error');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+
+  function init() {
+    initGuides();
+    initNewsletter();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
 </script>
 
 <style>
-  .rehber-hero {
-    position: relative;
-    padding: 140px 0 64px;
-    background: var(--color-navy-deep);
-    color: #fff;
-    overflow: hidden;
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .rehber-hero__grid {
+  /* Hero */
+  .rehber-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .rehber-hero__media {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 72px 72px;
-    pointer-events: none;
+  }
+
+  .rehber-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    opacity: 0.35;
+    mix-blend-mode: luminosity;
+  }
+
+  .rehber-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(25, 27, 74, 0.92) 0%, rgba(25, 27, 74, 0.7) 60%, rgba(25, 27, 74, 0.85) 100%);
   }
 
   .rehber-hero__inner {
     position: relative;
+    padding-block: 58px 63px;
   }
 
   .rehber-hero__breadcrumb {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: var(--space-m);
-    font-size: var(--fs-small);
+    gap: 12px;
+    margin-bottom: 30px;
+    font-size: 0.84rem;
   }
 
   .rehber-hero__breadcrumb a {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.75);
     transition: color var(--transition);
   }
 
   .rehber-hero__breadcrumb a:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
   }
 
   .rehber-hero__breadcrumb span:first-of-type {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.4);
   }
 
   .rehber-hero__breadcrumb span[aria-current] {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .rehber-hero__eyebrow {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: var(--space-m);
+    gap: 16px;
+    margin-bottom: 16px;
   }
 
   .rehber-hero__eyebrow-bar {
     display: block;
-    width: 44px;
-    height: 3px;
+    width: 31px;
+    height: 2px;
     background: #fff;
   }
 
   .rehber-hero__eyebrow span:last-child {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .rehber-hero h1 {
     display: flex;
     align-items: center;
-    gap: 16px;
-    font-size: clamp(2.25rem, 5vw, 4rem);
+    gap: 18px;
+    margin-bottom: 22px;
+    font-size: clamp(2.52rem, 5.152vw, 3.92rem);
     line-height: 1.05;
     color: #fff;
-    margin-bottom: var(--space-m);
   }
 
   .rehber-hero__count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 1.4em;
-    padding: 0.15em 0.35em;
+    padding: 4px 13px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 0.4em;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-family: var(--font-body);
+    font-size: 0.98rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.85);
+    color: #fff;
   }
 
   .rehber-hero__lead {
-    max-width: 580px;
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.7);
+    max-width: 44ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.9);
   }
 
+  .rehber-hero__quote {
+    position: absolute;
+    top: 50%;
+    right: clamp(20px, 4vw, 72px);
+    padding-left: 21px;
+    border-left: 2px solid rgba(255, 255, 255, 0.85);
+    font-size: 1.26rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-50%);
+  }
+
+  .rehber-hero__quote strong {
+    color: #fff;
+  }
+
+  /* Layout */
   .rehber-page {
-    padding-block: var(--space-xl) var(--space-xxl);
-    background: var(--color-bg-light);
+    padding-block: 31px 72px;
+    background: #f4f6fb;
   }
 
-  .rehber-featured {
+  .rehber-page__layout {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: var(--space-l);
-    align-items: stretch;
-    margin-bottom: var(--space-l);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--color-bg);
-    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease;
+    grid-template-columns: 269px minmax(0, 1fr);
+    gap: 27px;
+    align-items: start;
   }
 
-  .rehber-featured:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+  .rehber-side {
+    display: grid;
+    gap: 22px;
+    position: sticky;
+    top: calc(var(--header-h) + 18px);
   }
 
-  .rehber-featured__image {
-    overflow: hidden;
-    min-height: 320px;
+  .rehber-side__card {
+    padding: 25px 13px 16px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
   }
 
-  .rehber-featured__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 500ms ease;
+  .rehber-side__card h2 {
+    margin-bottom: 16px;
+    padding-inline: 4px;
+    font-family: var(--font-body);
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
   }
 
-  .rehber-featured:hover .rehber-featured__image img {
-    transform: scale(1.05);
+  .rehber-side nav {
+    display: grid;
   }
 
-  .rehber-featured__body {
-    padding: var(--space-l) var(--space-l) var(--space-l) 0;
+  .rehber-side__btn {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: center;
-  }
-
-  .rehber-featured__badge {
-    display: inline-flex;
-    align-self: flex-start;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: var(--color-navy);
-    color: #fff;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .rehber-featured__body h2 {
-    font-size: 1.5rem;
-    line-height: 1.3;
-    color: var(--color-text);
-  }
-
-  .rehber-featured__body p {
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .rehber-filters {
-    display: flex;
-    gap: var(--space-s);
-    flex-wrap: wrap;
-    padding-block: var(--space-m) var(--space-l);
-  }
-
-  .rehber-filters__btn {
-    padding: 10px 24px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    border: 2px solid rgba(43, 46, 131, 0.2);
-    color: var(--color-text-muted);
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 0;
+    border-bottom: 1px solid #eef0f6;
+    border-radius: 3px;
     background: transparent;
-    transition:
-      background var(--transition),
-      color var(--transition),
-      border-color var(--transition);
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+    text-align: left;
+    cursor: pointer;
+    transition: background var(--transition);
   }
 
-  .rehber-filters__btn:hover,
-  .rehber-filters__btn[aria-current='page'] {
+  .rehber-side__btn:last-child {
+    border-bottom: 0;
+  }
+
+  .rehber-side__btn:hover {
+    background: #f4f6fb;
+  }
+
+  .rehber-side__btn[aria-current='true'] {
     background: var(--color-navy);
     color: #fff;
+    border-bottom-color: transparent;
+  }
+
+  .rehber-popular ul {
+    display: grid;
+    padding-inline: 4px;
+  }
+
+  .rehber-popular li + li {
+    border-top: 1px solid #eef0f6;
+  }
+
+  .rehber-popular a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 0;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-popular a:hover span {
+    color: var(--color-navy);
+  }
+
+  .rehber-popular img {
+    flex: none;
+    width: 58px;
+    height: 49px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  /* Toolbar */
+  .rehber-toolbar {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .rehber-toolbar__search {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 13px;
+    padding: 0 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: #fff;
+    color: var(--color-navy);
+  }
+
+  .rehber-toolbar__search:focus-within {
     border-color: var(--color-navy);
   }
 
+  .rehber-toolbar__search input {
+    flex: 1;
+    min-width: 0;
+    height: 49px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 0.84rem;
+    color: var(--color-text);
+    outline: none;
+  }
+
+  .rehber-toolbar__sort select {
+    height: 52px;
+    min-width: 168px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Grid */
   .rehber-page__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
+    gap: 21px;
+    align-items: start;
   }
 
   .rehber-card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--radius);
+    height: 100%;
     overflow: hidden;
-    background: var(--color-bg);
-    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
     transition:
       transform 220ms ease,
       box-shadow 220ms ease;
   }
 
+  .rehber-card[hidden] {
+    display: none;
+  }
+
   .rehber-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(43, 46, 131, 0.14);
   }
 
   .rehber-card__image {
-    height: 220px;
+    height: 202px;
     overflow: hidden;
   }
 
@@ -359,75 +669,310 @@ const tabs = [
   }
 
   .rehber-card__body {
-    padding: 22px 22px 26px;
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    padding: 18px 22px 22px;
+  }
+
+  .rehber-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
   }
 
   .rehber-card__date {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 0.77rem;
     color: var(--color-text-faint);
   }
 
-  .rehber-card__body h2 {
-    margin-top: 2px;
-    font-size: 1rem;
+  .rehber-card__tag {
+    padding: 4px 12px;
+    border-radius: 3px;
+    background: #eceefa;
+    color: var(--color-navy);
+    font-size: 0.63rem;
     font-weight: 700;
-    color: var(--color-text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .rehber-card__body h2 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 800;
     line-height: 1.35;
+    color: var(--color-navy-deep);
   }
 
   .rehber-card__body p {
-    font-size: 13px;
-    color: var(--color-text-muted);
+    font-size: 0.84rem;
     line-height: 1.6;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .rehber-card__more {
     margin-top: auto;
-    padding-top: 14px;
-    font-size: 12px;
+    padding-top: 12px;
+    font-size: 0.77rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     color: var(--color-navy);
-    transition: color var(--transition);
   }
 
-  .rehber-card:hover .rehber-card__more {
-    color: var(--color-navy-dark);
+  .rehber-empty {
+    padding: 54px 0;
+    text-align: center;
+    color: var(--color-text-muted);
   }
 
-  @media (max-width: 1024px) {
+  .rehber-pager {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .rehber-pager[hidden] {
+    display: none;
+  }
+
+  :global(.rehber-pager__btn) {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+  }
+
+  :global(.rehber-pager__btn.is-active) {
+    border-color: var(--color-navy);
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  :global(.rehber-pager__btn.is-gap) {
+    border-color: transparent;
+    background: transparent;
+    cursor: default;
+  }
+
+  /* Newsletter */
+  .rehber-news {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 63px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(43, 46, 131, 0.08);
+  }
+
+  .rehber-news__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  .rehber-news__intro {
+    padding: 54px 49px;
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .rehber-news__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 25px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .rehber-news__eyebrow span {
+    width: 31px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .rehber-news__intro h2 {
+    max-width: 16ch;
+    margin-bottom: 21px;
+    font-size: clamp(1.68rem, 2.688vw, 2.24rem);
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  .rehber-news__intro p {
+    max-width: 44ch;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .rehber-news__form {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 13px;
+    padding: 40px 49px;
+  }
+
+  .rehber-news__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .rehber-news__form h3 {
+    margin-top: 7px;
+    font-family: var(--font-body);
+    font-size: 1.26rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+  }
+
+  .rehber-news__form > p {
+    max-width: 44ch;
+    font-size: 0.91rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .rehber-news__row {
+    display: flex;
+    gap: 16px;
+    justify-self: stretch;
+    margin-top: 7px;
+  }
+
+  .rehber-news__row input {
+    flex: 1;
+    min-width: 0;
+    height: 49px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+  }
+
+  .rehber-news__row input:focus {
+    outline: none;
+    border-color: var(--color-navy);
+  }
+
+  .rehber-news__row button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 49px;
+    padding: 0 27px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--color-navy);
+    color: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .rehber-news__row button:hover {
+    background: var(--color-navy-dark);
+  }
+
+  .rehber-news__row button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .rehber-news__secure {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    max-width: none !important;
+    font-size: 0.77rem !important;
+    color: var(--color-text-faint) !important;
+  }
+
+  .rehber-news__status {
+    min-height: 0;
+    font-size: 0.84rem;
+  }
+
+  .rehber-news__status:empty {
+    display: none;
+  }
+
+  .rehber-news__status[data-state='success'] {
+    color: #1f7a4d;
+  }
+
+  .rehber-news__status[data-state='error'] {
+    color: #b3261e;
+  }
+
+  @media (max-width: 1200px) {
     .rehber-page__grid {
       grid-template-columns: 1fr 1fr;
     }
   }
 
-  @media (max-width: 780px) {
-    .rehber-featured {
+  @media (max-width: 900px) {
+    .rehber-page__layout {
       grid-template-columns: 1fr;
     }
 
-    .rehber-featured__image {
-      min-height: 220px;
+    .rehber-side {
+      position: static;
     }
 
-    .rehber-featured__body {
-      padding: var(--space-m);
+    .rehber-hero__quote {
+      display: none;
+    }
+
+    .rehber-news {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 640px) {
-    .rehber-hero {
-      padding-top: 108px;
-    }
-
     .rehber-page__grid {
       grid-template-columns: 1fr;
+    }
+
+    .rehber-toolbar,
+    .rehber-news__row {
+      flex-direction: column;
+    }
+
+    .rehber-news__intro,
+    .rehber-news__form {
+      padding: 36px 27px;
     }
   }
 </style>

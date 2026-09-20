@@ -1,50 +1,34 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 
-const steps = [
-  {
-    number: '01',
-    title: 'Teknik Değerlendirme ve Fizibilite',
-    description: 'Riskli yapı tespiti sonrası teknik değerlendirme ve fizibilite çalışması yapılır.',
-  },
-  {
-    number: '02',
-    title: 'Şartname ve Sözleşme',
-    description: 'Kat karşılığı veya sözleşme koşulları netleşir.',
-  },
-  {
-    number: '03',
-    title: 'Projelendirme',
-    description: 'Yeni yapının projesi hazırlanır.',
-  },
-  {
-    number: '04',
-    title: 'Ruhsat ve Yasal İzinler',
-    description: 'Gerekli ruhsat ve yasal izin süreçleri yürütülür.',
-  },
-  {
-    number: '05',
-    title: 'İnşaat Süreci',
-    description: 'Saha ekiplerimiz projeyi zaman planına göre yürütür, süreç düzenli raporlanır.',
-  },
-  {
-    number: '06',
-    title: 'Kat İttifakı Süreci',
-    description: 'Kat maliklerinin ittifak süreci yönetilir.',
-  },
-  {
-    number: '07',
-    title: 'İskan Süreci',
-    description: 'İş bitirme belgeleri ile birlikte iskan alınır ve anahtar teslimi yapılır.',
-  },
+const heroFeatures = [
+  { icon: 'shield', title: 'Güvenli Yapılar', text: 'Depreme dayanıklı, uzun ömürlü' },
+  { icon: 'team', title: 'Uzman Kadro', text: 'Deneyimli mühendis ve mimarlar' },
+  { icon: 'document', title: 'Yasal Uyum', text: 'Tüm süreçlerde mevzuata uygunluk' },
 ];
 
-const whySayda = [
-  "1996'dan bu yana İstanbul'da müteahhitlik ve alt müteahhitlik alanında faaliyet",
-  'G grubu müteahhitlik yetki belgesi',
-  '33 iş bitirme belgesi ile kanıtlanmış saha deneyimi',
-  'Rönesans, Kiler GYO, Oyak, Varyap, Torunlar gibi kurumsal yapılarla tamamlanan projeler',
-  'Süreç boyunca tek muhatap: teknik değerlendirmeden iskana kadar aynı ekip',
+const benefits = [
+  { icon: 'leaf', title: 'Modern Yaşam Alanları', text: 'Konforlu ve estetik projeler' },
+  { icon: 'team', title: 'Arsa ve Bina Sahiplerine Şeffaf Süreç', text: 'Tüm adımlarda bilgilendirme' },
+  { icon: 'list', title: 'Kira ve Kredi Desteği', text: 'Devlet destekleriyle güçlü çözümler' },
+  { icon: 'document', title: 'Deneyim ve Güven', text: 'İstanbul ve çevresinde başarılı projeler' },
+];
+
+const steps = [
+  { icon: 'search', title: 'Risk Tespiti ve Ön Değerlendirme', text: 'İmar durumu, yapı analizi, risk analizi ve fizibilite çalışması yapılır.' },
+  { icon: 'list', title: 'Şartname ve Sözleşme', text: 'Kat karşılığı veya sözleşme koşulları netleştirilir.' },
+  { icon: 'document', title: 'Projelendirme', text: 'Mimari, statik, mekanik elektrik projeleri hazırlanır.' },
+  { icon: 'gear', title: 'Ruhsat ve Yasal İzinler', text: 'Gerekli tüm ruhsat ve yasal izin süreçleri yürütülür.' },
+  { icon: 'helmet', title: 'İnşaat Süreci', text: 'Saha ekibimiz projeyi zaman planına göre yürütür.' },
+  { icon: 'key', title: 'Teslim & İskan', text: 'İskan belgesi alınır ve anahtar teslimi yapılır.' },
+];
+
+const solutions = [
+  { icon: 'building', title: 'Arsa ve Bina Sahiplerine Özel Çözümler', text: 'Her proje için yerinde analiz ve en uygun dönüşüm modeli.' },
+  { icon: 'database', title: 'Finansman ve Destek Yönetimi', text: 'Kira yardımı, kredi desteği ve teşvik süreçlerinde danışmanlık.' },
+  { icon: 'team', title: 'Tek Muhatap, Tüm Süreç', text: 'Projelendirmeden iskan alımına kadar tek ekiple koordinasyon.' },
+  { icon: 'shield', title: 'Şeffaf ve Güvenilir Yaklaşım', text: 'Düzenli bilgilendirme, raporlama ve açık iletişim.' },
 ];
 
 const faqs = [
@@ -73,56 +57,91 @@ const faqs = [
     answer:
       'İş bitirme belgesi geçmişi, müteahhitlik yetki belgesi grubu, tamamlanan proje referansları ve sözleşme şartlarının netliği (teslim tarihi, malzeme kalitesi, kat karşılığı oranı) en önemli kriterlerdir.',
   },
+  {
+    question: 'Riskli yapı tespiti nasıl yapılır?',
+    answer:
+      'Binanın deprem güvenliği, lisanslı kuruluşlar tarafından yapılan inceleme ve analizlerle belirlenir; sonuç risk raporu olarak düzenlenir. Ayrıntılar için Rehber sayfamızdaki yazıya göz atabilirsiniz.',
+    href: '/rehber/riskli-yapi-tespiti-nasil-yapilir',
+  },
+];
+
+const faqColumns = [
+  [faqs[0], faqs[1], faqs[2]],
+  [faqs[3], faqs[4], faqs[5]],
 ];
 ---
 
 <Layout
   title="Kentsel Dönüşüm | Sayda İnşaat"
   description="Riskli yapı tespiti sonrası süreç yönetimi, kat karşılığı anlaşma ve inşaatın anahtar teslim tamamlanması."
+  hideCtaBanner
 >
-  <section class="intro">
-    <div class="container">
-      <h1>Kentsel Dönüşüm</h1>
-      <p class="intro__lead">
-        Riskli yapı tespitinden anahtar teslime kadar kentsel dönüşüm sürecinin tamamında bina ve arsa
-        sahiplerinin yanındayız.
-      </p>
-      <p class="intro__body">
-        Sayda İnşaat, riskli yapıları 6306 sayılı Kentsel Dönüşüm Kanunu çerçevesinde kent dokusuna uygun,
-        sağlam, konforlu, sağlıklı ve güvenli yapılara dönüştürür. Kira ve kredi desteği süreçlerinden kat
-        karşılığı inşaat organizasyonuna kadar tüm adımları bina ve arsa sahipleri adına yönetiyoruz.
-      </p>
+  <section class="kd-hero">
+    <div class="kd-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
+    <p class="kd-hero__script" aria-hidden="true">Güvenli yapılar,<br />mutlu yarınlar.</p>
+
+    <div class="container kd-hero__inner">
+      <div class="kd-hero__content">
+        <div class="kd-eyebrow">
+          <span></span>
+          KENTSEL DÖNÜŞÜM
+        </div>
+        <h1>
+          Daha Güvenli,<br />Daha Yaşanabilir<br />
+          <em>Bir Gelecek İçin</em>
+        </h1>
+        <p class="kd-hero__lead">
+          Riskli yapı tespitinden anahtar teslimine kadar, kentsel dönüşüm sürecinin tamamında bina ve arsa
+          sahiplerinin yanındayız. Yasal süreçler, finansman destekleri ve teknik uzmanlığımızla güvenli yaşam
+          alanları üretiyoruz.
+        </p>
+        <div class="kd-hero__buttons">
+          <a class="kd-btn kd-btn--navy" href="/iletisim#quote-form">
+            Ücretsiz Ön Değerlendirme <Icon name="arrow" size={18} />
+          </a>
+          <a class="kd-btn kd-btn--outline" href="/rehber">Süreç Hakkında Bilgi Al</a>
+        </div>
+
+        <ul class="kd-hero__features">
+          {
+            heroFeatures.map((item) => (
+              <li>
+                <span class="kd-round">
+                  <Icon name={item.icon} size={30} />
+                </span>
+                <span>
+                  <strong>{item.title}</strong>
+                  {item.text}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <a class="kd-hero__card" href="/rehber">
+        <Icon name="building" size={39} />
+        <span>Yaşanabilir<br />Şehirler İçin<br />Bugünden Adım Atın</span>
+        <span class="kd-hero__card-arrow">
+          <Icon name="arrow" size={18} />
+        </span>
+      </a>
     </div>
   </section>
 
-  <section class="process">
+  <section class="kd-benefits">
     <div class="container">
-      <h2>Süreç Nasıl İşliyor?</h2>
-
-      <ol class="process__grid">
+      <ul>
         {
-          steps.map((step) => (
-            <li class="process-step">
-              <span class="process-step__number">{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  <section class="why-sayda">
-    <div class="container">
-      <h2>Neden Sayda?</h2>
-
-      <ul class="why-sayda__list">
-        {
-          whySayda.map((item) => (
+          benefits.map((item) => (
             <li>
-              <span class="why-sayda__marker" aria-hidden="true" />
-              <span>{item}</span>
+              <span class="kd-round kd-round--lg">
+                <Icon name={item.icon} size={31} />
+              </span>
+              <strong>{item.title}</strong>
+              <span>{item.text}</span>
             </li>
           ))
         }
@@ -130,182 +149,806 @@ const faqs = [
     </div>
   </section>
 
-  <section class="faq">
+  <section class="kd-process">
     <div class="container">
-      <h2>Sıkça Sorulan Sorular</h2>
+      <div class="kd-process__head">
+        <div>
+          <div class="kd-eyebrow kd-eyebrow--small">
+            <span></span>
+            SÜREÇ
+          </div>
+          <h2>Kentsel Dönüşüm Süreci Nasıl İşliyor?</h2>
+        </div>
+        <p>Projenizin her aşamasında şeffaf, planlı ve koordineli bir çalışma modeliyle ilerliyoruz.</p>
+      </div>
 
-      <dl class="faq__list">
+      <ol class="kd-steps">
         {
-          faqs.map((faq) => (
-            <div class="faq__item">
-              <dt>{faq.question}</dt>
-              <dd>{faq.answer}</dd>
+          steps.map((step, index) => (
+            <li>
+              <div class="kd-steps__top">
+                <span class="kd-round kd-round--lg">
+                  <Icon name={step.icon} size={31} />
+                </span>
+                {index < steps.length - 1 && (
+                  <span class="kd-steps__connector">
+                    <span />
+                    <Icon name="arrow" size={16} />
+                  </span>
+                )}
+              </div>
+              <span class="kd-steps__num">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="kd-legal">
+    <div class="container">
+      <div class="kd-legal__grid">
+        <aside class="kd-legal__feature">
+          <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="" loading="lazy" />
+          <div class="kd-legal__feature-body">
+            <div class="kd-eyebrow kd-eyebrow--light kd-eyebrow--small">
+              <span></span>
+              YASAL GÜVENCE
+            </div>
+            <h2>6306 Sayılı Kanun Kapsamında Güvenli Dönüşüm</h2>
+            <p>
+              Kira ve kredi desteği süreçlerinden hak sahiplerinin başvurularına kadar tüm yasal adımlarda sizinleyiz.
+            </p>
+            <a class="kd-btn kd-btn--white" href="/rehber/6306-sayili-kentsel-donusum-kanunu-nedir">
+              Detaylı Bilgi <Icon name="arrow" size={18} />
+            </a>
+          </div>
+        </aside>
+
+        <ul class="kd-legal__cards">
+          {
+            solutions.map((item) => (
+              <li>
+                <Icon name={item.icon} size={39} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-faq">
+    <div class="container">
+      <div class="kd-faq__head">
+        <div>
+          <div class="kd-eyebrow kd-eyebrow--small">
+            <span></span>
+            MERAK EDİLENLER
+          </div>
+          <h2>Sıkça Sorulan Sorular</h2>
+        </div>
+        <a href="/rehber">
+          Tüm Soruları Gör <Icon name="arrow" size={18} />
+        </a>
+      </div>
+
+      <div class="kd-faq__columns">
+        {
+          faqColumns.map((column) => (
+            <div class="kd-faq__column">
+              {column.map((faq) => (
+                <details class="kd-faq__item">
+                  <summary>
+                    {faq.question}
+                    <span class="kd-faq__plus" aria-hidden="true" />
+                  </summary>
+                  <p>
+                    {faq.answer}
+                    {faq.href && (
+                      <>
+                        {' '}
+                        <a href={faq.href}>Yazıyı okuyun →</a>
+                      </>
+                    )}
+                  </p>
+                </details>
+              ))}
             </div>
           ))
         }
-      </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-cta">
+    <div class="container">
+      <div class="kd-cta__card reveal">
+        <img src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
+        <div>
+          <div class="kd-eyebrow kd-eyebrow--light kd-eyebrow--small">
+            <span></span>
+            BİRLİKTE DAHA GÜVENLİ YARINLAR
+          </div>
+          <h2>Kentsel dönüşüm projenizi birlikte hayata geçirelim.</h2>
+        </div>
+        <a class="kd-btn kd-btn--white" href="/iletisim#quote-form">
+          Teklif Al <Icon name="arrow" size={18} />
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: 0;
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .intro .container {
-    max-width: 760px;
+  .kd-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 21px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-navy);
   }
 
-  .intro h1 {
-    font-size: var(--fs-h1);
+  .kd-eyebrow span {
+    display: block;
+    width: 31px;
+    height: 2px;
+    background: currentColor;
   }
 
-  .intro__lead {
-    margin-top: var(--space-m);
-    font-size: 1.125rem;
+  .kd-eyebrow--small {
+    margin-bottom: 13px;
+    font-size: 0.7rem;
+  }
+
+  .kd-eyebrow--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .kd-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px 30px;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+    font-size: 0.91rem;
+    font-weight: 700;
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .kd-btn--navy {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .kd-btn--navy:hover {
+    background: var(--color-navy-dark);
+  }
+
+  .kd-btn--outline {
+    border-color: var(--color-navy);
+    color: var(--color-navy);
+  }
+
+  .kd-btn--outline:hover {
+    background: #eceefa;
+  }
+
+  .kd-btn--white {
+    background: #fff;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-btn--white:hover {
+    background: #e8e9f5;
+  }
+
+  .kd-round {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .kd-round--lg {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* Hero */
+  .kd-hero {
+    position: relative;
+    overflow: hidden;
+    background: #eef2f9;
+  }
+
+  .kd-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+  }
+
+  .kd-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+
+  .kd-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0) 48%);
+  }
+
+  .kd-hero__script {
+    position: absolute;
+    top: 54px;
+    left: 56%;
+    z-index: 1;
+    font-family: var(--font-script);
+    font-size: clamp(1.68rem, 2.688vw, 2.52rem);
+    line-height: 1.1;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(19, 21, 74, 0.5);
+    transform: rotate(-8deg);
+  }
+
+  .kd-hero__inner {
+    position: relative;
+    z-index: 2;
+    min-height: 627px;
+    padding-block: 63px 54px;
+  }
+
+  .kd-hero__content {
+    max-width: 717px;
+  }
+
+  .kd-hero h1 {
+    font-size: clamp(2.52rem, 4.704vw, 3.92rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-hero h1 em {
+    font-style: normal;
+    color: var(--color-navy);
+  }
+
+  .kd-hero__lead {
+    max-width: 52ch;
+    margin-top: 27px;
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .kd-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 31px;
+  }
+
+  .kd-hero__features {
+    display: flex;
+    gap: 31px;
+    margin-top: 45px;
+  }
+
+  .kd-hero__features li {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 0.77rem;
+    line-height: 1.4;
     color: var(--color-text-muted);
   }
 
-  .intro__body {
-    margin-top: var(--space-m);
-    font-size: var(--fs-body);
-    line-height: 1.8;
-    color: var(--color-text-muted);
+  .kd-hero__features li > span:last-child {
+    display: grid;
+    gap: 2px;
+    max-width: 146px;
   }
 
-  .process {
-    padding-block: var(--space-block);
+  .kd-hero__features .kd-round {
+    border: 1px solid #d6dae9;
+    background: #fff;
   }
 
-  .process h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-l);
+  .kd-hero__features strong {
+    font-size: 0.91rem;
+    color: var(--color-navy-deep);
   }
 
-  .process__grid {
+  .kd-hero__card {
+    position: absolute;
+    right: clamp(20px, 4vw, 72px);
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 21px 22px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 8px 30px rgba(17, 19, 24, 0.15);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-hero__card > :global(svg) {
+    color: var(--color-navy);
+  }
+
+  .kd-hero__card-arrow {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-navy);
+    border-radius: 50%;
+    color: var(--color-navy);
+  }
+
+  /* Benefits */
+  .kd-benefits {
+    padding-block: 27px 9px;
+  }
+
+  .kd-benefits ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
-    list-style: none;
+    padding: 31px 13px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(43, 46, 131, 0.08);
   }
 
-  .process-step {
-    position: relative;
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
-  }
-
-  .process-step__number {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
+  .kd-benefits li {
+    display: grid;
+    align-content: start;
+    gap: 9px;
+    padding-inline: 31px;
+    font-size: 0.91rem;
     color: var(--color-text-faint);
   }
 
-  .process-step h3 {
-    margin-top: var(--space-xs);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
+  .kd-benefits li + li {
+    border-left: 1px solid var(--color-border);
   }
 
-  .process-step p {
-    margin-top: 6px;
-    font-size: var(--fs-small);
+  .kd-benefits .kd-round {
+    margin-bottom: 7px;
+  }
+
+  .kd-benefits strong {
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--color-navy-deep);
+  }
+
+  /* Process */
+  .kd-process {
+    padding-block: 63px 54px;
+  }
+
+  .kd-process__head,
+  .kd-faq__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-l);
+    margin-bottom: 36px;
+  }
+
+  .kd-process h2,
+  .kd-faq h2 {
+    font-size: clamp(1.68rem, 2.688vw, 2.38rem);
+    color: var(--color-navy-deep);
+  }
+
+  .kd-process__head p {
+    max-width: 38ch;
+    font-size: 0.98rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
   }
 
-  @media (max-width: 1024px) {
-    .process h2 {
-      text-align: center;
-    }
-
-    .process__grid {
-      grid-template-columns: 1fr 1fr;
-    }
+  .kd-steps {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 18px;
+    list-style: none;
+    text-align: center;
   }
 
-  @media (max-width: 640px) {
-    .process__grid {
+  .kd-steps li {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 7px;
+  }
+
+  .kd-steps__top {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  .kd-steps__connector {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 4px;
+    margin-inline: 9px -50%;
+    color: var(--color-navy);
+    position: relative;
+    z-index: 1;
+    transform: translateX(50%);
+  }
+
+  .kd-steps__connector span {
+    flex: 1;
+    border-top: 1px dashed rgba(43, 46, 131, 0.5);
+  }
+
+  .kd-steps__num {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-steps h3 {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-steps p {
+    max-width: 22ch;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  /* Legal */
+  .kd-legal {
+    padding-block: 9px 54px;
+  }
+
+  .kd-legal__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    gap: 18px;
+    padding: 22px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(43, 46, 131, 0.06);
+  }
+
+  .kd-legal__feature {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .kd-legal__feature img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    mix-blend-mode: luminosity;
+  }
+
+  .kd-legal__feature-body {
+    position: relative;
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    padding: 40px 36px;
+  }
+
+  .kd-legal__feature h2 {
+    font-size: clamp(1.54rem, 2.24vw, 1.96rem);
+    line-height: 1.25;
+    color: #fff;
+  }
+
+  .kd-legal__feature p {
+    max-width: 38ch;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .kd-legal__feature .kd-btn {
+    margin-top: 12px;
+  }
+
+  .kd-legal__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 13px;
+    list-style: none;
+  }
+
+  .kd-legal__cards li {
+    display: grid;
+    align-content: center;
+    gap: 9px;
+    padding: 27px 25px;
+    border-radius: 6px;
+    background: #f6f7fc;
+    color: var(--color-navy);
+  }
+
+  .kd-legal__cards h3 {
+    margin-top: 7px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-legal__cards p {
+    font-size: 0.91rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  /* FAQ */
+  .kd-faq {
+    padding-block: 18px 45px;
+  }
+
+  .kd-faq__head {
+    align-items: center;
+    margin-bottom: 22px;
+  }
+
+  .kd-faq__head a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.91rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .kd-faq__columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 22px;
+    align-items: start;
+  }
+
+  .kd-faq__column {
+    display: grid;
+    gap: 12px;
+  }
+
+  .kd-faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: #fff;
+  }
+
+  .kd-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px 21px;
+    font-size: 0.91rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .kd-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .kd-faq__plus {
+    position: relative;
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .kd-faq__plus::before,
+  .kd-faq__plus::after {
+    content: '';
+    position: absolute;
+    background: var(--color-navy);
+  }
+
+  .kd-faq__plus::before {
+    top: 7px;
+    left: 0;
+    width: 16px;
+    height: 2px;
+  }
+
+  .kd-faq__plus::after {
+    top: 0;
+    left: 6px;
+    width: 2px;
+    height: 16px;
+    transition: transform var(--transition);
+  }
+
+  .kd-faq__item[open] .kd-faq__plus::after {
+    transform: scaleY(0);
+  }
+
+  .kd-faq__item p {
+    padding: 0 21px 21px;
+    font-size: 0.91rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .kd-faq__item p a {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  /* CTA */
+  .kd-cta {
+    padding-block: 9px 63px;
+  }
+
+  .kd-cta__card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    overflow: hidden;
+    padding: 45px 54px;
+    border-radius: 10px;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .kd-cta__card > * {
+    position: relative;
+  }
+
+  .kd-cta__card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.22;
+    mix-blend-mode: luminosity;
+  }
+
+  .kd-cta__card h2 {
+    max-width: 22ch;
+    font-size: clamp(1.68rem, 2.912vw, 2.52rem);
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  @media (max-width: 1200px) {
+    .kd-hero__media {
+      width: 100%;
+      opacity: 0.35;
+    }
+
+    .kd-hero__media::after {
+      background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0.6) 60%, rgba(238, 242, 249, 0.2) 100%);
+    }
+
+    .kd-hero__script {
+      display: none;
+    }
+
+    .kd-hero__card {
+      position: static;
+      margin-top: 36px;
+      width: max-content;
+    }
+
+    .kd-hero__inner {
+      min-height: 0;
+    }
+
+    .kd-steps {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 36px;
+    }
+
+    .kd-steps__connector {
+      display: none;
+    }
+
+    .kd-legal__grid {
       grid-template-columns: 1fr;
     }
   }
 
-  .why-sayda {
-    padding-block: var(--space-block);
-    background: var(--color-bg-light);
+  @media (max-width: 900px) {
+    .kd-benefits ul {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 27px;
+    }
+
+    .kd-benefits li:nth-child(odd) {
+      border-left: 0;
+    }
+
+    .kd-process__head,
+    .kd-faq__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-s);
+    }
+
+    .kd-faq__columns {
+      grid-template-columns: 1fr;
+    }
+
+    .kd-hero__features {
+      flex-direction: column;
+      gap: 18px;
+    }
   }
 
-  .why-sayda .container {
-    max-width: 760px;
-  }
+  @media (max-width: 640px) {
+    .kd-benefits ul,
+    .kd-legal__cards {
+      grid-template-columns: 1fr;
+    }
 
-  .why-sayda h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-l);
-  }
+    .kd-benefits li {
+      border-left: 0 !important;
+    }
 
-  .why-sayda__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
-  }
+    .kd-steps {
+      grid-template-columns: 1fr 1fr;
+    }
 
-  .why-sayda__list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    font-size: var(--fs-body);
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  .why-sayda__marker {
-    flex-shrink: 0;
-    margin-top: 8px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-navy);
-  }
-
-  .faq {
-    padding-block: var(--space-block);
-  }
-
-  .faq .container {
-    max-width: 760px;
-  }
-
-  .faq h2 {
-    font-size: var(--fs-h2);
-    margin-bottom: var(--space-l);
-  }
-
-  .faq__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-l);
-  }
-
-  .faq__item {
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
-  }
-
-  .faq__item dt {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.0625rem;
-    color: var(--color-text);
-  }
-
-  .faq__item dd {
-    margin-top: var(--space-xs);
-    font-size: var(--fs-body);
-    line-height: 1.8;
-    color: var(--color-text-muted);
+    .kd-cta__card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 36px 27px;
+    }
   }
 </style>

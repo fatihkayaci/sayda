@@ -1,198 +1,487 @@
 ---
+import '../../styles/services.css';
 import Layout from '../../layouts/Layout.astro';
-import ServiceHero from '../../components/service/ServiceHero.astro';
+import Icon from '../../components/Icon.astro';
+import ServiceTopbar from '../../components/service/ServiceTopbar.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
-import ServicePanel from '../../components/service/ServicePanel.astro';
-import Callout from '../../components/service/Callout.astro';
+import ServiceFeatures from '../../components/service/ServiceFeatures.astro';
+
+const ozellikler = [
+  { icon: 'chart', title: 'Planlı Süreç', text: 'Zamanında teslim' },
+  { icon: 'team', title: 'Uzman Kadro', text: 'Deneyimli ekip' },
+  { icon: 'shield', title: 'Risk Yönetimi', text: 'Güvenli süreç' },
+  { icon: 'document', title: 'Şeffaf Raporlama', text: 'Düzenli bilgilendirme' },
+];
 
 const projeYonetimi = [
-  'Takvim & milestone takibi',
-  'Kaynak ve iş gücü planlaması',
+  'Proje planlama ve zaman yönetimi',
+  'Kaynak ve iş gücü koordinasyonu',
   'Saha denetimi ve raporlama',
-  'Tedarikçi koordinasyonu',
-  'Risk yönetimi',
+  'Tedarikçi ve alt yüklenici yönetimi',
+  'Risk analizi ve çözüm üretme',
 ];
 
 const teknikDanismanlik = [
+  'Fizibilite ve teknik analiz',
   'Bütçe analizi ve maliyet kontrolü',
-  'Teknik şartname hazırlama',
-  'İhale dosyası & teklif analizi',
+  'İhale dosyası ve teklif değerlendirme',
   'Yapı denetim koordinasyonu',
-  'Teslim & hakediş kontrolü',
+  'Mevzuat ve ruhsat süreçlerinde danışmanlık',
+];
+
+const istatistikler = [
+  { icon: 'clock', value: '%15', label: 'Ortalama Maliyet Tasarrufu' },
+  { icon: 'list', value: '30+', label: 'Yıl Saha Deneyimi' },
+  { icon: 'team', value: '100%', label: 'Şeffaf Yönetim' },
+  { icon: 'shield', value: 'ISO', label: '9001 • 14001 • 10002' },
 ];
 ---
 
 <Layout
   title="Proje Yönetimi & Danışmanlık | Sayda İnşaat"
   description="Bağımsız proje yönetimi, maliyet kontrolü ve teknik danışmanlık hizmetleri."
+  hideCtaBanner
 >
-  <ServiceHero />
+  <section class="svc-main svc-main--flat pm-page">
+    <ServiceTopbar />
 
-  <section class="svc-main">
     <div class="container svc-main__layout">
-      <ServiceSidebar active={3} />
+      <ServiceSidebar
+        active={3}
+        cards
+        ctaEyebrow="PROJENİZ İÇİN"
+        ctaTitle="Uzman ekibimiz yanınızda."
+        ctaText="Projenizin ihtiyaçlarını birlikte değerlendirelim, en uygun çözümü sunalım."
+        ctaImage="/img/sayda-insaat-hero01.webp"
+        caption="DOĞRU PLANLAMA, DAHA GÜÇLÜ YAPILAR"
+      />
 
-      <ServicePanel
-        number="04"
-        title="Proje Yönetimi & Danışmanlık"
-        lead={`Kendi müteahhidiniz olsa bile uzman gözetimi istiyorsanız; bütçe kontrolü, takvim takibi ve teknik danışmanlık için yanınızdayız.`}
-      >
-        <div class="svc-cards">
-          <div class="svc-card svc-card--navy">
-            <h4>Proje Yönetimi</h4>
-            <ul>
-              {projeYonetimi.map((item) => <li><span class="svc-card__dot" />{item}</li>)}
-            </ul>
+      <div class="pm-content">
+        <header class="pm-head">
+          <img class="pm-head__corner" src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
+          <div class="pm-head__text">
+            <div class="pm-eyebrow">
+              <span></span>
+              HİZMET 04
+            </div>
+            <h1>Proje Yönetimi &amp; Danışmanlık</h1>
+            <p>
+              Kendi müteahhidiniz olsa bile, projelerinizin her aşamasında uzman gözetimi sağlıyoruz.{' '}
+              <strong>Bütçe kontrolü, takvim takibi, teknik danışmanlık ve koordinasyonla</strong> projelerinizi daha
+              verimli, güvenli ve sürdürülebilir hale getiriyoruz.
+            </p>
           </div>
-          <div class="svc-card svc-card--deep">
-            <h4>Teknik Danışmanlık</h4>
+          <blockquote class="pm-head__quote" aria-hidden="true">
+            “Doğru yönetilen<br />iyi projeler, güvenli<br />yarınlar inşa eder.”
+            <span></span>
+          </blockquote>
+        </header>
+
+        <ServiceFeatures items={ozellikler} />
+
+        <div class="pm-cards">
+          <section class="pm-card">
+            <h2>Proje Yönetimi</h2>
             <ul>
-              {teknikDanismanlik.map((item) => <li><span class="svc-card__dot svc-card__dot--deep" />{item}</li>)}
+              {
+                projeYonetimi.map((item) => (
+                  <li>
+                    <span class="pm-check">
+                      <Icon name="check" size={16} />
+                    </span>
+                    {item}
+                  </li>
+                ))
+              }
             </ul>
-          </div>
+          </section>
+
+          <section class="pm-card">
+            <h2>Teknik Danışmanlık</h2>
+            <ul>
+              {
+                teknikDanismanlik.map((item) => (
+                  <li>
+                    <span class="pm-check">
+                      <Icon name="check" size={16} />
+                    </span>
+                    {item}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <figure class="pm-photo">
+            <img src="/img/projects/dimas-antrepo/dimas-antrepo-01.webp" alt="" loading="lazy" />
+            <figcaption>Sürecin her aşamasında yanınızdayız.</figcaption>
+          </figure>
         </div>
 
-        <div class="stats-panel">
-          <div class="stats-panel__item">
-            <span class="stats-panel__value">%15</span>
-            <span class="stats-panel__label">ORTALAMA MALİYET TASARRUFU</span>
-          </div>
-          <div class="stats-panel__item stats-panel__item--bordered">
-            <span class="stats-panel__value">30+</span>
-            <span class="stats-panel__label">YIL SAHA DENEYİMİ</span>
-          </div>
-          <div class="stats-panel__item">
-            <span class="stats-panel__value">ISO</span>
-            <span class="stats-panel__label">9001 · 14001 · 10002</span>
-          </div>
-        </div>
+        <ul class="pm-stats">
+          {
+            istatistikler.map((stat) => (
+              <li>
+                <span class="pm-stats__icon">
+                  <Icon name={stat.icon} size={30} />
+                </span>
+                <span class="pm-stats__text">
+                  <strong>{stat.value}</strong>
+                  {stat.label}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
 
-        <Callout
-          title="Bağımsız Bakış Açısı"
-          text="Müteahhidinizden bağımsız teknik gözetim; hak kayıplarınızı önler, takvim ve bütçeyi korur."
-        />
-      </ServicePanel>
+        <aside class="pm-note">
+          <span class="pm-note__icon">
+            <Icon name="bulb" size={34} />
+          </span>
+          <div class="pm-note__text">
+            <h2>Bağımsız Bakış Açısı</h2>
+            <p>
+              Müteahhidinizden bağımsız teknik gözetime sahip olarak, hak kayıplarınızı önler, maliyet ve zaman
+              kontrolünü profesyonel şekilde sağlarız.
+            </p>
+          </div>
+          <a href="/iletisim">
+            Daha Fazla Bilgi <Icon name="arrow" size={21} />
+          </a>
+        </aside>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .svc-cards {
+  .pm-page {
+    padding-top: 0;
+    padding-bottom: 81px;
+  }
+
+  .pm-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 48px;
+    gap: 0;
+    min-width: 0;
   }
 
-  .svc-card {
-    padding: 28px;
-    background: var(--color-bg-light);
-    border-radius: 6px;
-    border-top: 3px solid var(--color-navy);
-  }
-
-  .svc-card--deep {
-    border-top-color: #191b4a;
-  }
-
-  .svc-card h4 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 12px;
-  }
-
-  .svc-card ul {
+  /* Head */
+  .pm-head {
+    position: relative;
     display: grid;
-    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) 336px;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(43, 46, 131, 0.06);
   }
 
-  .svc-card li {
+  .pm-head__corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 358px;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.6) brightness(1.1);
+    opacity: 0.55;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 85%);
+    mask-image: linear-gradient(to left, #000 0%, transparent 85%);
+  }
+
+  .pm-head__text,
+  .pm-head__quote {
+    position: relative;
+  }
+
+  .pm-head__text {
+    padding: 36px 45px 40px;
+  }
+
+  .pm-eyebrow {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 14px;
+    gap: 18px;
+    margin-bottom: 16px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--color-navy);
+  }
+
+  .pm-eyebrow span {
+    display: block;
+    width: 45px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .pm-head h1 {
+    margin-bottom: 21px;
+    font-size: clamp(1.96rem, 3.808vw, 3.36rem);
+    line-height: 1.1;
+    color: var(--color-navy-deep);
+  }
+
+  .pm-head__text p {
+    max-width: 66ch;
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--color-navy);
+  }
+
+  .pm-head__text strong {
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .pm-head__quote {
+    align-self: center;
+    margin: 0 31px 0 0;
+    padding: 7px 0 7px 36px;
+    border-left: 1px solid var(--color-border);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
   }
 
-  .svc-card__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-navy);
-    flex-shrink: 0;
-  }
-
-  .svc-card__dot--deep {
-    background: #191b4a;
-  }
-
-  .stats-panel {
-    background: #191b4a;
-    border-radius: 6px;
-    padding: 36px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .stats-panel__item--bordered {
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .stats-panel__value {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 32px;
-    color: #fff;
+  .pm-head__quote span {
     display: block;
-    line-height: 1;
+    width: 54px;
+    height: 2px;
+    margin-top: 18px;
+    background: var(--color-navy);
   }
 
-  .stats-panel__label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.55);
-    letter-spacing: 0.1em;
+  /* Cards */
+  .pm-cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 18px;
+    padding-top: 13px;
   }
 
-  @media (max-width: 1024px) {
-    .stats-panel {
+  .pm-card {
+    padding: 27px 25px 22px;
+    border-radius: 3px;
+    background: #f6f7fc;
+  }
+
+  .pm-card h2 {
+    margin-bottom: 21px;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .pm-card ul {
+    display: grid;
+    gap: 16px;
+  }
+
+  .pm-card li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+  }
+
+  .pm-check {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .pm-photo {
+    position: relative;
+    margin: 0;
+    min-height: 269px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--color-navy-deep);
+  }
+
+  .pm-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pm-photo figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 31px 25px 25px;
+    background: linear-gradient(to top, rgba(25, 27, 74, 0.92) 40%, rgba(25, 27, 74, 0.6));
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.26rem;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  /* Stats */
+  .pm-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 21px;
+    padding: 25px 13px;
+    border-radius: 4px;
+    background: var(--color-navy-deep);
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .pm-stats li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-inline: 22px;
+  }
+
+  .pm-stats li + li {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .pm-stats__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 61px;
+    height: 61px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+
+  .pm-stats__text {
+    display: grid;
+    gap: 2px;
+    font-size: 0.77rem;
+    line-height: 1.4;
+  }
+
+  .pm-stats__text strong {
+    font-family: var(--font-heading);
+    font-size: 1.82rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  /* Note */
+  .pm-note {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-top: 21px;
+    padding: 22px 31px;
+    border-radius: 4px;
+    background: #f6f7fc;
+  }
+
+  .pm-note__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .pm-note__text {
+    flex: 1;
+  }
+
+  .pm-note h2 {
+    margin-bottom: 7px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .pm-note p {
+    max-width: 72ch;
+    font-size: 0.91rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .pm-note a {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 13px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .pm-note a:hover {
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1200px) {
+    .pm-cards {
       grid-template-columns: 1fr 1fr;
-      padding: 28px 20px;
     }
 
-    .stats-panel__item:last-child {
+    .pm-photo {
       grid-column: 1 / -1;
+      min-height: 246px;
+    }
+
+    .pm-stats {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 22px;
+    }
+
+    .pm-stats li:nth-child(odd) {
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .pm-head {
+      grid-template-columns: 1fr;
+    }
+
+    .pm-head__corner,
+    .pm-head__quote {
+      display: none;
+    }
+
+    .pm-head__text {
+      padding: 31px 25px;
+    }
+
+    .pm-note {
+      flex-wrap: wrap;
     }
   }
 
   @media (max-width: 640px) {
-    .svc-cards {
+    .pm-cards,
+    .pm-stats {
       grid-template-columns: 1fr;
-      margin-bottom: 28px;
     }
 
-    .svc-card {
-      padding: 20px;
-    }
-
-    .stats-panel {
-      grid-template-columns: 1fr;
-      padding: 24px 16px;
-    }
-
-    .stats-panel__value {
-      font-size: 28px;
-    }
-
-    .stats-panel__item--bordered {
-      border-left: none;
-      border-right: none;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-block: 16px;
+    .pm-stats li {
+      border-left: 0 !important;
     }
   }
 </style>

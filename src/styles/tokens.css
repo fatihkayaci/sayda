@@ -16,6 +16,7 @@
   --font-body: 'Archivo', sans-serif;
   --font-heading: 'Archivo Black', sans-serif;
   --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
+  --font-script: 'Caveat', cursive; /* handwritten quote accents */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
   --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);

@@ -1,0 +1,226 @@
+---
+import Icon from './Icon.astro';
+import site from '../data/site.json';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+  subject?: string;
+  icon?: string;
+  note?: string;
+}
+
+const {
+  eyebrow,
+  title = 'Gelişmeleri kaçırmayın',
+  text = 'En yeni haberler ve duyurular için e-posta bültenimize abone olun.',
+  subject = 'Bülten aboneliği',
+  icon,
+  note,
+} = Astro.props;
+---
+
+<form class:list={['news-band', { 'news-band--icon': icon }]} id="newsBandForm">
+  <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="checkbox" name="botcheck" class="news-band__honeypot" tabindex="-1" autocomplete="off" />
+
+  {
+    icon && (
+      <span class="news-band__icon">
+        <Icon name={icon} size={30} />
+      </span>
+    )
+  }
+  <div class="news-band__text">
+    {eyebrow && <span class="news-band__eyebrow">{eyebrow}</span>}
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+  <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
+  <button type="submit">
+    Abone Ol <Icon name="arrow" size={16} />
+  </button>
+  {
+    note && (
+      <p class="news-band__note">
+        <Icon name="lock" size={16} />
+        {note}
+      </p>
+    )
+  }
+  <p class="news-band__status" id="newsBandStatus" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  function initNewsBand() {
+    const form = document.getElementById('newsBandForm') as HTMLFormElement | null;
+    const status = document.getElementById('newsBandStatus');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
+      if (!accessKey) {
+        status.textContent = 'Abonelik şu an kapalı, lütfen daha sonra tekrar deneyin.';
+        status.setAttribute('data-state', 'error');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitButton.disabled = true;
+      status.textContent = 'Gönderiliyor...';
+      status.removeAttribute('data-state');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message ?? 'Unknown error');
+        status.textContent = 'Teşekkürler, aboneliğiniz alındı.';
+        status.setAttribute('data-state', 'success');
+        form.reset();
+      } catch {
+        status.textContent = 'Gönderilemedi, lütfen daha sonra tekrar deneyin.';
+        status.setAttribute('data-state', 'error');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+
+  initNewsBand();
+  document.addEventListener('astro:page-load', initNewsBand);
+</script>
+
+<style>
+  .news-band {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 358px) auto;
+    align-items: center;
+    gap: 18px;
+    padding: 30px 36px;
+    border-radius: 6px;
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .news-band__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  .news-band--icon {
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 358px) auto;
+  }
+
+  .news-band__icon {
+    display: grid;
+    place-items: center;
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .news-band__eyebrow {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.75);
+    text-transform: uppercase;
+  }
+
+  .news-band__note {
+    grid-column: 3 / -1;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.77rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .news-band h2 {
+    margin-bottom: 4px;
+    font-family: var(--font-body);
+    font-size: 1.26rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .news-band__text p {
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .news-band input[type='email'] {
+    height: 49px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 3px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+  }
+
+  .news-band input[type='email']:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+  }
+
+  .news-band button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    height: 49px;
+    padding: 0 30px;
+    border: 0;
+    border-radius: 3px;
+    background: #fff;
+    color: var(--color-navy);
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .news-band button:hover {
+    background: #e8e9f5;
+  }
+
+  .news-band button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .news-band__status {
+    grid-column: 1 / -1;
+    min-height: 0;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .news-band__status:empty {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .news-band,
+    .news-band--icon {
+      grid-template-columns: 1fr;
+    }
+
+    .news-band__note {
+      grid-column: auto;
+    }
+  }
+</style>

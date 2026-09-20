@@ -1,11 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceCta from '../../components/service/ServiceCta.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
 import ServicePanel from '../../components/service/ServicePanel.astro';
 import ProcessSteps from '../../components/service/ProcessSteps.astro';
 import ChecklistBox from '../../components/service/ChecklistBox.astro';
-import Callout from '../../components/service/Callout.astro';
+import ServiceMedia from '../../components/service/ServiceMedia.astro';
+import ServiceWhy from '../../components/service/ServiceWhy.astro';
 
 const steps = [
   { title: 'Arsa / Bina Değerleme', description: 'Arsanın imar durumu, tapu analizi ve piyasa değeri incelenir; fizibilite raporu hazırlanır.' },
@@ -16,20 +18,36 @@ const steps = [
 ];
 
 const kapsam = [
-  'Arsa analizi ve fizibilite',
-  'Mimari & statik proje',
-  'Belediye ruhsat işlemleri',
-  'Kaba yapı',
-  'İnce işler (sıva, şap, seramik)',
-  'Boya & duvar kağıdı',
-  'Elektro-mekanik altyapı',
-  'İskan belgesi temini',
+  { label: 'Arsa analizi ve fizibilite', icon: 'document' },
+  { label: 'Mimari & statik proje', icon: 'area' },
+  { label: 'Belediye ruhsat işlemleri', icon: 'building' },
+  { label: 'Kaba yapı', icon: 'gear' },
+  { label: 'İnce işler (sıva, şap, seramik)', icon: 'check' },
+  { label: 'Boya & duvar kağıdı', icon: 'photo' },
+  { label: 'Elektro-mekanik altyapı', icon: 'bolt' },
+  { label: 'İskan belgesi temini', icon: 'shield' },
+];
+
+const ozellikler = [
+  { icon: 'chart', text: 'Arsa değerinize değer katar' },
+  { icon: 'gear', text: 'Tüm süreci biz yönetiriz' },
+  { icon: 'shield', text: 'Şeffaf ve güvenilir ortaklık' },
+  { icon: 'building', text: 'Modern ve nitelikli yapılar' },
+];
+
+const nedenler = [
+  'Arsa sahipleri için yüksek değer potansiyeli',
+  'Tüm teknik ve idari süreçlerin profesyonel yönetimi',
+  'Deneyimli ve güvenilir ekip',
+  'Zamanında teslimat',
+  'Modern ve nitelikli yaşam alanları',
 ];
 ---
 
 <Layout
   title="Kat Karşılığı İnşaat | Sayda İnşaat"
   description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
+  hideCtaBanner
 >
   <ServiceHero />
 
@@ -41,15 +59,40 @@ const kapsam = [
         number="01"
         title="Kat Karşılığı İnşaat"
         lead="Arsa veya bina sahipleriyle kat karşılığı anlaşma yaparak, projenin tamamını üstleniyoruz. Tasarım, ruhsat, inşaat ve teslim süreçlerini eksiksiz yönetiyoruz — siz sadece anahtarınızı teslim alıyorsunuz."
+        tagline="Arsanızın potansiyelini birlikte değerlendiriyor, ortak değer üretiyoruz."
       >
-        <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+        <ServiceMedia image="/img/projects/vadistanbul/vadistanbul.webp" features={ozellikler} />
+
+        <div class="kat-split">
+          <div>
+            <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+          </div>
+          <ServiceWhy
+            title="Neden Kat Karşılığı?"
+            items={nedenler}
+            quote="Arsanızın potansiyelini güvenle geleceğe taşıyoruz."
+          />
+        </div>
+
         <ChecklistBox heading="Kapsama Dahil İşler" items={kapsam} />
-        <Callout
-          title="Neden Sayda İnşaat?"
-          text="30 yıllık deneyim, 33 iş bitirme belgesi ve G grubu yüklenici yetki belgesiyle güven veren tek adres."
-        />
       </ServicePanel>
     </div>
   </section>
+
+  <ServiceCta />
 </Layout>
 
+<style>
+  .kat-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: start;
+  }
+
+  @media (max-width: 1100px) {
+    .kat-split {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

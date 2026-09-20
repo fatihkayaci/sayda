@@ -35,34 +35,34 @@ const { heading, steps, color = 'navy' } = Astro.props;
 
 <style>
   .process-steps__heading {
-    font-size: 16px;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 28px;
-    letter-spacing: 0.04em;
+    color: var(--color-navy-deep);
+    margin-bottom: 27px;
   }
 
   .process-steps {
     display: grid;
     gap: 0;
-    margin-bottom: 48px;
+    margin-bottom: 0;
   }
 
   .process-step {
     display: grid;
-    grid-template-columns: 56px 1fr;
-    gap: 20px;
+    grid-template-columns: 63px 1fr;
+    gap: 22px;
     align-items: start;
   }
 
   .process-step__num {
-    width: 56px;
-    height: 56px;
+    width: 63px;
+    height: 63px;
     border-radius: 50%;
     background: var(--color-navy);
     color: #fff;
     font-family: 'Archivo Black', sans-serif;
-    font-size: 18px;
+    font-size: 21px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,53 +74,53 @@ const { heading, steps, color = 'navy' } = Astro.props;
   }
 
   .process-step__body {
-    padding-top: 12px;
+    padding-top: 13px;
     min-width: 0;
   }
 
   .process-step__body h4 {
-    font-size: 15px;
+    font-size: 17px;
     font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 6px;
+    color: var(--color-navy-deep);
+    margin-bottom: 7px;
   }
 
   .process-step__body p {
-    font-size: 14px;
+    font-size: 16px;
     color: #6b6d7a;
     line-height: 1.7;
   }
 
   .process-step__line {
     width: 2px;
-    height: 40px;
-    background: rgba(43, 46, 131, 0.15);
-    margin: 8px 0 8px 27px;
+    height: 27px;
+    background: rgba(43, 46, 131, 0.2);
+    margin: 7px 0 7px 30px;
   }
 
   @media (max-width: 640px) {
     .process-steps {
-      margin-bottom: 36px;
+      margin-bottom: 40px;
     }
 
     .process-step {
-      grid-template-columns: 44px minmax(0, 1fr);
-      gap: 12px;
+      grid-template-columns: 49px minmax(0, 1fr);
+      gap: 13px;
     }
 
     .process-step__num {
-      width: 44px;
-      height: 44px;
-      font-size: 14px;
+      width: 49px;
+      height: 49px;
+      font-size: 16px;
     }
 
     .process-step__line {
-      height: 24px;
-      margin: 6px 0 6px 21px;
+      height: 27px;
+      margin: 7px 0 7px 23px;
     }
 
     .process-step__body {
-      padding-top: 6px;
+      padding-top: 7px;
     }
   }
 </style>

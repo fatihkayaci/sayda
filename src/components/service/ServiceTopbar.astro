@@ -1,0 +1,67 @@
+---
+interface Props {
+  slogan?: string;
+}
+
+const { slogan } = Astro.props;
+---
+
+<div class="svc-topbar">
+  <nav class="svc-topbar__breadcrumb" aria-label="Konum">
+    <a href="/">Anasayfa</a>
+    <span>/</span>
+    <span aria-current="page">Hizmetler</span>
+  </nav>
+  {
+    slogan && (
+      <p class="svc-topbar__slogan" aria-hidden="true">
+        {slogan}
+        <span />
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .svc-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+    padding: 30px clamp(22px, 4vw, 81px) 25px;
+  }
+
+  .svc-topbar__breadcrumb {
+    display: flex;
+    gap: 13px;
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+  }
+
+  .svc-topbar__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .svc-topbar__slogan {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--color-text-faint);
+  }
+
+  .svc-topbar__slogan span {
+    width: 63px;
+    height: 1px;
+    background: var(--color-navy);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 900px) {
+    .svc-topbar__slogan {
+      display: none;
+    }
+  }
+</style>

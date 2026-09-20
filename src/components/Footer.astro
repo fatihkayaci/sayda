@@ -15,14 +15,14 @@ const year = new Date().getFullYear();
         {
           site.social.instagram && (
             <a class="footer__social" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Icon name="instagram" size={20} />
+              <Icon name="instagram" size={22} />
             </a>
           )
         }
         {
           site.social.linkedin && (
             <a class="footer__social" href={site.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Icon name="linkedin" size={20} />
+              <Icon name="linkedin" size={22} />
             </a>
           )
         }
@@ -56,15 +56,15 @@ const year = new Date().getFullYear();
       <h2>İletişim</h2>
       <ul class="footer__contact">
         <li>
-          <Icon name="pin" size={18} />
+          <Icon name="pin" size={21} />
           <span>{site.address.street}, {site.address.neighborhood} / {site.address.city}</span>
         </li>
         <li>
-          <Icon name="phone" size={18} />
+          <Icon name="phone" size={21} />
           <a href={site.phoneHref}>{site.phone}</a>
         </li>
         <li>
-          <Icon name="mail" size={18} />
+          <Icon name="mail" size={21} />
           <a href={`mailto:${site.email}`}>{site.email}</a>
         </li>
       </ul>
@@ -96,7 +96,7 @@ const year = new Date().getFullYear();
   .footer__logo {
     font-family: var(--font-accent);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     color: #fff;
   }
 
@@ -108,7 +108,7 @@ const year = new Date().getFullYear();
   .footer__tagline {
     margin-top: var(--space-s);
     max-width: 32ch;
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
   }
 
   .footer__social-list {
@@ -130,7 +130,7 @@ const year = new Date().getFullYear();
   .footer__column h2 {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -141,7 +141,7 @@ const year = new Date().getFullYear();
     display: flex;
     flex-direction: column;
     gap: var(--space-s);
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
   }
 
   .footer__column a {
@@ -155,14 +155,14 @@ const year = new Date().getFullYear();
   .footer__contact li {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
 
   .footer__bottom {
     margin-top: var(--space-xl);
     padding-top: var(--space-m);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: var(--fs-small);
+    font-size: calc(var(--fs-small) * 1.12);
     display: flex;
     align-items: center;
     justify-content: space-between;

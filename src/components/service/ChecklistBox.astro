@@ -1,8 +1,12 @@
 ---
+import Icon from '../Icon.astro';
+
+type Item = string | { label: string; icon: string };
+
 interface Props {
   heading: string;
   lead?: string;
-  items: string[];
+  items: Item[];
   iconFill?: string;
 }
 
@@ -14,54 +18,72 @@ const { heading, lead, items, iconFill = '#eef0f9' } = Astro.props;
   {lead && <p class="checklist-box__lead">{lead}</p>}
   <div class="checklist-box__grid">
     {
-      items.map((item) => (
-        <div class="check-item">
-          <svg viewBox="0 0 20 20" fill="none" width="18" height="18" class="check-item__icon">
-            <circle cx="10" cy="10" r="9" fill={iconFill} />
-            <path d="M6 10l3 3 5-5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <span>{item}</span>
-        </div>
-      ))
+      items.map((item) =>
+        typeof item === 'string' ? (
+          <div class="check-item">
+            <svg viewBox="0 0 20 20" fill="none" width="18" height="18" class="check-item__icon">
+              <circle cx="10" cy="10" r="9" fill={iconFill} />
+              <path d="M6 10l3 3 5-5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>{item}</span>
+          </div>
+        ) : (
+          <div class="check-item check-item--icon">
+            <Icon name={item.icon} size={31} class="check-item__glyph" />
+            <span>{item.label}</span>
+          </div>
+        ),
+      )
     }
   </div>
 </div>
 
 <style>
   .checklist-box {
-    background: var(--color-bg-light);
-    border-radius: 6px;
-    padding: 32px;
-    margin-bottom: 40px;
+    background: #f6f7fc;
+    border-radius: 4px;
+    padding: 31px 36px;
+    margin-block: 45px;
     min-width: 0;
   }
 
   .checklist-box h3 {
-    font-size: 15px;
+    font-family: var(--font-body);
+    font-size: 1.19rem;
     font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 20px;
+    color: var(--color-navy-deep);
+    margin-bottom: 18px;
   }
 
   .checklist-box__lead {
-    font-size: 14px;
+    font-size: 16px;
     color: #6b6d7a;
     line-height: 1.75;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .checklist-box__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    column-gap: 54px;
   }
 
   .check-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--color-bg-light);
+    gap: 13px;
+    padding: 13px 0;
+  }
+
+  .check-item--icon {
+    align-items: center;
+    gap: 21px;
+    padding: 10px 0;
+  }
+
+  .check-item :global(.check-item__glyph) {
+    flex: none;
+    color: var(--color-navy);
   }
 
   .check-item__icon {
@@ -70,14 +92,14 @@ const { heading, lead, items, iconFill = '#eef0f9' } = Astro.props;
   }
 
   .check-item span {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--color-text-muted);
   }
 
   @media (max-width: 640px) {
     .checklist-box {
-      padding: 20px;
-      margin-bottom: 28px;
+      padding: 22px;
+      margin-bottom: 31px;
     }
 
     .checklist-box__grid {

@@ -1,13 +1,15 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 import ProjectsHero from '../../components/project/ProjectsHero.astro';
+import ProjectFeatured from '../../components/project/ProjectFeatured.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
 import allProjects from '../../data/projects.json';
 
 const imageFirst = (projects: typeof allProjects) =>
   [...projects.filter((project) => project.image), ...projects.filter((project) => !project.image)];
 
-const devamEden = imageFirst(allProjects.filter((project) => project.status === 'devam-eden'));
+const devamEden = allProjects.filter((project) => project.status === 'devam-eden');
 const tamamlanan = imageFirst(allProjects.filter((project) => project.status === 'tamamlanan'));
 ---
 
@@ -16,26 +18,27 @@ const tamamlanan = imageFirst(allProjects.filter((project) => project.status ===
 
   <section class="projeler-page">
     <div class="container">
-      {
-        devamEden.length > 0 && (
-          <div class="projeler-page__group">
-            <div class="projeler-page__group-heading">
-              <span class="projeler-page__group-bar projeler-page__group-bar--active" />
-              <h2>Devam Eden İşler</h2>
-              <span class="projeler-page__group-count projeler-page__group-count--active">{devamEden.length} PROJE</span>
-            </div>
-            <ProjectGrid projects={devamEden} />
-          </div>
-        )
-      }
+      <ProjectFeatured projects={devamEden} />
 
       {
         tamamlanan.length > 0 && (
-          <div class="projeler-page__group">
+          <div class="projeler-page__group" data-project-group>
             <div class="projeler-page__group-heading">
-              <span class="projeler-page__group-bar" />
-              <h2>Tamamlanan İşler</h2>
-              <span class="projeler-page__group-count">{tamamlanan.length} PROJE</span>
+              <div>
+                <div class="projeler-page__eyebrow">
+                  <span />
+                  TAMAMLANAN PROJELER
+                </div>
+                <div class="projeler-page__title">
+                  <h2>Tamamlanan İşler</h2>
+                  <span class="projeler-page__group-count" data-group-count>
+                    {tamamlanan.length} PROJE
+                  </span>
+                </div>
+              </div>
+              <a href="/projeler/tamamlanan">
+                Tüm Projeleri Gör <Icon name="arrow" size={18} />
+              </a>
             </div>
             <ProjectGrid projects={tamamlanan} />
           </div>
@@ -46,51 +49,81 @@ const tamamlanan = imageFirst(allProjects.filter((project) => project.status ===
 </Layout>
 
 <style>
-  .projeler-page {
-    padding-block: var(--space-xl);
-    background: var(--color-bg-light);
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .projeler-page__group + .projeler-page__group {
-    margin-top: var(--space-xl);
+  .projeler-page {
+    padding-block: 9px 81px;
+    background: #f4f6fb;
+  }
+
+  [data-project-group][hidden] {
+    display: none;
   }
 
   .projeler-page__group-heading {
     display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-m);
+    margin-bottom: 31px;
+  }
+
+  .projeler-page__eyebrow {
+    display: flex;
     align-items: center;
-    gap: var(--space-s);
-    margin-bottom: var(--space-l);
+    gap: 16px;
+    margin-bottom: 13px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--color-navy);
   }
 
-  .projeler-page__group-bar {
-    width: 4px;
-    height: 28px;
-    border-radius: 2px;
-    background: rgba(43, 46, 131, 0.3);
+  .projeler-page__eyebrow span {
+    width: 31px;
+    height: 2px;
+    background: currentColor;
   }
 
-  .projeler-page__group-bar--active {
-    background: var(--color-navy);
+  .projeler-page__title {
+    display: flex;
+    align-items: center;
+    gap: 21px;
   }
 
-  .projeler-page__group-heading h2 {
-    font-size: 1.375rem;
+  .projeler-page__title h2 {
+    font-size: clamp(1.96rem, 2.912vw, 2.52rem);
+    color: var(--color-navy-deep);
   }
 
   .projeler-page__group-count {
-    padding: 4px 14px;
-    border: 1px solid var(--color-border);
+    padding: 7px 16px;
+    border: 1px solid #c9cde3;
     border-radius: 20px;
-    font-size: 0.6875rem;
+    background: #fff;
+    font-size: 0.77rem;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: var(--color-text-muted);
-    background: var(--color-bg);
+    color: var(--color-navy);
   }
 
-  .projeler-page__group-count--active {
-    border-color: var(--color-navy);
-    background: var(--color-navy);
-    color: #fff;
+  .projeler-page__group-heading a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 7px;
+    font-size: 0.91rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 640px) {
+    .projeler-page__group-heading {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>

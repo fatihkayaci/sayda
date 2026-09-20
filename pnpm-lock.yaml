@@ -17,6 +17,9 @@ importers:
       '@fontsource/archivo-black':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource/caveat':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@fontsource/syne':
         specifier: ^5.3.0
         version: 5.3.0
@@ -411,6 +414,9 @@ packages:
 
   '@fontsource/archivo@5.3.0':
     resolution: {integrity: sha512-5DIMgPVJRi62OqdOVoogCFxP73EkNM/E0YVTSDIQlDEJfDbxqZduwM/YoNZwC9Sx1CDgpKinqf8ckRY1QNIecw==}
+
+  '@fontsource/caveat@5.3.0':
+    resolution: {integrity: sha512-eHTfzQxFSW9ABERRLNruHoNJmKed2J7pqTUc5lp4a4POMgXGKpxmWj3d9Hz10kmAg6iuTTLe6UagbA4bnsmfQw==}
 
   '@fontsource/syne@5.3.0':
     resolution: {integrity: sha512-kRWNVsrdYw+08I4EM1SYPe2JovdTzUI0kMVALVRsKmjRdkrVoun1qddSlDAglz5J9LbgUpJSkWmw6BYnmKdGuw==}
@@ -2072,6 +2078,8 @@ snapshots:
   '@fontsource/archivo-black@5.3.0': {}
 
   '@fontsource/archivo@5.3.0': {}
+
+  '@fontsource/caveat@5.3.0': {}
 
   '@fontsource/syne@5.3.0': {}
 

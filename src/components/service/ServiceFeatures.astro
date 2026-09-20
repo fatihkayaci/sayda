@@ -1,0 +1,87 @@
+---
+import Icon from '../Icon.astro';
+
+interface Feature {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  items: Feature[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="svc-features">
+  {
+    items.map((item) => (
+      <li>
+        <Icon name={item.icon} size={43} />
+        <span>
+          <strong>{item.title}</strong>
+          {item.text}
+        </span>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .svc-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 30px 22px;
+    background: #f6f7fc;
+  }
+
+  .svc-features li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-inline: 22px;
+    color: var(--color-navy);
+  }
+
+  .svc-features li + li {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .svc-features li :global(svg) {
+    flex: none;
+  }
+
+  .svc-features li span {
+    display: grid;
+    gap: 4px;
+    font-size: 0.84rem;
+    color: var(--color-text-faint);
+  }
+
+  .svc-features li strong {
+    font-size: 1.05rem;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 1200px) {
+    .svc-features {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 22px;
+    }
+
+    .svc-features li:nth-child(odd) {
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .svc-features {
+      grid-template-columns: 1fr;
+    }
+
+    .svc-features li {
+      border-left: 0 !important;
+    }
+  }
+</style>

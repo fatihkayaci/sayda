@@ -1,14 +1,48 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
 
-const certLabel = site.certifications.map((c) => c.name.replace('ISO ', '')).join(' · ');
+const [areaValue, areaUnit] = site.stats.totalCompletedArea.split(' ');
 
 const stats = [
-  { value: String(site.foundedYear), label: 'Kuruluş Yılı' },
-  { value: String(site.stats.employeeCount), label: 'Çalışan' },
-  { value: String(site.stats.avgAnnualProjects), label: 'Yıllık Ortalama Proje' },
-  { value: site.stats.totalCompletedArea, label: 'Tamamlanan Alan' },
+  { icon: 'calendar', value: String(site.foundedYear), unit: '', label: 'Kuruluş Yılı' },
+  { icon: 'team', value: String(site.stats.employeeCount), unit: '', label: 'Çalışan' },
+  { icon: 'chart', value: String(site.stats.avgAnnualProjects), unit: '', label: 'Yıllık Ortalama Proje' },
+  { icon: 'building', value: areaValue, unit: areaUnit, label: 'Tamamlanan Alan' },
+];
+
+const values = [
+  { icon: 'shield', title: 'Güven', text: 'Söz verdiğimiz gibi, zamanında ve kaliteli işler teslim ederiz.' },
+  {
+    icon: 'user',
+    title: 'İnsan Odaklılık',
+    text: 'Çalışanlarımız, iş ortaklarımız ve müşterilerimiz bizim için değerlidir.',
+  },
+  { icon: 'gear', title: 'Sürdürülebilirlik', text: 'Gelecek nesiller için daha iyi yaşam alanları inşa ederiz.' },
+  { icon: 'diamond', title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
+];
+
+const timeline = [
+  { year: String(site.foundedYear), text: 'Sayda İnşaat kuruldu.' },
+  { year: '2000+', text: 'İlk büyük ölçekli projeler.' },
+  { year: '2010+', text: 'Farklı proje tiplerinde faaliyet alanı genişletildi.' },
+  { year: '2020+', text: 'Türkiye genelinde projeler.' },
+  { year: '2026', text: 'Bugün, yeni hedeflerle yolumuza devam ediyoruz.' },
+];
+
+const expertise = [
+  { title: 'Konut Projeleri', image: '/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp' },
+  { title: 'Ticari Yapılar', image: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp' },
+  { title: 'Sağlık Kampüsleri', image: '/img/projects/capital-tower-ofis/capital-tower-ofis.webp' },
+  { title: 'Otel Projeleri', image: '/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp' },
+];
+
+const certificates = [
+  { icon: 'globe', title: 'ISO 9001', text: 'Kalite Yönetim Sistemi' },
+  { icon: 'leaf', title: 'ISO 14001', text: 'Çevre Yönetim Sistemi' },
+  { icon: 'team', title: 'ISO 10002', text: 'Müşteri Memnuniyeti' },
+  { icon: 'document', title: `${site.contractorLicenseGroup} Grubu`, text: 'Yüklenici Yetki Belgesi' },
 ];
 ---
 
@@ -16,32 +50,51 @@ const stats = [
   title="Hakkımızda | Sayda İnşaat"
   description="Sayda İnşaat'ın hikayesi, deneyimi ve çalışma prensipleri."
   organizationSchema
+  hideCtaBanner
 >
-  <section class="intro">
-    <div class="container">
-      <h1>Hakkımızda</h1>
-      <p class="intro__lead">
-        {site.legalName}, {site.foundedYear} yılında kurulmuştur ve bu tarihten beri birçok büyük projede
-        çeşitli müteahhitlik ve uzman ekip hizmetleri vermiştir.
-      </p>
-      <p class="intro__body">
-        Aradan geçen sürede İstanbul ve Türkiye genelinde konut, ticari yapı, sağlık kampüsü ve otel
-        projelerinde ince işler ile taahhüt hizmetleri sunduk; edindiğimiz deneyimi her yeni projede
-        müşterilerimizin yanında kullanmaya devam ediyoruz. ISO {certLabel} belgelerimiz ve{' '}
-        {site.contractorLicenseGroup} grubu yüklenici yetki belgemizle kaliteyi ve sürdürülebilirliği taahhüt
-        ediyoruz.
+  <section class="about-hero">
+    <div class="about-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
+    <p class="about-hero__script" aria-hidden="true">
+      “Daha iyi<br />yarınlar<br />için sağlam<br />yapılar”
+    </p>
+
+    <div class="container about-hero__inner">
+      <div class="about-hero__content">
+        <div class="eyebrow">
+          <span class="eyebrow__bar"></span>
+          <span>KURUMSAL</span>
+        </div>
+        <h1>Hakkımızda</h1>
+        <p class="about-hero__lead">{site.foundedYear}’dan bugüne,<br />daha iyi yaşam alanları için çalışıyoruz.</p>
+        <p class="about-hero__text">
+          Sayda İnşaat; konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde taahhüt ve ince işler
+          hizmetleri sunan, deneyimi ve uzman ekibiyle sektörde güvenilir bir çözüm ortağıdır.
+        </p>
+        <a class="btn btn--navy" href="/hakkimizda/vizyon-misyon">
+          Vizyonumuzla Tanışın <Icon name="arrow" size={16} />
+        </a>
+      </div>
+      <p class="about-hero__since">
+        <span>{site.foundedYear}</span>
+        <span>Since</span>
       </p>
     </div>
   </section>
 
-  <section class="stats">
+  <section class="about-stats">
     <div class="container">
-      <ul class="stats__grid">
+      <ul class="about-stats__grid">
         {
           stats.map((stat) => (
-            <li class="stat">
-              <span class="stat__value">{stat.value}</span>
-              <span class="stat__label">{stat.label}</span>
+            <li class="about-stat">
+              <span class="about-stat__icon">
+                <Icon name={stat.icon} size={36} />
+              </span>
+              <span class="about-stat__value">{stat.value}</span>
+              {stat.unit && <span class="about-stat__unit">{stat.unit}</span>}
+              <span class="about-stat__label">{stat.label}</span>
             </li>
           ))
         }
@@ -49,103 +102,839 @@ const stats = [
     </div>
   </section>
 
-  <section class="more">
+  <section class="about-who">
+    <div class="container about-who__inner">
+      <div class="about-who__content reveal">
+        <div class="eyebrow">
+          <span class="eyebrow__bar"></span>
+          <span>BİZ KİMİZ?</span>
+        </div>
+        <h2>Yapının Her Aşamasında Deneyim ve Güven</h2>
+        <p>
+          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı
+          ölçeklerde birçok projeye imza atmıştır.
+        </p>
+        <p>
+          Konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde uzman ekibimizle taahhüt ve ince işler
+          hizmetleri sunuyor, edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya devam
+          ediyoruz.
+        </p>
+        <a class="btn btn--navy" href="/projeler">
+          Daha Fazla Bilgi <Icon name="arrow" size={16} />
+        </a>
+      </div>
+
+      <div class="about-who__media reveal reveal-d1">
+        <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
+        <div class="about-who__quote">
+          <span class="about-who__quote-mark" aria-hidden="true">“</span>
+          <p>Yaşam alanlarına değer katmak için çalışıyoruz.</p>
+          <span class="about-who__quote-line"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-values">
     <div class="container">
-      <p>
-        Şirketimizin görev, vizyon ve hedeflerini <a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a>{' '}
-        sayfamızda, belgelerimizi ise <a href="/belgeler">Belgelerimiz</a> sayfamızda bulabilirsiniz.
-      </p>
+      <div class="eyebrow about-values__eyebrow">
+        <span class="eyebrow__bar"></span>
+        <span>DEĞERLERİMİZ</span>
+      </div>
+      <ul class="about-values__grid">
+        {
+          values.map((value) => (
+            <li class="about-value reveal">
+              <span class="about-value__icon">
+                <Icon name={value.icon} size={30} />
+              </span>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-journey">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow__bar"></span>
+            <span>YOLCULUĞUMUZ</span>
+          </div>
+          <h2>{site.foundedYear}’dan Bugüne</h2>
+        </div>
+        <p>Her projede daha iyisini hedefleyerek, sektörde kalıcı ve sürdürülebilir değerler üretmeye devam ediyoruz.</p>
+      </div>
+
+      <ol class="timeline reveal">
+        {
+          timeline.map((item, index) => (
+            <li class:list={['timeline__item', { 'timeline__item--first': index === 0 }]}>
+              <span class="timeline__dot"></span>
+              <span class="timeline__year">{item.year}</span>
+              <span class="timeline__text">{item.text}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="about-expertise">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow__bar"></span>
+            <span>UZMANLIK ALANLARIMIZ</span>
+          </div>
+          <h2>Güçlü Yapılar, Güvenli Yarınlar</h2>
+        </div>
+        <p>Farklı sektörlerde edindiğimiz deneyimle, yaşam alanlarına değer katıyoruz.</p>
+      </div>
+
+      <ul class="about-expertise__grid">
+        {
+          expertise.map((item, index) => (
+            <li class={`reveal reveal-d${index}`}>
+              <a class="expertise-card" href="/projeler">
+                <img src={item.image} alt="" loading="lazy" />
+                <span class="expertise-card__title">{item.title}</span>
+                <span class="expertise-card__arrow">
+                  <Icon name="arrow" size={22} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-certs">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow__bar"></span>
+            <span>BELGELERİMİZ</span>
+          </div>
+          <h2>Kaliteyi Belgeliyoruz</h2>
+        </div>
+        <p>
+          ISO standartları ve {site.contractorLicenseGroup} grubu yüklenici yetki belgemiz ile kalite ve
+          sürdürülebilirlik ilkelerimizi taahhüt ediyoruz.
+        </p>
+      </div>
+
+      <ul class="about-certs__grid">
+        {
+          certificates.map((cert, index) => (
+            <li class={`cert-card reveal reveal-d${index}`}>
+              <span class="cert-card__icon">
+                <Icon name={cert.icon} size={32} />
+              </span>
+              <div>
+                <h3>{cert.title}</h3>
+                <p>{cert.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-cta">
+    <img class="about-cta__bg" src="/img/sayda-insaat-hero02.webp" alt="" loading="lazy" />
+    <div class="container about-cta__inner reveal">
+      <div>
+        <div class="eyebrow eyebrow--light">
+          <span class="eyebrow__bar"></span>
+          <span>DAHA GÜÇLÜ YARINLAR İÇİN</span>
+        </div>
+        <h2>Yeni projenizi birlikte hayata geçirelim.</h2>
+      </div>
+      <div class="about-cta__side">
+        <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
+        <a class="btn btn--white" href="/iletisim#quote-form">
+          Teklif Al <Icon name="arrow" size={16} />
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: 0;
+  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 72px);
   }
 
-  .intro .container {
-    max-width: 760px;
+  /* Shared bits */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--color-navy);
   }
 
-  .intro h1 {
-    font-size: var(--fs-h1);
+  .eyebrow__bar {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: currentColor;
   }
 
-  .intro__lead {
-    margin-top: var(--space-m);
+  .eyebrow--light {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 26px;
+    border-radius: var(--radius);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .btn--navy {
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .btn--navy:hover {
+    background: var(--color-navy);
+  }
+
+  .btn--white {
+    background: #fff;
+    color: var(--color-navy);
+  }
+
+  .btn--white:hover {
+    background: #e8e9f5;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 2.2vw + 1rem, 2.5rem);
+    color: var(--color-navy-deep);
+  }
+
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-l);
+    margin-bottom: 40px;
+  }
+
+  .section-head p {
+    max-width: 34ch;
+    font-size: var(--fs-small);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .section-head .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  /* Hero */
+  .about-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .about-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+  }
+
+  .about-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% center;
+  }
+
+  .about-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0) 45%),
+      linear-gradient(to top, var(--color-bg) 0%, rgba(255, 255, 255, 0) 22%);
+  }
+
+  .about-hero__script {
+    position: absolute;
+    top: 72px;
+    left: 52%;
+    z-index: 1;
+    font-family: var(--font-script);
+    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+    line-height: 1.1;
+    color: rgba(255, 255, 255, 0.85);
+    transform: rotate(-9deg);
+    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.35);
+  }
+
+  .about-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-height: 520px;
+    padding-block: 72px 56px;
+  }
+
+  .about-hero__content {
+    max-width: 480px;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+  }
+
+  .about-hero__lead {
+    margin-top: 16px;
+    font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+    line-height: 1.3;
+    color: var(--color-text-faint);
+  }
+
+  .about-hero__text {
+    margin-top: 20px;
+    font-size: var(--fs-small);
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .about-hero .btn {
+    margin-top: 28px;
+  }
+
+  .about-hero__since {
+    display: grid;
+    gap: 4px;
+    padding-left: 18px;
+    border-left: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 1px 8px rgba(19, 21, 74, 0.5);
+  }
+
+  .about-hero__since span:first-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  /* Stats */
+  .about-stats {
+    padding-block: 48px;
+  }
+
+  .about-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: var(--space-s);
+    text-align: center;
+  }
+
+  .about-stat + .about-stat {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .about-stat__icon {
+    display: grid;
+    place-items: center;
+    width: 84px;
+    height: 84px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    color: var(--color-navy);
+  }
+
+  .about-stat__value {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 2vw + 0.5rem, 2.25rem);
+    line-height: 1;
+    color: var(--color-navy-deep);
+  }
+
+  .about-stat__unit {
+    margin-top: 4px;
+    font-family: var(--font-heading);
     font-size: 1.125rem;
+    color: var(--color-navy-deep);
+  }
+
+  .about-stat__label {
+    margin-top: 10px;
+    font-size: var(--fs-small);
+    color: var(--color-text-faint);
+  }
+
+  /* Who we are */
+  .about-who {
+    padding-block: 64px;
+    background: var(--color-bg-light);
+  }
+
+  .about-who__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-who__content {
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+
+  .about-who__content h2 {
+    max-width: 18ch;
+  }
+
+  .about-who__content p {
+    font-size: var(--fs-small);
+    line-height: 1.75;
     color: var(--color-text-muted);
   }
 
-  .intro__body {
-    margin-top: var(--space-m);
-    font-size: var(--fs-body);
-    line-height: 1.8;
+  .about-who__content .btn {
+    margin-top: 6px;
+  }
+
+  .about-who__media {
+    position: relative;
+    margin-right: 24px;
+    padding-bottom: 24px;
+  }
+
+  .about-who__media img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .about-who__quote {
+    position: absolute;
+    right: -24px;
+    bottom: 0;
+    width: 220px;
+    padding: 24px;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+
+  .about-who__quote-mark {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 0.8;
+  }
+
+  .about-who__quote p {
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .about-who__quote-line {
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin-top: 18px;
+    background: #fff;
+  }
+
+  /* Values */
+  .about-values {
+    padding-block: 40px 48px;
+  }
+
+  .about-values__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-l);
+    text-align: center;
+  }
+
+  .about-value {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+  }
+
+  .about-value__icon {
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    color: var(--color-navy);
+  }
+
+  .about-value h3 {
+    margin-top: 6px;
+    font-size: 1rem;
+    color: var(--color-navy-deep);
+  }
+
+  .about-value p {
+    max-width: 24ch;
+    font-size: 0.8125rem;
+    line-height: 1.6;
     color: var(--color-text-muted);
   }
 
-  .stats {
-    padding-block: var(--space-xl);
+  /* Journey */
+  .about-journey {
+    padding-block: 56px;
+    background: var(--color-bg-light);
   }
 
-  .stats__grid {
+  .timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-m);
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-border);
+  }
+
+  .timeline__item {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    align-content: start;
+    padding-top: 28px;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .timeline__dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    box-shadow: 0 0 0 4px var(--color-bg-light);
+  }
+
+  .timeline__item--first .timeline__dot {
+    box-shadow:
+      0 0 0 4px var(--color-bg-light),
+      0 0 0 6px rgba(43, 46, 131, 0.25);
+  }
+
+  .timeline__year {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .timeline__text {
+    max-width: 22ch;
+    line-height: 1.5;
+  }
+
+  /* Expertise */
+  .about-expertise {
+    padding-block: 64px 72px;
+  }
+
+  .about-expertise__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-m);
   }
 
-  .stat {
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
+  .expertise-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
-  .stat__value {
-    display: block;
+  .expertise-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .expertise-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(19, 21, 74, 0.85) 0%, rgba(19, 21, 74, 0) 55%);
+  }
+
+  .expertise-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .expertise-card__title {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 1;
+    max-width: 9ch;
     font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-size: 1.0625rem;
+    line-height: 1.2;
+  }
+
+  .expertise-card__arrow {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .expertise-card:hover .expertise-card__arrow {
+    background: #fff;
     color: var(--color-navy);
   }
 
-  .stat__label {
-    display: block;
-    margin-top: 6px;
-    font-size: var(--fs-small);
+  /* Certificates */
+  .about-certs {
+    padding-block: 0 80px;
+  }
+
+  .about-certs__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+  }
+
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 20px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(17, 19, 24, 0.07);
+  }
+
+  .cert-card__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius);
+    background: var(--color-bg-light);
+    color: var(--color-navy);
+  }
+
+  .cert-card h3 {
+    font-size: 0.9375rem;
+    color: var(--color-navy-deep);
+  }
+
+  .cert-card p {
+    margin-top: 4px;
+    font-size: 0.75rem;
     color: var(--color-text-faint);
   }
 
-  .more {
-    padding-block: 0 var(--space-xxl);
+  /* CTA */
+  .about-cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: 88px;
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
-  .more .container {
-    max-width: 760px;
+  .about-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    mix-blend-mode: luminosity;
   }
 
-  .more p {
+  .about-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(25, 27, 74, 0.92), rgba(25, 27, 74, 0.6));
+  }
+
+  .about-cta__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .about-cta h2 {
+    max-width: 14ch;
+    font-size: clamp(1.75rem, 2.6vw + 1rem, 2.75rem);
+    color: #fff;
+  }
+
+  .about-cta__side {
+    display: grid;
+    gap: 24px;
+    justify-items: start;
+  }
+
+  .about-cta__side p {
+    max-width: 34ch;
     font-size: var(--fs-small);
-    color: var(--color-text-muted);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
   }
 
-  .more a {
-    color: var(--color-navy);
-    font-weight: 700;
-  }
-
-  .more a:hover {
-    text-decoration: underline;
-  }
-
+  /* Responsive */
   @media (max-width: 1024px) {
-    .stats__grid {
+    .about-hero__media {
+      width: 100%;
+    }
+
+    .about-hero__media::after {
+      background: linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0.7) 55%, rgba(255, 255, 255, 0.2) 100%);
+    }
+
+    .about-hero__script {
+      display: none;
+    }
+
+    .about-hero__since {
+      display: none;
+    }
+
+    .about-who__inner,
+    .about-cta__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-l);
+    }
+
+    .about-values__grid,
+    .about-expertise__grid,
+    .about-certs__grid {
       grid-template-columns: 1fr 1fr;
+    }
+
+    .timeline {
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: var(--space-l);
+    }
+
+    .timeline::before {
+      display: none;
     }
   }
 
   @media (max-width: 640px) {
-    .stats__grid {
+    .about-hero__inner {
+      min-height: 0;
+      padding-block: 56px 48px;
+    }
+
+    .about-stats__grid {
+      grid-template-columns: 1fr 1fr;
+      row-gap: var(--space-l);
+    }
+
+    .about-stat:nth-child(odd) {
+      border-left: 0;
+    }
+
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-s);
+    }
+
+    .about-who__media {
+      margin-right: 0;
+    }
+
+    .about-who__media img {
+      height: 260px;
+    }
+
+    .about-who__quote {
+      right: 12px;
+      width: 190px;
+      padding: 18px;
+    }
+
+    .about-values__grid,
+    .about-certs__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline {
       grid-template-columns: 1fr 1fr;
     }
   }

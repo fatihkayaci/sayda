@@ -1,17 +1,33 @@
 ---
+import '../../styles/services.css';
 import Layout from '../../layouts/Layout.astro';
-import ServiceHero from '../../components/service/ServiceHero.astro';
+import Icon from '../../components/Icon.astro';
+import ServiceTopbar from '../../components/service/ServiceTopbar.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
-import ServicePanel from '../../components/service/ServicePanel.astro';
-import ProcessSteps from '../../components/service/ProcessSteps.astro';
-import ChecklistBox from '../../components/service/ChecklistBox.astro';
-import Callout from '../../components/service/Callout.astro';
+
+const ozellikler = [
+  { icon: 'shield', text: 'Kesintisiz İşletme Desteği' },
+  { icon: 'gear', text: 'Modern & Fonksiyonel Mekanlar' },
+  { icon: 'team', text: 'Uzman Ekip Güvencesi' },
+];
 
 const steps = [
-  { title: 'Oda & Süit Yenileme', description: 'Zemin, duvar, tavan, banyo armatürleri, mobilya ve aydınlatma tamamen yenilenir.' },
-  { title: 'Lobi & Ortak Alanlar', description: 'Resepsiyon, lobi, koridor, restoran ve toplantı alanları yenilenir.' },
-  { title: 'Teknik Altyapı', description: 'Elektrik, tesisat, ısıtma-soğutma sistemleri, yangın tesisat güncellenir.' },
-  { title: 'Fasad & Dış Cephe', description: 'Cephe kaplama, mantolama ve peyzaj düzenlemesi dahil dış görünüm iyileştirme.' },
+  {
+    title: 'Oda & Süit Yenileme',
+    description: 'Zemin, duvar, tavan, banyo armatürleri, mobilya ve iç dekorasyonun modern standartlara uygun olarak yenilenmesi.',
+  },
+  {
+    title: 'Lobi & Ortak Alanlar',
+    description: 'Resepsiyon, lobi, restoran, toplantı ve sosyal alanların yeniden tasarlanması ve uygulanması.',
+  },
+  {
+    title: 'Teknik Altyapı',
+    description: 'Elektrik, mekanik, sıhhi tesisat ve iklimlendirme sistemlerinin yenilenmesi, enerji verimliliğinin artırılması.',
+  },
+  {
+    title: 'Fasad & Dış Cephe',
+    description: 'Cephe kaplama, ısı ve su yalıtımı, aydınlatma ve dış mekan düzenlemeleri ile otelin prestijinin güçlendirilmesi.',
+  },
 ];
 
 const surdurulebilirlik = [
@@ -20,36 +36,692 @@ const surdurulebilirlik = [
   'Misafir odası önceliklendirme',
   'Toz & gürültü yönetimi',
 ];
+
+const avantajlar = [
+  { icon: 'chart', title: 'Artan Misafir Memnuniyeti', text: 'Daha modern ve konforlu yaşam alanları' },
+  { icon: 'leaf', title: 'Uzun Ömürlü Çözümler', text: 'Kaliteli malzeme ve uzman uygulama' },
+  { icon: 'clock', title: 'Zamanında Teslimat', text: 'Planlı süreç ve etkin koordinasyon' },
+  { icon: 'team', title: 'Tek Noktadan Yönetim', text: 'Tasarım, uygulama ve denetim bir arada' },
+];
 ---
 
 <Layout
   title="Otel Renovasyonu | Sayda İnşaat"
   description="İşletme faaliyetini aksatmadan planlanan, kapsamlı otel yenileme ve modernizasyon projeleri."
+  hideCtaBanner
 >
-  <ServiceHero />
+  <section class="svc-main svc-main--soft ot-page">
+    <ServiceTopbar />
 
-  <section class="svc-main">
     <div class="container svc-main__layout">
-      <ServiceSidebar active={4} />
+      <ServiceSidebar
+        active={4}
+        cards
+        ctaEyebrow="PROJENİZ İÇİN"
+        ctaTitle="Bu hizmet için teklif almak ister misiniz?"
+        ctaText="Uzman ekibimiz projenizi değerlendirsin, en uygun çözümü sunalım."
+        ctaImage="/img/sayda-insaat-hero01.webp"
+        caption="DAHA İYİ YAŞAM ALANLARI İNŞA EDİYORUZ."
+      />
 
-      <ServicePanel
-        number="05"
-        title="Otel Renovasyonu"
-        lead="İşletme faaliyetini aksatmadan, bölüm bölüm çalışarak kapsamlı otel yenileme ve modernizasyon projeleri gerçekleştiriyoruz. Hızlı ve titiz."
-      >
-        <ProcessSteps heading="Yenileme Kapsamı" steps={steps} color="navy-deep" />
-        <ChecklistBox
-          heading="İşletme Sürekliliği Taahhüdü"
-          lead="Oteliniz açık kalırken aşamalı çalışma ile kesinti minimuma indirilir. Gürültü yönetimi, toz önlemi ve misafir konfor planı hazırlanır."
-          items={surdurulebilirlik}
-          iconFill="#fff"
-        />
-        <Callout
-          title="Referans"
-          text="Piazza AVM & Anamon Otel (Samsun, 135.000 m²) projesinde Rönesans Teknik İnşaat A.Ş. bünyesinde edinilen kapsamlı otel yenileme deneyimi."
-        />
-      </ServicePanel>
+      <div class="ot-card">
+        <header class="ot-head">
+          <img
+            class="ot-head__image"
+            src="/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp"
+            alt=""
+            fetchpriority="high"
+          />
+          <div class="ot-head__text">
+            <div class="ot-eyebrow">
+              <span></span>
+              HİZMET 05
+            </div>
+            <h1>Otel Renovasyonu</h1>
+            <p>
+              İşletme faaliyetleri aksatılmadan, bölüm bölüm çalışarak konaklama deneyimini modernize ediyor,
+              otelinize yeniden değer katıyoruz. Konfor, estetik ve fonksiyonelliği bir arada sunarak misafir
+              memnuniyetini en üst seviyeye çıkarıyoruz.
+            </p>
+
+            <ul class="ot-features">
+              {
+                ozellikler.map((item) => (
+                  <li>
+                    <span class="ot-features__icon">
+                      <Icon name={item.icon} size={30} />
+                    </span>
+                    {item.text}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <p class="ot-head__quote" aria-hidden="true">
+            Daha konforlu<br />deneyimler,<br />daha güçlü yarınlar.
+            <span></span>
+          </p>
+        </header>
+
+        <section class="ot-scope">
+          <div class="ot-scope__head">
+            <div>
+              <div class="ot-eyebrow ot-eyebrow--small">
+                <span></span>
+                YENİLEME KAPSAMI
+              </div>
+              <h2>Profesyonel ve Planlı Bir Süreç</h2>
+            </div>
+            <p>
+              Otelinizin tüm alanlarını, deneyimli ekibimizle planlı şekilde yeniliyor, kalite ve estetiği kalıcı
+              hale getiriyoruz.
+            </p>
+          </div>
+
+          <div class="ot-scope__body">
+            <ol class="ot-steps">
+              {
+                steps.map((step, index) => (
+                  <li>
+                    <span class="ot-steps__num">{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.description}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+
+            <div class="ot-photos" aria-hidden="true">
+              <img src="/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp" alt="" loading="lazy" />
+              <img src="/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-03.webp" alt="" loading="lazy" />
+            </div>
+          </div>
+        </section>
+
+        <section class="ot-promise">
+          <span class="ot-promise__icon">
+            <Icon name="shield" size={45} />
+          </span>
+          <div class="ot-promise__text">
+            <h2>İşletme Sürekliliği Taahhüdü</h2>
+            <p>
+              Oteliniz açık kalırken, misafir memnuniyetini ön planda tutarak yenileme çalışmalarını aşamalı şekilde
+              yürütüyoruz. Gürültü, toz ve operasyonel etkiyi minimuma indiriyor, misafir konforunu kesintisiz
+              sürdürüyoruz.
+            </p>
+          </div>
+          <ul class="ot-promise__list">
+            {
+              surdurulebilirlik.map((item) => (
+                <li>
+                  <span class="ot-check">
+                    <Icon name="check" size={16} />
+                  </span>
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <section class="ot-benefits">
+          <h2 class="ot-benefits__title">
+            <span></span>
+            Avantajlarımız
+          </h2>
+          <ul>
+            {
+              avantajlar.map((item) => (
+                <li>
+                  <span class="ot-benefits__icon">
+                    <Icon name={item.icon} size={34} />
+                  </span>
+                  <span class="ot-benefits__text">
+                    <strong>{item.title}</strong>
+                    {item.text}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <aside class="ot-reference">
+          <span class="ot-reference__icon">
+            <Icon name="building" size={49} />
+          </span>
+          <div class="ot-reference__text">
+            <h2>Referans</h2>
+            <p>
+              Piazza AVM &amp; Anamon Otel (Samsun, 135.000 m²) projesinde Rönesans Teknik İnşaat A.Ş. bünyesinde
+              edinilen kapsamlı otel yenileme deneyimi.
+            </p>
+          </div>
+          <a href="/projeler">
+            Benzer Projelerimizi İnceleyin <Icon name="arrow" size={18} />
+          </a>
+        </aside>
+      </div>
     </div>
   </section>
 </Layout>
 
+<style>
+  .ot-page {
+    padding-top: 0;
+    padding-bottom: 81px;
+  }
+
+  .ot-card {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(43, 46, 131, 0.08);
+  }
+
+  .ot-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 16px;
+    font-size: 0.77rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--color-navy);
+  }
+
+  .ot-eyebrow span {
+    display: block;
+    width: 45px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .ot-eyebrow--small {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+  }
+
+  /* Head */
+  .ot-head {
+    position: relative;
+    min-height: 381px;
+    overflow: hidden;
+  }
+
+  .ot-head__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 58%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  }
+
+  .ot-head::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 auto;
+    width: 45%;
+    height: 45%;
+    background: linear-gradient(to top, rgba(25, 27, 74, 0.75), rgba(25, 27, 74, 0));
+    pointer-events: none;
+  }
+
+  .ot-head__text {
+    position: relative;
+    z-index: 1;
+    max-width: 62%;
+    padding: 40px 36px 36px 45px;
+  }
+
+  .ot-head h1 {
+    margin-bottom: 21px;
+    font-size: clamp(2.24rem, 4.032vw, 3.64rem);
+    line-height: 1.05;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-head__text p {
+    max-width: 52ch;
+    font-size: 1.12rem;
+    line-height: 1.7;
+    color: var(--color-navy);
+  }
+
+  .ot-features {
+    display: flex;
+    gap: 0;
+    margin-top: 45px;
+  }
+
+  .ot-features li {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-inline: 21px;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-features li:first-child {
+    padding-left: 0;
+  }
+
+  .ot-features li + li {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ot-features li {
+    max-width: 213px;
+  }
+
+  .ot-features__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 54px;
+    height: 54px;
+    border: 1px solid var(--color-navy);
+    border-radius: 50%;
+    color: var(--color-navy);
+  }
+
+  .ot-head__quote {
+    position: absolute;
+    right: 28px;
+    bottom: 32px;
+    z-index: 1;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: #fff;
+  }
+
+  .ot-head__quote span {
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin-top: 21px;
+    background: #fff;
+  }
+
+  /* Scope */
+  .ot-scope {
+    padding: 40px 45px 40px;
+  }
+
+  .ot-scope__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-l);
+    margin-bottom: 31px;
+  }
+
+  .ot-scope h2 {
+    font-size: clamp(1.68rem, 2.688vw, 2.38rem);
+    color: var(--color-navy-deep);
+  }
+
+  .ot-scope__head p {
+    max-width: 38ch;
+    padding: 4px 0 4px 27px;
+    border-left: 1px solid var(--color-border);
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .ot-scope__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 314px;
+    gap: 45px;
+    align-items: start;
+  }
+
+  .ot-steps {
+    display: grid;
+    gap: 31px;
+    list-style: none;
+  }
+
+  .ot-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 25px;
+  }
+
+  .ot-steps li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 58px;
+    bottom: -24px;
+    left: 23px;
+    width: 1px;
+    background: rgba(43, 46, 131, 0.25);
+  }
+
+  .ot-steps__num {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--color-navy);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.12rem;
+  }
+
+  .ot-steps h3 {
+    margin-bottom: 7px;
+    font-family: var(--font-body);
+    font-size: 1.19rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-steps p {
+    max-width: 52ch;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .ot-photos {
+    display: grid;
+    gap: 9px;
+  }
+
+  .ot-photos img {
+    width: 100%;
+    height: 213px;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+
+  /* Promise */
+  .ot-promise {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) 291px;
+    gap: 27px;
+    align-items: center;
+    margin: 0 45px;
+    padding: 31px 36px;
+    border-radius: 4px;
+    background: #f6f7fc;
+  }
+
+  .ot-promise__icon {
+    color: var(--color-navy);
+  }
+
+  .ot-promise h2 {
+    margin-bottom: 12px;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-promise__text p {
+    max-width: 62ch;
+    font-size: 0.91rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .ot-promise__list {
+    display: grid;
+    gap: 16px;
+    padding-left: 27px;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ot-promise__list li {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+  }
+
+  .ot-check {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+    background: #dfe2f6;
+    color: var(--color-navy);
+  }
+
+  /* Benefits */
+  .ot-benefits {
+    padding: 40px 45px 9px;
+  }
+
+  .ot-benefits__title {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+    font-family: var(--font-body);
+    font-size: 1.54rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-benefits__title span {
+    width: 54px;
+    height: 2px;
+    background: var(--color-navy);
+  }
+
+  .ot-benefits ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ot-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-inline: 18px;
+  }
+
+  .ot-benefits li:first-child {
+    padding-left: 0;
+  }
+
+  .ot-benefits li + li {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ot-benefits__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eef0f9;
+    color: var(--color-navy);
+  }
+
+  .ot-benefits__text {
+    display: grid;
+    gap: 4px;
+    font-size: 0.77rem;
+    line-height: 1.45;
+    color: var(--color-text-faint);
+  }
+
+  .ot-benefits__text strong {
+    font-size: 0.91rem;
+    line-height: 1.3;
+    color: var(--color-navy-deep);
+  }
+
+  /* Reference */
+  .ot-reference {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 27px;
+    align-items: center;
+    margin: 36px 45px 45px;
+    padding: 27px 36px;
+    border-radius: 4px;
+    background: #f6f7fc;
+  }
+
+  .ot-reference__icon {
+    color: var(--color-navy);
+  }
+
+  .ot-reference h2 {
+    margin-bottom: 7px;
+    font-family: var(--font-body);
+    font-size: 1.26rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-reference__text p {
+    max-width: 64ch;
+    font-size: 0.91rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .ot-reference a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 0 7px 31px;
+    border-left: 1px solid var(--color-border);
+    font-size: 0.91rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ot-reference a:hover {
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1200px) {
+    .ot-head__text {
+      max-width: 100%;
+    }
+
+    .ot-head__image {
+      width: 100%;
+      opacity: 0.25;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .ot-head__quote,
+    .ot-head::after {
+      display: none;
+    }
+
+    .ot-features {
+      flex-wrap: wrap;
+      row-gap: 18px;
+    }
+
+    .ot-scope__body {
+      grid-template-columns: 1fr;
+    }
+
+    .ot-photos {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ot-promise {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .ot-promise__list {
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr 1fr;
+      padding: 22px 0 0;
+      border-left: 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .ot-benefits ul {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 27px;
+    }
+
+    .ot-benefits li:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .ot-scope,
+    .ot-benefits {
+      padding-inline: 22px;
+    }
+
+    .ot-head__text {
+      padding: 31px 22px;
+    }
+
+    .ot-scope__head {
+      flex-direction: column;
+      gap: var(--space-s);
+    }
+
+    .ot-scope__head p {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .ot-promise,
+    .ot-reference {
+      margin-inline: 18px;
+      padding: 25px 22px;
+    }
+
+    .ot-reference {
+      grid-template-columns: 1fr;
+    }
+
+    .ot-reference a {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ot-photos,
+    .ot-promise__list,
+    .ot-benefits ul {
+      grid-template-columns: 1fr;
+    }
+
+    .ot-benefits li {
+      padding-left: 0 !important;
+      border-left: 0 !important;
+    }
+
+    .ot-promise {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

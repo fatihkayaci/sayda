@@ -1,10 +1,11 @@
 ---
+import '../../styles/services.css';
 import Layout from '../../layouts/Layout.astro';
-import ServiceHero from '../../components/service/ServiceHero.astro';
+import ServiceTopbar from '../../components/service/ServiceTopbar.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
 import ServicePanel from '../../components/service/ServicePanel.astro';
 import ChecklistBox from '../../components/service/ChecklistBox.astro';
-import Callout from '../../components/service/Callout.astro';
+import Icon from '../../components/Icon.astro';
 
 const partners = [
   'Kiler GYO',
@@ -29,124 +30,262 @@ const uzmanlik = [
   'Teras & çatı şap',
 ];
 
+const istatistikler = [
+  { icon: 'chart', value: '4,25M+', label: 'M² TAMAMLANAN ALAN' },
+  { icon: 'helmet', value: '14+', label: 'BÜYÜK PROJE' },
+  { icon: 'star', value: '30+', label: 'YIL DENEYİM' },
+];
 ---
 
 <Layout
   title="Alt Müteahhitlik | Sayda İnşaat"
   description="Ana yükleniciye bağlı olarak kaba veya ince yapı işlerinin taşeronluğu."
+  hideCtaBanner
 >
-  <ServiceHero />
+  <section class="svc-main svc-main--soft alt-page">
+    <ServiceTopbar slogan="YAPILARDA DAİMA DAHA FAZLASI" />
 
-  <section class="svc-main">
     <div class="container svc-main__layout">
-      <ServiceSidebar active={1} />
+      <ServiceSidebar
+        active={1}
+        cards
+        ctaEyebrow="PROJENİZ İÇİN"
+        ctaTitle="Uzman ekibimiz yanınızda."
+        ctaText="Projenizin ihtiyaçlarını birlikte değerlendirelim, en uygun çözümü sunalım."
+        ctaImage="/img/sayda-insaat-hero01.webp"
+        caption="GÜVENLİ YAPILAR, DAHA İYİ YARINLAR."
+      />
 
       <ServicePanel
         number="02"
         title="Alt Müteahhitlik"
+        titleTag="h1"
+        card
+        cornerImage="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp"
         lead="Ana yükleniciye bağlı olarak kaba yapı veya ince işlerin profesyonel taşeronluğunu üstleniyoruz. Büyük ölçekli projelerde uzun soluklu iş ortaklıkları kuruyoruz."
+        tagline="“Güçlü iş birlikleri, kalıcı yapılar.”"
+        taglineVariant="quote"
       >
-        <h3 class="partners__heading">Referans İş Ortaklarımız</h3>
+        <h2 class="alt-heading">
+          <Icon name="team" size={34} />
+          Referans İş Ortaklarımız
+        </h2>
         <div class="partners__grid">
           {partners.map((p) => <div class="partners__item">{p}</div>)}
         </div>
 
-        <ChecklistBox heading="Uzmanlık Alanları" items={uzmanlik} />
-
-        <div class="stats-cards">
-          <div class="stats-card">
-            <span class="stats-card__value">4,25M+</span>
-            <span class="stats-card__label">M² TAMAMLANAN ALAN</span>
-          </div>
-          <div class="stats-card">
-            <span class="stats-card__value">14+</span>
-            <span class="stats-card__label">BÜYÜK PROJE</span>
-          </div>
-          <div class="stats-card">
-            <span class="stats-card__value">30+</span>
-            <span class="stats-card__label">YIL DENEYİM</span>
-          </div>
+        <div class="alt-skills">
+          <ChecklistBox heading="Uzmanlık Alanları" items={uzmanlik} />
+          <p class="alt-skills__caption" aria-hidden="true">DETAYDA KALİTE,<br />YAPIDA GÜVEN</p>
         </div>
 
-        <Callout
-          title="Avantajımız"
-          text="Kiler GYO, Biskon Yapı, CCN ve Özak gibi Türkiye'nin en büyük inşaat gruplarıyla uzun vadeli iş ortaklığı deneyimi."
-        />
+        <div class="stats-cards">
+          {
+            istatistikler.map((stat) => (
+              <div class="stats-card">
+                <span class="stats-card__icon">
+                  <Icon name={stat.icon} size={34} />
+                </span>
+                <span class="stats-card__text">
+                  <span class="stats-card__value">{stat.value}</span>
+                  <span class="stats-card__label">{stat.label}</span>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="alt-advantage">
+          <h2 class="alt-heading">
+            <Icon name="diamond" size={34} />
+            Avantajımız
+          </h2>
+          <p>
+            Kiler GYO, Biskon Yapı, CCN ve Özak gibi Türkiye'nin en büyük inşaat gruplarıyla uzun vadeli iş
+            ortaklığı deneyimi.
+          </p>
+          <p class="alt-advantage__caption" aria-hidden="true">
+            <span></span>
+            DAHA FAZLASI<br />İÇİN ÇALIŞIYORUZ.
+          </p>
+        </div>
       </ServicePanel>
     </div>
   </section>
 </Layout>
 
 <style>
-  .partners__heading {
-    font-size: 16px;
+  .alt-page {
+    padding-top: 0;
+  }
+
+  .alt-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 22px;
+    font-family: var(--font-body);
+    font-size: 1.68rem;
     font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 28px;
+    color: var(--color-navy-deep);
+  }
+
+  .alt-heading :global(svg) {
+    flex: none;
+    color: var(--color-navy);
   }
 
   .partners__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 13px;
     margin-bottom: 40px;
   }
 
   .partners__item {
-    padding: 16px 20px;
-    background: var(--color-bg-light);
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 14px 22px;
+    border-radius: 3px;
+    background: #f3f5fa;
+    font-size: 0.98rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-navy-deep);
     text-align: center;
+  }
+
+  .alt-skills {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 27px;
+    border-radius: 4px;
+    background: #f6f7fc;
+  }
+
+  .alt-skills :global(.checklist-box) {
+    margin: 0;
+    background: transparent;
+    padding: 31px 336px 31px 36px;
+  }
+
+  .alt-skills__caption {
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    width: 246px;
+    padding-left: 40px;
+    border-left: 1px solid rgba(43, 46, 131, 0.35);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.12rem;
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    transform: translateY(-50%);
   }
 
   .stats-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 22px;
     margin-bottom: 40px;
   }
 
   .stats-card {
-    text-align: center;
-    padding: 28px 16px;
-    background: #191b4a;
-    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 27px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  .stats-card__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #eef0f9;
+    color: var(--color-navy);
+  }
+
+  .stats-card__text {
+    display: grid;
+    gap: 4px;
   }
 
   .stats-card__value {
-    font-family: 'Archivo Black', sans-serif;
-    font-size: 36px;
-    color: #fff;
-    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.96rem;
     line-height: 1;
+    color: var(--color-navy-deep);
   }
 
   .stats-card__label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.84rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .alt-advantage {
+    position: relative;
+  }
+
+  .alt-advantage .alt-heading {
+    margin-bottom: 12px;
+  }
+
+  .alt-advantage p:not(.alt-advantage__caption) {
+    max-width: 62ch;
+    padding-left: 52px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .alt-advantage__caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    justify-items: end;
+    gap: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    line-height: 1.6;
+    text-align: right;
+    color: var(--color-text-faint);
+  }
+
+  .alt-advantage__caption span {
+    width: 49px;
+    height: 1px;
+    background: var(--color-navy);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 1100px) {
+    .alt-skills :global(.checklist-box) {
+      padding-right: 36px;
+    }
+
+    .alt-skills__caption {
+      display: none;
+    }
   }
 
   @media (max-width: 900px) {
     .partners__grid {
       grid-template-columns: 1fr 1fr;
     }
-  }
 
-  @media (max-width: 640px) {
     .stats-cards {
       grid-template-columns: 1fr;
     }
 
-    .stats-card {
-      padding: 20px 16px;
-    }
-
-    .stats-card__value {
-      font-size: 28px;
+    .alt-advantage__caption {
+      display: none;
     }
   }
 

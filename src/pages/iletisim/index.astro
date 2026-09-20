@@ -1,82 +1,734 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
-import QuoteForm from '../../components/home/QuoteForm.astro';
+import services from '../../data/services.json';
 import site from '../../data/site.json';
+
+const mapsQuery = encodeURIComponent(`${site.address.street} ${site.address.neighborhood} ${site.address.district} ${site.address.city}`);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+// Tarabya / Sarıyer civarı (yaklaşık konum; kesin koordinat girildiğinde güncellenmeli).
+const lat = 41.1436;
+const lon = 29.0583;
+const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.018}%2C${lat - 0.009}%2C${lon + 0.018}%2C${lat + 0.009}&layer=mapnik&marker=${lat}%2C${lon}`;
+
+const cards = [
+  {
+    icon: 'pin',
+    title: 'Adresimiz',
+    lines: [site.address.street, `${site.address.neighborhood} / ${site.address.district}, ${site.address.city} ${site.address.postalCode}`],
+  },
+  { icon: 'phone', title: 'Telefon', lines: [site.phone], href: site.phoneHref },
+  { icon: 'mail', title: 'E-posta', lines: [site.email], href: `mailto:${site.email}` },
+  { icon: 'clock', title: 'Çalışma Saatleri', lines: site.workingHours },
+];
 ---
 
-<Layout title="İletişim | Sayda İnşaat" description="Sayda İnşaat iletişim bilgileri ve teklif formu." organizationSchema hideCtaBanner>
-  <section class="iletisim">
-    <div class="container">
+<Layout
+  title="İletişim | Sayda İnşaat"
+  description="Sayda İnşaat iletişim bilgileri ve teklif formu."
+  organizationSchema
+  hideCtaBanner
+>
+  <section class="ct-hero">
+    <div class="ct-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
+
+    <div class="container ct-hero__inner">
+      <nav class="ct-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Anasayfa</a>
+        <span>/</span>
+        <span aria-current="page">İletişim</span>
+      </nav>
+
+      <div class="ct-eyebrow">
+        <span></span>
+        BİZE ULAŞIN
+      </div>
       <h1>İletişim</h1>
-      <p class="iletisim__legal-name">{site.legalName}</p>
-      <ul class="iletisim__list">
-        <li>
-          <Icon name="pin" size={20} />
-          <span>{site.address.street}, {site.address.neighborhood} / {site.address.district}, {site.address.city} {site.address.postalCode}</span>
-        </li>
-        <li>
-          <Icon name="phone" size={20} />
-          <a href={site.phoneHref}>{site.phone}</a>
-        </li>
-        <li>
-          <Icon name="mail" size={20} />
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </li>
-        {
-          site.social.instagram && (
-            <li>
-              <Icon name="instagram" size={20} />
-              <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-            </li>
-          )
-        }
-        {
-          site.social.linkedin && (
-            <li>
-              <Icon name="linkedin" size={20} />
-              <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </li>
-          )
-        }
-      </ul>
+      <p class="ct-hero__lead">
+        Projelerimiz, hizmetlerimiz veya iş birlikleri için bizimle iletişime geçebilirsiniz. Ekibimiz en kısa
+        sürede size dönüş yapacaktır.
+      </p>
+
+      <p class="ct-hero__quote" aria-hidden="true">“Daha yaşanabilir<br />şehirler için<br />birlikte çalışalım.”</p>
     </div>
   </section>
 
-  <QuoteForm />
+  <section class="ct-main">
+    <div class="container">
+      <ul class="ct-cards">
+        {
+          cards.map((card) => (
+            <li>
+              <span class="ct-cards__icon">
+                <Icon name={card.icon} size={25} />
+              </span>
+              <div>
+                <h2>{card.title}</h2>
+                {card.lines.map((line) => (
+                  <p>{card.href ? <a href={card.href}>{line}</a> : line}</p>
+                ))}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="ct-grid">
+        <div class="ct-map">
+          <iframe
+            title="Sayda İnşaat konumu"
+            src={mapSrc}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <div class="ct-map__card">
+            <Icon name="pin" size={30} />
+            <div>
+              <strong>{site.name}</strong>
+              <span>{site.address.neighborhood} / {site.address.city}</span>
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+                Haritada Gör <Icon name="arrow" size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ct-form" id="quote-form">
+          <div class="ct-eyebrow ct-eyebrow--small">
+            <span></span>
+            MESAJ GÖNDERİN
+          </div>
+          <h2>Sizinle İletişime Geçelim</h2>
+          <p class="ct-form__lead">Aşağıdaki formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
+
+          <form id="contactForm">
+            <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+            <input type="checkbox" name="botcheck" class="ct-form__honeypot" tabindex="-1" autocomplete="off" />
+
+            <div class="ct-form__row">
+              <label>
+                <span>Ad Soyad *</span>
+                <input type="text" name="name" placeholder="Adınız ve soyadınız" required autocomplete="name" />
+              </label>
+              <label>
+                <span>Telefon *</span>
+                <input type="tel" name="phone" placeholder="+90 5XX XXX XX XX" required autocomplete="tel" />
+              </label>
+            </div>
+
+            <div class="ct-form__row">
+              <label>
+                <span>E-posta *</span>
+                <input type="email" name="email" placeholder="ornek@sayda.com.tr" required autocomplete="email" />
+              </label>
+              <label>
+                <span>İlgilendiğiniz Hizmet</span>
+                <select name="service">
+                  <option value="">Seçiniz</option>
+                  {services.map((service) => <option value={service.title}>{service.title}</option>)}
+                  <option value="Diğer">Diğer</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              <span>Mesajınız *</span>
+              <textarea name="message" rows="4" placeholder="Mesajınızı buraya yazın..." required></textarea>
+            </label>
+
+            <label class="ct-form__consent">
+              <input type="checkbox" name="kvkk" required />
+              <span>
+                <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni
+                okudum, kişisel verilerimin işlenmesini kabul ediyorum.
+              </span>
+            </label>
+
+            <div class="ct-form__actions">
+              <button type="submit">
+                Mesaj Gönder <Icon name="arrow" size={18} />
+              </button>
+              <p class="ct-form__secure">
+                <Icon name="lock" size={16} />
+                Bilgileriniz güvenle saklanır.
+              </p>
+            </div>
+
+            <p class="ct-form__status" id="contactStatus" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {
+    site.offices.length > 0 && (
+      <section class="ct-offices">
+        <div class="container">
+          <div class="ct-offices__head">
+            <h2>Ofislerimiz</h2>
+            <p>Türkiye'nin farklı bölgelerinde projeler geliştiriyor, sizinle daha yakın oluyoruz.</p>
+          </div>
+
+          <ul class="ct-offices__grid">
+            {site.offices.map((office) => (
+              <li>
+                <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+                  <img src="/img/sayda-insaat-hero01.webp" alt="" loading="lazy" />
+                  <span>
+                    <strong>{office.name}</strong>
+                    {office.street}
+                    <br />
+                    {office.area}
+                  </span>
+                  <Icon name="arrow" size={21} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 </Layout>
 
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contactForm') as HTMLFormElement | null;
+    const status = document.getElementById('contactStatus');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
+      if (!accessKey) {
+        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
+        status.setAttribute('data-state', 'error');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitButton.disabled = true;
+      status.textContent = 'Gönderiliyor...';
+      status.removeAttribute('data-state');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        const result = await res.json();
+
+        if (!result.success) throw new Error(result.message ?? 'Unknown error');
+        status.textContent = 'Teşekkürler, talebiniz alındı. En kısa sürede dönüş yapacağız.';
+        status.setAttribute('data-state', 'success');
+        form.reset();
+      } catch {
+        status.textContent = 'Gönderilemedi, lütfen telefonla ulaşın.';
+        status.setAttribute('data-state', 'error');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
+</script>
+
 <style>
-  .iletisim {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: 0;
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .iletisim .container {
-    max-width: 760px;
-  }
-
-  .iletisim h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .iletisim__legal-name {
-    margin-top: var(--space-s);
-    color: var(--color-text-faint);
-    font-size: var(--fs-small);
-  }
-
-  .iletisim__list {
-    margin-top: var(--space-l);
+  .ct-eyebrow {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 13px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--color-navy);
   }
 
-  .iletisim__list li {
+  .ct-eyebrow span {
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .ct-eyebrow--small {
+    font-size: 0.7rem;
+    margin-bottom: 9px;
+  }
+
+  /* Hero */
+  .ct-hero {
+    position: relative;
+    overflow: hidden;
+    background: #eef2f9;
+  }
+
+  .ct-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 58%;
+  }
+
+  .ct-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% top;
+  }
+
+  .ct-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0) 48%);
+  }
+
+  .ct-hero__inner {
+    position: relative;
+    padding-block: 36px 49px;
+  }
+
+  .ct-hero__breadcrumb {
+    display: flex;
+    gap: 13px;
+    margin-bottom: 30px;
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+  }
+
+  .ct-hero__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .ct-hero h1 {
+    margin-bottom: 18px;
+    font-size: clamp(2.52rem, 4.928vw, 3.92rem);
+    line-height: 1.05;
+    color: var(--color-text);
+  }
+
+  .ct-hero__lead {
+    max-width: 52ch;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+
+  .ct-hero__quote {
+    position: absolute;
+    top: 50%;
+    right: clamp(20px, 4vw, 72px);
+    padding-left: 21px;
+    border-left: 3px solid rgba(255, 255, 255, 0.9);
+    font-size: 1.26rem;
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.5);
+    transform: translateY(-50%);
+  }
+
+  /* Main */
+  .ct-main {
+    padding-block: 21px 36px;
+    background: #f4f6fb;
+  }
+
+  .ct-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 21px;
+  }
+
+  .ct-cards li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 25px 27px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
+  }
+
+  .ct-cards__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .ct-cards h2 {
+    margin-bottom: 4px;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-cards p {
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .ct-cards a:hover {
+    color: var(--color-navy);
+    text-decoration: underline;
+  }
+
+  .ct-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: stretch;
+  }
+
+  .ct-map {
+    position: relative;
+    min-height: 470px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #e3e8f2;
+  }
+
+  .ct-map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .ct-map__card {
+    position: absolute;
+    top: 18px;
+    left: 20px;
     display: flex;
     align-items: flex-start;
-    gap: var(--space-s);
-    font-size: var(--fs-body);
+    gap: 16px;
+    padding: 21px 30px 21px 22px;
+    border-radius: 4px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(17, 19, 24, 0.25);
+  }
+
+  .ct-map__card div {
+    display: grid;
+    gap: 4px;
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .ct-map__card strong {
+    font-size: 1.05rem;
+    color: #fff;
+  }
+
+  .ct-map__card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* Form */
+  .ct-form {
+    padding: 25px 31px 30px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(43, 46, 131, 0.07);
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+
+  .ct-form h2 {
+    margin-bottom: 9px;
+    font-size: clamp(1.68rem, 2.464vw, 2.1rem);
+    color: var(--color-navy-deep);
+  }
+
+  .ct-form__lead {
+    margin-bottom: 21px;
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+  }
+
+  .ct-form form {
+    display: grid;
+    gap: 16px;
+  }
+
+  .ct-form__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+  }
+
+  .ct-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .ct-form label {
+    display: grid;
+    gap: 7px;
+  }
+
+  .ct-form label > span {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-form input:not([type='checkbox']),
+  .ct-form select,
+  .ct-form textarea {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+    color: var(--color-text);
+  }
+
+  .ct-form input:not([type='checkbox']),
+  .ct-form select {
+    height: 45px;
+  }
+
+  .ct-form textarea {
+    min-height: 99px;
+    resize: vertical;
+  }
+
+  .ct-form input:focus,
+  .ct-form select:focus,
+  .ct-form textarea:focus {
+    outline: none;
+    border-color: var(--color-navy);
+  }
+
+  .ct-form__consent {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.77rem;
+    color: var(--color-text-muted);
+  }
+
+  .ct-form .ct-form__consent > span {
+    font-size: 0.77rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .ct-form__consent input {
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .ct-form__consent a {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .ct-form__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .ct-form__actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 30px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    font: inherit;
+    font-size: 0.91rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+
+  .ct-form__actions button:hover {
+    background: var(--color-navy);
+  }
+
+  .ct-form__actions button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .ct-form__secure {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.77rem;
+    color: var(--color-text-faint);
+  }
+
+  .ct-form__status {
+    min-height: 1em;
+    font-size: 0.84rem;
+  }
+
+  .ct-form__status:empty {
+    display: none;
+  }
+
+  .ct-form__status[data-state='success'] {
+    color: #1f7a4d;
+  }
+
+  .ct-form__status[data-state='error'] {
+    color: #b3261e;
+  }
+
+  /* Offices */
+  .ct-offices {
+    padding-block: 13px 63px;
+    background: #f4f6fb;
+  }
+
+  .ct-offices__head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 9px 27px;
+    margin-bottom: 22px;
+  }
+
+  .ct-offices__head h2 {
+    padding-left: 16px;
+    border-left: 3px solid var(--color-navy);
+    font-family: var(--font-body);
+    font-size: 1.54rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-offices__head p {
+    font-size: 0.91rem;
+    color: var(--color-text-muted);
+  }
+
+  .ct-offices__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 27px;
+  }
+
+  .ct-offices__grid a {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    padding: 13px 22px 13px 13px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
+    color: var(--color-navy);
+    transition: box-shadow 200ms;
+  }
+
+  .ct-offices__grid a:hover {
+    box-shadow: 0 8px 26px rgba(43, 46, 131, 0.13);
+  }
+
+  .ct-offices__grid img {
+    flex: none;
+    width: 106px;
+    height: 76px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .ct-offices__grid span {
+    flex: 1;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .ct-offices__grid strong {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 1.05rem;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 1200px) {
+    .ct-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .ct-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ct-map {
+      min-height: 381px;
+    }
+
+    .ct-offices__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .ct-hero__media {
+      width: 100%;
+      opacity: 0.4;
+    }
+
+    .ct-hero__quote {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ct-cards,
+    .ct-form__row,
+    .ct-offices__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .ct-form__actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ct-map__card {
+      right: 12px;
+      left: 12px;
+    }
   }
 </style>

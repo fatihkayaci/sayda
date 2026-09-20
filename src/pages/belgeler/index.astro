@@ -1,112 +1,706 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
+
+const certMeta: Record<string, { subtitle: string; text: string; tone: string }> = {
+  'ISO 9001': {
+    subtitle: 'Kalite Yönetim Sistemi',
+    text: 'Tüm süreçlerimizde kalite odaklı yönetim anlayışını benimsiyoruz.',
+    tone: 'blue',
+  },
+  'ISO 14001': {
+    subtitle: 'Çevre Yönetim Sistemi',
+    text: 'Çevreye duyarlı, sürdürülebilir ve doğaya saygılı projeler gerçekleştiriyoruz.',
+    tone: 'green',
+  },
+  'ISO 10002': {
+    subtitle: 'Müşteri Memnuniyeti Yönetim Sistemi',
+    text: 'Müşteri memnuniyetini temel alarak kalıcı değerler üretmek için çalışıyoruz.',
+    tone: 'red',
+  },
+};
+
+const certs = site.certifications.map((cert) => ({
+  ...cert,
+  number: cert.name.replace('ISO ', ''),
+  ...(certMeta[cert.name] ?? { subtitle: '', text: '', tone: 'blue' }),
+}));
+
+const facts = [
+  { title: 'Müteahhitlik Yetki Belgesi Grubu', text: 'Yetki Belgesi Grubu', value: site.contractorLicenseGroup },
+  { title: 'İş Bitirme Belgesi Sayısı', text: 'Tamamlanan proje sayısı', value: String(site.completionCertificatesCount) },
+];
+
+const downloads = [
+  { title: 'E-Katalog (PDF)', text: 'Şirket tanıtım kataloğumuzu inceleyin.', href: site.documents.catalog },
+  { title: 'Sertifika (PDF)', text: 'Tüm sertifikalarımızı içeren dosya.', href: site.documents.certificate },
+];
 ---
 
-<Layout title="Belgelerimiz | Sayda İnşaat" description="Sayda İnşaat'ın belgeleri, iş bitirme evrakları ve e-katalog.">
-  <section class="belgeler">
-    <div class="container">
-      <h1>Belgelerimiz</h1>
+<Layout
+  title="Belgelerimiz | Sayda İnşaat"
+  description="Sayda İnşaat'ın belgeleri, iş bitirme evrakları ve e-katalog."
+  hideCtaBanner
+>
+  <section class="bg-hero">
+    <div class="bg-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
 
-      <ul class="belgeler__certs">
+    <div class="container bg-hero__inner">
+      <nav class="bg-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/kurumsal">Kurumsal</a>
+        <span>/</span>
+        <span aria-current="page">Belgelerimiz</span>
+      </nav>
+
+      <div class="eyebrow">
+        <span class="eyebrow__bar"></span>
+        <span>KURUMSAL</span>
+      </div>
+      <h1>Belgelerimiz</h1>
+      <p class="bg-hero__lead">
+        Kalite, çevre, müşteri memnuniyeti ve iş güvenliği konularında uluslararası standartlara uygun şekilde
+        çalışıyoruz.
+      </p>
+
+      <p class="bg-hero__script" aria-hidden="true">“Güvenli yapılar,<br />daha iyi yarınlar.”</p>
+    </div>
+  </section>
+
+  <section class="bg-body">
+    <div class="container">
+      <div class="bg-head">
+        <div class="bg-head__title">
+          <span class="bg-head__bar"></span>
+          <h2>Sertifikalarımız</h2>
+        </div>
+        <p>Sektörümüzdeki en iyi uygulamaları benimseyerek, sürdürülebilir ve kaliteli projeler üretmeye devam ediyoruz.</p>
+      </div>
+
+      <ul class="bg-certs">
         {
-          site.certifications.map((cert: { name: string; validUntil: string }) => (
-            <li>
-              <span class="belgeler__cert-name">{cert.name}</span>
-              <span class="belgeler__cert-date">Geçerlilik: {cert.validUntil}</span>
+          certs.map((cert, index) => (
+            <li class={`cert reveal reveal-d${index}`}>
+              <div class={`cert__paper cert__paper--${cert.tone}`} aria-hidden="true">
+                <Icon name="globe" size={34} />
+                <span class="cert__paper-iso">ISO</span>
+                <span class="cert__paper-number">{cert.number}</span>
+                <span class="cert__paper-lines">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </span>
+                <span class="cert__paper-seal"></span>
+              </div>
+              <div class="cert__content">
+                <h3>{cert.name}</h3>
+                <p class="cert__subtitle">{cert.subtitle}</p>
+                <p class="cert__text">{cert.text}</p>
+                <p class="cert__date">
+                  <span>Geçerlilik Tarihi</span>
+                  <strong>{cert.validUntil}</strong>
+                </p>
+                <a
+                  class="cert__button"
+                  href={site.documents.certificate}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Sertifikayı Görüntüle <Icon name="external" size={21} />
+                </a>
+              </div>
             </li>
           ))
         }
       </ul>
 
-      <dl class="belgeler__info">
-        <dt>Müteahhitlik Yetki Belgesi Grubu</dt>
-        <dd>{site.contractorLicenseGroup}</dd>
-        <dt>İş Bitirme Belgesi Sayısı</dt>
-        <dd>{site.completionCertificatesCount}</dd>
-      </dl>
-
-      <ul class="belgeler__list">
-        <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">E-Katalog (PDF)</a></li>
-        <li><a href={site.documents.certificate} target="_blank" rel="noopener noreferrer">Sertifika (PDF)</a></li>
+      <ul class="bg-facts">
+        {
+          facts.map((fact) => (
+            <li class="fact reveal">
+              <span class="icon-circle">
+                <Icon name="document" size={30} />
+              </span>
+              <div class="fact__text">
+                <h3>{fact.title}</h3>
+                <p>{fact.text}</p>
+              </div>
+              <span class="fact__line"></span>
+              <span class="fact__value">{fact.value}</span>
+            </li>
+          ))
+        }
       </ul>
+
+      <div class="bg-head bg-head--docs">
+        <div class="bg-head__title">
+          <span class="bg-head__bar"></span>
+          <h2>Diğer Dokümanlar</h2>
+        </div>
+      </div>
+
+      <ul class="bg-docs">
+        {
+          downloads.map((doc) => (
+            <li class="doc reveal">
+              <a href={doc.href} target="_blank" rel="noopener noreferrer">
+                <span class="icon-circle icon-circle--sm">
+                  <Icon name="document" size={25} />
+                </span>
+                <span class="doc__text">
+                  <strong>{doc.title}</strong>
+                  <span>{doc.text}</span>
+                </span>
+                <span class="doc__download">
+                  <Icon name="download" size={22} />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-cta">
+    <img class="bg-cta__bg" src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
+    <div class="container bg-cta__inner reveal">
+      <div>
+        <div class="eyebrow eyebrow--light">
+          <span class="eyebrow__bar"></span>
+          <span>BİRLİKTE DAHA GÜÇLÜ YAPILAR</span>
+        </div>
+        <h2>Yeni projeniz için bizimle çalışın.</h2>
+        <p>Uzman kadromuzla projenizi planlamadan teslimata kadar yönetiyoruz.</p>
+      </div>
+      <a class="btn-white" href="/iletisim#quote-form">
+        Teklif Al <Icon name="arrow" size={21} />
+      </a>
     </div>
   </section>
 </Layout>
 
 <style>
-  .belgeler {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: var(--space-xxl);
-    min-height: 40vh;
+  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .belgeler .container {
-    max-width: 760px;
-  }
-
-  .belgeler h1 {
-    font-size: var(--fs-h1);
-  }
-
-  .belgeler__certs {
-    margin-top: var(--space-l);
+  .eyebrow {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-
-  .belgeler__certs li {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-s);
-    padding: var(--space-s) 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .belgeler__cert-name {
-    font-weight: 700;
-  }
-
-  @media (max-width: 640px) {
-    .belgeler__certs li {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
-  }
-
-  .belgeler__info {
-    margin-top: var(--space-l);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--space-xs) var(--space-m);
-  }
-
-  .belgeler__info dt {
-    font-size: var(--fs-small);
-    font-weight: 700;
-    color: var(--color-text-faint);
-  }
-
-  .belgeler__info dd {
-    font-size: var(--fs-small);
-    color: var(--color-text-muted);
-  }
-
-  .belgeler__list {
-    margin-top: var(--space-xl);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-  }
-
-  .belgeler__list a {
-    font-weight: 700;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+    font-size: 0.91rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
     color: var(--color-navy);
   }
 
-  .belgeler__list a:hover {
-    text-decoration: underline;
+  .eyebrow__bar {
+    display: block;
+    width: 54px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .eyebrow--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .btn-white {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 34px;
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--color-navy-deep);
+    font-size: calc(var(--fs-small) * 1.12);
+    font-weight: 700;
+    transition: background var(--transition);
+  }
+
+  .btn-white:hover {
+    background: #e8e9f5;
+  }
+
+  .icon-circle {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .icon-circle--sm {
+    width: 54px;
+    height: 54px;
+  }
+
+  /* Hero */
+  .bg-hero {
+    position: relative;
+    overflow: hidden;
+    background: #eef2f9;
+  }
+
+  .bg-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 55%;
+  }
+
+  .bg-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% top;
+  }
+
+  .bg-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0) 50%);
+  }
+
+  .bg-hero__inner {
+    position: relative;
+    z-index: 1;
+    min-height: 242px;
+    padding-block: 27px 40px;
+  }
+
+  .bg-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 0.84rem;
+    color: var(--color-text-muted);
+  }
+
+  .bg-hero__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .bg-hero h1 {
+    font-size: clamp(2.52rem, 4.928vw, 3.92rem);
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .bg-hero__lead {
+    max-width: 52ch;
+    margin-top: 16px;
+    font-size: clamp(1.12rem, 1.456vw, 1.33rem);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .bg-hero__script {
+    position: absolute;
+    top: 40px;
+    right: var(--edge);
+    padding-left: 25px;
+    border-left: 2px solid rgba(255, 255, 255, 0.9);
+    font-family: var(--font-script);
+    font-size: clamp(1.68rem, 2.464vw, 2.24rem);
+    line-height: 1.15;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(19, 21, 74, 0.45);
+  }
+
+  /* Body */
+  .bg-body {
+    padding-block: 36px 63px;
+    background: #f6f8fc;
+  }
+
+  .bg-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+    margin-bottom: 27px;
+  }
+
+  .bg-head__title {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .bg-head__bar {
+    display: block;
+    width: 54px;
+    height: 2px;
+    background: var(--color-navy-deep);
+  }
+
+  .bg-head h2 {
+    font-size: clamp(1.68rem, 2.24vw + 0.56rem, 2.24rem);
+    color: var(--color-navy-deep);
+  }
+
+  .bg-head p {
+    max-width: 44ch;
+    font-size: calc(var(--fs-small) * 1.12);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .bg-head--docs {
+    margin-top: 36px;
+    margin-bottom: 18px;
+  }
+
+  .bg-head--docs h2 {
+    font-size: 1.68rem;
+  }
+
+  /* Certificates */
+  .bg-certs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+
+  .cert {
+    display: grid;
+    grid-template-columns: 121px 1fr;
+    gap: 18px;
+    padding: 21px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(17, 19, 24, 0.06);
+  }
+
+  .cert__paper {
+    --tone: var(--color-navy);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 27px 13px 13px;
+    border: 4px solid #eceef2;
+    outline: 1px solid #d9dce4;
+    background: #fff;
+    color: var(--tone);
+    text-align: center;
+  }
+
+  .cert__paper--green {
+    --tone: #1f7a4d;
+  }
+
+  .cert__paper--red {
+    --tone: #a3232e;
+  }
+
+  .cert__paper-iso {
+    margin-top: 2px;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .cert__paper-number {
+    margin-top: 4px;
+    font-family: var(--font-heading);
+    font-size: 1.12rem;
+    line-height: 1;
+  }
+
+  .cert__paper-lines {
+    display: grid;
+    gap: 5px;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .cert__paper-lines i {
+    display: block;
+    height: 2px;
+    background: #dfe2e9;
+  }
+
+  .cert__paper-lines i:nth-child(2) {
+    width: 80%;
+  }
+
+  .cert__paper-lines i:nth-child(3) {
+    width: 55%;
+  }
+
+  .cert__paper-seal {
+    align-self: flex-end;
+    width: 22px;
+    height: 22px;
+    margin-top: auto;
+    border: 1.5px solid var(--tone);
+    border-radius: 50%;
+    opacity: 0.7;
+  }
+
+  .cert__content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .cert h3,
+  .fact__text h3 {
+    font-family: var(--font-body);
+    font-weight: 700;
+  }
+
+  .cert h3 {
+    font-size: 1.26rem;
+    color: var(--color-navy-deep);
+  }
+
+  .cert__subtitle {
+    margin-top: 4px;
+    font-size: 0.91rem;
+    color: var(--color-text-muted);
+  }
+
+  .cert__text {
+    margin-top: 18px;
+    font-size: 0.91rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .cert__date {
+    display: grid;
+    gap: 2px;
+    margin-top: auto;
+    padding-top: 16px;
+    font-size: 0.84rem;
+    color: var(--color-text-faint);
+  }
+
+  .cert__date strong {
+    font-size: 1.05rem;
+    color: var(--color-navy-deep);
+  }
+
+  .cert__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13px;
+    margin-top: 13px;
+    padding: 13px 16px;
+    border-radius: var(--radius);
+    background: #eceefa;
+    color: var(--color-navy-deep);
+    font-size: 0.84rem;
+    white-space: nowrap;
+    font-weight: 700;
+    transition: background var(--transition);
+  }
+
+  .cert__button:hover {
+    background: #dfe2f6;
+  }
+
+  /* Facts */
+  .bg-facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-m);
+    margin-top: var(--space-m);
+  }
+
+  .fact {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 21px 36px 21px 39px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(17, 19, 24, 0.05);
+  }
+
+  .fact__text h3 {
+    font-size: 1.12rem;
+    color: var(--color-navy-deep);
+  }
+
+  .fact__text p {
+    margin-top: 4px;
+    font-size: 0.91rem;
+    color: var(--color-text-muted);
+  }
+
+  .fact__line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-navy);
+    opacity: 0.35;
+  }
+
+  .fact__value {
+    min-width: 2.5ch;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-navy-deep);
+    text-align: center;
+  }
+
+  /* Downloads */
+  .bg-docs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-m);
+  }
+
+  .doc a {
+    display: flex;
+    align-items: center;
+    gap: 21px;
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(17, 19, 24, 0.05);
+    transition: box-shadow var(--transition);
+  }
+
+  .doc a:hover {
+    box-shadow: 0 6px 22px rgba(43, 46, 131, 0.14);
+  }
+
+  .doc__text {
+    display: grid;
+    flex: 1;
+    gap: 2px;
+    font-size: 0.91rem;
+    color: var(--color-text-muted);
+  }
+
+  .doc__text strong {
+    font-size: 1.05rem;
+    color: var(--color-navy-deep);
+  }
+
+  .doc__download {
+    display: grid;
+    place-items: center;
+    width: 47px;
+    height: 47px;
+    border-radius: var(--radius);
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  /* CTA */
+  .bg-cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: 49px;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .bg-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    mix-blend-mode: luminosity;
+  }
+
+  .bg-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(25, 27, 74, 0.9), rgba(25, 27, 74, 0.55));
+  }
+
+  .bg-cta__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+
+  .bg-cta h2 {
+    font-size: clamp(1.68rem, 2.24vw + 0.84rem, 2.52rem);
+    color: #fff;
+  }
+
+  .bg-cta p {
+    margin-top: 12px;
+    font-size: 1.12rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .bg-certs {
+      grid-template-columns: 1fr;
+    }
+
+    .bg-hero__media {
+      width: 100%;
+    }
+
+    .bg-hero__media::after {
+      background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0.75) 55%, rgba(238, 242, 249, 0.25) 100%);
+    }
+
+    .bg-hero__script {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .bg-facts,
+    .bg-docs {
+      grid-template-columns: 1fr;
+    }
+
+    .bg-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-s);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .cert {
+      grid-template-columns: 1fr;
+    }
+
+    .cert__paper {
+      max-width: 157px;
+    }
+
+    .fact {
+      padding-inline: 22px;
+    }
+
+    .bg-cta__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 </style>

@@ -1,0 +1,282 @@
+---
+import Icon from '../Icon.astro';
+import { formatDateRange } from '../../utils/project';
+
+interface Project {
+  name: string;
+  employer: string;
+  location: string;
+  description: string[];
+  area: string;
+  startDate: string;
+  endDate: string;
+  image: string;
+  href: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const fallbackImage = '/img/sayda-insaat-hero01.webp';
+const many = projects.length > 1;
+---
+
+{
+  projects.length > 0 && (
+    <section class="featured" data-featured>
+      {projects.map((project, index) => (
+        <article class="featured__slide" data-slide hidden={index !== 0}>
+          <div class="featured__text">
+            <div class="featured__eyebrow">
+              <span />
+              DEVAM EDEN PROJE
+            </div>
+            <h2>{project.name}</h2>
+            <p class="featured__location">
+              <Icon name="pin" size={21} />
+              {project.location.replace(' - ', ' · ')}
+            </p>
+            <p class="featured__desc">{project.description[0]}</p>
+            <ul class="featured__meta">
+              {project.area && (
+                <li>
+                  <Icon name="area" size={22} />
+                  {project.area}
+                </li>
+              )}
+              <li>
+                <Icon name="calendar" size={22} />
+                {formatDateRange(project.startDate, project.endDate)}
+              </li>
+            </ul>
+            <a class="featured__button" href={project.href}>
+              Projeyi İncele <Icon name="arrow" size={18} />
+            </a>
+          </div>
+
+          <div class="featured__media">
+            <img src={project.image || fallbackImage} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
+            <span class="featured__badge">DEVAM EDİYOR</span>
+            {many && (
+              <div class="featured__controls">
+                <button type="button" data-prev aria-label="Önceki proje">
+                  <Icon name="arrowLeft" size={18} />
+                </button>
+                <button type="button" data-next aria-label="Sonraki proje">
+                  <Icon name="arrow" size={18} />
+                </button>
+                <span data-counter>
+                  {String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                </span>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </section>
+  )
+}
+
+<script>
+  function initFeatured() {
+    document.querySelectorAll<HTMLElement>('[data-featured]').forEach((root) => {
+      const slides = [...root.querySelectorAll<HTMLElement>('[data-slide]')];
+      if (slides.length < 2) return;
+
+      let current = 0;
+      const show = (index: number) => {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((slide, i) => (slide.hidden = i !== current));
+      };
+
+      root.querySelectorAll('[data-prev]').forEach((btn) => btn.addEventListener('click', () => show(current - 1)));
+      root.querySelectorAll('[data-next]').forEach((btn) => btn.addEventListener('click', () => show(current + 1)));
+    });
+  }
+
+  initFeatured();
+  document.addEventListener('astro:page-load', initFeatured);
+</script>
+
+<style>
+  .featured {
+    margin-bottom: 63px;
+    border-radius: 8px;
+    background: #eef1f9;
+  }
+
+  .featured__slide {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    gap: 45px;
+    align-items: center;
+    padding: 27px;
+  }
+
+  .featured__slide[hidden] {
+    display: none;
+  }
+
+  .featured__text {
+    display: grid;
+    justify-items: start;
+    gap: 18px;
+    padding: 13px 9px 13px 27px;
+  }
+
+  .featured__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    color: var(--color-navy);
+  }
+
+  .featured__eyebrow span {
+    width: 31px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .featured h2 {
+    font-size: clamp(1.68rem, 2.688vw, 2.24rem);
+    line-height: 1.2;
+    color: var(--color-navy-deep);
+  }
+
+  .featured__location {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .featured__desc {
+    max-width: 40ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .featured__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px 31px;
+    font-size: 0.98rem;
+    color: var(--color-text-muted);
+  }
+
+  .featured__meta li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .featured__meta :global(svg) {
+    color: var(--color-navy);
+  }
+
+  .featured__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    margin-top: 7px;
+    padding: 16px 27px;
+    border-radius: 3px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    font-size: 0.91rem;
+    font-weight: 700;
+    transition: background var(--transition);
+  }
+
+  .featured__button:hover {
+    background: var(--color-navy);
+  }
+
+  .featured__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--color-navy-deep);
+  }
+
+  .featured__media img {
+    width: 100%;
+    height: 100%;
+    min-height: 381px;
+    max-height: 420px;
+    object-fit: cover;
+  }
+
+  .featured__badge {
+    position: absolute;
+    top: 16px;
+    right: 14px;
+    padding: 9px 18px;
+    border-radius: 3px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .featured__controls {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .featured__controls button {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 3px;
+    background: #fff;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+  }
+
+  .featured__controls span {
+    padding: 8px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 3px;
+    background: rgba(25, 27, 74, 0.7);
+    color: #fff;
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 1024px) {
+    .featured__slide {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .featured__text {
+      padding: 9px 4px 0;
+    }
+
+    .featured__media img {
+      min-height: 269px;
+    }
+  }
+</style>

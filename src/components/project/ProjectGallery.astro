@@ -15,7 +15,7 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
 {images.length === 0 ? (
   <div class="project-gallery project-gallery--empty reveal">
     <div class="project-gallery__main project-gallery__main--empty">
-      <Icon name="photo" size={40} />
+      <Icon name="photo" size={45} />
     </div>
   </div>
 ) : (
@@ -73,17 +73,28 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
       const nextBtn = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
       if (!main || thumbs.length === 0) return;
 
-      const visible = 3;
-      const gap = 12;
+      const gap = 10;
+      let visible = 5;
       let index = 0;
       let thumbStep = 0;
 
+      const windowStart = () => Math.min(Math.max(index, 0), Math.max(thumbs.length - visible, 0));
+
+      // Penceredeki son küçük resmin üzerinde kalan fotoğraf sayısını göster (+8 gibi).
+      const updateMore = () => {
+        const remaining = thumbs.length - (windowStart() + visible);
+        thumbs.forEach((t) => t.removeAttribute('data-more'));
+        if (remaining > 0) thumbs[windowStart() + visible - 1]?.setAttribute('data-more', `+${remaining}`);
+      };
+
       const layout = () => {
         if (!thumbsEl) return;
+        visible = window.innerWidth < 640 ? 3 : 5;
         const width = (thumbsEl.clientWidth - gap * (visible - 1)) / visible;
         thumbStep = width + gap;
         thumbs.forEach((t) => (t.style.flex = `0 0 ${width}px`));
-        if (track) track.style.transform = `translateX(-${Math.min(index, Math.max(thumbs.length - visible, 0)) * thumbStep}px)`;
+        if (track) track.style.transform = `translateX(-${windowStart() * thumbStep}px)`;
+        updateMore();
       };
 
       const show = (nextIndex: number) => {
@@ -99,10 +110,8 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
         }, 150);
         thumbs.forEach((t, i) => t.classList.toggle('is-active', i === index));
         if (counter) counter.textContent = `${index + 1} / ${thumbs.length}`;
-        if (track) {
-          const windowStart = Math.min(Math.max(index, 0), Math.max(thumbs.length - visible, 0));
-          track.style.transform = `translateX(-${windowStart * thumbStep}px)`;
-        }
+        if (track) track.style.transform = `translateX(-${windowStart() * thumbStep}px)`;
+        updateMore();
       };
 
       thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => show(i)));
@@ -120,8 +129,8 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
 <style>
   .project-gallery__main {
     position: relative;
-    height: 420px;
-    border-radius: 6px;
+    height: 448px;
+    border-radius: 4px;
     overflow: hidden;
     background: var(--color-bg-light);
   }
@@ -147,41 +156,39 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 49px;
+    height: 49px;
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: rgba(19, 21, 74, 0.55);
+    background: var(--color-navy-deep);
     color: #fff;
     cursor: pointer;
-    backdrop-filter: blur(4px);
     transition: background 150ms;
   }
 
   .project-gallery__arrow:hover {
-    background: rgba(19, 21, 74, 0.8);
+    background: var(--color-navy);
   }
 
   .project-gallery__arrow--prev {
-    left: 16px;
+    left: 20px;
   }
 
   .project-gallery__arrow--next {
-    right: 16px;
+    right: 20px;
   }
 
   .project-gallery__counter {
     position: absolute;
-    bottom: 12px;
+    bottom: 14px;
     right: 16px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(19, 21, 74, 0.55);
+    padding: 5px 13px;
+    border-radius: 3px;
+    background: rgba(19, 21, 74, 0.8);
     color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-    backdrop-filter: blur(4px);
+    font-size: 0.84rem;
+    font-weight: 700;
   }
 
   .project-gallery__thumbs {
@@ -197,15 +204,14 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
   }
 
   .project-gallery__thumb {
-    height: 100px;
+    position: relative;
+    height: 94px;
     padding: 0;
     border: 0;
-    border-radius: 4px;
+    border-radius: 3px;
     overflow: hidden;
     cursor: pointer;
-    transition:
-      transform 180ms,
-      box-shadow 180ms;
+    transition: box-shadow 180ms;
   }
 
   .project-gallery__thumb img {
@@ -214,19 +220,36 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
     object-fit: cover;
   }
 
-  .project-gallery__thumb:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(43, 46, 131, 0.15);
+  .project-gallery__thumb[data-more]::after {
+    content: attr(data-more);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(19, 21, 74, 0.72);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
   }
 
   .project-gallery__thumb.is-active {
-    box-shadow: 0 0 0 3px var(--color-navy);
+    box-shadow: 0 0 0 2px var(--color-navy);
   }
 
   .project-gallery__caption {
-    margin-top: 12px;
-    font-size: 12px;
+    margin-top: 13px;
+    font-size: 0.84rem;
     color: var(--color-text-faint);
     font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .project-gallery__main {
+      height: 291px;
+    }
+
+    .project-gallery__thumb {
+      height: 72px;
+    }
   }
 </style>

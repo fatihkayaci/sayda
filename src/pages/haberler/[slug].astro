@@ -1,6 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
 import haberlerData from '../../data/haberler.json';
+import site from '../../data/site.json';
+
+const categories: { key: string; label: string }[] = [
+  { key: 'teslim', label: 'Teslim & Açılış' },
+  { key: 'devam-eden', label: 'Devam Eden İşler' },
+  { key: 'satis-ofisi', label: 'Satış Ofisi' },
+  { key: 'kurumsal', label: 'Kurumsal' },
+];
+const categoryLabels: Record<string, string> = Object.fromEntries(categories.map((c) => [c.key, c.label]));
 
 export function getStaticPaths() {
   return haberlerData.map((haber) => ({
@@ -11,60 +22,639 @@ export function getStaticPaths() {
 
 const { haber } = Astro.props;
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const sorted = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const others = sorted.filter((item) => item.slug !== haber.slug);
+
+const paragraphs = haber.content
+  .split(/\n\s*\n/)
+  .map((p) => p.trim())
+  .filter(Boolean);
+const [lead, ...rest] = paragraphs;
+
+const words = haber.content.split(/\s+/).filter(Boolean).length;
+const readMinutes = Math.max(1, Math.round(words / 200));
+
+const url = new URL(`/haberler/${haber.slug}`, site.url).toString();
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(haber.title);
+const shares = [
+  { name: 'LinkedIn', icon: 'linkedin', className: 'linkedin', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
+  { name: 'X', icon: 'x', className: 'x', href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}` },
+  { name: 'Facebook', icon: 'facebook', className: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+  { name: 'WhatsApp', icon: 'whatsapp', className: 'whatsapp', href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
+];
+
+const categoryTabs = [
+  { key: 'all', label: 'Tümü', count: sorted.length },
+  ...categories.map((c) => ({ ...c, count: sorted.filter((item) => item.category === c.key).length })),
+];
+
+const latest = others.slice(0, 4);
+const sameCategory = others.filter((item) => item.category === haber.category);
+const more = [...sameCategory, ...others.filter((item) => item.category !== haber.category)].slice(0, 3);
 ---
 
-<Layout title={`${haber.title} | Sayda İnşaat`} description={haber.excerpt}>
+<Layout title={`${haber.title} | Sayda İnşaat`} description={haber.excerpt} ogImage={haber.image} hideCtaBanner>
   <article class="haber-detail">
-    <div class="container">
-      <a class="haber-detail__back" href="/haberler">← Tüm haberler</a>
-      <span class="haber-detail__date">{formatter.format(new Date(haber.date))}</span>
-      <h1>{haber.title}</h1>
-      <img src={haber.image} alt={haber.title} />
-      <p class="haber-detail__content">{haber.content}</p>
-    </div>
+    <header class="haber-hero">
+      <img src={haber.image} alt="" fetchpriority="high" />
+      <div class="haber-hero__overlay"></div>
+
+      <div class="container haber-hero__inner">
+        <nav class="haber-hero__breadcrumb" aria-label="Konum">
+          <a href="/">Anasayfa</a>
+          <span>/</span>
+          <a href="/haberler">Haberler</a>
+          <span>/</span>
+          <span aria-current="page">{haber.title}</span>
+        </nav>
+
+        <div class="haber-hero__eyebrow">
+          <span></span>
+          {categoryLabels[haber.category]?.toLocaleUpperCase('tr')}
+        </div>
+        <h1>{haber.title}</h1>
+        <p class="haber-hero__lead">{haber.excerpt}</p>
+
+        <ul class="haber-hero__meta">
+          <li>
+            <Icon name="calendar" size={22} />
+            {formatter.format(new Date(haber.date))}
+          </li>
+          <li>
+            <Icon name="clock" size={22} />
+            {readMinutes} dk okuma süresi
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="haber-body">
+      <div class="container haber-body__layout">
+        <div class="haber-content">
+          {lead && <p class="haber-content__lead">{lead}</p>}
+
+          <figure class="haber-content__figure">
+            <img src={haber.image} alt={haber.title} loading="lazy" />
+          </figure>
+
+          {rest.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        <aside class="haber-side">
+          <div class="haber-side__card">
+            <h2>Bu Haberi Paylaş</h2>
+            <div class="haber-share">
+              {
+                shares.map((share) => (
+                  <a
+                    class={`haber-share__btn haber-share__btn--${share.className}`}
+                    href={share.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${share.name} ile paylaş`}
+                  >
+                    <Icon name={share.icon} size={22} />
+                  </a>
+                ))
+              }
+              <button type="button" class="haber-share__btn haber-share__btn--copy" data-copy-link={url} aria-label="Bağlantıyı kopyala">
+                <Icon name="link" size={22} />
+              </button>
+            </div>
+            <p class="haber-share__status" data-copy-status role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="haber-side__card">
+            <h2>Haber Kategorileri</h2>
+            <ul class="haber-cats">
+              {
+                categoryTabs.map((tab) => (
+                  <li>
+                    <a
+                      href={tab.key === 'all' ? '/haberler' : `/haberler?kategori=${tab.key}`}
+                      class:list={{ 'is-active': tab.key === haber.category }}
+                    >
+                      {tab.label}
+                      <span>{tab.count}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="haber-side__card haber-latest">
+            <h2>Son Haberler</h2>
+            <ul>
+              {
+                latest.map((item) => (
+                  <li>
+                    <a href={`/haberler/${item.slug}`}>
+                      <img src={item.image} alt="" loading="lazy" />
+                      <span>
+                        <strong>{item.title}</strong>
+                        {formatter.format(new Date(item.date))}
+                      </span>
+                      <Icon name="arrow" size={16} />
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="haber-more">
+      <div class="container">
+        <div class="haber-more__head">
+          <h2>Diğer Haberler</h2>
+          <a href="/haberler">
+            Tüm Haberleri Gör <Icon name="arrow" size={16} />
+          </a>
+        </div>
+
+        <div class="haber-more__grid">
+          {
+            more.map((item) => (
+              <a class="haber-more__card" href={`/haberler/${item.slug}`}>
+                <img src={item.image} alt="" loading="lazy" />
+                <span class="haber-more__text">
+                  <small>{formatter.format(new Date(item.date))}</small>
+                  <strong>{item.title}</strong>
+                </span>
+                <span class="haber-more__arrow" aria-hidden="true">
+                  <Icon name="arrow" size={16} />
+                </span>
+              </a>
+            ))
+          }
+        </div>
+
+        <NewsletterBand />
+      </div>
+    </section>
   </article>
 </Layout>
 
+<script>
+  function initCopyLink() {
+    const button = document.querySelector<HTMLButtonElement>('[data-copy-link]');
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    if (!button || !status) return;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyLink ?? location.href);
+        status.textContent = 'Bağlantı kopyalandı.';
+      } catch {
+        status.textContent = 'Bağlantı kopyalanamadı.';
+      }
+    });
+  }
+
+  initCopyLink();
+  document.addEventListener('astro:page-load', initCopyLink);
+</script>
+
 <style>
-  .haber-detail {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: var(--space-xl);
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .haber-detail .container {
-    max-width: 760px;
+  /* Hero */
+  .haber-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 381px;
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
-  .haber-detail__back {
-    display: inline-block;
-    margin-bottom: var(--space-m);
-    font-size: var(--fs-small);
+  .haber-hero > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .haber-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(19, 21, 74, 0.9) 0%, rgba(19, 21, 74, 0.55) 55%, rgba(19, 21, 74, 0.15) 100%);
+  }
+
+  .haber-hero__inner {
+    position: relative;
+    padding-block: 36px 45px;
+  }
+
+  .haber-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 40px;
+    font-size: 0.77rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .haber-hero__breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .haber-hero__breadcrumb span:not([aria-current]) {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .haber-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: var(--color-navy);
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.75);
   }
 
-  .haber-detail__date {
-    display: block;
-    font-size: var(--fs-small);
+  .haber-hero__eyebrow span {
+    width: 31px;
+    height: 2px;
+    background: #fff;
+  }
+
+  .haber-hero h1 {
+    max-width: 20ch;
+    font-size: clamp(1.96rem, 3.808vw, 3.08rem);
+    line-height: 1.15;
+    color: #fff;
+  }
+
+  .haber-hero__lead {
+    max-width: 62ch;
+    margin-top: 21px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .haber-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px 31px;
+    margin-top: 31px;
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+
+  .haber-hero__meta li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .haber-hero__meta li + li {
+    padding-left: 31px;
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  /* Body */
+  .haber-body {
+    padding-block: 40px 63px;
+    background: #fff;
+  }
+
+  .haber-body__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 426px;
+    gap: 54px;
+    align-items: start;
+  }
+
+  .haber-content {
+    min-width: 0;
+    max-width: 874px;
+  }
+
+  .haber-content p {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--color-text-muted);
+  }
+
+  .haber-content p + p {
+    margin-top: 22px;
+  }
+
+  .haber-content__lead {
+    margin-bottom: 36px;
+    font-size: 1.12rem !important;
+    color: var(--color-text) !important;
+  }
+
+  .haber-content__figure {
+    margin: 0 0 36px;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .haber-content__figure img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+  }
+
+  /* Sidebar */
+  .haber-side {
+    display: grid;
+    gap: 27px;
+    position: sticky;
+    top: calc(var(--header-h) + 18px);
+  }
+
+  .haber-side__card {
+    padding: 25px 25px 27px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(43, 46, 131, 0.09);
+  }
+
+  .haber-side__card h2 {
+    margin-bottom: 21px;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-navy-deep);
+  }
+
+  .haber-share {
+    display: flex;
+    gap: 13px;
+  }
+
+  .haber-share__btn {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity var(--transition);
+  }
+
+  .haber-share__btn:hover {
+    opacity: 0.85;
+  }
+
+  .haber-share__btn--linkedin {
+    background: #0a66c2;
+  }
+
+  .haber-share__btn--x {
+    border-color: var(--color-border);
+    background: #fff;
+    color: #111;
+  }
+
+  .haber-share__btn--facebook {
+    background: #1877f2;
+  }
+
+  .haber-share__btn--whatsapp {
+    background: #25d366;
+  }
+
+  .haber-share__btn--copy {
+    border-color: var(--color-border);
+    background: #f4f6fb;
+    color: var(--color-text-muted);
+  }
+
+  .haber-share__status {
+    margin-top: 12px;
+    font-size: 0.77rem;
+    color: var(--color-text-muted);
+  }
+
+  .haber-share__status:empty {
+    display: none;
+  }
+
+  .haber-cats {
+    display: grid;
+    gap: 9px;
+  }
+
+  .haber-cats a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border-radius: 3px;
+    background: #f4f6fb;
+    font-size: 0.84rem;
+    color: var(--color-navy-deep);
+    transition: background var(--transition);
+  }
+
+  .haber-cats a:hover {
+    background: #eceefa;
+  }
+
+  .haber-cats a.is-active {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .haber-cats span {
+    display: grid;
+    place-items: center;
+    min-width: 27px;
+    height: 22px;
+    padding: 0 7px;
+    border-radius: 10px;
+    background: #e3e6f3;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .haber-cats a.is-active span {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .haber-latest ul {
+    display: grid;
+  }
+
+  .haber-latest li + li {
+    border-top: 1px solid #eef0f6;
+  }
+
+  .haber-latest a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 13px 0;
+  }
+
+  .haber-latest img {
+    flex: none;
+    width: 85px;
+    height: 63px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
+
+  .haber-latest a > span {
+    display: grid;
+    flex: 1;
+    gap: 4px;
+    min-width: 0;
+    font-size: 0.7rem;
     color: var(--color-text-faint);
   }
 
-  .haber-detail h1 {
-    margin-top: var(--space-xs);
-    font-size: var(--fs-h1);
+  .haber-latest strong {
+    font-size: 0.77rem;
+    line-height: 1.35;
+    color: var(--color-navy-deep);
   }
 
-  .haber-detail img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
+  .haber-latest a > :global(svg) {
+    flex: none;
+    color: var(--color-navy);
+  }
+
+  /* More */
+  .haber-more {
+    padding-block: 45px 54px;
+    background: #f4f6fb;
+  }
+
+  .haber-more__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    margin-bottom: 25px;
+  }
+
+  .haber-more__head h2 {
+    padding-left: 16px;
+    border-left: 3px solid var(--color-navy);
+    font-family: var(--font-body);
+    font-size: 1.54rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--color-navy-deep);
+  }
+
+  .haber-more__head a {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.77rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .haber-more__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 31px;
+  }
+
+  .haber-more__card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 13px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
+    transition:
+      transform 200ms,
+      box-shadow 200ms;
+  }
+
+  .haber-more__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(43, 46, 131, 0.12);
+  }
+
+  .haber-more__card img {
+    flex: none;
+    width: 108px;
+    height: 108px;
+    border-radius: 3px;
     object-fit: cover;
-    border-radius: var(--radius);
-    margin-top: var(--space-l);
   }
 
-  .haber-detail__content {
-    margin-top: var(--space-l);
-    color: var(--color-text-muted);
-    max-width: 65ch;
+  .haber-more__text {
+    display: grid;
+    flex: 1;
+    gap: 9px;
+    min-width: 0;
+  }
+
+  .haber-more__text small {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+  }
+
+  .haber-more__text strong {
+    font-size: 0.98rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--color-navy-deep);
+  }
+
+  .haber-more__arrow {
+    display: grid;
+    place-items: center;
+    flex: none;
+    align-self: flex-end;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1100px) {
+    .haber-body__layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .haber-side {
+      position: static;
+    }
+
+    .haber-more__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .haber-hero__meta li + li {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .haber-more__head a {
+      display: none;
+    }
   }
 </style>

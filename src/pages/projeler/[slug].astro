@@ -4,6 +4,7 @@ import ProjectHero from '../../components/project/ProjectHero.astro';
 import ProjectGallery from '../../components/project/ProjectGallery.astro';
 import ProjectOverview from '../../components/project/ProjectOverview.astro';
 import ProjectSidebar from '../../components/project/ProjectSidebar.astro';
+import ProjectFeatures from '../../components/project/ProjectFeatures.astro';
 import ProjectNavigation from '../../components/project/ProjectNavigation.astro';
 import projects from '../../data/projects.json';
 import site from '../../data/site.json';
@@ -80,6 +81,7 @@ const serviceLd = {
           <ProjectSidebar project={project} />
         </div>
 
+        <ProjectFeatures features={project.features} />
         <ProjectNavigation projects={related} />
       </div>
     </section>
@@ -87,15 +89,20 @@ const serviceLd = {
 </Layout>
 
 <style>
+  .proje-detail__main .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
+  }
+
   .proje-detail__main {
-    padding-block: 72px 96px;
-    background: var(--color-bg-light);
+    padding-block: 36px 81px;
+    background: #f4f6fb;
   }
 
   .proje-detail__grid {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: var(--space-l);
+    grid-template-columns: minmax(0, 1fr) 426px;
+    gap: 36px;
     align-items: start;
   }
 

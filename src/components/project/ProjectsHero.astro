@@ -1,4 +1,5 @@
 ---
+import Icon from '../Icon.astro';
 import site from '../../data/site.json';
 import projects from '../../data/projects.json';
 
@@ -17,13 +18,23 @@ const tabs = [
   { key: 'tamamlanan', label: 'Tamamlanan', count: tamamlananCount, href: '/projeler/tamamlanan' },
 ] as const;
 
-const districts = [...new Set(projects.map((p) => p.district).filter((d): d is string => Boolean(d)))].sort((a, b) =>
-  a.localeCompare(b, 'tr'),
-);
+const sortTr = (a: string, b: string) => a.localeCompare(b, 'tr');
+const districts = [...new Set(projects.map((p) => p.district).filter((d): d is string => Boolean(d)))].sort(sortTr);
+const types = [...new Set(projects.map((p) => p.type).filter((t): t is string => Boolean(t)))].sort(sortTr);
+
+const stats = [
+  { icon: 'area', value: site.stats.totalCompletedArea, label: 'Toplam Alan' },
+  { icon: 'check', value: String(tamamlananCount), label: 'Tamamlanan Proje' },
+  { icon: 'user', value: String(devamEdenCount), label: 'Devam Eden Proje' },
+  { icon: 'document', value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
+];
 ---
 
 <section class="projects-hero">
-  <div class="projects-hero__grid"></div>
+  <div class="projects-hero__media" aria-hidden="true">
+    <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+  </div>
+
   <div class="container projects-hero__inner reveal">
     <nav class="projects-hero__breadcrumb" aria-label="Konum">
       <a href="/">Anasayfa</a>
@@ -36,44 +47,47 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
       <span>REFERANSLARIMIZ</span>
     </div>
 
-    <h1>Projelerimiz</h1>
+    <h1>Geçmişten Bugüne<br />Hayata Geçirdiğimiz Projeler</h1>
     <p class="projects-hero__lead">
-      {site.foundedYear}'dan bu yana İstanbul ve Türkiye genelinde tamamladığımız büyük ölçekli projelerin tamamı.
+      {site.foundedYear}'dan bu yana İstanbul ve Türkiye genelinde tamamladığımız ve devam eden projeleri keşfedin.
     </p>
 
-    <dl class="projects-hero__stats">
-      <div>
-        <dd>{site.stats.totalCompletedArea}</dd>
-        <dt>Toplam Alan</dt>
-      </div>
-      <div>
-        <dd>{tamamlananCount}</dd>
-        <dt>Tamamlanan Proje</dt>
-      </div>
-      <div>
-        <dd>{devamEdenCount}</dd>
-        <dt>Devam Eden Proje</dt>
-      </div>
-      <div>
-        <dd>{site.completionCertificatesCount}</dd>
-        <dt>İş Bitirme Belgesi</dt>
-      </div>
+    <p class="projects-hero__slogan" aria-hidden="true">
+      DAHA İYİ<br />YAŞAM ALANLARI<br />İNŞA EDİYORUZ
+    </p>
+  </div>
+</section>
+
+<section class="projects-stats">
+  <div class="container">
+    <dl>
+      {
+        stats.map((stat) => (
+          <div>
+            <span class="projects-stats__icon">
+              <Icon name={stat.icon} size={25} />
+            </span>
+            <span class="projects-stats__text">
+              <dd>{stat.value}</dd>
+              <dt>{stat.label}</dt>
+            </span>
+          </div>
+        ))
+      }
     </dl>
   </div>
 </section>
 
-<nav class="projects-filters container" aria-label="Proje durumu">
-  {
-    tabs.map((tab) => (
-      <a href={tab.href} class="projects-filters__btn" aria-current={active === tab.key ? 'page' : undefined}>
-        {tab.label} ({tab.count})
-      </a>
-    ))
-  }
+<div class="projects-filters container">
+  <label class="projects-filters__search">
+    <span class="sr-only">Proje ara</span>
+    <Icon name="search" size={22} />
+    <input type="search" placeholder="Proje ara... (ör. Vadistanbul)" data-project-search autocomplete="off" />
+  </label>
 
   {
     districts.length > 0 && (
-      <label class="projects-filters__district">
+      <label class="projects-filters__select">
         <span class="sr-only">İlçeye göre filtrele</span>
         <select data-district-filter>
           <option value="all">Tüm İlçeler</option>
@@ -84,148 +98,312 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
       </label>
     )
   }
-</nav>
+
+  {
+    types.length > 0 && (
+      <label class="projects-filters__select">
+        <span class="sr-only">Proje türüne göre filtrele</span>
+        <select data-type-filter>
+          <option value="all">Tüm Proje Türleri</option>
+          {types.map((type) => (
+            <option value={type}>{type}</option>
+          ))}
+        </select>
+      </label>
+    )
+  }
+
+  <nav class="projects-filters__tabs" aria-label="Proje durumu">
+    {
+      tabs.map((tab) => (
+        <a href={tab.href} class="projects-filters__btn" aria-current={active === tab.key ? 'page' : undefined}>
+          {tab.label} ({tab.count})
+        </a>
+      ))
+    }
+  </nav>
+</div>
 
 <script>
-  function initDistrictFilter() {
-    const select = document.querySelector<HTMLSelectElement>('[data-district-filter]');
-    const cards = document.querySelectorAll<HTMLElement>('.project-card[data-district]');
-    if (!select || cards.length === 0) return;
+  function initProjectFilters() {
+    const search = document.querySelector<HTMLInputElement>('[data-project-search]');
+    const district = document.querySelector<HTMLSelectElement>('[data-district-filter]');
+    const type = document.querySelector<HTMLSelectElement>('[data-type-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('.project-card');
+    if (!search || cards.length === 0) return;
 
-    const applyFilter = (value: string) => {
+    const normalize = (value: string) => value.toLocaleLowerCase('tr').trim();
+
+    const apply = () => {
+      const query = normalize(search.value);
+      const districtValue = district?.value ?? 'all';
+      const typeValue = type?.value ?? 'all';
+
       cards.forEach((card) => {
-        const matches = value === 'all' || card.getAttribute('data-district') === value;
-        card.hidden = !matches;
+        const matchesQuery = !query || normalize(card.dataset.search ?? '').includes(query);
+        const matchesDistrict = districtValue === 'all' || card.dataset.district === districtValue;
+        const matchesType = typeValue === 'all' || card.dataset.type === typeValue;
+        card.hidden = !(matchesQuery && matchesDistrict && matchesType);
+      });
+
+      document.querySelectorAll<HTMLElement>('[data-project-group]').forEach((group) => {
+        const visible = group.querySelectorAll('.project-card:not([hidden])').length;
+        group.hidden = visible === 0;
+        const count = group.querySelector('[data-group-count]');
+        if (count) count.textContent = `${visible} PROJE`;
       });
     };
 
-    select.value = 'all';
-    select.addEventListener('change', () => applyFilter(select.value));
+    search.value = '';
+    if (district) district.value = 'all';
+    if (type) type.value = 'all';
+    apply();
+
+    search.addEventListener('input', apply);
+    district?.addEventListener('change', apply);
+    type?.addEventListener('change', apply);
   }
 
-  initDistrictFilter();
-  document.addEventListener('astro:page-load', initDistrictFilter);
+  initProjectFilters();
+  document.addEventListener('astro:page-load', initProjectFilters);
 </script>
 
 <style>
-  .projects-hero {
-    position: relative;
-    padding: 140px 0 64px;
-    background: var(--color-navy-deep);
-    color: #fff;
-    overflow: hidden;
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
   }
 
-  .projects-hero__grid {
+  .projects-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .projects-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 65%;
+  }
+
+  .projects-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% center;
+  }
+
+  .projects-hero__media::after {
+    content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 72px 72px;
-    pointer-events: none;
+    background:
+      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0.35) 55%, rgba(25, 27, 74, 0.55) 100%),
+      rgba(25, 27, 74, 0.25);
   }
 
   .projects-hero__inner {
     position: relative;
+    padding-block: 54px 63px;
   }
 
   .projects-hero__breadcrumb {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: var(--space-m);
-    font-size: var(--fs-small);
+    gap: 12px;
+    margin-bottom: 22px;
+    font-size: 0.84rem;
   }
 
   .projects-hero__breadcrumb a {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
     transition: color var(--transition);
   }
 
   .projects-hero__breadcrumb a:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
   }
 
   .projects-hero__breadcrumb span:first-of-type {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.4);
   }
 
   .projects-hero__breadcrumb span[aria-current] {
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .projects-hero__eyebrow {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: var(--space-m);
+    gap: 16px;
+    margin-bottom: 18px;
   }
 
   .projects-hero__eyebrow-bar {
     display: block;
-    width: 44px;
-    height: 3px;
+    width: 31px;
+    height: 2px;
     background: #fff;
   }
 
   .projects-hero__eyebrow span:last-child {
-    font-size: 0.75rem;
+    font-size: 0.77rem;
     font-weight: 700;
     letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(255, 255, 255, 0.75);
   }
 
   .projects-hero h1 {
-    font-size: clamp(2.25rem, 5vw, 4rem);
-    line-height: 1.05;
+    font-size: clamp(1.96rem, 3.584vw, 3.08rem);
+    line-height: 1.15;
     color: #fff;
-    margin-bottom: var(--space-m);
+    margin-bottom: 21px;
   }
 
   .projects-hero__lead {
-    max-width: 580px;
-    font-size: 1.125rem;
+    max-width: 52ch;
+    font-size: 1.05rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.9);
   }
 
-  .projects-hero__stats {
+  .projects-hero__slogan {
+    position: absolute;
+    top: 50%;
+    right: clamp(20px, 4vw, 72px);
+    padding-left: 25px;
+    border-left: 1px solid rgba(255, 255, 255, 0.85);
+    font-size: 0.77rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    line-height: 2;
+    transform: translateY(-50%);
+  }
+
+  /* Stats */
+  .projects-stats {
+    background: #fff;
+  }
+
+  .projects-stats dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-block: 34px;
+  }
+
+  .projects-stats dl > div {
     display: flex;
-    gap: var(--space-l);
-    margin-top: var(--space-xl);
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+    padding-inline: 22px;
   }
 
-  .projects-hero__stats dd {
+  .projects-stats dl > div + div {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .projects-stats dl > div:first-child {
+    padding-left: 0;
+  }
+
+  .projects-stats__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 49px;
+    height: 49px;
+    border-radius: 8px;
+    background: #eceefa;
+    color: var(--color-navy);
+  }
+
+  .projects-stats__text {
+    display: grid;
+    gap: 4px;
+  }
+
+  .projects-stats dd {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 2.25rem;
+    font-size: 1.68rem;
     line-height: 1;
-    color: #fff;
+    color: var(--color-navy-deep);
   }
 
-  .projects-hero__stats dt {
-    margin-top: var(--space-xs);
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    color: rgba(255, 255, 255, 0.5);
+  .projects-stats dt {
+    font-size: 0.77rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
   }
 
+  /* Filters */
   .projects-filters {
     display: flex;
-    gap: var(--space-s);
+    align-items: center;
+    gap: 18px;
     flex-wrap: wrap;
-    padding-block: var(--space-l);
+    padding-block: 40px 36px;
+  }
+
+  .projects-filters__search {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    flex: 0 1 280px;
+    padding: 0 18px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--color-navy);
+  }
+
+  .projects-filters__search input {
+    flex: 1;
+    min-width: 0;
+    height: 49px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 0.84rem;
+    color: var(--color-text);
+    outline: none;
+  }
+
+  .projects-filters__search:focus-within {
+    border-color: var(--color-navy);
+  }
+
+  .projects-filters__select select {
+    height: 49px;
+    padding: 0 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--color-navy-deep);
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .projects-filters__tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-left: auto;
   }
 
   .projects-filters__btn {
-    padding: 10px 24px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
+    padding: 13px 25px;
+    border-radius: 4px;
+    font-size: 0.84rem;
     font-weight: 700;
-    border: 2px solid rgba(43, 46, 131, 0.2);
-    color: var(--color-text-muted);
+    border: 1px solid #c9cde3;
+    background: #fff;
+    color: var(--color-navy-deep);
     transition:
       background var(--transition),
       color var(--transition),
@@ -237,22 +415,6 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
     background: var(--color-navy);
     color: #fff;
     border-color: var(--color-navy);
-  }
-
-  .projects-filters__district {
-    margin-left: auto;
-  }
-
-  .projects-filters__district select {
-    padding: 10px 16px;
-    border-radius: var(--radius);
-    border: 2px solid rgba(43, 46, 131, 0.2);
-    background: var(--color-bg);
-    color: var(--color-text-muted);
-    font: inherit;
-    font-size: var(--fs-small);
-    font-weight: 700;
-    cursor: pointer;
   }
 
   .sr-only {
@@ -267,13 +429,43 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
     border: 0;
   }
 
-  @media (max-width: 640px) {
-    .projects-hero {
-      padding-top: 108px;
+  @media (max-width: 1024px) {
+    .projects-hero__media {
+      width: 100%;
+      opacity: 0.55;
     }
 
-    .projects-hero__stats {
-      gap: var(--space-m);
+    .projects-hero__slogan {
+      display: none;
+    }
+
+    .projects-stats dl {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 22px;
+    }
+
+    .projects-stats dl > div:nth-child(odd) {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .projects-filters__tabs {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .projects-filters__search {
+      flex-basis: 100%;
+    }
+
+    .projects-stats dl {
+      grid-template-columns: 1fr;
+    }
+
+    .projects-stats dl > div {
+      padding-left: 0;
+      border-left: 0 !important;
     }
   }
 </style>

@@ -1,87 +1,445 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 
 const items = [
   {
+    icon: 'target',
     title: 'Misyon',
-    text: 'Toplum ve çevre bilincinde, ahlaki değerler doğrultusunda, müşteri ve çalışanlarının memnuniyetini temel alarak, en yüksek verim ve kaliteyle hizmet ve ürünleri sunmaktır.',
+    text: 'Toplum ve çevre bilincinde, ahlaki değerler doğrultusunda, müşteri ve çalışanlarımızın memnuniyetini temel alarak, en yüksek verim ve kaliteyle hizmet ve ürünleri sunmaktır.',
+    image: '/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp',
+    caption: 'Değer üretmek için çalışıyoruz',
   },
   {
+    icon: 'binoculars',
     title: 'Vizyon',
-    text: 'Araştırmacı ve teknolojik gelişimlerin takipçisi olarak daha verimli sistemler oluşturmaktır.',
+    text: 'Araştırmacı ve teknolojik gelişimlerin takipçisi olarak daha verimli sistemler oluşturmak, sektörde yenilikçi ve güvenilir bir marka olarak tercih edilmektir.',
+    image: '/img/projects/vadistanbul/vadistanbul.webp',
+    caption: 'Daima daha iyisi için gelişiyoruz',
   },
   {
+    icon: 'chart',
     title: 'Hedef',
-    text: 'Türkiye ve uluslararası platformda sektöründe önde gelen şirketlerden biri olmaktır.',
+    text: 'Türkiye ve uluslararası platformda sektöründe öne gelen şirketlerden biri olmak, sürdürülebilir projelerle yaşam alanlarına kalıcı değerler kazandırmaktır.',
+    image: '/img/sayda-insaat-hero01.webp',
+    caption: 'Daha güçlü yarınlar için',
   },
 ];
 ---
 
-<Layout title="Vizyon & Misyon | Sayda İnşaat" description="Sayda İnşaat'ın vizyonu ve misyonu.">
-  <section class="intro">
-    <div class="container">
+<Layout
+  title="Vizyon & Misyon | Sayda İnşaat"
+  description="Sayda İnşaat'ın vizyonu ve misyonu."
+  hideCtaBanner
+>
+  <section class="vm-hero">
+    <div class="vm-hero__media" aria-hidden="true">
+      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    </div>
+
+    <div class="container vm-hero__inner">
+      <nav class="vm-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/kurumsal">Kurumsal</a>
+        <span>/</span>
+        <span aria-current="page">Vizyon &amp; Misyon</span>
+      </nav>
+
+      <div class="eyebrow">
+        <span class="eyebrow__bar"></span>
+        <span>KURUMSAL</span>
+      </div>
       <h1>Vizyon &amp; Misyon</h1>
+      <p class="vm-hero__lead">
+        Daha iyi yaşam alanları için, bugünün ihtiyaçlarını geleceğin değerleriyle birleştiriyoruz.
+      </p>
+
+      <p class="vm-hero__script" aria-hidden="true">
+        “Yaşam alanlarına<br />değer katıyoruz”
+        <span></span>
+      </p>
     </div>
   </section>
 
-  <section class="items">
+  <section class="vm-cards">
     <div class="container">
-      <ul class="items__grid">
+      <ul class="vm-cards__grid">
         {
-          items.map((item) => (
-            <li class="item">
-              <h2>{item.title}</h2>
-              <p>{item.text}</p>
+          items.map((item, index) => (
+            <li class={`vm-card reveal reveal-d${index}`}>
+              <div class="vm-card__head">
+                <span class="vm-card__icon">
+                  <Icon name={item.icon} size={36} />
+                </span>
+                <div>
+                  <h2>{item.title}</h2>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+              <img src={item.image} alt="" loading="lazy" />
+              <div class="vm-card__foot">
+                <span class="vm-card__number">{String(index + 1).padStart(2, '0')}</span>
+                <span class="vm-card__line"></span>
+                <span class="vm-card__caption">{item.caption}</span>
+              </div>
             </li>
           ))
         }
       </ul>
     </div>
   </section>
+
+  <section class="vm-cta">
+    <img class="vm-cta__bg" src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
+    <div class="container vm-cta__inner reveal">
+      <div>
+        <div class="eyebrow eyebrow--light">
+          <span class="eyebrow__bar"></span>
+          <span>BİRLİKTE DAHA FAZLASI</span>
+        </div>
+        <h2>Projeniz için Bizimle Çalışın</h2>
+        <p>Uzman kadromuzla projelerinizi planlamadan teslimata kadar yönetiyoruz.</p>
+        <a class="btn btn--white" href="/iletisim#quote-form">
+          Teklif Al <Icon name="arrow" size={18} />
+        </a>
+      </div>
+      <p class="vm-cta__script" aria-hidden="true">
+        “Güvenli yapılar,<br />daha iyi yaşamlar.”
+        <span></span>
+      </p>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .intro {
-    padding-top: calc(var(--header-h) + var(--space-l));
-    padding-bottom: 0;
+  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
+  .container {
+    max-width: none;
+    padding-inline: clamp(var(--edge-mobile), 4vw, 72px);
   }
 
-  .intro h1 {
-    font-size: var(--fs-h1);
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
   }
 
-  .items {
-    padding-block: var(--space-xl) var(--space-xxl);
+  .eyebrow__bar {
+    display: block;
+    width: 48px;
+    height: 2px;
+    background: var(--color-navy-deep);
   }
 
-  .items__grid {
+  .eyebrow--light {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .eyebrow--light .eyebrow__bar {
+    background: #fff;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 30px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background var(--transition);
+  }
+
+  .btn--white {
+    background: #fff;
+    color: var(--color-navy-deep);
+  }
+
+  .btn--white:hover {
+    background: #e8e9f5;
+  }
+
+  /* Hero */
+  .vm-hero {
+    position: relative;
+    overflow: hidden;
+    background: #eef2f9;
+  }
+
+  .vm-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 62%;
+  }
+
+  .vm-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% top;
+  }
+
+  .vm-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0) 50%);
+  }
+
+  .vm-hero__inner {
+    position: relative;
+    z-index: 1;
+    min-height: 340px;
+    padding-block: 32px 56px;
+  }
+
+  .vm-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+    font-size: 0.75rem;
+    color: var(--color-text-faint);
+  }
+
+  .vm-hero__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .vm-hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+  }
+
+  .vm-hero__lead {
+    max-width: 30ch;
+    margin-top: 18px;
+    font-size: clamp(1.0625rem, 1.4vw, 1.375rem);
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  .vm-hero__script,
+  .vm-cta__script {
+    font-family: var(--font-script);
+    line-height: 1.1;
+  }
+
+  .vm-hero__script {
+    position: absolute;
+    top: 56px;
+    right: var(--edge);
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(19, 21, 74, 0.45);
+    transform: rotate(-7deg);
+  }
+
+  .vm-hero__script span {
+    display: block;
+    width: 90px;
+    height: 2px;
+    margin: 18px auto 0;
+    background: #fff;
+  }
+
+  /* Cards */
+  .vm-cards {
+    padding-block: 32px 40px;
+  }
+
+  .vm-cards__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--space-m);
   }
 
-  .item {
-    padding-top: var(--space-m);
-    border-top: 2px solid var(--color-navy);
+  .vm-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: #fff;
   }
 
-  .item h2 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: var(--fs-h3);
-    color: var(--color-navy);
+  .vm-card__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: start;
+    flex: 1;
   }
 
-  .item p {
-    margin-top: var(--space-s);
-    font-size: var(--fs-body);
-    line-height: 1.7;
+  .vm-card__icon {
+    display: grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    color: var(--color-navy-deep);
+  }
+
+  .vm-card h2 {
+    margin-top: 12px;
+    font-size: 1.5rem;
+    color: var(--color-navy-deep);
+  }
+
+  .vm-card p {
+    margin-top: 16px;
+    font-size: var(--fs-small);
+    line-height: 1.75;
     color: var(--color-text-muted);
   }
 
-  @media (max-width: 768px) {
-    .items__grid {
+  .vm-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .vm-card__foot {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .vm-card__number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--color-text-faint);
+  }
+
+  .vm-card__line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-navy);
+    opacity: 0.4;
+  }
+
+  .vm-card__caption {
+    flex: none;
+    width: 170px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  /* CTA */
+  .vm-cta {
+    position: relative;
+    overflow: hidden;
+    padding-block: 64px;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .vm-cta__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    mix-blend-mode: luminosity;
+  }
+
+  .vm-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(25, 27, 74, 0.9), rgba(25, 27, 74, 0.55));
+  }
+
+  .vm-cta__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+  }
+
+  .vm-cta h2 {
+    margin-top: 4px;
+    font-size: clamp(1.75rem, 2.4vw + 0.75rem, 2.5rem);
+    color: #fff;
+  }
+
+  .vm-cta__inner p:not(.vm-cta__script) {
+    margin-top: 14px;
+    font-size: 1.0625rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .vm-cta .btn {
+    margin-top: 28px;
+  }
+
+  .vm-cta__script {
+    padding-left: 40px;
+    border-left: 1px solid rgba(255, 255, 255, 0.8);
+    font-size: 1.75rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .vm-cta__script span {
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin-top: 22px;
+    background: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .vm-hero__media {
+      width: 100%;
+    }
+
+    .vm-hero__media::after {
+      background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0.75) 55%, rgba(238, 242, 249, 0.25) 100%);
+    }
+
+    .vm-hero__script,
+    .vm-cta__script {
+      display: none;
+    }
+
+    .vm-cards__grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .vm-hero__inner {
+      min-height: 0;
+      padding-block: 24px 40px;
+    }
+
+    .vm-card__head {
+      grid-template-columns: 1fr;
+    }
+
+    .vm-cta__inner {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

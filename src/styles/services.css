@@ -1,14 +1,16 @@
 .svc-main {
-  background: var(--color-bg-light);
-  padding-block: 64px 112px;
+  background: var(--color-bg);
+  padding-block: 31px 72px;
 }
 
-.svc-main__layout {
+.svc-main .svc-main__layout {
   display: grid;
-  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
-  gap: 32px;
+  grid-template-columns: minmax(0, 336px) minmax(0, 1fr);
+  gap: 0;
   align-items: start;
   min-width: 0;
+  max-width: none;
+  padding-inline: clamp(22px, 4vw, 81px);
 }
 
 .svc-main__layout > * {
@@ -16,26 +18,69 @@
   max-width: 100%;
 }
 
+/* Sidebar ile içerik arasındaki dikey ayırıcı */
+.svc-main__layout > :last-child {
+  padding-left: 45px;
+  margin-left: 45px;
+  border-left: 1px solid var(--color-border);
+}
+
 @media (max-width: 1100px) {
-  .svc-main__layout {
-    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-    gap: 24px;
+  .svc-main .svc-main__layout {
+    grid-template-columns: minmax(0, 303px) minmax(0, 1fr);
+  }
+
+  .svc-main__layout > :last-child {
+    padding-left: 27px;
+    margin-left: 27px;
   }
 }
 
 @media (max-width: 1024px) {
   .svc-main {
-    padding-block: 40px 72px;
+    padding-block: 27px 54px;
   }
 
-  .svc-main__layout {
+  .svc-main .svc-main__layout {
     grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    gap: 36px;
+  }
+
+  .svc-main__layout > :last-child {
+    padding-left: 0;
+    margin-left: 0;
+    border-left: 0;
   }
 }
 
-@media (max-width: 700px) {
-  .svc-main {
-    padding-block: 32px 56px;
+/* Açık zeminli, kartlı düzen (Alt Müteahhitlik) */
+.svc-main--soft {
+  background: #f4f6fb;
+}
+
+.svc-main--soft .svc-main__layout {
+  gap: 36px;
+}
+
+.svc-main--soft .svc-main__layout > :last-child {
+  padding-left: 49px;
+  margin-left: 0;
+  border-left: 0;
+}
+
+@media (max-width: 900px) {
+  .svc-main--soft .svc-main__layout > :last-child {
+    padding-left: 25px;
   }
+}
+
+/* Düz beyaz zeminli düzen (Anahtar Teslim) */
+.svc-main--flat .svc-main__layout {
+  gap: 36px;
+}
+
+.svc-main--flat .svc-main__layout > :last-child {
+  padding-left: 0;
+  margin-left: 0;
+  border-left: 0;
 }

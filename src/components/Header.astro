@@ -2,11 +2,19 @@
 import Icon from './Icon.astro';
 import site from '../data/site.json';
 
-const navLinks = [
-  { label: 'Ana Sayfa', href: '/' },
+// `paths`: bu öğeyi "aktif" yapan yol önekleri. `exact`: yalnızca tam eşleşme (ana sayfa için).
+const navLinks: {
+  label: string;
+  href: string;
+  paths: string[];
+  exact?: boolean;
+  children?: { label: string; href: string }[];
+}[] = [
+  { label: 'Ana Sayfa', href: '/', paths: ['/'], exact: true },
   {
     label: 'Kurumsal',
     href: '/kurumsal',
+    paths: ['/kurumsal', '/hakkimizda', '/belgeler'],
     children: [
       { label: 'Hakkımızda', href: '/hakkimizda' },
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
@@ -16,6 +24,7 @@ const navLinks = [
   {
     label: 'Hizmetler',
     href: '/hizmetler',
+    paths: ['/hizmetler'],
     children: [
       { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
       { label: 'Anahtar Teslim Müteahhitlik', href: '/hizmetler/anahtar-teslim-muteahhitlik' },
@@ -24,18 +33,23 @@ const navLinks = [
       { label: 'Otel Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
     ],
   },
-  { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum' },
+  { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum', paths: ['/kentsel-donusum'] },
   {
     label: 'Projeler',
     href: '/projeler',
+    paths: ['/projeler'],
     children: [
       { label: 'Devam Eden', href: '/projeler/devam-eden' },
       { label: 'Tamamlanan', href: '/projeler/tamamlanan' },
     ],
   },
-  { label: 'Haberler', href: '/haberler' },
-  { label: 'Rehber', href: '/rehber' },
+  { label: 'Haberler', href: '/haberler', paths: ['/haberler'] },
+  { label: 'Rehber', href: '/rehber', paths: ['/rehber'] },
 ];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (item: (typeof navLinks)[number]) =>
+  item.paths.some((p) => currentPath === p || (!item.exact && currentPath.startsWith(`${p}/`)));
 ---
 
 <header class="header" transition:persist="sayda-header">
@@ -48,11 +62,16 @@ const navLinks = [
       <ul>
         {
           navLinks.map((item, i) => (
-            <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
+            <li
+              class="header__nav-item"
+              class:list={{ 'has-dropdown': item.children, 'is-current': isCurrent(item) }}
+              data-paths={item.paths.join(',')}
+              data-exact={item.exact ? '' : undefined}
+            >
               {item.children ? (
                 <div class="header__nav-item-row">
                   {item.href ? (
-                    <a href={item.href} class="header__nav-link">
+                    <a href={item.href} class="header__nav-link" aria-current={isCurrent(item) ? 'page' : undefined}>
                       {item.label}
                     </a>
                   ) : (
@@ -76,7 +95,7 @@ const navLinks = [
                   </button>
                 </div>
               ) : (
-                <a href={item.href} class="header__nav-link">
+                <a href={item.href} class="header__nav-link" aria-current={isCurrent(item) ? 'page' : undefined}>
                   {item.label}
                 </a>
               )}
@@ -84,7 +103,9 @@ const navLinks = [
                 <ul class="header__dropdown" id={`dropdown-${i}`}>
                   {item.children.map((child) => (
                     <li>
-                      <a href={child.href}>{child.label}</a>
+                      <a href={child.href} aria-current={child.href === currentPath ? 'page' : undefined}>
+                        {child.label}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -175,12 +196,34 @@ const navLinks = [
   }
 
   .header__nav-link {
+    position: relative;
     display: inline-flex;
     align-items: center;
     font-size: var(--fs-small);
     font-weight: 600;
     color: rgba(255, 255, 255, 0.88);
     transition: color var(--transition);
+  }
+
+  /* Aktif sayfa çizgisi: ortadan açılır, hover'da soluk önizleme gösterir. */
+  .header__nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -9px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    opacity: 0;
+    transform: scaleX(0);
+    transition:
+      transform 260ms ease,
+      opacity 260ms ease;
+  }
+
+  .header__nav-cta-link::after {
+    display: none;
   }
 
   .header__nav-link--label {
@@ -191,6 +234,22 @@ const navLinks = [
 
   .header__nav-link:hover {
     color: #fff;
+  }
+
+  .header__nav-link:hover::after {
+    opacity: 0.45;
+    transform: scaleX(1);
+  }
+
+  .header__nav-item.is-current > .header__nav-link,
+  .header__nav-item.is-current .header__nav-item-row > .header__nav-link {
+    color: #fff;
+  }
+
+  .header__nav-item.is-current > .header__nav-link::after,
+  .header__nav-item.is-current .header__nav-item-row > .header__nav-link::after {
+    opacity: 1;
+    transform: scaleX(1);
   }
 
   .header__dropdown-toggle {
@@ -239,9 +298,14 @@ const navLinks = [
       color var(--transition);
   }
 
-  .header__dropdown li a:hover {
+  .header__dropdown li a:hover,
+  .header__dropdown li a[aria-current='page'] {
     background: var(--color-bg-light);
     color: var(--color-navy);
+  }
+
+  .header__dropdown li a[aria-current='page'] {
+    font-weight: 700;
   }
 
   @media (min-width: 1281px) {
@@ -382,7 +446,8 @@ const navLinks = [
       color: rgba(255, 255, 255, 0.7);
     }
 
-    .header__dropdown li a:hover {
+    .header__dropdown li a:hover,
+    .header__dropdown li a[aria-current='page'] {
       background: rgba(255, 255, 255, 0.06);
       color: #fff;
     }
@@ -514,9 +579,31 @@ const navLinks = [
     closeDropdowns();
   };
 
+  // Header sayfa geçişlerinde korunduğu için aktif öğe burada istemci tarafında güncellenir.
+  const updateCurrentLink = () => {
+    const path = location.pathname.replace(/\/$/, '') || '/';
+
+    document.querySelectorAll<HTMLElement>('.header__nav-item[data-paths]').forEach((item) => {
+      const paths = (item.dataset.paths ?? '').split(',').filter(Boolean);
+      const exact = item.hasAttribute('data-exact');
+      const current = paths.some((p) => path === p || (!exact && path.startsWith(`${p}/`)));
+      item.classList.toggle('is-current', current);
+
+      const link = item.querySelector('.header__nav-link');
+      if (current) link?.setAttribute('aria-current', 'page');
+      else link?.removeAttribute('aria-current');
+    });
+
+    document.querySelectorAll<HTMLAnchorElement>('.header__dropdown a').forEach((link) => {
+      if (new URL(link.href).pathname.replace(/\/$/, '') === path) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
   const resetMenu = () => {
     setMenuOpen(false);
     updateHeaderBackground();
+    updateCurrentLink();
   };
 
   const win = window as Window & { __saydaHeaderNavV2?: boolean };
