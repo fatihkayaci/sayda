@@ -1,0 +1,321 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+
+const links = [
+  {
+    icon: 'building',
+    title: 'Projelerimiz',
+    description: 'Devam eden ve tamamlanan projelerimizi inceleyin.',
+    href: '/projeler',
+  },
+  {
+    icon: 'document',
+    title: 'Haberler',
+    description: 'Güncel gelişmeleri takip edin.',
+    href: '/haberler',
+  },
+  {
+    icon: 'bulb',
+    title: 'Rehber',
+    description: 'Kentsel dönüşüm hakkında faydalı içerikler.',
+    href: '/rehber',
+  },
+  {
+    icon: 'mail',
+    title: 'İletişim',
+    description: 'Bizimle iletişime geçin, sorularınızı yanıtlayalım.',
+    href: '/iletisim',
+  },
+];
+---
+
+<Layout
+  title="Sayfa Bulunamadı | Sayda İnşaat"
+  description="Aradığınız sayfa bulunamadı. Sayda İnşaat ana sayfasına dönebilir, projelerimizi inceleyebilir veya bizimle iletişime geçebilirsiniz."
+  hideCtaBanner
+>
+  <section class="not-found">
+    <div class="not-found__media">
+      <img
+        class="not-found__image"
+        src="/img/sayda-insaat-hero01.webp"
+        alt="Sayda İnşaat proje görünümü"
+        fetchpriority="high"
+      />
+      <div class="not-found__overlay"></div>
+      <p class="not-found__script">Daha iyi yaşam alanları için...</p>
+    </div>
+
+    <div class="container not-found__inner reveal">
+      <div class="not-found__text">
+        <div class="not-found__eyebrow">
+          <span class="not-found__eyebrow-bar"></span>
+          <span>ÜZGÜNÜZ</span>
+        </div>
+        <p class="not-found__code">404</p>
+        <h1>Sayfa bulunamadı</h1>
+        <p class="not-found__lead">
+          Aradığınız sayfa taşınmış, silinmiş ya da adres yanlış yazılmış olabilir. Size yardımcı
+          olabilecek bağlantılar aşağıda.
+        </p>
+        <div class="not-found__actions">
+          <a class="not-found__btn not-found__btn--primary" href="/">
+            <Icon name="home" size={19} />
+            Ana Sayfaya Dön
+          </a>
+          <a class="not-found__btn not-found__btn--outline" href="/iletisim">
+            <Icon name="mail" size={19} />
+            Bize Ulaşın
+          </a>
+        </div>
+      </div>
+
+      <div class="not-found__grid">
+        {
+          links.map((link) => (
+            <a class="nf-card" href={link.href}>
+              <span class="nf-card__icon">
+                <Icon name={link.icon} size={26} />
+              </span>
+              <h3>{link.title}</h3>
+              <p>{link.description}</p>
+              <span class="nf-card__arrow">
+                <Icon name="arrow" size={16} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    position: relative;
+    padding-top: calc(var(--header-h) + var(--space-xxl));
+    padding-bottom: var(--space-xxl);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .not-found__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .not-found__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .not-found__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(19, 21, 74, 0.92) 0%,
+      rgba(19, 21, 74, 0.68) 45%,
+      rgba(19, 21, 74, 0.35) 100%
+    );
+  }
+
+  .not-found__script {
+    position: absolute;
+    top: 32px;
+    right: 5%;
+    max-width: 220px;
+    font-family: var(--font-script);
+    font-size: clamp(1.375rem, 2vw, 1.75rem);
+    line-height: 1.15;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.9);
+    transform: rotate(-4deg);
+    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.45);
+  }
+
+  .not-found__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .not-found__text {
+    max-width: 720px;
+  }
+
+  .not-found__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: var(--space-s);
+  }
+
+  .not-found__eyebrow-bar {
+    display: block;
+    width: 44px;
+    height: 3px;
+    background: #fff;
+  }
+
+  .not-found__eyebrow span:last-child {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .not-found__code {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    line-height: 0.95;
+    color: #fff;
+  }
+
+  .not-found h1 {
+    margin-top: var(--space-xs);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  .not-found__lead {
+    margin-top: var(--space-m);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 46ch;
+  }
+
+  .not-found__actions {
+    margin-top: var(--space-l);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+  }
+
+  .not-found__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    transition:
+      background var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .not-found__btn--primary {
+    background: #fff;
+    color: var(--color-navy);
+  }
+
+  .not-found__btn--primary:hover {
+    background: #e8e9f5;
+  }
+
+  .not-found__btn--outline {
+    color: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .not-found__btn--outline:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+  }
+
+  .not-found__grid {
+    margin-top: var(--space-xxl);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-s);
+  }
+
+  .nf-card {
+    position: relative;
+    display: block;
+    padding: 26px 24px 30px;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition:
+      border-color 200ms,
+      background 200ms,
+      transform 200ms;
+  }
+
+  .nf-card:hover {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-4px);
+  }
+
+  .nf-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    margin-bottom: var(--space-s);
+  }
+
+  .nf-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .nf-card p {
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .nf-card__arrow {
+    display: inline-flex;
+    margin-top: 16px;
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    .not-found__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .not-found {
+      padding-top: calc(var(--header-h) + var(--space-l));
+      padding-bottom: var(--space-l);
+    }
+
+    .not-found__script {
+      display: none;
+    }
+
+    .not-found__actions .not-found__btn {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+
+    .not-found__grid {
+      margin-top: var(--space-xl);
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
