@@ -634,8 +634,14 @@ const avantajlar = [
     }
 
     .ot-features {
+      flex-direction: column;
       flex-wrap: wrap;
       row-gap: 18px;
+    }
+
+    .ot-features li {
+      padding-left: 0;
+      border-left: 0;
     }
 
     .ot-scope__body {
@@ -721,4 +727,11 @@ const avantajlar = [
       grid-template-columns: 1fr;
     }
   }
+
+  @media (max-width: 380px) {
+    .ot-head h1 {
+      font-size: 1.75rem;
+    }
+  }
 </style>
+

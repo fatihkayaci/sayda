@@ -65,22 +65,6 @@ const tabs = [
             }
           </nav>
         </div>
-
-        <form class="haberler-side__card haberler-news" id="newsletterForm">
-          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
-          <input type="hidden" name="subject" value="Bülten aboneliği" />
-          <input type="checkbox" name="botcheck" class="haberler-news__honeypot" tabindex="-1" autocomplete="off" />
-          <span class="haberler-news__icon">
-            <Icon name="bell" size={30} />
-          </span>
-          <h2>Gelişmeleri kaçırmayın</h2>
-          <p>En yeni haberler ve duyurular için e-posta bültenimize abone olun.</p>
-          <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
-          <button type="submit">
-            Abone Ol <Icon name="arrow" size={18} />
-          </button>
-          <p class="haberler-news__status" id="newsletterStatus" role="status" aria-live="polite"></p>
-        </form>
       </aside>
 
       <div class="haberler-main">
@@ -130,6 +114,22 @@ const tabs = [
 
         <nav class="haberler-pager" aria-label="Sayfalar" data-news-pager></nav>
       </div>
+
+      <form class="haberler-side__card haberler-news" id="newsletterForm">
+        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="subject" value="Bülten aboneliği" />
+        <input type="checkbox" name="botcheck" class="haberler-news__honeypot" tabindex="-1" autocomplete="off" />
+        <span class="haberler-news__icon">
+          <Icon name="bell" size={30} />
+        </span>
+        <h2>Gelişmeleri kaçırmayın</h2>
+        <p>En yeni haberler ve duyurular için e-posta bültenimize abone olun.</p>
+        <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
+        <button type="submit">
+          Abone Ol <Icon name="arrow" size={18} />
+        </button>
+        <p class="haberler-news__status" id="newsletterStatus" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 </Layout>
@@ -433,15 +433,23 @@ const tabs = [
   .haberler-page__layout {
     display: grid;
     grid-template-columns: 269px minmax(0, 1fr);
+    grid-template-areas: 'side main' 'news main';
     gap: 27px;
     align-items: start;
   }
 
   .haberler-side {
-    display: grid;
-    gap: 22px;
+    grid-area: side;
     position: sticky;
     top: calc(var(--header-h) + 18px);
+  }
+
+  .haberler-news {
+    grid-area: news;
+  }
+
+  .haberler-main {
+    grid-area: main;
   }
 
   .haberler-side__card {
@@ -807,6 +815,7 @@ const tabs = [
   @media (max-width: 900px) {
     .haberler-page__layout {
       grid-template-columns: 1fr;
+      grid-template-areas: 'side' 'main' 'news';
     }
 
     .haberler-side {

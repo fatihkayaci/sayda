@@ -180,19 +180,17 @@ const interval = 6;
   }
 
   .hero__tags {
-    position: relative;
-    height: 52px;
+    display: grid;
     margin-top: 30px;
     overflow: hidden;
   }
 
   .hero__tag {
-    position: absolute;
-    left: 0;
-    top: 0;
+    grid-area: 1 / 1;
     display: flex;
     align-items: center;
     gap: 16px;
+    min-width: 0;
     opacity: 0;
     transform: translateY(24px);
     transition:
@@ -365,8 +363,13 @@ const interval = 6;
       font-size: 16px;
     }
 
+    .hero__tag {
+      align-items: flex-start;
+    }
+
     .hero__tag span {
       white-space: normal;
+      line-height: 1.25;
     }
   }
 
