@@ -243,7 +243,8 @@ const flow = [
       if (positionTypeInput) positionTypeInput.value = LABELS[tab];
       if (cvInput) cvInput.required = tab === 'beyaz';
       try {
-        history.replaceState(null, '', '#' + HASHES[tab]);
+        const url = tab === 'beyaz' ? location.pathname + location.search : '#' + HASHES[tab];
+        history.replaceState(null, '', url);
       } catch {
         /* noop */
       }
