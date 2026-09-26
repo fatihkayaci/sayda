@@ -3,13 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
 
-const mapsQuery = encodeURIComponent(`${site.address.street} ${site.address.neighborhood} ${site.address.district} ${site.address.city}`);
+const mapsQuery = encodeURIComponent('SAYDA, Tarabya, Kaydırak Sk. No:3, 34457 Sarıyer/İstanbul');
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-
-// Tarabya / Sarıyer civarı (yaklaşık konum; kesin koordinat girildiğinde güncellenmeli).
-const lat = 41.1436;
-const lon = 29.0583;
-const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.018}%2C${lat - 0.009}%2C${lon + 0.018}%2C${lat + 0.009}&layer=mapnik&marker=${lat}%2C${lon}`;
+const mapSrc = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
 
 const cards = [
   {
