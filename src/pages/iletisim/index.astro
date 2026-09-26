@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
-import services from '../../data/services.json';
 import site from '../../data/site.json';
 
 const mapsQuery = encodeURIComponent(`${site.address.street} ${site.address.neighborhood} ${site.address.district} ${site.address.city}`);
@@ -125,10 +124,15 @@ const cards = [
                 <input type="email" name="email" placeholder="ornek@sayda.com.tr" required autocomplete="email" />
               </label>
               <label>
-                <span>İlgilendiğiniz Hizmet</span>
+                <span>Talep Ettiğiniz Hizmet</span>
                 <select name="service">
                   <option value="">Seçiniz</option>
-                  {services.map((service) => <option value={service.title}>{service.title}</option>)}
+                  <option value="Anahtar Teslim Müteahhitlik">Anahtar Teslim Müteahhitlik (Ana Yüklenici)</option>
+                  <option value="Alt Müteahhitlik">Alt Müteahhitlik (Kısmi Yüklenici / Uzman Ekip)</option>
+                  <option value="Kat Karşılığı İnşaat">Kat Karşılığı İnşaat</option>
+                  <option value="Kentsel Dönüşüm">Kentsel Dönüşüm</option>
+                  <option value="Renovasyon İşleri">Renovasyon İşleri</option>
+                  <option value="Proje Yönetimi ve Danışmanlık">Proje Yönetimi ve Danışmanlık</option>
                   <option value="Diğer">Diğer</option>
                 </select>
               </label>

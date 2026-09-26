@@ -15,14 +15,14 @@
   },
   {
     "title": "Alt Müteahhitlik",
-    "description": "Ana yükleniciye bağlı olarak kaba veya ince yapı işlerinin taşeronluğu.",
+    "description": "Kısmi yüklenici / uzman ekip olarak, ana yükleniciye bağlı kaba veya ince yapı işlerinin taşeronluğu.",
     "href": "/hizmetler/alt-muteahhitlik",
     "icon": "helmet",
     "audience": "ana-yukleniciler"
   },
   {
     "title": "Anahtar Teslim Müteahhitlik",
-    "description": "Projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi.",
+    "description": "Ana yüklenici olarak, projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi.",
     "href": "/hizmetler/anahtar-teslim-muteahhitlik",
     "icon": "door",
     "audience": "ana-yukleniciler"
@@ -35,8 +35,8 @@
     "audience": "ana-yukleniciler"
   },
   {
-    "title": "Otel Renovasyonu",
-    "description": "İşletme faaliyetini aksatmadan planlanan, kapsamlı otel yenileme ve modernizasyon projeleri.",
+    "title": "Tesis Renovasyonu",
+    "description": "Otel, fabrika, hastane ve benzeri tesislerde, işletme faaliyetini aksatmadan planlanan kapsamlı yenileme ve modernizasyon projeleri.",
     "href": "/hizmetler/otel-renovasyonu",
     "icon": "star",
     "audience": "ana-yukleniciler"

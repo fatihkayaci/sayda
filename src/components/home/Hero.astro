@@ -14,6 +14,8 @@ const interval = 6;
       fetchpriority="high"
     />
     <img class="hero__image" src="/img/sayda-insaat-hero02.webp" alt="" />
+    <img class="hero__image" src="/img/sayda-insaat-hero03.webp" alt="" />
+    <img class="hero__image" src="/img/sayda-insaat-hero04.webp" alt="" />
   </div>
   <div class="hero__shade"></div>
 
@@ -77,7 +79,13 @@ const interval = 6;
     };
 
     groups[1].forEach((btn, i) => btn.addEventListener('click', () => go(i)));
-    requestAnimationFrame(() => requestAnimationFrame(() => go(0)));
+
+    // The first tag/tab render with `is-on` already applied server-side, so the
+    // underline-fill transition has no "from" state to animate on load. Strip it,
+    // force a reflow, then re-apply via go(0) so the first fill animates too.
+    groups.forEach((group) => group.forEach((el) => el.classList.remove('is-on', 'is-past')));
+    void hero.offsetWidth;
+    go(0);
   });
 </script>
 

@@ -7,10 +7,10 @@ const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, ''
 const areaValue = `${areaInMillions.toFixed(2)}M`;
 
 const stats = [
-  { icon: 'calendar', value: String(site.foundedYear), unit: '', label: 'Kuruluş Yılı' },
   { icon: 'building', value: areaValue, unit: ' m²', label: 'Tamamlanan Alan' },
+  { icon: 'team', value: String(site.stats.employeeCount), unit: '+', label: 'Çalışan' },
   { icon: 'document', value: String(site.completionCertificatesCount), unit: '', label: 'İş Bitirme Belgesi' },
-  { icon: 'team', value: site.contractorLicenseGroup, unit: '', label: 'Yüklenici Yetki Belgesi' },
+  { icon: 'shield', value: site.contractorLicenseGroup, unit: '', label: 'Yüklenici Yetki Belgesi Grubu' },
 ];
 
 const values = [
