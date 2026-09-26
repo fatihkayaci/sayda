@@ -30,7 +30,6 @@ const items = [
 <Layout
   title="Vizyon & Misyon | Sayda İnşaat"
   description="Sayda İnşaat'ın vizyonu ve misyonu."
-  hideCtaBanner
 >
   <section class="vm-hero">
     <div class="vm-hero__media" aria-hidden="true">
@@ -90,35 +89,10 @@ const items = [
     </div>
   </section>
 
-  <section class="vm-cta">
-    <img class="vm-cta__bg" src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
-    <div class="container vm-cta__inner reveal">
-      <div>
-        <div class="eyebrow eyebrow--light">
-          <span class="eyebrow__bar"></span>
-          <span>BİRLİKTE DAHA FAZLASI</span>
-        </div>
-        <h2>Projeniz için Bizimle Çalışın</h2>
-        <p>Uzman kadromuzla projelerinizi planlamadan teslimata kadar yönetiyoruz.</p>
-        <a class="btn btn--white" href="/iletisim#quote-form">
-          Teklif Al <Icon name="arrow" size={18} />
-        </a>
-      </div>
-      <p class="vm-cta__script" aria-hidden="true">
-        “Güvenli yapılar,<br />daha iyi yaşamlar.”
-        <span></span>
-      </p>
-    </div>
-  </section>
+
 </Layout>
 
 <style>
-  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 72px);
-  }
-
   .eyebrow {
     display: flex;
     align-items: center;
@@ -143,26 +117,6 @@ const items = [
 
   .eyebrow--light .eyebrow__bar {
     background: #fff;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 30px;
-    border-radius: var(--radius);
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background var(--transition);
-  }
-
-  .btn--white {
-    background: #fff;
-    color: var(--color-navy-deep);
-  }
-
-  .btn--white:hover {
-    background: #e8e9f5;
   }
 
   /* Hero */
@@ -226,13 +180,9 @@ const items = [
     color: var(--color-text-muted);
   }
 
-  .vm-hero__script,
-  .vm-cta__script {
+  .vm-hero__script {
     font-family: var(--font-script);
     line-height: 1.1;
-  }
-
-  .vm-hero__script {
     position: absolute;
     top: 56px;
     right: var(--edge);
@@ -340,73 +290,6 @@ const items = [
     color: var(--color-text-muted);
   }
 
-  /* CTA */
-  .vm-cta {
-    position: relative;
-    overflow: hidden;
-    padding-block: 64px;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .vm-cta__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-    mix-blend-mode: luminosity;
-  }
-
-  .vm-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg, rgba(25, 27, 74, 0.9), rgba(25, 27, 74, 0.55));
-  }
-
-  .vm-cta__inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-xl);
-  }
-
-  .vm-cta h2 {
-    margin-top: 4px;
-    font-size: clamp(1.75rem, 2.4vw + 0.75rem, 2.5rem);
-    color: #fff;
-  }
-
-  .vm-cta__inner p:not(.vm-cta__script) {
-    margin-top: 14px;
-    font-size: 1.0625rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .vm-cta .btn {
-    margin-top: 28px;
-  }
-
-  .vm-cta__script {
-    padding-left: 40px;
-    border-left: 1px solid rgba(255, 255, 255, 0.8);
-    font-size: 1.75rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .vm-cta__script span {
-    display: block;
-    width: 56px;
-    height: 2px;
-    margin-top: 22px;
-    background: #fff;
-  }
-
   /* Responsive */
   @media (max-width: 1024px) {
     .vm-hero__media {
@@ -417,8 +300,7 @@ const items = [
       background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0.75) 55%, rgba(238, 242, 249, 0.25) 100%);
     }
 
-    .vm-hero__script,
-    .vm-cta__script {
+    .vm-hero__script {
       display: none;
     }
 
@@ -435,11 +317,6 @@ const items = [
 
     .vm-card__head {
       grid-template-columns: 1fr;
-    }
-
-    .vm-cta__inner {
-      flex-direction: column;
-      align-items: flex-start;
     }
   }
 </style>

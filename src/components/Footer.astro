@@ -9,7 +9,8 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <p class="footer__logo">SAYDA<span>İNŞAAT</span></p>
+      <img class="footer__logo" src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
+      <p class="footer__label">İnşaat Taahhüt · Since {site.foundedYear}</p>
       <p class="footer__tagline">{site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik.</p>
       <div class="footer__social-list">
         {
@@ -94,15 +95,19 @@ const year = new Date().getFullYear();
   }
 
   .footer__logo {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #fff;
+    display: block;
+    height: 46px;
+    width: auto;
+    filter: brightness(0) invert(1);
   }
 
-  .footer__logo span {
-    margin-left: 0.35em;
-    color: var(--color-on-dark-muted);
+  .footer__label {
+    margin-top: var(--space-m);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-accent);
   }
 
   .footer__tagline {

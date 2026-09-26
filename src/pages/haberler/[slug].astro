@@ -55,7 +55,7 @@ const sameCategory = others.filter((item) => item.category === haber.category);
 const more = [...sameCategory, ...others.filter((item) => item.category !== haber.category)].slice(0, 3);
 ---
 
-<Layout title={`${haber.title} | Sayda İnşaat`} description={haber.excerpt} ogImage={haber.image} hideCtaBanner>
+<Layout title={`${haber.title} | Sayda İnşaat`} description={haber.excerpt} ogImage={haber.image}>
   <article class="haber-detail">
     <header class="haber-hero">
       <img src={haber.image} alt="" fetchpriority="high" />
@@ -221,10 +221,6 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
 </script>
 
 <style>
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
 
   /* Hero */
   .haber-hero {

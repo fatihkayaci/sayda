@@ -1,51 +1,46 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
 
-const certMeta: Record<string, { subtitle: string; text: string; tone: string }> = {
+const certMeta: Record<string, { subtitle: string; text: string }> = {
   'ISO 9001': {
     subtitle: 'Kalite Yönetim Sistemi',
     text: 'Tüm süreçlerimizde kalite odaklı yönetim anlayışını benimsiyoruz.',
-    tone: 'blue',
   },
   'ISO 14001': {
     subtitle: 'Çevre Yönetim Sistemi',
     text: 'Çevreye duyarlı, sürdürülebilir ve doğaya saygılı projeler gerçekleştiriyoruz.',
-    tone: 'green',
   },
   'ISO 10002': {
     subtitle: 'Müşteri Memnuniyeti Yönetim Sistemi',
     text: 'Müşteri memnuniyetini temel alarak kalıcı değerler üretmek için çalışıyoruz.',
-    tone: 'red',
   },
 };
 
 const certs = site.certifications.map((cert) => ({
   ...cert,
   number: cert.name.replace('ISO ', ''),
-  ...(certMeta[cert.name] ?? { subtitle: '', text: '', tone: 'blue' }),
+  ...(certMeta[cert.name] ?? { subtitle: '', text: '' }),
 }));
 
 const facts = [
-  { title: 'Müteahhitlik Yetki Belgesi Grubu', text: 'Yetki Belgesi Grubu', value: site.contractorLicenseGroup },
-  { title: 'İş Bitirme Belgesi Sayısı', text: 'Tamamlanan proje sayısı', value: String(site.completionCertificatesCount) },
+  { label: 'Müteahhitlik', title: 'Yüklenici Yetki Belgesi Grubu', value: site.contractorLicenseGroup },
+  { label: 'Tamamlanan Projeler', title: 'İş Bitirme Belgesi', value: String(site.completionCertificatesCount), link: true },
 ];
 
 const downloads = [
-  { title: 'E-Katalog (PDF)', text: 'Şirket tanıtım kataloğumuzu inceleyin.', href: site.documents.catalog },
-  { title: 'Sertifika (PDF)', text: 'Tüm sertifikalarımızı içeren dosya.', href: site.documents.certificate },
+  { title: 'E-Katalog', text: 'Şirket tanıtım kataloğumuz.', href: site.documents.catalog },
+  { title: 'Sertifikalar', text: 'Tüm sertifikalarımızı içeren dosya.', href: site.documents.certificate },
 ];
 ---
 
 <Layout
   title="Belgelerimiz | Sayda İnşaat"
   description="Sayda İnşaat'ın belgeleri, iş bitirme evrakları ve e-katalog."
-  hideCtaBanner
 >
   <section class="bg-hero">
     <div class="bg-hero__media" aria-hidden="true">
-      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+      <img src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" fetchpriority="high" />
     </div>
 
     <div class="container bg-hero__inner">
@@ -61,7 +56,7 @@ const downloads = [
         <div class="bg-hero__content">
           <div class="eyebrow eyebrow--light">
             <span class="eyebrow__bar"></span>
-            <span>Kurumsal</span>
+            <span>KURUMSAL</span>
           </div>
           <h1>Belgelerimiz</h1>
           <p class="bg-hero__lead">
@@ -70,7 +65,9 @@ const downloads = [
           </p>
         </div>
 
-        <p class="bg-hero__quote" aria-hidden="true">Güvenli yapılar,<br />daha iyi yarınlar.</p>
+        <div class="bg-hero__quote-row">
+          <p class="bg-hero__quote" aria-hidden="true">“Güvenli yapılar, daha iyi yarınlar”</p>
+        </div>
       </div>
     </div>
   </section>
@@ -81,23 +78,23 @@ const downloads = [
         <div>
           <div class="eyebrow">
             <span class="eyebrow__bar"></span>
-            <span>Sertifikalarımız</span>
+            <span>SERTİFİKALARIMIZ</span>
           </div>
           <h2>Uluslararası standartlarda çalışıyoruz</h2>
         </div>
-        <p>Sektörümüzdeki en iyi uygulamaları benimseyerek, sürdürülebilir ve kaliteli projeler üretmeye devam ediyoruz.</p>
+        <p>Sektördeki en iyi uygulamaları benimseyerek sürdürülebilir ve kaliteli projeler üretmeye devam ediyoruz.</p>
       </div>
 
       <ul class="bg-certs">
         {
           certs.map((cert, index) => (
-            <li class={`cert cert--${cert.tone} reveal reveal-d${index}`}>
+            <li class={`cert reveal reveal-d${index}`}>
               <div class="cert__top">
                 <div class="cert__code">
                   <span class="cert__code-label">ISO</span>
                   <span class="cert__code-number">{cert.number}</span>
                 </div>
-                <span class="cert__badge">{cert.verified ? 'Doğrulandı' : 'Geçerli'}</span>
+                <span class="cert__badge">Geçerli</span>
               </div>
 
               <div class="cert__body">
@@ -111,7 +108,7 @@ const downloads = [
               </div>
 
               <a class="cert__link" href={site.documents.certificate} target="_blank" rel="noopener noreferrer">
-                Sertifikayı Görüntüle <Icon name="external" size={18} />
+                Sertifikayı Görüntüle <span aria-hidden="true">→</span>
               </a>
             </li>
           ))
@@ -127,8 +124,13 @@ const downloads = [
           <div class="bg-band__item">
             <span class="bg-band__value">{fact.value}</span>
             <div class="bg-band__text">
-              <span class="bg-band__label">{fact.text}</span>
+              <span class="bg-band__label">{fact.label}</span>
               <span class="bg-band__title">{fact.title}</span>
+              {fact.link && (
+                <a class="bg-band__link" href="/projeler/tamamlanan">
+                  Belgeleri Görüntüle <span aria-hidden="true">→</span>
+                </a>
+              )}
             </div>
           </div>
         ))
@@ -142,7 +144,7 @@ const downloads = [
         <div>
           <div class="eyebrow">
             <span class="eyebrow__bar"></span>
-            <span>Diğer Dokümanlar</span>
+            <span>DİĞER DOKÜMANLAR</span>
           </div>
           <h2>İndirilebilir dosyalar</h2>
         </div>
@@ -153,16 +155,12 @@ const downloads = [
           downloads.map((doc) => (
             <li class="doc reveal">
               <a href={doc.href} target="_blank" rel="noopener noreferrer">
-                <span class="doc__badge">
-                  <Icon name="document" size={26} />
-                </span>
+                <span class="doc__badge">PDF</span>
                 <span class="doc__text">
                   <strong>{doc.title}</strong>
                   <span>{doc.text}</span>
                 </span>
-                <span class="doc__download">
-                  İndir <Icon name="download" size={18} />
-                </span>
+                <span class="doc__download">İNDİR <span aria-hidden="true">↓</span></span>
               </a>
             </li>
           ))
@@ -171,39 +169,18 @@ const downloads = [
     </div>
   </section>
 
-  <section class="bg-cta">
-    <img class="bg-cta__bg" src="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp" alt="" loading="lazy" />
-    <div class="container bg-cta__inner reveal">
-      <div>
-        <div class="eyebrow eyebrow--light">
-          <span class="eyebrow__bar"></span>
-          <span>Birlikte Daha Güçlü Yapılar</span>
-        </div>
-        <h2>Yeni projeniz için bizimle çalışın.</h2>
-        <p>Uzman kadromuzla projenizi planlamadan teslimata kadar yönetiyoruz.</p>
-      </div>
-      <a class="btn-white" href="/iletisim#quote-form">
-        Teklif Al <Icon name="arrow" size={21} />
-      </a>
-    </div>
-  </section>
+
 </Layout>
 
 <style>
-  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
-
   .eyebrow {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     margin-bottom: 16px;
-    font-size: 0.77rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--color-navy);
   }
@@ -216,25 +193,7 @@ const downloads = [
   }
 
   .eyebrow--light {
-    color: var(--color-on-dark-muted);
-  }
-
-  .btn-white {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 34px;
-    border-radius: var(--radius);
-    background: #fff;
-    color: var(--color-navy-deep);
-    font-size: calc(var(--fs-small) * 1.12);
-    font-weight: 700;
-    transition: background var(--transition);
-  }
-
-  .btn-white:hover {
-    background: #e8e9f5;
+    color: #8589e6;
   }
 
   /* Hero */
@@ -248,61 +207,41 @@ const downloads = [
   .bg-hero__media {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 55%;
+    width: 52%;
   }
 
   .bg-hero__media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 60% top;
   }
 
   .bg-hero__media::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to right,
-      var(--color-navy-deep) 0%,
-      rgba(25, 27, 74, 0.4) 45%,
-      rgba(25, 27, 74, 0.15) 100%
-    );
+    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(13, 21, 51, 0.55) 35%, rgba(13, 21, 51, 0.15) 100%);
   }
 
   .bg-hero__inner {
     position: relative;
     z-index: 1;
-    min-height: 480px;
+    min-height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-block: 63px 81px;
-  }
-
-  .bg-hero__row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
-    gap: var(--space-xl);
-    align-items: end;
-  }
-
-  .bg-hero__content {
-    max-width: 560px;
+    padding-block: 72px 96px;
   }
 
   .bg-hero__breadcrumb {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 48px;
-    font-size: 0.84rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .bg-hero__breadcrumb a {
-    color: rgba(255, 255, 255, 0.6);
-    transition: color var(--transition);
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 64px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
   }
 
   .bg-hero__breadcrumb a:hover {
@@ -313,12 +252,23 @@ const downloads = [
     color: #fff;
   }
 
+  .bg-hero__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-xl);
+    align-items: end;
+  }
+
+  .bg-hero__content {
+    max-width: 560px;
+  }
+
   .bg-hero h1 {
     margin: 0;
     font-family: var(--font-display);
     font-stretch: 125%;
     font-weight: 800;
-    font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+    font-size: clamp(2.75rem, 6vw, 5.75rem);
     line-height: 0.95;
     letter-spacing: -0.01em;
     text-transform: uppercase;
@@ -326,32 +276,36 @@ const downloads = [
   }
 
   .bg-hero__lead {
-    max-width: 46ch;
-    margin-top: 24px;
-    font-size: clamp(1.05rem, 1.2vw + 0.6rem, 1.26rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
+    margin-top: 30px;
+    max-width: 520px;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 251, 0.8);
+  }
+
+  .bg-hero__quote-row {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .bg-hero__quote {
-    justify-self: end;
-    max-width: 340px;
+    max-width: 380px;
     margin: 0;
-    padding: 4px 0 4px 24px;
-    border-left: 2px solid var(--color-on-dark-muted);
+    padding: 4px 0 4px 28px;
+    border-left: 2px solid #8589e6;
     font-family: var(--font-display);
     font-stretch: 112%;
     font-weight: 600;
-    font-size: clamp(1.26rem, 1.6vw, 1.68rem);
-    line-height: 1.25;
-    text-transform: uppercase;
+    font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+    line-height: 1.2;
     letter-spacing: 0.01em;
+    text-transform: uppercase;
     color: #fff;
   }
 
   /* Certificates */
   .bg-certs-section {
-    padding-block: 72px 63px;
+    padding-block: 120px;
     background: #fff;
   }
 
@@ -361,27 +315,30 @@ const downloads = [
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-l);
-    margin-bottom: 40px;
+    margin-bottom: 48px;
   }
 
   .bg-head h2 {
     max-width: 20ch;
-    font-size: clamp(1.68rem, 2.24vw + 0.56rem, 2.45rem);
-    font-weight: 700;
+    font-family: var(--font-display);
     font-stretch: 112%;
+    font-size: 2.75rem;
+    line-height: 1.05;
+    font-weight: 700;
     letter-spacing: -0.015em;
     color: var(--color-text);
   }
 
   .bg-head p {
-    max-width: 42ch;
-    font-size: calc(var(--fs-small) * 1.12);
+    margin: 0;
+    max-width: 27.5ch;
+    font-size: 1rem;
     line-height: 1.65;
     color: var(--color-text-muted);
   }
 
   .bg-head--docs {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
   }
 
   .bg-certs {
@@ -391,19 +348,10 @@ const downloads = [
   }
 
   .cert {
-    --tone: var(--color-navy);
     display: flex;
     flex-direction: column;
     background: var(--color-bg-light);
     border: 1px solid var(--color-border);
-  }
-
-  .cert--green {
-    --tone: #1f7a4d;
-  }
-
-  .cert--red {
-    --tone: #a3232e;
   }
 
   .cert__top {
@@ -411,7 +359,7 @@ const downloads = [
     align-items: flex-start;
     justify-content: space-between;
     gap: 16px;
-    padding: 27px 27px 0;
+    padding: 36px 34px 0;
   }
 
   .cert__code {
@@ -420,29 +368,31 @@ const downloads = [
   }
 
   .cert__code-label {
-    font-size: 0.84rem;
+    font-size: 0.875rem;
     font-weight: 700;
     letter-spacing: 0.24em;
-    color: var(--tone);
+    color: #3e43b8;
   }
 
   .cert__code-number {
     margin-top: 2px;
-    font-family: var(--font-heading);
-    font-size: 3rem;
+    font-family: var(--font-display);
+    font-stretch: 120%;
+    font-weight: 800;
+    font-size: 4rem;
     line-height: 0.95;
-    letter-spacing: -0.01em;
-    color: var(--tone);
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
   }
 
   .cert__badge {
     flex: none;
-    padding: 6px 12px;
-    background: var(--tone);
+    padding: 7px 12px;
+    background: var(--color-navy);
     color: #fff;
-    font-size: 0.7rem;
+    font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     white-space: nowrap;
   }
@@ -450,19 +400,23 @@ const downloads = [
   .cert__body {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 20px 27px 24px;
+    gap: 10px;
+    padding: 26px 34px 30px;
     flex: 1;
   }
 
   .cert__body h3 {
-    font-size: 1.19rem;
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-size: 1.375rem;
     font-weight: 700;
     color: var(--color-text);
   }
 
   .cert__body p {
-    font-size: 0.91rem;
+    margin: 0;
+    font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--color-text-muted);
   }
@@ -471,10 +425,10 @@ const downloads = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 27px;
-    padding: 16px 0;
+    margin: 0 34px;
+    padding: 18px 0;
     border-top: 1px solid var(--color-border);
-    font-size: 0.84rem;
+    font-size: 0.875rem;
     color: var(--color-text-muted);
   }
 
@@ -488,20 +442,23 @@ const downloads = [
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    height: 54px;
-    padding: 0 27px;
+    height: 60px;
+    padding: 0 34px;
     border-top: 1px solid var(--color-border);
     background: #fff;
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-navy);
-    transition: background var(--transition);
+    transition:
+      background var(--transition),
+      color var(--transition);
   }
 
   .cert__link:hover {
-    background: var(--color-bg-light);
+    background: var(--color-navy);
+    color: #fff;
   }
 
   /* Yetki belgesi band */
@@ -518,8 +475,8 @@ const downloads = [
   .bg-band__item {
     display: flex;
     align-items: center;
-    gap: 28px;
-    padding: 54px 40px;
+    gap: 36px;
+    padding: 72px 48px;
   }
 
   .bg-band__item + .bg-band__item {
@@ -528,35 +485,55 @@ const downloads = [
 
   .bg-band__value {
     flex: none;
-    font-family: var(--font-heading);
-    font-size: clamp(3.5rem, 7vw, 5.6rem);
+    font-family: var(--font-display);
+    font-stretch: 120%;
+    font-weight: 800;
+    font-size: clamp(5.625rem, 9vw, 8.75rem);
     line-height: 0.85;
     color: #fff;
   }
 
-  .bg-band__text {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
   .bg-band__label {
-    font-size: 0.77rem;
+    display: block;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-on-dark-muted);
+    color: #8589e6;
+    margin-bottom: 10px;
   }
 
   .bg-band__title {
-    font-size: 1.19rem;
+    display: block;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-size: 1.625rem;
     font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.2;
+  }
+
+  .bg-band__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #8589e6;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    transition: color var(--transition);
+  }
+
+  .bg-band__link:hover {
+    color: #8589e6;
   }
 
   /* Downloads */
   .bg-docs-section {
-    padding-block: 63px 81px;
+    padding-block: 120px;
     background: var(--color-bg-light);
   }
 
@@ -569,10 +546,11 @@ const downloads = [
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 24px;
-    padding: 22px 27px;
+    gap: 28px;
+    padding: 28px 32px;
     background: #fff;
     border: 1px solid var(--color-border);
+    color: var(--color-text);
     transition: border-color var(--transition);
   }
 
@@ -583,22 +561,27 @@ const downloads = [
   .doc__badge {
     display: grid;
     place-items: center;
-    width: 54px;
-    height: 54px;
+    width: 64px;
+    height: 64px;
     background: var(--color-navy);
     color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
   }
 
   .doc__text {
     display: grid;
-    gap: 4px;
+    gap: 6px;
     min-width: 0;
-    font-size: 0.91rem;
+    font-size: 0.9375rem;
     color: var(--color-text-muted);
   }
 
   .doc__text strong {
-    font-size: 1.12rem;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-size: 1.3125rem;
     font-weight: 700;
     color: var(--color-text);
   }
@@ -606,60 +589,13 @@ const downloads = [
   .doc__download {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.77rem;
+    gap: 6px;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-navy);
     white-space: nowrap;
-  }
-
-  /* CTA */
-  .bg-cta {
-    position: relative;
-    overflow: hidden;
-    padding-block: 63px;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .bg-cta__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-    mix-blend-mode: luminosity;
-  }
-
-  .bg-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg, rgba(25, 27, 74, 0.9), rgba(25, 27, 74, 0.55));
-  }
-
-  .bg-cta__inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-xl);
-  }
-
-  .bg-cta h2 {
-    font-size: clamp(1.68rem, 2.24vw + 0.84rem, 2.52rem);
-    color: #fff;
-  }
-
-  .bg-cta p {
-    margin-top: 12px;
-    font-size: 1.12rem;
-    color: rgba(255, 255, 255, 0.9);
   }
 
   /* Responsive */
@@ -670,19 +606,20 @@ const downloads = [
 
     .bg-hero__media {
       width: 100%;
-      opacity: 0.55;
+      opacity: 0.5;
     }
 
     .bg-hero__media::after {
-      background: linear-gradient(
-        to right,
-        var(--color-navy-deep) 0%,
-        rgba(25, 27, 74, 0.55) 55%,
-        rgba(25, 27, 74, 0.25) 100%
-      );
+      background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(13, 21, 51, 0.75) 55%, rgba(13, 21, 51, 0.35) 100%);
     }
 
-    .bg-hero__quote {
+    .bg-hero__row {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: var(--space-l);
+    }
+
+    .bg-hero__quote-row {
       display: none;
     }
   }
@@ -705,6 +642,14 @@ const downloads = [
   }
 
   @media (max-width: 640px) {
+    .bg-hero__inner {
+      padding-block: 24px 48px;
+    }
+
+    .bg-hero__breadcrumb {
+      margin-bottom: 32px;
+    }
+
     .doc a {
       grid-template-columns: auto 1fr;
     }
@@ -716,11 +661,6 @@ const downloads = [
     .bg-band__item {
       padding: 40px 27px;
       gap: 20px;
-    }
-
-    .bg-cta__inner {
-      flex-direction: column;
-      align-items: flex-start;
     }
   }
 </style>

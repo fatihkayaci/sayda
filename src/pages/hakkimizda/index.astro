@@ -3,13 +3,14 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
 
-const [areaValue, areaUnit] = site.stats.totalCompletedArea.split(' ');
+const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000;
+const areaValue = `${areaInMillions.toFixed(2)}M`;
 
 const stats = [
   { icon: 'calendar', value: String(site.foundedYear), unit: '', label: 'Kuruluş Yılı' },
-  { icon: 'team', value: String(site.stats.employeeCount), unit: '', label: 'Çalışan' },
-  { icon: 'chart', value: String(site.stats.avgAnnualProjects), unit: '', label: 'Yıllık Ortalama Proje' },
-  { icon: 'building', value: areaValue, unit: areaUnit, label: 'Tamamlanan Alan' },
+  { icon: 'building', value: areaValue, unit: ' m²', label: 'Tamamlanan Alan' },
+  { icon: 'document', value: String(site.completionCertificatesCount), unit: '', label: 'İş Bitirme Belgesi' },
+  { icon: 'team', value: site.contractorLicenseGroup, unit: '', label: 'Yüklenici Yetki Belgesi' },
 ];
 
 const values = [
@@ -38,19 +39,26 @@ const expertise = [
   { title: 'Otel Projeleri', image: '/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp' },
 ];
 
-const certificates = [
-  { icon: 'globe', title: 'ISO 9001', text: 'Kalite Yönetim Sistemi' },
-  { icon: 'leaf', title: 'ISO 14001', text: 'Çevre Yönetim Sistemi' },
-  { icon: 'team', title: 'ISO 10002', text: 'Müşteri Memnuniyeti' },
-  { icon: 'document', title: `${site.contractorLicenseGroup} Grubu`, text: 'Yüklenici Yetki Belgesi' },
-];
+const refs = [
+  ['Çırağan Palace Kempinski', 'Otel taahhüt'],
+  ['Nestlé Gıda San. A.Ş.', 'Taahhüt işleri'],
+  ['Visa International EU', 'Taahhüt işleri'],
+  ['Isısan – Buderus', 'Bölge binası & showroom'],
+  ['Rönesans İnşaat', 'Samsun AVM & Otel'],
+  ['Akkök – Akiş GYO', 'Akbatı AVM & Yaşam Merkezi'],
+  ['Varyap İnşaat', 'Varyap Meridian'],
+  ['Oyak İnşaat', 'Oyakkent'],
+  ['Yapı Kredi – Koray GYO', 'İstanbul-İstanbul'],
+  ['Süzer Grubu', 'The Ritz-Carlton İstanbul'],
+  ['Acarlar Şirketler Grubu', 'Acarkent'],
+  ['Sinpaş Yapı', 'Aqua Manors'],
+].map(([name, project]) => ({ name, project }));
 ---
 
 <Layout
   title="Hakkımızda | Sayda İnşaat"
   description="Sayda İnşaat'ın hikayesi, deneyimi ve çalışma prensipleri."
   organizationSchema
-  hideCtaBanner
 >
   <section class="about-hero">
     <div class="about-hero__media" aria-hidden="true">
@@ -81,15 +89,48 @@ const certificates = [
             Sayda İnşaat; konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde taahhüt ve ince işler
             hizmetleri sunan, deneyimi ve uzman ekibiyle sektörde güvenilir bir çözüm ortağıdır.
           </p>
-          <a class="btn btn--white" href="/hakkimizda/vizyon-misyon">
-            Vizyonumuzla Tanışın <Icon name="arrow" size={16} />
-          </a>
         </div>
 
         <p class="about-hero__quote" aria-hidden="true">
           “Daha iyi yarınlar için sağlam yapılar”
           <span></span>
         </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-who">
+    <div class="container about-who__inner">
+      <div class="about-who__content reveal">
+        <div class="eyebrow">
+          <span class="eyebrow__bar"></span>
+          <span>BİZ KİMİZ?</span>
+        </div>
+        <h2>Yapının Her Aşamasında Deneyim ve Güven</h2>
+        <p>
+          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı
+          ölçeklerde birçok projeye imza atmıştır.
+        </p>
+        <p>
+          Konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde uzman ekibimizle taahhüt ve ince işler
+          hizmetleri sunuyor, edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya devam
+          ediyoruz.
+        </p>
+        <div class="about-who__founder">
+          <span class="about-who__founder-avatar">AO</span>
+          <div>
+            <p class="about-who__founder-name">Ali Orhan Onur</p>
+            <p class="about-who__founder-title">Kurucu &amp; Genel Müdür · İTÜ İnşaat Fakültesi, 1990</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-who__media reveal reveal-d1">
+        <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
+        <div class="about-who__since">
+          <span class="about-who__since-label">Since</span>
+          <span class="about-who__since-value">{site.foundedYear}</span>
+        </div>
       </div>
     </div>
   </section>
@@ -112,49 +153,13 @@ const certificates = [
     </div>
   </section>
 
-  <section class="about-who">
-    <div class="container about-who__inner">
-      <div class="about-who__content reveal">
-        <div class="eyebrow">
-          <span class="eyebrow__bar"></span>
-          <span>BİZ KİMİZ?</span>
-        </div>
-        <h2>Yapının Her Aşamasında Deneyim ve Güven</h2>
-        <p>
-          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı
-          ölçeklerde birçok projeye imza atmıştır.
-        </p>
-        <p>
-          Konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde uzman ekibimizle taahhüt ve ince işler
-          hizmetleri sunuyor, edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya devam
-          ediyoruz.
-        </p>
-        <a class="btn btn--navy" href="/projeler">
-          Daha Fazla Bilgi <Icon name="arrow" size={16} />
-        </a>
-      </div>
-
-      <div class="about-who__media reveal reveal-d1">
-        <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
-        <div class="about-who__since">
-          <span class="about-who__since-label">Since</span>
-          <span class="about-who__since-value">{site.foundedYear}</span>
-        </div>
-        <div class="about-who__quote">
-          <span class="about-who__quote-mark" aria-hidden="true">“</span>
-          <p>Yaşam alanlarına değer katmak için çalışıyoruz.</p>
-          <span class="about-who__quote-line"></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="about-values">
     <div class="container">
       <div class="eyebrow about-values__eyebrow">
         <span class="eyebrow__bar"></span>
         <span>DEĞERLERİMİZ</span>
       </div>
+      <h2 class="about-values__title">“Yaşam alanlarına değer katmak için çalışıyoruz.”</h2>
       <ul class="about-values__grid">
         {
           values.map((value, index) => (
@@ -234,33 +239,24 @@ const certificates = [
     </div>
   </section>
 
-  <section class="about-certs">
+  <section class="about-refs">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="eyebrow">
             <span class="eyebrow__bar"></span>
-            <span>BELGELERİMİZ</span>
+            <span>ÇALIŞTIĞIMIZ KURUMLAR</span>
           </div>
-          <h2>Kaliteyi Belgeliyoruz</h2>
+          <h2>Müteahhit ve alt müteahhit olarak yer aldığımız projeler</h2>
         </div>
-        <p>
-          ISO standartları ve {site.contractorLicenseGroup} grubu yüklenici yetki belgemiz ile kalite ve
-          sürdürülebilirlik ilkelerimizi taahhüt ediyoruz.
-        </p>
       </div>
 
-      <ul class="about-certs__grid">
+      <ul class="about-refs__grid">
         {
-          certificates.map((cert, index) => (
-            <li class={`cert-card reveal reveal-d${index}`}>
-              <span class="cert-card__icon">
-                <Icon name={cert.icon} size={30} />
-              </span>
-              <div>
-                <h3>{cert.title}</h3>
-                <p>{cert.text}</p>
-              </div>
+          refs.map((r) => (
+            <li class="ref-card">
+              <span class="ref-card__name">{r.name}</span>
+              <span class="ref-card__project">{r.project}</span>
             </li>
           ))
         }
@@ -268,33 +264,10 @@ const certificates = [
     </div>
   </section>
 
-  <section class="about-cta">
-    <img class="about-cta__bg" src="/img/sayda-insaat-hero02.webp" alt="" loading="lazy" />
-    <div class="container about-cta__inner reveal">
-      <div>
-        <div class="eyebrow eyebrow--light">
-          <span class="eyebrow__bar"></span>
-          <span>DAHA GÜÇLÜ YARINLAR İÇİN</span>
-        </div>
-        <h2>Yeni projenizi birlikte hayata geçirelim.</h2>
-      </div>
-      <div class="about-cta__side">
-        <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
-        <a class="btn btn--white" href="/iletisim#quote-form">
-          Teklif Al <Icon name="arrow" size={16} />
-        </a>
-      </div>
-    </div>
-  </section>
+
 </Layout>
 
 <style>
-  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 72px);
-  }
-
   /* Shared bits */
   .eyebrow {
     display: flex;
@@ -397,7 +370,7 @@ const certificates = [
   .about-hero__media {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 58%;
+    width: 52%;
   }
 
   .about-hero__media img {
@@ -586,6 +559,45 @@ const certificates = [
     margin-top: 8px;
   }
 
+  .about-who__founder {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 12px;
+    padding: 26px 28px;
+    background: var(--color-bg-light);
+  }
+
+  .about-who__founder-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--color-navy);
+    color: #fff;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .about-who__founder-name {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .about-who__founder-title {
+    margin-top: 4px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
   .about-who__media {
     position: relative;
     margin-left: 28px;
@@ -627,39 +639,6 @@ const certificates = [
     letter-spacing: -0.02em;
   }
 
-  .about-who__quote {
-    position: absolute;
-    right: -24px;
-    bottom: 0;
-    width: 220px;
-    padding: 24px;
-    background: var(--color-navy-deep);
-    color: #fff;
-    box-shadow: var(--shadow);
-  }
-
-  .about-who__quote-mark {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    line-height: 0.8;
-  }
-
-  .about-who__quote p {
-    margin-top: 10px;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #fff;
-  }
-
-  .about-who__quote-line {
-    display: block;
-    width: 28px;
-    height: 2px;
-    margin-top: 18px;
-    background: #fff;
-  }
-
   /* Values */
   .about-values {
     padding-block: 88px;
@@ -668,6 +647,12 @@ const certificates = [
 
   .about-values__eyebrow {
     margin-bottom: 40px;
+  }
+
+  .about-values__title {
+    max-width: 20ch;
+    margin: 0 0 48px;
+    text-transform: none;
   }
 
   .about-values__grid {
@@ -873,104 +858,45 @@ const certificates = [
     color: var(--color-navy);
   }
 
-  /* Certificates */
-  .about-certs {
-    padding-block: 0 96px;
+  /* References */
+  .about-refs {
+    padding-block: 96px;
+    background: var(--color-bg-light);
   }
 
-  .about-certs__grid {
+  .about-refs__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
-  }
-
-  .cert-card {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 26px 24px;
-    background: #fff;
+    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+    gap: 1px;
+    background: var(--color-border);
     border: 1px solid var(--color-border);
   }
 
-  .cert-card__icon {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--color-bg-light);
-    color: var(--color-navy-deep);
+  .ref-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 112px;
+    padding: 28px 26px;
+    background: #fff;
   }
 
-  .cert-card h3 {
+  .ref-card__name {
     font-family: var(--font-display);
     font-stretch: 108%;
-    font-size: 0.9375rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.25;
     color: var(--color-navy-deep);
   }
 
-  .cert-card p {
-    margin-top: 4px;
+  .ref-card__project {
     font-size: 0.75rem;
-    color: var(--color-text-faint);
-  }
-
-  /* CTA */
-  .about-cta {
-    position: relative;
-    overflow: hidden;
-    padding-block: 96px;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .about-cta__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.25;
-    mix-blend-mode: luminosity;
-  }
-
-  .about-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg, rgba(25, 27, 74, 0.95), rgba(43, 46, 131, 0.55));
-  }
-
-  .about-cta__inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: var(--space-xl);
-  }
-
-  .about-cta h2 {
-    max-width: 14ch;
-    font-size: clamp(1.875rem, 2.8vw + 1rem, 3rem);
-    color: #fff;
-  }
-
-  .about-cta__side {
-    display: grid;
-    gap: 24px;
-    justify-items: start;
-    max-width: 380px;
-  }
-
-  .about-cta__side p {
-    font-size: var(--fs-small);
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
   }
 
   /* Responsive */
@@ -994,8 +920,7 @@ const certificates = [
       display: none;
     }
 
-    .about-who__inner,
-    .about-cta__inner {
+    .about-who__inner {
       grid-template-columns: 1fr;
       gap: var(--space-l);
     }
@@ -1005,8 +930,7 @@ const certificates = [
     }
 
     .about-values__grid,
-    .about-expertise__grid,
-    .about-certs__grid {
+    .about-expertise__grid {
       grid-template-columns: 1fr 1fr;
     }
 
@@ -1058,14 +982,7 @@ const certificates = [
       height: 260px;
     }
 
-    .about-who__quote {
-      right: 12px;
-      width: 190px;
-      padding: 18px;
-    }
-
-    .about-values__grid,
-    .about-certs__grid {
+    .about-values__grid {
       grid-template-columns: 1fr;
     }
 

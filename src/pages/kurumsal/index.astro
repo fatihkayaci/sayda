@@ -29,16 +29,15 @@ const kurumsal = [
 
 const stats = [
   { value: String(site.foundedYear), label: 'Kuruluş Yılı' },
-  { value: String(site.stats.employeeCount), label: 'Çalışan' },
-  { value: String(site.stats.avgAnnualProjects), label: 'Yıllık Ortalama Proje' },
+  { value: '30+', label: 'Yıllık Deneyim' },
   { value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
+  { value: 'ISO', label: '9001 · 14001 · 10002' },
 ];
 ---
 
 <Layout
   title="Kurumsal | Sayda İnşaat"
   description="Sayda İnşaat hakkında, vizyon ve misyonumuz, belgelerimiz ve haberler."
-  hideCtaBanner
 >
   <section class="kh-hero">
     <div class="kh-hero__media" aria-hidden="true">
@@ -70,7 +69,7 @@ const stats = [
         </div>
 
         <div class="kh-hero__quote">
-          <p>“Daha iyi<br />yarınlar<br />için sağlam<br />yapılar”</p>
+          <p>“Daha iyi yarınlar için sağlam yapılar”</p>
         </div>
       </div>
     </div>
@@ -126,36 +125,10 @@ const stats = [
     </div>
   </section>
 
-  <section class="kh-cta">
-    <img class="kh-cta__bg" src="/img/sayda-insaat-hero02.webp" alt="" loading="lazy" />
-    <div class="container kh-cta__inner reveal">
-      <div>
-        <div class="eyebrow eyebrow--light">
-          <span class="eyebrow__bar"></span>
-          <span>Birlikte Daha Güçlü Yapılar</span>
-        </div>
-        <h2>Yeni projeniz için bizimle çalışın.</h2>
-        <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
-      </div>
-      <div class="kh-cta__side">
-        <a class="btn btn--accent" href="/iletisim#quote-form">
-          Teklif Al <Icon name="arrow" size={16} />
-        </a>
-        <a class="btn btn--outline" href={site.phoneHref}>
-          {site.phone}
-        </a>
-      </div>
-    </div>
-  </section>
+
 </Layout>
 
 <style>
-  /* Tam genişlik: bu sayfada içerik 1200px ile sınırlanmaz */
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 72px);
-  }
-
   .eyebrow {
     display: flex;
     align-items: center;
@@ -177,43 +150,6 @@ const stats = [
 
   .eyebrow--light {
     color: var(--color-on-dark-muted);
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    height: 56px;
-    padding: 0 28px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    transition:
-      background var(--transition),
-      border-color var(--transition),
-      color var(--transition);
-  }
-
-  .btn--accent {
-    background: var(--color-accent);
-    color: #fff;
-  }
-
-  .btn--accent:hover {
-    background: var(--color-navy);
-  }
-
-  .btn--outline {
-    border: 1.5px solid var(--color-on-dark-muted);
-    color: #fff;
-  }
-
-  .btn--outline:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
   }
 
   h2 {
@@ -305,9 +241,13 @@ const stats = [
     color: #fff;
   }
 
+  .kh-hero .eyebrow--light {
+    color: #8589e6;
+  }
+
   .kh-hero__title-accent {
     font-weight: 300;
-    color: var(--color-on-dark-muted);
+    color: #8589e6;
   }
 
   .kh-hero__lead {
@@ -324,10 +264,10 @@ const stats = [
   }
 
   .kh-hero__quote p {
-    max-width: 340px;
+    max-width: 380px;
     margin: 0;
     padding: 4px 0 4px 26px;
-    border-left: 2px solid var(--color-accent);
+    border-left: 2px solid #8589e6;
     font-family: var(--font-display);
     font-stretch: 112%;
     font-weight: 600;
@@ -489,67 +429,6 @@ const stats = [
     color: var(--color-text-muted);
   }
 
-  /* CTA */
-  .kh-cta {
-    position: relative;
-    overflow: hidden;
-    padding-block: 96px;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .kh-cta__bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.25;
-    mix-blend-mode: luminosity;
-  }
-
-  .kh-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background: linear-gradient(90deg, rgba(43, 46, 131, 0.92), rgba(25, 27, 74, 0.6));
-  }
-
-  .kh-cta__inner {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
-  }
-
-  .kh-cta__inner > div:first-child {
-    max-width: 680px;
-  }
-
-  .kh-cta h2 {
-    max-width: 16ch;
-    font-size: clamp(1.75rem, 2.6vw + 1rem, 2.75rem);
-    color: #fff;
-  }
-
-  .kh-cta__inner p {
-    margin: 22px 0 0;
-    max-width: 34ch;
-    font-size: 1.0625rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .kh-cta__side {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
   /* Responsive */
   @media (max-width: 1024px) {
     .kh-hero__media {
@@ -589,10 +468,6 @@ const stats = [
 
     .kh-cards__grid {
       grid-template-columns: 1fr;
-    }
-
-    .kh-cta {
-      padding-block: 64px;
     }
   }
 </style>

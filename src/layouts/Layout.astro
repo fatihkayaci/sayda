@@ -12,10 +12,12 @@ interface Props {
   organizationSchema?: boolean;
   ogImage?: string;
   hideCtaBanner?: boolean;
+  ctaHeading?: string;
+  ctaEyebrow?: string;
   jsonLd?: object[];
 }
 
-const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeading, ctaEyebrow, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -32,7 +34,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
     <main>
       <slot />
     </main>
-    {!hideCtaBanner && <CtaBanner />}
+    {!hideCtaBanner && <CtaBanner heading={ctaHeading} eyebrow={ctaEyebrow} />}
     <Footer transition:persist />
 
     <script>
@@ -55,11 +57,11 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
       initReveal();
       document.addEventListener('astro:page-load', initReveal);
 
-      // Sekme geçişlerinde (hizmet, proje kategorisi) scroll konumunu koru (üste atlamasın, sayfa yenilenmiş gibi görünmesin).
+      // Sekme geçişlerinde (proje kategorisi) scroll konumunu koru (üste atlamasın, sayfa yenilenmiş gibi görünmesin).
       let preserveScrollY: number | null = null;
 
       document.addEventListener('click', (event) => {
-        const link = (event.target as Element)?.closest?.('a.svc-tab, a.svc-hero__pill, a.projects-filters__btn');
+        const link = (event.target as Element)?.closest?.('a.svc-hero__pill, a.projects-filters__btn');
         if (link) {
           preserveScrollY = window.scrollY;
         }

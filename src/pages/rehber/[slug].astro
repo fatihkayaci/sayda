@@ -53,7 +53,7 @@ const categoryTabs = [
 const related = others.slice(0, 3);
 ---
 
-<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image} hideCtaBanner>
+<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image}>
   <article class="rehber-detail">
     <header class="rehber-hero">
       <img src={post.image} alt="" fetchpriority="high" />
@@ -284,10 +284,6 @@ const related = others.slice(0, 3);
 </script>
 
 <style>
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
 
   /* Hero */
   .rehber-hero {

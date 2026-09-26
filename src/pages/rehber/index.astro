@@ -24,7 +24,6 @@ const popular = sorted.slice(0, 5);
 <Layout
   title="Rehber | Sayda İnşaat"
   description="Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri."
-  hideCtaBanner
 >
   <section class="rehber-hero">
     <div class="rehber-hero__media" aria-hidden="true">
@@ -256,6 +255,7 @@ const popular = sorted.slice(0, 5);
         buttons.forEach((b) => b.removeAttribute('aria-current'));
         btn.setAttribute('aria-current', 'true');
         render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }),
     );
     search.addEventListener('input', () => {
@@ -326,10 +326,6 @@ const popular = sorted.slice(0, 5);
 </script>
 
 <style>
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
 
   /* Hero */
   .rehber-hero {

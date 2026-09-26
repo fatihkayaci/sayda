@@ -21,7 +21,7 @@ const tabs = [
 ];
 ---
 
-<Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler ve duyurular." hideCtaBanner>
+<Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler ve duyurular.">
   <section class="haberler-hero">
     <div class="haberler-hero__media" aria-hidden="true">
       <img src="/img/projects/dimas-antrepo/dimas-antrepo-01.webp" alt="" fetchpriority="high" />
@@ -213,6 +213,7 @@ const tabs = [
         buttons.forEach((b) => b.removeAttribute('aria-current'));
         btn.setAttribute('aria-current', 'true');
         render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }),
     );
     search.addEventListener('input', () => {
@@ -285,10 +286,6 @@ const tabs = [
 </script>
 
 <style>
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
 
   /* Hero */
   .haberler-hero {

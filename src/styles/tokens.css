@@ -1,8 +1,8 @@
 :root {
   /* Color */
-  --color-navy: #2b2e83; /* brand primary */
-  --color-navy-dark: #1e2163; /* hover */
-  --color-navy-deep: #191b4a; /* footer background */
+  --color-navy: #2f3091; /* brand primary */
+  --color-navy-dark: #262873; /* hover */
+  --color-navy-deep: #0d1533; /* footer background */
   --color-text: #111318;
   --color-text-muted: #4a4c58;
   --color-text-faint: #8a8c98;

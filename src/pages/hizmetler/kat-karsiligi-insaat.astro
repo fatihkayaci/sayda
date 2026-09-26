@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ServiceHero from '../../components/service/ServiceHero.astro';
-import ServiceCta from '../../components/service/ServiceCta.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
 import ServicePanel from '../../components/service/ServicePanel.astro';
 import ProcessSteps from '../../components/service/ProcessSteps.astro';
@@ -47,7 +46,6 @@ const nedenler = [
 <Layout
   title="Kat Karşılığı İnşaat | Sayda İnşaat"
   description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
-  hideCtaBanner
 >
   <ServiceHero />
 
@@ -79,7 +77,7 @@ const nedenler = [
     </div>
   </section>
 
-  <ServiceCta />
+
 </Layout>
 
 <style>

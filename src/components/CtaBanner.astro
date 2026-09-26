@@ -1,69 +1,161 @@
 ---
+import Icon from './Icon.astro';
+import site from '../data/site.json';
+
+interface Props {
+  heading?: string;
+  eyebrow?: string;
+}
+
+const { heading = 'Yeni projeniz için bizimle çalışın.', eyebrow = 'BİRLİKTE DAHA GÜÇLÜ YAPILAR' } = Astro.props;
 ---
 
 <section class="cta-banner">
+  <img class="cta-banner__bg" src="/img/sayda-insaat-hero02.webp" alt="" loading="lazy" />
   <div class="container cta-banner__inner reveal">
-    <h2>Projeniz için Bizimle Çalışın</h2>
-    <p>Uzman kadromuzla projenizi planlamadan teslimata kadar yönetiyoruz.</p>
-    <a class="cta-banner__btn" href="/iletisim#quote-form">Teklif Al →</a>
+    <div class="cta-banner__copy">
+      <div class="cta-banner__eyebrow">
+        <span></span>
+        <span>{eyebrow}</span>
+      </div>
+      <h2>{heading}</h2>
+      <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
+    </div>
+    <div class="cta-banner__actions">
+      <a class="btn btn--white" href="/iletisim#quote-form">
+        Teklif Al <Icon name="arrow" size={16} />
+      </a>
+      <a class="btn btn--outline" href={site.phoneHref}>{site.phone}</a>
+    </div>
   </div>
 </section>
 
 <style>
   .cta-banner {
-    background: var(--color-navy);
-    padding-block: 90px;
+    position: relative;
+    overflow: hidden;
+    padding-block: 110px;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .cta-banner__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(47, 48, 145, 0.95), rgba(25, 27, 74, 0.85) 55%, rgba(25, 27, 74, 0.55));
   }
 
   .cta-banner__inner {
-    max-width: 896px;
-    margin-inline: auto;
-    text-align: center;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-xl);
   }
 
-  .cta-banner__inner h2 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(31px, 4.48vw, 49px);
-    color: #fff;
-    margin-bottom: 22px;
+  .cta-banner__copy {
+    max-width: 680px;
   }
 
-  .cta-banner__inner p {
-    font-size: 21px;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 45px;
-  }
-
-  .cta-banner__btn {
-    display: inline-block;
-    padding: 19px 49px;
-    background: #fff;
-    color: var(--color-navy);
-    font-size: 17px;
+  .cta-banner__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    border-radius: var(--radius);
-    transition: background var(--transition);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8589e6;
   }
 
-  .cta-banner__btn:hover {
-    background: #e8e9f5;
+  .cta-banner__eyebrow span:first-child {
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .cta-banner__copy h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    line-height: 1.02;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: #fff;
+  }
+
+  .cta-banner__copy p {
+    margin: 22px 0 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(246, 247, 251, 0.8);
+  }
+
+  .cta-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 30px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+      background var(--transition),
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .btn--white {
+    background: #3e43b8;
+    color: #fff;
+  }
+
+  .btn--white:hover {
+    background: #4e53d0;
+  }
+
+  .btn--outline {
+    background: none;
+    border: 1.5px solid #8589e6;
+    color: #f6f7fb;
+  }
+
+  .btn--outline:hover {
+    border-color: #fff;
+    color: #fff;
   }
 
   @media (max-width: 640px) {
     .cta-banner {
-      padding-block: 54px;
+      padding-block: 64px;
     }
 
-    .cta-banner__inner p {
-      font-size: 18px;
-      margin-bottom: 27px;
-    }
-
-    .cta-banner__btn {
-      padding: 16px 31px;
+    .cta-banner__inner {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

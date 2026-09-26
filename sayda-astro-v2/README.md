@@ -18,9 +18,10 @@ Sonra bu klasördeki `src/` ve `public/` içeriğini projeye kopyalayın ve `npm
 - /projeler, /proje-detay#<proje-slug>
 - /haberler, /haber-detay#<haber-slug>
 - /teklif-al
+- /kariyer (#beyaz-yaka veya #kalfa-ekipli ile form seçilir)
 
 ## Notlar
 - Tüm stiller bileşenlerde satır içi; hover efektleri her bileşenin başındaki <style> etiketinde.
 - Görseller şu an sayda-chi.vercel.app üzerinden çekiliyor; `public/img` altına alıp yolları güncelleyebilirsiniz.
-- Teklif formu şimdilik gönderim yapmıyor — `TeklifAl.jsx` içindeki `submit` fonksiyonuna API/form servisini bağlayın.
+- Teklif ve İK formları şimdilik gönderim yapmıyor — `TeklifAl.jsx` ve `InsanKaynaklari.jsx` içindeki `submit` fonksiyonlarına API/form servisini bağlayın.
 - Proje/haber detayları hash (#slug) ile çalışıyor. İleride SEO için `[slug].astro` dinamik route'a çevrilebilir.

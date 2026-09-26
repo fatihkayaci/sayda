@@ -5,7 +5,6 @@ import Icon from '../../components/Icon.astro';
 import ServiceTopbar from '../../components/service/ServiceTopbar.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
 import ServiceFeatures from '../../components/service/ServiceFeatures.astro';
-import ServiceCta from '../../components/service/ServiceCta.astro';
 
 const ozellikler = [
   { icon: 'shield', title: 'Tek Sorumluluk', text: 'Tüm süreci tek elden yönetiyoruz.' },
@@ -35,7 +34,6 @@ const projeTurleri = [
 <Layout
   title="Anahtar Teslim Müteahhitlik | Sayda İnşaat"
   description="Projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi."
-  hideCtaBanner
 >
   <section class="svc-main svc-main--flat at-page">
     <ServiceTopbar />
@@ -144,13 +142,7 @@ const projeTurleri = [
     </div>
   </section>
 
-  <ServiceCta
-    eyebrow="BİRLİKTE DAHA GÜÇLÜ YAPILAR"
-    title="Geleceğin yaşam alanlarını inşa ediyoruz."
-    text="Uzman kadromuzla projelerinizi planlamadan teslimata kadar yönetiyoruz."
-    label="İletişime Geç"
-    href="/iletisim"
-  />
+
 </Layout>
 
 <style>

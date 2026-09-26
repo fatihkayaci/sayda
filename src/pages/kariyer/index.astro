@@ -1,9 +1,944 @@
 ---
-import PagePlaceholder from '../../components/PagePlaceholder.astro';
+import Layout from '../../layouts/Layout.astro';
+import site from '../../data/site.json';
+
+const perks = [
+  { num: '01', title: 'Büyük ölçekli projeler', text: 'Vadistanbul, Büyükyalı, şehir hastaneleri gibi prestijli işler.' },
+  { num: '02', title: 'Güçlü iş ortakları', text: "Türkiye'nin önde gelen yatırımcı ve yüklenicileriyle çalışma." },
+  { num: '03', title: 'Süreklilik', text: '30 yıla yakın geçmiş ve uzun soluklu iş birlikleri.' },
+  { num: '04', title: 'İş güvenliği', text: 'ISO standartlarında, güvenliği önceleyen şantiyeler.' },
+];
+
+const flow = [
+  { num: '01', title: 'Başvuru', text: 'Formu doldurup gönderin.' },
+  { num: '02', title: 'Ön değerlendirme', text: 'İK ekibimiz başvurunuzu inceler.' },
+  { num: '03', title: 'Görüşme', text: 'Uygun adaylarla ofiste veya şantiyede görüşülür.' },
+];
 ---
 
-<PagePlaceholder
-  title="Kariyer | Sayda İnşaat"
-  description="Sayda İnşaat'ta kariyer fırsatları."
-  heading="Kariyer"
-/>
+<Layout
+  title="İnsan Kaynakları | Sayda İnşaat"
+  description="Sayda İnşaat ekibine katılın: Beyaz Yaka ve Kalfa (Ekipli) pozisyonları için başvuru formu."
+  hideCtaBanner
+>
+  <section class="ik-hero">
+    <div class="ik-hero__media" aria-hidden="true">
+      <img src="/img/projects/buyukyali/buyukyali.webp" alt="" fetchpriority="high" />
+    </div>
+
+    <div class="container ik-hero__inner">
+      <nav class="ik-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span>/</span>
+        <span>İnsan Kaynakları</span>
+        <span>/</span>
+        <span aria-current="page" id="ikTabLabel">Beyaz Yaka</span>
+      </nav>
+
+      <div class="ik-hero__content">
+        <div class="eyebrow eyebrow--light">
+          <span class="eyebrow__bar"></span>
+          <span>İnsan Kaynakları</span>
+        </div>
+        <h1>
+          Ekibimize<br />
+          <span class="ik-hero__accent">katılın</span>
+        </h1>
+        <p class="ik-hero__lead">1996'dan bu yana İstanbul'un en büyük projelerinde birlikte çalıştığımız ekibimizi büyütüyoruz.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ik-perks">
+    <ul class="container ik-perks__grid">
+      {
+        perks.map((p) => (
+          <li>
+            <span class="ik-perks__num">{p.num}</span>
+            <div class="ik-perks__title">{p.title}</div>
+            <div class="ik-perks__text">{p.text}</div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="ik-apply">
+    <div class="container">
+      <div class="ik-apply__head">
+        <div class="eyebrow">
+          <span class="eyebrow__bar"></span>
+          <span>Başvuru Formu</span>
+        </div>
+        <h2>Hangi pozisyon için başvuruyorsunuz?</h2>
+      </div>
+
+      <div class="ik-tabs">
+        <button type="button" class="ik-tab" data-tab="beyaz">
+          <span class="ik-tab__num">01</span>
+          <span class="ik-tab__mark" aria-hidden="true">✓</span>
+          <span class="ik-tab__title">Beyaz Yaka</span>
+          <span class="ik-tab__desc">Mühendis, mimar, şantiye şefi, teknik ofis ve idari pozisyonlar.</span>
+        </button>
+        <button type="button" class="ik-tab" data-tab="kalfa">
+          <span class="ik-tab__num">02</span>
+          <span class="ik-tab__mark" aria-hidden="true">→</span>
+          <span class="ik-tab__title">Kalfa (Ekipli)</span>
+          <span class="ik-tab__desc">Sıva, şap, seramik, alçı, boya ve ince işlerde ekibiyle çalışan ustalar.</span>
+        </button>
+      </div>
+
+      <div class="ik-layout">
+        <div class="ik-form-card">
+          <form id="ikForm">
+            <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+            <input type="hidden" name="subject" value="İK Başvurusu" />
+            <input type="hidden" name="position_type" id="ikPositionType" value="Beyaz Yaka" />
+            <input type="checkbox" name="botcheck" class="ik-honeypot" tabindex="-1" autocomplete="off" />
+
+            <div class="ik-section-label">01 · KİŞİSEL BİLGİLER</div>
+            <div class="ik-grid">
+              <label>
+                <span>Ad Soyad *</span>
+                <input type="text" name="name" required />
+              </label>
+              <label data-tab-only="kalfa" hidden>
+                <span>Doğum Yeri / Tarihi *</span>
+                <input type="text" name="birth_info" placeholder="Örn. İstanbul / 01.01.1985" />
+              </label>
+              <label>
+                <span>Telefon *</span>
+                <input type="tel" name="phone" placeholder="05xx xxx xx xx" required />
+              </label>
+              <label>
+                <span>E-posta *</span>
+                <input type="email" name="email" placeholder="ornek@mail.com" required />
+              </label>
+              <label data-tab-only="kalfa" hidden class="ik-grid__full">
+                <span>Adres *</span>
+                <input type="text" name="address" />
+              </label>
+              <label data-tab-only="beyaz">
+                <span>Başvurulan pozisyon</span>
+                <input type="text" name="position" placeholder="Örn. Şantiye Mühendisi" />
+              </label>
+            </div>
+
+            <div data-tab-only="beyaz">
+              <div class="ik-section-label ik-section-label--spaced">02 · ÖZGEÇMİŞ</div>
+              <label class="ik-upload">
+                <input type="file" name="cv" accept=".pdf,.doc,.docx" required />
+                <span class="ik-upload__icon" aria-hidden="true">↑</span>
+                <span class="ik-upload__text">
+                  <b id="ikCvLabel">CV yükleyin *</b>
+                  <span>PDF veya Word · en fazla 5 MB</span>
+                </span>
+              </label>
+            </div>
+
+            <div data-tab-only="kalfa" hidden>
+              <div class="ik-section-label ik-section-label--spaced">02 · İŞ TECRÜBELERİ</div>
+              <div class="ik-experiences">
+                {
+                  [1, 2, 3].map((i) => (
+                    <div class="ik-experience">
+                      <div class="ik-experience__head">
+                        <span class="ik-experience__num">{`0${i}`}</span>
+                        Proje {i}
+                      </div>
+                      <div class="ik-experience__grid">
+                        <label>
+                          <span>Proje adı / yapılan iş</span>
+                          <input type="text" name={`exp${i}_project`} placeholder="Örn. Vadistanbul — seramik & şap" />
+                        </label>
+                        <label>
+                          <span>İşveren temsilcisi</span>
+                          <input type="text" name={`exp${i}_contact`} placeholder="Ad Soyad" />
+                        </label>
+                        <label>
+                          <span>Temsilci telefonu</span>
+                          <input type="tel" name={`exp${i}_contact_phone`} placeholder="05xx xxx xx xx" />
+                        </label>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+              <label class="ik-team">
+                <span>Ekip bilgisi</span>
+                <input type="text" name="team_info" placeholder="Ekip büyüklüğü ve uzmanlık (örn. 6 kişi · sıva & alçı)" />
+              </label>
+            </div>
+
+            <label class="ik-consent">
+              <input type="checkbox" name="kvkk" required />
+              <span>
+                Yukarıdaki bilgilerin şahsıma ait olduğunu onaylıyorum; <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni okudum.
+              </span>
+            </label>
+
+            <button type="submit" class="ik-submit">
+              BAŞVURUYU GÖNDER <span aria-hidden="true">→</span>
+            </button>
+            <p class="ik-status" id="ikStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="ik-success" id="ikSuccess" hidden>
+            <span class="ik-success__icon" aria-hidden="true">✓</span>
+            <h3>Başvurunuz alındı.</h3>
+            <p>İnsan kaynakları ekibimiz başvurunuzu inceleyip sizinle iletişime geçecek.</p>
+            <button type="button" class="ik-reset" id="ikReset">YENİ BAŞVURU</button>
+          </div>
+        </div>
+
+        <aside class="ik-sidebar">
+          <div class="ik-flow">
+            <div class="ik-flow__label">BAŞVURU SÜRECİ</div>
+            {
+              flow.map((f) => (
+                <div class="ik-flow__item">
+                  <span class="ik-flow__num">{f.num}</span>
+                  <div>
+                    <div class="ik-flow__title">{f.title}</div>
+                    <div class="ik-flow__text">{f.text}</div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+          <div class="ik-contact-card">
+            <div class="ik-contact-card__label">SORULARINIZ İÇİN</div>
+            <a href={`mailto:${site.email}`} class="ik-contact-card__email">{site.email}</a>
+            <a href={site.phoneHref} class="ik-contact-card__phone">{site.phone}</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const LABELS: Record<string, string> = { beyaz: 'Beyaz Yaka', kalfa: 'Kalfa (Ekipli)' };
+  const HASHES: Record<string, string> = { beyaz: 'beyaz-yaka', kalfa: 'kalfa-ekipli' };
+
+  function initCareerTabs() {
+    const tabButtons = document.querySelectorAll<HTMLButtonElement>('.ik-tab');
+    const tabOnlyEls = document.querySelectorAll<HTMLElement>('[data-tab-only]');
+    const tabLabelEl = document.getElementById('ikTabLabel');
+    const positionTypeInput = document.getElementById('ikPositionType') as HTMLInputElement | null;
+    const cvInput = document.querySelector<HTMLInputElement>('input[name="cv"]');
+    const cvLabel = document.getElementById('ikCvLabel');
+    if (!tabButtons.length) return;
+
+    const setTab = (tab: string) => {
+      tabButtons.forEach((btn) => {
+        const active = btn.dataset.tab === tab;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+      tabOnlyEls.forEach((el) => {
+        el.hidden = el.dataset.tabOnly !== tab;
+      });
+      if (tabLabelEl) tabLabelEl.textContent = LABELS[tab];
+      if (positionTypeInput) positionTypeInput.value = LABELS[tab];
+      if (cvInput) cvInput.required = tab === 'beyaz';
+      try {
+        history.replaceState(null, '', '#' + HASHES[tab]);
+      } catch {
+        /* noop */
+      }
+    };
+
+    tabButtons.forEach((btn) => btn.addEventListener('click', () => setTab(btn.dataset.tab ?? 'beyaz')));
+
+    const applyHash = () => {
+      const h = (location.hash || '').slice(1);
+      setTab(h === 'kalfa-ekipli' ? 'kalfa' : 'beyaz');
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+
+    if (cvInput && cvLabel) {
+      cvInput.addEventListener('change', () => {
+        const file = cvInput.files?.[0];
+        cvLabel.textContent = file ? file.name : 'CV yükleyin *';
+      });
+    }
+  }
+
+  function initCareerForm() {
+    const form = document.getElementById('ikForm') as HTMLFormElement | null;
+    const status = document.getElementById('ikStatus');
+    const success = document.getElementById('ikSuccess');
+    const resetBtn = document.getElementById('ikReset');
+    if (!form || !status || !success) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
+      if (!accessKey) {
+        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
+        status.setAttribute('data-state', 'error');
+        return;
+      }
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      submitButton.disabled = true;
+      status.textContent = 'Gönderiliyor...';
+      status.removeAttribute('data-state');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message ?? 'Unknown error');
+        form.hidden = true;
+        success.hidden = false;
+        status.textContent = '';
+      } catch {
+        status.textContent = 'Gönderilemedi, lütfen telefonla ulaşın.';
+        status.setAttribute('data-state', 'error');
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      form.reset();
+      form.hidden = false;
+      success.hidden = true;
+      status.textContent = '';
+      initCareerTabs();
+    });
+  }
+
+  function init() {
+    initCareerTabs();
+    initCareerForm();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .eyebrow__bar {
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .eyebrow--light {
+    color: #8589e6;
+  }
+
+  /* Hero */
+  .ik-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .ik-hero__media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 50%;
+  }
+
+  .ik-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ik-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(13, 21, 51, 0.6) 40%, rgba(13, 21, 51, 0.2) 100%);
+  }
+
+  .ik-hero__inner {
+    position: relative;
+    z-index: 1;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    padding-block: 56px 72px;
+  }
+
+  .ik-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ik-hero__breadcrumb span[aria-current] {
+    color: #f6f7fb;
+  }
+
+  .ik-hero h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 6vw, 5.75rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .ik-hero__accent {
+    font-weight: 300;
+    color: #8589e6;
+  }
+
+  .ik-hero__lead {
+    margin-top: 24px;
+    max-width: 540px;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: rgba(246, 247, 251, 0.8);
+  }
+
+  /* Perks */
+  .ik-perks {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .ik-perks__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  }
+
+  .ik-perks__grid li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px 28px;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .ik-perks__num {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #8589e6;
+  }
+
+  .ik-perks__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-stretch: 110%;
+    line-height: 1.2;
+  }
+
+  .ik-perks__text {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  /* Apply */
+  .ik-apply {
+    padding-block: 96px 120px;
+    background: var(--color-bg-light);
+  }
+
+  .ik-apply__head {
+    margin-bottom: 40px;
+  }
+
+  .ik-apply__head h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: clamp(1.875rem, 3.6vw, 2.625rem);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--color-text);
+  }
+
+  .ik-tabs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .ik-tab {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 8px 20px;
+    padding: 30px 30px 32px;
+    background: #fff;
+    border: 1px solid rgba(20, 22, 58, 0.12);
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--color-text);
+    transition:
+      background 0.25s,
+      color 0.25s,
+      border-color 0.25s;
+  }
+
+  .ik-tab.is-active {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
+  }
+
+  .ik-tab__num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--color-navy);
+  }
+
+  .ik-tab.is-active .ik-tab__num {
+    color: #8589e6;
+  }
+
+  .ik-tab__mark {
+    grid-row: span 3;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--color-navy);
+    font-size: 1.125rem;
+  }
+
+  .ik-tab.is-active .ik-tab__mark {
+    border-color: #8589e6;
+  }
+
+  .ik-tab__title {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .ik-tab__desc {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    opacity: 0.8;
+  }
+
+  .ik-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .ik-form-card {
+    background: #fff;
+    border: 1px solid rgba(20, 22, 58, 0.08);
+    padding: 44px 44px 48px;
+    min-width: 0;
+  }
+
+  .ik-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--color-navy);
+  }
+
+  .ik-section-label--spaced {
+    margin-top: 40px;
+  }
+
+  .ik-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: 18px;
+    margin-top: 16px;
+  }
+
+  .ik-grid__full {
+    grid-column: 1 / -1;
+  }
+
+  .ik-form-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .ik-form-card input[type='text'],
+  .ik-form-card input[type='tel'],
+  .ik-form-card input[type='email'] {
+    height: 54px;
+    padding: 0 16px;
+    background: #fff;
+    border: 1px solid rgba(20, 22, 58, 0.18);
+    font-family: inherit;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    width: 100%;
+  }
+
+  .ik-form-card input:focus {
+    outline: 2px solid var(--color-navy);
+    outline-offset: 1px;
+  }
+
+  .ik-upload {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 26px 24px;
+    border: 1.5px dashed rgba(47, 48, 145, 0.35);
+    background: var(--color-bg-light);
+    cursor: pointer;
+    transition: border-color var(--transition);
+  }
+
+  .ik-upload input[type='file'] {
+    display: none;
+  }
+
+  .ik-upload__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: #fff;
+    font-size: 1.25rem;
+  }
+
+  .ik-upload__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .ik-upload__text b {
+    font-size: 1rem;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ik-upload__text > span {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .ik-experiences {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .ik-experience {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px 22px 24px;
+    border: 1px solid rgba(20, 22, 58, 0.12);
+  }
+
+  .ik-experience__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .ik-experience__num {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-light);
+    border: 1px solid rgba(47, 48, 145, 0.2);
+    font-size: 0.8125rem;
+    color: var(--color-navy);
+  }
+
+  .ik-experience__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+    gap: 14px;
+  }
+
+  .ik-team {
+    margin-top: 18px;
+  }
+
+  .ik-consent {
+    flex-direction: row !important;
+    align-items: flex-start;
+    gap: 12px !important;
+    margin-top: 28px;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .ik-consent input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-navy);
+    flex-shrink: 0;
+  }
+
+  .ik-consent a {
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .ik-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    height: 58px;
+    padding: 0 32px;
+    background: #3e43b8;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: background var(--transition);
+  }
+
+  .ik-submit:hover {
+    background: #4e53d0;
+  }
+
+  .ik-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .ik-status {
+    margin: 16px 0 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .ik-status[data-state='error'] {
+    color: #b3261e;
+  }
+
+  .ik-honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ik-success {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .ik-success__icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: #fff;
+    font-size: 1.625rem;
+  }
+
+  .ik-success h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .ik-success p {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .ik-reset {
+    margin-top: 8px;
+    height: 50px;
+    padding: 0 24px;
+    background: var(--color-navy);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    transition: background var(--transition);
+  }
+
+  .ik-reset:hover {
+    background: var(--color-navy-dark);
+  }
+
+  /* Sidebar */
+  .ik-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .ik-flow {
+    background: var(--color-navy-deep);
+    color: #fff;
+    padding: 32px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .ik-flow__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #8589e6;
+  }
+
+  .ik-flow__item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 14px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .ik-flow__num {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #8589e6;
+  }
+
+  .ik-flow__title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .ik-flow__text {
+    margin-top: 4px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .ik-contact-card {
+    background: #fff;
+    border: 1px solid rgba(20, 22, 58, 0.08);
+    padding: 28px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.9375rem;
+  }
+
+  .ik-contact-card__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--color-text-muted);
+  }
+
+  .ik-contact-card__email {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-navy);
+  }
+
+  .ik-contact-card__phone {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .ik-hero__media {
+      width: 100%;
+      opacity: 0.4;
+    }
+
+    .ik-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ik-hero__inner {
+      padding-block: 32px 48px;
+    }
+
+    .ik-form-card {
+      padding: 32px 24px 36px;
+    }
+
+    .ik-tab {
+      grid-template-columns: 1fr auto;
+    }
+  }
+</style>

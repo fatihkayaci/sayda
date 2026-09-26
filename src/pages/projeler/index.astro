@@ -10,7 +10,11 @@ const devamEden = allProjects.filter((project) => project.status === 'devam-eden
 const tamamlanan = allProjects.filter((project) => project.status === 'tamamlanan');
 ---
 
-<Layout title="Projeler | Sayda İnşaat" description="Sayda İnşaat'ın devam eden ve tamamlanan projeleri.">
+<Layout
+  title="Projeler | Sayda İnşaat"
+  description="Sayda İnşaat'ın devam eden ve tamamlanan projeleri."
+  ctaHeading="Projeniz için bizimle çalışın."
+>
   <ProjectsHero active="all" />
 
   <section class="projeler-page">
@@ -46,10 +50,6 @@ const tamamlanan = allProjects.filter((project) => project.status === 'tamamlana
 </Layout>
 
 <style>
-  .container {
-    max-width: none;
-    padding-inline: clamp(var(--edge-mobile), 4vw, 81px);
-  }
 
   .projeler-page {
     padding-block: 9px 81px;
