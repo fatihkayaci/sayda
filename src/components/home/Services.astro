@@ -1,29 +1,26 @@
 ---
-import Icon from '../Icon.astro';
 import services from '../../data/services.json';
 ---
 
-<section class="services" id="hizmetler">
-  <div class="container services__inner">
-    <div class="services__intro reveal reveal-left">
-      <div class="services__eyebrow">
-        <span class="services__eyebrow-bar"></span>
-        <span>HİZMETLERİMİZ</span>
+<section class="svc" id="hizmetler">
+  <div class="container svc__wrap">
+    <div class="svc__head reveal reveal-left">
+      <div class="svc__head-l">
+        <div class="eyebrow">Hizmetlerimiz</div>
+        <h2 class="h2">Her aşamayı uzmanlıkla yönetiyoruz</h2>
       </div>
-      <h2>Her Aşamayı Uzmanlıkla Yönetiyoruz</h2>
       <p>Planlamadan teslimata kadar tüm süreçlerde kalite, güvenlik ve sürdürülebilirliği ön planda tutuyoruz.</p>
-      <a class="services__cta" href="/iletisim#quote-form">Teklif Al →</a>
     </div>
-
-    <div class="services__grid">
+    <div class="svc__grid">
       {
-        services.map((service, i) => (
-          <a class={`svc-card reveal reveal-right reveal-d${(i % 4) + 1}`} href={service.href}>
-            <span class="svc-card__icon">
-              <Icon name={service.icon} size={26} />
-            </span>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
+        services.map((s, i) => (
+          <a href={s.href} class={`svc__card reveal reveal-d${(i % 4) + 1}`}>
+            <div class="svc__top">
+              <span>0{i + 1}</span>
+              <span>→</span>
+            </div>
+            <h3>{s.title}</h3>
+            <p>{s.description}</p>
           </a>
         ))
       }
@@ -32,144 +29,137 @@ import services from '../../data/services.json';
 </section>
 
 <style>
-  .services {
-    padding-block: 112px;
-    background: var(--color-bg);
+  .svc {
+    background: var(--color-bg-light);
   }
 
-  .services__inner {
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: var(--space-l);
-    align-items: start;
-  }
-
-  .services__intro {
-    position: sticky;
-    top: 96px;
-  }
-
-  .services__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .services__eyebrow-bar {
-    display: block;
-    width: 44px;
-    height: 3px;
-    background: var(--color-navy);
-  }
-
-  .services__eyebrow span:last-child {
-    font-size: 0.75rem;
+  .eyebrow {
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
     color: var(--color-navy);
+    margin-bottom: 16px;
   }
 
-  .services__intro h2 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(28px, 3.5vw, 40px);
-    line-height: 1.1;
-    margin-bottom: var(--space-s);
+  .h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 48px;
+    line-height: 1.05;
+    font-weight: 700;
+    font-stretch: 112%;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
   }
 
-  .services__intro p {
-    font-size: 1rem;
-    line-height: 1.75;
+  .svc__wrap {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .svc__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+
+  .svc__head-l {
+    max-width: 620px;
+  }
+
+  .svc__head p {
+    margin: 0;
+    max-width: 420px;
+    font-size: 17px;
+    line-height: 1.65;
     color: var(--color-text-muted);
     text-wrap: pretty;
-    margin-bottom: var(--space-m);
   }
 
-  .services__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 15px 30px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    background: var(--color-navy);
-    color: #fff;
-    transition: background var(--transition);
-  }
-
-  .services__cta:hover {
-    background: var(--color-navy-dark);
-  }
-
-  .services__grid {
+  .svc__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .svc-card {
-    display: block;
-    padding: 32px 28px;
-    border-radius: var(--radius);
-    background: var(--color-bg);
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1px;
+    background: rgba(43, 46, 131, 0.12);
     border: 1px solid rgba(43, 46, 131, 0.12);
-    transition:
-      border-color 200ms,
-      box-shadow 200ms,
-      transform 200ms;
   }
 
-  .svc-card:hover {
-    border-color: var(--color-navy);
-    box-shadow: 0 16px 40px rgba(43, 46, 131, 0.12);
-    transform: translateY(-4px);
-  }
-
-  .svc-card__icon {
+  .svc__card {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--color-bg-light);
-    color: var(--color-navy);
-    margin-bottom: 20px;
-  }
-
-  .svc-card h3 {
-    font-size: 1.125rem;
-    font-weight: 700;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 280px;
+    padding: 40px 36px;
+    background: var(--color-bg);
     color: var(--color-text);
-    margin-bottom: 10px;
+    transition: background 0.3s;
   }
 
-  .svc-card p {
-    font-size: var(--fs-small);
-    line-height: 1.7;
-    color: var(--color-text-faint);
+  .svc__card:hover {
+    background: var(--color-bg-light);
+    color: var(--color-text);
   }
 
-  @media (max-width: 1024px) {
-    .services__inner {
+  .svc__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-navy);
+  }
+
+  .svc__top span:first-child {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .svc__top span:last-child {
+    font-size: 20px;
+    transition: transform 0.3s;
+  }
+
+  .svc__card:hover .svc__top span:last-child {
+    transform: translateX(4px);
+  }
+
+  .svc__card h3 {
+    margin: auto 0 0;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    font-stretch: 108%;
+    line-height: 1.15;
+  }
+
+  .svc__card p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 760px) {
+    .h2 {
+      font-size: 34px;
+    }
+
+    .svc__wrap {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .svc__grid {
       grid-template-columns: 1fr;
     }
 
-    .services__intro {
-      position: static;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .services {
-      padding-block: 64px;
-    }
-
-    .services__grid {
-      grid-template-columns: 1fr;
+    .svc__card {
+      min-height: 0;
+      padding: 28px 24px;
     }
   }
 </style>

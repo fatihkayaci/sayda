@@ -11,12 +11,14 @@
   --color-border: #e2e3ec;
   --color-on-dark: #ffffff;
   --color-on-dark-muted: #b7b8d6;
+  --color-accent: #6d78f6; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
 
   /* Typography */
   --font-body: 'Archivo', sans-serif;
   --font-heading: 'Archivo Black', sans-serif;
   --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
   --font-script: 'Caveat', cursive; /* handwritten quote accents */
+  --font-display: 'Archivo Variable', sans-serif; /* stretch-axis display type, homepage sections */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
   --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
@@ -27,7 +29,7 @@
   /* Layout */
   --edge: 48px;
   --edge-mobile: 20px;
-  --max-width: 1200px;
+  --max-width: 1400px;
   --radius: 4px;
   --header-h: 84px;
   --header-h-compact: 64px;

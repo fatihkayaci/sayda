@@ -8,37 +8,36 @@ const rest = allProjects.filter((project) => !project.featured).slice(0, 2);
 const projects = [...featured, ...rest].slice(0, 3);
 ---
 
-<section class="featured-projects" id="projeler">
-  <div class="container">
-    <div class="featured-projects__header">
+<section class="prj" id="projeler">
+  <div class="container prj__wrap">
+    <div class="prj__head">
       <div class="reveal reveal-left">
-        <div class="featured-projects__eyebrow">
-          <span class="featured-projects__eyebrow-bar"></span>
-          <span>ÖNE ÇIKAN PROJELER</span>
-        </div>
-        <h2>Gerçek Projeler,<br />Gerçek Sonuçlar</h2>
+        <div class="eyebrow eyebrow--light">Öne Çıkan Projeler</div>
+        <h2 class="h2">Gerçek projeler,<br />gerçek sonuçlar</h2>
       </div>
-      <a class="featured-projects__all reveal reveal-right" href="/projeler">Tüm Projeler →</a>
+      <a href="/projeler" class="prj__all reveal reveal-right">Tüm Projeler <span>→</span></a>
     </div>
-
-    <div class="featured-projects__grid">
+    <div class="prj__grid">
       {
         projects.map((project, i) => (
-          <a class={`project-card reveal reveal-d${i + 1}`} href={project.href}>
-            <div class="project-card__media">
+          <a href={project.href} class={`prj__card reveal reveal-d${i + 1}`}>
+            <div class="prj__img">
               {project.image ? (
                 <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
               ) : (
-                <div class="project-card__media-empty">
+                <div class="prj__img-empty">
                   <Icon name="photo" size={36} />
                 </div>
               )}
-              <span class={`project-card__badge project-card__badge--${project.status}`}>{statusLabel(project.status)}</span>
+              <span class={`prj__badge prj__badge--${project.status}`}>{statusLabel(project.status)}</span>
             </div>
-            <div class="project-card__info">
+            <div class="prj__body">
+              {project.employer && <div class="prj__loc">{project.employer} · {project.location}</div>}
               <h3>{project.name}</h3>
-              {project.employer && <p class="project-card__employer">{project.employer} · {project.location}</p>}
-              <p class="project-card__meta">{project.area} · {formatDateRange(project.startDate, project.endDate)}</p>
+              <div class="prj__meta">
+                <b>{project.area}</b>
+                <span>{formatDateRange(project.startDate, project.endDate)}</span>
+              </div>
             </div>
           </a>
         ))
@@ -48,182 +47,171 @@ const projects = [...featured, ...rest].slice(0, 3);
 </section>
 
 <style>
-  .featured-projects {
-    padding-block: 112px;
-    background: var(--color-bg-light);
-  }
-
-  .featured-projects__header {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-m);
-    margin-bottom: 56px;
-    flex-wrap: wrap;
-  }
-
-  .featured-projects__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .featured-projects__eyebrow-bar {
-    display: block;
-    width: 44px;
-    height: 3px;
-    background: var(--color-navy);
-  }
-
-  .featured-projects__eyebrow span:last-child {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    color: var(--color-navy);
-  }
-
-  .featured-projects__header h2 {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(28px, 3.5vw, 42px);
-    line-height: 1.1;
-  }
-
-  .featured-projects__all {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 700;
-    white-space: nowrap;
-    flex-shrink: 0;
-    border: 2px solid var(--color-navy);
-    color: var(--color-navy);
-    transition:
-      background var(--transition),
-      color var(--transition);
-  }
-
-  .featured-projects__all:hover {
-    background: var(--color-navy);
+  .prj {
+    background: var(--color-navy-dark);
     color: #fff;
   }
 
-  .featured-projects__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
   }
 
-  .project-card {
+  .eyebrow--light {
+    color: var(--color-on-dark-muted);
+  }
+
+  .h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 48px;
+    line-height: 1.05;
+    font-weight: 700;
+    font-stretch: 112%;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .prj__wrap {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .prj__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .prj__all {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-on-dark-muted);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .prj__all:hover {
+    color: var(--color-on-dark-muted);
+  }
+
+  .prj__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+    gap: 28px;
+  }
+
+  .prj__card {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--color-bg);
-    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease;
+    color: #fff;
   }
 
-  .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 48px rgba(43, 46, 131, 0.15);
+  .prj__card:hover {
+    color: var(--color-bg-light);
   }
 
-  .project-card__media {
+  .prj__img {
     position: relative;
-    height: 320px;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
+    background: var(--color-navy-deep);
   }
 
-  .project-card__media img {
+  .prj__img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 500ms ease;
+    transition: transform 0.6s ease;
   }
 
-  .project-card__media-empty {
+  .prj__img-empty {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    background: var(--color-bg-light);
-    color: var(--color-border);
+    color: rgba(255, 255, 255, 0.3);
   }
 
-  .project-card:hover .project-card__media img {
-    transform: scale(1.05);
+  .prj__card:hover .prj__img img {
+    transform: scale(1.04);
   }
 
-  .project-card__media::after {
-    content: '';
+  .prj__badge {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(19, 21, 74, 0.85) 0%, transparent 55%);
-  }
-
-  .project-card__badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 1;
-    padding: 6px 14px;
-    border-radius: 2px;
-    font-size: 0.6875rem;
+    top: 18px;
+    left: 18px;
+    padding: 7px 12px;
+    background: #fff;
+    color: var(--color-navy);
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.14em;
+  }
+
+  .prj__badge--devam-eden {
+    background: var(--color-navy);
     color: #fff;
   }
 
-  .project-card__badge--devam-eden {
-    background: var(--color-navy);
+  .prj__body {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .project-card__badge--tamamlanan {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(4px);
-  }
-
-  .project-card__info {
-    padding: 24px;
-    background: var(--color-bg);
-  }
-
-  .project-card h3 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 6px;
-  }
-
-  .project-card__employer {
+  .prj__loc {
     font-size: 13px;
-    color: var(--color-text-faint);
-    margin-bottom: 4px;
-  }
-
-  .project-card__meta {
-    font-size: 13px;
-    color: var(--color-navy);
     font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
   }
 
-  @media (max-width: 1024px) {
-    .featured-projects__grid {
-      grid-template-columns: 1fr 1fr;
+  .prj__body h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    font-stretch: 108%;
+    line-height: 1.15;
+  }
+
+  .prj__meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 6px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .prj__meta b {
+    color: #fff;
+  }
+
+  @media (max-width: 760px) {
+    .h2 {
+      font-size: 34px;
     }
-  }
 
-  @media (max-width: 700px) {
-    .featured-projects__grid {
-      grid-template-columns: 1fr;
+    .prj__wrap {
+      padding-top: 72px;
+      padding-bottom: 72px;
     }
   }
 </style>

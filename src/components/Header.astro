@@ -51,7 +51,7 @@ const isPathActive = (href?: string) => {
 <header class="header" transition:persist="sayda-header">
   <div class="header__inner">
     <a href="/" class="header__logo">
-      <img src={site.logo} alt="Sayda İnşaat" width="148" height="34" />
+      <img src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
     </a>
 
     <nav class="header__nav" id="mainMenu">
@@ -110,13 +110,19 @@ const isPathActive = (href?: string) => {
           })
         }
         <li class="header__nav-item header__nav-cta-item">
-          <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">Teklif Al</a>
+          <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">
+            Teklif Al
+            <Icon name="arrow" size={16} />
+          </a>
         </li>
       </ul>
     </nav>
 
     <div class="header__actions">
-      <a class="header__cta" href="/iletisim#quote-form">Teklif Al</a>
+      <a class="header__cta" href="/iletisim#quote-form">
+        Teklif Al
+        <Icon name="arrow" size={16} />
+      </a>
       <button class="header__hamburger" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
         <Icon name="menu" class="header__hamburger-icon header__hamburger-icon--open" />
         <Icon name="close" class="header__hamburger-icon header__hamburger-icon--close" />
@@ -130,24 +136,37 @@ const isPathActive = (href?: string) => {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(19, 21, 74, 0.96);
+    background:
+      linear-gradient(115deg, rgba(107, 114, 246, 0.4) 0%, rgba(107, 114, 246, 0.14) 16%, rgba(107, 114, 246, 0) 30%),
+      rgba(19, 21, 74, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     transition:
       background 300ms,
       box-shadow 300ms;
   }
 
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #6d78f6 0%, #170aa0 45%, #4433d8 100%);
+  }
+
   .header.is-scrolled {
-    background: rgba(19, 21, 74, 0.55);
+    background:
+      linear-gradient(115deg, rgba(107, 114, 246, 0.4) 0%, rgba(107, 114, 246, 0.14) 16%, rgba(107, 114, 246, 0) 30%),
+      rgba(19, 21, 74, 0.55);
     box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
   }
 
   .header__inner {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: flex-start;
     gap: var(--space-m);
     height: 84px;
     width: 100%;
@@ -162,18 +181,15 @@ const isPathActive = (href?: string) => {
 
   .header__logo img {
     display: block;
-    height: 34px;
+    height: 46px;
     width: auto;
     filter: brightness(0) invert(1);
-  }
-
-  .header__nav {
-    margin-left: auto;
   }
 
   .header__nav > ul {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-l);
   }
 
@@ -311,18 +327,27 @@ const isPathActive = (href?: string) => {
   }
 
   .header__cta {
-    background: var(--color-navy);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #6d6bf0, #5142e6);
     color: #fff;
-    padding: 12px 24px;
-    border-radius: var(--radius);
+    padding: 12px 22px;
+    border-radius: 10px;
     font-size: var(--fs-small);
     font-weight: 700;
     white-space: nowrap;
-    transition: background var(--transition);
+    box-shadow: 0 8px 20px rgba(81, 66, 230, 0.35);
+    transition:
+      background var(--transition),
+      box-shadow var(--transition),
+      transform var(--transition);
   }
 
   .header__cta:hover {
-    background: var(--color-navy-dark);
+    background: linear-gradient(135deg, #7a78f5, #5c4eef);
+    box-shadow: 0 10px 24px rgba(81, 66, 230, 0.45);
+    transform: translateY(-1px);
   }
 
   .header__hamburger {
@@ -456,16 +481,18 @@ const isPathActive = (href?: string) => {
     .header__nav-cta-link {
       display: flex;
       justify-content: center;
-      background: var(--color-navy);
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6d6bf0, #5142e6);
       color: #fff;
       padding: 12px 24px;
-      border-radius: var(--radius);
+      border-radius: 10px;
       font-weight: 700;
       transition: background var(--transition);
     }
 
     .header__nav-cta-link:hover {
-      background: var(--color-navy-dark);
+      background: linear-gradient(135deg, #7a78f5, #5c4eef);
       color: #fff;
     }
   }

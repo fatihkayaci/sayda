@@ -56,30 +56,41 @@ const certificates = [
     <div class="about-hero__media" aria-hidden="true">
       <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
     </div>
-    <p class="about-hero__script" aria-hidden="true">
-      “Daha iyi<br />yarınlar<br />için sağlam<br />yapılar”
-    </p>
 
     <div class="container about-hero__inner">
-      <div class="about-hero__content">
-        <div class="eyebrow">
-          <span class="eyebrow__bar"></span>
-          <span>KURUMSAL</span>
+      <nav class="about-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/kurumsal">Kurumsal</a>
+        <span>/</span>
+        <span aria-current="page">Hakkımızda</span>
+      </nav>
+
+      <div class="about-hero__row">
+        <div class="about-hero__content">
+          <div class="eyebrow eyebrow--light">
+            <span class="eyebrow__bar"></span>
+            <span>KURUMSAL</span>
+          </div>
+          <h1>
+            Hakkımızda
+            <span class="about-hero__since">Since {site.foundedYear}</span>
+          </h1>
+          <p class="about-hero__lead">{site.foundedYear}’dan bugüne, daha iyi yaşam alanları için çalışıyoruz.</p>
+          <p class="about-hero__text">
+            Sayda İnşaat; konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde taahhüt ve ince işler
+            hizmetleri sunan, deneyimi ve uzman ekibiyle sektörde güvenilir bir çözüm ortağıdır.
+          </p>
+          <a class="btn btn--white" href="/hakkimizda/vizyon-misyon">
+            Vizyonumuzla Tanışın <Icon name="arrow" size={16} />
+          </a>
         </div>
-        <h1>Hakkımızda</h1>
-        <p class="about-hero__lead">{site.foundedYear}’dan bugüne,<br />daha iyi yaşam alanları için çalışıyoruz.</p>
-        <p class="about-hero__text">
-          Sayda İnşaat; konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde taahhüt ve ince işler
-          hizmetleri sunan, deneyimi ve uzman ekibiyle sektörde güvenilir bir çözüm ortağıdır.
+
+        <p class="about-hero__quote" aria-hidden="true">
+          “Daha iyi yarınlar için sağlam yapılar”
+          <span></span>
         </p>
-        <a class="btn btn--navy" href="/hakkimizda/vizyon-misyon">
-          Vizyonumuzla Tanışın <Icon name="arrow" size={16} />
-        </a>
       </div>
-      <p class="about-hero__since">
-        <span>{site.foundedYear}</span>
-        <span>Since</span>
-      </p>
     </div>
   </section>
 
@@ -89,11 +100,10 @@ const certificates = [
         {
           stats.map((stat) => (
             <li class="about-stat">
-              <span class="about-stat__icon">
-                <Icon name={stat.icon} size={36} />
+              <span class="about-stat__value">
+                {stat.value}
+                {stat.unit && <span class="about-stat__unit">{stat.unit}</span>}
               </span>
-              <span class="about-stat__value">{stat.value}</span>
-              {stat.unit && <span class="about-stat__unit">{stat.unit}</span>}
               <span class="about-stat__label">{stat.label}</span>
             </li>
           ))
@@ -126,6 +136,10 @@ const certificates = [
 
       <div class="about-who__media reveal reveal-d1">
         <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
+        <div class="about-who__since">
+          <span class="about-who__since-label">Since</span>
+          <span class="about-who__since-value">{site.foundedYear}</span>
+        </div>
         <div class="about-who__quote">
           <span class="about-who__quote-mark" aria-hidden="true">“</span>
           <p>Yaşam alanlarına değer katmak için çalışıyoruz.</p>
@@ -143,10 +157,14 @@ const certificates = [
       </div>
       <ul class="about-values__grid">
         {
-          values.map((value) => (
+          values.map((value, index) => (
             <li class="about-value reveal">
+              <div class="about-value__head">
+                <span class="about-value__marker" aria-hidden="true"></span>
+                <span class="about-value__num">{String(index + 1).padStart(2, '0')}</span>
+              </div>
               <span class="about-value__icon">
-                <Icon name={value.icon} size={30} />
+                <Icon name={value.icon} size={26} />
               </span>
               <h3>{value.title}</h3>
               <p>{value.text}</p>
@@ -161,7 +179,7 @@ const certificates = [
     <div class="container">
       <div class="section-head">
         <div>
-          <div class="eyebrow">
+          <div class="eyebrow eyebrow--light">
             <span class="eyebrow__bar"></span>
             <span>YOLCULUĞUMUZ</span>
           </div>
@@ -174,7 +192,7 @@ const certificates = [
         {
           timeline.map((item, index) => (
             <li class:list={['timeline__item', { 'timeline__item--first': index === 0 }]}>
-              <span class="timeline__dot"></span>
+              <span class="timeline__marker" aria-hidden="true"></span>
               <span class="timeline__year">{item.year}</span>
               <span class="timeline__text">{item.text}</span>
             </li>
@@ -203,9 +221,10 @@ const certificates = [
             <li class={`reveal reveal-d${index}`}>
               <a class="expertise-card" href="/projeler">
                 <img src={item.image} alt="" loading="lazy" />
+                <span class="expertise-card__num">{String(index + 1).padStart(2, '0')}</span>
                 <span class="expertise-card__title">{item.title}</span>
                 <span class="expertise-card__arrow">
-                  <Icon name="arrow" size={22} />
+                  <Icon name="arrow" size={20} />
                 </span>
               </a>
             </li>
@@ -236,7 +255,7 @@ const certificates = [
           certificates.map((cert, index) => (
             <li class={`cert-card reveal reveal-d${index}`}>
               <span class="cert-card__icon">
-                <Icon name={cert.icon} size={32} />
+                <Icon name={cert.icon} size={30} />
               </span>
               <div>
                 <h3>{cert.title}</h3>
@@ -283,30 +302,32 @@ const certificates = [
     gap: 14px;
     margin-bottom: 18px;
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
     color: var(--color-navy);
   }
 
   .eyebrow__bar {
     display: block;
-    width: 28px;
+    width: 32px;
     height: 2px;
     background: currentColor;
   }
 
   .eyebrow--light {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-on-dark-muted);
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    padding: 15px 26px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
+    padding: 16px 28px;
+    font-size: 0.8125rem;
     font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     transition:
       background var(--transition),
       color var(--transition);
@@ -323,15 +344,23 @@ const certificates = [
 
   .btn--white {
     background: #fff;
-    color: var(--color-navy);
+    color: var(--color-navy-deep);
   }
 
   .btn--white:hover {
     background: #e8e9f5;
   }
 
+  h1,
   h2 {
-    font-size: clamp(1.75rem, 2.2vw + 1rem, 2.5rem);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+  }
+
+  h2 {
+    font-size: clamp(1.875rem, 2.4vw + 1rem, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
     color: var(--color-navy-deep);
   }
 
@@ -340,7 +369,7 @@ const certificates = [
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-l);
-    margin-bottom: 40px;
+    margin-bottom: 48px;
   }
 
   .section-head p {
@@ -348,6 +377,10 @@ const certificates = [
     font-size: var(--fs-small);
     line-height: 1.7;
     color: var(--color-text-muted);
+  }
+
+  .about-journey .section-head p {
+    color: var(--color-on-dark-muted);
   }
 
   .section-head .eyebrow {
@@ -358,13 +391,13 @@ const certificates = [
   .about-hero {
     position: relative;
     overflow: hidden;
-    background: var(--color-bg);
+    background: var(--color-navy-deep);
   }
 
   .about-hero__media {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 62%;
+    width: 58%;
   }
 
   .about-hero__media img {
@@ -379,79 +412,104 @@ const certificates = [
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0) 45%),
-      linear-gradient(to top, var(--color-bg) 0%, rgba(255, 255, 255, 0) 22%);
-  }
-
-  .about-hero__script {
-    position: absolute;
-    top: 72px;
-    left: 52%;
-    z-index: 1;
-    font-family: var(--font-script);
-    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
-    line-height: 1.1;
-    color: rgba(255, 255, 255, 0.85);
-    transform: rotate(-9deg);
-    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.35);
+      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0.15) 50%, rgba(25, 27, 74, 0) 100%),
+      linear-gradient(to top, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0) 30%);
   }
 
   .about-hero__inner {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    min-height: 560px;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
     justify-content: space-between;
-    min-height: 520px;
-    padding-block: 72px 56px;
+    padding-block: 40px 64px;
+  }
+
+  .about-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 56px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .about-hero__breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .about-hero__breadcrumb span[aria-current] {
+    color: #fff;
+  }
+
+  .about-hero__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-xl);
+    align-items: end;
   }
 
   .about-hero__content {
-    max-width: 480px;
+    max-width: 560px;
   }
 
   .about-hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: -0.02em;
-    color: var(--color-navy-deep);
-  }
-
-  .about-hero__lead {
-    margin-top: 16px;
-    font-size: clamp(1.25rem, 1.6vw, 1.5rem);
-    line-height: 1.3;
-    color: var(--color-text-faint);
-  }
-
-  .about-hero__text {
-    margin-top: 20px;
-    font-size: var(--fs-small);
-    line-height: 1.75;
-    color: var(--color-text-muted);
-  }
-
-  .about-hero .btn {
-    margin-top: 28px;
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: #fff;
   }
 
   .about-hero__since {
-    display: grid;
-    gap: 4px;
-    padding-left: 18px;
-    border-left: 2px solid rgba(255, 255, 255, 0.8);
-    color: #fff;
-    font-weight: 500;
-    text-shadow: 0 1px 8px rgba(19, 21, 74, 0.5);
+    display: block;
+    font-weight: 300;
+    color: var(--color-on-dark-muted);
   }
 
-  .about-hero__since span:first-child {
-    font-size: 1.25rem;
-    font-weight: 700;
+  .about-hero__lead {
+    margin-top: 22px;
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .about-hero__text {
+    margin-top: 18px;
+    max-width: 48ch;
+    font-size: var(--fs-small);
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .about-hero .btn {
+    margin-top: 30px;
+  }
+
+  .about-hero__quote {
+    max-width: 300px;
+    margin: 0;
+    padding: 4px 0 4px 26px;
+    border-left: 2px solid var(--color-on-dark-muted);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #fff;
   }
 
   /* Stats */
   .about-stats {
-    padding-block: 48px;
+    background: var(--color-navy);
+    color: #fff;
   }
 
   .about-stats__grid {
@@ -462,90 +520,111 @@ const certificates = [
   .about-stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-inline: var(--space-s);
-    text-align: center;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 44px var(--space-m);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
   }
 
-  .about-stat + .about-stat {
-    border-left: 1px solid var(--color-border);
-  }
-
-  .about-stat__icon {
-    display: grid;
-    place-items: center;
-    width: 84px;
-    height: 84px;
-    margin-bottom: 20px;
-    border-radius: 50%;
-    background: var(--color-bg-light);
-    color: var(--color-navy);
+  .about-stat:first-child {
+    border-left: 0;
   }
 
   .about-stat__value {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 2vw + 0.5rem, 2.25rem);
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-weight: 700;
+    font-size: clamp(1.875rem, 2.2vw + 0.5rem, 2.5rem);
     line-height: 1;
-    color: var(--color-navy-deep);
+    letter-spacing: -0.01em;
   }
 
   .about-stat__unit {
-    margin-top: 4px;
-    font-family: var(--font-heading);
-    font-size: 1.125rem;
-    color: var(--color-navy-deep);
+    margin-left: 4px;
+    font-size: 1.0625rem;
+    font-weight: 500;
   }
 
   .about-stat__label {
-    margin-top: 10px;
-    font-size: var(--fs-small);
-    color: var(--color-text-faint);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
   }
 
   /* Who we are */
   .about-who {
-    padding-block: 64px;
-    background: var(--color-bg-light);
+    padding-block: 96px;
+    background: var(--color-bg);
   }
 
   .about-who__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    gap: 88px;
     align-items: center;
   }
 
   .about-who__content {
     display: grid;
-    gap: 18px;
+    gap: 20px;
     justify-items: start;
   }
 
   .about-who__content h2 {
-    max-width: 18ch;
+    max-width: 16ch;
   }
 
   .about-who__content p {
-    font-size: var(--fs-small);
+    font-size: var(--fs-body);
     line-height: 1.75;
     color: var(--color-text-muted);
   }
 
   .about-who__content .btn {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .about-who__media {
     position: relative;
-    margin-right: 24px;
+    margin-left: 28px;
     padding-bottom: 24px;
   }
 
   .about-who__media img {
     width: 100%;
-    height: 340px;
+    height: 380px;
     object-fit: cover;
-    border-radius: var(--radius);
+  }
+
+  .about-who__since {
+    position: absolute;
+    left: -28px;
+    top: 32px;
+    display: grid;
+    gap: 2px;
+    padding: 22px 26px;
+    background: var(--color-navy);
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+
+  .about-who__since-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .about-who__since-value {
+    font-family: var(--font-display);
+    font-stretch: 120%;
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 
   .about-who__quote {
@@ -554,7 +633,6 @@ const certificates = [
     bottom: 0;
     width: 220px;
     padding: 24px;
-    border-radius: var(--radius);
     background: var(--color-navy-deep);
     color: #fff;
     box-shadow: var(--shadow);
@@ -571,6 +649,7 @@ const certificates = [
     margin-top: 10px;
     font-size: 1rem;
     line-height: 1.5;
+    color: #fff;
   }
 
   .about-who__quote-line {
@@ -583,109 +662,135 @@ const certificates = [
 
   /* Values */
   .about-values {
-    padding-block: 40px 48px;
+    padding-block: 88px;
+    background: var(--color-bg-light);
+  }
+
+  .about-values__eyebrow {
+    margin-bottom: 40px;
   }
 
   .about-values__grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-l);
-    text-align: center;
+    gap: var(--space-m);
   }
 
   .about-value {
-    display: grid;
-    justify-items: center;
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 32px 28px 34px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+  }
+
+  .about-value__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .about-value__marker {
+    display: block;
+    width: 9px;
+    height: 9px;
+    background: var(--color-navy);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .about-value__num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-navy);
   }
 
   .about-value__icon {
     display: grid;
     place-items: center;
-    width: 68px;
-    height: 68px;
+    width: 56px;
+    height: 56px;
+    margin-top: 4px;
     border-radius: 50%;
     background: var(--color-bg-light);
-    color: var(--color-navy);
+    color: var(--color-navy-deep);
   }
 
   .about-value h3 {
-    margin-top: 6px;
-    font-size: 1rem;
+    margin-top: 4px;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-size: 1.25rem;
     color: var(--color-navy-deep);
   }
 
   .about-value p {
-    max-width: 24ch;
-    font-size: 0.8125rem;
-    line-height: 1.6;
+    font-size: 0.875rem;
+    line-height: 1.65;
     color: var(--color-text-muted);
   }
 
   /* Journey */
   .about-journey {
-    padding-block: 56px;
-    background: var(--color-bg-light);
+    padding-block: 96px;
+    background: var(--color-navy-dark);
+    color: #fff;
+  }
+
+  .about-journey h2 {
+    color: #fff;
   }
 
   .timeline {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: var(--space-m);
   }
 
-  .timeline::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-border);
-  }
-
   .timeline__item {
     position: relative;
     display: grid;
-    gap: 6px;
+    gap: 16px;
     align-content: start;
-    padding-top: 28px;
-    font-size: 0.8125rem;
-    color: var(--color-text-muted);
+    padding-top: 32px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
   }
 
-  .timeline__dot {
+  .timeline__marker {
     position: absolute;
-    top: 0;
+    top: -7px;
     left: 0;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--color-navy);
-    box-shadow: 0 0 0 4px var(--color-bg-light);
+    width: 12px;
+    height: 12px;
+    background: var(--color-on-dark-muted);
+    transform: rotate(45deg);
   }
 
-  .timeline__item--first .timeline__dot {
-    box-shadow:
-      0 0 0 4px var(--color-bg-light),
-      0 0 0 6px rgba(43, 46, 131, 0.25);
+  .timeline__item--first .timeline__marker {
+    background: #fff;
   }
 
   .timeline__year {
-    font-size: 1rem;
+    font-family: var(--font-display);
+    font-stretch: 115%;
     font-weight: 700;
-    color: var(--color-navy-deep);
+    font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
 
   .timeline__text {
     max-width: 22ch;
-    line-height: 1.5;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   /* Expertise */
   .about-expertise {
-    padding-block: 64px 72px;
+    padding-block: 96px;
   }
 
   .about-expertise__grid {
@@ -697,9 +802,8 @@ const certificates = [
   .expertise-card {
     position: relative;
     display: block;
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
-    border-radius: var(--radius);
     background: var(--color-navy-deep);
     color: #fff;
   }
@@ -717,34 +821,47 @@ const certificates = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(19, 21, 74, 0.85) 0%, rgba(19, 21, 74, 0) 55%);
+    background: linear-gradient(to top, rgba(25, 27, 74, 0.92) 0%, rgba(25, 27, 74, 0.1) 55%);
   }
 
   .expertise-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+  }
+
+  .expertise-card__num {
+    position: absolute;
+    left: 22px;
+    top: 22px;
+    z-index: 1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-on-dark-muted);
   }
 
   .expertise-card__title {
     position: absolute;
-    left: 18px;
-    bottom: 18px;
+    left: 22px;
+    right: 60px;
+    bottom: 22px;
     z-index: 1;
-    max-width: 9ch;
-    font-family: var(--font-heading);
-    font-size: 1.0625rem;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: 1.1875rem;
     line-height: 1.2;
   }
 
   .expertise-card__arrow {
     position: absolute;
-    right: 16px;
-    bottom: 16px;
+    right: 18px;
+    bottom: 18px;
     z-index: 1;
     display: grid;
     place-items: center;
-    width: 44px;
-    height: 44px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 50%;
     transition:
       background var(--transition),
@@ -758,7 +875,7 @@ const certificates = [
 
   /* Certificates */
   .about-certs {
-    padding-block: 0 80px;
+    padding-block: 0 96px;
   }
 
   .about-certs__grid {
@@ -770,25 +887,26 @@ const certificates = [
   .cert-card {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 22px 20px;
-    border-radius: var(--radius);
+    gap: 18px;
+    padding: 26px 24px;
     background: #fff;
-    box-shadow: 0 4px 20px rgba(17, 19, 24, 0.07);
+    border: 1px solid var(--color-border);
   }
 
   .cert-card__icon {
     display: grid;
     place-items: center;
     flex: none;
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     background: var(--color-bg-light);
-    color: var(--color-navy);
+    color: var(--color-navy-deep);
   }
 
   .cert-card h3 {
+    font-family: var(--font-display);
+    font-stretch: 108%;
     font-size: 0.9375rem;
     color: var(--color-navy-deep);
   }
@@ -803,7 +921,7 @@ const certificates = [
   .about-cta {
     position: relative;
     overflow: hidden;
-    padding-block: 88px;
+    padding-block: 96px;
     background: var(--color-navy-deep);
     color: #fff;
   }
@@ -823,21 +941,22 @@ const certificates = [
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(90deg, rgba(25, 27, 74, 0.92), rgba(25, 27, 74, 0.6));
+    background: linear-gradient(90deg, rgba(25, 27, 74, 0.95), rgba(43, 46, 131, 0.55));
   }
 
   .about-cta__inner {
     position: relative;
     z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-xl);
   }
 
   .about-cta h2 {
     max-width: 14ch;
-    font-size: clamp(1.75rem, 2.6vw + 1rem, 2.75rem);
+    font-size: clamp(1.875rem, 2.8vw + 1rem, 3rem);
     color: #fff;
   }
 
@@ -845,10 +964,10 @@ const certificates = [
     display: grid;
     gap: 24px;
     justify-items: start;
+    max-width: 380px;
   }
 
   .about-cta__side p {
-    max-width: 34ch;
     font-size: var(--fs-small);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
@@ -858,17 +977,20 @@ const certificates = [
   @media (max-width: 1024px) {
     .about-hero__media {
       width: 100%;
+      opacity: 0.5;
     }
 
     .about-hero__media::after {
-      background: linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0.7) 55%, rgba(255, 255, 255, 0.2) 100%);
+      background: linear-gradient(to right, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0.75) 55%, rgba(25, 27, 74, 0.35) 100%);
     }
 
-    .about-hero__script {
-      display: none;
+    .about-hero__row {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: var(--space-l);
     }
 
-    .about-hero__since {
+    .about-hero__quote {
       display: none;
     }
 
@@ -876,6 +998,10 @@ const certificates = [
     .about-cta__inner {
       grid-template-columns: 1fr;
       gap: var(--space-l);
+    }
+
+    .about-who__media {
+      margin-left: 0;
     }
 
     .about-values__grid,
@@ -888,25 +1014,28 @@ const certificates = [
       grid-template-columns: repeat(3, 1fr);
       row-gap: var(--space-l);
     }
-
-    .timeline::before {
-      display: none;
-    }
   }
 
   @media (max-width: 640px) {
     .about-hero__inner {
-      min-height: 0;
-      padding-block: 56px 48px;
+      padding-block: 24px 48px;
+    }
+
+    .about-hero__breadcrumb {
+      margin-bottom: 36px;
     }
 
     .about-stats__grid {
       grid-template-columns: 1fr 1fr;
-      row-gap: var(--space-l);
+    }
+
+    .about-stat {
+      border-left: 0;
+      padding: 28px var(--space-s);
     }
 
     .about-stat:nth-child(odd) {
-      border-left: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     .section-head {
@@ -915,8 +1044,14 @@ const certificates = [
       gap: var(--space-s);
     }
 
-    .about-who__media {
-      margin-right: 0;
+    .about-who__since {
+      left: 0;
+      top: -20px;
+      padding: 16px 20px;
+    }
+
+    .about-who__since-value {
+      font-size: 2rem;
     }
 
     .about-who__media img {

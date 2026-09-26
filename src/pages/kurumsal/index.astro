@@ -44,50 +44,80 @@ const stats = [
     <div class="kh-hero__media" aria-hidden="true">
       <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
     </div>
-    <p class="kh-hero__script" aria-hidden="true">“Daha iyi<br />yarınlar<br />için sağlam<br />yapılar”</p>
 
     <div class="container kh-hero__inner">
-      <div class="eyebrow">
-        <span class="eyebrow__bar"></span>
-        <span>KURUMSAL</span>
-      </div>
-      <h1>Sayda İnşaat'ı Tanıyın</h1>
-      <p class="kh-hero__lead">
-        {site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik hizmeti veriyoruz.
-        Hikayemiz, değerlerimiz ve belgelerimiz hakkında bilgi alın.
-      </p>
+      <nav class="kh-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Ana Sayfa</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Kurumsal</span>
+      </nav>
 
-      <ul class="kh-hero__stats">
-        {
-          stats.map((stat) => (
-            <li>
-              <span class="kh-hero__stat-value">{stat.value}</span>
-              <span class="kh-hero__stat-label">{stat.label}</span>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="kh-hero__grid">
+        <div class="kh-hero__main">
+          <div class="eyebrow eyebrow--light">
+            <span class="eyebrow__bar"></span>
+            <span>Kurumsal</span>
+          </div>
+          <h1 class="kh-hero__title">
+            Sayda<br />
+            <span class="kh-hero__title-accent">İnşaat'ı</span><br />
+            Tanıyın
+          </h1>
+          <p class="kh-hero__lead">
+            {site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik hizmeti veriyoruz.
+            Hikayemiz, değerlerimiz ve belgelerimiz hakkında bilgi alın.
+          </p>
+        </div>
+
+        <div class="kh-hero__quote">
+          <p>“Daha iyi<br />yarınlar<br />için sağlam<br />yapılar”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kh-stats">
+    <div class="container kh-stats__grid">
+      {
+        stats.map((stat) => (
+          <div class="kh-stats__item">
+            <span class="kh-stats__value">{stat.value}</span>
+            <span class="kh-stats__label">{stat.label}</span>
+          </div>
+        ))
+      }
     </div>
   </section>
 
   <section class="kh-cards">
     <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow__bar"></span>
+        <span>Kurumsal Sayfalar</span>
+      </div>
+      <h2 class="kh-cards__title">Bizi yakından tanıyın</h2>
+
       <ul class="kh-cards__grid">
         {
           kurumsal.map((item, index) => (
             <li class={`reveal reveal-d${index + 1}`}>
               <a class="kh-card" href={item.href}>
-                <img class="kh-card__image" src={item.image} alt="" loading="lazy" />
-                <span class="kh-card__icon">
-                  <Icon name={item.icon} size={24} />
-                </span>
+                <div class="kh-card__media">
+                  <img class="kh-card__image" src={item.image} alt="" loading="lazy" />
+                  <span class="kh-card__icon">
+                    <Icon name={item.icon} size={22} />
+                  </span>
+                </div>
                 <div class="kh-card__body">
-                  <h2>{item.title}</h2>
+                  <div class="kh-card__row">
+                    <span class="kh-card__num">{String(index + 1).padStart(2, '0')}</span>
+                    <span class="kh-card__arrow">
+                      <Icon name="arrow" size={18} />
+                    </span>
+                  </div>
+                  <h3>{item.title}</h3>
                   <p>{item.description}</p>
                 </div>
-                <span class="kh-card__arrow">
-                  <Icon name="arrow" size={20} />
-                </span>
               </a>
             </li>
           ))
@@ -102,14 +132,17 @@ const stats = [
       <div>
         <div class="eyebrow eyebrow--light">
           <span class="eyebrow__bar"></span>
-          <span>BİRLİKTE DAHA GÜÇLÜ YAPILAR</span>
+          <span>Birlikte Daha Güçlü Yapılar</span>
         </div>
         <h2>Yeni projeniz için bizimle çalışın.</h2>
+        <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
       </div>
       <div class="kh-cta__side">
-        <p>Deneyimimiz, uzman ekibimiz ve çözüm odaklı yaklaşımımızla yanınızdayız.</p>
-        <a class="btn btn--white" href="/iletisim#quote-form">
+        <a class="btn btn--accent" href="/iletisim#quote-form">
           Teklif Al <Icon name="arrow" size={16} />
+        </a>
+        <a class="btn btn--outline" href={site.phoneHref}>
+          {site.phone}
         </a>
       </div>
     </div>
@@ -129,8 +162,9 @@ const stats = [
     gap: 14px;
     margin-bottom: 18px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.22em;
+    text-transform: uppercase;
     color: var(--color-navy);
   }
 
@@ -142,33 +176,52 @@ const stats = [
   }
 
   .eyebrow--light {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-on-dark-muted);
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    padding: 15px 26px;
+    height: 56px;
+    padding: 0 28px;
     border-radius: var(--radius);
     font-size: var(--fs-small);
     font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
     transition:
       background var(--transition),
+      border-color var(--transition),
       color var(--transition);
   }
 
-  .btn--white {
-    background: #fff;
-    color: var(--color-navy);
+  .btn--accent {
+    background: var(--color-accent);
+    color: #fff;
   }
 
-  .btn--white:hover {
-    background: #e8e9f5;
+  .btn--accent:hover {
+    background: var(--color-navy);
+  }
+
+  .btn--outline {
+    border: 1.5px solid var(--color-on-dark-muted);
+    color: #fff;
+  }
+
+  .btn--outline:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   h2 {
-    font-size: clamp(1.75rem, 2.2vw + 1rem, 2.5rem);
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    font-size: clamp(1.75rem, 2.2vw + 1rem, 2.75rem);
     color: var(--color-navy-deep);
   }
 
@@ -176,13 +229,14 @@ const stats = [
   .kh-hero {
     position: relative;
     overflow: hidden;
-    background: var(--color-bg);
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
   .kh-hero__media {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 58%;
+    width: 52%;
   }
 
   .kh-hero__media img {
@@ -196,71 +250,138 @@ const stats = [
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0) 45%),
-      linear-gradient(to top, var(--color-bg) 0%, rgba(255, 255, 255, 0) 22%);
-  }
-
-  .kh-hero__script {
-    position: absolute;
-    top: 64px;
-    left: 50%;
-    z-index: 1;
-    font-family: var(--font-script);
-    font-size: clamp(1.375rem, 2.4vw, 2rem);
-    line-height: 1.1;
-    color: rgba(255, 255, 255, 0.85);
-    transform: rotate(-9deg);
-    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.35);
+    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0.55) 35%, rgba(25, 27, 74, 0.15) 100%);
   }
 
   .kh-hero__inner {
     position: relative;
     z-index: 2;
-    padding-block: 72px 56px;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: 56px 96px;
   }
 
-  .kh-hero h1 {
-    max-width: 14ch;
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    letter-spacing: -0.02em;
-    color: var(--color-navy-deep);
+  .kh-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 56px;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--color-on-dark-muted);
+  }
+
+  .kh-breadcrumb a {
+    color: var(--color-on-dark-muted);
+    transition: color var(--transition);
+  }
+
+  .kh-breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .kh-breadcrumb [aria-current] {
+    color: #fff;
+  }
+
+  .kh-hero__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+    gap: var(--space-xl);
+    align-items: end;
+  }
+
+  .kh-hero__title {
+    margin: 18px 0 0;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .kh-hero__title-accent {
+    font-weight: 300;
+    color: var(--color-on-dark-muted);
   }
 
   .kh-hero__lead {
     max-width: 46ch;
-    margin-top: 18px;
+    margin-top: 26px;
     font-size: 1.0625rem;
-    line-height: 1.75;
-    color: var(--color-text-muted);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
   }
 
-  .kh-hero__stats {
+  .kh-hero__quote {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-l);
-    margin-top: var(--space-xl);
-    padding-top: var(--space-l);
-    border-top: 1px solid var(--color-border);
+    justify-content: flex-end;
   }
 
-  .kh-hero__stat-value {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
-    color: var(--color-navy-deep);
+  .kh-hero__quote p {
+    max-width: 340px;
+    margin: 0;
+    padding: 4px 0 4px 26px;
+    border-left: 2px solid var(--color-accent);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2.2vw, 1.875rem);
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: #fff;
   }
 
-  .kh-hero__stat-label {
+  /* Stats band */
+  .kh-stats {
+    background: var(--color-navy);
+    color: #fff;
+  }
+
+  .kh-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .kh-stats__item {
+    padding: 40px 28px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .kh-stats__value {
     display: block;
-    margin-top: 4px;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+  }
+
+  .kh-stats__label {
+    display: block;
+    margin-top: 12px;
     font-size: var(--fs-small);
-    color: var(--color-text-faint);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
   }
 
   /* Cards */
   .kh-cards {
-    padding-block: 24px 88px;
+    padding-block: 96px;
+    background: var(--color-bg-light);
+  }
+
+  .kh-cards__title {
+    margin: 0 0 40px;
   }
 
   .kh-cards__grid {
@@ -270,31 +391,35 @@ const stats = [
   }
 
   .kh-card {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    aspect-ratio: 4 / 5;
-    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    background: var(--color-navy-deep);
-    color: #fff;
+    overflow: hidden;
+    color: var(--color-text);
+    transition:
+      box-shadow var(--transition),
+      transform var(--transition);
+  }
+
+  .kh-card:hover {
+    box-shadow: 0 24px 48px -24px rgba(13, 21, 51, 0.35);
+    transform: translateY(-4px);
+  }
+
+  .kh-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-bg-light);
   }
 
   .kh-card__image {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 500ms ease;
-  }
-
-  .kh-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(19, 21, 74, 0.92) 0%, rgba(19, 21, 74, 0.25) 55%, rgba(19, 21, 74, 0.05) 100%);
   }
 
   .kh-card:hover .kh-card__image {
@@ -302,63 +427,73 @@ const stats = [
   }
 
   .kh-card__icon {
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    top: 18px;
+    left: 18px;
     display: grid;
     place-items: center;
-    width: 52px;
-    height: 52px;
-    margin: 28px 28px 0;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.14);
+    background: rgba(19, 21, 74, 0.55);
     backdrop-filter: blur(4px);
-  }
-
-  .kh-card__body {
-    position: relative;
-    z-index: 1;
-    padding: 24px 28px 28px;
-  }
-
-  .kh-card__body h2 {
-    font-size: 1.375rem;
     color: #fff;
   }
 
-  .kh-card__body p {
-    margin-top: 10px;
-    max-width: 30ch;
+  .kh-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    padding: 26px 28px 30px;
+  }
+
+  .kh-card__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .kh-card__num {
     font-size: var(--fs-small);
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-navy);
   }
 
   .kh-card__arrow {
-    position: absolute;
-    z-index: 1;
-    right: 24px;
-    bottom: 24px;
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    transition:
-      background var(--transition),
-      color var(--transition);
+    color: var(--color-navy);
+    transition: transform var(--transition);
   }
 
   .kh-card:hover .kh-card__arrow {
-    background: #fff;
-    color: var(--color-navy);
+    transform: translateX(4px);
+  }
+
+  .kh-card__body h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: 1.375rem;
+    color: var(--color-navy-deep);
+  }
+
+  .kh-card__body p {
+    margin: 0;
+    max-width: 32ch;
+    font-size: var(--fs-small);
+    line-height: 1.65;
+    color: var(--color-text-muted);
   }
 
   /* CTA */
   .kh-cta {
     position: relative;
     overflow: hidden;
-    padding-block: 88px;
+    padding-block: 96px;
     background: var(--color-navy-deep);
     color: #fff;
   }
@@ -378,35 +513,41 @@ const stats = [
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(90deg, rgba(25, 27, 74, 0.92), rgba(25, 27, 74, 0.6));
+    background: linear-gradient(90deg, rgba(43, 46, 131, 0.92), rgba(25, 27, 74, 0.6));
   }
 
   .kh-cta__inner {
     position: relative;
     z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+  }
+
+  .kh-cta__inner > div:first-child {
+    max-width: 680px;
   }
 
   .kh-cta h2 {
-    max-width: 14ch;
+    max-width: 16ch;
     font-size: clamp(1.75rem, 2.6vw + 1rem, 2.75rem);
     color: #fff;
   }
 
-  .kh-cta__side {
-    display: grid;
-    gap: 24px;
-    justify-items: start;
-  }
-
-  .kh-cta__side p {
+  .kh-cta__inner p {
+    margin: 22px 0 0;
     max-width: 34ch;
-    font-size: var(--fs-small);
+    font-size: 1.0625rem;
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.8);
+  }
+
+  .kh-cta__side {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
   }
 
   /* Responsive */
@@ -416,42 +557,42 @@ const stats = [
     }
 
     .kh-hero__media::after {
-      background: linear-gradient(to right, var(--color-bg) 0%, rgba(255, 255, 255, 0.7) 55%, rgba(255, 255, 255, 0.2) 100%);
+      background: linear-gradient(
+        90deg,
+        var(--color-navy-deep) 0%,
+        rgba(25, 27, 74, 0.75) 55%,
+        rgba(25, 27, 74, 0.35) 100%
+      );
     }
 
-    .kh-hero__script {
-      display: none;
+    .kh-hero__quote {
+      justify-content: flex-start;
     }
 
     .kh-cards__grid {
       grid-template-columns: 1fr 1fr;
     }
-
-    .kh-cta__inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-l);
-    }
   }
 
   @media (max-width: 640px) {
     .kh-hero__inner {
-      padding-block: 56px 48px;
+      padding-block: 40px 64px;
     }
 
-    .kh-hero__stats {
-      gap: var(--space-m);
+    .kh-breadcrumb {
+      margin-bottom: 36px;
     }
 
     .kh-cards {
-      padding-block: 16px 64px;
+      padding-block: 64px;
     }
 
     .kh-cards__grid {
       grid-template-columns: 1fr;
     }
 
-    .kh-card {
-      aspect-ratio: 4 / 3.4;
+    .kh-cta {
+      padding-block: 64px;
     }
   }
 </style>
