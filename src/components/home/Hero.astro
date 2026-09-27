@@ -58,35 +58,45 @@ const interval = 6;
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
-    const dur = Number(hero.dataset.interval) || 6000;
-    const groups = ['.hero__tag', '.hero__tab'].map((selector) => [...hero.querySelectorAll(selector)]);
-    const images = [...hero.querySelectorAll<HTMLElement>('.hero__image')];
-    let current = 0;
-    let timer: number;
+  const heroTimers = new WeakMap<HTMLElement, number>();
 
-    const go = (n: number) => {
-      groups.forEach((group) =>
-        group.forEach((el, i) => {
-          el.classList.toggle('is-on', i === n);
-          el.classList.toggle('is-past', i < n);
-        })
-      );
-      images.forEach((img, i) => img.classList.toggle('is-on', i === n % images.length));
-      current = n;
-      clearTimeout(timer);
-      timer = window.setTimeout(() => go((current + 1) % groups[0].length), dur);
-    };
+  function initHero() {
+    document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+      const dur = Number(hero.dataset.interval) || 6000;
+      const groups = ['.hero__tag', '.hero__tab'].map((selector) => [...hero.querySelectorAll(selector)]);
+      const images = [...hero.querySelectorAll<HTMLElement>('.hero__image')];
+      let current = 0;
 
-    groups[1].forEach((btn, i) => btn.addEventListener('click', () => go(i)));
+      const go = (n: number) => {
+        groups.forEach((group) =>
+          group.forEach((el, i) => {
+            el.classList.toggle('is-on', i === n);
+            el.classList.toggle('is-past', i < n);
+          })
+        );
+        images.forEach((img, i) => img.classList.toggle('is-on', i === n % images.length));
+        current = n;
+        const prevTimer = heroTimers.get(hero);
+        if (prevTimer) clearTimeout(prevTimer);
+        heroTimers.set(
+          hero,
+          window.setTimeout(() => go((current + 1) % groups[0].length), dur)
+        );
+      };
 
-    // The first tag/tab render with `is-on` already applied server-side, so the
-    // underline-fill transition has no "from" state to animate on load. Strip it,
-    // force a reflow, then re-apply via go(0) so the first fill animates too.
-    groups.forEach((group) => group.forEach((el) => el.classList.remove('is-on', 'is-past')));
-    void hero.offsetWidth;
-    go(0);
-  });
+      groups[1].forEach((btn, i) => btn.addEventListener('click', () => go(i)));
+
+      // The first tag/tab render with `is-on` already applied server-side, so the
+      // underline-fill transition has no "from" state to animate on load. Strip it,
+      // force a reflow, then re-apply via go(0) so the first fill animates too.
+      groups.forEach((group) => group.forEach((el) => el.classList.remove('is-on', 'is-past')));
+      void hero.offsetWidth;
+      go(0);
+    });
+  }
+
+  initHero();
+  document.addEventListener('astro:page-load', initHero);
 </script>
 
 <style>
