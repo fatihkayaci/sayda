@@ -5,6 +5,7 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
 
 interface Props {
   title: string;
@@ -26,8 +27,21 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
     <ClientRouter />
+    {
+      site.gaMeasurementId && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`} />
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.gaMeasurementId}');`}
+          />
+        </>
+      )
+    }
   </head>
   <body>
     <Header transition:persist />

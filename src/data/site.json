@@ -42,5 +42,7 @@
     "catalog": "/katalog.pdf",
     "certificate": "/sertifikalar/sertifika.pdf"
   },
-  "web3formsAccessKey": ""
+  "web3formsAccessKey": "",
+  "gaMeasurementId": "",
+  "gscVerification": ""
 }

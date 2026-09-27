@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+
+const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
+---
+
+<Layout
+  title="Çerez Politikası | Sayda İnşaat"
+  description="Sayda İnşaat internet sitesi çerez (cookie) politikası."
+>
+  <section class="privacy">
+    <div class="container">
+      <h1>Çerez Politikası</h1>
+      <p class="privacy__updated">Son güncelleme: {lastUpdated}</p>
+
+      <div class="privacy__body">
+        <p>
+          Bu Çerez Politikası, <strong>{site.legalName}</strong> ("Sayda İnşaat", "Şirket", "biz")
+          tarafından işletilen <a href={site.url}>{site.url}</a> internet sitesinde ("Site")
+          kullanılan çerezleri ve benzeri teknolojileri, bunların amaçlarını ve tercihlerinizi nasıl
+          yönetebileceğinizi açıklamak amacıyla hazırlanmıştır. Kişisel verilerinizin işlenmesine
+          ilişkin genel bilgi için <a href="/gizlilik-politikasi">Gizlilik Politikası</a>'nı ve{' '}
+          <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>'ni inceleyebilirsiniz.
+        </p>
+
+        <h2>1. Çerez Nedir?</h2>
+        <p>
+          Çerezler, ziyaret ettiğiniz internet siteleri tarafından tarayıcınız aracılığıyla
+          cihazınıza (bilgisayar, telefon, tablet) yerleştirilen küçük metin dosyalarıdır. Çerezler,
+          siteyi bir sonraki ziyaretinizde sizi tanımaya, tercihlerinizi hatırlamaya ve site
+          kullanımına ilişkin istatistiksel bilgi toplamaya yarar.
+        </p>
+
+        <h2>2. Kullandığımız Çerez Türleri</h2>
+        <ul class="privacy__list">
+          <li>
+            <strong>Zorunlu (teknik) çerezler:</strong> Site'nin temel işlevlerini (sayfalar arası
+            gezinme, form gönderimi gibi) yerine getirebilmesi için gereklidir. Bu çerezler
+            devre dışı bırakılamaz.
+          </li>
+          <li>
+            <strong>Analitik/performans çerezleri:</strong> Site trafiğini ve kullanıcı
+            davranışlarını anlamamıza yardımcı olur (örn. <strong>Google Analytics</strong>).
+            Bu çerezler kullanıldığında toplanan veriler istatistiksel amaçlarla kullanılır.
+          </li>
+          <li>
+            <strong>Reklam/pazarlama çerezleri:</strong> Reklamlarımızın performansını ölçmek ve
+            ilgi alanlarınıza uygun içerik/reklam sunmak amacıyla kullanılabilir (örn.{' '}
+            <strong>Google Ads</strong>, <strong>Meta Pixel</strong>).
+          </li>
+        </ul>
+        <p>
+          Bu araçlar aktif olarak kullanıldığında ilgili sağlayıcıların kendi gizlilik ve çerez
+          politikaları da geçerli olur.
+        </p>
+
+        <h2>3. Çerezleri Nasıl Yönetebilirsiniz?</h2>
+        <p>
+          Çoğu internet tarayıcısı çerezleri varsayılan olarak otomatik kabul edecek şekilde
+          ayarlanmıştır. Tarayıcı ayarlarınızdan çerezleri engelleyebilir, silebilir veya bir çerez
+          yerleştirilmeden önce uyarı almayı tercih edebilirsiniz. Tarayıcınızın yardım menüsünden
+          çerez ayarlarına nasıl erişebileceğinizi öğrenebilirsiniz. Zorunlu çerezleri devre dışı
+          bırakmanız halinde Site'nin bazı bölümleri düzgün çalışmayabilir.
+        </p>
+
+        <h2>4. Politikadaki Değişiklikler</h2>
+        <p>
+          Bu Çerez Politikası, yasal düzenlemelerdeki değişiklikler veya Site'deki güncellemeler
+          doğrultusunda zaman zaman revize edilebilir. Güncel sürüm her zaman bu sayfada yayınlanır.
+        </p>
+
+        <h2>5. İletişim</h2>
+        <p>
+          Bu politika ile ilgili sorularınız için bizimle{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a> veya {site.phone} üzerinden iletişime
+          geçebilirsiniz.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .privacy {
+    padding-block: var(--space-block-compact) var(--space-xxl);
+  }
+
+  .privacy .container {
+    max-width: 851px;
+  }
+
+  .privacy h1 {
+    font-size: calc(var(--fs-h1) * 1.12);
+  }
+
+  .privacy__updated {
+    margin-top: var(--space-xs);
+    color: var(--color-text-faint);
+    font-size: calc(var(--fs-small) * 1.12);
+  }
+
+  .privacy__body {
+    margin-top: var(--space-l);
+  }
+
+  .privacy__body h2 {
+    margin-top: var(--space-l);
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--color-navy);
+  }
+
+  .privacy__body p {
+    margin-top: var(--space-xs);
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .privacy__list {
+    margin-top: var(--space-xs);
+    padding-left: 22px;
+    display: grid;
+    gap: 7px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    list-style: disc;
+  }
+
+  .privacy__body a {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .privacy__body a:hover {
+    text-decoration: underline;
+  }
+</style>

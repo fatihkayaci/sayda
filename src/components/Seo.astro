@@ -13,7 +13,7 @@ interface Props {
 const { title, description, organizationSchema = false, ogImage, jsonLd = [] } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, site.url).toString();
-const ogImageUrl = ogImage ? new URL(ogImage, site.url).toString() : undefined;
+const ogImageUrl = new URL(ogImage ?? '/img/og-default.jpg', site.url).toString();
 
 const organizationLd = {
   '@context': 'https://schema.org',
@@ -48,12 +48,14 @@ const organizationLd = {
 <meta property="og:url" content={canonical} />
 <meta property="og:locale" content="tr_TR" />
 <meta property="og:site_name" content={site.name} />
-{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+<meta property="og:image" content={ogImageUrl} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-{ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+<meta name="twitter:image" content={ogImageUrl} />
+
+{site.gscVerification && <meta name="google-site-verification" content={site.gscVerification} />}
 
 {
   organizationSchema && (
