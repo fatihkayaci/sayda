@@ -1,8 +1,8 @@
 :root {
   /* Color */
-  --color-navy: #2f3091; /* brand primary */
-  --color-navy-dark: #262873; /* hover */
-  --color-navy-deep: #0d1533; /* footer background */
+  --color-navy: #202124; /* brand primary — near-black, matches sayda.com.tr's black/orange identity (not blue) */
+  --color-navy-dark: #17181b; /* hover */
+  --color-navy-deep: #0d0d0f; /* deepest surfaces: footer, header, hero */
   --color-text: #111318;
   --color-text-muted: #4a4c58;
   --color-text-faint: #8a8c98;
@@ -10,10 +10,9 @@
   --color-bg-light: #f4f5fa;
   --color-border: #e2e3ec;
   --color-on-dark: #ffffff;
-  --color-on-dark-muted: #b7b8d6;
+  --color-on-dark-muted: #a9aab0;
   --color-accent: #f2994a; /* brand orange accent — CTAs, active states, highlights (sayda.com.tr identity) */
   --color-accent-dark: #d97f2e;
-  --color-header-dark: #17181c; /* near-black header bg, matches sayda.com.tr's old navbar (not navy) */
 
   /* Typography */
   --font-body: 'Archivo', sans-serif;
