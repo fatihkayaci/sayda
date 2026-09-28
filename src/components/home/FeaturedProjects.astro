@@ -30,6 +30,7 @@ const projects = [...featured, ...rest].slice(0, 3);
                 </div>
               )}
               <span class={`prj__badge prj__badge--${project.status}`}>{statusLabel(project.status)}</span>
+              <span class="prj__cta">İncele <span>→</span></span>
             </div>
             <div class="prj__body">
               {project.employer && <div class="prj__loc">{project.employer} · {project.location}</div>}
@@ -164,6 +165,44 @@ const projects = [...featured, ...rest].slice(0, 3);
   .prj__badge--devam-eden {
     background: var(--color-navy);
     color: #fff;
+  }
+
+  .prj__cta {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 18px rgba(217, 127, 46, 0.4);
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .prj__cta span {
+    transition: transform 0.3s ease;
+  }
+
+  .prj__card:hover .prj__cta {
+    opacity: 1;
+    transform: translateY(0);
+    background: var(--color-accent-dark);
+  }
+
+  .prj__card:hover .prj__cta span {
+    transform: translateX(3px);
   }
 
   .prj__body {

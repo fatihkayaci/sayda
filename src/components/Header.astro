@@ -58,9 +58,12 @@ const isPathActive = (href?: string) => {
 
 <header class="header" transition:persist="sayda-header">
   <div class="header__inner">
-    <a href="/" class="header__logo">
-      <img src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
-    </a>
+    <div class="header__brand">
+      <span class="header__plate" aria-hidden="true"></span>
+      <a href="/" class="header__logo">
+        <img src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
+      </a>
+    </div>
 
     <nav class="header__nav" id="mainMenu">
       <ul>
@@ -159,7 +162,7 @@ const isPathActive = (href?: string) => {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #6d78f6 0%, #170aa0 45%, #4433d8 100%);
+    background: linear-gradient(90deg, var(--color-accent) 0%, #170aa0 45%, #4433d8 100%);
   }
 
   .header.is-scrolled {
@@ -180,7 +183,29 @@ const isPathActive = (href?: string) => {
   }
 
 
+  .header__brand {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  /* Diagonal light plate behind the logo — a modernized nod to the classic
+     light/dark split header from the previous site. */
+  .header__plate {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100vw;
+    right: -56px;
+    background: #fff;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 34px) 100%, 0 100%);
+    z-index: 0;
+  }
+
   .header__logo {
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
   }
@@ -189,7 +214,16 @@ const isPathActive = (href?: string) => {
     display: block;
     height: 46px;
     width: auto;
-    filter: brightness(0) invert(1);
+  }
+
+  @media (max-width: 1329px) {
+    .header__plate {
+      display: none;
+    }
+
+    .header__logo img {
+      filter: brightness(0) invert(1);
+    }
   }
 
   .header__nav > ul {
@@ -237,7 +271,7 @@ const isPathActive = (href?: string) => {
   }
 
   .header__nav-link.is-active {
-    color: #fff;
+    color: var(--color-accent);
   }
 
   .header__nav-link.is-active::after {
@@ -248,7 +282,7 @@ const isPathActive = (href?: string) => {
     bottom: -9px;
     height: 2px;
     border-radius: 1px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.25));
+    background: linear-gradient(90deg, var(--color-accent), rgba(242, 153, 74, 0.25));
   }
 
   .header__dropdown li a.is-active {
@@ -339,14 +373,14 @@ const isPathActive = (href?: string) => {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #6d6bf0, #5142e6);
+    background: linear-gradient(135deg, #f5aa5f, var(--color-accent-dark));
     color: #fff;
     padding: 12px 22px;
     border-radius: 10px;
     font-size: var(--fs-small);
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(81, 66, 230, 0.35);
+    box-shadow: 0 8px 20px rgba(217, 127, 46, 0.35);
     transition:
       background var(--transition),
       box-shadow var(--transition),
@@ -354,8 +388,8 @@ const isPathActive = (href?: string) => {
   }
 
   .header__cta:hover {
-    background: linear-gradient(135deg, #7a78f5, #5c4eef);
-    box-shadow: 0 10px 24px rgba(81, 66, 230, 0.45);
+    background: linear-gradient(135deg, #f7b877, #e08832);
+    box-shadow: 0 10px 24px rgba(217, 127, 46, 0.45);
     transform: translateY(-1px);
   }
 
@@ -493,7 +527,7 @@ const isPathActive = (href?: string) => {
       justify-content: center;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #6d6bf0, #5142e6);
+      background: linear-gradient(135deg, #f5aa5f, var(--color-accent-dark));
       color: #fff;
       padding: 12px 24px;
       border-radius: 10px;
@@ -502,7 +536,7 @@ const isPathActive = (href?: string) => {
     }
 
     .header__nav-cta-link:hover {
-      background: linear-gradient(135deg, #7a78f5, #5c4eef);
+      background: linear-gradient(135deg, #f7b877, #e08832);
       color: #fff;
     }
   }
