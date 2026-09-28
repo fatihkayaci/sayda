@@ -1,7 +1,13 @@
 ---
+import Icon from '../Icon.astro';
 import site from '../../data/site.json';
 
-const tags = ['Güvenilir Takvim, Adil Fiyat', 'Profesyonel Çözümler', 'Yüksek Kalitede Uygulamalar', 'Kentsel Dönüşüm Çözümleri'];
+const slides = [
+  'Güvenilir Takvim, Adil Fiyat',
+  'Profesyonel Çözümler',
+  'Yüksek Kalitede Uygulamalar',
+  'Kentsel Dönüşüm Çözümleri',
+];
 const interval = 6;
 ---
 
@@ -19,19 +25,22 @@ const interval = 6;
   </div>
   <div class="hero__shade"></div>
 
+  <button type="button" class="hero__arrow hero__arrow--prev" aria-label="Önceki">
+    <Icon name="arrowLeft" size={22} />
+  </button>
+  <button type="button" class="hero__arrow hero__arrow--next" aria-label="Sonraki">
+    <Icon name="arrow" size={22} />
+  </button>
+
   <div class="container hero__content">
     <div class="hero__eyebrow"><span></span>{site.foundedYear}'dan bu yana · İstanbul</div>
-    <h1 class="hero__title"><span>Sayda</span><span class="hero__title-light">İnşaat</span></h1>
-    <div class="hero__tags" aria-live="polite">
+    <h1 class="hero__title" aria-live="polite">
       {
-        tags.map((tag, i) => (
-          <div class:list={['hero__tag', { 'is-on': i === 0 }]}>
-            <i></i>
-            <span>{tag}</span>
-          </div>
+        slides.map((slide, i) => (
+          <span class:list={['hero__title-line', { 'is-on': i === 0 }]}>{slide}</span>
         ))
       }
-    </div>
+    </h1>
     <p class="hero__lead">
       {site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve anahtar teslim
       müteahhitlik hizmeti veriyoruz.
@@ -40,16 +49,17 @@ const interval = 6;
       <a href="/projeler" class="btn btn--primary">Projelerimiz <span>→</span></a>
       <a href="/iletisim#quote-form" class="btn btn--outline">Teklif Alın</a>
     </div>
-  </div>
 
-  <div class="hero__tabs">
-    <div class="container hero__tabs-grid">
+    <div class="hero__dots" role="tablist" aria-label="Slaytlar">
       {
-        tags.map((tag, i) => (
-          <button type="button" class:list={['hero__tab', { 'is-on': i === 0 }]} data-i={i}>
-            <b></b>
-            <small>0{i + 1}</small>
-            <span>{tag}</span>
+        slides.map((slide, i) => (
+          <button
+            type="button"
+            class:list={['hero__dot', { 'is-on': i === 0 }]}
+            data-i={i}
+            aria-label={slide}
+          >
+            <b />
           </button>
         ))
       }
@@ -63,33 +73,42 @@ const interval = 6;
   function initHero() {
     document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
       const dur = Number(hero.dataset.interval) || 6000;
-      const groups = ['.hero__tag', '.hero__tab'].map((selector) => [...hero.querySelectorAll(selector)]);
+      const lines = [...hero.querySelectorAll<HTMLElement>('.hero__title-line')];
+      const dots = [...hero.querySelectorAll<HTMLElement>('.hero__dot')];
       const images = [...hero.querySelectorAll<HTMLElement>('.hero__image')];
+      const count = lines.length;
       let current = 0;
 
-      const go = (n: number) => {
-        groups.forEach((group) =>
-          group.forEach((el, i) => {
-            el.classList.toggle('is-on', i === n);
-            el.classList.toggle('is-past', i < n);
-          })
-        );
+      const render = (n: number) => {
+        lines.forEach((el, i) => {
+          el.classList.toggle('is-on', i === n);
+          el.classList.toggle('is-past', i < n);
+        });
+        dots.forEach((el, i) => el.classList.toggle('is-on', i === n));
         images.forEach((img, i) => img.classList.toggle('is-on', i === n % images.length));
         current = n;
+      };
+
+      const go = (n: number, restart = true) => {
+        render(((n % count) + count) % count);
+        if (!restart) return;
         const prevTimer = heroTimers.get(hero);
         if (prevTimer) clearTimeout(prevTimer);
         heroTimers.set(
           hero,
-          window.setTimeout(() => go((current + 1) % groups[0].length), dur)
+          window.setTimeout(() => go(current + 1), dur)
         );
       };
 
-      groups[1].forEach((btn, i) => btn.addEventListener('click', () => go(i)));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+      hero.querySelector('.hero__arrow--prev')?.addEventListener('click', () => go(current - 1));
+      hero.querySelector('.hero__arrow--next')?.addEventListener('click', () => go(current + 1));
 
-      // The first tag/tab render with `is-on` already applied server-side, so the
-      // underline-fill transition has no "from" state to animate on load. Strip it,
-      // force a reflow, then re-apply via go(0) so the first fill animates too.
-      groups.forEach((group) => group.forEach((el) => el.classList.remove('is-on', 'is-past')));
+      // The first line/dot render with `is-on` already applied server-side, so the
+      // transition has no "from" state to animate on load. Strip it, force a
+      // reflow, then re-apply via go(0) so the first fill animates too.
+      lines.forEach((el) => el.classList.remove('is-on', 'is-past'));
+      dots.forEach((el) => el.classList.remove('is-on'));
       void hero.offsetWidth;
       go(0);
     });
@@ -103,8 +122,8 @@ const interval = 6;
   .hero {
     position: relative;
     height: calc(100vh - var(--header-h));
-    min-height: 660px;
-    max-height: 920px;
+    min-height: 600px;
+    max-height: 820px;
     overflow: hidden;
     background: var(--color-navy-deep);
     color: #fff;
@@ -138,17 +157,66 @@ const interval = 6;
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(25, 27, 74, 0.82) 0%, rgba(25, 27, 74, 0.45) 48%, rgba(25, 27, 74, 0.1) 100%),
-      linear-gradient(0deg, rgba(25, 27, 74, 0.7) 0%, rgba(25, 27, 74, 0) 45%);
+      linear-gradient(90deg, rgba(13, 21, 51, 0.86) 0%, rgba(13, 21, 51, 0.5) 52%, rgba(13, 21, 51, 0.2) 100%),
+      linear-gradient(0deg, rgba(13, 21, 51, 0.55) 0%, rgba(13, 21, 51, 0) 40%);
+  }
+
+  .hero__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(13, 21, 51, 0.35);
+    color: #fff;
+    transform: translateY(-50%);
+    transition:
+      background var(--transition),
+      border-color var(--transition);
+  }
+
+  .hero__arrow:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .hero__arrow--prev {
+    left: var(--edge-mobile);
+  }
+
+  .hero__arrow--next {
+    right: var(--edge-mobile);
+  }
+
+  @media (min-width: 640px) {
+    .hero__arrow--prev {
+      left: var(--edge);
+    }
+
+    .hero__arrow--next {
+      right: var(--edge);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero__arrow {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .hero__content {
     position: relative;
     height: 100%;
-    padding-bottom: 150px;
+    padding-bottom: 90px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .hero__eyebrow {
@@ -166,76 +234,44 @@ const interval = 6;
   .hero__eyebrow span {
     width: 36px;
     height: 2px;
-    background: var(--color-on-dark-muted);
+    background: var(--color-accent);
   }
 
   .hero__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-stretch: 125%;
-    letter-spacing: -0.01em;
-    font-weight: 800;
-    font-size: clamp(56px, 8.6vw, 140px);
-    line-height: 0.92;
-    text-transform: uppercase;
-  }
-
-  .hero__title span {
-    display: block;
-  }
-
-  .hero__title-light {
-    font-weight: 300;
-    color: var(--color-on-dark-muted);
-  }
-
-  .hero__tags {
     display: grid;
-    margin-top: 30px;
+    margin: 0;
+    max-width: 900px;
     overflow: hidden;
   }
 
-  .hero__tag {
+  .hero__title-line {
     grid-area: 1 / 1;
-    display: flex;
-    align-items: center;
-    gap: 16px;
     min-width: 0;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(32px, 5.6vw, 68px);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    text-wrap: balance;
     opacity: 0;
     transform: translateY(24px);
     transition:
       opacity 0.7s ease,
       transform 0.7s ease;
-    white-space: nowrap;
   }
 
-  .hero__tag.is-past {
+  .hero__title-line.is-past {
     transform: translateY(-24px);
   }
 
-  .hero__tag.is-on {
+  .hero__title-line.is-on {
     opacity: 1;
     transform: none;
   }
 
-  .hero__tag i {
-    width: 12px;
-    height: 12px;
-    background: var(--color-on-dark-muted);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
-
-  .hero__tag span {
-    font-size: clamp(22px, 2.4vw, 34px);
-    font-weight: 600;
-    font-stretch: 112%;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
   .hero__lead {
-    margin: 18px 0 0;
+    margin: 22px 0 0;
     max-width: 560px;
     font-size: 18px;
     line-height: 1.6;
@@ -266,12 +302,12 @@ const interval = 6;
   }
 
   .btn--primary {
-    background: var(--color-navy);
+    background: var(--color-accent);
     color: #fff;
   }
 
   .btn--primary:hover {
-    background: var(--color-navy-dark);
+    background: var(--color-accent-dark);
   }
 
   .btn--outline {
@@ -284,102 +320,47 @@ const interval = 6;
     background: rgba(255, 255, 255, 0.1);
   }
 
-  .hero__tabs {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .hero__tabs-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .hero__tab {
-    position: relative;
-    background: none;
-    border: 0;
-    cursor: pointer;
-    text-align: left;
-    padding: 24px 20px 28px 0;
-    color: rgba(255, 255, 255, 0.55);
-    font-family: inherit;
+  .hero__dots {
     display: flex;
-    gap: 14px;
-    align-items: baseline;
-    transition: color 0.4s;
+    align-items: center;
+    gap: 10px;
+    margin-top: 48px;
   }
 
-  .hero__tab::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 20px;
-    top: -1px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.15);
+  .hero__dot {
+    position: relative;
+    width: 34px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.28);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
   }
 
-  .hero__tab b {
+  .hero__dot b {
     position: absolute;
-    left: 0;
-    top: -1px;
-    height: 2px;
+    inset: 0;
     width: 0;
-    max-width: calc(100% - 20px);
     background: var(--color-accent);
   }
 
-  .hero__tab.is-on {
-    color: #fff;
-  }
-
-  .hero__tab.is-on b {
+  .hero__dot.is-on b {
     width: 100%;
     transition: width var(--dur) linear;
   }
 
-  .hero__tab small {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-  }
-
-  .hero__tab span {
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  @media (max-width: 900px) {
-    .hero__tab span {
-      display: none;
-    }
-
-    .hero__content {
-      padding-bottom: 110px;
-    }
-  }
-
   @media (max-width: 760px) {
     .hero {
-      min-height: 600px;
+      min-height: 560px;
     }
 
     .hero__lead {
       font-size: 16px;
     }
 
-    .hero__tag {
-      align-items: flex-start;
-    }
-
-    .hero__tag span {
-      white-space: normal;
-      line-height: 1.25;
+    .hero__content {
+      padding-bottom: 60px;
     }
   }
 

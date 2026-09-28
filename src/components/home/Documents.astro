@@ -1,23 +1,34 @@
 ---
+import Icon from '../Icon.astro';
 import site from '../../data/site.json';
+import haberler from '../../data/haberler.json';
 
-const cards = [
+const latestNews = [...haberler]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 2);
+
+const dateFormatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'numeric', year: 'numeric' });
+
+const docCards = [
   {
+    icon: 'shield',
     title: 'Sertifikalarımız',
     description: 'ISO 9001, ISO 14001, ISO 10002 kalite belgelerimizi inceleyin.',
-    cta: 'İNCELE →',
+    cta: 'İncele',
     href: '/belgeler',
   },
   {
+    icon: 'document',
     title: 'Tanıtım Kataloğu',
     description: 'Tüm proje ve hizmetlerimizi içeren detaylı PDF katalog.',
-    cta: 'PDF İNDİR ↓',
+    cta: 'PDF İndir',
     href: site.documents.catalog,
   },
   {
+    icon: 'check',
     title: 'İş Bitirme Belgeleri',
     description: `${site.completionCertificatesCount} adet iş bitirme belgemize ait bilgiler ve belgeler.`,
-    cta: 'GÖRÜNTÜLE →',
+    cta: 'Görüntüle',
     href: '/belgeler',
   },
 ];
@@ -25,21 +36,42 @@ const cards = [
 
 <section class="doc" id="belgeler">
   <div class="container doc__wrap reveal">
-    <div class="eyebrow eyebrow--light">Hızlı Erişim</div>
-    <h2 class="h2 doc__title">Belge &amp; dokümanlar</h2>
+    <div class="eyebrow">Hızlı Erişim</div>
+    <h2 class="h2 doc__title">Haberler &amp; belgeler</h2>
 
     <div class="doc__grid">
+      <div class="doc__card doc__card--news">
+        <h3>Bizden Haberler</h3>
+        <ul class="doc__news-list">
+          {
+            latestNews.map((item) => (
+              <li>
+                <a href={`/haberler/${item.slug}`} class="doc__news-item">
+                  <img src={item.image} alt="" loading="lazy" />
+                  <span>
+                    <b>{item.title}</b>
+                    <time datetime={item.date}>{dateFormatter.format(new Date(item.date))}</time>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="doc__news-all" href="/haberler">Tüm Haberler <span>→</span></a>
+      </div>
+
       {
-        cards.map((card) => (
+        docCards.map((card) => (
           <a
             class="doc__card"
             href={card.href}
             target={card.href.endsWith('.pdf') ? '_blank' : undefined}
             rel={card.href.endsWith('.pdf') ? 'noopener noreferrer' : undefined}
           >
+            <Icon name={card.icon} size={30} class="doc__card-icon" />
             <h3>{card.title}</h3>
             <p>{card.description}</p>
-            <span>{card.cta}</span>
+            <span class="doc__card-cta">{card.cta} →</span>
           </a>
         ))
       }
@@ -49,8 +81,7 @@ const cards = [
 
 <style>
   .doc {
-    background: var(--color-navy);
-    color: #fff;
+    background: var(--color-bg-light);
   }
 
   .eyebrow {
@@ -58,11 +89,8 @@ const cards = [
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
+    color: var(--color-accent-dark);
     margin-bottom: 16px;
-  }
-
-  .eyebrow--light {
-    color: var(--color-on-dark-muted);
   }
 
   .h2 {
@@ -74,11 +102,12 @@ const cards = [
     font-stretch: 112%;
     letter-spacing: -0.015em;
     text-wrap: balance;
+    color: var(--color-navy);
   }
 
   .doc__wrap {
-    padding-top: 130px;
-    padding-bottom: 110px;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 
   .doc__title {
@@ -88,55 +117,123 @@ const cards = [
 
   .doc__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: 20px;
+    align-items: start;
   }
 
   .doc__card {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 36px;
-    background: var(--color-navy-dark);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: #fff;
+    padding: 32px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text);
     transition:
       border-color 0.3s,
-      background 0.3s;
+      box-shadow 0.3s,
+      transform 0.3s;
   }
 
-  .doc__card:hover {
+  a.doc__card:hover {
     border-color: var(--color-accent);
-    background: var(--color-navy-deep);
-    color: #fff;
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    color: var(--color-text);
+  }
+
+  .doc__card-icon {
+    color: var(--color-accent);
   }
 
   .doc__card h3 {
     margin: 0;
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     font-stretch: 108%;
+    color: var(--color-navy);
   }
 
   .doc__card p {
     margin: 0;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-text-muted);
   }
 
-  .doc__card span {
-    margin-top: 12px;
+  .doc__card-cta {
+    margin-top: auto;
+    padding-top: 8px;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--color-accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-dark);
+  }
+
+  .doc__card--news {
+    grid-row: span 1;
+  }
+
+  .doc__news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .doc__news-item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    color: var(--color-text);
+  }
+
+  .doc__news-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .doc__news-item span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .doc__news-item b {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .doc__news-item time {
+    font-size: 12px;
+    color: var(--color-text-faint);
+  }
+
+  .doc__news-all {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-dark);
   }
 
   @media (max-width: 760px) {
     .doc__wrap {
-      padding-top: 80px;
+      padding-top: 72px;
       padding-bottom: 72px;
     }
 
