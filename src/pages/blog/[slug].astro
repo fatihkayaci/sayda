@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import NewsletterBand from '../../components/NewsletterBand.astro';
-import rehberData from '../../data/rehber.json';
+import blogData from '../../data/blog.json';
 import site from '../../data/site.json';
 
 const categories: { key: string; label: string }[] = [
@@ -12,7 +12,7 @@ const categories: { key: string; label: string }[] = [
 const categoryLabels: Record<string, string> = Object.fromEntries(categories.map((c) => [c.key, c.label]));
 
 export function getStaticPaths() {
-  return rehberData.map((post) => ({
+  return blogData.map((post) => ({
     params: { slug: post.slug },
     props: { post },
   }));
@@ -21,10 +21,10 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
 
-const sorted = [...rehberData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const sorted = [...blogData].sort((a, b) => (a.date < b.date ? 1 : -1));
 const others = sorted.filter((item) => item.slug !== post.slug);
 
-// İçerik `rehber.json` içinde bloklar halinde tutulur; okuma süresi `readMinutes` ile elle verilebilir.
+// İçerik `blog.json` içinde bloklar halinde tutulur; okuma süresi `readMinutes` ile elle verilebilir.
 type Block =
   | { type: 'lead' | 'p' | 'heading' | 'note'; text: string }
   | { type: 'quote'; text: string; author?: string }
@@ -35,7 +35,7 @@ const blockText = (block: Block) => (block.type === 'steps' ? block.items.map((i
 const words = blocks.map(blockText).join(' ').split(/\s+/).filter(Boolean).length;
 const readMinutes = (post as { readMinutes?: number }).readMinutes ?? Math.max(1, Math.round(words / 200));
 
-const url = new URL(`/rehber/${post.slug}`, site.url).toString();
+const url = new URL(`/blog/${post.slug}`, site.url).toString();
 const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(post.title);
 const shares = [
@@ -63,14 +63,14 @@ const related = others.slice(0, 3);
         <nav class="rehber-hero__breadcrumb" aria-label="Konum">
           <a href="/">Anasayfa</a>
           <span>/</span>
-          <a href="/rehber">Rehber</a>
+          <a href="/blog">Blog</a>
           <span>/</span>
           <span aria-current="page">{post.title}</span>
         </nav>
 
         <div class="rehber-hero__eyebrow">
           <span></span>
-          REHBER İÇERİĞİ
+          BLOG İÇERİĞİ
         </div>
         <h1>{post.title}</h1>
         <p class="rehber-hero__lead">{post.excerpt}</p>
@@ -163,13 +163,13 @@ const related = others.slice(0, 3);
           </div>
 
           <div class="rehber-side__card">
-            <h2>Rehber Kategorileri</h2>
+            <h2>Blog Kategorileri</h2>
             <ul class="rehber-cats">
               {
                 categoryTabs.map((tab) => (
                   <li>
                     <a
-                      href={tab.key === 'all' ? '/rehber' : `/rehber?kategori=${tab.key}`}
+                      href={tab.key === 'all' ? '/blog' : `/blog?kategori=${tab.key}`}
                       class:list={{ 'is-active': tab.key === post.category }}
                     >
                       {tab.label}
@@ -184,11 +184,11 @@ const related = others.slice(0, 3);
           {
             related.length > 0 && (
               <div class="rehber-side__card rehber-related">
-                <h2>İlgili Rehberler</h2>
+                <h2>İlgili Yazılar</h2>
                 <ul>
                   {related.map((item) => (
                     <li>
-                      <a href={`/rehber/${item.slug}`}>
+                      <a href={`/blog/${item.slug}`}>
                         <img src={item.image} alt="" loading="lazy" />
                         <span>
                           <strong>{item.title}</strong>
@@ -223,15 +223,15 @@ const related = others.slice(0, 3);
           others.length > 0 && (
             <>
               <div class="rehber-more__head">
-                <h2>Diğer Rehberler</h2>
-                <a href="/rehber">
-                  Tüm Rehberleri Gör <Icon name="arrow" size={16} />
+                <h2>Diğer Yazılar</h2>
+                <a href="/blog">
+                  Tüm Yazıları Gör <Icon name="arrow" size={16} />
                 </a>
               </div>
 
               <div class="rehber-more__grid">
                 {others.slice(0, 3).map((item) => (
-                  <a class="rehber-more__card" href={`/rehber/${item.slug}`}>
+                  <a class="rehber-more__card" href={`/blog/${item.slug}`}>
                     <img src={item.image} alt="" loading="lazy" />
                     <span class="rehber-more__text">
                       <small>{formatter.format(new Date(item.date))}</small>
@@ -251,10 +251,10 @@ const related = others.slice(0, 3);
         }
 
         <NewsletterBand
-          eyebrow="Güncel rehberlerden haberdar olun"
+          eyebrow="Güncel blog yazılarından haberdar olun"
           title="E-posta bültenimize abone olun"
-          text="Yeni rehber içerikleri ve kentsel dönüşüm ile ilgili güncel gelişmeler doğrudan gelen kutunuza gelsin."
-          subject="Rehber bülteni aboneliği"
+          text="Yeni blog yazıları ve kentsel dönüşüm ile ilgili güncel gelişmeler doğrudan gelen kutunuza gelsin."
+          subject="Blog bülteni aboneliği"
           icon="mail"
           note="E-posta adresinizin güvenliği bizim için önemlidir."
         />

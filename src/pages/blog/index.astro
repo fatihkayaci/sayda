@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
-import rehberData from '../../data/rehber.json';
+import blogData from '../../data/blog.json';
 import site from '../../data/site.json';
 
 const categories: { key: string; label: string; icon: string }[] = [
@@ -10,7 +10,7 @@ const categories: { key: string; label: string; icon: string }[] = [
 ];
 const categoryLabels = Object.fromEntries(categories.map((c) => [c.key, c.label]));
 
-const sorted = [...rehberData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const sorted = [...blogData].sort((a, b) => (a.date < b.date ? 1 : -1));
 const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
 
 const tabs = [
@@ -22,8 +22,8 @@ const popular = sorted.slice(0, 5);
 ---
 
 <Layout
-  title="Rehber | Sayda İnşaat"
-  description="Kentsel dönüşüm ve inşaat süreçleri hakkında rehber içerikleri."
+  title="Blog | Sayda İnşaat"
+  description="Kentsel dönüşüm ve inşaat süreçleri hakkında blog içerikleri."
 >
   <section class="rehber-hero">
     <div class="rehber-hero__media" aria-hidden="true">
@@ -33,7 +33,7 @@ const popular = sorted.slice(0, 5);
       <nav class="rehber-hero__breadcrumb" aria-label="Konum">
         <a href="/">Anasayfa</a>
         <span>/</span>
-        <span aria-current="page">Rehber</span>
+        <span aria-current="page">Blog</span>
       </nav>
 
       <div class="rehber-hero__eyebrow">
@@ -41,9 +41,9 @@ const popular = sorted.slice(0, 5);
         <span>BİLGİ MERKEZİ</span>
       </div>
 
-      <h1>Rehber <span class="rehber-hero__count">{sorted.length}</span></h1>
+      <h1>Blog <span class="rehber-hero__count">{sorted.length}</span></h1>
       <p class="rehber-hero__lead">
-        Kentsel dönüşüm ve inşaat süreçleri hakkında uzman içerikleri, rehber niteliğindeki yazılarla keşfedin.
+        Kentsel dönüşüm ve inşaat süreçleri hakkında uzman içerikleri, blog yazılarıyla keşfedin.
       </p>
 
       <p class="rehber-hero__quote" aria-hidden="true">
@@ -57,7 +57,7 @@ const popular = sorted.slice(0, 5);
       <aside class="rehber-side">
         <div class="rehber-side__card">
           <h2>Kategoriler</h2>
-          <nav aria-label="Rehber kategorisi">
+          <nav aria-label="Blog kategorisi">
             {
               tabs.map((tab) => (
                 <button type="button" class="rehber-side__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'true' : undefined}>
@@ -75,7 +75,7 @@ const popular = sorted.slice(0, 5);
             {
               popular.map((post) => (
                 <li>
-                  <a href={`/rehber/${post.slug}`}>
+                  <a href={`/blog/${post.slug}`}>
                     <img src={post.image} alt="" loading="lazy" />
                     <span>{post.title}</span>
                   </a>
@@ -89,9 +89,9 @@ const popular = sorted.slice(0, 5);
       <div class="rehber-main">
         <div class="rehber-toolbar">
           <label class="rehber-toolbar__search">
-            <span class="sr-only">Rehber içeriklerinde ara</span>
+            <span class="sr-only">Blog içeriklerinde ara</span>
             <Icon name="search" size={21} />
-            <input type="search" placeholder="Rehber içeriklerinde ara..." data-guide-search autocomplete="off" />
+            <input type="search" placeholder="Blog içeriklerinde ara..." data-guide-search autocomplete="off" />
           </label>
           <label class="rehber-toolbar__sort">
             <span class="sr-only">Sırala</span>
@@ -107,7 +107,7 @@ const popular = sorted.slice(0, 5);
             sorted.map((post) => (
               <a
                 class="rehber-card"
-                href={`/rehber/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 data-category={post.category}
                 data-date={post.date}
                 data-search={`${post.title} ${post.excerpt}`}
@@ -138,7 +138,7 @@ const popular = sorted.slice(0, 5);
     <div class="container">
       <form class="rehber-news" id="rehberNewsForm">
         <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
-        <input type="hidden" name="subject" value="Rehber bülteni aboneliği" />
+        <input type="hidden" name="subject" value="Blog bülteni aboneliği" />
         <input type="checkbox" name="botcheck" class="rehber-news__honeypot" tabindex="-1" autocomplete="off" />
 
         <div class="rehber-news__intro">
@@ -146,9 +146,9 @@ const popular = sorted.slice(0, 5);
             <span></span>
             BİLGİDEN HABERDAR OLUN
           </div>
-          <h2>Yeni rehber içeriklerini kaçırmayın</h2>
+          <h2>Yeni blog yazılarını kaçırmayın</h2>
           <p>
-            Kentsel dönüşüm, inşaat süreçleri ve güncel düzenlemeler hakkında rehber içeriklerimizi e-posta
+            Kentsel dönüşüm, inşaat süreçleri ve güncel düzenlemeler hakkında blog yazılarımızı e-posta
             bültenimizle takip edin.
           </p>
         </div>
@@ -158,7 +158,7 @@ const popular = sorted.slice(0, 5);
             <Icon name="mail" size={27} />
           </span>
           <h3>E-posta bültenimize abone olun</h3>
-          <p>Yeni rehber içerikleri ve güncel bilgilendirmeler doğrudan gelen kutunuza gelsin.</p>
+          <p>Yeni blog yazıları ve güncel bilgilendirmeler doğrudan gelen kutunuza gelsin.</p>
           <div class="rehber-news__row">
             <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
             <button type="submit">
