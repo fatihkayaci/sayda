@@ -12,10 +12,12 @@ const projects = [...featured, ...rest].slice(0, 3);
   <div class="container prj__wrap">
     <div class="prj__head">
       <div class="reveal reveal-left">
-        <div class="eyebrow eyebrow--light">Öne Çıkan Projeler</div>
+        <div class="eyebrow">Öne Çıkan Projeler</div>
         <h2 class="h2">Gerçek projeler,<br />gerçek sonuçlar</h2>
       </div>
-      <a href="/projeler" class="prj__all reveal reveal-right">Tüm Projeler <span>→</span></a>
+      <div class="prj__nav reveal reveal-right">
+        <a href="/projeler" class="prj__all">Tüm Projeler <span>→</span></a>
+      </div>
     </div>
     <div class="prj__grid">
       {
@@ -51,8 +53,9 @@ const projects = [...featured, ...rest].slice(0, 3);
 
 <style>
   .prj {
-    background: var(--color-navy-dark);
-    color: #fff;
+    position: relative;
+    background: var(--color-bg-light);
+    overflow: hidden;
   }
 
   .eyebrow {
@@ -60,11 +63,8 @@ const projects = [...featured, ...rest].slice(0, 3);
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
+    color: var(--color-accent-dark);
     margin-bottom: 16px;
-  }
-
-  .eyebrow--light {
-    color: var(--color-on-dark-muted);
   }
 
   .h2 {
@@ -76,11 +76,14 @@ const projects = [...featured, ...rest].slice(0, 3);
     font-stretch: 112%;
     letter-spacing: -0.015em;
     text-wrap: balance;
+    color: var(--color-navy);
   }
 
   .prj__wrap {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    position: relative;
+    z-index: 1;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 
   .prj__head {
@@ -89,7 +92,13 @@ const projects = [...featured, ...rest].slice(0, 3);
     justify-content: space-between;
     align-items: flex-end;
     gap: 24px;
-    margin-bottom: 56px;
+    margin-bottom: 48px;
+  }
+
+  .prj__nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .prj__all {
@@ -97,16 +106,17 @@ const projects = [...featured, ...rest].slice(0, 3);
     align-items: center;
     gap: 10px;
     padding-bottom: 6px;
-    border-bottom: 2px solid var(--color-on-dark-muted);
+    border-bottom: 2px solid var(--color-navy);
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--color-navy);
   }
 
   .prj__all:hover {
-    color: var(--color-on-dark-muted);
+    color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
   }
 
   .prj__grid {
@@ -118,11 +128,14 @@ const projects = [...featured, ...rest].slice(0, 3);
   .prj__card {
     display: flex;
     flex-direction: column;
-    color: #fff;
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
   }
 
   .prj__card:hover {
-    color: var(--color-bg-light);
+    color: var(--color-text);
+    border-color: var(--color-accent);
   }
 
   .prj__img {
@@ -222,7 +235,7 @@ const projects = [...featured, ...rest].slice(0, 3);
   }
 
   .prj__body {
-    padding-top: 24px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -233,7 +246,7 @@ const projects = [...featured, ...rest].slice(0, 3);
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-text-faint);
   }
 
   .prj__meta {
@@ -241,13 +254,13 @@ const projects = [...featured, ...rest].slice(0, 3);
     gap: 20px;
     margin-top: 6px;
     padding-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid var(--color-border);
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-text-muted);
   }
 
   .prj__meta b {
-    color: #fff;
+    color: var(--color-navy);
   }
 
   @media (max-width: 760px) {
@@ -256,8 +269,8 @@ const projects = [...featured, ...rest].slice(0, 3);
     }
 
     .prj__wrap {
-      padding-top: 72px;
-      padding-bottom: 72px;
+      padding-top: 64px;
+      padding-bottom: 64px;
     }
   }
 </style>

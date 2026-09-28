@@ -1,6 +1,5 @@
 ---
 import Icon from '../Icon.astro';
-import site from '../../data/site.json';
 
 const slides = [
   'Güvenilir Takvim, Adil Fiyat',
@@ -33,7 +32,6 @@ const interval = 6;
   </button>
 
   <div class="container hero__content">
-    <div class="hero__eyebrow"><span></span>{site.foundedYear}'dan bu yana · İstanbul</div>
     <h1 class="hero__title" aria-live="polite">
       {
         slides.map((slide, i) => (
@@ -41,29 +39,6 @@ const interval = 6;
         ))
       }
     </h1>
-    <p class="hero__lead">
-      {site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve anahtar teslim
-      müteahhitlik hizmeti veriyoruz.
-    </p>
-    <div class="hero__ctas">
-      <a href="/projeler" class="btn btn--primary">Projelerimiz <span>→</span></a>
-      <a href="/iletisim#quote-form" class="btn btn--outline">Teklif Alın</a>
-    </div>
-
-    <div class="hero__dots" role="tablist" aria-label="Slaytlar">
-      {
-        slides.map((slide, i) => (
-          <button
-            type="button"
-            class:list={['hero__dot', { 'is-on': i === 0 }]}
-            data-i={i}
-            aria-label={slide}
-          >
-            <b />
-          </button>
-        ))
-      }
-    </div>
   </div>
 </section>
 
@@ -74,17 +49,12 @@ const interval = 6;
     document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
       const dur = Number(hero.dataset.interval) || 6000;
       const lines = [...hero.querySelectorAll<HTMLElement>('.hero__title-line')];
-      const dots = [...hero.querySelectorAll<HTMLElement>('.hero__dot')];
       const images = [...hero.querySelectorAll<HTMLElement>('.hero__image')];
       const count = lines.length;
       let current = 0;
 
       const render = (n: number) => {
-        lines.forEach((el, i) => {
-          el.classList.toggle('is-on', i === n);
-          el.classList.toggle('is-past', i < n);
-        });
-        dots.forEach((el, i) => el.classList.toggle('is-on', i === n));
+        lines.forEach((el, i) => el.classList.toggle('is-on', i === n));
         images.forEach((img, i) => img.classList.toggle('is-on', i === n % images.length));
         current = n;
       };
@@ -100,16 +70,9 @@ const interval = 6;
         );
       };
 
-      dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
       hero.querySelector('.hero__arrow--prev')?.addEventListener('click', () => go(current - 1));
       hero.querySelector('.hero__arrow--next')?.addEventListener('click', () => go(current + 1));
 
-      // The first line/dot render with `is-on` already applied server-side, so the
-      // transition has no "from" state to animate on load. Strip it, force a
-      // reflow, then re-apply via go(0) so the first fill animates too.
-      lines.forEach((el) => el.classList.remove('is-on', 'is-past'));
-      dots.forEach((el) => el.classList.remove('is-on'));
-      void hero.offsetWidth;
       go(0);
     });
   }
@@ -122,8 +85,8 @@ const interval = 6;
   .hero {
     position: relative;
     height: calc(100vh - var(--header-h));
-    min-height: 600px;
-    max-height: 820px;
+    min-height: 480px;
+    max-height: 760px;
     overflow: hidden;
     background: var(--color-navy-deep);
     color: #fff;
@@ -142,23 +105,17 @@ const interval = 6;
     object-fit: cover;
     object-position: center;
     opacity: 0;
-    transform: scale(1.08);
-    transition:
-      opacity 1.2s ease,
-      transform calc(var(--dur) + 1.5s) ease-out;
+    transition: opacity 1.2s ease;
   }
 
   .hero__image.is-on {
     opacity: 1;
-    transform: scale(1);
   }
 
   .hero__shade {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(90deg, rgba(13, 21, 51, 0.86) 0%, rgba(13, 21, 51, 0.5) 52%, rgba(13, 21, 51, 0.2) 100%),
-      linear-gradient(0deg, rgba(13, 21, 51, 0.55) 0%, rgba(13, 21, 51, 0) 40%);
+    background: linear-gradient(0deg, rgba(13, 21, 51, 0.55) 0%, rgba(13, 21, 51, 0.15) 55%, rgba(13, 21, 51, 0.35) 100%);
   }
 
   .hero__arrow {
@@ -171,8 +128,8 @@ const interval = 6;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    background: rgba(13, 21, 51, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(13, 21, 51, 0.3);
     color: #fff;
     transform: translateY(-50%);
     transition:
@@ -205,43 +162,24 @@ const interval = 6;
 
   @media (max-width: 640px) {
     .hero__arrow {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
     }
   }
 
   .hero__content {
     position: relative;
     height: 100%;
-    padding-bottom: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .hero__eyebrow {
     display: flex;
     align-items: center;
-    gap: 14px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-on-dark-muted);
-    margin-bottom: 22px;
-  }
-
-  .hero__eyebrow span {
-    width: 36px;
-    height: 2px;
-    background: var(--color-accent);
+    justify-content: center;
+    text-align: center;
   }
 
   .hero__title {
     display: grid;
     margin: 0;
-    max-width: 900px;
-    overflow: hidden;
+    max-width: 960px;
   }
 
   .hero__title-line {
@@ -249,125 +187,24 @@ const interval = 6;
     min-width: 0;
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: clamp(32px, 5.6vw, 68px);
-    line-height: 1.08;
-    letter-spacing: -0.005em;
+    font-size: clamp(28px, 5vw, 56px);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
     text-wrap: balance;
     opacity: 0;
-    transform: translateY(24px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s ease;
-  }
-
-  .hero__title-line.is-past {
-    transform: translateY(-24px);
+    visibility: hidden;
+    transition: opacity 0.8s ease;
   }
 
   .hero__title-line.is-on {
     opacity: 1;
-    transform: none;
-  }
-
-  .hero__lead {
-    margin: 22px 0 0;
-    max-width: 560px;
-    font-size: 18px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    text-wrap: pretty;
-  }
-
-  .hero__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 34px;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    height: 54px;
-    padding: 0 28px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition:
-      background 0.2s,
-      border-color 0.2s;
-  }
-
-  .btn--primary {
-    background: var(--color-accent);
-    color: #fff;
-  }
-
-  .btn--primary:hover {
-    background: var(--color-accent-dark);
-  }
-
-  .btn--outline {
-    border: 1.5px solid var(--color-on-dark-muted);
-    color: #fff;
-  }
-
-  .btn--outline:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .hero__dots {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 48px;
-  }
-
-  .hero__dot {
-    position: relative;
-    width: 34px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.28);
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    overflow: hidden;
-  }
-
-  .hero__dot b {
-    position: absolute;
-    inset: 0;
-    width: 0;
-    background: var(--color-accent);
-  }
-
-  .hero__dot.is-on b {
-    width: 100%;
-    transition: width var(--dur) linear;
-  }
-
-  @media (max-width: 760px) {
-    .hero {
-      min-height: 560px;
-    }
-
-    .hero__lead {
-      font-size: 16px;
-    }
-
-    .hero__content {
-      padding-bottom: 60px;
-    }
+    visibility: visible;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero__image {
       transition: opacity 1.2s ease;
-      transform: none;
     }
   }
 </style>
