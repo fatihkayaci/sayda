@@ -144,9 +144,8 @@ const isPathActive = (href?: string) => {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(13, 21, 51, 0.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: var(--color-charcoal);
+    overflow-x: clip;
     transition:
       background 300ms,
       box-shadow 300ms;
@@ -158,13 +157,14 @@ const isPathActive = (href?: string) => {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #6d78f6 0%, #170aa0 45%, #4433d8 100%);
+    height: 2px;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(90deg, #f7941d 0%, #e0820e 100%);
   }
 
   .header.is-scrolled {
-    background: rgba(13, 21, 51, 0.55);
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.25);
   }
 
   .header__inner {
@@ -180,16 +180,44 @@ const isPathActive = (href?: string) => {
   }
 
 
+  /* Açık gri logo paneli: viewport'un soluna kadar uzanır, sağ kenarı çapraz kesilir */
   .header__logo {
+    position: relative;
     display: flex;
     align-items: center;
+    align-self: stretch;
+    padding-right: 20px;
+    margin-right: 28px;
+    background: var(--color-panel);
+    z-index: 2;
+  }
+
+  .header__logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: 100vw;
+    background: var(--color-panel);
+  }
+
+  .header__logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    width: 44px;
+    background: var(--color-panel);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
   }
 
   .header__logo img {
+    position: relative;
     display: block;
     height: 46px;
     width: auto;
-    filter: brightness(0) invert(1);
   }
 
   .header__nav > ul {
@@ -222,7 +250,7 @@ const isPathActive = (href?: string) => {
     font-weight: 600;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(255, 255, 255, 0.92);
     transition: color var(--transition);
   }
 
@@ -232,23 +260,9 @@ const isPathActive = (href?: string) => {
     padding: 0;
   }
 
-  .header__nav-link:hover {
-    color: #fff;
-  }
-
+  .header__nav-link:hover,
   .header__nav-link.is-active {
-    color: #fff;
-  }
-
-  .header__nav-link.is-active::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -9px;
-    height: 2px;
-    border-radius: 1px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.25));
+    color: var(--color-orange);
   }
 
   .header__dropdown li a.is-active {
@@ -339,24 +353,18 @@ const isPathActive = (href?: string) => {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #6d6bf0, #5142e6);
-    color: #fff;
+    background: var(--color-orange);
+    color: #1a1a1a;
     padding: 12px 22px;
-    border-radius: 10px;
+    border-radius: var(--radius);
     font-size: var(--fs-small);
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(81, 66, 230, 0.35);
-    transition:
-      background var(--transition),
-      box-shadow var(--transition),
-      transform var(--transition);
+    transition: background var(--transition);
   }
 
   .header__cta:hover {
-    background: linear-gradient(135deg, #7a78f5, #5c4eef);
-    box-shadow: 0 10px 24px rgba(81, 66, 230, 0.45);
-    transform: translateY(-1px);
+    background: var(--color-orange-dark);
   }
 
   .header__hamburger {
@@ -372,7 +380,7 @@ const isPathActive = (href?: string) => {
       position: sticky;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
-      background: #0d1533;
+      background: var(--color-charcoal);
     }
 
     :global(body.menu-open) .header {
@@ -384,7 +392,7 @@ const isPathActive = (href?: string) => {
     }
 
     .header.is-scrolled {
-      background: #0d1533;
+      background: var(--color-charcoal);
     }
 
     .header__inner {
@@ -398,6 +406,14 @@ const isPathActive = (href?: string) => {
       z-index: 2;
     }
 
+    .header__logo {
+      margin-right: 0;
+    }
+
+    .header__logo::after {
+      width: 28px;
+    }
+
     .header__nav {
       position: fixed;
       inset: 0;
@@ -406,7 +422,7 @@ const isPathActive = (href?: string) => {
       z-index: 1;
       margin-left: 0;
       overflow-y: auto;
-      background: #0d1533;
+      background: var(--color-charcoal);
       padding: calc(var(--header-h-compact) + var(--space-l)) var(--edge-mobile) var(--space-l);
       transform: translateX(100%);
       visibility: hidden;
@@ -493,17 +509,17 @@ const isPathActive = (href?: string) => {
       justify-content: center;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #6d6bf0, #5142e6);
-      color: #fff;
+      background: var(--color-orange);
+      color: #1a1a1a;
       padding: 12px 24px;
-      border-radius: 10px;
+      border-radius: var(--radius);
       font-weight: 700;
       transition: background var(--transition);
     }
 
     .header__nav-cta-link:hover {
-      background: linear-gradient(135deg, #7a78f5, #5c4eef);
-      color: #fff;
+      background: var(--color-orange-dark);
+      color: #1a1a1a;
     }
   }
 

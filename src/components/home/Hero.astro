@@ -21,7 +21,7 @@ const interval = 6;
 
   <div class="container hero__content">
     <div class="hero__eyebrow"><span></span>{site.foundedYear}'dan bu yana · İstanbul</div>
-    <h1 class="hero__title"><span>Sayda</span><span class="hero__title-light">İnşaat</span></h1>
+    <h1 class="sr-only">Sayda İnşaat</h1>
     <div class="hero__tags" aria-live="polite">
       {
         tags.map((tag, i) => (
@@ -106,8 +106,17 @@ const interval = 6;
     min-height: 660px;
     max-height: 920px;
     overflow: hidden;
-    background: var(--color-navy-deep);
+    background: #1b1b1b;
     color: #fff;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
   .hero__media {
@@ -137,18 +146,21 @@ const interval = 6;
   .hero__shade {
     position: absolute;
     inset: 0;
+    /* Nötr, hafif gölge: fotoğrafın kendi renkleri (kulelerin turuncusu vb.) korunur */
     background:
-      linear-gradient(90deg, rgba(25, 27, 74, 0.82) 0%, rgba(25, 27, 74, 0.45) 48%, rgba(25, 27, 74, 0.1) 100%),
-      linear-gradient(0deg, rgba(25, 27, 74, 0.7) 0%, rgba(25, 27, 74, 0) 45%);
+      radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.12) 60%, rgba(0, 0, 0, 0) 100%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 40%);
   }
 
   .hero__content {
     position: relative;
     height: 100%;
-    padding-bottom: 150px;
+    padding-bottom: 110px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .hero__eyebrow {
@@ -159,39 +171,26 @@ const interval = 6;
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-on-dark-muted);
-    margin-bottom: 22px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 20px;
   }
 
   .hero__eyebrow span {
     width: 36px;
     height: 2px;
-    background: var(--color-on-dark-muted);
+    background: var(--color-orange);
   }
 
-  .hero__title {
-    margin: 0;
-    font-family: var(--font-display);
-    font-stretch: 125%;
-    letter-spacing: -0.01em;
-    font-weight: 800;
-    font-size: clamp(56px, 8.6vw, 140px);
-    line-height: 0.92;
-    text-transform: uppercase;
-  }
-
-  .hero__title span {
-    display: block;
-  }
-
-  .hero__title-light {
-    font-weight: 300;
-    color: var(--color-on-dark-muted);
+  .hero__eyebrow::after {
+    content: '';
+    width: 36px;
+    height: 2px;
+    background: var(--color-orange);
   }
 
   .hero__tags {
     display: grid;
-    margin-top: 30px;
+    justify-items: center;
     overflow: hidden;
   }
 
@@ -199,7 +198,7 @@ const interval = 6;
     grid-area: 1 / 1;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     min-width: 0;
     opacity: 0;
     transform: translateY(24px);
@@ -221,22 +220,23 @@ const interval = 6;
   .hero__tag i {
     width: 12px;
     height: 12px;
-    background: var(--color-on-dark-muted);
+    background: var(--color-orange);
     transform: rotate(45deg);
     flex-shrink: 0;
   }
 
   .hero__tag span {
-    font-size: clamp(22px, 2.4vw, 34px);
-    font-weight: 600;
-    font-stretch: 112%;
-    letter-spacing: 0.04em;
+    font-size: clamp(28px, 4.4vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
   }
 
   .hero__lead {
-    margin: 18px 0 0;
-    max-width: 560px;
+    margin: 22px auto 0;
+    max-width: 620px;
     font-size: 18px;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
@@ -246,6 +246,7 @@ const interval = 6;
   .hero__ctas {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     margin-top: 34px;
   }
@@ -266,16 +267,16 @@ const interval = 6;
   }
 
   .btn--primary {
-    background: var(--color-navy);
-    color: #fff;
+    background: var(--color-orange);
+    color: #1a1a1a;
   }
 
   .btn--primary:hover {
-    background: var(--color-navy-dark);
+    background: var(--color-orange-dark);
   }
 
   .btn--outline {
-    border: 1.5px solid var(--color-on-dark-muted);
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
     color: #fff;
   }
 
@@ -329,7 +330,7 @@ const interval = 6;
     height: 2px;
     width: 0;
     max-width: calc(100% - 20px);
-    background: var(--color-on-dark-muted);
+    background: var(--color-orange);
   }
 
   .hero__tab.is-on {
@@ -375,6 +376,7 @@ const interval = 6;
 
     .hero__tag {
       align-items: flex-start;
+      text-align: left;
     }
 
     .hero__tag span {

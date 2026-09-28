@@ -2,7 +2,7 @@
   /* Color */
   --color-navy: #2f3091; /* brand primary */
   --color-navy-dark: #262873; /* hover */
-  --color-navy-deep: #0d1533; /* footer background */
+  --color-navy-deep: #232323; /* koyu yüzeyler: footer, koyu bantlar (eski site antraziti) */
   --color-text: #111318;
   --color-text-muted: #4a4c58;
   --color-text-faint: #8a8c98;
@@ -10,8 +10,12 @@
   --color-bg-light: #f4f5fa;
   --color-border: #e2e3ec;
   --color-on-dark: #ffffff;
-  --color-on-dark-muted: #b7b8d6;
-  --color-accent: #6d78f6; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
+  --color-on-dark-muted: #cfcfcf;
+  --color-charcoal: #232323; /* header bar (eski site antraziti) */
+  --color-panel: #f1f1f1; /* header logo paneli */
+  --color-orange: #f7941d; /* aktif link, CTA, vurgu (eski site) */
+  --color-orange-dark: #e0820e;
+  --color-accent: #f7941d; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
 
   /* Typography */
   --font-body: 'Archivo', sans-serif;
