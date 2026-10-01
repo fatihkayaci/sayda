@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/home/Hero.astro';
-import TrustBlock from '../components/home/TrustBlock.astro';
-import Services from '../components/home/Services.astro';
+import Intro from '../components/home/Intro.astro';
 import FeaturedProjects from '../components/home/FeaturedProjects.astro';
-import About from '../components/home/About.astro';
+import Services from '../components/home/Services.astro';
 import Documents from '../components/home/Documents.astro';
+import News from '../components/home/News.astro';
+import Videos from '../components/home/Videos.astro';
 ---
 
 <Layout
@@ -15,10 +16,10 @@ import Documents from '../components/home/Documents.astro';
   hideCtaBanner
 >
   <Hero />
-  <TrustBlock />
-  <Services />
+  <Intro />
   <FeaturedProjects />
-  <About />
+  <Services />
   <Documents />
+  <News />
+  <Videos />
 </Layout>
-

@@ -1,24 +1,22 @@
 ---
+import Icon from '../Icon.astro';
 import services from '../../data/services.json';
+
+const items = services.slice(0, 4);
 ---
 
-<section class="svc" id="hizmetler">
-  <div class="container svc__wrap">
-    <div class="svc__head reveal reveal-left">
-      <div class="svc__head-l">
-        <div class="eyebrow">Hizmetlerimiz</div>
-        <h2 class="h2">Her aşamayı uzmanlıkla yönetiyoruz</h2>
-      </div>
-      <p>Planlamadan teslimata kadar tüm süreçlerde kalite, güvenlik ve sürdürülebilirliği ön planda tutuyoruz.</p>
+<section class="svc">
+  <div class="container">
+    <div class="svc__head">
+      <span class="svc__eyebrow">Hizmetlerimiz</span>
+      <h2>Her Aşamada Güçlü Çözümler</h2>
     </div>
     <div class="svc__grid">
       {
-        services.map((s, i) => (
-          <a href={s.href} class={`svc__card reveal reveal-d${(i % 4) + 1}`}>
-            <div class="svc__top">
-              <span>0{i + 1}</span>
-              <span>→</span>
-            </div>
+        items.map((s) => (
+          <a href={s.href} class="svc__card">
+            <i class="svc__arrow"><Icon name="arrow" size={13} /></i>
+            <Icon name={s.icon} size={44} class="svc__icon" />
             <h3>{s.title}</h3>
             <p>{s.description}</p>
           </a>
@@ -30,136 +28,102 @@ import services from '../../data/services.json';
 
 <style>
   .svc {
-    background: var(--color-bg-light);
-  }
-
-  .eyebrow {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-navy);
-    margin-bottom: 16px;
-  }
-
-  .h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: 48px;
-    line-height: 1.05;
-    font-weight: 700;
-    font-stretch: 112%;
-    letter-spacing: -0.015em;
-    text-wrap: balance;
-  }
-
-  .svc__wrap {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding-block: 44px 56px;
+    background: #fff;
   }
 
   .svc__head {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 32px;
-    margin-bottom: 56px;
+    margin-bottom: 22px;
   }
 
-  .svc__head-l {
-    max-width: 620px;
+  .svc__eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3a4a7a;
   }
 
-  .svc__head p {
-    margin: 0;
-    max-width: 420px;
-    font-size: 17px;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    text-wrap: pretty;
+  .svc__head h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    color: var(--color-navy);
   }
 
   .svc__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1px;
-    background: rgba(43, 46, 131, 0.12);
-    border: 1px solid rgba(43, 46, 131, 0.12);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 
   .svc__card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    min-height: 280px;
-    padding: 40px 36px;
-    background: var(--color-bg);
-    color: var(--color-text);
-    transition: background 0.3s;
+    gap: 6px;
+    padding: 22px 20px 24px;
+    background: #fff;
+    border: 1px solid #e6eaf2;
+    box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
   }
 
   .svc__card:hover {
-    background: var(--color-bg-light);
-    color: var(--color-text);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(20, 27, 46, 0.12);
   }
 
-  .svc__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .svc__card :global(.svc__icon) {
+    margin-bottom: 18px;
+    color: var(--color-navy);
+    stroke-width: 1.3;
+  }
+
+  .svc__arrow {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #c9d0e0;
+    border-radius: 50%;
     color: var(--color-navy);
   }
 
-  .svc__top span:first-child {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-  }
-
-  .svc__top span:last-child {
-    font-size: 20px;
-    transition: transform 0.3s;
-  }
-
-  .svc__card:hover .svc__top span:last-child {
-    transform: translateX(4px);
-  }
-
   .svc__card h3 {
-    margin: auto 0 0;
-    font-family: var(--font-display);
-    font-size: 24px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
     font-weight: 700;
-    font-stretch: 108%;
-    line-height: 1.15;
+    color: #141b2e;
   }
 
   .svc__card p {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 0.8rem;
+    line-height: 1.5;
     color: var(--color-text-muted);
-    text-wrap: pretty;
   }
 
-  @media (max-width: 760px) {
-    .h2 {
-      font-size: 34px;
+  @media (max-width: 1024px) {
+    .svc__grid {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
-    .svc__wrap {
-      padding-top: 72px;
-      padding-bottom: 72px;
+  @media (max-width: 600px) {
+    .svc__head h2 {
+      font-size: 1.4rem;
     }
 
     .svc__grid {
       grid-template-columns: 1fr;
-    }
-
-    .svc__card {
-      min-height: 0;
-      padding: 28px 24px;
     }
   }
 </style>

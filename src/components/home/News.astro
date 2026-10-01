@@ -1,0 +1,231 @@
+---
+import Icon from '../Icon.astro';
+import news from '../../data/haberler.json';
+
+const images = ['/img/home/gold-towers.webp', '/img/home/garden-day.webp', '/img/home/site-team.webp'];
+const [lead, ...others] = [...news]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 3)
+  .map((n, i) => ({ ...n, image: images[i] }));
+
+const fmt = (iso: string) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+  return `${d} ${months[m - 1]} ${y}`;
+};
+---
+
+<section class="news">
+  <div class="container">
+    <div class="news__head">
+      <div>
+        <span class="news__eyebrow">Bizden Haberler</span>
+        <h2>Güncel Gelişmeler</h2>
+      </div>
+      <a href="/haberler">Tüm Haberler <Icon name="arrow" size={14} /></a>
+    </div>
+    <div class="news__grid">
+      <a href={`/haberler/${lead.slug}`} class="news__lead">
+        <img src={lead.image} alt="" loading="lazy" />
+        <div>
+          <time><i></i>{fmt(lead.date)}</time>
+          <h3>{lead.title}</h3>
+          <p>{lead.excerpt}</p>
+          <span class="news__more">Devamını Oku <Icon name="arrow" size={13} /></span>
+        </div>
+      </a>
+      {
+        others.map((n) => (
+          <a href={`/haberler/${n.slug}`} class="news__card">
+            <img src={n.image} alt="" loading="lazy" />
+            <div>
+              <time><i></i>{fmt(n.date)}</time>
+              <h3>{n.title}</h3>
+              <p>{n.excerpt}</p>
+              <span class="news__more">Devamını Oku <Icon name="arrow" size={13} /></span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .news {
+    padding-block: 44px 56px;
+    background: #fff;
+  }
+
+  .news__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-s);
+    margin-bottom: 22px;
+  }
+
+  .news__eyebrow {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3a4a7a;
+  }
+
+  .news__head h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    color: var(--color-navy);
+  }
+
+  .news__head > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    white-space: nowrap;
+  }
+
+  .news__grid {
+    display: grid;
+    grid-template-columns: 2.1fr 1fr 1fr;
+    gap: 14px;
+  }
+
+  .news__lead,
+  .news__card {
+    display: flex;
+    background: #fff;
+    border: 1px solid #e6eaf2;
+    box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
+    overflow: hidden;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .news__lead:hover,
+  .news__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(20, 27, 46, 0.12);
+  }
+
+  .news__lead {
+    align-items: stretch;
+  }
+
+  .news__lead img {
+    width: 58%;
+    flex: none;
+    object-fit: cover;
+  }
+
+  .news__lead > div {
+    align-self: center;
+    padding: 20px;
+  }
+
+  .news__card {
+    flex-direction: column;
+  }
+
+  .news__card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .news__card > div {
+    padding: 14px 16px 18px;
+  }
+
+  .news time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.68rem;
+    color: var(--color-text-muted);
+  }
+
+  .news time i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e7a42c;
+  }
+
+  .news h3 {
+    margin-block: 8px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--color-navy);
+  }
+
+  .news__lead h3 {
+    font-size: 1.15rem;
+  }
+
+  .news p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .news__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1024px) {
+    .news__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .news__lead {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .news__head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .news__head h2 {
+      font-size: 1.4rem;
+    }
+
+    .news__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .news__lead {
+      flex-direction: column;
+    }
+
+    .news__lead img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

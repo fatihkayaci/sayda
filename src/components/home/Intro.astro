@@ -1,0 +1,96 @@
+---
+import Icon from '../Icon.astro';
+import site from '../../data/site.json';
+
+const years = new Date().getFullYear() - site.foundedYear;
+const area = `${Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')).toLocaleString('tr-TR')}+`;
+
+const stats = [
+  { icon: 'building', value: `${years}+`, label: 'Yıllık Tecrübe' },
+  { icon: 'check', value: '250+', label: 'Tamamlanan Proje' },
+  { icon: 'helmet', value: area, label: 'm² Uygulama Alanı' },
+];
+---
+
+<section class="intro">
+  <div class="container">
+    <div class="intro__stats">
+      {
+        stats.map((s) => (
+          <div class="intro__stat">
+            <Icon name={s.icon} size={38} />
+            <b>{s.value}</b>
+            <span>{s.label}</span>
+          </div>
+        ))
+      }
+      <div class="intro__stat">
+        <Icon name="pin" size={38} />
+        <small>Türkiye genelinde</small>
+        <b class="intro__stat-text">Birçok şehirde</b>
+        <span>devam eden projeler</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    background: #f3f6fb;
+    padding-block: 14px;
+  }
+
+  .intro__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .intro__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 12px;
+    text-align: center;
+    color: var(--color-navy);
+    text-transform: uppercase;
+  }
+
+  .intro__stat + .intro__stat {
+    border-left: 1px solid #d3d9e6;
+  }
+
+  .intro__stat :global(svg) {
+    margin-bottom: 4px;
+    stroke-width: 1.4;
+  }
+
+  .intro__stat b {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.9rem;
+    color: #141b2e;
+  }
+
+  .intro__stat .intro__stat-text {
+    color: var(--color-navy);
+    font-size: 1.5rem;
+  }
+
+  .intro__stat small,
+  .intro__stat span {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .intro__stats {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: var(--space-m);
+    }
+
+    .intro__stat:nth-child(odd) {
+      border-left: 0;
+    }
+  }
+</style>

@@ -1,7 +1,6 @@
 ---
 import Icon from './Icon.astro';
 import site from '../data/site.json';
-import services from '../data/services.json';
 
 const year = new Date().getFullYear();
 ---
@@ -10,8 +9,10 @@ const year = new Date().getFullYear();
   <div class="container footer__inner">
     <div class="footer__brand">
       <img class="footer__logo" src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
-      <p class="footer__label">İnşaat Taahhüt · Since {site.foundedYear}</p>
-      <p class="footer__tagline">{site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm ve müteahhitlik.</p>
+      <p class="footer__name">{site.legalName}</p>
+      <p class="footer__tagline">
+        {site.foundedYear} yılından bu yana, nitelikli yapılar, güvenilir çözümler ve sürdürülebilir projeler ile geleceği inşa ediyoruz.
+      </p>
       <div class="footer__social-list">
         {
           site.social.instagram && (
@@ -30,12 +31,15 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <nav class="footer__column" aria-label="Hizmetler">
-      <h2>Hizmetler</h2>
+    <nav class="footer__column" aria-label="Hızlı linkler">
+      <h2>Hızlı Linkler</h2>
       <ul>
-        {services.map((service) => (
-          <li><a href={service.href}>{service.title}</a></li>
-        ))}
+        <li><a href="/">Anasayfa</a></li>
+        <li><a href="/hakkimizda">Kurumsal</a></li>
+        <li><a href="/hizmetler">Hizmetler</a></li>
+        <li><a href="/projeler">Projeler</a></li>
+        <li><a href="/belgeler">E-Katalog</a></li>
+        <li><a href="/iletisim">İletişim</a></li>
       </ul>
     </nav>
 
@@ -44,12 +48,9 @@ const year = new Date().getFullYear();
       <ul>
         <li><a href="/hakkimizda">Hakkımızda</a></li>
         <li><a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a></li>
-        <li><a href="/projeler">Projeler</a></li>
-        <li><a href="/belgeler">Belge &amp; Dökümanlar</a></li>
-        <li><a href="/haberler">Haberler</a></li>
-        <li><a href="/rehber">Rehber</a></li>
-        <li><a href="/kariyer">Kariyer</a></li>
-        <li><a href="/iletisim">İletişim</a></li>
+        <li><a href="/belgeler">Belgelerimiz</a></li>
+        <li><a href="/kariyer">İnsan Kaynakları</a></li>
+        <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">Online Katalog</a></li>
       </ul>
     </nav>
 
@@ -83,20 +84,20 @@ const year = new Date().getFullYear();
 
 <style>
   .footer {
-    background: var(--color-navy-deep);
+    background: #0f1a36;
     color: var(--color-on-dark-muted);
-    padding-block: var(--space-xxl) var(--space-l);
+    padding-block: var(--space-xl) var(--space-l);
   }
 
   .footer__inner {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
     gap: var(--space-l);
   }
 
   .footer__logo {
     display: block;
-    height: 46px;
+    height: 56px;
     width: auto;
     filter: brightness(0) invert(1);
   }
@@ -110,8 +111,15 @@ const year = new Date().getFullYear();
     color: var(--color-accent);
   }
 
-  .footer__tagline {
+  .footer__name {
     margin-top: var(--space-s);
+    font-size: calc(var(--fs-small) * 1.05);
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .footer__tagline {
+    margin-top: var(--space-xs);
     max-width: 32ch;
     font-size: calc(var(--fs-small) * 1.12);
   }

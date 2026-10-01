@@ -1,60 +1,22 @@
 ---
-import site from '../../data/site.json';
-
-const tags = ['Güvenilir Takvim, Adil Fiyat', 'Profesyonel Çözümler', 'Yüksek Kalitede Uygulamalar', 'Kentsel Dönüşüm Çözümleri'];
-const interval = 6;
+const slides = [
+  { image: '/img/sayda-insaat-hero01.webp', title: 'Yüksek Kalitede Uygulamalar' },
+  { image: '/img/sayda-insaat-hero02.webp', title: 'Profesyonel Çözümler' },
+  { image: '/img/sayda-insaat-hero03.webp', title: 'Güvenilir Takvim, Adil Fiyat' },
+  { image: '/img/sayda-insaat-hero04.webp', title: 'Kentsel Dönüşüm Çözümleri' },
+];
 ---
 
-<section class="hero" data-interval={interval * 1000} style={`--dur:${interval}s`}>
-  <div class="hero__media">
-    <img
-      class="hero__image is-on"
-      src="/img/sayda-insaat-hero01.webp"
-      alt="Sayda İnşaat şantiye görünümü"
-      fetchpriority="high"
-    />
-    <img class="hero__image" src="/img/sayda-insaat-hero02.webp" alt="" />
-    <img class="hero__image" src="/img/sayda-insaat-hero03.webp" alt="" />
-    <img class="hero__image" src="/img/sayda-insaat-hero04.webp" alt="" />
-  </div>
+<section class="hero" data-interval="6000">
+  {
+    slides.map((slide, i) => (
+      <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
+        <img src={slide.image} alt="" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
+        {i === 0 ? <h1 class="hero__title">{slide.title}</h1> : <p class="hero__title">{slide.title}</p>}
+      </div>
+    ))
+  }
   <div class="hero__shade"></div>
-
-  <div class="container hero__content">
-    <div class="hero__eyebrow"><span></span>{site.foundedYear}'dan bu yana · İstanbul</div>
-    <h1 class="hero__title"><span>Sayda</span><span class="hero__title-light">İnşaat</span></h1>
-    <div class="hero__tags" aria-live="polite">
-      {
-        tags.map((tag, i) => (
-          <div class:list={['hero__tag', { 'is-on': i === 0 }]}>
-            <i></i>
-            <span>{tag}</span>
-          </div>
-        ))
-      }
-    </div>
-    <p class="hero__lead">
-      {site.foundedYear}'dan bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve anahtar teslim
-      müteahhitlik hizmeti veriyoruz.
-    </p>
-    <div class="hero__ctas">
-      <a href="/projeler" class="btn btn--primary">Projelerimiz <span>→</span></a>
-      <a href="/iletisim#quote-form" class="btn btn--outline">Teklif Alın</a>
-    </div>
-  </div>
-
-  <div class="hero__tabs">
-    <div class="container hero__tabs-grid">
-      {
-        tags.map((tag, i) => (
-          <button type="button" class:list={['hero__tab', { 'is-on': i === 0 }]} data-i={i}>
-            <b></b>
-            <small>0{i + 1}</small>
-            <span>{tag}</span>
-          </button>
-        ))
-      }
-    </div>
-  </div>
 </section>
 
 <script>
@@ -62,36 +24,19 @@ const interval = 6;
 
   function initHero() {
     document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+      const slides = [...hero.querySelectorAll('.hero__slide')];
       const dur = Number(hero.dataset.interval) || 6000;
-      const groups = ['.hero__tag', '.hero__tab'].map((selector) => [...hero.querySelectorAll(selector)]);
-      const images = [...hero.querySelectorAll<HTMLElement>('.hero__image')];
       let current = 0;
-
-      const go = (n: number) => {
-        groups.forEach((group) =>
-          group.forEach((el, i) => {
-            el.classList.toggle('is-on', i === n);
-            el.classList.toggle('is-past', i < n);
-          })
-        );
-        images.forEach((img, i) => img.classList.toggle('is-on', i === n % images.length));
-        current = n;
-        const prevTimer = heroTimers.get(hero);
-        if (prevTimer) clearTimeout(prevTimer);
-        heroTimers.set(
-          hero,
-          window.setTimeout(() => go((current + 1) % groups[0].length), dur)
-        );
-      };
-
-      groups[1].forEach((btn, i) => btn.addEventListener('click', () => go(i)));
-
-      // The first tag/tab render with `is-on` already applied server-side, so the
-      // underline-fill transition has no "from" state to animate on load. Strip it,
-      // force a reflow, then re-apply via go(0) so the first fill animates too.
-      groups.forEach((group) => group.forEach((el) => el.classList.remove('is-on', 'is-past')));
-      void hero.offsetWidth;
-      go(0);
+      const prev = heroTimers.get(hero);
+      if (prev) clearInterval(prev);
+      heroTimers.set(
+        hero,
+        window.setInterval(() => {
+          slides[current].classList.remove('is-on');
+          current = (current + 1) % slides.length;
+          slides[current].classList.add('is-on');
+        }, dur)
+      );
     });
   }
 
@@ -103,290 +48,60 @@ const interval = 6;
   .hero {
     position: relative;
     height: calc(100vh - var(--header-h));
-    min-height: 660px;
-    max-height: 920px;
+    height: calc(100svh - var(--header-h));
+    min-height: 480px;
     overflow: hidden;
-    background: var(--color-navy-deep);
+    background: #1b2130;
     color: #fff;
   }
 
-  .hero__media {
+  .hero__slide {
     position: absolute;
     inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
   }
 
-  .hero__image {
-    position: absolute;
-    inset: 0;
+  .hero__slide.is-on {
+    opacity: 1;
+  }
+
+  .hero__slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0;
-    transform: scale(1.08);
-    transition:
-      opacity 1.2s ease,
-      transform calc(var(--dur) + 1.5s) ease-out;
-  }
-
-  .hero__image.is-on {
-    opacity: 1;
-    transform: scale(1);
   }
 
   .hero__shade {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(90deg, rgba(25, 27, 74, 0.82) 0%, rgba(25, 27, 74, 0.45) 48%, rgba(25, 27, 74, 0.1) 100%),
-      linear-gradient(0deg, rgba(25, 27, 74, 0.7) 0%, rgba(25, 27, 74, 0) 45%);
-  }
-
-  .hero__content {
-    position: relative;
-    height: 100%;
-    padding-bottom: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .hero__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-on-dark-muted);
-    margin-bottom: 22px;
-  }
-
-  .hero__eyebrow span {
-    width: 36px;
-    height: 2px;
-    background: var(--color-on-dark-muted);
+    background: linear-gradient(180deg, rgba(13, 17, 28, 0.45) 0%, rgba(13, 17, 28, 0.1) 35%, rgba(13, 17, 28, 0.25) 100%);
+    pointer-events: none;
   }
 
   .hero__title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
+    padding: 0 var(--edge-mobile);
+    text-align: center;
     font-family: var(--font-display);
-    font-stretch: 125%;
-    letter-spacing: -0.01em;
-    font-weight: 800;
-    font-size: clamp(56px, 8.6vw, 140px);
-    line-height: 0.92;
-    text-transform: uppercase;
-  }
-
-  .hero__title span {
-    display: block;
-  }
-
-  .hero__title-light {
-    font-weight: 300;
-    color: var(--color-on-dark-muted);
-  }
-
-  .hero__tags {
-    display: grid;
-    margin-top: 30px;
-    overflow: hidden;
-  }
-
-  .hero__tag {
-    grid-area: 1 / 1;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    min-width: 0;
-    opacity: 0;
-    transform: translateY(24px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s ease;
-    white-space: nowrap;
-  }
-
-  .hero__tag.is-past {
-    transform: translateY(-24px);
-  }
-
-  .hero__tag.is-on {
-    opacity: 1;
-    transform: none;
-  }
-
-  .hero__tag i {
-    width: 12px;
-    height: 12px;
-    background: var(--color-on-dark-muted);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
-
-  .hero__tag span {
-    font-size: clamp(22px, 2.4vw, 34px);
-    font-weight: 600;
-    font-stretch: 112%;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .hero__lead {
-    margin: 18px 0 0;
-    max-width: 560px;
-    font-size: 18px;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    text-wrap: pretty;
-  }
-
-  .hero__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 34px;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    height: 54px;
-    padding: 0 28px;
-    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition:
-      background 0.2s,
-      border-color 0.2s;
-  }
-
-  .btn--primary {
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  .btn--primary:hover {
-    background: var(--color-navy-dark);
-  }
-
-  .btn--outline {
-    border: 1.5px solid var(--color-on-dark-muted);
-    color: #fff;
-  }
-
-  .btn--outline:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .hero__tabs {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .hero__tabs-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .hero__tab {
-    position: relative;
-    background: none;
-    border: 0;
-    cursor: pointer;
-    text-align: left;
-    padding: 24px 20px 28px 0;
-    color: rgba(255, 255, 255, 0.55);
-    font-family: inherit;
-    display: flex;
-    gap: 14px;
-    align-items: baseline;
-    transition: color 0.4s;
-  }
-
-  .hero__tab::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 20px;
-    top: -1px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .hero__tab b {
-    position: absolute;
-    left: 0;
-    top: -1px;
-    height: 2px;
-    width: 0;
-    max-width: calc(100% - 20px);
-    background: var(--color-on-dark-muted);
-  }
-
-  .hero__tab.is-on {
-    color: #fff;
-  }
-
-  .hero__tab.is-on b {
-    width: 100%;
-    transition: width var(--dur) linear;
-  }
-
-  .hero__tab small {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-  }
-
-  .hero__tab span {
-    font-size: 14px;
-    font-weight: 600;
+    font-stretch: 112%;
+    font-size: clamp(26px, 3.4vw, 46px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-  }
-
-  @media (max-width: 900px) {
-    .hero__tab span {
-      display: none;
-    }
-
-    .hero__content {
-      padding-bottom: 110px;
-    }
-  }
-
-  @media (max-width: 760px) {
-    .hero {
-      min-height: 600px;
-    }
-
-    .hero__lead {
-      font-size: 16px;
-    }
-
-    .hero__tag {
-      align-items: flex-start;
-    }
-
-    .hero__tag span {
-      white-space: normal;
-      line-height: 1.25;
-    }
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+    z-index: 1;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__image {
-      transition: opacity 1.2s ease;
-      transform: none;
+    .hero__slide {
+      transition: none;
     }
   }
 </style>

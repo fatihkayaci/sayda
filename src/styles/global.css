@@ -32,7 +32,7 @@ html {
 
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip; /* hidden sticky header'ı bozar */
   font-family: var(--font-body);
   font-size: var(--fs-body);
   color: var(--color-text);
