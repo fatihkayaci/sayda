@@ -11,6 +11,7 @@
   --color-border: #e2e3ec;
   --color-on-dark: #ffffff;
   --color-on-dark-muted: #b7b8d6;
+  --color-orange: #f5a21b; /* homepage highlight: eyebrow dashes, hero underline, arrow buttons */
   --color-accent: #6d78f6; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
 
   /* Typography */

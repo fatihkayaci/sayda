@@ -4,7 +4,6 @@ import Hero from '../components/home/Hero.astro';
 import Intro from '../components/home/Intro.astro';
 import FeaturedProjects from '../components/home/FeaturedProjects.astro';
 import Services from '../components/home/Services.astro';
-import Documents from '../components/home/Documents.astro';
 import News from '../components/home/News.astro';
 import Videos from '../components/home/Videos.astro';
 ---
@@ -13,13 +12,13 @@ import Videos from '../components/home/Videos.astro';
   title="Sayda İnşaat | İstanbul Müteahhitlik ve Kentsel Dönüşüm Firması"
   description="1996'dan bu yana İstanbul'da kentsel dönüşüm, kat karşılığı inşaat ve anahtar teslim müteahhitlik. İş bitirme belgeli, kurumsal referanslı."
   organizationSchema
-  hideCtaBanner
+  ctaEyebrow="PROJENİZ İÇİN"
+  ctaHeading="Bizimle İletişime Geçin"
 >
   <Hero />
   <Intro />
-  <FeaturedProjects />
   <Services />
-  <Documents />
+  <FeaturedProjects />
   <News />
   <Videos />
 </Layout>

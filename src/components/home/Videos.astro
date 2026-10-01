@@ -13,10 +13,7 @@ const videos = [
 <section class="vid">
   <div class="container">
     <div class="vid__head">
-      <div>
-        <span class="vid__eyebrow">Video Galeri</span>
-        <h2>Projelerden Görüntüler</h2>
-      </div>
+      <h2>Proje Videolarımız</h2>
       <a href="/projeler">Tüm Videolar <Icon name="arrow" size={14} /></a>
     </div>
     <div class="vid__grid">
@@ -36,33 +33,23 @@ const videos = [
 <style>
   .vid {
     padding-block: 36px 44px;
-    background: #14224a;
+    background: #fff;
   }
 
   .vid__head {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: var(--space-s);
     margin-bottom: 18px;
   }
 
-  .vid__eyebrow {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #aab6da;
-  }
-
   .vid__head h2 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.5rem;
-    line-height: 1.15;
-    color: #fff;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    color: #141b2e;
   }
 
   .vid__head a {
@@ -71,7 +58,7 @@ const videos = [
     gap: 6px;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--color-navy);
     white-space: nowrap;
   }
 
@@ -85,8 +72,7 @@ const videos = [
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border: 2px solid #fff;
-    background: #141a27;
+        background: #141a27;
   }
 
   .vid__card img {
@@ -125,8 +111,9 @@ const videos = [
     width: 48px;
     height: 48px;
     transform: translate(-50%, -50%);
+    border: 2px solid #fff;
     border-radius: 50%;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.15);
   }
 
   .vid__play::after {
@@ -135,7 +122,7 @@ const videos = [
     top: 50%;
     left: 50%;
     transform: translate(-40%, -50%);
-    border-left: 13px solid #141b2e;
+    border-left: 13px solid #fff;
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
   }

@@ -17,6 +17,8 @@ const slides = [
     ))
   }
   <div class="hero__shade"></div>
+  <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Önceki slayt">‹</button>
+  <button class="hero__arrow hero__arrow--next" type="button" aria-label="Sonraki slayt">›</button>
 </section>
 
 <script>
@@ -27,16 +29,25 @@ const slides = [
       const slides = [...hero.querySelectorAll('.hero__slide')];
       const dur = Number(hero.dataset.interval) || 6000;
       let current = 0;
-      const prev = heroTimers.get(hero);
-      if (prev) clearInterval(prev);
-      heroTimers.set(
-        hero,
-        window.setInterval(() => {
-          slides[current].classList.remove('is-on');
-          current = (current + 1) % slides.length;
-          slides[current].classList.add('is-on');
-        }, dur)
-      );
+      const go = (step: number) => {
+        slides[current].classList.remove('is-on');
+        current = (current + step + slides.length) % slides.length;
+        slides[current].classList.add('is-on');
+      };
+      const start = () => {
+        const prev = heroTimers.get(hero);
+        if (prev) clearInterval(prev);
+        heroTimers.set(hero, window.setInterval(() => go(1), dur));
+      };
+      hero.querySelector('.hero__arrow--prev')!.addEventListener('click', () => {
+        go(-1);
+        start();
+      });
+      hero.querySelector('.hero__arrow--next')!.addEventListener('click', () => {
+        go(1);
+        start();
+      });
+      start();
     });
   }
 
@@ -97,6 +108,42 @@ const slides = [
     text-transform: uppercase;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
     z-index: 1;
+  }
+
+  .hero__title::after {
+    content: '';
+    position: absolute;
+    top: calc(50% + 1.6em);
+    width: 90px;
+    height: 4px;
+    background: var(--color-orange);
+  }
+
+  .hero__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(13, 17, 28, 0.45);
+    font-size: 1.6rem;
+    line-height: 1;
+    color: #fff;
+    transition: background var(--transition);
+  }
+
+  .hero__arrow:hover {
+    background: rgba(13, 17, 28, 0.8);
+  }
+
+  .hero__arrow--prev {
+    left: 12px;
+  }
+
+  .hero__arrow--next {
+    right: 12px;
   }
 
   @media (prefers-reduced-motion: reduce) {

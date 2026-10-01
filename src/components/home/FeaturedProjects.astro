@@ -1,7 +1,7 @@
 ---
 import Icon from '../Icon.astro';
 import allProjects from '../../data/projects.json';
-import { shortProjectTitle, splitLocation } from '../../utils/project';
+import { shortProjectTitle } from '../../utils/project';
 
 const picks = [
   { slug: 'terrace-bahce-konut', image: '/img/home/residence-sunset.webp' },
@@ -19,10 +19,10 @@ const projects = picks.flatMap(({ slug, image }) => {
   <div class="container">
     <div class="fp__head">
       <div>
-        <span class="fp__eyebrow">Projelerimiz</span>
-        <h2>Geleceğe Değer Katan Yapılar</h2>
+        <span class="eyebrow"><i></i>Öne Çıkan Projeler</span>
+        <h2>Yaşam Alanlarına Değer Katıyoruz</h2>
       </div>
-      <a href="/projeler">Tüm Projeleri Gör <Icon name="arrow" size={14} /></a>
+      <a href="/projeler">Tüm Projeler <Icon name="arrow" size={14} /></a>
     </div>
     <div class="fp__grid">
       {
@@ -32,11 +32,7 @@ const projects = picks.flatMap(({ slug, image }) => {
             <div class="fp__body">
               <div>
                 <span class="fp__type">{p.type}</span>
-                <h3>{shortProjectTitle(p.name)} Projesi</h3>
-                <span class="fp__loc">
-                  <Icon name="pin" size={12} />
-                  {splitLocation(p.location).short}
-                </span>
+                <h3>{shortProjectTitle(p.name)}</h3>
               </div>
               <i><Icon name="arrow" size={16} /></i>
             </div>
@@ -50,7 +46,7 @@ const projects = picks.flatMap(({ slug, image }) => {
 <style>
   .fp {
     padding-block: 40px 56px;
-    background: #eef3fa;
+    background: #fff;
   }
 
   .fp__head {
@@ -59,16 +55,6 @@ const projects = picks.flatMap(({ slug, image }) => {
     justify-content: space-between;
     gap: var(--space-s);
     margin-bottom: 22px;
-  }
-
-  .fp__eyebrow {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #3a4a7a;
   }
 
   .fp__head h2 {
@@ -82,10 +68,12 @@ const projects = picks.flatMap(({ slug, image }) => {
   .fp__head > a {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 1.5px solid #2a2f45;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-navy);
+    font-weight: 700;
+    color: #141b2e;
     white-space: nowrap;
   }
 
@@ -96,19 +84,15 @@ const projects = picks.flatMap(({ slug, image }) => {
   }
 
   .fp__card {
-    position: relative;
-    display: block;
-    aspect-ratio: 3 / 4;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    background: #141a27;
     color: #fff;
   }
 
   .fp__card img {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     transition: transform 400ms ease;
   }
@@ -117,24 +101,19 @@ const projects = picks.flatMap(({ slug, image }) => {
     transform: scale(1.04);
   }
 
-  .fp__card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(10, 14, 28, 0) 50%, rgba(10, 14, 28, 0.92) 100%);
+  .fp__card {
+    position: relative;
   }
 
   .fp__body {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: relative;
     z-index: 1;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 14px;
+    padding: 14px 14px 14px 16px;
+    background: var(--color-navy);
   }
 
   .fp__type {
@@ -147,38 +126,21 @@ const projects = picks.flatMap(({ slug, image }) => {
   }
 
   .fp__body h3 {
-    margin-block: 3px 4px;
+    margin-top: 3px;
     font-family: var(--font-body);
     font-size: 0.85rem;
-    font-weight: 800;
-    text-transform: uppercase;
+    font-weight: 700;
     line-height: 1.25;
-  }
-
-  .fp__loc {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 0.68rem;
-    color: #e7b24c;
   }
 
   .fp__body i {
     display: grid;
     place-items: center;
     flex: none;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid #fff;
-    border-radius: 50%;
-    transition:
-      background var(--transition),
-      color var(--transition);
-  }
-
-  .fp__card:hover .fp__body i {
-    background: #fff;
-    color: var(--color-navy);
+    width: 34px;
+    height: 34px;
+    background: var(--color-orange);
+    color: #fff;
   }
 
   @media (max-width: 1024px) {
@@ -201,8 +163,5 @@ const projects = picks.flatMap(({ slug, image }) => {
       grid-template-columns: 1fr;
     }
 
-    .fp__card {
-      aspect-ratio: 4 / 3;
-    }
   }
 </style>

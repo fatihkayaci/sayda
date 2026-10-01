@@ -208,3 +208,22 @@ button {
     transition: none;
   }
 }
+
+/* Homepage section eyebrow: orange dash + small caps label */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #3a4a7a;
+}
+
+.eyebrow i {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--color-orange);
+}
