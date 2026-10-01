@@ -5,6 +5,7 @@ import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
+import Splash from '../components/Splash.astro';
 import site from '../data/site.json';
 
 interface Props {
@@ -44,6 +45,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
     }
   </head>
   <body>
+    <Splash />
     <Header transition:persist />
     <main>
       <slot />
