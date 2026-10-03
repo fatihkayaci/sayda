@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+}
+
+// Eski sitedeki #page-title bandı. Sayfanın gerçek H1'i içerikte kalır; bu bant başlık etiketi kullanmaz.
+const label = Astro.props.title.split('|')[0].trim();
+---
+
+<section class="page-title">
+  <div class="container page-title__inner">
+    <p class="page-title__text">{label}</p>
+    <nav class="page-title__crumbs" aria-label="Sayfa yolu">
+      <a href="/">Anasayfa</a> <span aria-hidden="true">›</span> <span>{label}</span>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .page-title {
+    padding: 35px 0;
+    background: url('/img/legacy/page-title-bg.jpg') center center no-repeat;
+    background-size: cover;
+    background-color: #0b3345;
+    color: #fff;
+    font-family: var(--font-body);
+  }
+
+  .page-title__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1170px;
+    padding-inline: 15px;
+  }
+
+  .page-title__text {
+    margin: 0;
+    padding: 0 26px;
+    min-width: 280px;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 44px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(132, 119, 117, 0.8);
+    border-bottom: 1px solid rgba(132, 119, 117, 0.8);
+  }
+
+  .page-title__crumbs {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .page-title__crumbs a:hover {
+    color: #f69c00;
+  }
+</style>

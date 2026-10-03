@@ -1,303 +1,153 @@
 ---
-import Icon from '../Icon.astro';
 import news from '../../data/haberler.json';
 import site from '../../data/site.json';
 
-const images = ['/img/home/gold-towers.webp', '/img/home/garden-day.webp', '/img/home/site-team.webp'];
-const items = [...news]
-  .sort((a, b) => b.date.localeCompare(a.date))
-  .slice(0, 3)
-  .map((n, i) => ({ ...n, image: images[i] }));
+const items = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 2);
 
 const docs = [
-  { title: 'Sertifikalarımız', href: site.documents.certificate, image: '/img/home/belge1.webp', external: true },
-  { title: 'Tanıtım Kataloğu', href: site.documents.catalog, image: '/img/home/sayda-hq.webp', external: true },
-  { title: 'İş Bitirme Belgelerimiz', href: '/projeler/tamamlanan', image: '/img/home/belge3.webp', external: false },
+  { title: 'Sertifikalarımız', href: site.documents.certificate, image: '/img/legacy/sertifika.png', external: true },
+  { title: 'Tanıtım Katalog', href: site.documents.catalog, image: '/img/legacy/pdfkat.png', external: true },
+  { title: 'İş Bitirme Belgelerimiz', href: '/belgeler', image: '/img/legacy/isbitirme.png', external: false },
 ];
 
 const fmt = (iso: string) => {
   const [y, m, d] = iso.split('-').map(Number);
-  const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-  return `${d} ${months[m - 1]} ${y}`;
+  return `${d}.${m}.${y}`;
 };
 ---
 
 <section class="news">
   <div class="container news__layout">
-    <div>
-      <div class="news__head">
-        <h2>Bizden Haberler</h2>
-        <a href="/haberler">Tüm Haberler <Icon name="arrow" size={14} /></a>
-      </div>
-      <div class="news__grid">
+    <div class="news__list">
+      <h2>Bizden Haberler</h2>
+      <ul>
         {
           items.map((n) => (
-            <a href={`/haberler/${n.slug}`} class="news__card">
-              <img src={n.image} alt="" loading="lazy" />
-              <div>
-                <time>{fmt(n.date)}</time>
-                <h3>{n.title}</h3>
-                <span class="news__more">
-                  Devamını Oku <Icon name="arrow" size={13} />
-                </span>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-    <aside class="certs">
-      <div class="news__head">
-        <h2>Sertifika ve Belgeler</h2>
-      </div>
-      <div class="certs__card">
-        <img src="/img/home/belge1.webp" alt="Sertifika" loading="lazy" />
-        <div>
-          <p>Kalite ve güven standartlarımızı belgeleyen sertifikalarımız.</p>
-          <a class="certs__btn" href="/belgeler">Belgelerimiz</a>
-        </div>
-      </div>
-      <ul class="certs__docs">
-        {
-          docs.map((d) => (
             <li>
-              <a href={d.href} {...(d.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                <img class="certs__thumb" src={d.image} alt="" loading="lazy" />
-                <span>{d.title}</span>
-                <Icon name="arrow" size={13} />
-              </a>
+              <img src={n.image} alt="" width="98" height="76" loading="lazy" />
+              <div>
+                <h3>{n.title}</h3>
+                <time class="news__date">{fmt(n.date)}</time>
+                <a href={`/haberler/${n.slug}`}>Devamı..</a>
+              </div>
             </li>
           ))
         }
       </ul>
-    </aside>
+      <a class="news__all" href="/haberler">Tüm Haberler..</a>
+    </div>
+
+    <div class="news__doc">
+      <h2>{docs[0].title}</h2>
+      <a href={docs[0].href} target="_blank" rel="noopener noreferrer">
+        <img src={docs[0].image} alt={docs[0].title} loading="lazy" />
+      </a>
+    </div>
+
+    <div class="news__stack">
+      {
+        docs.slice(1).map((d) => (
+          <div class="news__doc">
+            <h2>{d.title}</h2>
+            <a href={d.href} target={d.external ? '_blank' : undefined} rel={d.external ? 'noopener noreferrer' : undefined}>
+              <img src={d.image} alt={d.title} loading="lazy" />
+            </a>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
   .news {
-    padding-block: 72px;
-    background: #f4f6fb;
+    background: #dce8eb;
+    padding-block: 30px 40px;
+    font-family: var(--font-body);
   }
 
   .news__layout {
     display: grid;
-    grid-template-columns: 2.2fr 1fr;
-    gap: var(--space-l);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    max-width: 1170px;
+    padding-inline: 15px;
   }
 
-  .news__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-s);
-    margin-bottom: 18px;
-  }
-
-  .news__head h2 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+  .news__list h2,
+  .news__doc h2 {
+    margin: 40px 0 10px;
+    font-size: 16px;
+    line-height: 26px;
     text-transform: uppercase;
-    color: #141b2e;
+    color: #da9700;
   }
 
-  .news__head > a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-navy);
-    white-space: nowrap;
+  .news__list ul {
+    max-width: 302px;
   }
 
-  .news__grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 16px;
-  }
-
-  .news__card {
+  .news__list li {
     display: flex;
-    flex-direction: column;
-    background: #fff;
-    box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
-    transition:
-      transform var(--transition),
-      box-shadow var(--transition);
-  }
-
-  .news__card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(20, 27, 46, 0.12);
-  }
-
-  .news__card img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-  }
-
-  .news__card > div {
-    padding: 14px 16px 18px;
-  }
-
-  /* first story is the lead, the rest are compact rows */
-  .news__card:nth-child(1) {
-    grid-row: 1 / 3;
-  }
-
-  .news__card:nth-child(1) img {
-    flex: 1;
-    min-height: 0;
-    aspect-ratio: auto;
-  }
-
-  .news__card:nth-child(1) h3 {
-    font-size: 1.1rem;
-  }
-
-  .news__card:nth-child(n + 2) {
-    flex-direction: row;
-  }
-
-  .news__card:nth-child(n + 2) img {
-    flex: none;
-    width: 42%;
-    aspect-ratio: auto;
-    height: 100%;
-  }
-
-  .news__card:nth-child(n + 2) > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .news time {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--color-orange);
-  }
-
-  .news h3 {
-    margin-block: 8px 12px;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 700;
-    line-height: 1.35;
-    color: #141b2e;
-  }
-
-  .news__more {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--color-navy);
-  }
-
-  .certs__card {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    padding: 18px;
-    background: #fff;
-    box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
-  }
-
-  .certs__card img {
-    flex: none;
-    width: 110px;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-  }
-
-  .certs__card p {
-    font-size: 0.8rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: #141b2e;
-  }
-
-  .certs__docs {
-    display: grid;
-    gap: 8px;
-    margin: 12px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .certs__docs a {
-    display: flex;
-    align-items: center;
     gap: 12px;
-    padding: 8px 14px 8px 10px;
+    margin-bottom: 25px;
+    padding: 5px;
     background: #fff;
-    border-left: 3px solid var(--color-orange);
-    box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #141b2e;
-    transition: transform var(--transition);
+    color: #000;
   }
 
-  .certs__docs a:hover {
-    transform: translateX(3px);
-  }
-
-  .certs__docs a > span:nth-child(2) {
+  .news__list li > div {
     flex: 1;
   }
 
-  .certs__thumb {
-    flex: none;
-    width: 40px;
-    height: 52px;
+  .news__list img {
+    width: 98px;
+    height: 76px;
     object-fit: cover;
-    border: 1px solid #e2e3ec;
+    flex: none;
   }
 
-  .certs__btn {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 11px 20px;
-    background: #141b2e;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #fff;
-    transition: background var(--transition);
+  .news__list h3 {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
   }
 
-  .certs__btn:hover {
-    background: var(--color-navy);
+  .news__date {
+    display: block;
+    margin: 14px 0 6px;
+    font-size: 12px;
+    color: #da9700;
   }
 
-  @media (max-width: 1100px) {
+  .news__list li a {
+    font-size: 13px;
+    color: #3d7ab5;
+  }
+
+  .news__all {
+    display: block;
+    max-width: 302px;
+    padding: 6px 5px;
+    background: #fff;
+    text-align: right;
+    font-size: 13px;
+    color: #3d7ab5;
+  }
+
+  .news__doc img {
+    max-width: 190px;
+    height: auto;
+  }
+
+  .news__stack .news__doc img {
+    max-width: 80px;
+  }
+
+  @media (max-width: 800px) {
     .news__layout {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 700px) {
-    .news__grid {
-      grid-template-columns: 1fr;
-    }
-
-    .news__card:nth-child(1) {
-      grid-row: auto;
-    }
-
-    .news__card:nth-child(1) img {
-      aspect-ratio: 16 / 10;
-    }
-
-    .news__card:nth-child(n + 2) img {
-      width: 38%;
-      min-height: 110px;
     }
   }
 </style>

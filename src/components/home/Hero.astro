@@ -1,9 +1,11 @@
 ---
 const slides = [
-  { image: '/img/sayda-insaat-hero01.webp', title: 'Yüksek Kalitede Uygulamalar' },
-  { image: '/img/sayda-insaat-hero02.webp', title: 'Profesyonel Çözümler' },
-  { image: '/img/sayda-insaat-hero03.webp', title: 'Güvenilir Takvim, Adil Fiyat' },
-  { image: '/img/sayda-insaat-hero04.webp', title: 'Kentsel Dönüşüm Çözümleri' },
+  { image: '/img/legacy/slide-1.webp', title: 'Yüksek Kalitede Uygulamalar' },
+  { image: '/img/legacy/slide-2.webp', title: 'Profesyonel Çözümler' },
+  { image: '/img/legacy/slide-3.webp', title: 'Güvenilir Takvim, Adil Fiyat' },
+  { image: '/img/legacy/slide-4.webp', title: 'Kentsel Dönüşüm Çözümleri' },
+  { image: '/img/legacy/slide-6.webp', title: 'İş Bitirme Belgeli Müteahhitlik' },
+  { image: '/img/legacy/slide-7.webp', title: 'İstanbul’da 1996’dan Beri' },
 ];
 ---
 
@@ -11,66 +13,58 @@ const slides = [
   {
     slides.map((slide, i) => (
       <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
-        <img src={slide.image} alt="" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
-        {i === 0 ? <h1 class="hero__title">{slide.title}</h1> : <p class="hero__title">{slide.title}</p>}
+        <img src={slide.image} alt="" width="1920" height="740" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
+        <div class="hero__caption">
+          {i === 0 ? <h1><b>{slide.title}</b></h1> : <p><b>{slide.title}</b></p>}
+        </div>
       </div>
     ))
   }
-  <div class="hero__shade"></div>
   <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Önceki slayt">‹</button>
   <button class="hero__arrow hero__arrow--next" type="button" aria-label="Sonraki slayt">›</button>
 </section>
 
 <script>
-  const heroTimers = new WeakMap<HTMLElement, number>();
-
-  function initHero() {
-    document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
-      const slides = [...hero.querySelectorAll('.hero__slide')];
-      const dur = Number(hero.dataset.interval) || 6000;
-      let current = 0;
-      const go = (step: number) => {
-        slides[current].classList.remove('is-on');
-        current = (current + step + slides.length) % slides.length;
-        slides[current].classList.add('is-on');
-      };
-      const start = () => {
-        const prev = heroTimers.get(hero);
-        if (prev) clearInterval(prev);
-        heroTimers.set(hero, window.setInterval(() => go(1), dur));
-      };
-      hero.querySelector('.hero__arrow--prev')!.addEventListener('click', () => {
-        go(-1);
-        start();
-      });
-      hero.querySelector('.hero__arrow--next')!.addEventListener('click', () => {
-        go(1);
-        start();
-      });
+  document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+    const slides = [...hero.querySelectorAll('.hero__slide')];
+    const dur = Number(hero.dataset.interval) || 6000;
+    let current = 0;
+    let timer = 0;
+    const go = (step: number) => {
+      slides[current].classList.remove('is-on');
+      current = (current + step + slides.length) % slides.length;
+      slides[current].classList.add('is-on');
+    };
+    const start = () => {
+      clearInterval(timer);
+      timer = window.setInterval(() => go(1), dur);
+    };
+    hero.querySelector('.hero__arrow--prev')!.addEventListener('click', () => {
+      go(-1);
       start();
     });
-  }
-
-  initHero();
-  document.addEventListener('astro:page-load', initHero);
+    hero.querySelector('.hero__arrow--next')!.addEventListener('click', () => {
+      go(1);
+      start();
+    });
+    start();
+  });
 </script>
 
 <style>
   .hero {
     position: relative;
-    height: calc(100vh - var(--header-h));
-    height: calc(100svh - var(--header-h));
-    min-height: 480px;
+    aspect-ratio: 1920 / 740;
+    min-height: 260px;
+    background: #012c3c;
     overflow: hidden;
-    background: #1b2130;
-    color: #fff;
   }
 
   .hero__slide {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1.2s ease;
+    transition: opacity 0.9s ease;
   }
 
   .hero__slide.is-on {
@@ -81,74 +75,51 @@ const slides = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
   }
 
-  .hero__shade {
+  .hero__caption {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(13, 17, 28, 0.45) 0%, rgba(13, 17, 28, 0.1) 35%, rgba(13, 17, 28, 0.25) 100%);
+    top: clamp(24px, 10vw, 205px);
+    right: 0;
+    text-align: right;
     pointer-events: none;
   }
 
-  .hero__title {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hero__caption h1,
+  .hero__caption p {
+    display: inline-block;
     margin: 0;
-    padding: 0 var(--edge-mobile);
-    text-align: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-stretch: 112%;
-    font-size: clamp(26px, 3.4vw, 46px);
-    letter-spacing: 0.06em;
+    padding: 10px 24px;
+    background: rgba(246, 156, 0, 0.9);
+    color: #fff;
+    font-size: clamp(18px, 3.2vw, 44px);
+    line-height: 1.2;
     text-transform: uppercase;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
-    z-index: 1;
-  }
-
-  .hero__title::after {
-    content: '';
-    position: absolute;
-    top: calc(50% + 1.6em);
-    width: 90px;
-    height: 4px;
-    background: var(--color-orange);
   }
 
   .hero__arrow {
     position: absolute;
     top: 50%;
-    z-index: 2;
-    width: 36px;
-    height: 36px;
     transform: translateY(-50%);
-    border: 0;
-    background: rgba(13, 17, 28, 0.45);
-    font-size: 1.6rem;
-    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: rgba(0, 0, 0, 0.35);
     color: #fff;
-    transition: background var(--transition);
+    font-size: 28px;
+    line-height: 1;
+    transition: background 0.3s ease;
   }
 
   .hero__arrow:hover {
-    background: rgba(13, 17, 28, 0.8);
+    background: var(--color-navy);
   }
 
   .hero__arrow--prev {
-    left: 12px;
+    left: 0;
   }
 
   .hero__arrow--next {
-    right: 12px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__slide {
-      transition: none;
-    }
+    right: 0;
   }
 </style>

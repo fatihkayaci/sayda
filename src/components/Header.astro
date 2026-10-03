@@ -1,6 +1,5 @@
 ---
 import Icon from './Icon.astro';
-import site from '../data/site.json';
 
 const navLinks = [
   { label: 'Ana Sayfa', href: '/' },
@@ -11,6 +10,8 @@ const navLinks = [
       { label: 'Hakkımızda', href: '/hakkimizda' },
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
       { label: 'Belgelerimiz', href: '/belgeler' },
+      { label: 'Haberler', href: '/haberler' },
+      { label: 'Rehber', href: '/rehber' },
     ],
   },
   {
@@ -22,6 +23,7 @@ const navLinks = [
       { label: 'Kat Karşılığı İnşaat', href: '/hizmetler/kat-karsiligi-insaat' },
       { label: 'Proje Yönetimi & Danışmanlık', href: '/hizmetler/proje-yonetimi-danismanlik' },
       { label: 'Tesis Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
+      { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum' },
     ],
   },
   {
@@ -32,9 +34,7 @@ const navLinks = [
       { label: 'Tamamlanan', href: '/projeler/tamamlanan' },
     ],
   },
-  { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum' },
-  { label: 'Haberler', href: '/haberler' },
-  { label: 'Rehber', href: '/rehber' },
+  { label: 'E-Katalog', href: '/katalog.pdf' },
   {
     label: 'İK',
     href: '/kariyer',
@@ -56,59 +56,29 @@ const isPathActive = (href?: string) => {
 };
 ---
 
-<header class="header" transition:persist="sayda-header">
-  <div class="header__inner">
+<header class="header">
+  <div class="container header__inner">
     <a href="/" class="header__logo">
-      <img src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
+      <img src="/img/legacy/logo-2.png" alt="Sayda İnşaat" />
     </a>
 
-    <nav class="header__nav" id="mainMenu">
-      <ul>
+    <button class="header__toggle" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
+      <Icon name="menu" size={22} />
+    </button>
+
+    <nav class="header__nav" id="mainMenu" aria-label="Ana menü">
+      <ul class="header__list">
         {
-          navLinks.map((item, i) => {
-            const childActive = item.children?.some((child) => isPathActive(child.href)) ?? false;
-            const itemActive = isPathActive(item.href) || childActive;
+          navLinks.map((item) => {
+            const active = isPathActive(item.href) || (item.children?.some((c) => isPathActive(c.href)) ?? false);
             return (
-              <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
-                {item.children ? (
-                  <div class="header__nav-item-row">
-                    {item.href ? (
-                      <a href={item.href} class="header__nav-link" class:list={{ 'is-active': itemActive }}>
-                        {item.label}
-                      </a>
-                    ) : (
-                      <button
-                        type="button"
-                        class="header__nav-link header__nav-link--label"
-                        class:list={{ 'is-active': itemActive }}
-                        aria-expanded="false"
-                        aria-controls={`dropdown-${i}`}
-                      >
-                        {item.label}
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      class="header__dropdown-toggle"
-                      aria-expanded="false"
-                      aria-controls={`dropdown-${i}`}
-                      aria-label={`${item.label} alt menüsünü aç`}
-                    >
-                      <Icon name="chevronDown" size={16} />
-                    </button>
-                  </div>
-                ) : (
-                  <a href={item.href} class="header__nav-link" class:list={{ 'is-active': itemActive }}>
-                    {item.label}
-                  </a>
-                )}
+              <li class:list={['header__item', { 'has-sub': item.children, current: active }]}>
+                <a href={item.href}>{item.label}</a>
                 {item.children && (
-                  <ul class="header__dropdown" id={`dropdown-${i}`}>
+                  <ul class="header__sub">
                     {item.children.map((child) => (
                       <li>
-                        <a href={child.href} class:list={{ 'is-active': isPathActive(child.href) }}>
-                          {child.label}
-                        </a>
+                        <a href={child.href}>{child.label}</a>
                       </li>
                     ))}
                   </ul>
@@ -117,570 +87,223 @@ const isPathActive = (href?: string) => {
             );
           })
         }
-        <li class="header__nav-item header__nav-cta-item">
-          <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">
-            Teklif Al
-            <Icon name="arrow" size={16} />
-          </a>
-        </li>
+        <li class="header__item"><a href="/iletisim">İletişim</a></li>
       </ul>
     </nav>
-
-    <div class="header__actions">
-      <a class="header__cta" href="/iletisim#quote-form">
-        Teklif Al
-        <Icon name="arrow" size={16} />
-      </a>
-      <button class="header__hamburger" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
-        <Icon name="menu" class="header__hamburger-icon header__hamburger-icon--open" />
-        <Icon name="close" class="header__hamburger-icon header__hamburger-icon--close" />
-      </button>
-    </div>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById('menuButton');
+  const nav = document.getElementById('mainMenu');
+  btn?.addEventListener('click', () => {
+    const open = nav!.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  nav?.querySelectorAll<HTMLElement>('.has-sub > a').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if (window.innerWidth > 991) return;
+      const li = a.parentElement!;
+      if (!li.classList.contains('is-open')) {
+        e.preventDefault();
+        li.classList.add('is-open');
+      }
+    });
+  });
+</script>
 
 <style>
   .header {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(24, 29, 41, 0.96);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    transition:
-      background 300ms,
-      box-shadow 300ms;
-  }
-
-  .header.is-scrolled {
-    background: rgba(24, 29, 41, 0.55);
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
+    overflow: visible;
+    background: #1d1d1d url('/img/legacy/header-v5-bg.png') no-repeat 0 0;
+    background-size: cover;
+    font-family: var(--font-body);
   }
 
   .header__inner {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: var(--space-m);
-    height: var(--header-h);
-    width: 100%;
-    max-width: var(--max-width);
-    margin-inline: auto;
-    padding-inline: 0 var(--edge);
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    max-width: 1170px;
+    padding-inline: 15px;
   }
 
   .header__logo {
     position: relative;
-    display: flex;
-    align-items: center;
-    align-self: stretch;
-    padding-left: var(--edge-mobile);
-    padding-right: 44px;
+    display: block;
+    padding: 18px 30px 18px 0;
   }
 
   .header__logo::before {
     content: '';
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
-    left: -100vw;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
-    transition: background 300ms;
-  }
-
-  .header.is-scrolled .header__logo::before {
-    background: rgba(255, 255, 255, 0.7);
+    width: 2000px;
+    height: 100%;
+    background: #fff url('/img/legacy/header-v5-bg.png') no-repeat 0 0;
+    background-size: cover;
+    transform: skewX(-45deg);
+    z-index: 1;
   }
 
   .header__logo img {
     position: relative;
-    display: block;
-    height: 40px;
-    width: auto;
+    z-index: 2;
+    width: 270px;
+    height: auto;
   }
 
-  @media (min-width: 1330px) {
-    .header__inner {
-      grid-template-columns: auto 1fr;
-    }
+  .header__nav {
+    display: flex;
+    align-items: center;
+  }
 
-    .header__logo {
-      padding-left: 0;
-      padding-right: 70px;
-    }
+  .header__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 
-    .header__logo::before {
-      clip-path: polygon(0 0, 100% 0, calc(100% - 44px) 100%, 0 100%);
+  .header__item {
+    position: relative;
+  }
+
+  .header__item > a {
+    display: inline-block;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 85px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+
+  .header__item.has-sub > a::after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin: 0 0 3px 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .header__item > a:hover,
+  .header__item.current > a {
+    color: #eea010;
+  }
+
+  .header__sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    display: none;
+    width: 260px;
+    background: #191919;
+    border-top: 2px solid #f69c00;
+    box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .header__item:hover > .header__sub,
+  .header__item:focus-within > .header__sub {
+    display: block;
+  }
+
+  .header__sub a {
+    display: block;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 40px;
+    text-transform: uppercase;
+    color: #767474;
+    border-bottom: 1px solid #2a2a2a;
+    transition: color 0.3s ease;
+  }
+
+  .header__sub li:last-child a {
+    border: none;
+  }
+
+  .header__sub a:hover {
+    color: #f69c00;
+  }
+
+  .header__toggle {
+    display: none;
+    align-self: center;
+    padding: 8px 12px;
+    border: 1px solid #f69c00;
+    background: transparent;
+    color: #fff;
+  }
+
+  @media (max-width: 1199px) {
+    .header__item > a {
+      padding: 0 9px;
+      font-size: 13px;
     }
 
     .header__logo img {
-      height: 56px;
-    }
-
-    .header .header__actions {
-      display: none;
-    }
-
-    .header__nav {
-      display: flex;
-      align-items: center;
-      align-self: stretch;
-    }
-
-    .header__nav > ul {
-      justify-content: center;
-      flex: 1;
-      transform: translateY(1.5px); /* büyük harflerin optik merkezi için */
+      width: 220px;
     }
   }
 
-  .header__nav > ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(14px, 1.8vw, 40px);
-  }
-
-  .header__nav-item {
-    position: relative;
-  }
-
-  .header__nav-cta-item {
-    display: none;
-  }
-
-  .header__nav-item-row {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    line-height: 1;
-  }
-
-  .header__nav-item:not(.header__nav-cta-item) {
-    display: flex;
-    align-items: center;
-  }
-
-  .header__nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
-    transition: color var(--transition);
-  }
-
-  .header__nav-link--label {
-    background: none;
-    border: none;
-    padding: 0;
-  }
-
-  .header__nav-link:hover {
-    color: #fff;
-  }
-
-  .header__nav-link.is-active {
-    color: #e8a13a;
-  }
-
-  .header__dropdown li a.is-active {
-    color: var(--color-navy);
-    font-weight: 700;
-    background: var(--color-bg-light);
-  }
-
-  .header__dropdown-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    padding: 4px;
-    color: rgba(255, 255, 255, 0.88);
-    transition: transform var(--transition);
-  }
-
-  .header__nav-item.is-open .header__dropdown-toggle {
-    transform: rotate(180deg);
-  }
-
-  .header__dropdown {
-    position: absolute;
-    top: calc(100% + 12px);
-    left: 0;
-    min-width: 240px;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: var(--space-xs);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(4px);
-    transition:
-      opacity var(--transition),
-      transform var(--transition),
-      visibility var(--transition);
-  }
-
-  .header__dropdown li a {
-    display: block;
-    padding: 10px 12px;
-    border-radius: var(--radius);
-    font-size: var(--fs-small);
-    font-weight: 500;
-    color: var(--color-text);
-    transition:
-      background var(--transition),
-      color var(--transition);
-  }
-
-  .header__dropdown li a:hover {
-    background: var(--color-bg-light);
-    color: var(--color-navy);
-  }
-
-  @media (min-width: 1330px) {
-    .header__nav-item.is-open .header__dropdown,
-    .header__nav-item:focus-within .header__dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-  }
-
-  @media (hover: hover) and (min-width: 1330px) {
-    .header__nav-item:hover .header__dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+  @media (max-width: 991px) {
+    .header {
+      position: relative;
     }
 
-    .header__nav-item:hover .header__dropdown-toggle {
-      transform: rotate(180deg);
-    }
-  }
-
-  .header__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-m);
-  }
-
-  .header__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #6d6bf0, #5142e6);
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 10px;
-    font-size: var(--fs-small);
-    font-weight: 700;
-    white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(81, 66, 230, 0.35);
-    transition:
-      background var(--transition),
-      box-shadow var(--transition),
-      transform var(--transition);
-  }
-
-  .header__cta:hover {
-    background: linear-gradient(135deg, #7a78f5, #5c4eef);
-    box-shadow: 0 10px 24px rgba(81, 66, 230, 0.45);
-    transform: translateY(-1px);
-  }
-
-  .header__hamburger {
-    display: none;
-    background: none;
-    border: none;
-    padding: 4px;
-    color: #fff;
-  }
-
-  @media (max-width: 1329px) {
-    /* backdrop-filter would make the fixed full-screen menu relative to the header, so drop it while open */
-    :global(body.menu-open) .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      background: #0d1533;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-
-    :global(body.menu-open) .header__logo::before {
-      background: #fff;
+    .header__toggle {
+      display: block;
+      position: relative;
+      z-index: 3;
     }
 
     .header__inner {
-      height: var(--header-h-compact);
-      padding-right: var(--edge-mobile);
-    }
-
-    .header__logo,
-    .header__actions {
-      position: relative;
-      z-index: 2;
+      flex-wrap: wrap;
     }
 
     .header__nav {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100dvh;
-      z-index: 1;
-      margin-left: 0;
-      overflow-y: auto;
-      background: #0d1533;
-      padding: calc(var(--header-h-compact) + var(--space-l)) var(--edge-mobile) var(--space-l);
-      transform: translateX(100%);
-      visibility: hidden;
-      pointer-events: none;
-      transition:
-        transform var(--transition),
-        visibility var(--transition);
+      display: none;
+      flex-basis: 100%;
+      background: #1d1d1d;
     }
 
     .header__nav.is-open {
-      transform: translateX(0);
-      visibility: visible;
-      pointer-events: auto;
+      display: block;
     }
 
-    .header__nav > ul {
-      flex-direction: column;
-      align-items: stretch;
-      gap: var(--space-m);
+    .header__list {
+      display: block;
     }
 
-    .header__nav-link {
-      font-size: 1.125rem;
-      white-space: normal;
+    .header__item > a {
+      display: block;
+      line-height: 44px;
+      border-top: 1px solid #2a2a2a;
     }
 
-    .header__nav-item-row {
-      justify-content: space-between;
-    }
-
-    .header__dropdown {
+    .header__sub {
       position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: none;
-      display: none;
-      max-height: none;
+      width: auto;
       box-shadow: none;
-      border: none;
-      background: none;
-      margin-top: var(--space-s);
-      padding: 0 0 0 var(--space-s);
-      transition: none;
     }
 
-    .header__dropdown li a {
-      color: rgba(255, 255, 255, 0.7);
-    }
-
-    .header__dropdown li a:hover {
-      background: rgba(255, 255, 255, 0.06);
-      color: #fff;
-    }
-
-    .header__nav-item.is-open .header__dropdown {
-      display: block;
-    }
-
-    .header__cta {
-      padding: 10px 16px;
-    }
-
-    .header__hamburger {
-      display: block;
-    }
-
-    .header__actions {
-      margin-left: auto;
-    }
-  }
-
-  @media (max-width: 470px) {
-    .header__cta {
+    .header__item:hover > .header__sub {
       display: none;
     }
 
-    .header__nav-cta-item {
+    .header__item.is-open > .header__sub {
       display: block;
-      margin-top: var(--space-s);
-    }
-
-    .header__nav-cta-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #6d6bf0, #5142e6);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-weight: 700;
-      transition: background var(--transition);
-    }
-
-    .header__nav-cta-link:hover {
-      background: linear-gradient(135deg, #7a78f5, #5c4eef);
-      color: #fff;
     }
   }
-
 </style>
-
-<script>
-  const els = () => ({
-    header: document.querySelector('.header'),
-    button: document.getElementById('menuButton'),
-    menu: document.getElementById('mainMenu'),
-  });
-
-  const closeDropdowns = () => {
-    document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
-      openItem.classList.remove('is-open');
-      openItem
-        .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
-        .forEach((el) => el.setAttribute('aria-expanded', 'false'));
-    });
-  };
-
-  const isCompactNav = () => window.matchMedia('(max-width: 1329px)').matches;
-
-  const setMenuOpen = (open: boolean) => {
-    const { button, menu } = els();
-    menu?.classList.toggle('is-open', open);
-    button?.setAttribute('aria-expanded', String(open));
-    button?.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
-    document.body.classList.toggle('menu-open', open);
-    if (isCompactNav()) {
-      menu?.setAttribute('aria-hidden', String(!open));
-    } else {
-      menu?.removeAttribute('aria-hidden');
-    }
-    if (!open) closeDropdowns();
-  };
-
-  const updateHeaderBackground = () => {
-    els().header?.classList.toggle('is-scrolled', window.scrollY > 40);
-  };
-
-  const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
-
-  const updateActiveNav = () => {
-    const current = normalizePath(window.location.pathname);
-    const isPathActive = (href: string | null) => {
-      if (!href) return false;
-      const h = normalizePath(href);
-      if (h === '/') return current === '/';
-      return current === h || current.startsWith(`${h}/`);
-    };
-
-    document.querySelectorAll<HTMLElement>('.header__nav-item').forEach((item) => {
-      let childActive = false;
-      item.querySelectorAll<HTMLAnchorElement>('.header__dropdown a').forEach((child) => {
-        const active = isPathActive(child.getAttribute('href'));
-        child.classList.toggle('is-active', active);
-        if (active) childActive = true;
-      });
-
-      const topLink = item.querySelector<HTMLElement>(
-        '.header__nav-item-row > .header__nav-link, :scope > a.header__nav-link'
-      );
-      if (topLink) {
-        topLink.classList.toggle('is-active', childActive || isPathActive(topLink.getAttribute('href')));
-      }
-    });
-  };
-
-  const toggleDropdown = (toggle: Element) => {
-    const item = toggle.closest('.header__nav-item');
-    if (!item) return;
-    const isOpen = item.classList.contains('is-open');
-
-    document.querySelectorAll('.header__nav-item.is-open').forEach((openItem) => {
-      if (openItem !== item) {
-        openItem.classList.remove('is-open');
-        openItem
-          .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
-          .forEach((el) => el.setAttribute('aria-expanded', 'false'));
-      }
-    });
-
-    item.classList.toggle('is-open', !isOpen);
-    item
-      .querySelectorAll('.header__dropdown-toggle, .header__nav-link--label')
-      .forEach((el) => el.setAttribute('aria-expanded', String(!isOpen)));
-  };
-
-  const onDocumentClick = (event: Event) => {
-    const target = event.target as Element | null;
-    if (!target) return;
-
-    if (target.closest('#menuButton')) {
-      const { menu } = els();
-      setMenuOpen(!menu?.classList.contains('is-open'));
-      return;
-    }
-
-    const dropdownToggle = target.closest('.header__dropdown-toggle, .header__nav-link--label');
-    if (dropdownToggle) {
-      toggleDropdown(dropdownToggle);
-      return;
-    }
-
-    if (target.closest('#mainMenu a')) {
-      return;
-    }
-
-    const { menu, button } = els();
-    if (menu?.contains(target) || button?.contains(target)) return;
-    closeDropdowns();
-  };
-
-  const resetMenu = () => {
-    setMenuOpen(false);
-    updateHeaderBackground();
-    updateActiveNav();
-  };
-
-  const win = window as Window & { __saydaHeaderNavV2?: boolean };
-
-  if (!win.__saydaHeaderNavV2) {
-    win.__saydaHeaderNavV2 = true;
-
-    window.addEventListener('click', onDocumentClick, true);
-    window.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setMenuOpen(false);
-    });
-    window.addEventListener('scroll', updateHeaderBackground, { passive: true });
-    window.matchMedia('(min-width: 1330px)').addEventListener('change', (event) => {
-      if (event.matches) setMenuOpen(false);
-    });
-    document.addEventListener('astro:before-preparation', resetMenu);
-    document.addEventListener('astro:after-swap', resetMenu);
-    document.addEventListener('astro:page-load', resetMenu);
-  }
-
-  resetMenu();
-</script>
-
-

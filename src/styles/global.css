@@ -1,23 +1,10 @@
 @import './tokens.css';
 
-/* Archivo (body text) */
-@import '@fontsource/archivo/400.css';
-@import '@fontsource/archivo/500.css';
-@import '@fontsource/archivo/600.css';
-@import '@fontsource/archivo/700.css';
-
-/* Archivo Black (headings) */
-@import '@fontsource/archivo-black/400.css';
-
-/* Archivo Variable (stretch-axis display type, homepage sections) */
-@import '@fontsource-variable/archivo/wdth.css';
-
-/* Caveat (handwritten quote accents) */
-@import '@fontsource/caveat/400.css';
-
-/* Syne (SAYDA logotype only) */
-@import '@fontsource/syne/700.css';
-@import '@fontsource/syne/800.css';
+@import '@fontsource/didact-gothic/400.css';
+@import '@fontsource/open-sans/400.css';
+@import '@fontsource/open-sans/600.css';
+@import '@fontsource/open-sans/700.css';
+@import '@fontsource/open-sans/800.css';
 
 *,
 *::before,
@@ -76,7 +63,7 @@ h3,
 h4 {
   margin: 0;
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.1;
 }
 

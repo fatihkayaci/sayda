@@ -1,201 +1,151 @@
 ---
-import Icon from '../Icon.astro';
 import allProjects from '../../data/projects.json';
 import { shortProjectTitle } from '../../utils/project';
 
-const picks = [
-  { slug: 'terrace-bahce-konut', image: '/img/home/residence-sunset.webp' },
-  { slug: 'capital-tower-ofis', image: '/img/home/twin-towers.webp' },
-  { slug: 'gaziantep-sehir-hastanesi', image: '/img/home/hospital.webp' },
-  { slug: 'atlas-park-avm-ofis', image: '/img/home/mall.webp' },
-];
-const projects = picks.flatMap(({ slug, image }) => {
-  const project = allProjects.find((p) => p.slug === slug);
-  return project ? [{ ...project, image }] : [];
-});
+const projects = allProjects.filter((p) => p.image).slice(0, 12);
 ---
 
 <section class="fp">
-  <div class="container">
-    <div class="fp__head">
-      <div>
-        <span class="eyebrow"><i></i>Öne Çıkan Projeler</span>
-        <h2>Yaşam Alanlarına Değer Katıyoruz</h2>
-      </div>
-      <a href="/projeler">Tüm Projeler <Icon name="arrow" size={14} /></a>
+  <div class="fp__inner">
+    <h2 class="visually-hidden">Projelerimiz</h2>
+    <div class="fp__nav">
+      <button type="button" class="fp__btn" data-dir="-1" aria-label="Önceki projeler">‹</button>
+      <button type="button" class="fp__btn" data-dir="1" aria-label="Sonraki projeler">›</button>
     </div>
-    <div class="fp__grid">
+    <ul class="fp__track">
       {
         projects.map((p) => (
-          <a href={p.href} class="fp__card">
-            <img src={p.image} alt={`${p.name} - Sayda İnşaat`} loading="lazy" />
-            <div class="fp__body">
-              <div>
-                <span class="fp__type">{p.type}</span>
-                <h3>{shortProjectTitle(p.name)}</h3>
-              </div>
-              <i><Icon name="arrow" size={16} /></i>
-            </div>
-          </a>
+          <li class="fp__item">
+            <a href={p.href} class="fp__card">
+              <img src={p.image} alt={p.name} width="138" height="150" loading="lazy" />
+              <h3>{shortProjectTitle(p.name)}</h3>
+              <span class="fp__more">Detaylar</span>
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>
 
+<script>
+  document.querySelectorAll<HTMLElement>('.fp').forEach((fp) => {
+    const track = fp.querySelector<HTMLElement>('.fp__track')!;
+    fp.querySelectorAll<HTMLElement>('.fp__btn').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        track.scrollBy({ left: Number(btn.dataset.dir) * track.clientWidth, behavior: 'smooth' });
+      }),
+    );
+  });
+</script>
+
 <style>
   .fp {
-    padding-block: 72px;
-    background: #fff;
+    padding-block: 40px 70px;
+    background: url('/img/legacy/projects-bg.jpg') center center no-repeat;
+    background-size: cover;
+    background-color: #c9ccd6;
+    font-family: var(--font-body);
   }
 
-  .fp__head {
+  .fp__inner {
+    max-width: 1170px;
+    margin-inline: auto;
+    padding-inline: 15px;
+  }
+
+  .fp__nav {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-s);
-    margin-bottom: 22px;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-bottom: 40px;
   }
 
-  .fp__head h2 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.7rem;
-    line-height: 1.15;
-    color: var(--color-navy);
+  .fp__btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #555;
+    font-size: 18px;
+    line-height: 1;
   }
 
-  .fp__head > a {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border: 1.5px solid #2a2f45;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #141b2e;
-    white-space: nowrap;
+  .fp__btn:hover {
+    background: #f7a238;
+    color: #fff;
   }
 
-  .fp__grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
-    grid-template-rows: 250px 250px;
-    gap: 16px;
+  .fp__track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .fp__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fp__item {
+    flex: 0 0 calc(50% - 12px);
+    scroll-snap-align: start;
   }
 
   .fp__card {
     position: relative;
     display: block;
-    overflow: hidden;
-    color: #fff;
-    background: var(--color-navy-deep);
-  }
-
-  .fp__card:nth-child(1) {
-    grid-row: 1 / 3;
-  }
-
-  .fp__card:nth-child(4) {
-    grid-column: 2 / 4;
+    min-height: 150px;
+    padding-left: 138px;
+    background: #fff;
   }
 
   .fp__card img {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 138px;
+    height: 150px;
     object-fit: cover;
-    transition: transform 500ms ease;
+    transition: opacity 0.3s ease;
   }
 
   .fp__card:hover img {
-    transform: scale(1.05);
+    opacity: 0.45;
   }
 
-  .fp__card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(13, 21, 51, 0) 40%, rgba(13, 21, 51, 0.9) 100%);
-    pointer-events: none;
-  }
-
-  .fp__body {
-    position: absolute;
-    inset: auto 0 0;
-    z-index: 1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 20px;
-  }
-
-  .fp__type {
-    display: block;
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-orange);
-  }
-
-  .fp__body h3 {
-    margin-top: 4px;
-    font-family: var(--font-body);
-    font-size: 1rem;
+  .fp__card h3 {
+    display: inline-block;
+    position: relative;
+    top: 12px;
+    left: -20px;
+    max-width: calc(100% - 100px);
+    margin: 0;
+    padding: 8px 20px;
+    font-size: 12px;
+    line-height: 26px;
     font-weight: 700;
-    line-height: 1.25;
-  }
-
-  .fp__card:nth-child(1) h3 {
-    font-size: 1.5rem;
-  }
-
-  .fp__body i {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 36px;
-    height: 36px;
-    background: var(--color-orange);
+    text-transform: uppercase;
     color: #fff;
+    background: #2e3191;
   }
 
-  @media (max-width: 1024px) {
-    .fp__grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: 300px 220px 220px;
-    }
-
-    .fp__card:nth-child(1) {
-      grid-column: 1 / 3;
-      grid-row: auto;
-    }
-
-    .fp__card:nth-child(4) {
-      grid-column: 1 / 3;
-    }
+  .fp__more {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 20px;
+    font-size: 12px;
+    line-height: 37px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #f7a238;
   }
 
-  @media (max-width: 600px) {
-    .fp__head {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .fp__head h2 {
-      font-size: 1.4rem;
-    }
-
-    .fp__grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: none;
-      grid-auto-rows: 240px;
-    }
-
-    .fp__card:nth-child(1),
-    .fp__card:nth-child(4) {
-      grid-column: auto;
+  @media (max-width: 800px) {
+    .fp__item {
+      flex-basis: 100%;
     }
   }
 </style>

@@ -1,25 +1,25 @@
 :root {
   /* Color */
-  --color-navy: #2f3091; /* brand primary */
-  --color-navy-dark: #262873; /* hover */
-  --color-navy-deep: #0d1533; /* footer background */
-  --color-text: #111318;
-  --color-text-muted: #4a4c58;
-  --color-text-faint: #8a8c98;
+  --color-navy: #f69c00; /* brand primary (legacy-site orange) */
+  --color-navy-dark: #da9700; /* hover */
+  --color-navy-deep: #161616; /* footer / dark surfaces */
+  --color-text: #352d2d;
+  --color-text-muted: #515050;
+  --color-text-faint: #8e8d8d;
   --color-bg: #ffffff;
-  --color-bg-light: #f4f5fa;
-  --color-border: #e2e3ec;
+  --color-bg-light: #dce8eb;
+  --color-border: #d8d8d8;
   --color-on-dark: #ffffff;
-  --color-on-dark-muted: #b7b8d6;
+  --color-on-dark-muted: #7e959e;
   --color-orange: #f5a21b; /* homepage highlight: eyebrow dashes, hero underline, arrow buttons */
-  --color-accent: #6d78f6; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
+  --color-accent: #36abfc; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
 
   /* Typography */
-  --font-body: 'Archivo', sans-serif;
-  --font-heading: 'Archivo Black', sans-serif;
-  --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
-  --font-script: 'Caveat', cursive; /* handwritten quote accents */
-  --font-display: 'Archivo Variable', sans-serif; /* stretch-axis display type, homepage sections */
+  --font-body: 'Century Gothic', 'Didact Gothic', sans-serif;
+  --font-heading: 'Century Gothic', 'Didact Gothic', sans-serif;
+  --font-accent: 'Open Sans', sans-serif; /* SAYDA logotype only */
+  --font-script: 'Open Sans', sans-serif; /* handwritten quote accents */
+  --font-display: 'Open Sans', sans-serif; /* stretch-axis display type, homepage sections */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
   --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
@@ -30,9 +30,9 @@
   /* Layout */
   --edge: 48px;
   --edge-mobile: 20px;
-  --max-width: 1400px;
-  --radius: 4px;
-  --header-h: 100px;
+  --max-width: 1200px;
+  --radius: 0;
+  --header-h: 105px;
   --header-h-compact: 64px;
 
   /* Spacing scale */

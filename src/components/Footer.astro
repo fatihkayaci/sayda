@@ -7,207 +7,189 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container footer__inner">
-    <div class="footer__brand">
-      <img class="footer__logo" src={site.logo} alt="Sayda İnşaat" width="196" height="46" />
-      <p class="footer__name">{site.legalName}</p>
-      <p class="footer__tagline">
-        {site.foundedYear} yılından bu yana, nitelikli yapılar, güvenilir çözümler ve sürdürülebilir projeler ile geleceği inşa ediyoruz.
+    <div class="footer__col">
+      <img class="footer__logo" src="/img/legacy/logo-3.png" alt="Sayda İnşaat" loading="lazy" />
+    </div>
+
+    <div class="footer__col">
+      <h2>Hakkımızda</h2>
+      <p>
+        {site.legalName} {site.foundedYear} yılında kurulmuş, bu tarihten beri birçok büyük proje için çeşitli müteahhitlik ve alt müteahhitlik hizmeti vermektedir.
       </p>
       <div class="footer__social-list">
         {
           site.social.instagram && (
             <a class="footer__social" href={site.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <Icon name="instagram" size={22} />
+              <Icon name="instagram" size={18} />
             </a>
           )
         }
         {
           site.social.linkedin && (
             <a class="footer__social" href={site.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Icon name="linkedin" size={22} />
+              <Icon name="linkedin" size={18} />
             </a>
           )
         }
       </div>
     </div>
 
-    <nav class="footer__column" aria-label="Hızlı linkler">
-      <h2>Hızlı Linkler</h2>
-      <ul>
-        <li><a href="/">Anasayfa</a></li>
-        <li><a href="/hakkimizda">Kurumsal</a></li>
-        <li><a href="/hizmetler">Hizmetler</a></li>
-        <li><a href="/projeler">Projeler</a></li>
-        <li><a href="/belgeler">E-Katalog</a></li>
-        <li><a href="/iletisim">İletişim</a></li>
-      </ul>
-    </nav>
-
-    <nav class="footer__column" aria-label="Kurumsal">
+    <nav class="footer__col" aria-label="Kurumsal">
       <h2>Kurumsal</h2>
-      <ul>
+      <ul class="footer__links">
         <li><a href="/hakkimizda">Hakkımızda</a></li>
         <li><a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a></li>
         <li><a href="/belgeler">Belgelerimiz</a></li>
+        <li><a href="/hizmetler/kat-karsiligi-insaat">Hizmetlerimiz</a></li>
+        <li><a href="/projeler">Projeler</a></li>
         <li><a href="/kariyer">İnsan Kaynakları</a></li>
         <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">Online Katalog</a></li>
       </ul>
     </nav>
 
-    <div class="footer__column">
+    <div class="footer__col">
       <h2>İletişim</h2>
+      <p>{site.address.street}, {site.address.neighborhood} / {site.address.city}</p>
       <ul class="footer__contact">
-        <li>
-          <Icon name="pin" size={21} />
-          <span>{site.address.street}, {site.address.neighborhood} / {site.address.city}</span>
-        </li>
-        <li>
-          <Icon name="phone" size={21} />
-          <a href={site.phoneHref}>{site.phone}</a>
-        </li>
-        <li>
-          <Icon name="mail" size={21} />
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </li>
+        <li><Icon name="phone" size={16} /> <a href={site.phoneHref}>{site.phone}</a></li>
+        <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="footer__bottom container">
-    <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
-    <nav class="footer__legal" aria-label="Yasal">
-      <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
-      <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>
-    </nav>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
+      <nav class="footer__legal" aria-label="Yasal">
+        <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
+        <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>
+        <a href="/cerez-politikasi">Çerez Politikası</a>
+      </nav>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background: #0f1a36;
-    color: var(--color-on-dark-muted);
-    padding-block: var(--space-xl) var(--space-l);
+    background: #161616;
+    color: #636363;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
   }
 
   .footer__inner {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
-    gap: var(--space-l);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1170px;
+    padding: 80px 15px 60px;
   }
 
   .footer__logo {
-    display: block;
-    height: 56px;
-    width: auto;
-    filter: brightness(0) invert(1);
+    width: 240px;
+    height: auto;
   }
 
-  .footer__label {
-    margin-top: var(--space-m);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.32em;
+  .footer__col h2 {
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    font-size: 16px;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--color-accent);
-  }
-
-  .footer__name {
-    margin-top: var(--space-s);
-    font-size: calc(var(--fs-small) * 1.05);
-    font-weight: 600;
     color: #fff;
+    border-bottom: 1px solid #262728;
   }
 
-  .footer__tagline {
-    margin-top: var(--space-xs);
-    max-width: 32ch;
-    font-size: calc(var(--fs-small) * 1.12);
+  .footer__col p {
+    line-height: 26px;
   }
 
   .footer__social-list {
     display: flex;
-    gap: var(--space-s);
-    margin-top: var(--space-m);
+    gap: 10px;
+    margin-top: 18px;
   }
 
   .footer__social {
     display: inline-flex;
-    color: var(--color-on-dark-muted);
-    transition: color var(--transition);
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #8e846f;
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.3s ease;
   }
 
   .footer__social:hover {
-    color: #fff;
+    background: #ffbb00;
+    border-color: #ffbb00;
+    color: #000;
   }
 
-  .footer__column h2 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: calc(var(--fs-small) * 1.12);
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: var(--space-m);
+  .footer__links a {
+    display: block;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    line-height: 24px;
+    border-bottom: 1px solid #2c2c2e;
+    transition: color 0.3s ease;
   }
 
-  .footer__column ul {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-    font-size: calc(var(--fs-small) * 1.12);
+  .footer__links a::before {
+    content: '›';
+    margin-right: 15px;
   }
 
-  .footer__column a {
-    transition: color var(--transition);
+  .footer__links li:last-child a {
+    border-bottom: 0;
   }
 
-  .footer__column a:hover {
-    color: #fff;
+  .footer__contact {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #262728;
   }
 
   .footer__contact li {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
+    padding-block: 7px;
+  }
+
+  .footer a:hover {
+    color: #ffbb00;
   }
 
   .footer__bottom {
-    margin-top: var(--space-xl);
-    padding-top: var(--space-m);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: calc(var(--fs-small) * 1.12);
+    background: #0e0e0e;
+  }
+
+  .footer__bottom-inner {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
-    gap: var(--space-s);
+    justify-content: space-between;
+    gap: 6px 24px;
+    max-width: 1170px;
+    padding: 24px 15px;
+    font-size: 13px;
   }
 
   .footer__legal {
     display: flex;
-    gap: var(--space-m);
+    flex-wrap: wrap;
+    gap: 6px 20px;
   }
 
-  .footer__legal a {
-    transition: color var(--transition);
-  }
-
-  .footer__legal a:hover {
-    color: #fff;
-  }
-
-  @media (max-width: 1024px) {
+  @media (max-width: 900px) {
     .footer__inner {
-      grid-template-columns: 1fr 1fr;
-      row-gap: var(--space-l);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (max-width: 640px) {
-    .footer {
-      padding-block: var(--space-xl) var(--space-l);
-    }
-
+  @media (max-width: 560px) {
     .footer__inner {
       grid-template-columns: 1fr;
     }

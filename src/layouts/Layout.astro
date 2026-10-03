@@ -1,11 +1,9 @@
 ---
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
 import Seo from '../components/Seo.astro';
 import Header from '../components/Header.astro';
-import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
-import Splash from '../components/Splash.astro';
+import PageTitle from '../components/PageTitle.astro';
 import site from '../data/site.json';
 
 interface Props {
@@ -31,7 +29,6 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
-    <ClientRouter />
     {
       site.gaMeasurementId && (
         <>
@@ -45,13 +42,12 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
     }
   </head>
   <body>
-    <Splash />
-    <Header transition:persist />
+    <Header />
+    {Astro.url.pathname !== '/' && Astro.url.pathname !== '/404' && Astro.url.pathname !== '/404/' && <PageTitle title={title} />}
     <main>
       <slot />
     </main>
-    {!hideCtaBanner && <CtaBanner heading={ctaHeading} eyebrow={ctaEyebrow} />}
-    <Footer transition:persist />
+    <Footer />
 
     <script>
       function initReveal() {
@@ -71,34 +67,6 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
       }
 
       initReveal();
-      document.addEventListener('astro:page-load', initReveal);
-
-      // Sekme geçişlerinde (proje kategorisi) scroll konumunu koru (üste atlamasın, sayfa yenilenmiş gibi görünmesin).
-      let preserveScrollY: number | null = null;
-
-      document.addEventListener('click', (event) => {
-        const link = (event.target as Element)?.closest?.('a.svc-hero__pill, a.projects-filters__btn');
-        if (link) {
-          preserveScrollY = window.scrollY;
-        }
-      });
-
-      // Yeni doküman canlıya alınmadan ÖNCE hedef scroll konumunu üzerine yazıyoruz,
-      // böylece geçiş animasyonu "sayfa başı" durumunu hiç yakalamıyor (üste zıplama görünmüyor).
-      document.addEventListener('astro:before-swap', (event) => {
-        if (preserveScrollY !== null) {
-          const swapEvent = event as unknown as { newDocument: Document };
-          swapEvent.newDocument.documentElement.scrollTop = preserveScrollY;
-          swapEvent.newDocument.body.scrollTop = preserveScrollY;
-        }
-      });
-
-      document.addEventListener('astro:after-swap', () => {
-        if (preserveScrollY !== null) {
-          window.scrollTo({ left: 0, top: preserveScrollY, behavior: 'instant' });
-          preserveScrollY = null;
-        }
-      });
     </script>
   </body>
 </html>
