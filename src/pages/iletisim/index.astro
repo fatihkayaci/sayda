@@ -3,20 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import site from '../../data/site.json';
 
-const mapsQuery = encodeURIComponent('SAYDA, Tarabya, Kaydırak Sk. No:3, 34457 Sarıyer/İstanbul');
-const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-const mapSrc = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
+const mapSrc =
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.8431446997392!2d29.050132814863236!3d41.137950019385016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caca992de690d7%3A0x610000eea3614bdc!2zS2F5ZMSxcmFrIFNrLiBObzo5LCBUYXJhYnlhLCAzNDQ1NyBTYXLEsXllci_EsHN0YW5idWw!5e0!3m2!1str!2str!4v1453124749653';
 
-const cards = [
-  {
-    icon: 'pin',
-    title: 'Adresimiz',
-    lines: [site.address.street, `${site.address.neighborhood} / ${site.address.district}, ${site.address.city} ${site.address.postalCode}`],
-  },
-  { icon: 'phone', title: 'Telefon', lines: [site.phone], href: site.phoneHref },
-  { icon: 'mail', title: 'E-posta', lines: [site.email], href: `mailto:${site.email}` },
-  { icon: 'clock', title: 'Çalışma Saatleri', lines: site.workingHours },
-];
+const phones = ['+90 212 223 88 12', '+90 212 299 42 92', '+90 212 299 42 93', '(fax) +90 212 223 61 70'];
 ---
 
 <Layout
@@ -24,176 +14,173 @@ const cards = [
   description="Sayda İnşaat iletişim bilgileri ve teklif formu."
   organizationSchema
   hideCtaBanner
+  heading="İletişim"
 >
-  <section class="ct-hero">
-    <div class="ct-hero__media" aria-hidden="true">
-      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
-    </div>
+  <section class="page" id="quote-form">
+    <div class="container contact">
+      <div>
+        <form id="contactForm" class="contact__form">
+          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
 
-    <div class="container ct-hero__inner">
-      <nav class="ct-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Anasayfa</a>
-        <span>/</span>
-        <span aria-current="page">İletişim</span>
-      </nav>
+          <input type="text" name="name" placeholder="Ad Soyad" required autocomplete="name" aria-label="Ad Soyad" />
+          <input type="email" name="email" placeholder="E-Mail" required autocomplete="email" aria-label="E-Mail" />
+          <input type="text" name="subject" placeholder="Konu" aria-label="Konu" />
+          <textarea name="message" rows="6" placeholder="Mesaj" required aria-label="Mesaj"></textarea>
 
-      <div class="ct-eyebrow">
-        <span></span>
-        BİZE ULAŞIN
+          <label class="consent">
+            <input type="checkbox" name="kvkk" required />
+            <span>
+              <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni
+              okudum, kişisel verilerimin işlenmesini kabul ediyorum.
+            </span>
+          </label>
+
+          <div>
+            <button type="submit" class="contact__send">Gönder</button>
+          </div>
+          <p id="contactStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <iframe class="map" title="Sayda İnşaat konumu" src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-      <h1>İletişim</h1>
-      <p class="ct-hero__lead">
-        Projelerimiz, hizmetlerimiz veya iş birlikleri için bizimle iletişime geçebilirsiniz. Ekibimiz en kısa
-        sürede size dönüş yapacaktır.
-      </p>
 
-      <p class="ct-hero__quote" aria-hidden="true">“Daha yaşanabilir<br />şehirler için<br />birlikte çalışalım.”</p>
+      <aside class="contact__info">
+        <ul>
+          <li>
+            <span class="icon"><Icon name="pin" size={22} /></span>
+            <p>{site.address.street}, {site.address.postalCode} {site.address.neighborhood} / {site.address.city.toLocaleUpperCase('tr')}</p>
+          </li>
+          <li>
+            <span class="icon"><Icon name="mail" size={22} /></span>
+            <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+          </li>
+          <li>
+            <span class="icon"><Icon name="phone" size={22} /></span>
+            <p>
+              {phones.map((phone) => <span class="phone">{phone}</span>)}
+            </p>
+          </li>
+        </ul>
+      </aside>
     </div>
   </section>
-
-  <section class="ct-main">
-    <div class="container">
-      <ul class="ct-cards">
-        {
-          cards.map((card) => (
-            <li>
-              <span class="ct-cards__icon">
-                <Icon name={card.icon} size={25} />
-              </span>
-              <div>
-                <h2>{card.title}</h2>
-                {card.lines.map((line) => (
-                  <p>{card.href ? <a href={card.href}>{line}</a> : line}</p>
-                ))}
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-
-      <div class="ct-grid">
-        <div class="ct-map">
-          <iframe
-            title="Sayda İnşaat konumu"
-            src={mapSrc}
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-          <div class="ct-map__card">
-            <Icon name="pin" size={30} />
-            <div>
-              <strong>{site.name}</strong>
-              <span>{site.address.neighborhood} / {site.address.city}</span>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                Haritada Gör <Icon name="arrow" size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="ct-form" id="quote-form">
-          <div class="ct-eyebrow ct-eyebrow--small">
-            <span></span>
-            MESAJ GÖNDERİN
-          </div>
-          <h2>Sizinle İletişime Geçelim</h2>
-          <p class="ct-form__lead">Aşağıdaki formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
-
-          <form id="contactForm">
-            <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
-            <input type="checkbox" name="botcheck" class="ct-form__honeypot" tabindex="-1" autocomplete="off" />
-
-            <div class="ct-form__row">
-              <label>
-                <span>Ad Soyad *</span>
-                <input type="text" name="name" placeholder="Adınız ve soyadınız" required autocomplete="name" />
-              </label>
-              <label>
-                <span>Telefon *</span>
-                <input type="tel" name="phone" placeholder="+90 5XX XXX XX XX" required autocomplete="tel" />
-              </label>
-            </div>
-
-            <div class="ct-form__row">
-              <label>
-                <span>E-posta *</span>
-                <input type="email" name="email" placeholder="ornek@sayda.com.tr" required autocomplete="email" />
-              </label>
-              <label>
-                <span>Talep Ettiğiniz Hizmet</span>
-                <select name="service">
-                  <option value="">Seçiniz</option>
-                  <option value="Anahtar Teslim Müteahhitlik">Anahtar Teslim Müteahhitlik (Ana Yüklenici)</option>
-                  <option value="Alt Müteahhitlik">Alt Müteahhitlik (Kısmi Yüklenici / Uzman Ekip)</option>
-                  <option value="Kat Karşılığı İnşaat">Kat Karşılığı İnşaat</option>
-                  <option value="Kentsel Dönüşüm">Kentsel Dönüşüm</option>
-                  <option value="Renovasyon İşleri">Renovasyon İşleri</option>
-                  <option value="Proje Yönetimi ve Danışmanlık">Proje Yönetimi ve Danışmanlık</option>
-                  <option value="Diğer">Diğer</option>
-                </select>
-              </label>
-            </div>
-
-            <label>
-              <span>Mesajınız *</span>
-              <textarea name="message" rows="4" placeholder="Mesajınızı buraya yazın..." required></textarea>
-            </label>
-
-            <label class="ct-form__consent">
-              <input type="checkbox" name="kvkk" required />
-              <span>
-                <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni
-                okudum, kişisel verilerimin işlenmesini kabul ediyorum.
-              </span>
-            </label>
-
-            <div class="ct-form__actions">
-              <button type="submit">
-                Mesaj Gönder <Icon name="arrow" size={18} />
-              </button>
-              <p class="ct-form__secure">
-                <Icon name="lock" size={16} />
-                Bilgileriniz güvenle saklanır.
-              </p>
-            </div>
-
-            <p class="ct-form__status" id="contactStatus" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {
-    site.offices.length > 0 && (
-      <section class="ct-offices">
-        <div class="container">
-          <div class="ct-offices__head">
-            <h2>Ofislerimiz</h2>
-            <p>Türkiye'nin farklı bölgelerinde projeler geliştiriyor, sizinle daha yakın oluyoruz.</p>
-          </div>
-
-          <ul class="ct-offices__grid">
-            {site.offices.map((office) => (
-              <li>
-                <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                  <img src="/img/sayda-insaat-hero01.webp" alt="" loading="lazy" />
-                  <span>
-                    <strong>{office.name}</strong>
-                    {office.street}
-                    <br />
-                    {office.area}
-                  </span>
-                  <Icon name="arrow" size={21} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    )
-  }
 </Layout>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact__form {
+    display: grid;
+    gap: 14px;
+  }
+
+  .contact__form input,
+  .contact__form textarea {
+    padding: 14px 16px;
+    font-size: 13px;
+    background: #f6f6f6;
+    border: 1px solid #ececec;
+  }
+
+  .contact__form textarea {
+    resize: vertical;
+  }
+
+  .contact__send {
+    width: 180px;
+    padding: 0;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 44px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #1d1d1d;
+    border: 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .contact__send:hover {
+    background: #f69c00;
+  }
+
+  .consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12px;
+  }
+
+  .consent input {
+    width: auto;
+    margin-top: 3px;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .map {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    border: 0;
+  }
+
+  .contact__info li {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 22px 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.04);
+  }
+
+  .icon {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    color: #f69c00;
+    border: 1px solid #f69c00;
+    border-radius: 50%;
+  }
+
+  .contact__info p {
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .phone {
+    display: block;
+    line-height: 1.8;
+  }
+
+  [data-state='error'] {
+    color: #c0392b;
+  }
+
+  [data-state='success'] {
+    color: #2e7d32;
+  }
+
+  @media (max-width: 800px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
 <script>
   function initContactForm() {

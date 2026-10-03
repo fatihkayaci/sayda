@@ -15,9 +15,11 @@ interface Props {
   ctaHeading?: string;
   ctaEyebrow?: string;
   jsonLd?: object[];
+  /** Sayfanın H1 metni; verilirse başlık bandında H1 olarak gösterilir. */
+  heading?: string;
 }
 
-const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeading, ctaEyebrow, jsonLd } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeading, ctaEyebrow, jsonLd, heading } = Astro.props;
 ---
 
 <!doctype html>
@@ -43,7 +45,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
   </head>
   <body>
     <Header />
-    {Astro.url.pathname !== '/' && Astro.url.pathname !== '/404' && Astro.url.pathname !== '/404/' && <PageTitle title={title} />}
+    {Astro.url.pathname !== '/' && Astro.url.pathname !== '/404' && Astro.url.pathname !== '/404/' && <PageTitle title={title} heading={heading} />}
     <main>
       <slot />
     </main>

@@ -8,13 +8,13 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 <Layout
   title="Gizlilik Politikası | Sayda İnşaat"
   description="Sayda İnşaat internet sitesi gizlilik politikası."
+  heading="Gizlilik Politikası"
 >
-  <section class="privacy">
+  <section class="page">
     <div class="container">
-      <h1>Gizlilik Politikası</h1>
-      <p class="privacy__updated">Son güncelleme: {lastUpdated}</p>
+      <p >Son güncelleme: {lastUpdated}</p>
 
-      <div class="privacy__body">
+      <div >
         <p>
           Bu Gizlilik Politikası, <strong>{site.legalName}</strong> ("Sayda İnşaat", "Şirket", "biz")
           tarafından işletilen <a href={site.url}>{site.url}</a> internet sitesini ("Site") ziyaret
@@ -32,7 +32,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 
         <h2>2. Topladığımız Bilgiler</h2>
         <p>Site üzerinden iki şekilde bilgi toplanmaktadır:</p>
-        <ul class="privacy__list">
+        <ul class="list">
           <li>
             <strong>Doğrudan sizin sağladığınız bilgiler:</strong> İletişim/teklif formunu doldurduğunuzda ad,
             soyad, telefon numarası, e-posta adresi ve mesaj içeriğiniz gibi bilgiler tarafımıza iletilir.
@@ -46,7 +46,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
         </ul>
 
         <h2>3. Bilgileri Kullanma Amaçlarımız</h2>
-        <ul class="privacy__list">
+        <ul class="list">
           <li>Teklif ve bilgi taleplerinizi yanıtlamak, sizinle iletişime geçmek</li>
           <li>Site'nin işlevselliğini, güvenliğini ve performansını sağlamak</li>
           <li>Site trafiğini ve kullanıcı davranışlarını analiz ederek hizmet kalitesini iyileştirmek
@@ -62,7 +62,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
           hizmetlerden faydalanılabilmektedir. Bu hizmet sağlayıcılar kendi gizlilik politikaları
           çerçevesinde veri işleyebilir:
         </p>
-        <ul class="privacy__list">
+        <ul class="list">
           <li><strong>Google Analytics</strong> (Google LLC) — site trafiği ve kullanıcı davranışı analizi</li>
           <li><strong>Google Ads</strong> (Google LLC) — reklam performans ölçümü ve yeniden pazarlama</li>
           <li><strong>Meta Pixel</strong> (Meta Platforms Inc.) — reklam performans ölçümü ve yeniden pazarlama</li>
@@ -120,59 +120,3 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
   </section>
 </Layout>
 
-<style>
-  .privacy {
-    padding-block: var(--space-block-compact) var(--space-xxl);
-  }
-
-  .privacy .container {
-    max-width: 851px;
-  }
-
-  .privacy h1 {
-    font-size: calc(var(--fs-h1) * 1.12);
-  }
-
-  .privacy__updated {
-    margin-top: var(--space-xs);
-    color: var(--color-text-faint);
-    font-size: calc(var(--fs-small) * 1.12);
-  }
-
-  .privacy__body {
-    margin-top: var(--space-l);
-  }
-
-  .privacy__body h2 {
-    margin-top: var(--space-l);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.4rem;
-    color: var(--color-navy);
-  }
-
-  .privacy__body p {
-    margin-top: var(--space-xs);
-    line-height: 1.8;
-    color: var(--color-text-muted);
-  }
-
-  .privacy__list {
-    margin-top: var(--space-xs);
-    padding-left: 22px;
-    display: grid;
-    gap: 7px;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    list-style: disc;
-  }
-
-  .privacy__body a {
-    color: var(--color-navy);
-    font-weight: 700;
-  }
-
-  .privacy__body a:hover {
-    text-decoration: underline;
-  }
-</style>

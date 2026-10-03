@@ -11,29 +11,28 @@ const navLinks = [
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
       { label: 'Belgelerimiz', href: '/belgeler' },
       { label: 'Haberler', href: '/haberler' },
-      { label: 'Rehber', href: '/rehber' },
     ],
   },
   {
     label: 'Hizmetler',
     href: '/hizmetler',
     children: [
-      { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
-      { label: 'Anahtar Teslim Müteahhitlik', href: '/hizmetler/anahtar-teslim-muteahhitlik' },
-      { label: 'Kat Karşılığı İnşaat', href: '/hizmetler/kat-karsiligi-insaat' },
-      { label: 'Proje Yönetimi & Danışmanlık', href: '/hizmetler/proje-yonetimi-danismanlik' },
-      { label: 'Tesis Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
-      { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum' },
+      { label: 'Müteahhitlik ve Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
+      { label: 'Kentsel Dönüşüm ve Kat Karşılığı İnşaat', href: '/hizmetler/kentsel-donusum' },
+      { label: 'Proje Yönetimi ve Danışmanlık', href: '/hizmetler/proje-yonetimi-danismanlik' },
     ],
   },
   {
     label: 'Projeler',
     href: '/projeler',
     children: [
-      { label: 'Devam Eden', href: '/projeler/devam-eden' },
-      { label: 'Tamamlanan', href: '/projeler/tamamlanan' },
+      { label: 'Devam Eden Projeler', href: '/projeler/devam-eden' },
+      { label: 'Tamamlanan Projeler', href: '/projeler/tamamlanan' },
+      { label: 'İş Bitirme Belgeleri', href: '/projeler/is-bitirme-belgeleri' },
+      { label: 'Video Görüntüleri', href: 'https://www.youtube.com/channel/UC-gUM5eN_XwqaV-EUpOx_Ag', external: true },
     ],
   },
+  { label: 'Blog', href: '/blog' },
   { label: 'E-Katalog', href: '/katalog.pdf' },
   {
     label: 'İK',
@@ -73,12 +72,12 @@ const isPathActive = (href?: string) => {
             const active = isPathActive(item.href) || (item.children?.some((c) => isPathActive(c.href)) ?? false);
             return (
               <li class:list={['header__item', { 'has-sub': item.children, current: active }]}>
-                <a href={item.href}>{item.label}</a>
+                <a href={item.children ? '#' : item.href} aria-haspopup={item.children ? 'true' : undefined}>{item.label}</a>
                 {item.children && (
                   <ul class="header__sub">
                     {item.children.map((child) => (
                       <li>
-                        <a href={child.href}>{child.label}</a>
+                        <a href={child.href} target={child.external ? '_blank' : undefined} rel={child.external ? 'noopener noreferrer' : undefined}>{child.label}</a>
                       </li>
                     ))}
                   </ul>
@@ -100,14 +99,12 @@ const isPathActive = (href?: string) => {
     const open = nav!.classList.toggle('is-open');
     btn.setAttribute('aria-expanded', String(open));
   });
+  // Üst menü öğeleri (Kurumsal, Hizmetler...) sayfa değil; sadece alt menüyü açar.
   nav?.querySelectorAll<HTMLElement>('.has-sub > a').forEach((a) => {
     a.addEventListener('click', (e) => {
+      e.preventDefault();
       if (window.innerWidth > 991) return;
-      const li = a.parentElement!;
-      if (!li.classList.contains('is-open')) {
-        e.preventDefault();
-        li.classList.add('is-open');
-      }
+      a.parentElement!.classList.toggle('is-open');
     });
   });
 </script>

@@ -1,0 +1,79 @@
+---
+import haberlerData from '../data/haberler.json';
+
+const items = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const fmt = (iso: string) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d}.${m}.${y}`;
+};
+---
+
+<aside class="news-side">
+  <h2>Bizden Haberler</h2>
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <img src={item.image} alt="" width="98" height="76" loading="lazy" />
+          <div>
+            <h3>{item.title}</h3>
+            <time>{fmt(item.date)}</time>
+            <a href={`/haberler/${item.slug}`}>Devamı..</a>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
+
+<style>
+  .news-side {
+    padding-top: 60px;
+  }
+
+  .news-side h2 {
+    margin: 0 0 24px;
+    padding: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #da9700;
+  }
+
+  .news-side h2::after {
+    display: none;
+  }
+
+  .news-side li {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .news-side img {
+    width: 98px;
+    height: 76px;
+    object-fit: cover;
+    flex: none;
+  }
+
+  .news-side h3 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13px;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  .news-side time {
+    display: block;
+    margin: 18px 0 10px;
+    font-size: 12px;
+    color: #f69c00;
+  }
+
+  .news-side a {
+    font-size: 12px;
+    color: #337ab7;
+  }
+</style>

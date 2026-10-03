@@ -8,20 +8,20 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 <Layout
   title="KVKK Aydınlatma Metni | Sayda İnşaat"
   description="Sayda İnşaat kişisel verilerin korunması kanunu (KVKK) kapsamında aydınlatma metni."
+  heading="KVKK Aydınlatma Metni"
 >
-  <section class="kvkk">
+  <section class="page">
     <div class="container">
-      <h1>KVKK Aydınlatma Metni</h1>
-      <p class="kvkk__updated">Son güncelleme: {lastUpdated}</p>
+      <p >Son güncelleme: {lastUpdated}</p>
 
-      <div class="kvkk__body">
+      <div >
         <h2>1. Veri Sorumlusunun Kimliği</h2>
         <p>
           6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") uyarınca, kişisel verileriniz veri sorumlusu
           sıfatıyla <strong>{site.legalName}</strong> ("Sayda İnşaat" veya "Şirket") tarafından aşağıda
           açıklanan kapsamda işlenebilecektir.
         </p>
-        <ul class="kvkk__list">
+        <ul class="list">
           <li>Adres: {site.address.street}, {site.address.neighborhood} / {site.address.district}, {site.address.city} {site.address.postalCode}</li>
           <li>Telefon: {site.phone}</li>
           <li>E-posta: {site.email}</li>
@@ -31,7 +31,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 
         <h2>2. İşlenen Kişisel Veriler</h2>
         <p>İletişim/teklif formu üzerinden aşağıdaki kişisel verileriniz işlenmektedir:</p>
-        <ul class="kvkk__list">
+        <ul class="list">
           <li>Kimlik bilgisi: Ad, soyad</li>
           <li>İletişim bilgisi: Telefon numarası, e-posta adresi</li>
           <li>İşlem güvenliği bilgisi: Form gönderim tarihi/saati, IP adresi [SUNUCU LOGLARINDA TUTULUYORSA]</li>
@@ -39,7 +39,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
         </ul>
 
         <h2>3. Kişisel Verilerin İşlenme Amaçları</h2>
-        <ul class="kvkk__list">
+        <ul class="list">
           <li>Tarafınızca iletilen teklif/bilgi taleplerinin değerlendirilmesi ve yanıtlanması</li>
           <li>Sizinle iletişime geçilmesi, teklif ve bilgilendirme süreçlerinin yürütülmesi</li>
           <li>Talep ve şikayetlerin takibi</li>
@@ -77,7 +77,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 
         <h2>8. KVKK Kapsamındaki Haklarınız</h2>
         <p>KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
-        <ul class="kvkk__list">
+        <ul class="list">
           <li>Kişisel verinizin işlenip işlenmediğini öğrenme</li>
           <li>İşlenmişse buna ilişkin bilgi talep etme</li>
           <li>İşlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme</li>
@@ -101,59 +101,3 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
   </section>
 </Layout>
 
-<style>
-  .kvkk {
-    padding-block: var(--space-block-compact) var(--space-xxl);
-  }
-
-  .kvkk .container {
-    max-width: 851px;
-  }
-
-  .kvkk h1 {
-    font-size: calc(var(--fs-h1) * 1.12);
-  }
-
-  .kvkk__updated {
-    margin-top: var(--space-xs);
-    color: var(--color-text-faint);
-    font-size: calc(var(--fs-small) * 1.12);
-  }
-
-  .kvkk__body {
-    margin-top: var(--space-l);
-  }
-
-  .kvkk__body h2 {
-    margin-top: var(--space-l);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.4rem;
-    color: var(--color-navy);
-  }
-
-  .kvkk__body p {
-    margin-top: var(--space-xs);
-    line-height: 1.8;
-    color: var(--color-text-muted);
-  }
-
-  .kvkk__list {
-    margin-top: var(--space-xs);
-    padding-left: 22px;
-    display: grid;
-    gap: 7px;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    list-style: disc;
-  }
-
-  .kvkk__body a {
-    color: var(--color-navy);
-    font-weight: 700;
-  }
-
-  .kvkk__body a:hover {
-    text-decoration: underline;
-  }
-</style>

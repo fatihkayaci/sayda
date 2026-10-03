@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import blogData from '../../data/blog.json';
+
+export function getStaticPaths() {
+  return blogData.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const sorted = [...blogData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const related = sorted.filter((item) => item.slug !== post.slug).slice(0, 5);
+
+// İçerik `blog.json` içinde bloklar halinde tutulur.
+type Block =
+  | { type: 'lead' | 'p' | 'heading' | 'note'; text: string }
+  | { type: 'quote'; text: string; author?: string }
+  | { type: 'steps'; items: { title?: string; text: string }[] };
+const blocks = post.blocks as Block[];
+---
+
+<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image} heading={post.title}>
+  <article class="page">
+    <div class="container page__split">
+      <div>
+        <p class="meta">{formatter.format(new Date(post.date))}</p>
+        <figure class="page__figure">
+          <img src={post.image} alt={post.title} fetchpriority="high" />
+        </figure>
+        <p><strong>{post.excerpt}</strong></p>
+        {
+          blocks.map((block) => {
+            switch (block.type) {
+              case 'lead':
+                return <p><strong>{block.text}</strong></p>;
+              case 'heading':
+                return <h2>{block.text}</h2>;
+              case 'quote':
+                return (
+                  <blockquote>
+                    <p>“{block.text}”</p>
+                    {block.author && <cite>— {block.author}</cite>}
+                  </blockquote>
+                );
+              case 'note':
+                return <p class="note">{block.text}</p>;
+              case 'steps':
+                return (
+                  <ol class="list">
+                    {block.items.map((item, index) => (
+                      <li>
+                        <strong>{index + 1}. {item.title ? `${item.title}: ` : ''}</strong>
+                        {item.text}
+                      </li>
+                    ))}
+                  </ol>
+                );
+              default:
+                return <p>{block.text}</p>;
+            }
+          })
+        }
+        <p><a href="/blog">← Tüm Blog Yazıları</a></p>
+      </div>
+
+      <aside class="page__aside guide-side">
+        <h2>Diğer Yazılar</h2>
+        <ul>
+          {
+            related.map((item) => (
+              <li>
+                <img src={item.image} alt="" width="98" height="76" loading="lazy" />
+                <a href={`/blog/${item.slug}`}>{item.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .meta {
+    color: #da9700;
+  }
+
+  .page__figure {
+    margin: 0 0 20px;
+  }
+
+  .note {
+    padding: 12px 16px;
+    background: #dce8eb;
+  }
+
+  blockquote {
+    margin: 0 0 14px;
+    padding-left: 16px;
+    border-left: 3px solid #f69c00;
+  }
+
+  .guide-side ul li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #eee;
+  }
+
+  .guide-side img {
+    width: 98px;
+    height: 76px;
+    object-fit: cover;
+    flex: none;
+  }
+
+  .guide-side a {
+    font-size: 12px;
+    line-height: 16px;
+  }
+</style>

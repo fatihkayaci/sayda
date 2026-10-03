@@ -14,7 +14,8 @@ const year = new Date().getFullYear();
     <div class="footer__col">
       <h2>Hakkımızda</h2>
       <p>
-        {site.legalName} {site.foundedYear} yılında kurulmuş, bu tarihten beri birçok büyük proje için çeşitli müteahhitlik ve alt müteahhitlik hizmeti vermektedir.
+        Sayda İnşaat Taahhüt Sanayi ve Ticaret Limited Şirketi {site.foundedYear} yılında kurulmuş ve bu tarihten beri birçok büyük proje için
+        çeşitli müteahhitlik ve alt-müteahhitlik “uzman ekip” hizmetleri vermektedir.
       </p>
       <div class="footer__social-list">
         {
@@ -38,28 +39,23 @@ const year = new Date().getFullYear();
       <h2>Kurumsal</h2>
       <ul class="footer__links">
         <li><a href="/hakkimizda">Hakkımızda</a></li>
-        <li><a href="/hakkimizda/vizyon-misyon">Vizyon &amp; Misyon</a></li>
+        <li><a href="/hakkimizda/vizyon-misyon">Vizyon-Misyon</a></li>
         <li><a href="/belgeler">Belgelerimiz</a></li>
-        <li><a href="/hizmetler/kat-karsiligi-insaat">Hizmetlerimiz</a></li>
-        <li><a href="/projeler">Projeler</a></li>
-        <li><a href="/kariyer">İnsan Kaynakları</a></li>
         <li><a href={site.documents.catalog} target="_blank" rel="noopener noreferrer">Online Katalog</a></li>
       </ul>
     </nav>
 
     <div class="footer__col">
       <h2>İletişim</h2>
-      <p>{site.address.street}, {site.address.neighborhood} / {site.address.city}</p>
-      <ul class="footer__contact">
-        <li><Icon name="phone" size={16} /> <a href={site.phoneHref}>{site.phone}</a></li>
-        <li><Icon name="mail" size={16} /> <a href={`mailto:${site.email}`}>{site.email}</a></li>
-      </ul>
+      <p>{site.address.street} {site.address.postalCode} {site.address.neighborhood} / {site.address.city.toLocaleUpperCase('tr')}</p>
+      <p class="footer__tel">Tel : <a href={site.phoneHref}>{site.phone}</a></p>
+      <p class="footer__mail"><a href={`mailto:${site.email}`}>{site.email}</a></p>
     </div>
   </div>
 
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-      <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
+      <p>Copyright &copy; Sayda İnşaat.</p>
       <nav class="footer__legal" aria-label="Yasal">
         <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
         <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>
@@ -146,10 +142,16 @@ const year = new Date().getFullYear();
     border-bottom: 0;
   }
 
-  .footer__contact {
-    margin-top: 14px;
+  .footer__tel {
+    font-weight: 700;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .footer__mail {
+    margin-top: 14px !important;
     padding-top: 14px;
     border-top: 1px solid #262728;
+    font-family: Georgia, 'Times New Roman', serif;
   }
 
   .footer__contact li {
@@ -164,7 +166,8 @@ const year = new Date().getFullYear();
   }
 
   .footer__bottom {
-    background: #0e0e0e;
+    background: #0f0f0f;
+    color: #3f3f3f;
   }
 
   .footer__bottom-inner {
@@ -174,7 +177,7 @@ const year = new Date().getFullYear();
     gap: 6px 24px;
     max-width: 1170px;
     padding: 24px 15px;
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .footer__legal {

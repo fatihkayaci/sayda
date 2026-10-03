@@ -8,13 +8,13 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
 <Layout
   title="Çerez Politikası | Sayda İnşaat"
   description="Sayda İnşaat internet sitesi çerez (cookie) politikası."
+  heading="Çerez Politikası"
 >
-  <section class="privacy">
+  <section class="page">
     <div class="container">
-      <h1>Çerez Politikası</h1>
-      <p class="privacy__updated">Son güncelleme: {lastUpdated}</p>
+      <p >Son güncelleme: {lastUpdated}</p>
 
-      <div class="privacy__body">
+      <div >
         <p>
           Bu Çerez Politikası, <strong>{site.legalName}</strong> ("Sayda İnşaat", "Şirket", "biz")
           tarafından işletilen <a href={site.url}>{site.url}</a> internet sitesinde ("Site")
@@ -33,7 +33,7 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
         </p>
 
         <h2>2. Kullandığımız Çerez Türleri</h2>
-        <ul class="privacy__list">
+        <ul class="list">
           <li>
             <strong>Zorunlu (teknik) çerezler:</strong> Site'nin temel işlevlerini (sayfalar arası
             gezinme, form gönderimi gibi) yerine getirebilmesi için gereklidir. Bu çerezler
@@ -81,59 +81,3 @@ const lastUpdated = '[GG.AA.YYYY]'; // Yayına almadan önce güncelleyin
   </section>
 </Layout>
 
-<style>
-  .privacy {
-    padding-block: var(--space-block-compact) var(--space-xxl);
-  }
-
-  .privacy .container {
-    max-width: 851px;
-  }
-
-  .privacy h1 {
-    font-size: calc(var(--fs-h1) * 1.12);
-  }
-
-  .privacy__updated {
-    margin-top: var(--space-xs);
-    color: var(--color-text-faint);
-    font-size: calc(var(--fs-small) * 1.12);
-  }
-
-  .privacy__body {
-    margin-top: var(--space-l);
-  }
-
-  .privacy__body h2 {
-    margin-top: var(--space-l);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 1.4rem;
-    color: var(--color-navy);
-  }
-
-  .privacy__body p {
-    margin-top: var(--space-xs);
-    line-height: 1.8;
-    color: var(--color-text-muted);
-  }
-
-  .privacy__list {
-    margin-top: var(--space-xs);
-    padding-left: 22px;
-    display: grid;
-    gap: 7px;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-    list-style: disc;
-  }
-
-  .privacy__body a {
-    color: var(--color-navy);
-    font-weight: 700;
-  }
-
-  .privacy__body a:hover {
-    text-decoration: underline;
-  }
-</style>

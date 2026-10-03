@@ -1,1 +1,4 @@
 https://sayda.com.tr/* https://www.sayda.com.tr/:splat 301!
+/rehber /blog 301
+/rehber/* /blog/:splat 301
+/kentsel-donusum /hizmetler/kentsel-donusum 301

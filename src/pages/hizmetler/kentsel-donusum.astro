@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const adimlar = [
+  'TEKNİK DEĞERLENDİRME VE FİZİBİLİTE ÇALIŞMASI',
+  'ŞARTNAME VE SÖZLEŞME',
+  'PROJELENDİRME',
+  'RUHSAT VE YASAL İZİNLER',
+  'İNŞAAT SÜRECİ',
+  'KAT İTTİFAKI SÜRECİ',
+  'İSKAN SÜRECİ',
+];
+---
+
+<Layout
+  title="Kentsel Dönüşüm | Sayda İnşaat"
+  description="Riskli yapı tespiti sonrası süreç yönetimi, kat karşılığı anlaşma ve inşaatın anahtar teslim tamamlanması."
+  heading="Kentsel Dönüşüm ve Kat Karşılığı İnşaatlar"
+>
+  <section class="page">
+    <div class="container page__split">
+      <div>
+        <h2>KENTSEL DÖNÜŞÜM</h2>
+        <p>
+          SAYDA riskli yapıların “6306 sayılı KENTSEL DÖNÜŞÜM” kanunu çerçevesinde kent dokusuna uygun, sağlam,
+          konforlu, sağlıklı ve güvenli yapılara dönüştürmektedir.
+        </p>
+        <p>
+          Yapınızın risk analizleri neticesinde Çevre ve Şehircilik Bakanlığınca verilen "RİSK RAPORU" ile beraber
+          ilgili kanunla bina yenileme kredi, kira destekleriyle yapılarınızı yeniliyoruz. Bütün teknik ve yasal
+          süreçlerin takibiyle hak sahiplerini; konut alanlarında eksilme ve azalma olmaksızın sağlam, konforlu,
+          sağlıklı konutlara kavuşturuyoruz.
+        </p>
+
+        <h2>KAT KARŞILIĞI İNŞAATLAR</h2>
+        <p>
+          SAYDA bölgenizde imar kanunlarında yapılan değişiklikler ile yapılaşma alanında ekonomik büyüme olması
+          halinde; eski konutlarınızı veya arsanızı ekonomik koşullardaki uygun oranlarda kat karşılığı ile sağlam,
+          konforlu, sağlıklı ve güvenli konutlara dönüştürür.
+        </p>
+        <ul class="list">
+          {adimlar.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="page__aside">
+        <img src="/img/legacy/hizmet.webp" alt="Kentsel dönüşüm ve kat karşılığı inşaat" loading="lazy" />
+      </div>
+    </div>
+  </section>
+</Layout>

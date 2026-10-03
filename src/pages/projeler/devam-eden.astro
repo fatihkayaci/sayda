@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ProjectsHero from '../../components/project/ProjectsHero.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
 import allProjects from '../../data/projects.json';
 
@@ -10,25 +9,12 @@ const projects = allProjects.filter((project) => project.status === 'devam-eden'
 <Layout
   title="Devam Eden Projeler | Sayda İnşaat"
   description="Sayda İnşaat'ın devam eden projeleri."
-  ctaHeading="Projeniz için bizimle çalışın."
+  heading="Devam Eden Projeler"
 >
-  <ProjectsHero active="devam-eden" />
-
-  <section class="projeler-page">
+  <section class="page">
     <div class="container">
-      {projects.length > 0 ? <ProjectGrid projects={projects} /> : <p class="projeler-page__empty">İçerik hazırlanıyor.</p>}
+      {projects.length > 0 ? <ProjectGrid projects={projects} /> : <p>İçerik hazırlanıyor.</p>}
     </div>
   </section>
 </Layout>
 
-<style>
-  .projeler-page {
-    padding-block: var(--space-xl);
-    background: var(--color-bg-light);
-  }
-
-  .projeler-page__empty {
-    color: var(--color-text-faint);
-    font-size: var(--fs-small);
-  }
-</style>

@@ -1,24 +1,27 @@
 ---
 interface Props {
   title: string;
+  heading?: string;
 }
 
-// Eski sitedeki #page-title bandı. Sayfanın gerçek H1'i içerikte kalır; bu bant başlık etiketi kullanmaz.
+// Eski sitedeki #page-title bandı. `heading` verilirse sayfanın H1'i burada render edilir; verilmezse sayfa kendi H1'ini taşır ve bant H1 kullanmaz.
+const { heading } = Astro.props;
 const label = Astro.props.title.split('|')[0].trim();
+const crumb = heading ?? label;
 ---
 
 <section class="page-title">
   <div class="container page-title__inner">
-    <p class="page-title__text">{label}</p>
+    {heading ? <h1 class="page-title__text">{heading}</h1> : <p class="page-title__text">{label}</p>}
     <nav class="page-title__crumbs" aria-label="Sayfa yolu">
-      <a href="/">Anasayfa</a> <span aria-hidden="true">›</span> <span>{label}</span>
+      <a href="/">Anasayfa</a> <span aria-hidden="true">›</span> <span>{crumb}</span>
     </nav>
   </div>
 </section>
 
 <style>
   .page-title {
-    padding: 35px 0;
+    padding: 65px 0;
     background: url('/img/legacy/page-title-bg.jpg') center center no-repeat;
     background-size: cover;
     background-color: #0b3345;
@@ -39,18 +42,18 @@ const label = Astro.props.title.split('|')[0].trim();
   .page-title__text {
     margin: 0;
     padding: 0 26px;
-    min-width: 280px;
+    min-width: 320px;
     text-align: center;
-    font-size: 17px;
+    font-size: 30px;
     font-weight: 700;
-    line-height: 44px;
+    line-height: 50px;
     text-transform: uppercase;
     border-top: 1px solid rgba(132, 119, 117, 0.8);
     border-bottom: 1px solid rgba(132, 119, 117, 0.8);
   }
 
   .page-title__crumbs {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
   }

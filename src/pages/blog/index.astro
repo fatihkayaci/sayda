@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import blogData from '../../data/blog.json';
+
+const categoryLabels: Record<string, string> = {
+  'kentsel-donusum': 'Kentsel Dönüşüm',
+  'kat-karsiligi': 'Kat Karşılığı',
+};
+
+const sorted = [...blogData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout title="Blog | Sayda İnşaat" description="Kentsel dönüşüm ve inşaat süreçleri hakkında blog yazıları." heading="Blog">
+  <section class="page">
+    <div class="container page__split">
+      <div>
+        <p>Kentsel dönüşüm ve inşaat süreçleri hakkında uzman içerikleri, blog yazılarıyla keşfedin.</p>
+        <ul class="guide-list">
+          {
+            sorted.map((post) => (
+              <li>
+                <a class="guide-list__img" href={`/blog/${post.slug}`}>
+                  <img src={post.image} alt={post.title} width="285" height="180" loading="lazy" />
+                  <span>{formatter.format(new Date(post.date))}</span>
+                </a>
+                <div>
+                  <small>{categoryLabels[post.category]}</small>
+                  <h2>
+                    <a href={`/blog/${post.slug}`}>{post.title}</a>
+                  </h2>
+                  <p>{post.excerpt}</p>
+                  <a class="btn" href={`/blog/${post.slug}`}>Devamını Oku</a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <aside class="page__aside guide-side">
+        <h2>Popüler Başlıklar</h2>
+        <ul>
+          {
+            sorted.slice(0, 5).map((post) => (
+              <li>
+                <img src={post.image} alt="" width="98" height="76" loading="lazy" />
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .guide-list > li {
+    display: grid;
+    grid-template-columns: 285px 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  .guide-list__img {
+    position: relative;
+    display: block;
+  }
+
+  .guide-list__img img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .guide-list__img span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 14px;
+    font-size: 11px;
+    line-height: 28px;
+    color: #fff;
+    background: #f69c00;
+  }
+
+  .guide-list small {
+    color: #8e8d8d;
+    text-transform: uppercase;
+  }
+
+  .guide-list h2 {
+    margin-top: 4px;
+    font-size: 16px;
+  }
+
+  .guide-list h2 a {
+    color: #333 !important;
+  }
+
+  .guide-side ul li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #eee;
+  }
+
+  .guide-side img {
+    width: 98px;
+    height: 76px;
+    object-fit: cover;
+    flex: none;
+  }
+
+  .guide-side a {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  @media (max-width: 800px) {
+    .guide-list > li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

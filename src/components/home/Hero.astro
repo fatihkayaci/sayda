@@ -1,11 +1,11 @@
 ---
+// Canlı sitedeki slider: 4 slayt, sağa hizalı düz beyaz başlık, ok/nokta yok.
+// Sayfanın H1'i (SEO) "Yüksek Kalitede Uygulamalar" slaytında kalır.
 const slides = [
-  { image: '/img/legacy/slide-1.webp', title: 'Yüksek Kalitede Uygulamalar' },
-  { image: '/img/legacy/slide-2.webp', title: 'Profesyonel Çözümler' },
-  { image: '/img/legacy/slide-3.webp', title: 'Güvenilir Takvim, Adil Fiyat' },
-  { image: '/img/legacy/slide-4.webp', title: 'Kentsel Dönüşüm Çözümleri' },
-  { image: '/img/legacy/slide-6.webp', title: 'İş Bitirme Belgeli Müteahhitlik' },
-  { image: '/img/legacy/slide-7.webp', title: 'İstanbul’da 1996’dan Beri' },
+  { image: '/img/sayda-insaat-hero01.webp', title: 'Zamanında Teslim' },
+  { image: '/img/sayda-insaat-hero02.webp', title: 'Profesyonel Çözümler' },
+  { image: '/img/sayda-insaat-hero03.webp', title: 'Yüksek Kalitede Uygulamalar', h1: true },
+  { image: '/img/sayda-insaat-hero04.webp', title: 'Kentsel Dönüşüm Çözümleri' },
 ];
 ---
 
@@ -15,13 +15,11 @@ const slides = [
       <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
         <img src={slide.image} alt="" width="1920" height="740" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
         <div class="hero__caption">
-          {i === 0 ? <h1><b>{slide.title}</b></h1> : <p><b>{slide.title}</b></p>}
+          {slide.h1 ? <h1><b>{slide.title}</b></h1> : <p><b>{slide.title}</b></p>}
         </div>
       </div>
     ))
   }
-  <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Önceki slayt">‹</button>
-  <button class="hero__arrow hero__arrow--next" type="button" aria-label="Sonraki slayt">›</button>
 </section>
 
 <script>
@@ -29,25 +27,11 @@ const slides = [
     const slides = [...hero.querySelectorAll('.hero__slide')];
     const dur = Number(hero.dataset.interval) || 6000;
     let current = 0;
-    let timer = 0;
-    const go = (step: number) => {
+    window.setInterval(() => {
       slides[current].classList.remove('is-on');
-      current = (current + step + slides.length) % slides.length;
+      current = (current + 1) % slides.length;
       slides[current].classList.add('is-on');
-    };
-    const start = () => {
-      clearInterval(timer);
-      timer = window.setInterval(() => go(1), dur);
-    };
-    hero.querySelector('.hero__arrow--prev')!.addEventListener('click', () => {
-      go(-1);
-      start();
-    });
-    hero.querySelector('.hero__arrow--next')!.addEventListener('click', () => {
-      go(1);
-      start();
-    });
-    start();
+    }, dur);
   });
 </script>
 
@@ -79,47 +63,21 @@ const slides = [
 
   .hero__caption {
     position: absolute;
-    top: clamp(24px, 10vw, 205px);
-    right: 0;
-    text-align: right;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 15px;
+    text-align: center;
     pointer-events: none;
   }
 
   .hero__caption h1,
   .hero__caption p {
-    display: inline-block;
     margin: 0;
-    padding: 10px 24px;
-    background: rgba(246, 156, 0, 0.9);
-    color: #fff;
-    font-size: clamp(18px, 3.2vw, 44px);
+    font-size: clamp(20px, 3.4vw, 40px);
     line-height: 1.2;
     text-transform: uppercase;
-  }
-
-  .hero__arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 44px;
-    height: 44px;
-    border: none;
-    background: rgba(0, 0, 0, 0.35);
     color: #fff;
-    font-size: 28px;
-    line-height: 1;
-    transition: background 0.3s ease;
-  }
-
-  .hero__arrow:hover {
-    background: var(--color-navy);
-  }
-
-  .hero__arrow--prev {
-    left: 0;
-  }
-
-  .hero__arrow--next {
-    right: 0;
   }
 </style>

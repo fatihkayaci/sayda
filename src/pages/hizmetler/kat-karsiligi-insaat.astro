@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ServiceHero from '../../components/service/ServiceHero.astro';
 import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
 import ServicePanel from '../../components/service/ServicePanel.astro';
 import ProcessSteps from '../../components/service/ProcessSteps.astro';
@@ -46,11 +45,10 @@ const nedenler = [
 <Layout
   title="Kat Karşılığı İnşaat | Sayda İnşaat"
   description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
+  heading="Hizmetlerimiz"
 >
-  <ServiceHero />
-
-  <section class="svc-main">
-    <div class="container svc-main__layout">
+  <section class="page">
+    <div class="container svc-layout">
       <ServiceSidebar active={0} />
 
       <ServicePanel
@@ -60,36 +58,24 @@ const nedenler = [
         tagline="Arsanızın potansiyelini birlikte değerlendiriyor, ortak değer üretiyoruz."
       >
         <ServiceMedia image="/img/projects/vadistanbul/vadistanbul.webp" features={ozellikler} />
-
-        <div class="kat-split">
-          <div>
-            <ProcessSteps heading="Çalışma Süreci" steps={steps} />
-          </div>
-          <ServiceWhy
-            title="Neden Kat Karşılığı?"
-            items={nedenler}
-            quote="Arsanızın potansiyelini güvenle geleceğe taşıyoruz."
-          />
-        </div>
-
+        <ProcessSteps heading="Çalışma Süreci" steps={steps} />
+        <ServiceWhy title="Neden Kat Karşılığı?" items={nedenler} quote="Arsanızın potansiyelini güvenle geleceğe taşıyoruz." />
         <ChecklistBox heading="Kapsama Dahil İşler" items={kapsam} />
       </ServicePanel>
     </div>
   </section>
-
-
 </Layout>
 
 <style>
-  .kat-split {
+  .svc-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: 36px;
+    grid-template-columns: 1fr 3fr;
+    gap: 40px;
     align-items: start;
   }
 
-  @media (max-width: 1100px) {
-    .kat-split {
+  @media (max-width: 800px) {
+    .svc-layout {
       grid-template-columns: 1fr;
     }
   }

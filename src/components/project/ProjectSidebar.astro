@@ -1,5 +1,4 @@
 ---
-import Icon from '../Icon.astro';
 import site from '../../data/site.json';
 
 interface Props {
@@ -25,186 +24,57 @@ const rows = [
   { label: 'İşveren', value: project.employer },
   { label: 'Lokasyon', value: project.location },
   { label: 'İlçe', value: project.district },
-  { label: 'Alan', value: project.area, emphasis: true },
+  { label: 'Alan', value: project.area },
   { label: 'Başlangıç', value: project.startDate },
   { label: 'Bitiş', value: project.endDate || (ongoing ? 'Devam Ediyor' : '') },
-  { label: 'Durum', value: ongoing ? 'Devam Ediyor' : 'Tamamlandı', status: true },
+  { label: 'Durum', value: ongoing ? 'Devam Ediyor' : 'Tamamlandı' },
   { label: 'Proje Türü', value: project.type },
   { label: 'Hizmetlerimiz', value: project.services?.join(', ') },
 ].filter((row) => row.value);
 ---
 
-<div class="project-sidebar">
-  <div class="project-sidebar__card reveal">
+<aside class="page__aside">
+  <div class="page__box">
     <h2>Proje Bilgileri</h2>
-    <div class="project-sidebar__rows">
+    <dl>
       {
         rows.map((row) => (
-          <div class="project-sidebar__row">
-            <span class="project-sidebar__label">{row.label}</span>
-            <span class:list={['project-sidebar__value', { 'project-sidebar__value--emphasis': row.emphasis }]}>
-              {row.status && <span class:list={['project-sidebar__dot', { 'project-sidebar__dot--ongoing': ongoing }]} />}
-              {row.value}
-            </span>
+          <div class="row">
+            <dt>{row.label}</dt>
+            <dd>{row.value}</dd>
           </div>
         ))
       }
-    </div>
+    </dl>
   </div>
 
-  <div class="project-sidebar__cta reveal">
+  <div class="page__box cta">
     <h3>Benzer Proje için Teklif Alın</h3>
     <p>Uzman ekibimiz projenizi değerlendirsin.</p>
-    <a class="project-sidebar__cta-btn" href="/iletisim#quote-form">
-      Teklif Al <Icon name="arrow" size={18} />
-    </a>
-    <div class="project-sidebar__contact">
-      <a href={site.phoneHref}>
-        <Icon name="phone" size={21} />
-        {site.phone}
-      </a>
-      <a href={`mailto:${site.email}`}>
-        <Icon name="mail" size={21} />
-        {site.email}
-      </a>
-    </div>
+    <p><a class="btn" href="/iletisim#quote-form">Teklif Al</a></p>
+    <p><a href={site.phoneHref}>{site.phone}</a></p>
+    <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
   </div>
-</div>
+</aside>
 
 <style>
-  .project-sidebar {
-    display: grid;
-    gap: 18px;
-    position: sticky;
-    top: calc(var(--header-h) + 18px);
+  .row {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
   }
 
-  .project-sidebar__card {
-    background: var(--color-bg);
-    border-radius: 4px;
-    padding: 27px 31px 13px;
-    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.06);
-  }
-
-  .project-sidebar__card h2 {
-    margin-bottom: 9px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--color-border);
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.26rem;
-    color: var(--color-navy-deep);
-  }
-
-  .project-sidebar__row {
-    display: grid;
-    grid-template-columns: 124px 1fr;
-    gap: 13px;
-    padding: 14px 0;
-    border-bottom: 1px solid #eef0f6;
-  }
-
-  .project-sidebar__row:last-child {
-    border-bottom: 0;
-  }
-
-  .project-sidebar__label {
-    align-self: start;
-    padding-top: 2px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--color-text-faint);
+  dt {
+    font-size: 11px;
     text-transform: uppercase;
+    color: #8e8d8d;
   }
 
-  .project-sidebar__value {
-    display: flex;
-    align-items: baseline;
-    gap: 9px;
-    font-size: 0.84rem;
-    line-height: 1.5;
-    color: var(--color-text-muted);
+  dd {
+    margin: 2px 0 0;
+    color: #333;
   }
 
-  .project-sidebar__value--emphasis {
-    font-weight: 700;
-    color: var(--color-navy);
-  }
-
-  .project-sidebar__dot {
-    flex: none;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: #22a45d;
-  }
-
-  .project-sidebar__dot--ongoing {
-    background: #e0a020;
-  }
-
-  .project-sidebar__cta {
-    padding: 30px 31px 31px;
-    border-radius: 4px;
-    background: var(--color-navy);
-  }
-
-  .project-sidebar__cta h3 {
-    margin-bottom: 9px;
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 1.26rem;
-    color: #fff;
-  }
-
-  .project-sidebar__cta p {
-    margin-bottom: 22px;
-    font-size: 0.91rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-  }
-
-  .project-sidebar__cta-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 16px;
-    border-radius: 3px;
-    background: #fff;
-    color: var(--color-navy);
-    font-size: 0.91rem;
-    font-weight: 700;
-    transition: background var(--transition);
-  }
-
-  .project-sidebar__cta-btn:hover {
-    background: #e8e9f5;
-  }
-
-  .project-sidebar__contact {
-    display: grid;
-    gap: 16px;
-    margin-top: 25px;
-  }
-
-  .project-sidebar__contact a {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.91rem;
-    color: rgba(255, 255, 255, 0.9);
-    transition: color var(--transition);
-  }
-
-  .project-sidebar__contact a:hover {
-    color: #fff;
-  }
-
-  @media (max-width: 1024px) {
-    .project-sidebar {
-      position: static;
-    }
+  .cta {
+    margin-top: 20px;
   }
 </style>

@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Icon from '../../components/Icon.astro';
 import ProjectsHero from '../../components/project/ProjectsHero.astro';
 import ProjectFeatured from '../../components/project/ProjectFeatured.astro';
 import ProjectGrid from '../../components/ProjectGrid.astro';
@@ -13,114 +12,21 @@ const tamamlanan = allProjects.filter((project) => project.status === 'tamamlana
 <Layout
   title="Projeler | Sayda İnşaat"
   description="Sayda İnşaat'ın devam eden ve tamamlanan projeleri."
-  ctaHeading="Projeniz için bizimle çalışın."
+  heading="Geçmişten Bugüne Hayata Geçirdiğimiz Projeler"
 >
-  <ProjectsHero active="all" />
-
-  <section class="projeler-page">
+  <section class="page">
     <div class="container">
+      <p>1996'dan bu yana İstanbul ve Türkiye genelinde tamamladığımız ve devam eden projeleri keşfedin.</p>
+      <ProjectsHero active="all" />
       <ProjectFeatured projects={devamEden} />
-
       {
         tamamlanan.length > 0 && (
-          <div class="projeler-page__group" data-project-group>
-            <div class="projeler-page__group-heading">
-              <div>
-                <div class="projeler-page__eyebrow">
-                  <span />
-                  TAMAMLANAN PROJELER
-                </div>
-                <div class="projeler-page__title">
-                  <h2>Tamamlanan İşler</h2>
-                  <span class="projeler-page__group-count" data-group-count>
-                    {tamamlanan.length} PROJE
-                  </span>
-                </div>
-              </div>
-              <a href="/projeler/tamamlanan">
-                Tüm Projeleri Gör <Icon name="arrow" size={18} />
-              </a>
-            </div>
+          <section>
+            <h2>Tamamlanan İşler ({tamamlanan.length} proje)</h2>
             <ProjectGrid projects={tamamlanan} />
-          </div>
+          </section>
         )
       }
     </div>
   </section>
 </Layout>
-
-<style>
-
-  .projeler-page {
-    padding-block: 9px 81px;
-    background: #f4f6fb;
-  }
-
-  [data-project-group][hidden] {
-    display: none;
-  }
-
-  .projeler-page__group-heading {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-m);
-    margin-bottom: 31px;
-  }
-
-  .projeler-page__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 13px;
-    font-size: 0.77rem;
-    font-weight: 700;
-    letter-spacing: 0.24em;
-    color: var(--color-navy);
-  }
-
-  .projeler-page__eyebrow span {
-    width: 31px;
-    height: 2px;
-    background: currentColor;
-  }
-
-  .projeler-page__title {
-    display: flex;
-    align-items: center;
-    gap: 21px;
-  }
-
-  .projeler-page__title h2 {
-    font-size: clamp(1.96rem, 2.912vw, 2.52rem);
-    color: var(--color-navy-deep);
-  }
-
-  .projeler-page__group-count {
-    padding: 7px 16px;
-    border: 1px solid #c9cde3;
-    border-radius: 20px;
-    background: #fff;
-    font-size: 0.77rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--color-navy);
-  }
-
-  .projeler-page__group-heading a {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 7px;
-    font-size: 0.91rem;
-    font-weight: 700;
-    color: var(--color-navy-deep);
-  }
-
-  @media (max-width: 640px) {
-    .projeler-page__group-heading {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-</style>

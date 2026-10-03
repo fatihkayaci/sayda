@@ -1,296 +1,132 @@
 ---
-import '../../styles/services.css';
 import Layout from '../../layouts/Layout.astro';
-import ServiceTopbar from '../../components/service/ServiceTopbar.astro';
-import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
-import ServicePanel from '../../components/service/ServicePanel.astro';
-import ChecklistBox from '../../components/service/ChecklistBox.astro';
-import Icon from '../../components/Icon.astro';
 
-const partners = [
-  'Kiler GYO',
-  'Biskon Yapı A.Ş.',
-  'Özak İnşaat',
-  'CCN Altyapı',
-  'Artaş İnvest',
-  'Rönesans Teknik',
-  'Akiş GYO',
-  'Varyap İnşaat',
-  'Oyak İnşaat',
+const altHizmetler = [
+  'KABA YAPI İMALATLARI',
+  'İLERİ KABA VE İNCE YAPI İMALATLARI',
+  'ÇATI İMALATLARI',
+  'ASMATAVAN & BÖLME DUVAR İMALATLARI',
+  'CEPHE MANTOLAMA & SERAMİK, METAL & CAM GİYDİRME İMALATLARI',
+  'DEKORASYON UYGULAMALARI',
 ];
 
-const uzmanlik = [
-  'Tuğla & gazbeton duvar',
-  'Sıva & şap',
-  'Seramik & mermer döşeme',
-  'Alçı levha asma tavan',
-  'Boya & kaplama',
-  'Alçı & kartonpiyer',
-  'Mantolama',
-  'Teras & çatı şap',
+const tesisTurleri = [
+  'AVM, İŞMERKEZİ',
+  'HASTANE, SOSYAL TESİSLER',
+  'OTEL, TATİL KÖYÜ',
+  'KONUT, VİLLA',
+  'FABRİKA, DEPO, ENDÜSTRİYEL TESİSLER',
+  'OFİS, PLAZA, İDARE BİNA',
+  'SATIŞ OFİSİ, SHOWROOM',
 ];
 
-const istatistikler = [
-  { icon: 'chart', value: '4,25M+', label: 'M² TAMAMLANAN ALAN' },
-  { icon: 'helmet', value: '14+', label: 'BÜYÜK PROJE' },
-  { icon: 'star', value: '30+', label: 'YIL DENEYİM' },
+const ortaklar = [
+  { title: 'GAZ BETON ve TUĞLA', logos: ['yutong', 'kilsan'] },
+  { title: 'ALÇI ve ÇİMENTO ESASLI SIVA ve LEVHALAR', logos: ['lafarge', 'knf', 'rgbs', 'entegre', 'abs'] },
+  { title: 'BOYA ve MANTOLAMA', logos: ['juton', 'pol', 'dyo', 'bum', 'fil'] },
+  { title: 'YAPI KİMYASALLARI', logos: ['weber', 'basf', 'bostik', 'hrnkrl', 'koster', 'conica'] },
+  { title: 'DEMİR PROFİL', logos: ['yucel', 'tos'] },
+  { title: 'ISI YALITIM LEVHA', logos: ['mar', 'iz', 'ozs', 'assan', 'bras', 'ondu', 'yal', 'stan'] },
 ];
 ---
 
 <Layout
   title="Alt Müteahhitlik | Sayda İnşaat"
   description="Kısmi yüklenici / uzman ekip olarak, ana yükleniciye bağlı kaba veya ince yapı işlerinin taşeronluğu."
+  heading="Müteahhitlik ve Alt Müteahhitlik"
 >
-  <section class="svc-main svc-main--soft alt-page">
-    <ServiceTopbar slogan="YAPILARDA DAİMA DAHA FAZLASI" />
+  <section class="page">
+    <div class="container page__split">
+      <div>
+        <h2>MÜTEAHHİTLİK</h2>
+        <p>
+          SAYDA her türlü bina ve üst yapıların proje, şartname ve sözleşmeler doğrultusunda Uzman Ekip, Zamanında
+          Teslim, Yüksek Kalite, Düşük Maliyet, Çevre ve Doğaya saygı anlayışıyla ANAHTAR TESLİM MÜTEAHHİTLİK
+          yapmaktadır.
+        </p>
+        <p>
+          Yasmin-Bodrum Hotel, Çırağan Palace Hotel Kempinski, Enternasyonal Turizm Yatırım A.Ş., Visa İnternational
+          EU, Nestle Gıda Sanayi A.Ş., gibi kuruluşların taahhüt işlerinde müteahhit olarak hizmet vermiştir. Ayrıca
+          birçok otel, ofis, villa ve konutun inşaat, dekorasyon, renovasyon gibi taahhütleri anahtar teslimi olarak
+          yapmış ve teslim etmiştir.
+        </p>
 
-    <div class="container svc-main__layout">
-      <ServiceSidebar
-        active={1}
-        cards
-        ctaEyebrow="PROJENİZ İÇİN"
-        ctaTitle="Uzman ekibimiz yanınızda."
-        ctaText="Projenizin ihtiyaçlarını birlikte değerlendirelim, en uygun çözümü sunalım."
-        ctaImage="/img/sayda-insaat-hero01.webp"
-        caption="GÜVENLİ YAPILAR, DAHA İYİ YARINLAR."
-      />
+        <h2>ALT MÜTEAHHİTLİK (UZMAN EKİP)</h2>
+        <p>
+          SAYDA seçkin ve prestijli projelere aşağıdaki konularda ALT MÜTEAHHİTLİK ve UZMAN EKİP hizmetleri
+          vermektedir.
+        </p>
+        <ul class="list">
+          {altHizmetler.map((item) => <li>{item}</li>)}
+        </ul>
 
-      <ServicePanel
-        number="02"
-        title="Alt Müteahhitlik"
-        titleTag="h1"
-        card
-        cornerImage="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp"
-        lead="Kısmi yüklenici / uzman ekip olarak, ana yükleniciye bağlı kaba yapı veya ince işlerin profesyonel taşeronluğunu üstleniyoruz. Büyük ölçekli projelerde uzun soluklu iş ortaklıkları kuruyoruz."
-        tagline="“Güçlü iş birlikleri, kalıcı yapılar.”"
-        taglineVariant="quote"
-      >
-        <h2 class="alt-heading">
-          <Icon name="team" size={34} />
-          Referans İş Ortaklarımız
-        </h2>
-        <div class="partners__grid">
-          {partners.map((p) => <div class="partners__item">{p}</div>)}
+        <div class="faaliyet">
+          {tesisTurleri.map((item) => <a class="faaliyet__link" href="/projeler">{item}</a>)}
         </div>
 
-        <div class="alt-skills">
-          <ChecklistBox heading="Uzmanlık Alanları" items={uzmanlik} />
-          <p class="alt-skills__caption" aria-hidden="true">DETAYDA KALİTE,<br />YAPIDA GÜVEN</p>
-        </div>
-
-        <div class="stats-cards">
-          {
-            istatistikler.map((stat) => (
-              <div class="stats-card">
-                <span class="stats-card__icon">
-                  <Icon name={stat.icon} size={34} />
-                </span>
-                <span class="stats-card__text">
-                  <span class="stats-card__value">{stat.value}</span>
-                  <span class="stats-card__label">{stat.label}</span>
-                </span>
+        <h2>ÇÖZÜM ORTAKLARIMIZ</h2>
+        {
+          ortaklar.map((grup) => (
+            <div class="ortak">
+              <h3>{grup.title}</h3>
+              <div class="ortak__logos">
+                {grup.logos.map((logo) => (
+                  <img src={`/img/partners/${logo}.webp`} alt={`${grup.title} çözüm ortağı`} height="60" loading="lazy" />
+                ))}
               </div>
-            ))
-          }
-        </div>
-
-        <div class="alt-advantage">
-          <h2 class="alt-heading">
-            <Icon name="diamond" size={34} />
-            Avantajımız
-          </h2>
-          <p>
-            Kiler GYO, Biskon Yapı, CCN ve Özak gibi Türkiye'nin en büyük inşaat gruplarıyla uzun vadeli iş
-            ortaklığı deneyimi.
-          </p>
-          <p class="alt-advantage__caption" aria-hidden="true">
-            <span></span>
-            DAHA FAZLASI<br />İÇİN ÇALIŞIYORUZ.
-          </p>
-        </div>
-      </ServicePanel>
+            </div>
+          ))
+        }
+      </div>
+      <div class="page__aside">
+        <img src="/img/legacy/hizmet.webp" alt="Sayda İnşaat müteahhitlik ve alt müteahhitlik" loading="lazy" />
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .alt-page {
-    padding-top: 0;
+  .faaliyet {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 20px 0 30px;
   }
 
-  .alt-heading {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 22px;
-    font-family: var(--font-body);
-    font-size: 1.68rem;
+  .faaliyet__link {
+    display: block;
+    padding: 0 15px;
+    font-size: 13px;
     font-weight: 700;
-    color: var(--color-navy-deep);
+    line-height: 32px;
+    text-transform: uppercase;
+    color: #fff !important;
+    background: #36abfc;
   }
 
-  .alt-heading :global(svg) {
-    flex: none;
-    color: var(--color-navy);
+  .faaliyet__link:hover {
+    background: #f69c00;
   }
 
-  .partners__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 13px;
-    margin-bottom: 40px;
+  .ortak h3 {
+    margin: 18px 0 8px;
+    font-size: 13px;
+    text-transform: uppercase;
   }
 
-  .partners__item {
-    padding: 14px 22px;
-    border-radius: 3px;
-    background: #f3f5fa;
-    font-size: 0.98rem;
-    font-weight: 600;
-    color: var(--color-navy-deep);
-    text-align: center;
-  }
-
-  .alt-skills {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 27px;
-    border-radius: 4px;
-    background: #f6f7fc;
-  }
-
-  .alt-skills :global(.checklist-box) {
-    margin: 0;
-    background: transparent;
-    padding: 31px 336px 31px 36px;
-  }
-
-  .alt-skills__caption {
-    position: absolute;
-    top: 50%;
-    right: 32px;
-    width: 246px;
-    padding-left: 40px;
-    border-left: 1px solid rgba(43, 46, 131, 0.35);
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.12rem;
-    letter-spacing: 0.1em;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    transform: translateY(-50%);
-  }
-
-  .stats-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    margin-bottom: 40px;
-  }
-
-  .stats-card {
+  .ortak__logos {
     display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
     align-items: center;
-    gap: 22px;
-    padding: 22px 27px;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background: #fff;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted #ccc;
   }
 
-  .stats-card__icon {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    background: #eef0f9;
-    color: var(--color-navy);
-  }
-
-  .stats-card__text {
-    display: grid;
-    gap: 4px;
-  }
-
-  .stats-card__value {
-    font-family: var(--font-heading);
-    font-size: 1.96rem;
-    line-height: 1;
-    color: var(--color-navy-deep);
-  }
-
-  .stats-card__label {
-    font-size: 0.84rem;
-    letter-spacing: 0.08em;
-    color: var(--color-text-muted);
-  }
-
-  .alt-advantage {
-    position: relative;
-  }
-
-  .alt-advantage .alt-heading {
-    margin-bottom: 12px;
-  }
-
-  .alt-advantage p:not(.alt-advantage__caption) {
-    max-width: 62ch;
-    padding-left: 52px;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--color-text-muted);
-  }
-
-  .alt-advantage__caption {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: grid;
-    justify-items: end;
-    gap: 12px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    line-height: 1.6;
-    text-align: right;
-    color: var(--color-text-faint);
-  }
-
-  .alt-advantage__caption span {
-    width: 49px;
-    height: 1px;
-    background: var(--color-navy);
-    opacity: 0.6;
-  }
-
-  @media (max-width: 1100px) {
-    .alt-skills :global(.checklist-box) {
-      padding-right: 36px;
-    }
-
-    .alt-skills__caption {
-      display: none;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .partners__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .stats-cards {
-      grid-template-columns: 1fr;
-    }
-
-    .alt-advantage__caption {
-      display: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .partners__grid {
-      grid-template-columns: 1fr;
-    }
+  .ortak__logos img {
+    height: 60px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
   }
 </style>
