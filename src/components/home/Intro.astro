@@ -2,36 +2,28 @@
 import Icon from '../Icon.astro';
 import site from '../../data/site.json';
 
-const area = `${Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')).toLocaleString('tr-TR')}+`;
+const area = `${(Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000).toLocaleString('tr-TR')}M+`;
 
 const stats = [
   { icon: 'calendar', value: String(site.foundedYear), label: 'Yılından Beri' },
-  { icon: 'check', value: '250+', label: 'Tamamlanan Proje' },
+  { icon: 'check', value: '30+', label: 'Tamamlanan Proje' },
   { icon: 'area', value: area, label: 'm² Uygulama Alanı' },
-  { icon: 'team', value: '3000+', label: 'Mutlu Yaşam Alanı' },
-  { icon: 'clock', value: '100%', label: 'Zamanında Teslim' },
-  { icon: 'shield', value: 'Güvenli', label: 've Sürdürülebilir Yapılar' },
 ];
 ---
 
 <section class="intro">
-  <div class="container intro__inner">
-    <div class="intro__copy">
-      <span class="eyebrow"><i></i>Sayda İnşaat</span>
-      <h2>Geleceği<br />Bugünden İnşa Ediyoruz</h2>
-      <p>
-        Sayda İnşaat, {site.foundedYear} yılından bu yana taahhüt, sanayi ve ticaret alanlarında faaliyet gösteren; kaliteli, güvenli ve
-        sürdürülebilir yapılar inşa eden bir yapı şirketidir. Her projede, yaşam alanlarına değer katmayı hedefler.
-      </p>
-      <a class="intro__btn" href="/hakkimizda">Hakkımızda <Icon name="arrow" size={14} /></a>
-    </div>
+  <div class="container">
     <div class="intro__stats">
       {
         stats.map((s) => (
           <div class="intro__stat">
-            <Icon name={s.icon} size={40} />
-            <b>{s.value}</b>
-            <span>{s.label}</span>
+            <i class="intro__icon">
+              <Icon name={s.icon} size={32} />
+            </i>
+            <div>
+              <b>{s.value}</b>
+              <span>{s.label}</span>
+            </div>
           </div>
         ))
       }
@@ -45,89 +37,98 @@ const stats = [
     background: linear-gradient(135deg, #fff 0%, #f1f4fb 100%);
   }
 
-  .intro__inner {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    align-items: center;
-    gap: var(--space-xl);
-  }
-
-  .intro__copy h2 {
-    margin-block: 6px 16px;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(1.6rem, 2vw + 0.8rem, 2.2rem);
-    line-height: 1.2;
-    color: var(--color-navy);
-  }
-
-  .intro__copy p {
-    max-width: 48ch;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .intro__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    padding: 12px 20px;
-    border: 1.5px solid #2a2f45;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #141b2e;
-    transition:
-      background var(--transition),
-      color var(--transition);
-  }
-
-  .intro__btn:hover {
-    background: #141b2e;
-    color: #fff;
-  }
-
   .intro__stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 36px 24px;
   }
 
   .intro__stat {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding-block: 8px;
   }
 
-  .intro__stat :global(svg) {
-    margin-bottom: 8px;
-    color: var(--color-orange);
-    stroke-width: 1.3;
+  .intro__stat + .intro__stat {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .intro__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 68px;
+    height: 68px;
+    background: #fff;
+    border-bottom: 3px solid var(--color-orange);
+    box-shadow: 0 6px 20px rgba(20, 27, 46, 0.08);
+    color: var(--color-navy);
+  }
+
+  .intro__icon :global(svg) {
+    stroke-width: 1.4;
   }
 
   .intro__stat b {
+    display: block;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.5rem;
-    color: #141b2e;
+    font-size: clamp(1.9rem, 2.4vw + 0.6rem, 2.8rem);
+    line-height: 1;
+    color: var(--color-navy);
   }
 
   .intro__stat span {
-    font-size: 0.75rem;
-    color: var(--color-text-faint);
+    display: block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
   }
 
   @media (max-width: 900px) {
-    .intro__inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-l);
+    .intro {
+      padding-block: 36px;
+    }
+
+    .intro__stat {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .intro__icon {
+      width: 52px;
+      height: 52px;
+    }
+
+    .intro__icon :global(svg) {
+      width: 26px;
+      height: 26px;
+    }
+
+    .intro__stat span {
+      margin-top: 6px;
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
     }
   }
 
   @media (max-width: 480px) {
-    .intro__stats {
-      grid-template-columns: repeat(2, 1fr);
+    .intro__icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .intro__stat b {
+      font-size: 1.4rem;
+    }
+
+    .intro__stat span {
+      font-size: 0.58rem;
     }
   }
 </style>
