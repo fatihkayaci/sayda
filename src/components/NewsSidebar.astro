@@ -1,7 +1,7 @@
 ---
 import haberlerData from '../data/haberler.json';
 
-const items = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
+const items = [...haberlerData].sort((a, b) => b.legacy.id - a.legacy.id);
 const fmt = (iso: string) => {
   const [y, m, d] = iso.split('-').map(Number);
   return `${d}.${m}.${y}`;

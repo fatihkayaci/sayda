@@ -1,5 +1,5 @@
 export function shortProjectTitle(name: string): string {
-  return name.replace(/^Referans\s+/, '').replace(/\s+Projesi$/, '');
+  return name.replace(/^(Referans|REFERANS)\s+/, '').replace(/\s+(Projesi|PROJESİ)$/, '');
 }
 
 export function statusLabel(status: string): string {

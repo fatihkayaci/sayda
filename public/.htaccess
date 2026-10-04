@@ -1,0 +1,166 @@
+# Sayda İnşaat - Apache (cPanel) yapılandırması
+Options -Indexes
+ErrorDocument 404 /404.html
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# HTTPS + www zorunlu (tek adımda)
+# (Yalnızca sayda.com.tr alan adlarında çalışır; geçici test adresinde yönlendirme yapmaz)
+RewriteCond %{HTTP_HOST} ^(www\.)?sayda\.com\.tr$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^sayda\.com\.tr$ [NC]
+RewriteRule ^(.*)$ https://www.sayda.com.tr/$1 [R=301,L]
+
+# Eski blog yolu
+RewriteRule ^rehber/?$ /blog [R=301,L]
+RewriteRule ^rehber/(.*)$ /blog/$1 [R=301,L]
+RewriteRule ^kentsel-donusum/?$ /hizmetler/kentsel-donusum [R=301,L]
+
+# Eski ASP.NET sitesi (query string'li adresler)
+RewriteCond %{QUERY_STRING} (^|&)PNR=3(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/atlas-park-avm-ofis? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=4(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/capital-tower-ofis? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=5(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/capital-tower-spor-kompleksi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=6(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/piazza-avm-anamon-otel? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=7(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/piazza-avm-anamon-otel? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=8(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/akbati-avm-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=9(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/varyap-meridien-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=10(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/terrace-bahce-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=11(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/oyakkent-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=12(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/isisan-buderus-bursa? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=13(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/omsan-depo-lojistik-merkezi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=14(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/yasmin-resort-hotel? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=15(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/ciragan-otel-renovasyonu? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=17(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/executive-hall? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=18(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/caviar-bar-restaurant? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=20(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/genel-mudurluk-kum-koy-atik-ali-pasa? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=21(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/mis-sut-dudullu-uretim-tesisleri? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=22(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/acarlar-acar-kent? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=23(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/referans-gunesli? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=28(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/vadistanbul? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=29(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/m1-real-avm? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=30(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/levent-print-center-is-merkezi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=31(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/dimas-antrepo? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=32(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/gaziantep-sehir-hastanesi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=33(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/buyukyali? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=34(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/akbati-avm-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=37(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/vadistanbul? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=38(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/capital-tower-spor-kompleksi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=39(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/varyap-meridien-konut? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=40(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/kasaba-konut-residance? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=41(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/istanbul-projesi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=42(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/capital-tower-ofis? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=43(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/suzer-plaza-ofis? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=45(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/nidapark-istinye-satis-ofisi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=46(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/isisan-buderus-bursa? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=47(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/referans-kartal-loca-2? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=48(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/referans-kartal-loca-1? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=49(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/kiler-besiktas-abbasaga-satis-ofisi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)PNR=51(&|$)
+RewriteRule ^Proje_Detay.aspx/?$ /projeler/referans-besiktas-abbasaga? [R=301,L,NC]
+RewriteRule ^Proje_Detay.aspx/?$ /projeler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=1(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/atlas-park-avm-hizmete-girdi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=4(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/kapital-tower-10-kat-ofis-teslim? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=6(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/referans-guneşli-ince-islere-basladik? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=7(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/bilsem-besiktas-sosyal-sorumluluk? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=8(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/vadistanbul-3-etap-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=16(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/buyukyali-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=19(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/gaziantep-saglik-kampusu-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=21(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/referans-kartal-loca-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=22(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/referans-kartal-loca-2-etap-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=23(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/kiler-besiktas-abbasaga-satis-ofisi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=24(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/kiler-referans-pendik-satis-ofisi? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=25(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/referans-besiktas-ince-isler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)Haber=27(&|$)
+RewriteRule ^HaberDetay.aspx/?$ /haberler/referans-loca-1-teslim? [R=301,L,NC]
+RewriteRule ^HaberDetay.aspx/?$ /haberler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)DRM=0(&|$)
+RewriteRule ^Projeler.aspx/?$ /projeler/devam-eden? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)DRM=1(&|$)
+RewriteRule ^Projeler.aspx/?$ /projeler/tamamlanan? [R=301,L,NC]
+RewriteRule ^Projeler.aspx/?$ /projeler? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)P=hakkimizda(&|$)
+RewriteRule ^Kurumsal.aspx/?$ /hakkimizda? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)P=vizyon-misyon(&|$)
+RewriteRule ^Kurumsal.aspx/?$ /hakkimizda/vizyon-misyon? [R=301,L,NC]
+RewriteRule ^Kurumsal.aspx/?$ /hakkimizda? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)DRM=beyazyakali(&|$)
+RewriteRule ^ik.aspx/?$ /kariyer? [R=301,L,NC]
+RewriteCond %{QUERY_STRING} (^|&)DRM=kalfaekipli(&|$)
+RewriteRule ^ik.aspx/?$ /kariyer? [R=301,L,NC]
+RewriteRule ^ik.aspx/?$ /kariyer? [R=301,L,NC]
+
+# Eski ASP.NET sitesi (düz adresler)
+RewriteRule ^Anasayfa.aspx$ / [R=301,L,NC]
+RewriteRule ^Haberler.aspx$ /haberler [R=301,L,NC]
+RewriteRule ^belgelerimiz.aspx$ /belgeler [R=301,L,NC]
+RewriteRule ^is_bitirme.aspx$ /projeler/is-bitirme-belgeleri [R=301,L,NC]
+RewriteRule ^iletisim.aspx$ /iletisim [R=301,L,NC]
+RewriteRule ^kentseldonusum.html$ /hizmetler/kentsel-donusum [R=301,L,NC]
+RewriteRule ^muteahitlik.html$ /hizmetler/anahtar-teslim-muteahhitlik [R=301,L,NC]
+RewriteRule ^prpjeyonetimi.html$ /hizmetler/proje-yonetimi-danismanlik [R=301,L,NC]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+<FilesMatch ".(css|js|webp|jpg|jpeg|png|svg|woff2?|ico)$">
+Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>

@@ -1,29 +1,21 @@
 [
   {
     "slug": "referans-besiktas-abbasaga",
-    "name": "Referans Beşiktaş Abbasağa Projesi",
-    "employer": "Kiler GYO, Biskon Yapı A.Ş. İş Ortaklığı",
-    "scope": "Lüks Konut Residance Projesi İnce İşleri (Duvar, Mantolama, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "name": "REFERANS BEŞİKTAŞ PROJESİ İNCE İŞLERİ BİZ YAPIYORUZ",
+    "employer": "Kiler GYO",
+    "scope": "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m2 arazi üzerine 10 blok, 295 ünite olarak hazırlanmış. Bina Yüksekliği : 2 kat bodrum, 6 Kat normal Daire Tipleri : 2,5+1 – 3+1 – 3+1 Dubleks – 4+1 – 4,5+1 Dubleks – 4,5+2 Dubleks – 5,5+2 Dubleks Kapalı yüzme havuzu, Tasarım Dekorasyon Havuzları, Spor Salonu Alanı, Yeraltı Otoparkı İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale ve Vitra Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2025 Nisan ayında hayata geçirilecektir.",
     "description": [
-      "Beşiktaş Abbasağa'da yer alan bu lüks konut / residence projesinde ince işler Sayda İnşaat tarafından yürütülmektedir.",
-      "Proje kapsamında duvar, mantolama, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları gerçekleştirilmektedir."
+      "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m2 arazi üzerine 10 blok, 295 ünite olarak hazırlanmış. Bina Yüksekliği : 2 kat bodrum, 6 Kat normal",
+      "Daire Tipleri : 2,5+1 – 3+1 – 3+1 Dubleks – 4+1 – 4,5+1 Dubleks – 4,5+2 Dubleks – 5,5+2 Dubleks",
+      "Kapalı yüzme havuzu, Tasarım Dekorasyon Havuzları, Spor Salonu Alanı, Yeraltı Otoparkı",
+      "İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale ve Vitra Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2025 Nisan ayında hayata geçirilecektir."
     ],
-    "works": [
-      "Duvar",
-      "Mantolama",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha",
-      "Boya",
-      "Kartonpiyer",
-      "Duvar Kağıdı"
-    ],
-    "location": "Beşiktaş - İstanbul",
-    "area": "79.000 m²",
+    "works": [],
+    "location": "",
+    "area": "16.655 m²",
     "status": "devam-eden",
-    "type": "Konut",
-    "startDate": "Ocak 2024",
+    "type": "",
+    "startDate": "",
     "endDate": "",
     "featured": false,
     "seoTitle": "Beşiktaş Abbasağa İnce İşler Projesi | Sayda İnşaat",
@@ -31,171 +23,1087 @@
     "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga.webp",
     "gallery": [],
     "href": "/projeler/referans-besiktas-abbasaga",
-    "district": "Beşiktaş"
+    "district": "Beşiktaş",
+    "legacy": {
+      "ids": [
+        51
+      ],
+      "entries": [
+        {
+          "id": 51,
+          "name": "REFERANS BEŞİKTAŞ PROJESİ İNCE İŞLERİ BİZ YAPIYORUZ",
+          "employer": "Kiler GYO",
+          "text": "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m2 arazi üzerine 10 blok, 295 ünite olarak hazırlanmış. Bina Yüksekliği : 2 kat bodrum, 6 Kat normal\r\n\r\nDaire Tipleri : 2,5+1 – 3+1 – 3+1 Dubleks – 4+1 – 4,5+1 Dubleks – 4,5+2 Dubleks – 5,5+2 Dubleks\r\n\r\nKapalı yüzme havuzu, Tasarım Dekorasyon Havuzları, Spor Salonu Alanı, Yeraltı Otoparkı\r\n İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale ve Vitra Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2025 Nisan ayında hayata geçirilecektir.",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
   },
   {
-    "slug": "referans-kartal-loca-1",
-    "name": "Referans Kartal Loca 1 Projesi",
-    "employer": "Kiler GYO, Biskon Yapı A.Ş.",
-    "scope": "2. Etap Konut & Cadde Dükkan İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "slug": "atlas-park-avm-ofis",
+    "name": "SULTANBEYLİ AVM & OFİS PROJESİ (ATLAS PARK AVM)",
+    "employer": "ZİYLAN GRUP, UZMAN İNŞAAT, HD GAYRİMENKUL ORTAK GİRİŞİMİ",
+    "scope": "AVM Blokları 1. Etap İnce İşleri (150,000 m2) İnce Yapı işleri: Bims Duvar, Kara Sıva, Alçı Sıva, Şap Alçıpan İşleri: Bölme duvar ve Asma tavanlarSultanbeyli / İSTANBUL",
     "description": [
-      "Kartal Loca 1 projesinin 2. etap konut ve cadde dükkanlarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+      "AVM Blokları 1. Etap İnce İşleri (150,000 m2) İnce Yapı işleri: Bims Duvar, Kara Sıva, Alçı Sıva, Şap",
+      "Alçıpan İşleri: Bölme duvar ve Asma tavanlarSultanbeyli / İSTANBUL"
     ],
-    "works": [
-      "Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha",
-      "Boya",
-      "Kartonpiyer",
-      "Duvar Kağıdı"
-    ],
-    "location": "Kartal - İstanbul",
-    "area": "35.672 m²",
+    "works": [],
+    "location": "Sultanbeyli - İstanbul",
+    "area": "150.000 m²",
     "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Eylül 2022",
-    "endDate": "Eylül 2024",
-    "featured": false,
-    "seoTitle": "Kartal Loca 1 İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Kartal / İstanbul'da 35.672 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2022-2024 arası sahada.",
-    "image": "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1.webp",
-    "gallery": [],
-    "href": "/projeler/referans-kartal-loca-1",
-    "district": "Kartal"
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": true,
+    "seoTitle": "Atlas Park AVM ve Ofis İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Sultanbeyli / İstanbul'da 160.000 m² Atlas Park AVM ve ofis projesinde bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı; 2013-2015 arası sahada.",
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-01.webp",
+    "gallery": [
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-01.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-02.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-03.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-04.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-05.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-06.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-07.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-08.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-09.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-10.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-11.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-12.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-13.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-14.webp"
+    ],
+    "href": "/projeler/atlas-park-avm-ofis",
+    "district": "Sultanbeyli",
+    "legacy": {
+      "ids": [
+        3
+      ],
+      "entries": [
+        {
+          "id": 3,
+          "name": "SULTANBEYLİ AVM & OFİS PROJESİ (ATLAS PARK AVM)",
+          "employer": "ZİYLAN GRUP, UZMAN İNŞAAT, HD GAYRİMENKUL ORTAK GİRİŞİMİ",
+          "text": "AVM Blokları 1. Etap İnce İşleri (150,000 m2) İnce Yapı işleri: Bims Duvar, Kara Sıva, Alçı Sıva, Şap\nAlçıpan İşleri: Bölme duvar ve Asma tavanlarSultanbeyli / İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/68ed1c95-0444-4838-9bc3-6553847649d1.jpg",
+            "Admin/yuklenenler/e99620a1-5dc3-482d-a7bf-c07eac27e5b5.jpg",
+            "Admin/yuklenenler/9e9d51f5-dcc9-49c2-94c7-56655bd6a3e7.jpg",
+            "Admin/yuklenenler/e123e7c3-d819-4991-8481-86ae27598653.jpg",
+            "Admin/yuklenenler/64d389ad-49db-4fd3-a957-8de627ee009f.jpg",
+            "Admin/yuklenenler/89e60fd5-d199-42e0-adc7-697fd448eb6d.jpg",
+            "Admin/yuklenenler/7a06ceb2-3808-4aad-8df4-d17a7b2ce4ed.jpg",
+            "Admin/yuklenenler/f1f41dd7-3fa3-41d8-bdf5-8460f94d31af.jpg",
+            "Admin/yuklenenler/5b723195-06c5-46ae-b14e-87fdefcf10d2.jpg",
+            "Admin/yuklenenler/c3fba09f-1d04-4cd3-a757-f951693f6bb4.jpg",
+            "Admin/yuklenenler/453ebde9-2642-4810-a04d-9f6609ce8cc8.jpg",
+            "Admin/yuklenenler/204f4506-f0f3-4a4a-ad83-150d7bc45195.jpg",
+            "Admin/yuklenenler/cb20fc24-eb01-4141-8f8b-dd10203d405b.jpg",
+            "Admin/yuklenenler/fdc7b56d-0cd0-40d5-aef0-57371a268084.jpg"
+          ]
+        }
+      ]
+    }
   },
   {
-    "slug": "referans-kartal-loca-2",
-    "name": "Referans Kartal Loca 2 Projesi",
-    "employer": "Kiler GYO, Biskon Yapı A.Ş.",
-    "scope": "1. Etap Konut & Cadde Dükkan İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "slug": "capital-tower-ofis",
+    "name": "CAPİTAL TOWER 10. KAT OFİSLERİ",
+    "employer": "MESTURKUAZ MADENCİLİK, UZMAN İNŞAAT ORTAK GİRİŞİMİ",
+    "scope": "10. Kat Ofisleri (1000 m2) Dekorasyon: Anahtar teslimi, İnce İşler, Elektro-Mekanik işleri, Ahşap işleri, Duvar Zemin Kaplama, Cam, Metal, Mobilya ve AksesuarlarıBasın Ekpres / İSTANBUL",
     "description": [
-      "Kartal Loca 2 projesinin 1. etap konut ve cadde dükkanlarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+      "10. Kat Ofisleri (1000 m2)",
+      "Dekorasyon: Anahtar teslimi, İnce İşler, Elektro-Mekanik işleri, Ahşap işleri, Duvar Zemin Kaplama, Cam, Metal, Mobilya ve AksesuarlarıBasın Ekpres / İSTANBUL"
     ],
-    "works": [
-      "Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha",
-      "Boya",
-      "Kartonpiyer",
-      "Duvar Kağıdı"
-    ],
-    "location": "Kartal - İstanbul",
-    "area": "40.437 m²",
+    "works": [],
+    "location": "Basın Ekspres - İstanbul",
+    "area": "1.000 m²",
     "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Eylül 2021",
-    "endDate": "Eylül 2023",
-    "featured": false,
-    "seoTitle": "Kartal Loca 2 İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Kartal / İstanbul'da 40.437 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2021-2023 arası sahada.",
-    "image": "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2.webp",
-    "gallery": [],
-    "href": "/projeler/referans-kartal-loca-2",
-    "district": "Kartal"
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": true,
+    "seoTitle": "Capital Tower Ofis Dekorasyonu | Sayda İnşaat",
+    "seoDescription": "Güneşli / İstanbul'da Capital Tower 10. kat ofisinde anahtar teslim dekorasyon; elektro-mekanik, mermer, ahşap, metal ve cam işlerini Sayda İnşaat tamamladı; 2013-2014 arası sahada.",
+    "image": "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-01.webp",
+    "gallery": [
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-01.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-02.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-03.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-04.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-05.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-06.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-07.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-08.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-09.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-10.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-11.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-12.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-13.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-14.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-15.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-16.webp"
+    ],
+    "href": "/projeler/capital-tower-ofis",
+    "district": "Bağcılar",
+    "legacy": {
+      "ids": [
+        4,
+        42
+      ],
+      "entries": [
+        {
+          "id": 4,
+          "name": "CAPİTAL TOWER 10. KAT OFİSLERİ",
+          "employer": "MESTURKUAZ MADENCİLİK, UZMAN İNŞAAT ORTAK GİRİŞİMİ",
+          "text": "10. Kat Ofisleri (1000 m2)\nDekorasyon: Anahtar teslimi, İnce İşler, Elektro-Mekanik işleri, Ahşap işleri, Duvar Zemin Kaplama, Cam, Metal, Mobilya ve AksesuarlarıBasın Ekpres / İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/b0d4b7fc-8e4e-4de8-91ce-a7739251597b.jpg",
+            "Admin/yuklenenler/fd3ec6db-123f-489d-8792-2513142e4372.jpg",
+            "Admin/yuklenenler/e7883d78-535e-4a71-852f-ba7fb95cdb5d.jpg",
+            "Admin/yuklenenler/c4b68870-14d6-4cc3-9084-48eed6197664.jpg",
+            "Admin/yuklenenler/52a59883-ae63-4799-8970-edcd783dcd8c.jpg",
+            "Admin/yuklenenler/33feaba5-6233-4e27-b06c-ba386cf96569.jpg",
+            "Admin/yuklenenler/a61d96da-3b4c-446d-90bb-2421061e8f2d.jpg",
+            "Admin/yuklenenler/8efe8a4d-4a45-4ed1-8000-f4164812f6a3.jpg",
+            "Admin/yuklenenler/b937e2fe-eb7d-45c6-97d1-7e899d7bc236.jpg",
+            "Admin/yuklenenler/6ad7f545-52d0-4c99-895d-1bc49144a760.jpg",
+            "Admin/yuklenenler/382aab58-6bdc-499f-ad6c-b9410c9d0644.jpg",
+            "Admin/yuklenenler/f93ceea5-a0df-43af-89e1-f547ccacc9be.jpg",
+            "Admin/yuklenenler/c4807f01-e97a-4c2c-ae3b-bc49e10141e1.jpg",
+            "Admin/yuklenenler/fb4f0ac6-8294-4407-a6f8-9485de92fe98.jpg",
+            "Admin/yuklenenler/50b00335-f4b7-4cbd-b4b4-028ab8742dd0.jpg",
+            "Admin/yuklenenler/1bd8e0d8-6317-483a-8b1d-572d9dbdfa2d.jpg"
+          ]
+        },
+        {
+          "id": 42,
+          "name": "CAPİTAL TOWER OFİSLERİ",
+          "employer": "MESTURKUAZ MAD. AŞ. UZMAN İNŞAAT A.Ş.",
+          "text": "CAPİTAL TOWER .OFİSLERİ PROJESİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
   },
   {
-    "slug": "kiler-besiktas-abbasaga-satis-ofisi",
-    "name": "Kiler Beşiktaş Abbasağa Satış Ofisi Projesi",
-    "employer": "Kiler Holding",
-    "scope": "Tarihi Aziziye Karakolu (Süslü Karakol) Renovasyonu — Satış Ofisi İnce İşleri",
+    "slug": "capital-tower-spor-kompleksi",
+    "name": "CAPİTAL TOWER SPOR KOMPLEKSİ",
+    "employer": "MUTLU İNŞAAT, MİLTAŞ İNŞAAT, UZMAN İNŞAAT ORTAK GİRİŞİMİ",
+    "scope": "Spor Komleksi (800 m2) Dekorasyon: Ahşap işleri, Duvar Zemin Kaplama, Mobilya ve Aksesuarları Basın Ekpres/İSTANBUL",
     "description": [
-      "1866 yılında Sultan Abdülaziz döneminde inşa edilen tarihi Aziziye Karakolu (Süslü Karakol), Kiler Holding'in Beşiktaş Abbasağa konut projesinin satış ofisine dönüştürülmüştür.",
-      "Renovasyon ve ince işler Sayda İnşaat tarafından gerçekleştirilmiştir."
+      "Spor Komleksi (800 m2) Dekorasyon: Ahşap işleri, Duvar Zemin Kaplama, Mobilya ve Aksesuarları",
+      "Basın Ekpres/İSTANBUL"
     ],
-    "works": [
-      "Renovasyon",
-      "İnce Yapı İşleri"
+    "works": [],
+    "location": "Basın Ekspres - İstanbul",
+    "area": "800 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Capital Tower Spor Kompleksi Dekorasyonu | Sayda İnşaat",
+    "seoDescription": "Basın Ekspres / İstanbul'da 800 m² Capital Tower Spor Kompleksi'nde ahşap işleri, duvar-zemin kaplama ve mobilya-aksesuar dekorasyonunu Sayda İnşaat tamamladı.",
+    "image": "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-01.webp",
+    "gallery": [
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-01.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-02.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-03.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-04.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-05.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-06.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-07.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-08.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-09.webp"
     ],
-    "location": "Abbasağa - İstanbul",
+    "href": "/projeler/capital-tower-spor-kompleksi",
+    "district": "Bağcılar",
+    "legacy": {
+      "ids": [
+        5,
+        38
+      ],
+      "entries": [
+        {
+          "id": 5,
+          "name": "CAPİTAL TOWER SPOR KOMPLEKSİ",
+          "employer": "MUTLU İNŞAAT, MİLTAŞ İNŞAAT, UZMAN İNŞAAT ORTAK GİRİŞİMİ",
+          "text": "Spor Komleksi (800 m2) Dekorasyon: Ahşap işleri, Duvar Zemin Kaplama, Mobilya ve Aksesuarları\nBasın Ekpres/İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/8ca21a27-80c7-4ae3-b138-f971870c87f7.jpg",
+            "Admin/yuklenenler/b311e4f5-ee85-481f-8732-e6baf51c9aed.jpg",
+            "Admin/yuklenenler/9d55802e-6097-49e1-b304-e6a93568a52f.jpg",
+            "Admin/yuklenenler/655450c0-0b53-448d-acf6-64ab175fd877.jpg",
+            "Admin/yuklenenler/194c8869-16fe-4a31-8358-e5bb9a0831d9.jpg",
+            "Admin/yuklenenler/ff59b7d9-c777-42eb-a3b3-515914dd4f93.jpg",
+            "Admin/yuklenenler/e9e8af99-5405-49af-872e-601dd6dac5fa.jpg",
+            "Admin/yuklenenler/d65fd753-a6d6-467a-b4aa-ac372e24170f.jpg",
+            "Admin/yuklenenler/d93f430e-734a-4af6-a36b-1b85543f83ea.jpg"
+          ]
+        },
+        {
+          "id": 38,
+          "name": "CAPİTAL TOWER SPOR KOMPLEKSİ",
+          "employer": "MUTLU - MİLTAŞ UZMAN ORTAKLIĞI",
+          "text": "SPOR KOMPLEKSİ DEKORASYONU",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "piazza-avm-anamon-otel",
+    "name": "RÖNESANS SAMSUN AVM PROJESİ (PİAZZA AVM)",
+    "employer": "RÖNESANS TEK. İNŞ. A.Ş.",
+    "scope": "OTEL Blokları İnce İşleri (14,000 m2) İnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması Alçıpan İşleri: Bölme duvar ve Asma tavanlar Canik/ SAMSUN",
+    "description": [
+      "OTEL Blokları İnce İşleri (14,000 m2)",
+      "İnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması",
+      "Alçıpan İşleri: Bölme duvar ve Asma tavanlar",
+      "Canik/ SAMSUN"
+    ],
+    "works": [],
+    "location": "Canik - Samsun",
+    "area": "140.000 m² (AVM), 14.000 m² (Otel)",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Canik / Samsun'da 135.000 m² Piazza AVM ve Anamon Otel projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Rönesans Teknik ile 2012-2013 arası sahada.",
+    "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-01.webp",
+    "gallery": [
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-01.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-02.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-03.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-04.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-05.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-06.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-07.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-08.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-09.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-10.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-11.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-12.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-13.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-14.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-15.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-16.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-17.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-18.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-19.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-20.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-21.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-22.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-23.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-24.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-25.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-26.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-27.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-28.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-29.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-30.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-31.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-32.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-33.webp"
+    ],
+    "href": "/projeler/piazza-avm-anamon-otel",
+    "district": "Canik",
+    "legacy": {
+      "ids": [
+        6,
+        7
+      ],
+      "entries": [
+        {
+          "id": 6,
+          "name": "RÖNESANS SAMSUN AVM PROJESİ (PİAZZA AVM)",
+          "employer": "RÖNESANS TEK. İNŞ. A.Ş.",
+          "text": "AVM Blokları İnce İşleri (140,000 m2) İnce Yapı işleri: Kara\r\nsıva, Alçı sıva, Boya işlerinin yapılması\nAlçıpan İşleri: Bölme duvar ve Asma tavanlarCanik/ SAMSUN",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/5f66e48c-2d21-4206-8290-c0f120c162a9.jpg",
+            "Admin/yuklenenler/832ecd17-11c5-426f-b566-b86bba77aac1.jpg",
+            "Admin/yuklenenler/1c5484fa-cae2-4db1-bbb7-4fac3e302738.jpg",
+            "Admin/yuklenenler/04baeb81-c183-4ca4-b49a-eb5c66d63cb1.jpg",
+            "Admin/yuklenenler/e77a0de6-e8f9-48eb-9952-c6b92c0090bd.jpg",
+            "Admin/yuklenenler/e9cf646d-8baa-4a99-a711-2771865a9a2f.jpg",
+            "Admin/yuklenenler/3c6a264f-7c19-4f50-ad90-f06b53244872.jpg",
+            "Admin/yuklenenler/10ad3430-c340-42e2-9ab7-98e4849e1c64.jpg",
+            "Admin/yuklenenler/bd8b7101-59ed-46d0-9672-9cbeaa3cdf51.jpg",
+            "Admin/yuklenenler/afe31c27-f508-4683-847c-16c9636f6baf.jpg",
+            "Admin/yuklenenler/2f415337-5095-4ddb-bb4c-b633c8a63a1d.jpg",
+            "Admin/yuklenenler/147bbf11-c1cb-4ef6-81b7-721a6ef7ae3e.jpg",
+            "Admin/yuklenenler/d2d4d5cc-ec00-4ef8-81d0-7b953731c07b.jpg",
+            "Admin/yuklenenler/2836b03f-7bf8-420c-b108-990899564a12.jpg",
+            "Admin/yuklenenler/22586939-ba88-4e5d-b2fa-9167bb6360d0.jpg",
+            "Admin/yuklenenler/d83c9e9a-77fd-4e18-817b-dea0af47a25e.jpg",
+            "Admin/yuklenenler/25e8b238-2511-409a-a2c2-1d909a9ee54b.jpg",
+            "Admin/yuklenenler/d5e39050-4fbf-4b32-86cf-5dd479b708c3.jpg",
+            "Admin/yuklenenler/bad0f5e4-7612-408f-a3e0-59cebbd5dab6.jpg",
+            "Admin/yuklenenler/b753912f-4267-49aa-aa34-f7893a3b15f0.jpg"
+          ]
+        },
+        {
+          "id": 7,
+          "name": "RÖNESANS SAMSUN OTEL PROJESİ (ANEMON SAMSUN HOTEL)",
+          "employer": "RÖNESANS TEK. İNŞ. A.Ş.",
+          "text": "OTEL Blokları İnce İşleri (14,000 m2) \nİnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması \nAlçıpan İşleri: Bölme duvar ve Asma tavanlar\nCanik/ SAMSUN",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/f4ada205-1979-4c99-a94b-a765e100e92a.jpg",
+            "Admin/yuklenenler/62f0261f-d649-4829-98bb-47aa062323ef.jpg",
+            "Admin/yuklenenler/a348d80b-d43b-40fe-a027-78e86cb64e5d.jpg",
+            "Admin/yuklenenler/5e7da456-a690-41f8-a669-0a48b292e276.jpg",
+            "Admin/yuklenenler/c0fda733-8fe5-4d59-a87f-e7b4ba88d328.jpg",
+            "Admin/yuklenenler/ff520922-c469-42d8-9d7a-13464848f40c.jpg",
+            "Admin/yuklenenler/a8c90082-b586-4a32-a9d7-09e742e199bf.jpg",
+            "Admin/yuklenenler/ace03ae1-514a-4bc1-9c28-b186b1e16c17.jpg",
+            "Admin/yuklenenler/4ac047d4-eb6f-4449-820b-b6904fa650f1.jpg",
+            "Admin/yuklenenler/00f11f88-ba6f-40bb-8761-a6956868145e.jpg",
+            "Admin/yuklenenler/bc21967f-d8f9-436c-89f0-010d32c2e08d.jpg",
+            "Admin/yuklenenler/21bf6f58-d092-4eb1-b88d-49e12680b336.jpg",
+            "Admin/yuklenenler/c71f7a00-ffa6-4917-a7f0-ab12df4e859c.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "akbati-avm-konut",
+    "name": "AKBATI PROJESİ",
+    "employer": "AKKÖK GRUP, GAC GAYRİMENKUL YATIRIMLARI A.Ş.",
+    "scope": "AVM ve OTOPARKLAR İnce İşleri (160,000 m2) İnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması Alçıpan İşleri: Bölme duvar ve Asma tavanlarBahçeşehir/ İSTANBUL",
+    "description": [
+      "AVM ve OTOPARKLAR İnce İşleri (160,000 m2)",
+      "İnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması",
+      "Alçıpan İşleri: Bölme duvar ve Asma tavanlarBahçeşehir/ İSTANBUL"
+    ],
+    "works": [],
+    "location": "Bahçeşehir - İstanbul",
+    "area": "160.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Akbatı AVM ve Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Bahçeşehir / İstanbul'da 250.000 m² Akbatı AVM ve otopark projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Akiş Gayrimenkul ile 2011 yılında sahada.",
+    "image": "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-01.webp",
+    "gallery": [
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-01.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-02.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-03.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-04.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-05.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-06.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-07.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-08.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-09.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-10.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-11.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-12.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-13.webp"
+    ],
+    "href": "/projeler/akbati-avm-konut",
+    "district": "Başakşehir",
+    "legacy": {
+      "ids": [
+        8,
+        34
+      ],
+      "entries": [
+        {
+          "id": 8,
+          "name": "AKBATI PROJESİ",
+          "employer": "AKKÖK GRUP, GAC GAYRİMENKUL YATIRIMLARI A.Ş.",
+          "text": "AVM ve OTOPARKLAR İnce İşleri (160,000 m2)\nİnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması\nAlçıpan İşleri: Bölme duvar ve Asma tavanlarBahçeşehir/ İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/eaf0679e-038d-4785-affe-84d56b19df89.jpg",
+            "Admin/yuklenenler/a5c5eea9-e4be-4a6f-8ca3-8cb4ccf8377f.jpg",
+            "Admin/yuklenenler/4333ce04-64f0-4b1e-b247-1edade7b01bb.jpg",
+            "Admin/yuklenenler/b182b73b-c101-4a68-95f5-a0a5964ae9af.jpg",
+            "Admin/yuklenenler/6414f028-f1ea-4a42-ae1c-538aaf8dd958.jpg",
+            "Admin/yuklenenler/5646a371-b889-4056-beb0-09174fbab2f1.jpg",
+            "Admin/yuklenenler/7d2b89fa-c1b4-4a61-8ea3-410d5ec94aff.jpg",
+            "Admin/yuklenenler/f7e98f7c-a333-41c0-a5ac-9a7f54f17099.jpg",
+            "Admin/yuklenenler/0cf995f1-f25f-4c40-a489-362c005a085f.jpg",
+            "Admin/yuklenenler/9b1293e9-7f8c-4c18-afb4-cb0e49196c1f.jpg",
+            "Admin/yuklenenler/ebf30c99-6206-4925-b77a-f37b9b1492a4.jpg",
+            "Admin/yuklenenler/0d6f7501-599f-42b0-8e22-a229366e3fd2.jpg",
+            "Admin/yuklenenler/b829e54a-9ebd-49c5-8136-6fdc7c533bbd.jpg"
+          ]
+        },
+        {
+          "id": 34,
+          "name": "AKBATI PROJESİ",
+          "employer": "AKKÖK GRUP, GAC GAYRİMENKUL YATIRIMLARI A.Ş.",
+          "text": "AVM ve OTOPARKLAR İnce İşleri (160,000 m2)\nİnce Yapı işleri: Kara sıva, Alçı sıva, Boya işlerinin yapılması\nAlçıpan İşleri: Bölme duvar ve Asma tavanlarBahçeşehir/ İSTANBUL",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "varyap-meridien-konut",
+    "name": "VARYAP MERİDİAN PROJESİ",
+    "employer": "VARYAP VARLIBAŞLAR YAPI SAN. A.Ş.",
+    "scope": "E Blok İnce İşleri / 44 Katlı Blok (65,000 m2) Batı Ataşehir/ İSTANBUL İnce Yapı İşleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya işlerinin yapılması Alçıpan İşleri: Asma tavanlar, Bölme duvarlar, Işık bantları, Perdelikler",
+    "description": [
+      "E Blok İnce İşleri / 44 Katlı Blok (65,000 m2) Batı Ataşehir/ İSTANBUL",
+      "İnce Yapı İşleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya işlerinin yapılması",
+      "Alçıpan İşleri: Asma tavanlar, Bölme duvarlar, Işık bantları, Perdelikler"
+    ],
+    "works": [],
+    "location": "Batı Ataşehir - İstanbul",
+    "area": "65.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Varyap Meridien Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Batı Ataşehir / İstanbul'da 150.000 m² Varyap Meridien E Blok residence projesinde gazbeton duvar, sıva ve şap işini Sayda İnşaat tamamladı; 2010-2011 arası sahada.",
+    "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-01.webp",
+    "gallery": [
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-01.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-02.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-03.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-04.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-05.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-06.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-07.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-08.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-09.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-10.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-11.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-12.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-13.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-14.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-15.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-16.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-17.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-18.webp"
+    ],
+    "href": "/projeler/varyap-meridien-konut",
+    "district": "Ataşehir",
+    "legacy": {
+      "ids": [
+        9,
+        39
+      ],
+      "entries": [
+        {
+          "id": 9,
+          "name": "VARYAP MERİDİAN PROJESİ",
+          "employer": "VARYAP VARLIBAŞLAR YAPI SAN. A.Ş.",
+          "text": "E Blok İnce İşleri / 44 Katlı Blok (65,000 m2) Batı Ataşehir/ İSTANBUL\nİnce Yapı İşleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya işlerinin yapılması\nAlçıpan İşleri: Asma tavanlar, Bölme duvarlar, Işık bantları, Perdelikler",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/ee67038b-b01d-458a-9cb2-afd8a76b33ae.jpg",
+            "Admin/yuklenenler/93defb06-a2cd-4a8d-b61b-d3a359262896.jpg",
+            "Admin/yuklenenler/b4279ca3-0c73-45e2-baef-bb8d009975c5.jpg",
+            "Admin/yuklenenler/ee78d2ae-3f1b-4f15-a6c9-20c103c2e04f.jpg",
+            "Admin/yuklenenler/5be0cd82-68e6-4606-9a96-82bf9f9080ae.jpg",
+            "Admin/yuklenenler/a68386f0-4dc2-4ca8-a2bb-a8341c719c62.jpg",
+            "Admin/yuklenenler/97aaf765-88e6-418e-8260-2b265f0315af.jpg",
+            "Admin/yuklenenler/1d38c3b6-af1f-42c4-8fe5-cea8333f119a.jpg",
+            "Admin/yuklenenler/8ad11821-1dcb-42f0-8d2b-30d84d566dbd.jpg",
+            "Admin/yuklenenler/d377e554-4732-4ca5-9f86-09f0e5ccc9b8.jpg",
+            "Admin/yuklenenler/c81c7000-3a2b-4a8d-9d5b-9c34f6811d59.jpg",
+            "Admin/yuklenenler/74924a1c-9dde-4e66-89b2-63b743ac6e8b.jpg",
+            "Admin/yuklenenler/2cfae0a7-9625-4f61-8b48-3eb5f4acedae.jpg",
+            "Admin/yuklenenler/f08a915b-599e-4722-9e0b-86998bc490a3.jpg",
+            "Admin/yuklenenler/6c00efad-fb9f-4197-ab77-17de11c07bde.jpg",
+            "Admin/yuklenenler/74489b92-2137-4bc3-9571-99142ee4e998.jpg",
+            "Admin/yuklenenler/8fcedd1a-0854-48c4-935a-df8124bec508.jpg",
+            "Admin/yuklenenler/898da3d4-3d13-40ad-9ea1-1095b0a0d784.jpg"
+          ]
+        },
+        {
+          "id": 39,
+          "name": "VARYAP MERİDİAN PROJESİ",
+          "employer": "VARYAP YAPI A.Ş.",
+          "text": "VARYAP MERİDİAN PROJESİ İNCE YAPI İŞLERİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "terrace-bahce-konut",
+    "name": "TERRACE BAHCE PROJESİ",
+    "employer": "İNANLAR İNŞAAT A.Ş.",
+    "scope": "B Blok/ 25 Daire, Numune Daireler (6,000 m2) İnce Yapı işleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik,Boya işlerinin yapılması Alçıpan İşleri: Asma tavanlarSarıyer/ İSTANBUL",
+    "description": [
+      "B Blok/ 25 Daire, Numune Daireler (6,000 m2)",
+      "İnce Yapı işleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik,Boya işlerinin yapılması Alçıpan İşleri: Asma tavanlarSarıyer/ İSTANBUL"
+    ],
+    "works": [],
+    "location": "Sarıyer - İstanbul",
+    "area": "6.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Terrace Bahçe Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Sarıyer / İstanbul'da 14.000 m² Terrace Bahçe 60 konutluk residence projesinde duvar, sıva, şap, seramik ve alçı-levha asma tavan işini Sayda İnşaat tamamladı; 2010 yılında sahada.",
+    "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-01.webp",
+    "gallery": [
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-01.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-02.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-03.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-04.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-05.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-06.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-07.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-08.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-09.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-10.webp"
+    ],
+    "href": "/projeler/terrace-bahce-konut",
+    "district": "Sarıyer",
+    "legacy": {
+      "ids": [
+        10
+      ],
+      "entries": [
+        {
+          "id": 10,
+          "name": "TERRACE BAHCE PROJESİ",
+          "employer": "İNANLAR İNŞAAT A.Ş.",
+          "text": "B Blok/ 25 Daire, Numune Daireler (6,000 m2)\nİnce Yapı işleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik,Boya işlerinin yapılması Alçıpan İşleri: Asma tavanlarSarıyer/ İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/3ffc12f7-3499-4b01-abcb-b3e476cf124f.jpg",
+            "Admin/yuklenenler/983a5f79-42db-4e7b-9bd7-314df7687a6b.jpg",
+            "Admin/yuklenenler/56e9e242-ddca-4142-82fd-9add0c1a916e.jpg",
+            "Admin/yuklenenler/3dd7d5ef-25ee-4176-8845-17ffcfc61e66.jpg",
+            "Admin/yuklenenler/2f873cb0-5530-44e3-a38f-de0f8b670cb7.jpg",
+            "Admin/yuklenenler/f0fc1f3d-8a1a-4d81-bd26-0fecee4c29ff.jpg",
+            "Admin/yuklenenler/fb189684-7004-4d08-b886-b2922e507ea1.jpg",
+            "Admin/yuklenenler/3ce02af0-5f85-4c8a-bab2-04bc58dd4604.jpg",
+            "Admin/yuklenenler/990b6fdc-5951-44a3-8108-49db825a0bf7.jpg",
+            "Admin/yuklenenler/6f939308-d671-4f95-9adc-11777d594315.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "isisan-buderus-bursa",
+    "name": "ISISAN-BUDERUS BURSA BÖLGE BİNASI",
+    "employer": "ISISAN KLİMA VE ISITMA SAN. A.Ş.",
+    "scope": "6,000m2 Showroom ve Depo Binası Kaba Yapı İşleri: Çelik Güçlendirme, Çatı Kaplama, Cephe Mantolama, Cam Ovaakça/BURSA",
+    "description": [
+      "6,000m2 Showroom ve Depo Binası Kaba Yapı İşleri: Çelik Güçlendirme,",
+      "Çatı Kaplama, Cephe Mantolama, Cam",
+      "Ovaakça/BURSA"
+    ],
+    "works": [],
+    "location": "Ovaakça - Bursa",
+    "area": "6.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Isısan-Buderus Bursa Bölge Binası Kaba Yapı İşleri | Sayda İnşaat",
+    "seoDescription": "Ovaakça / Bursa'da 6.000 m² Isısan-Buderus showroom ve depo binasında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-01.webp",
+    "gallery": [
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-01.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-02.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-03.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-04.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-05.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-06.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-07.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-08.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-09.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-10.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-11.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-12.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-13.webp",
+      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-eski-14.webp"
+    ],
+    "href": "/projeler/isisan-buderus-bursa",
+    "district": "Osmangazi",
+    "legacy": {
+      "ids": [
+        12,
+        46
+      ],
+      "entries": [
+        {
+          "id": 12,
+          "name": "ISISAN-BUDERUS BURSA BÖLGE BİNASI",
+          "employer": "ISISAN KLİMA VE ISITMA SAN. A.Ş.",
+          "text": "6,000m2 Showroom ve Depo Binası Kaba Yapı İşleri: Çelik Güçlendirme, \nÇatı Kaplama, Cephe Mantolama, Cam\nOvaakça/BURSA",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/edca687a-cd53-4b71-b3fb-65fa2793d3d1.jpg",
+            "Admin/yuklenenler/9c647449-ee32-4e59-8ad3-7e4c77a9b6a8.jpg",
+            "Admin/yuklenenler/ebc4151b-4b4a-4409-b88b-40cef0f29279.jpg",
+            "Admin/yuklenenler/fb36266c-7bde-4678-b183-324e6aa3a6b7.jpg",
+            "Admin/yuklenenler/4209dcac-761e-43de-b3a4-4561d505b80f.jpg",
+            "Admin/yuklenenler/158f98cd-c1cd-4142-b285-2d49ef1f0855.jpg",
+            "Admin/yuklenenler/47d976ff-7da9-4d89-b898-4be4ed0334ad.jpg",
+            "Admin/yuklenenler/321150c1-8228-4f97-9951-7c162e726d13.jpg",
+            "Admin/yuklenenler/a3cff0f8-0968-4ea2-b6d8-7ac1c55371da.jpg",
+            "Admin/yuklenenler/bf4f434c-057a-4528-82c7-90731ff8fdfa.jpg",
+            "Admin/yuklenenler/a32e0aad-3ec6-4315-b697-8cbf003e7a33.jpg",
+            "Admin/yuklenenler/447962dc-c835-43c1-bd3d-a0ed016e0e84.jpg",
+            "Admin/yuklenenler/1b15a0d8-eb1e-40fc-ac65-0c8ff83ef90e.jpg",
+            "Admin/yuklenenler/805b036f-2a85-4f06-b550-789157586c5e.jpg"
+          ]
+        },
+        {
+          "id": 46,
+          "name": "ISISAN - BUDERUS SHOWROOM",
+          "employer": "ISISAN-BUDERUS ISITMA VE KLIMA SANAYI A.Ş.",
+          "text": "ISISAN - BUDERUS SHOWROOM",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "omsan-depo-lojistik-merkezi",
+    "name": "OMSAN TUZLA LOJİSTİK MERKEZİ",
+    "employer": "OYAK KONUT İNŞAAT A.Ş.",
+    "scope": "65,000 m2 Omsan Tuzla Lojistik Merkezi ve Yardımcı Tesisler İnşaatı İnce Yapı İşleri: Duvar, Sıva, Şap, Seramik,Demir Konstrüksiyon, Alüminyum Kompoze Giydirme, Alüminyum Doğrama, Saç Kapılar Laminant Kapılar, Yükseltilmiş Döşeme, Pvc Linolyum Kaplama, Mermer,Alçıpan ve Boya İşleri 900 mt Brüt Betonarme Bahçe Duvarı Kaba Yapı İşleri: 4,000 m2 Logolu Brüt Yüzey Betonarme İstinat Duvarı İnce Yapı İşleri: Harpuşta ve Bisküvi Tuğla İşleri, Tel Çit Panel İşleri Tuzla/ İSTANBUL",
+    "description": [
+      "65,000 m2 Omsan Tuzla Lojistik Merkezi ve Yardımcı Tesisler İnşaatı",
+      "İnce Yapı İşleri: Duvar, Sıva, Şap, Seramik,Demir Konstrüksiyon, Alüminyum Kompoze Giydirme, Alüminyum Doğrama, Saç",
+      "Kapılar Laminant Kapılar, Yükseltilmiş Döşeme, Pvc Linolyum Kaplama, Mermer,Alçıpan ve Boya İşleri",
+      "900 mt Brüt Betonarme Bahçe Duvarı Kaba Yapı İşleri: 4,000 m2 Logolu Brüt Yüzey Betonarme İstinat Duvarı",
+      "İnce Yapı İşleri: Harpuşta ve Bisküvi Tuğla İşleri, Tel Çit Panel İşleri",
+      "Tuzla/ İSTANBUL"
+    ],
+    "works": [],
+    "location": "Tuzla - İstanbul",
+    "area": "65.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Omsan Depo ve Lojistik Merkezi İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Tuzla / İstanbul'da 100.000 m² Omsan Depo, ek binalar ve yönetim binaları projesinde tuğla duvar, sıva, şap, seramik ve mermer işini Sayda İnşaat tamamladı; Oyak Konut ile 2006-2008 arası sahada.",
+    "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-01.webp",
+    "gallery": [
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-01.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-02.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-03.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-04.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-05.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-06.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-07.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-08.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-09.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-10.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-11.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-12.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-13.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-14.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-15.webp"
+    ],
+    "href": "/projeler/omsan-depo-lojistik-merkezi",
+    "district": "Tuzla",
+    "legacy": {
+      "ids": [
+        13
+      ],
+      "entries": [
+        {
+          "id": 13,
+          "name": "OMSAN TUZLA LOJİSTİK MERKEZİ",
+          "employer": "OYAK KONUT İNŞAAT A.Ş.",
+          "text": "65,000 m2 Omsan Tuzla Lojistik Merkezi ve Yardımcı Tesisler İnşaatı\nİnce Yapı İşleri: Duvar, Sıva, Şap, Seramik,Demir Konstrüksiyon, Alüminyum Kompoze Giydirme, Alüminyum Doğrama, Saç\nKapılar Laminant Kapılar, Yükseltilmiş Döşeme, Pvc Linolyum Kaplama, Mermer,Alçıpan ve Boya İşleri\n.......................................................................................................................................................\n900 mt Brüt Betonarme Bahçe Duvarı  Kaba Yapı İşleri: 4,000 m2 Logolu Brüt Yüzey Betonarme İstinat Duvarı\nİnce Yapı İşleri: Harpuşta ve Bisküvi Tuğla İşleri, Tel Çit Panel İşleri\nTuzla/ İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/ea6209a8-75e7-4f67-b1ce-7a7fa0670cd8.jpg",
+            "Admin/yuklenenler/b1929084-c33d-41c2-aa59-70672e097fda.jpg",
+            "Admin/yuklenenler/24899cb1-6c68-4dcd-8ce1-4553c9273efe.jpg",
+            "Admin/yuklenenler/d84dfbfd-b4a1-4045-9a39-468b61861da2.jpg",
+            "Admin/yuklenenler/0feeaea0-36de-4462-821e-e5b340d74638.jpg",
+            "Admin/yuklenenler/103b3a4c-dae5-4236-8162-7bfc5cf6fd74.jpg",
+            "Admin/yuklenenler/1abaa379-a656-4047-9154-3cd1e43e88bd.jpg",
+            "Admin/yuklenenler/662e7c90-3025-4ddd-8ad9-73a742d9811e.jpg",
+            "Admin/yuklenenler/85c46bb1-e7ba-4f9f-afbb-b6168a610279.jpg",
+            "Admin/yuklenenler/1b7917fc-3640-4081-8fa3-85b52f0a73b2.jpg",
+            "Admin/yuklenenler/1d30a75f-b701-47e2-bdae-0bd7b686a96e.jpg",
+            "Admin/yuklenenler/d83a5214-1d43-4ea7-b3fc-e48a7cc66206.jpg",
+            "Admin/yuklenenler/1cc01cd4-726c-44ad-803c-d3e10c1d27ed.jpg",
+            "Admin/yuklenenler/f221d710-952d-4d17-9eef-406589e4936b.jpg",
+            "Admin/yuklenenler/fe8ae854-7b48-4bf5-8f59-1cbbed3a3e45.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "yasmin-resort-hotel",
+    "name": "YASMİN RESORT HOTEL",
+    "employer": "BİRMOD TURİZM İNŞAAT A.Ş.",
+    "scope": "Otel, Club binaları ve Soysal Tesis Proje Koordinasyonu 29,000 m2 Sosyal Tesis ve Otel Bloğu, Isı Yalıtımlı Bitümlü Memban Kaplama Çatı İşleri, Cephe Mantolama, Cam, Alüminyum Kompoze Giydirme, Alüminyum Doğrama İnce Yapı İşleri: Alçıpan, Sıva, Seramik, Boya İşleri Bodrum/MUĞLA",
+    "description": [
+      "Otel, Club binaları ve Soysal Tesis Proje Koordinasyonu",
+      "29,000 m2 Sosyal Tesis ve Otel Bloğu, Isı Yalıtımlı Bitümlü Memban Kaplama Çatı İşleri, Cephe Mantolama, Cam,",
+      "Alüminyum Kompoze Giydirme, Alüminyum Doğrama İnce Yapı İşleri: Alçıpan, Sıva, Seramik, Boya İşleri",
+      "Bodrum/MUĞLA"
+    ],
+    "works": [],
+    "location": "Bodrum - Muğla",
+    "area": "29.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Yasmin Resort Hotel Proje Koordinasyonu | Sayda İnşaat",
+    "seoDescription": "Bodrum / Muğla'da 29.000 m² Yasmin Resort Hotel'de otel, club binaları ve sosyal tesis proje koordinasyonu, çatı, cephe mantolama ve ince yapı işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-01.webp",
+    "gallery": [
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-01.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-02.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-03.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-04.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-05.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-06.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-07.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-08.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-09.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-10.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-11.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-12.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-13.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-14.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-15.webp"
+    ],
+    "href": "/projeler/yasmin-resort-hotel",
+    "district": "Bodrum",
+    "legacy": {
+      "ids": [
+        14
+      ],
+      "entries": [
+        {
+          "id": 14,
+          "name": "YASMİN RESORT HOTEL",
+          "employer": "BİRMOD TURİZM İNŞAAT A.Ş.",
+          "text": "Otel, Club binaları ve Soysal Tesis Proje Koordinasyonu\n29,000 m2 Sosyal Tesis ve Otel Bloğu, Isı Yalıtımlı Bitümlü Memban Kaplama Çatı İşleri, Cephe Mantolama, Cam, \nAlüminyum Kompoze Giydirme, Alüminyum Doğrama İnce Yapı İşleri: Alçıpan, Sıva, Seramik, Boya İşleri\nBodrum/MUĞLA",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/efdcbe00-76a6-4791-bd94-90329661bb44.jpg",
+            "Admin/yuklenenler/baf1e99b-ea92-4a39-9c61-075cdede11d9.jpg",
+            "Admin/yuklenenler/0387adc1-89bc-4036-a863-eb893a5f827e.jpg",
+            "Admin/yuklenenler/1377b658-7615-461b-9b76-7d48dc02bd17.jpg",
+            "Admin/yuklenenler/8d0ecb8a-766b-4a52-b1bf-5b3e6927fbbd.jpg",
+            "Admin/yuklenenler/b0374f39-5382-43a5-b83e-f35656b3d10d.jpg",
+            "Admin/yuklenenler/f1c58d3a-e731-4497-8eb0-190f264999c9.jpg",
+            "Admin/yuklenenler/49ad404d-bb4a-44ee-b44a-795565419c70.jpg",
+            "Admin/yuklenenler/4879b362-3e0e-46ad-83c6-8ae4d1341a4b.jpg",
+            "Admin/yuklenenler/2985c094-d8fe-42a5-9588-6cc27c317d6f.jpg",
+            "Admin/yuklenenler/fd3878de-73a7-40f0-a292-e1eab42b0913.jpg",
+            "Admin/yuklenenler/257866c3-6f5b-4910-8f8e-aeaff45c0b2c.jpg",
+            "Admin/yuklenenler/195d3b10-5bfd-4f2b-97f7-08e2d9bf5aa8.jpg",
+            "Admin/yuklenenler/85929b7c-327d-472e-b719-bc323bfc85d6.jpg",
+            "Admin/yuklenenler/62b418c5-2c47-42da-b4f3-ec83a4e090e2.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "ciragan-otel-renovasyonu",
+    "name": "ÇIRAĞAN OTEL BİNASI RENEVASYON PROJESİ",
+    "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+    "scope": "Otel binası Restaurantlar İnce Yapı İşleri: 650 m2 Demir kutu konstrüksiyon ve Alçıpan Kaplama İşleri Ortaköy/İSTANBUL",
+    "description": [
+      "Otel binası Restaurantlar",
+      "İnce Yapı İşleri: 650 m2 Demir kutu konstrüksiyon ve Alçıpan Kaplama İşleri",
+      "Ortaköy/İSTANBUL"
+    ],
+    "works": [],
+    "location": "Ortaköy - İstanbul",
+    "area": "650 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Çırağan Otel Renovasyon Projesi | Sayda İnşaat",
+    "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski Otel restoranlarında 650 m² demir konstrüksiyon ve alçıpan kaplama renovasyon işini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-01.webp",
+    "gallery": [
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-01.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-02.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-03.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-04.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-05.webp"
+    ],
+    "href": "/projeler/ciragan-otel-renovasyonu",
+    "district": "Beşiktaş",
+    "legacy": {
+      "ids": [
+        15
+      ],
+      "entries": [
+        {
+          "id": 15,
+          "name": "ÇIRAĞAN OTEL BİNASI RENEVASYON PROJESİ",
+          "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+          "text": "Otel binası Restaurantlar\nİnce Yapı İşleri: 650 m2 Demir kutu konstrüksiyon ve Alçıpan Kaplama İşleri\nOrtaköy/İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/d62b7f50-ac62-4e3e-84d6-4a3da64a74c1.jpg",
+            "Admin/yuklenenler/0b184d6c-477a-47a7-8779-4c49da035b92.jpg",
+            "Admin/yuklenenler/56bf5117-e091-4bbb-84a1-7b137c29ac34.jpg",
+            "Admin/yuklenenler/b73bbfd4-fe6a-4683-b0d0-ffb1c8dc5a08.jpg",
+            "Admin/yuklenenler/aa1067e4-c59b-4baa-b06e-b8598e936969.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "executive-hall",
+    "name": "EXUCİTİVE HALL PROJESİ",
+    "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+    "scope": "Tehsin Binası Brüt Beton kaba İnşaatı, Sahil Betonarme İstinad Duvarları, Çevre Betonları İnce Yapı İşleri Ortaköy / İSTANBUL",
+    "description": [
+      "Tehsin Binası Brüt Beton kaba İnşaatı, Sahil Betonarme İstinad Duvarları, Çevre Betonları İnce Yapı İşleri",
+      "Ortaköy / İSTANBUL"
+    ],
+    "works": [],
+    "location": "Ortaköy - İstanbul",
     "area": "",
     "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
+    "type": "",
     "startDate": "",
-    "endDate": "Eylül 2022",
+    "endDate": "",
     "featured": false,
-    "seoTitle": "Beşiktaş Abbasağa Satış Ofisi Renovasyonu | Sayda İnşaat",
-    "seoDescription": "Beşiktaş'ta tarihi Aziziye Karakolu'nun Kiler Holding satış ofisine dönüştürülmesi kapsamında renovasyon ve ince işleri Sayda İnşaat tamamladı.",
-    "image": "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi.webp",
+    "seoTitle": "Executive Hall Kaba İnşaat Projesi | Sayda İnşaat",
+    "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski bünyesindeki Executive Hall binasında brüt beton kaba inşaat ve istinat duvarı işlerini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/executive-hall/executive-hall.webp",
     "gallery": [],
-    "href": "/projeler/kiler-besiktas-abbasaga-satis-ofisi",
-    "district": "Beşiktaş"
+    "href": "/projeler/executive-hall",
+    "district": "Beşiktaş",
+    "legacy": {
+      "ids": [
+        17
+      ],
+      "entries": [
+        {
+          "id": 17,
+          "name": "EXUCİTİVE HALL PROJESİ",
+          "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+          "text": "Tehsin Binası Brüt Beton kaba İnşaatı, Sahil Betonarme İstinad Duvarları, Çevre Betonları İnce Yapı İşleri\nOrtaköy / İSTANBUL",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
   },
   {
-    "slug": "buyukyali",
-    "name": "Büyükyalı Projesi",
-    "employer": "Özak - Yenigün - Ziylan Ortaklığı",
-    "scope": "Garden Zone H, I, L Blokları Konut, Sosyal Tesisleri İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "slug": "caviar-bar-restaurant",
+    "name": "CAVİAR BAR VE RESTAURANT PROJESİ",
+    "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+    "scope": "Restorant Dekorasyonu İnce Yapı İşleri Ortaköy / İSTANBUL",
     "description": [
-      "Büyükyalı projesinin Garden Zone H, I, L blokları konut ve sosyal tesislerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+      "Restorant Dekorasyonu İnce Yapı İşleri",
+      "Ortaköy / İSTANBUL"
     ],
-    "works": [
-      "Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha",
-      "Boya",
-      "Kartonpiyer",
-      "Duvar Kağıdı"
-    ],
-    "location": "Zeytinburnu - İstanbul",
-    "area": "560.000 m²",
+    "works": [],
+    "location": "Ortaköy - İstanbul",
+    "area": "",
     "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Şubat 2018",
-    "endDate": "Şubat 2020",
+    "startDate": "",
+    "endDate": "",
     "featured": false,
-    "seoTitle": "Büyükyalı İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Zeytinburnu / İstanbul'da 560.000 m² Büyükyalı Garden Zone konut ve sosyal tesis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Özak-Yenigün-Ziylan ortaklığıyla 2018-2020 arası sahada.",
-    "image": "/img/projects/buyukyali/buyukyali.webp",
+    "seoTitle": "",
+    "seoDescription": "",
+    "image": "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant.webp",
     "gallery": [],
-    "href": "/projeler/buyukyali",
-    "district": "Zeytinburnu"
+    "href": "/projeler/caviar-bar-restaurant",
+    "district": "Beşiktaş",
+    "type": "",
+    "legacy": {
+      "ids": [
+        18
+      ],
+      "entries": [
+        {
+          "id": 18,
+          "name": "CAVİAR BAR VE RESTAURANT PROJESİ",
+          "employer": "ÇIRAĞAN PALACE KEMPİNSKİ OTEL A.Ş.",
+          "text": "Restorant Dekorasyonu İnce Yapı İşleri\nOrtaköy / İSTANBUL",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
   },
   {
-    "slug": "gaziantep-entegre-saglik-kampusu",
-    "name": "Gaziantep Entegre Sağlık Kampüsü Projesi",
-    "employer": "CCN Altyapı Yatırımları ve İnşaat A.Ş.",
-    "scope": "T1 Kardiyovasküler Cerrahi Hastanesi İnce İşleri (Alçı-levha işleri, Sıva, Şap, Seramik, Boya İşleri)",
+    "slug": "genel-mudurluk-kum-koy-atik-ali-pasa",
+    "name": "GENEL MÜDÜRLÜK / KUM KÖY PROJESİ / ATİK ALİ PAŞA OTELİ",
+    "employer": "ENTERNASYONEL TURİZM YATIRIMLARI A.Ş.",
+    "scope": "Genel Müdürlük katı Dekorasyonu ve İnce Yapı İşleri Gayrettepe/İSTANBUL Kumköy Projesi Kilyos / İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası Atik Ali Paşa Oteli Beşiktaş/İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası",
     "description": [
-      "Gaziantep Entegre Sağlık Kampüsü bünyesindeki T1 Kardiyovasküler Cerrahi Hastanesi'nde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında alçı levha, sıva, şap, seramik ve boya uygulamaları tamamlanmıştır."
+      "Genel Müdürlük katı Dekorasyonu ve İnce Yapı İşleri Gayrettepe/İSTANBUL",
+      "Kumköy Projesi Kilyos / İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası",
+      "Atik Ali Paşa Oteli Beşiktaş/İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası"
     ],
-    "works": [
-      "Alçı Levha",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Boya"
-    ],
-    "location": "Gaziantep",
-    "area": "640.000 m²",
+    "works": [],
+    "location": "Gayrettepe, Kilyos, Beşiktaş - İstanbul",
+    "area": "",
     "status": "tamamlanan",
-    "type": "Sağlık",
-    "startDate": "Şubat 2018",
-    "endDate": "Haziran 2019",
+    "startDate": "",
+    "endDate": "",
     "featured": false,
-    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Gaziantep'te 640.000 m² Entegre Sağlık Kampüsü T1 Kardiyovasküler Cerrahi Hastanesi'nde alçı-levha, sıva, şap ve seramik işini Sayda İnşaat tamamladı; CCN Altyapı ile 2018-2019 arası sahada.",
-    "image": "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu.webp",
+    "seoTitle": "Genel Müdürlük, Kumköy ve Atik Ali Paşa Oteli Projeleri | Sayda İnşaat",
+    "seoDescription": "Enternasyonel Turizm Yatırımları için Gayrettepe genel müdürlük katı dekorasyonu, Kilyos Kumköy ve Beşiktaş Atik Ali Paşa Oteli idari binalarının kaba-ince yapı işlerini Sayda İnşaat tamamladı.",
+    "image": "/img/projects/genel-mudurluk-kum-koy-atik-ali-pasa/genel-mudurluk-kum-koy-atik-ali-pasa.webp",
     "gallery": [],
-    "href": "/projeler/gaziantep-entegre-saglik-kampusu"
+    "href": "/projeler/genel-mudurluk-kum-koy-atik-ali-pasa",
+    "type": "",
+    "legacy": {
+      "ids": [
+        20
+      ],
+      "entries": [
+        {
+          "id": 20,
+          "name": "GENEL MÜDÜRLÜK / KUM KÖY PROJESİ / ATİK ALİ PAŞA OTELİ",
+          "employer": "ENTERNASYONEL TURİZM YATIRIMLARI A.Ş.",
+          "text": "Genel Müdürlük katı Dekorasyonu ve İnce Yapı İşleri Gayrettepe/İSTANBUL\nKumköy Projesi Kilyos / İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası \nAtik Ali Paşa Oteli Beşiktaş/İSTANBUL İdari Binaların Kaba-İnce Yapı İnşası",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "mis-sut-dudullu-uretim-tesisleri",
+    "name": "MİS SÜT DUDULLU ÜRETİM TESİSLERİ",
+    "employer": "NESTLE SÜT ÜRÜNLERİ A.Ş.",
+    "scope": "Soğuk Depo ve Paketleme, 800 m2 İnceYapı-Epoxy Şap ve Poliüretan-panel Duvar UygulamasıDudulu/İSTANBUL Üretim ve Kazan Dairesi Binası,3,200 m2 Çelik Çatı Konstrüksiyonu, Çatı ve Parabet Panel Kaplama İşleri Personel Binaları Demir Konstrüksiyonu ve İnce Yapı İnşası 1,800 m2 Kamyon Park ve Şarj Alanı: Ek bina Kaba-İnce yapı ve Brüt betonarme logolu çevre duvarları ve otopark alanı düzenlemesi",
+    "description": [
+      "Soğuk Depo ve Paketleme, 800 m2 İnceYapı-Epoxy Şap ve Poliüretan-panel Duvar UygulamasıDudulu/İSTANBUL",
+      "Üretim ve Kazan Dairesi Binası,3,200 m2 Çelik Çatı Konstrüksiyonu, Çatı ve Parabet Panel Kaplama İşleri",
+      "Personel Binaları Demir Konstrüksiyonu ve İnce Yapı İnşası",
+      "1,800 m2 Kamyon Park ve Şarj Alanı: Ek bina Kaba-İnce yapı ve Brüt betonarme logolu çevre duvarları ve otopark alanı düzenlemesi"
+    ],
+    "works": [],
+    "location": "Dudullu - İstanbul",
+    "area": "800 m², 3.200 m², 1.800 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Mis Süt Dudullu Üretim Tesisleri İnşaat İşleri | Sayda İnşaat",
+    "seoDescription": "Dudullu / İstanbul'da Mis Süt üretim tesislerinde soğuk depo, üretim ve personel binaları kaba-ince yapı işlerini Sayda İnşaat tamamladı; Nestle Süt Ürünleri için sahada.",
+    "image": "/img/projects/mis-sut-dudullu-uretim-tesisleri/mis-sut-dudullu-uretim-tesisleri.webp",
+    "gallery": [],
+    "href": "/projeler/mis-sut-dudullu-uretim-tesisleri",
+    "district": "Ümraniye",
+    "legacy": {
+      "ids": [
+        21
+      ],
+      "entries": [
+        {
+          "id": 21,
+          "name": "MİS SÜT DUDULLU ÜRETİM TESİSLERİ",
+          "employer": "NESTLE SÜT ÜRÜNLERİ A.Ş.",
+          "text": "Soğuk Depo ve Paketleme, 800 m2 İnceYapı-Epoxy Şap ve Poliüretan-panel Duvar UygulamasıDudulu/İSTANBUL\nÜretim ve Kazan Dairesi Binası,3,200 m2 Çelik Çatı Konstrüksiyonu, Çatı ve Parabet Panel Kaplama İşleri\nPersonel Binaları Demir Konstrüksiyonu ve İnce Yapı İnşası\n1,800 m2 Kamyon Park ve Şarj Alanı: Ek bina Kaba-İnce yapı ve Brüt betonarme logolu çevre duvarları ve otopark alanı düzenlemesi",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "referans-gunesli",
+    "name": "REFERANS GÜNEŞLİ PROJESİ",
+    "employer": "KİLER GAYRİMENKUL YATIRIM ORTAKLIĞI A.Ş.",
+    "scope": "Konut, mağaza ve sosyal tesis ince işleri İnce İşler: Gazbeton duvar, alçı sıva, kara sıva, şap, seramik işleri Alçıpan İşleri: Asma tavan, bölme duvar, perdelik işleri Boya ve duvar kağıdı işleri",
+    "description": [
+      "Konut, mağaza ve sosyal tesis ince işleri",
+      "İnce İşler: Gazbeton duvar, alçı sıva, kara sıva, şap, seramik işleri",
+      "Alçıpan İşleri: Asma tavan, bölme duvar, perdelik işleri",
+      "Boya ve duvar kağıdı işleri"
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Referans Güneşli İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Güneşli / İstanbul'da Referans Güneşli konut, mağaza ve sosyal tesis projesinde gazbeton duvar, sıva, şap, seramik ve alçıpan işlerini Sayda İnşaat tamamladı; Kiler GYO için sahada.",
+    "image": "/img/projects/referans-gunesli/referans-gunesli-eski-01.webp",
+    "gallery": [
+      "/img/projects/referans-gunesli/referans-gunesli-eski-01.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-eski-02.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-eski-03.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-eski-04.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-eski-05.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-eski-06.webp"
+    ],
+    "href": "/projeler/referans-gunesli",
+    "district": "Bağcılar",
+    "legacy": {
+      "ids": [
+        23
+      ],
+      "entries": [
+        {
+          "id": 23,
+          "name": "REFERANS GÜNEŞLİ PROJESİ",
+          "employer": "KİLER GAYRİMENKUL YATIRIM ORTAKLIĞI A.Ş.",
+          "text": "Konut, mağaza ve sosyal tesis ince işleri\nİnce İşler: Gazbeton duvar, alçı sıva, kara sıva, şap, seramik işleri\nAlçıpan İşleri: Asma tavan, bölme duvar, perdelik işleri\nBoya ve duvar kağıdı işleri",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/a7613224-3e24-4f9a-832a-583f1135edde.jpg",
+            "Admin/yuklenenler/a19bf073-fcce-41c8-ae77-e2e46f99e211.jpg",
+            "Admin/yuklenenler/1dc0ad71-7895-4732-a1e2-b873529f0933.jpg",
+            "Admin/yuklenenler/3660bda5-29e8-4cfd-bcc5-bf49a6e02188.jpg",
+            "Admin/yuklenenler/19a7acdd-a89d-4b51-89fe-cf54826962a6.jpg",
+            "Admin/yuklenenler/94473333-5fe0-460d-8875-ab8e52e364c6.jpg"
+          ]
+        }
+      ]
+    }
   },
   {
     "slug": "vadistanbul",
-    "name": "Vadistanbul Projesi",
-    "employer": "Artaş - İnvest Ortak Girişimi",
-    "scope": "2. Etap G Blok ve Otel, 3. Etap Konut, Ofis ve Sosyal Tesis İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-levha işleri, Boya, Kartonpiyer, Duvar kağıdı vb.)",
+    "name": "VADİSTANBUL PROJESİ 3. ETABI",
+    "employer": "ARTAŞ - İNVEST ADİ ORTAKLIĞI",
+    "scope": "3. Etap Ofis Blokları ve Tüm Adanın Kapalı Otoparkları (205.000 m2) İnce İşler: Bimsblok, Gazbeton blok, Tuğla, Şap, Seramik, Alçı Sıva, Kara Sıva, Saten Sıva, Boya İşleri Alçıpan İşleri: Asma Tavanlar, Gizli Işık Bantları, Bölme Duvarlar, Duvar Giydirme İşleri",
     "description": [
-      "Vadistanbul projesinin 2. etap G Blok ve otel, 3. etap konut, ofis ve sosyal tesislerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha, boya, kartonpiyer ve duvar kağıdı uygulamaları tamamlanmıştır."
+      "3. Etap Ofis Blokları ve Tüm Adanın Kapalı Otoparkları (205.000 m2)",
+      "İnce İşler: Bimsblok, Gazbeton blok, Tuğla, Şap, Seramik, Alçı Sıva, Kara Sıva, Saten Sıva, Boya İşleri",
+      "Alçıpan İşleri: Asma Tavanlar, Gizli Işık Bantları, Bölme Duvarlar, Duvar Giydirme İşleri"
     ],
     "tagline": "Modern yaşam, sürdürülebilir şehircilik ve güçlü yatırım değeriyle İstanbul'un yeni cazibe merkezi.",
     "services": [
@@ -235,133 +1143,726 @@
         "text": "Uluslararası standartlarda inşaat"
       }
     ],
-    "works": [
-      "Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha",
-      "Boya",
-      "Kartonpiyer",
-      "Duvar Kağıdı"
-    ],
-    "location": "Ayazağa - İstanbul",
-    "area": "450.000 m²",
+    "works": [],
+    "location": "",
+    "area": "205.000 m²",
     "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Haziran 2017",
-    "endDate": "Aralık 2018",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
     "featured": true,
     "seoTitle": "Vadistanbul İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Ayazağa / İstanbul'da 450.000 m² Vadistanbul G Blok, otel, konut ve ofis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Artaş-İnvest ortaklığıyla 2017-2018 arası sahada.",
-    "image": "/img/projects/vadistanbul/vadistanbul.webp",
+    "image": "/img/projects/vadistanbul/vadistanbul-eski-01.webp",
     "gallery": [
-      "/img/projects/vadistanbul/vadistanbul-01.webp",
-      "/img/projects/vadistanbul/vadistanbul.webp",
-      "/img/projects/vadistanbul/vadistanbul-03.webp",
-      "/img/projects/vadistanbul/vadistanbul-04.webp",
-      "/img/projects/vadistanbul/vadistanbul-05.webp",
-      "/img/projects/vadistanbul/vadistanbul-06.webp",
-      "/img/projects/vadistanbul/vadistanbul-07.webp",
-      "/img/projects/vadistanbul/vadistanbul-08.webp"
+      "/img/projects/vadistanbul/vadistanbul-eski-01.webp",
+      "/img/projects/vadistanbul/vadistanbul-eski-02.webp",
+      "/img/projects/vadistanbul/vadistanbul-eski-03.webp",
+      "/img/projects/vadistanbul/vadistanbul-eski-04.webp",
+      "/img/projects/vadistanbul/vadistanbul-eski-05.webp",
+      "/img/projects/vadistanbul/vadistanbul-eski-06.webp"
     ],
     "href": "/projeler/vadistanbul",
-    "district": "Sarıyer"
+    "district": "Sarıyer",
+    "legacy": {
+      "ids": [
+        28,
+        37
+      ],
+      "entries": [
+        {
+          "id": 28,
+          "name": "VADİSTANBUL PROJESİ 3. ETABI",
+          "employer": "ARTAŞ - İNVEST ADİ ORTAKLIĞI",
+          "text": "3. Etap Ofis Blokları ve Tüm Adanın Kapalı Otoparkları (205.000 m2)\nİnce İşler: Bimsblok, Gazbeton blok, Tuğla, Şap, Seramik, Alçı Sıva, Kara Sıva, Saten Sıva, Boya İşleri\nAlçıpan İşleri: Asma Tavanlar, Gizli Işık Bantları, Bölme Duvarlar, Duvar Giydirme İşleri",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/3c5153f7-d2a1-4ac5-8820-13444a27348b.jpg",
+            "Admin/yuklenenler/e5928b7b-887b-4eeb-b300-56a938a26cca.jpg",
+            "Admin/yuklenenler/3d001b26-f5f8-4d3c-a4b9-f87490392032.jpg",
+            "Admin/yuklenenler/10e14f47-c8e1-4f24-b78f-d6c91b1c0d4b.jpg",
+            "Admin/yuklenenler/73790387-4ced-454d-8a43-f1cf90af97c8.jpg",
+            "Admin/yuklenenler/28720363-d04b-48ce-83c3-9640aff17cc0.jpg"
+          ]
+        },
+        {
+          "id": 37,
+          "name": "VADİ İSTANBUL AVM-SOSYAL TESİS",
+          "employer": "ARTAŞ-İNVEST ORTAKLIĞI",
+          "text": "VADİ İSTANBUL AVM-SOSYAL TESİS İNCE İŞLERİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
   },
   {
-    "slug": "atlas-park-avm-ofis",
-    "name": "Atlas Park AVM ve Ofis Projesi",
-    "employer": "Mesturkuaz, Canovate, Uzman İnş., HD Gayrimenkul Geliştirme Ortak Girişimi",
-    "scope": "AVM & Ofis İnce İşleri (Bims Duvar, Sıva, Şap + Alçı-levha İşleri)",
+    "slug": "m1-real-avm",
+    "name": "M1 REAL AVM GENİŞLETME PROJESİ",
+    "employer": "METRO PROPERTİES VE Fİ-BA GROUP ORTAKLIĞI",
+    "scope": "AVM ilave J, K ve L Blokları Kaba İşleri (18.000 m2) Kaba Yapı İşleri: Kalıp, Demir, Beton işleri Su Yalıtımı işleri: Temel ve çatı yalıtımları",
     "description": [
-      "Atlas Park AVM ve Ofis projesinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında bims duvar, sıva, şap ve alçı levha uygulamaları tamamlanmıştır."
+      "AVM ilave J, K ve L Blokları Kaba İşleri",
+      "(18.000 m2)",
+      "Kaba Yapı İşleri: Kalıp, Demir, Beton işleri",
+      "Su Yalıtımı işleri: Temel ve çatı yalıtımları"
+    ],
+    "works": [],
+    "location": "",
+    "area": "18.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "M1 Real AVM Genişletme Projesi Kaba Yapı İşleri | Sayda İnşaat",
+    "seoDescription": "M1 Real AVM genişletme projesinde 18.000 m² alanda J, K ve L blokları kaba yapı ve su yalıtımı işlerini Sayda İnşaat tamamladı; Metro Properties ve Fi-Ba Group ortaklığı için sahada.",
+    "image": "/img/projects/m1-real-avm/m1-real-avm-eski-01.webp",
+    "gallery": [
+      "/img/projects/m1-real-avm/m1-real-avm-eski-01.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-02.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-03.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-04.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-05.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-06.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-07.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-08.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-eski-09.webp"
+    ],
+    "href": "/projeler/m1-real-avm",
+    "legacy": {
+      "ids": [
+        29
+      ],
+      "entries": [
+        {
+          "id": 29,
+          "name": "M1 REAL AVM GENİŞLETME PROJESİ",
+          "employer": "METRO PROPERTİES VE Fİ-BA GROUP ORTAKLIĞI",
+          "text": "AVM ilave J, K ve L Blokları Kaba İşleri\r\n(18.000 m2)\r\nKaba Yapı İşleri: Kalıp, Demir, Beton işleri\r\nSu Yalıtımı işleri: Temel ve çatı yalıtımları",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/84229839-2bce-4aa0-8096-bcb69e0b99dd.jpg",
+            "Admin/yuklenenler/5174324c-c9c4-4d72-8407-1fb96194aebf.jpg",
+            "Admin/yuklenenler/29775426-bea0-4e9c-b7b3-e552b7c11b8d.jpg",
+            "Admin/yuklenenler/8c175391-9b1b-4f47-9ed6-ac4c412fc78e.jpg",
+            "Admin/yuklenenler/cc633af0-9210-4138-ad06-95ae14cc9a20.jpg",
+            "Admin/yuklenenler/54d73ad6-e359-4fc7-914d-9459a0112490.jpg",
+            "Admin/yuklenenler/ff09400a-73fa-47b6-8cf4-e0aaecb5758e.jpg",
+            "Admin/yuklenenler/eb1e2a09-4f90-4e38-87c6-2a6d6e6b719b.jpg",
+            "Admin/yuklenenler/3b07923f-33c8-426e-95bf-756625574e3a.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "levent-print-center-is-merkezi",
+    "name": "LEVENT PRINT CENTER İŞ MERKEZİ",
+    "employer": "RAN İNŞAAT TAAHHÜT SAN. TİC. LTD. ŞTİ.",
+    "scope": "Betonarme Bina Kaba + İnce İşleri / 4 Bodrum +Zemin+ 3 Normal Kat (8,500 m2) Kaba İşleri: Kalıp, Demir, Beton işleri Yalıtımı İşleri: Perde ve Temel su yalıtım işleri İnce İşleri: Bims blok duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya işlerinin yapılması Alçıpan İşleri: Bölme duvar ve Asma tavanlar",
+    "description": [
+      "Betonarme Bina Kaba + İnce İşleri / 4",
+      "Bodrum +Zemin+ 3 Normal Kat (8,500 m2)",
+      "Kaba İşleri: Kalıp, Demir, Beton işleri",
+      "Yalıtımı İşleri: Perde ve Temel su yalıtım işleri",
+      "İnce İşleri: Bims blok duvar işleri, Kara sıva,",
+      "Alçı sıva, Şap, Seramik, Boya işlerinin",
+      "yapılması",
+      "Alçıpan İşleri: Bölme duvar ve Asma",
+      "tavanlar"
+    ],
+    "works": [],
+    "location": "",
+    "area": "8.500 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Levent Print Center İş Merkezi İnşaat İşleri | Sayda İnşaat",
+    "seoDescription": "Levent / İstanbul'da 8.500 m² Levent Print Center iş merkezinde kaba yapı, su yalıtımı ve ince yapı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
+    "image": "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-01.webp",
+    "gallery": [
+      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-01.webp",
+      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-02.webp",
+      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-03.webp",
+      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-04.webp",
+      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-eski-05.webp"
+    ],
+    "href": "/projeler/levent-print-center-is-merkezi",
+    "district": "Beşiktaş",
+    "legacy": {
+      "ids": [
+        30
+      ],
+      "entries": [
+        {
+          "id": 30,
+          "name": "LEVENT PRINT CENTER İŞ MERKEZİ",
+          "employer": "RAN İNŞAAT TAAHHÜT SAN. TİC. LTD. ŞTİ.",
+          "text": "Betonarme Bina Kaba + İnce İşleri / 4\r\nBodrum +Zemin+ 3 Normal Kat (8,500 m2)\r\nKaba İşleri: Kalıp, Demir, Beton işleri\r\nYalıtımı İşleri: Perde ve Temel su yalıtım işleri\r\nİnce İşleri: Bims blok duvar işleri, Kara sıva,\r\nAlçı sıva, Şap, Seramik, Boya işlerinin\r\nyapılması\r\nAlçıpan İşleri: Bölme duvar ve Asma\r\ntavanlar",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/07d16f34-ce2d-4e9f-9791-6dc9400953d8.jpg",
+            "Admin/yuklenenler/6ee0163b-fd17-4480-9a14-aec1056153a7.jpg",
+            "Admin/yuklenenler/ab5e433e-7eae-4b35-9a6d-91734f2b2394.jpg",
+            "Admin/yuklenenler/39b85261-057a-4c99-acda-dc6c64e748c0.jpg",
+            "Admin/yuklenenler/dc96e01b-7ae1-4abb-919e-b6ead56b044a.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "dimas-antrepo",
+    "name": "DİMAŞ ANTREPO PROJESİ",
+    "employer": "RAN İNŞAAT TAAH. SAN. TİC. LTD. ŞTİ.",
+    "scope": "Depo ve Yönetim Binaları Kaba İşleri (26,400 m2) Kaba Yapı İşleri: Kalıp, Demir, Beton işleri Su Yalıtımı İşleri: Perde ve Temel yalıtım işleri",
+    "description": [
+      "Depo ve Yönetim Binaları Kaba İşleri (26,400 m2) Kaba Yapı İşleri: Kalıp, Demir, Beton işleri Su Yalıtımı İşleri: Perde ve Temel yalıtım işleri"
+    ],
+    "works": [],
+    "location": "",
+    "area": "26.400 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Dimaş Antrepo Kaba Yapı İşleri | Sayda İnşaat",
+    "seoDescription": "26.400 m² Dimaş Antrepo depo ve yönetim binalarında kalıp, demir, beton ve su yalıtımı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
+    "image": "/img/projects/dimas-antrepo/dimas-antrepo-eski-01.webp",
+    "gallery": [
+      "/img/projects/dimas-antrepo/dimas-antrepo-eski-01.webp",
+      "/img/projects/dimas-antrepo/dimas-antrepo-eski-02.webp"
+    ],
+    "href": "/projeler/dimas-antrepo",
+    "legacy": {
+      "ids": [
+        31
+      ],
+      "entries": [
+        {
+          "id": 31,
+          "name": "DİMAŞ ANTREPO PROJESİ",
+          "employer": "RAN İNŞAAT TAAH. SAN. TİC. LTD. ŞTİ.",
+          "text": "Depo ve Yönetim Binaları Kaba İşleri (26,400 m2) Kaba Yapı İşleri: Kalıp, Demir, Beton işleri Su Yalıtımı İşleri: Perde ve Temel yalıtım işleri",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/9d67b0d4-f330-4e32-bd1e-f774f41e00fc.jpg",
+            "Admin/yuklenenler/8cb74a99-3196-4746-b989-5501ba0fb7b1.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gaziantep-sehir-hastanesi",
+    "name": "GAZİANTEP ŞEHİR HASTANESİ",
+    "employer": "SAĞLIK BAKANLIĞI KAMU-ÖZEL ORTAK GİRİŞİMİ",
+    "scope": "Ana Hastane Binası Kuleleri (638,000 m2) İnce Yapı işleri: Kara Sıva, Alçı Sıva, Şap, Seramik, Boya, Metal Asma tavan, Ahşap Asma tavan Alçıpan İşleri: Bölme duvar, Giydirme Duvarlar, Asma tavanlar, Işık bantları",
+    "description": [
+      "Ana Hastane Binası Kuleleri (638,000 m2) İnce Yapı işleri: Kara Sıva, Alçı Sıva, Şap, Seramik, Boya, Metal Asma tavan, Ahşap Asma tavan Alçıpan İşleri: Bölme duvar, Giydirme Duvarlar, Asma tavanlar, Işık bantları"
+    ],
+    "works": [],
+    "location": "",
+    "area": "638.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "",
+    "seoDescription": "",
+    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp",
+    "gallery": [],
+    "href": "/projeler/gaziantep-sehir-hastanesi",
+    "legacy": {
+      "ids": [
+        32
+      ],
+      "entries": [
+        {
+          "id": 32,
+          "name": "GAZİANTEP ŞEHİR HASTANESİ",
+          "employer": "SAĞLIK BAKANLIĞI KAMU-ÖZEL ORTAK GİRİŞİMİ",
+          "text": "Ana Hastane Binası Kuleleri (638,000 m2) İnce Yapı işleri: Kara Sıva, Alçı Sıva, Şap, Seramik, Boya, Metal Asma tavan, Ahşap Asma tavan Alçıpan İşleri: Bölme duvar, Giydirme Duvarlar, Asma tavanlar, Işık bantları",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "buyukyali",
+    "name": "BÜYÜK YALI PROJESİ (KONUT RESİDANCE)",
+    "employer": "ÖZAK GYO, YENİGÜN, ZİYLAN ORTAKLIĞI",
+    "scope": "Zone 2 ve Zone 3 Bloklar (560,000 m2) İnce Yapı işleri: Gazbeton, Tuğla Duvarlar, Kara Sıva, Alçı Sıva, Şap, Seramik, Boya, Duvar kağıdı, Kartonpiyer Alçıpan İşleri: Bölme duvar, Asma tavanlar, Işık bantları.",
+    "description": [
+      "Zone 2 ve Zone 3 Bloklar (560,000 m2)",
+      "İnce Yapı işleri: Gazbeton, Tuğla Duvarlar,",
+      "Kara Sıva, Alçı Sıva, Şap, Seramik, Boya,",
+      "Duvar kağıdı, Kartonpiyer",
+      "Alçıpan İşleri: Bölme duvar, Asma tavanlar,",
+      "Işık bantları."
+    ],
+    "works": [],
+    "location": "",
+    "area": "560.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Büyükyalı İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Zeytinburnu / İstanbul'da 560.000 m² Büyükyalı Garden Zone konut ve sosyal tesis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Özak-Yenigün-Ziylan ortaklığıyla 2018-2020 arası sahada.",
+    "image": "/img/projects/buyukyali/buyukyali.webp",
+    "gallery": [],
+    "href": "/projeler/buyukyali",
+    "district": "Zeytinburnu",
+    "legacy": {
+      "ids": [
+        33
+      ],
+      "entries": [
+        {
+          "id": 33,
+          "name": "BÜYÜK YALI PROJESİ (KONUT RESİDANCE)",
+          "employer": "ÖZAK GYO, YENİGÜN, ZİYLAN ORTAKLIĞI",
+          "text": "Zone 2 ve Zone 3 Bloklar (560,000 m2)\r\nİnce Yapı işleri: Gazbeton, Tuğla Duvarlar,\r\nKara Sıva, Alçı Sıva, Şap, Seramik, Boya,\r\nDuvar kağıdı, Kartonpiyer\r\nAlçıpan İşleri: Bölme duvar, Asma tavanlar,\r\nIşık bantları.",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kasaba-konut-residance",
+    "name": "KASABA KONUT - RESIDANCE PROJESİ",
+    "employer": "İŞ -KORAY G.M.Y.0 .",
+    "scope": "İŞ -KORAY G.M.Y.0 . KASABA KONUT-RESIDANCE PROJESİ",
+    "description": [
+      "İŞ -KORAY G.M.Y.0 . KASABA KONUT-RESIDANCE PROJESİ"
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "",
+    "seoDescription": "",
+    "image": "/img/projects/kasaba-konut-residance/kasaba-konut-residance.webp",
+    "gallery": [],
+    "href": "/projeler/kasaba-konut-residance",
+    "legacy": {
+      "ids": [
+        40
+      ],
+      "entries": [
+        {
+          "id": 40,
+          "name": "KASABA KONUT - RESIDANCE PROJESİ",
+          "employer": "İŞ -KORAY G.M.Y.0 .",
+          "text": "İŞ -KORAY G.M.Y.0 .  KASABA KONUT-RESIDANCE PROJESİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "istanbul-projesi",
+    "name": "İSTANBUL PROJESİ",
+    "employer": "YAPI KREDl-KORAY G.M.Y.O.",
+    "scope": "YAPI KREDl-KORAY G.M.Y.O. İSTANBUL PROJESİ",
+    "description": [
+      "YAPI KREDl-KORAY G.M.Y.O. İSTANBUL PROJESİ"
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "",
+    "seoDescription": "",
+    "image": "/img/projects/istanbul-projesi/istanbul-projesi.webp",
+    "gallery": [],
+    "href": "/projeler/istanbul-projesi",
+    "legacy": {
+      "ids": [
+        41
+      ],
+      "entries": [
+        {
+          "id": 41,
+          "name": "İSTANBUL PROJESİ",
+          "employer": "YAPI KREDl-KORAY G.M.Y.O.",
+          "text": "YAPI KREDl-KORAY G.M.Y.O.  İSTANBUL PROJESİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "suzer-plaza-ofis",
+    "name": "SÜZER PLAZA OFİS PROJESİ",
+    "employer": "DOLMABAHÇE TURİZM INŞAAT TİCARET A.Ş",
+    "scope": "SÜZER PLAZA- OFİS PROJESİ",
+    "description": [
+      "SÜZER PLAZA- OFİS PROJESİ"
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "",
+    "seoDescription": "",
+    "image": "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis.webp",
+    "gallery": [],
+    "href": "/projeler/suzer-plaza-ofis",
+    "legacy": {
+      "ids": [
+        43
+      ],
+      "entries": [
+        {
+          "id": 43,
+          "name": "SÜZER PLAZA OFİS PROJESİ",
+          "employer": "DOLMABAHÇE TURİZM INŞAAT TİCARET A.Ş",
+          "text": "SÜZER PLAZA- OFİS PROJESİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "referans-kartal-loca-2",
+    "name": "REFERANS KARTAL LOCA PROJESİ 2. ETAP",
+    "employer": "REFERANS KARTAL LOCA",
+    "scope": "Devam etmekte olan Referans Kartal Loca Projesinin 2. Etap İnce işleri firmamız tarafından yapılmaktadır. 30.05.2022 yapılan sözleşme ile Projenin İleri Kaba ve İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Baumit Mantolama ürürnleri, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Haziran’da hayata geçirilecektir.",
+    "description": [
+      "Devam etmekte olan Referans",
+      "Kartal Loca Projesinin 2. Etap İnce işleri firmamız tarafından yapılmaktadır.",
+      "30.05.2022 yapılan sözleşme",
+      "ile Projenin İleri Kaba ve İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve",
+      "Levha sistemleri, Çanakkale Seramik,",
+      "Baumit Mantolama ürürnleri, Entegre sıva,",
+      "Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım",
+      "sistemleri kullanılarak",
+      "Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat",
+      "süresi 12 ay olup 2022 Haziran’da hayata geçirilecektir."
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Kartal Loca 2 İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Kartal / İstanbul'da 40.437 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2021-2023 arası sahada.",
+    "image": "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2.webp",
+    "gallery": [],
+    "href": "/projeler/referans-kartal-loca-2",
+    "district": "Kartal",
+    "legacy": {
+      "ids": [
+        47
+      ],
+      "entries": [
+        {
+          "id": 47,
+          "name": "REFERANS KARTAL LOCA PROJESİ 2. ETAP",
+          "employer": "REFERANS KARTAL LOCA",
+          "text": "Devam etmekte olan Referans\r\nKartal Loca Projesinin 2. Etap İnce işleri firmamız tarafından yapılmaktadır.\n30.05.2022 yapılan sözleşme\r\nile Projenin İleri Kaba ve İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve\r\nLevha sistemleri, Çanakkale Seramik, \nBaumit Mantolama ürürnleri, Entegre sıva,\r\nPolisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım\r\nsistemleri kullanılarak \nSayda inşaat kalitesinde yapılmaktadır. Projenin inşaat\r\nsüresi 12 ay olup 2022 Haziran’da hayata geçirilecektir.",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "kiler-besiktas-abbasaga-satis-ofisi",
+    "name": "KİLER BEŞİKTAŞ ABBASAĞA KONUT PROJESİ SATIŞ OFİSİ BİZ YAPIYORUZ",
+    "employer": "Kiler Holding",
+    "scope": "1866 tarihinde Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol) günümüzde Kiler Holding’in Beşiktaş Abbasağa konut projesinin Satış ofisine dönüştürülüyor.Firmamızca yapılacak olan projenin renevasyon ve ince işleri Eylül 2022 de satış ofisi olarak hizmete girecektir.",
+    "description": [
+      "1866 tarihinde Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol) günümüzde Kiler Holding’in Beşiktaş Abbasağa konut projesinin Satış ofisine dönüştürülüyor.Firmamızca yapılacak olan projenin renevasyon ve ince işleri Eylül 2022 de satış ofisi olarak hizmete girecektir."
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Beşiktaş Abbasağa Satış Ofisi Renovasyonu | Sayda İnşaat",
+    "seoDescription": "Beşiktaş'ta tarihi Aziziye Karakolu'nun Kiler Holding satış ofisine dönüştürülmesi kapsamında renovasyon ve ince işleri Sayda İnşaat tamamladı.",
+    "image": "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi.webp",
+    "gallery": [],
+    "href": "/projeler/kiler-besiktas-abbasaga-satis-ofisi",
+    "district": "Beşiktaş",
+    "legacy": {
+      "ids": [
+        49
+      ],
+      "entries": [
+        {
+          "id": 49,
+          "name": "KİLER BEŞİKTAŞ ABBASAĞA KONUT PROJESİ SATIŞ OFİSİ BİZ YAPIYORUZ",
+          "employer": "Kiler Holding",
+          "text": "1866 tarihinde Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol) günümüzde Kiler Holding’in Beşiktaş Abbasağa konut projesinin Satış ofisine dönüştürülüyor.Firmamızca yapılacak olan projenin renevasyon ve ince işleri Eylül 2022 de satış ofisi olarak hizmete girecektir.",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "oyakkent-konut",
+    "name": "OYAKKENT KONUT PROJESİ",
+    "employer": "OYAK İNŞAAT A.Ş.",
+    "scope": "B Blok/ 25 Daire, Numune Daireler (6,000 m2) İnce Yapı işleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya işlerinin yapılması Alçıpan İşleri: Asma tavanla 9 Blok/ 471 Konut 2. Etap (108.000 m2) Duvar işleri: 4 Blok, 208 konut Tuğla duvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin yapılması 9 Blok/ 471 Konut 2. Etap (108,000 m2) Çatı işleri: 9 Blok, Çatı konstrüksiyonu ve kaplaması, teras çatı işlerinin yapılması 24 Blok/ 1096 Konut 1. Etap (288,000 m2) Duvar işleri: 12 Blok, 548 konut Tuğla duvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin yapılması 24 Blok/ 1096 Konut 1. Etap Çatı işleri: 24 Blok, Çatı konstrüksiyonu ve kaplaması, teras çatı işlerinin yapılması İkitelli/ İSTANBUL",
+    "description": [
+      "B Blok/ 25 Daire, Numune Daireler (6,000 m2) İnce Yapı",
+      "işleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya",
+      "işlerinin yapılması Alçıpan İşleri: Asma tavanla9 Blok/ 471 Konut 2. Etap (108.000 m2) Duvar işleri: 4 Blok, 208 konut",
+      "Tuğla duvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin",
+      "yapılması9 Blok/ 471 Konut 2. Etap (108,000 m2) Çatı işleri: 9 Blok, Çatı",
+      "konstrüksiyonu ve kaplaması, teras çatı işlerinin yapılması",
+      "24",
+      "Blok/ 1096 Konut 1. Etap (288,000 m2) Duvar işleri: 12 Blok, 548 konut Tuğla",
+      "duvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin",
+      "yapılması",
+      "24 Blok/ 1096 Konut 1. Etap Çatı işleri: 24 Blok, Çatı konstrüksiyonu ve",
+      "kaplaması, teras çatı işlerinin yapılması",
+      "İkitelli/ İSTANBUL"
+    ],
+    "works": [],
+    "location": "İkitelli - İstanbul",
+    "area": "288.000 m² (1. Etap), 108.000 m² (2. Etap)",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Oyakkent Konut İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Başakşehir / İstanbul'da 650.000 m² Oyakkent 33 blok 1.581 konutluk projede tuğla duvar, teras şap ve çatı işini Sayda İnşaat tamamladı; Oyak İnşaat ile 2007-2009 arası sahada.",
+    "image": "/img/projects/oyakkent-konut/oyakkent-konut-eski-01.webp",
+    "gallery": [
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-01.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-02.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-03.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-04.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-05.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-06.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-07.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-08.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-09.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-10.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-11.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-12.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-13.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-14.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-15.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-16.webp",
+      "/img/projects/oyakkent-konut/oyakkent-konut-eski-17.webp"
+    ],
+    "href": "/projeler/oyakkent-konut",
+    "district": "Başakşehir",
+    "legacy": {
+      "ids": [
+        11
+      ],
+      "entries": [
+        {
+          "id": 11,
+          "name": "OYAKKENT KONUT PROJESİ",
+          "employer": "OYAK İNŞAAT A.Ş.",
+          "text": "B Blok/ 25 Daire, Numune Daireler (6,000 m2) İnce Yapı\r\nişleri: Gazbeton duvar işleri, Kara sıva, Alçı sıva, Şap, Seramik, Boya\r\nişlerinin yapılması Alçıpan İşleri: Asma tavanla.......................................................................................................................................9 Blok/ 471 Konut 2. Etap (108.000 m2) Duvar işleri: 4 Blok, 208 konut\r\nTuğla duvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin\r\nyapılması.......................................................................................................................................9 Blok/ 471 Konut 2. Etap (108,000 m2) Çatı işleri: 9 Blok, Çatı\r\nkonstrüksiyonu ve kaplaması, teras çatı işlerinin yapılması\n.......................................................................................................................................24\r\nBlok/ 1096 Konut 1. Etap (288,000 m2) Duvar işleri: 12 Blok, 548 konut Tuğla\r\nduvar örülmesi, gazbeton bloklarla duvar örülmesi ve şönt baca işlerinin\r\nyapılması\n.......................................................................................................................................24 Blok/ 1096 Konut 1. Etap Çatı işleri: 24 Blok, Çatı konstrüksiyonu ve\r\nkaplaması, teras çatı işlerinin yapılması\r\nİkitelli/ İSTANBUL",
+          "status": "tamamlanan",
+          "images": [
+            "Admin/yuklenenler/9a5a9077-d83b-44be-80ca-ff66113096b4.jpg",
+            "Admin/yuklenenler/2b940922-67eb-49e9-8352-8daf60760b86.jpg",
+            "Admin/yuklenenler/7ca27836-9d5a-4415-b76b-ce8469216049.jpg",
+            "Admin/yuklenenler/b2828ffc-a514-4813-95e4-225033fc17de.jpg",
+            "Admin/yuklenenler/478a3d95-50e5-4df2-be6d-2fa2bce56a0f.jpg",
+            "Admin/yuklenenler/c180e8c4-0e26-4710-9b21-06508cf4a324.jpg",
+            "Admin/yuklenenler/ede26709-4bfa-4f22-9ad6-3ec2e4cffe0c.jpg",
+            "Admin/yuklenenler/012e1f6a-4abb-470d-a7e4-350166aeda0e.jpg",
+            "Admin/yuklenenler/c02be56e-3253-47fa-bd4c-96e4e7ebc2f4.jpg",
+            "Admin/yuklenenler/5d6385bd-7c90-41f1-8b78-73986b3f9720.jpg",
+            "Admin/yuklenenler/a0043b42-db4e-4ab1-a750-9f4cf2c7c11c.jpg",
+            "Admin/yuklenenler/39067fe7-b14d-46cb-9e19-03468b72d1c6.jpg",
+            "Admin/yuklenenler/0528e2b6-7fdc-4911-af78-6526ce7ee5b5.jpg",
+            "Admin/yuklenenler/b330e8e7-2dcc-4a34-8b08-2df42c073ae3.jpg",
+            "Admin/yuklenenler/eda0b98e-53b0-4388-8156-66f33000604b.jpg",
+            "Admin/yuklenenler/ca49ff0d-acab-4dfb-9dd4-df9674baa612.jpg",
+            "Admin/yuklenenler/067131e6-01d2-42ca-b14d-6bffe74f2cb7.jpg"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "slug": "acarlar-acar-kent",
+    "name": "ACARLAR ŞİRKETLER GRUBU / ACAR KENT",
+    "employer": "DOST İNŞAAT SAN. TİC. A.Ş.",
+    "scope": "Acarkent B Mahallesi 10,000 m2 12 Villa İnce Yapı İşleri: Alçıpan, Alçı sıva ve Boya İşleri Acarkent B Mahallesi 12 Villa Garaj Binaları Kaba Yapı İşleri: 800 m2 Betonarme İnşaatı İnce Yapı İşleri: Su izolasyonu, Sıva, Boya,Taş kaplama İşleri",
+    "description": [
+      "Acarkent B Mahallesi 10,000 m2 12 Villa İnce Yapı İşleri: Alçıpan, Alçı sıva ve Boya İşleri",
+      "Acarkent B Mahallesi 12 Villa Garaj Binaları Kaba Yapı İşleri: 800 m2 Betonarme İnşaatı İnce Yapı İşleri: Su izolasyonu, Sıva, Boya,Taş kaplama İşleri"
+    ],
+    "works": [],
+    "location": "Acarkent B Mahallesi",
+    "area": "10.000 m², 800 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Acarkent Villa Projesi İnce Yapı İşleri | Sayda İnşaat",
+    "seoDescription": "Beykoz / İstanbul'da Acarkent B Mahallesi'nde 12 villa ve garaj binalarında ince yapı, izolasyon ve taş kaplama işlerini Sayda İnşaat tamamladı; Dost İnşaat için sahada.",
+    "image": "/img/projects/acarlar-acar-kent/acarlar-acar-kent.webp",
+    "gallery": [],
+    "href": "/projeler/acarlar-acar-kent",
+    "district": "Beykoz",
+    "legacy": {
+      "ids": [
+        22
+      ],
+      "entries": [
+        {
+          "id": 22,
+          "name": "ACARLAR ŞİRKETLER GRUBU / ACAR KENT",
+          "employer": "DOST İNŞAAT SAN. TİC. A.Ş.",
+          "text": "Acarkent B Mahallesi 10,000 m2 12 Villa İnce Yapı İşleri: Alçıpan, Alçı sıva ve Boya İşleri\nAcarkent B Mahallesi 12 Villa Garaj Binaları Kaba Yapı İşleri: 800 m2 Betonarme İnşaatı İnce Yapı İşleri: Su izolasyonu, Sıva, Boya,Taş kaplama İşleri",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "nidapark-istinye-satis-ofisi",
+    "name": "NİDAPARK İSTİNYE SATIŞ OFİSİ PROJESİ",
+    "employer": "NİDA İNŞAAT TURİZM A.Ş",
+    "scope": "NİDAPARK İSTİNYE SATIŞ OFİSİ İNCE İŞLERİ",
+    "description": [
+      "NİDAPARK İSTİNYE SATIŞ OFİSİ İNCE İŞLERİ"
+    ],
+    "works": [],
+    "location": "",
+    "area": "",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Nidapark İstinye Satış Ofisi İnce İşleri | Sayda İnşaat",
+    "seoDescription": "İstinye / İstanbul'da Nidapark satış ofisi projesinin ince işlerini Sayda İnşaat tamamladı; Nida İnşaat için sahada.",
+    "image": "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi.webp",
+    "gallery": [],
+    "href": "/projeler/nidapark-istinye-satis-ofisi",
+    "district": "Sarıyer",
+    "legacy": {
+      "ids": [
+        45
+      ],
+      "entries": [
+        {
+          "id": 45,
+          "name": "NİDAPARK İSTİNYE SATIŞ OFİSİ PROJESİ",
+          "employer": "NİDA İNŞAAT TURİZM A.Ş",
+          "text": "NİDAPARK İSTİNYE SATIŞ OFİSİ İNCE İŞLERİ",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "referans-kartal-loca-1",
+    "name": "REFERANS KARTAL LOCA PROJESİ 1. ETAP",
+    "employer": "REFERANS KARTAL LOCA",
+    "scope": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36000 m2 arazi üzerine 2 blok, sokak dükkan konseptinde 33 mağaza, 202 daire olarak tasarlanmıştır. 25 katlı A blokta 176 daire, 4 katlı B blokta 14 daire, 4 katlı C blokta 12 daire olmak üzere brüt alanları107 m2 ile 357m2 arasında değişmektedir. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Aralık'ta hayata geçirilecektir.",
+    "description": [
+      "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36000 m2 arazi üzerine 2 blok, sokak dükkan konseptinde 33 mağaza, 202 daire olarak tasarlanmıştır. 25 katlı A blokta 176 daire, 4 katlı B blokta 14 daire, 4 katlı C blokta 12 daire olmak üzere brüt alanları107 m2 ile 357m2 arasında değişmektedir. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Aralık'ta hayata geçirilecektir."
+    ],
+    "works": [],
+    "location": "",
+    "area": "36.000 m²",
+    "status": "tamamlanan",
+    "type": "",
+    "startDate": "",
+    "endDate": "",
+    "featured": false,
+    "seoTitle": "Kartal Loca 1 İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Kartal / İstanbul'da 35.672 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2022-2024 arası sahada.",
+    "image": "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1.webp",
+    "gallery": [],
+    "href": "/projeler/referans-kartal-loca-1",
+    "district": "Kartal",
+    "legacy": {
+      "ids": [
+        48
+      ],
+      "entries": [
+        {
+          "id": 48,
+          "name": "REFERANS KARTAL LOCA PROJESİ 1. ETAP",
+          "employer": "REFERANS KARTAL LOCA",
+          "text": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36000 m2 arazi üzerine 2 blok, sokak dükkan konseptinde 33 mağaza, 202 daire olarak tasarlanmıştır. 25 katlı A blokta 176 daire, 4 katlı B blokta 14 daire, 4 katlı C blokta 12 daire olmak üzere brüt alanları107 m2 ile 357m2 arasında değişmektedir. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco Ses yalıtım sistemleri kullanılarak Sayda inşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Aralık'ta hayata geçirilecektir.",
+          "status": "tamamlanan",
+          "images": []
+        }
+      ]
+    }
+  },
+  {
+    "slug": "gaziantep-entegre-saglik-kampusu",
+    "name": "Gaziantep Entegre Sağlık Kampüsü Projesi",
+    "employer": "CCN Altyapı Yatırımları ve İnşaat A.Ş.",
+    "scope": "T1 Kardiyovasküler Cerrahi Hastanesi İnce İşleri (Alçı-levha işleri, Sıva, Şap, Seramik, Boya İşleri)",
+    "description": [
+      "Gaziantep Entegre Sağlık Kampüsü bünyesindeki T1 Kardiyovasküler Cerrahi Hastanesi'nde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
+      "Proje kapsamında alçı levha, sıva, şap, seramik ve boya uygulamaları tamamlanmıştır."
     ],
     "works": [
-      "Bims Duvar",
+      "Alçı Levha",
       "Sıva",
       "Şap",
-      "Alçı Levha"
+      "Seramik",
+      "Boya"
     ],
-    "location": "Sultanbeyli - İstanbul",
-    "area": "160.000 m²",
+    "location": "Gaziantep",
+    "area": "640.000 m²",
     "status": "tamamlanan",
-    "type": "AVM & Ticari",
-    "startDate": "Ağustos 2013",
-    "endDate": "Mart 2015",
-    "featured": true,
-    "seoTitle": "Atlas Park AVM ve Ofis İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Sultanbeyli / İstanbul'da 160.000 m² Atlas Park AVM ve ofis projesinde bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı; 2013-2015 arası sahada.",
-    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
-    "gallery": [
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-01.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-02.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-03.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-04.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-05.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-06.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-07.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-09.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-10.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-11.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-12.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-13.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-14.webp",
-      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-15.webp"
-    ],
-    "href": "/projeler/atlas-park-avm-ofis",
-    "district": "Sultanbeyli"
-  },
-  {
-    "slug": "capital-tower-ofis",
-    "name": "Capital Tower 10. Kat Ofis Projesi",
-    "employer": "Uzman İnşaat A.Ş. & Mesturkuaz Madencilik A.Ş.",
-    "scope": "Ofis Dekorasyonu Anahtar Teslimi (Elektro-mekanik, İnce işler, Mermer işleri, Ahşap işleri, Metal ve Cam işleri)",
-    "description": [
-      "Capital Tower 10. Kat Ofis projesinde anahtar teslim ofis dekorasyonu Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında elektro-mekanik, ince işler, mermer, ahşap, metal ve cam işleri tamamlanmıştır."
-    ],
-    "works": [
-      "Elektro-mekanik",
-      "İnce İşler",
-      "Mermer İşleri",
-      "Ahşap İşleri",
-      "Metal İşleri",
-      "Cam İşleri"
-    ],
-    "location": "Basınekspres, Güneşli - İstanbul",
-    "area": "4.000 m²",
-    "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
-    "startDate": "Eylül 2013",
-    "endDate": "Eylül 2014",
-    "featured": true,
-    "seoTitle": "Capital Tower Ofis Dekorasyonu | Sayda İnşaat",
-    "seoDescription": "Güneşli / İstanbul'da Capital Tower 10. kat ofisinde anahtar teslim dekorasyon; elektro-mekanik, mermer, ahşap, metal ve cam işlerini Sayda İnşaat tamamladı; 2013-2014 arası sahada.",
-    "image": "/img/projects/capital-tower-ofis/capital-tower-ofis.webp",
-    "gallery": [
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-01.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-02.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-03.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-04.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-05.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-06.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-07.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-08.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-09.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-10.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-11.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-13.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-14.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-15.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-16.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-17.webp",
-      "/img/projects/capital-tower-ofis/capital-tower-ofis-18.webp"
-    ],
-    "href": "/projeler/capital-tower-ofis",
-    "district": "Bağcılar"
+    "type": "Sağlık",
+    "startDate": "Şubat 2018",
+    "endDate": "Haziran 2019",
+    "featured": false,
+    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşler Projesi | Sayda İnşaat",
+    "seoDescription": "Gaziantep'te 640.000 m² Entegre Sağlık Kampüsü T1 Kardiyovasküler Cerrahi Hastanesi'nde alçı-levha, sıva, şap ve seramik işini Sayda İnşaat tamamladı; CCN Altyapı ile 2018-2019 arası sahada.",
+    "image": "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu.webp",
+    "gallery": [],
+    "href": "/projeler/gaziantep-entegre-saglik-kampusu",
+    "legacy": null
   },
   {
     "slug": "torun-tower-ofis",
@@ -391,708 +1892,7 @@
     "image": "/img/projects/torun-tower-ofis/torun-tower-ofis.webp",
     "gallery": [],
     "href": "/projeler/torun-tower-ofis",
-    "district": "Beşiktaş"
-  },
-  {
-    "slug": "piazza-avm-anamon-otel",
-    "name": "Piazza AVM & Anamon Otel Projesi",
-    "employer": "Rönesans Teknik İnşaat A.Ş.",
-    "scope": "AVM & Otel İnce İşleri (Alçı-Levha Bölme Duvar, Asma Tavan, Alçı ve Kara Sıva, Boya İşleri)",
-    "description": [
-      "Piazza AVM & Anamon Otel projesinde AVM ve otel ince işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında alçı levha bölme duvar, asma tavan, alçı ve kara sıva ile boya uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Alçı Levha Bölme Duvar",
-      "Asma Tavan",
-      "Alçı Sıva",
-      "Kara Sıva",
-      "Boya"
-    ],
-    "location": "Canik - Samsun",
-    "area": "135.000 m²",
-    "status": "tamamlanan",
-    "type": "AVM & Ticari",
-    "startDate": "Eylül 2012",
-    "endDate": "Şubat 2013",
-    "featured": false,
-    "seoTitle": "Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Canik / Samsun'da 135.000 m² Piazza AVM ve Anamon Otel projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Rönesans Teknik ile 2012-2013 arası sahada.",
-    "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel.webp",
-    "gallery": [
-      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-34.webp",
-      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-35.webp"
-    ],
-    "href": "/projeler/piazza-avm-anamon-otel",
-    "district": "Canik"
-  },
-  {
-    "slug": "akbati-avm-konut",
-    "name": "Akbatı AVM & Konut Projesi",
-    "employer": "Akiş Gayrimenkul Yatırım A.Ş.",
-    "scope": "AVM & Otoparklar İnce İşleri (Alçı-Levha Bölme Duvar, Asma Tavan, Sıva, Boya İşleri)",
-    "description": [
-      "Akbatı AVM & Konut projesinin AVM ve otopark bölümlerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında alçı levha bölme duvar, asma tavan, sıva ve boya uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Alçı Levha Bölme Duvar",
-      "Asma Tavan",
-      "Sıva",
-      "Boya"
-    ],
-    "location": "Bahçeşehir - İstanbul",
-    "area": "250.000 m²",
-    "status": "tamamlanan",
-    "type": "AVM & Ticari",
-    "startDate": "Ocak 2011",
-    "endDate": "Temmuz 2011",
-    "featured": false,
-    "seoTitle": "Akbatı AVM ve Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Bahçeşehir / İstanbul'da 250.000 m² Akbatı AVM ve otopark projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Akiş Gayrimenkul ile 2011 yılında sahada.",
-    "image": "/img/projects/akbati-avm-konut/akbati-avm-konut.webp",
-    "gallery": [
-      "/img/projects/akbati-avm-konut/akbati-avm-konut-14.webp",
-      "/img/projects/akbati-avm-konut/akbati-avm-konut-15.webp"
-    ],
-    "href": "/projeler/akbati-avm-konut",
-    "district": "Başakşehir"
-  },
-  {
-    "slug": "varyap-meridien-konut",
-    "name": "Varyap Meridien Konut Projesi",
-    "employer": "Varyap İnşaat Turizm A.Ş.",
-    "scope": "Residance E Blok İnce İşleri (Gazbeton Duvar, Sıva, Şap İşleri)",
-    "description": [
-      "Varyap Meridien Konut projesinin Residance E Blok'unda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında gazbeton duvar, sıva ve şap uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Gazbeton Duvar",
-      "Sıva",
-      "Şap"
-    ],
-    "location": "Batı Ataşehir - İstanbul",
-    "area": "150.000 m²",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Temmuz 2010",
-    "endDate": "Mart 2011",
-    "featured": false,
-    "seoTitle": "Varyap Meridien Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Batı Ataşehir / İstanbul'da 150.000 m² Varyap Meridien E Blok residence projesinde gazbeton duvar, sıva ve şap işini Sayda İnşaat tamamladı; 2010-2011 arası sahada.",
-    "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp",
-    "gallery": [
-      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-19.webp"
-    ],
-    "href": "/projeler/varyap-meridien-konut",
-    "district": "Ataşehir"
-  },
-  {
-    "slug": "terrace-bahce-konut",
-    "name": "Terrace Bahçe Konut Projesi",
-    "employer": "İnanlar İnşaat A.Ş.",
-    "scope": "Residance 60 Konut İnce İşleri (Duvar, Sıva, Şap, Seramik, Alçı-Levha Asma Tavan, Boya İşleri)",
-    "description": [
-      "Terrace Bahçe Konut projesinin Residance 60 konutunda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında duvar, sıva, şap, seramik, alçı levha asma tavan ve boya uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Alçı Levha Asma Tavan",
-      "Boya"
-    ],
-    "location": "Sarıyer - İstanbul",
-    "area": "14.000 m²",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Şubat 2010",
-    "endDate": "Aralık 2010",
-    "featured": false,
-    "seoTitle": "Terrace Bahçe Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Sarıyer / İstanbul'da 14.000 m² Terrace Bahçe 60 konutluk residence projesinde duvar, sıva, şap, seramik ve alçı-levha asma tavan işini Sayda İnşaat tamamladı; 2010 yılında sahada.",
-    "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp",
-    "gallery": [
-      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-11.webp"
-    ],
-    "href": "/projeler/terrace-bahce-konut",
-    "district": "Sarıyer"
-  },
-  {
-    "slug": "oyakkent-konut",
-    "name": "Oyakkent Konut Projesi",
-    "employer": "Oyak İnşaat A.Ş.",
-    "scope": "33 Blok 1581 Konut İnce İşleri (Tuğla Duvar, Teras Şap, Çatı İşleri)",
-    "description": [
-      "Oyakkent Konut projesinin 33 blok 1.581 konutunda ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında tuğla duvar, teras şap ve çatı işleri uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Tuğla Duvar",
-      "Teras Şap",
-      "Çatı İşleri"
-    ],
-    "location": "Başakşehir - İstanbul",
-    "area": "650.000 m²",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "Haziran 2007",
-    "endDate": "Nisan 2009",
-    "featured": false,
-    "seoTitle": "Oyakkent Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Başakşehir / İstanbul'da 650.000 m² Oyakkent 33 blok 1.581 konutluk projede tuğla duvar, teras şap ve çatı işini Sayda İnşaat tamamladı; Oyak İnşaat ile 2007-2009 arası sahada.",
-    "image": "/img/projects/oyakkent-konut/oyakkent-konut.webp",
-    "gallery": [
-      "/img/projects/oyakkent-konut/oyakkent-konut-17.webp"
-    ],
-    "href": "/projeler/oyakkent-konut",
-    "district": "Başakşehir"
-  },
-  {
-    "slug": "omsan-depo-lojistik-merkezi",
-    "name": "Omsan Depo & Lojistik Merkezi Projesi",
-    "employer": "Oyak Konut A.Ş.",
-    "scope": "Depo, Ek Binalar & Yönetim Binaları İnce İşleri (Tuğla Duvar, Sıva, Şap, Seramik, Mermer, Alçı-Levha Asma Tavan, Sıva, Boya İşleri)",
-    "description": [
-      "Omsan Depo & Lojistik Merkezi projesinin depo, ek binalar ve yönetim binalarında ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında tuğla duvar, sıva, şap, seramik, mermer, alçı levha asma tavan ve boya uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Tuğla Duvar",
-      "Sıva",
-      "Şap",
-      "Seramik",
-      "Mermer",
-      "Alçı Levha Asma Tavan",
-      "Boya"
-    ],
-    "location": "Tuzla - İstanbul",
-    "area": "100.000 m²",
-    "status": "tamamlanan",
-    "type": "Depo & Endüstriyel",
-    "startDate": "Kasım 2006",
-    "endDate": "Haziran 2008",
-    "featured": false,
-    "seoTitle": "Omsan Depo ve Lojistik Merkezi İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Tuzla / İstanbul'da 100.000 m² Omsan Depo, ek binalar ve yönetim binaları projesinde tuğla duvar, sıva, şap, seramik ve mermer işini Sayda İnşaat tamamladı; Oyak Konut ile 2006-2008 arası sahada.",
-    "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi.webp",
-    "gallery": [
-      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-16.webp"
-    ],
-    "href": "/projeler/omsan-depo-lojistik-merkezi",
-    "district": "Tuzla"
-  },
-  {
-    "slug": "isisan-buderus-bursa",
-    "name": "Isısan-Buderus Bursa Bölge Binası Projesi",
-    "employer": "Isısan Klima ve Isıtma San. A.Ş.",
-    "scope": "Showroom ve Depo Binası Kaba Yapı İşleri (Çelik Güçlendirme, Çatı Kaplama, Cephe Mantolama, Cam)",
-    "description": [
-      "Isısan-Buderus Bursa Bölge Binası'nın showroom ve depo yapısında kaba yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Çelik Güçlendirme",
-      "Çatı Kaplama",
-      "Cephe Mantolama",
-      "Cam"
-    ],
-    "location": "Ovaakça - Bursa",
-    "area": "6.000 m²",
-    "status": "tamamlanan",
-    "type": "Depo & Endüstriyel",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Isısan-Buderus Bursa Bölge Binası Kaba Yapı İşleri | Sayda İnşaat",
-    "seoDescription": "Ovaakça / Bursa'da 6.000 m² Isısan-Buderus showroom ve depo binasında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam işini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa.webp",
-    "gallery": [
-      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-15.webp",
-      "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa-16.webp"
-    ],
-    "href": "/projeler/isisan-buderus-bursa",
-    "district": "Osmangazi"
-  },
-  {
-    "slug": "ciragan-otel-renovasyonu",
-    "name": "Çırağan Otel Binası Renovasyon Projesi",
-    "employer": "Çırağan Palace Kempinski Otel A.Ş.",
-    "scope": "Otel Restoranları Renovasyon İşleri (Demir Kutu Konstrüksiyon, Alçıpan Kaplama)",
-    "description": [
-      "Çırağan Palace Kempinski Otel binasının restoran alanlarında renovasyon işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında demir kutu konstrüksiyon ve alçıpan kaplama uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Demir Konstrüksiyon",
-      "Alçıpan Kaplama"
-    ],
-    "location": "Ortaköy - İstanbul",
-    "area": "650 m²",
-    "status": "tamamlanan",
-    "type": "Otel & Turizm",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Çırağan Otel Renovasyon Projesi | Sayda İnşaat",
-    "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski Otel restoranlarında 650 m² demir konstrüksiyon ve alçıpan kaplama renovasyon işini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp",
-    "gallery": [
-      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-06.webp"
-    ],
-    "href": "/projeler/ciragan-otel-renovasyonu",
-    "district": "Beşiktaş"
-  },
-  {
-    "slug": "yasmin-resort-hotel",
-    "name": "Yasmin Resort Hotel Projesi",
-    "employer": "Birmod Turizm İnşaat A.Ş.",
-    "scope": "Otel, Club Binaları ve Sosyal Tesis Proje Koordinasyonu",
-    "description": [
-      "Yasmin Resort Hotel'in otel, club binaları ve sosyal tesis projesinde proje koordinasyonu Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında 29.000 m² sosyal tesis ve otel bloğunda ısı yalıtımlı bitümlü membran kaplama çatı, cephe mantolama, cam, alüminyum kompoze giydirme ve alüminyum doğrama ile alçıpan, sıva, seramik ve boya işleri tamamlanmıştır."
-    ],
-    "works": [
-      "Çatı Kaplama",
-      "Cephe Mantolama",
-      "Cam",
-      "Alüminyum Kompoze Giydirme",
-      "Alüminyum Doğrama",
-      "Alçıpan",
-      "Sıva",
-      "Seramik",
-      "Boya"
-    ],
-    "location": "Bodrum - Muğla",
-    "area": "29.000 m²",
-    "status": "tamamlanan",
-    "type": "Otel & Turizm",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Yasmin Resort Hotel Proje Koordinasyonu | Sayda İnşaat",
-    "seoDescription": "Bodrum / Muğla'da 29.000 m² Yasmin Resort Hotel'de otel, club binaları ve sosyal tesis proje koordinasyonu, çatı, cephe mantolama ve ince yapı işini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp",
-    "gallery": [],
-    "href": "/projeler/yasmin-resort-hotel",
-    "district": "Bodrum"
-  },
-  {
-    "slug": "capital-tower-spor-kompleksi",
-    "name": "Capital Tower Spor Kompleksi Projesi",
-    "employer": "Mutlu İnşaat, Miltaş İnşaat, Uzman İnşaat Ortak Girişimi",
-    "scope": "Spor Kompleksi Dekorasyonu (Ahşap İşleri, Duvar-Zemin Kaplama, Mobilya ve Aksesuar İşleri)",
-    "description": [
-      "Capital Tower Spor Kompleksi'nde dekorasyon işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında ahşap işleri, duvar ve zemin kaplama, mobilya ve aksesuar uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Ahşap İşleri",
-      "Duvar Kaplama",
-      "Zemin Kaplama",
-      "Mobilya ve Aksesuar"
-    ],
-    "location": "Basınekspres - İstanbul",
-    "area": "800 m²",
-    "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Capital Tower Spor Kompleksi Dekorasyonu | Sayda İnşaat",
-    "seoDescription": "Basın Ekspres / İstanbul'da 800 m² Capital Tower Spor Kompleksi'nde ahşap işleri, duvar-zemin kaplama ve mobilya-aksesuar dekorasyonunu Sayda İnşaat tamamladı.",
-    "image": "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-01.webp",
-    "gallery": [
-      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-10.webp",
-      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-11.webp"
-    ],
-    "href": "/projeler/capital-tower-spor-kompleksi",
-    "district": "Bağcılar"
-  },
-  {
-    "slug": "executive-hall",
-    "name": "Executive Hall Projesi",
-    "employer": "Çırağan Palace Kempinski Otel A.Ş.",
-    "scope": "Tesis Binası Brüt Beton Kaba İnşaatı, Sahil Betonarme İstinat Duvarları ve Çevre Betonları İnce Yapı İşleri",
-    "description": [
-      "Çırağan Palace Kempinski Otel bünyesindeki Executive Hall binasının kaba inşaat ve çevre düzenleme işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında brüt beton kaba inşaat, sahil betonarme istinat duvarları ve çevre beton işleri tamamlanmıştır."
-    ],
-    "works": [
-      "Brüt Beton",
-      "Betonarme İstinat Duvarı",
-      "Çevre Betonu"
-    ],
-    "location": "Ortaköy - İstanbul",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Diğer",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Executive Hall Kaba İnşaat Projesi | Sayda İnşaat",
-    "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski bünyesindeki Executive Hall binasında brüt beton kaba inşaat ve istinat duvarı işlerini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/executive-hall/executive-hall.webp",
-    "gallery": [],
-    "href": "/projeler/executive-hall",
-    "district": "Beşiktaş"
-  },
-  {
-    "slug": "mis-sut-dudullu-uretim-tesisleri",
-    "name": "Mis Süt Dudullu Üretim Tesisleri Projesi",
-    "employer": "Nestle Süt Ürünleri A.Ş.",
-    "scope": "Soğuk Depo, Üretim/Kazan Dairesi ve Personel Binaları Kaba-İnce Yapı İşleri (Epoxy Şap, Poliüretan Panel Duvar, Çelik Çatı Konstrüksiyonu, Demir Konstrüksiyon)",
-    "description": [
-      "Mis Süt Dudullu Üretim Tesisleri bünyesinde soğuk depo, üretim/kazan dairesi ve personel binalarının kaba-ince yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında epoxy şap, poliüretan panel duvar, çelik çatı konstrüksiyonu, demir konstrüksiyon ve brüt betonarme çevre duvarı uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Epoxy Şap",
-      "Poliüretan Panel Duvar",
-      "Çelik Çatı Konstrüksiyonu",
-      "Demir Konstrüksiyon"
-    ],
-    "location": "Dudullu - İstanbul",
-    "area": "5.800 m²",
-    "status": "tamamlanan",
-    "type": "Depo & Endüstriyel",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Mis Süt Dudullu Üretim Tesisleri İnşaat İşleri | Sayda İnşaat",
-    "seoDescription": "Dudullu / İstanbul'da Mis Süt üretim tesislerinde soğuk depo, üretim ve personel binaları kaba-ince yapı işlerini Sayda İnşaat tamamladı; Nestle Süt Ürünleri için sahada.",
-    "image": "/img/projects/mis-sut-dudullu-uretim-tesisleri/mis-sut-dudullu-uretim-tesisleri.webp",
-    "gallery": [],
-    "href": "/projeler/mis-sut-dudullu-uretim-tesisleri",
-    "district": "Ümraniye"
-  },
-  {
-    "slug": "referans-gunesli",
-    "name": "Referans Güneşli Projesi",
-    "employer": "Kiler Gayrimenkul Yatırım Ortaklığı A.Ş.",
-    "scope": "Konut, Mağaza ve Sosyal Tesis İnce İşleri (Gazbeton Duvar, Alçı-Kara Sıva, Şap, Seramik, Alçıpan Asma Tavan-Bölme Duvar, Boya, Duvar Kağıdı)",
-    "description": [
-      "Referans Güneşli projesinin konut, mağaza ve sosyal tesis bölümlerinde ince işler Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında gazbeton duvar, alçı ve kara sıva, şap, seramik, alçıpan asma tavan ve bölme duvar, boya ile duvar kağıdı uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Gazbeton Duvar",
-      "Alçı Sıva",
-      "Kara Sıva",
-      "Şap",
-      "Seramik",
-      "Asma Tavan",
-      "Bölme Duvar",
-      "Perdelik",
-      "Boya",
-      "Duvar Kağıdı"
-    ],
-    "location": "Güneşli - İstanbul",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Referans Güneşli İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Güneşli / İstanbul'da Referans Güneşli konut, mağaza ve sosyal tesis projesinde gazbeton duvar, sıva, şap, seramik ve alçıpan işlerini Sayda İnşaat tamamladı; Kiler GYO için sahada.",
-    "image": "/img/projects/referans-gunesli/referans-gunesli-01.webp",
-    "gallery": [
-      "/img/projects/referans-gunesli/referans-gunesli-07.webp"
-    ],
-    "href": "/projeler/referans-gunesli",
-    "district": "Bağcılar"
-  },
-  {
-    "slug": "m1-real-avm",
-    "name": "M1 Real AVM Genişletme Projesi",
-    "employer": "Metro Properties ve Fi-Ba Group Ortaklığı",
-    "scope": "AVM İlave J, K ve L Blokları Kaba Yapı İşleri (Kalıp, Demir, Beton İşleri, Temel ve Çatı Su Yalıtımı)",
-    "description": [
-      "M1 Real AVM Genişletme projesinin J, K ve L blokları kaba yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında kalıp, demir, beton işleri ile temel ve çatı su yalıtımı uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Kalıp",
-      "Demir",
-      "Beton İşleri",
-      "Temel Yalıtımı",
-      "Çatı Yalıtımı"
-    ],
-    "location": "",
-    "area": "18.000 m²",
-    "status": "tamamlanan",
-    "type": "AVM & Ticari",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "M1 Real AVM Genişletme Projesi Kaba Yapı İşleri | Sayda İnşaat",
-    "seoDescription": "M1 Real AVM genişletme projesinde 18.000 m² alanda J, K ve L blokları kaba yapı ve su yalıtımı işlerini Sayda İnşaat tamamladı; Metro Properties ve Fi-Ba Group ortaklığı için sahada.",
-    "image": "/img/projects/m1-real-avm/m1-real-avm-01.webp",
-    "gallery": [
-      "/img/projects/m1-real-avm/m1-real-avm-10.webp"
-    ],
-    "href": "/projeler/m1-real-avm"
-  },
-  {
-    "slug": "levent-print-center-is-merkezi",
-    "name": "Levent Print Center İş Merkezi Projesi",
-    "employer": "Ran İnşaat Taahhüt San. Tic. Ltd. Şti.",
-    "scope": "Betonarme Bina Kaba + İnce İşleri, 4 Bodrum+Zemin+3 Normal Kat (Kalıp, Demir, Beton, Su Yalıtımı, Bims Blok Duvar, Sıva, Şap, Seramik, Boya, Alçıpan İşleri)",
-    "description": [
-      "Levent Print Center İş Merkezi'nin betonarme bina kaba ve ince işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında kalıp, demir, beton, su yalıtımı, bims blok duvar, sıva, şap, seramik, boya ile alçıpan bölme duvar ve asma tavan uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Kalıp",
-      "Demir",
-      "Beton İşleri",
-      "Su Yalıtımı",
-      "Bims Blok Duvar",
-      "Kara Sıva",
-      "Alçı Sıva",
-      "Şap",
-      "Seramik",
-      "Boya",
-      "Bölme Duvar",
-      "Asma Tavan"
-    ],
-    "location": "Levent - İstanbul",
-    "area": "8.500 m²",
-    "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Levent Print Center İş Merkezi İnşaat İşleri | Sayda İnşaat",
-    "seoDescription": "Levent / İstanbul'da 8.500 m² Levent Print Center iş merkezinde kaba yapı, su yalıtımı ve ince yapı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
-    "image": "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-01.webp",
-    "gallery": [
-      "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-06.webp"
-    ],
-    "href": "/projeler/levent-print-center-is-merkezi",
-    "district": "Beşiktaş"
-  },
-  {
-    "slug": "dimas-antrepo",
-    "name": "Dimaş Antrepo Projesi",
-    "employer": "Ran İnşaat Taahhüt San. Tic. Ltd. Şti.",
-    "scope": "Depo ve Yönetim Binaları Kaba Yapı İşleri (Kalıp, Demir, Beton İşleri, Perde ve Temel Su Yalıtımı İşleri)",
-    "description": [
-      "Dimaş Antrepo projesinin depo ve yönetim binalarında kaba yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında kalıp, demir, beton işleri ile perde ve temel su yalıtımı uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Kalıp",
-      "Demir",
-      "Beton İşleri",
-      "Perde Yalıtımı",
-      "Temel Yalıtımı"
-    ],
-    "location": "",
-    "area": "26.400 m²",
-    "status": "tamamlanan",
-    "type": "Depo & Endüstriyel",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Dimaş Antrepo Kaba Yapı İşleri | Sayda İnşaat",
-    "seoDescription": "26.400 m² Dimaş Antrepo depo ve yönetim binalarında kalıp, demir, beton ve su yalıtımı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
-    "image": "/img/projects/dimas-antrepo/dimas-antrepo-01.webp",
-    "gallery": [
-      "/img/projects/dimas-antrepo/dimas-antrepo-03.webp"
-    ],
-    "href": "/projeler/dimas-antrepo"
-  },
-  {
-    "slug": "kasaba-konut-residance",
-    "name": "Kasaba Konut Residance Projesi",
-    "employer": "İş-Koray Gayrimenkul Yatırım Ortaklığı",
-    "scope": "",
-    "description": [
-      "İçerik hazırlanıyor."
-    ],
-    "works": [],
-    "location": "",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/kasaba-konut-residance/kasaba-konut-residance.webp",
-    "gallery": [],
-    "href": "/projeler/kasaba-konut-residance"
-  },
-  {
-    "slug": "istanbul-projesi",
-    "name": "İstanbul Projesi",
-    "employer": "Yapı Kredi-Koray Gayrimenkul Yatırım Ortaklığı",
-    "scope": "",
-    "description": [
-      "İçerik hazırlanıyor."
-    ],
-    "works": [],
-    "location": "",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Diğer",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/istanbul-projesi/istanbul-projesi.webp",
-    "gallery": [],
-    "href": "/projeler/istanbul-projesi"
-  },
-  {
-    "slug": "suzer-plaza-ofis",
-    "name": "Süzer Plaza Ofis Projesi",
-    "employer": "Dolmabahçe Turizm İnşaat Ticaret A.Ş.",
-    "scope": "",
-    "description": [
-      "İçerik hazırlanıyor."
-    ],
-    "works": [],
-    "location": "",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis.webp",
-    "gallery": [],
-    "href": "/projeler/suzer-plaza-ofis"
-  },
-  {
-    "slug": "acarlar-acar-kent",
-    "name": "Acarlar Şirketler Grubu / Acar Kent Projesi",
-    "employer": "Dost İnşaat San. Tic. A.Ş.",
-    "scope": "Acarkent B Mahallesi 12 Villa İnce Yapı İşleri (Alçıpan, Alçı Sıva, Boya) ve Garaj Binaları Kaba-İnce Yapı İşleri (Su İzolasyonu, Sıva, Boya, Taş Kaplama)",
-    "description": [
-      "Acarkent B Mahallesi'nde 12 villanın ince yapı işleri ile garaj binalarının kaba-ince yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Proje kapsamında alçıpan, alçı sıva, boya, su izolasyonu ve taş kaplama uygulamaları tamamlanmıştır."
-    ],
-    "works": [
-      "Alçıpan",
-      "Alçı Sıva",
-      "Boya",
-      "Su İzolasyonu",
-      "Taş Kaplama"
-    ],
-    "location": "Acarkent - İstanbul",
-    "area": "10.800 m²",
-    "status": "tamamlanan",
-    "type": "Konut",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Acarkent Villa Projesi İnce Yapı İşleri | Sayda İnşaat",
-    "seoDescription": "Beykoz / İstanbul'da Acarkent B Mahallesi'nde 12 villa ve garaj binalarında ince yapı, izolasyon ve taş kaplama işlerini Sayda İnşaat tamamladı; Dost İnşaat için sahada.",
-    "image": "/img/projects/acarlar-acar-kent/acarlar-acar-kent.webp",
-    "gallery": [],
-    "href": "/projeler/acarlar-acar-kent",
-    "district": "Beykoz"
-  },
-  {
-    "slug": "nidapark-istinye-satis-ofisi",
-    "name": "Nidapark İstinye Satış Ofisi Projesi",
-    "employer": "Nida İnşaat Turizm A.Ş.",
-    "scope": "Satış Ofisi İnce İşleri",
-    "description": [
-      "Nidapark İstinye satış ofisinin ince işleri Sayda İnşaat tarafından gerçekleştirilmiştir."
-    ],
-    "works": [],
-    "location": "İstinye - İstanbul",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Ofis & İş Merkezi",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Nidapark İstinye Satış Ofisi İnce İşleri | Sayda İnşaat",
-    "seoDescription": "İstinye / İstanbul'da Nidapark satış ofisi projesinin ince işlerini Sayda İnşaat tamamladı; Nida İnşaat için sahada.",
-    "image": "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi.webp",
-    "gallery": [],
-    "href": "/projeler/nidapark-istinye-satis-ofisi",
-    "district": "Sarıyer"
-  },
-  {
-    "slug": "gaziantep-sehir-hastanesi",
-    "name": "Gaziantep Şehir Hastanesi Projesi",
-    "employer": "",
-    "scope": "",
-    "description": [
-      "İçerik hazırlanıyor."
-    ],
-    "works": [],
-    "location": "",
-    "area": "",
-    "status": "tamamlanan",
-    "type": "Sağlık",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp",
-    "gallery": [],
-    "href": "/projeler/gaziantep-sehir-hastanesi"
-  },
-  {
-    "slug": "genel-mudurluk-kum-koy-atik-ali-pasa",
-    "name": "Genel Müdürlük / Kum Köy Projesi / Atik Ali Paşa Oteli",
-    "employer": "Enternasyonel Turizm Yatırımları A.Ş.",
-    "scope": "Genel Müdürlük Katı Dekorasyonu ve İnce Yapı İşleri; Kum Köy ve Atik Ali Paşa Oteli İdari Binalarının Kaba-İnce Yapı İnşası",
-    "description": [
-      "Enternasyonel Turizm Yatırımları genel müdürlük katının dekorasyon ve ince yapı işleri Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Kumköy Projesi kapsamında idari binaların kaba-ince yapı inşaatı Sayda İnşaat tarafından gerçekleştirilmiştir.",
-      "Atik Ali Paşa Oteli idari binalarının kaba-ince yapı inşaatı Sayda İnşaat tarafından gerçekleştirilmiştir."
-    ],
-    "works": [],
-    "location": "Gayrettepe, Kilyos, Beşiktaş - İstanbul",
-    "area": "",
-    "status": "tamamlanan",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "Genel Müdürlük, Kumköy ve Atik Ali Paşa Oteli Projeleri | Sayda İnşaat",
-    "seoDescription": "Enternasyonel Turizm Yatırımları için Gayrettepe genel müdürlük katı dekorasyonu, Kilyos Kumköy ve Beşiktaş Atik Ali Paşa Oteli idari binalarının kaba-ince yapı işlerini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/genel-mudurluk-kum-koy-atik-ali-pasa/genel-mudurluk-kum-koy-atik-ali-pasa.webp",
-    "gallery": [],
-    "href": "/projeler/genel-mudurluk-kum-koy-atik-ali-pasa",
-    "type": "Ofis & İş Merkezi"
-  },
-  {
-    "slug": "caviar-bar-restaurant",
-    "name": "Caviar Bar ve Restaurant Projesi",
-    "employer": "Çırağan Palace Kempinski Otel A.Ş.",
-    "scope": "",
-    "description": [
-      "İçerik hazırlanıyor."
-    ],
-    "works": [],
-    "location": "Ortaköy - İstanbul",
-    "area": "",
-    "status": "tamamlanan",
-    "startDate": "",
-    "endDate": "Tamamlandı",
-    "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant.webp",
-    "gallery": [],
-    "href": "/projeler/caviar-bar-restaurant",
     "district": "Beşiktaş",
-    "type": "AVM & Ticari"
+    "legacy": null
   }
 ]

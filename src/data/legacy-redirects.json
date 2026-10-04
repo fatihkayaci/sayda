@@ -1,0 +1,90 @@
+{
+  "Proje_Detay": {
+    "param": "PNR",
+    "map": {
+      "3": "/projeler/atlas-park-avm-ofis",
+      "4": "/projeler/capital-tower-ofis",
+      "5": "/projeler/capital-tower-spor-kompleksi",
+      "6": "/projeler/piazza-avm-anamon-otel",
+      "7": "/projeler/piazza-avm-anamon-otel",
+      "8": "/projeler/akbati-avm-konut",
+      "9": "/projeler/varyap-meridien-konut",
+      "10": "/projeler/terrace-bahce-konut",
+      "11": "/projeler/oyakkent-konut",
+      "12": "/projeler/isisan-buderus-bursa",
+      "13": "/projeler/omsan-depo-lojistik-merkezi",
+      "14": "/projeler/yasmin-resort-hotel",
+      "15": "/projeler/ciragan-otel-renovasyonu",
+      "17": "/projeler/executive-hall",
+      "18": "/projeler/caviar-bar-restaurant",
+      "20": "/projeler/genel-mudurluk-kum-koy-atik-ali-pasa",
+      "21": "/projeler/mis-sut-dudullu-uretim-tesisleri",
+      "22": "/projeler/acarlar-acar-kent",
+      "23": "/projeler/referans-gunesli",
+      "28": "/projeler/vadistanbul",
+      "29": "/projeler/m1-real-avm",
+      "30": "/projeler/levent-print-center-is-merkezi",
+      "31": "/projeler/dimas-antrepo",
+      "32": "/projeler/gaziantep-sehir-hastanesi",
+      "33": "/projeler/buyukyali",
+      "34": "/projeler/akbati-avm-konut",
+      "37": "/projeler/vadistanbul",
+      "38": "/projeler/capital-tower-spor-kompleksi",
+      "39": "/projeler/varyap-meridien-konut",
+      "40": "/projeler/kasaba-konut-residance",
+      "41": "/projeler/istanbul-projesi",
+      "42": "/projeler/capital-tower-ofis",
+      "43": "/projeler/suzer-plaza-ofis",
+      "45": "/projeler/nidapark-istinye-satis-ofisi",
+      "46": "/projeler/isisan-buderus-bursa",
+      "47": "/projeler/referans-kartal-loca-2",
+      "48": "/projeler/referans-kartal-loca-1",
+      "49": "/projeler/kiler-besiktas-abbasaga-satis-ofisi",
+      "51": "/projeler/referans-besiktas-abbasaga"
+    },
+    "fallback": "/projeler"
+  },
+  "HaberDetay": {
+    "param": "Haber",
+    "map": {
+      "1": "/haberler/atlas-park-avm-hizmete-girdi",
+      "4": "/haberler/kapital-tower-10-kat-ofis-teslim",
+      "6": "/haberler/referans-guneşli-ince-islere-basladik",
+      "7": "/haberler/bilsem-besiktas-sosyal-sorumluluk",
+      "8": "/haberler/vadistanbul-3-etap-ince-isler",
+      "16": "/haberler/buyukyali-ince-isler",
+      "19": "/haberler/gaziantep-saglik-kampusu-ince-isler",
+      "21": "/haberler/referans-kartal-loca-ince-isler",
+      "22": "/haberler/referans-kartal-loca-2-etap-ince-isler",
+      "23": "/haberler/kiler-besiktas-abbasaga-satis-ofisi",
+      "24": "/haberler/kiler-referans-pendik-satis-ofisi",
+      "25": "/haberler/referans-besiktas-ince-isler",
+      "27": "/haberler/referans-loca-1-teslim"
+    },
+    "fallback": "/haberler"
+  },
+  "Projeler": {
+    "param": "DRM",
+    "map": {
+      "0": "/projeler/devam-eden",
+      "1": "/projeler/tamamlanan"
+    },
+    "fallback": "/projeler"
+  },
+  "Kurumsal": {
+    "param": "P",
+    "map": {
+      "hakkimizda": "/hakkimizda",
+      "vizyon-misyon": "/hakkimizda/vizyon-misyon"
+    },
+    "fallback": "/hakkimizda"
+  },
+  "ik": {
+    "param": "DRM",
+    "map": {
+      "beyazyakali": "/kariyer",
+      "kalfaekipli": "/kariyer"
+    },
+    "fallback": "/kariyer"
+  }
+}
