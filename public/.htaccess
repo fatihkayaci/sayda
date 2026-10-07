@@ -1,5 +1,10 @@
 # Sayda İnşaat - Apache (cPanel) yapılandırması
 Options -Indexes
+
+# SMTP şifresi içeren dosya dışarıdan açılamasın
+<Files "form-config.php">
+Require all denied
+</Files>
 ErrorDocument 404 /404.html
 AddDefaultCharset UTF-8
 

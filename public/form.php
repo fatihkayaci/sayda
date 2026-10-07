@@ -9,13 +9,24 @@ const MAX_CV_BYTES = 5 * 1024 * 1024;
 const RATE_LIMIT = 5;          // pencere başına en fazla gönderim
 const RATE_WINDOW = 600;       // saniye (10 dakika)
 
+// SMTP ayarları sunucudaki form-config.php dosyasından okunur (depoda yok, şifre içerir):
+//   <?php return ['host' => 'smtp.hostinger.com', 'port' => 465, 'user' => 'info@sayda.com.tr', 'pass' => 'POSTA_KUTUSU_SIFRESI'];
+// Dosya yoksa PHP mail() kullanılır (Hostinger'da çoğu zaman çalışmaz).
+$smtpConfig = is_file(__DIR__ . '/form-config.php') ? include __DIR__ . '/form-config.php' : null;
+
 header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-store');
 
-function respond(bool $success, string $message, int $status = 200): void
+function respond(bool $success, string $message, int $status = 200, ?string $detail = null): void
 {
+    global $smtpConfig;
     http_response_code($status);
-    echo json_encode(['success' => $success, 'message' => $message], JSON_UNESCAPED_UNICODE);
+    $payload = ['success' => $success, 'message' => $message];
+    // Sorun giderirken: public_html içine boş bir form-debug.txt dosyası koyarsanız hata ayrıntısı cevaba eklenir (işiniz bitince silin)
+    if ($detail !== null && is_file(__DIR__ . '/form-debug.txt')) {
+        $payload['detail'] = $detail;
+    }
+    echo json_encode($payload, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -34,6 +45,84 @@ function field(string $key, int $max = 2000): string
 function encode_header(string $value): string
 {
     return '=?UTF-8?B?' . base64_encode($value) . '?=';
+}
+
+// Minimal SMTP istemcisi (SSL/465 veya STARTTLS/587). Başarıda null, hatada hata metni döner.
+function smtp_send(array $cfg, string $from, string $to, string $message): ?string
+{
+    $host = $cfg['host'] ?? '';
+    $port = (int) ($cfg['port'] ?? 465);
+    $remote = ($port === 465 ? 'ssl://' : 'tcp://') . $host . ':' . $port;
+    $socket = @stream_socket_client($remote, $errno, $errstr, 15);
+    if (!$socket) {
+        $last = error_get_last();
+        return "baglanti ($remote): $errstr ($errno) " . ($last['message'] ?? '');
+    }
+    stream_set_timeout($socket, 15);
+
+    $read = function () use ($socket): string {
+        $reply = '';
+        while (($line = fgets($socket, 1024)) !== false) {
+            $reply .= $line;
+            if (strlen($line) < 4 || $line[3] === ' ') {
+                break;
+            }
+        }
+        return $reply;
+    };
+    $expect = function (string $reply, string $code) {
+        return strncmp($reply, $code, 3) === 0 ? null : trim($reply);
+    };
+    $send = function (string $command) use ($socket): void {
+        fwrite($socket, $command . "\r\n");
+    };
+
+    $fail = $expect($read(), '220');
+    if ($fail) { fclose($socket); return "karsilama: $fail"; }
+
+    $send('EHLO sayda.com.tr');
+    $fail = $expect($read(), '250');
+    if ($fail) { fclose($socket); return "EHLO: $fail"; }
+
+    if ($port !== 465) {
+        $send('STARTTLS');
+        $fail = $expect($read(), '220');
+        if ($fail || !stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            fclose($socket);
+            return 'STARTTLS basarisiz';
+        }
+        $send('EHLO sayda.com.tr');
+        $fail = $expect($read(), '250');
+        if ($fail) { fclose($socket); return "EHLO2: $fail"; }
+    }
+
+    $send('AUTH LOGIN');
+    $fail = $expect($read(), '334');
+    if (!$fail) { $send(base64_encode($cfg['user'] ?? '')); $fail = $expect($read(), '334'); }
+    if (!$fail) { $send(base64_encode($cfg['pass'] ?? '')); $fail = $expect($read(), '235'); }
+    if ($fail) { fclose($socket); return "giris: $fail"; }
+
+    $send("MAIL FROM:<$from>");
+    $fail = $expect($read(), '250');
+    if ($fail) { fclose($socket); return "MAIL FROM: $fail"; }
+
+    $send("RCPT TO:<$to>");
+    $fail = $expect($read(), '250');
+    if ($fail) { fclose($socket); return "RCPT TO: $fail"; }
+
+    $send('DATA');
+    $fail = $expect($read(), '354');
+    if ($fail) { fclose($socket); return "DATA: $fail"; }
+
+    // Satır başındaki noktaları çiftle (dot-stuffing)
+    $normalized = str_replace(["\r\n", "\r"], "\n", $message);
+    $send(str_replace("\n", "\r\n", preg_replace('/^\./m', '..', $normalized)));
+    $send('.');
+    $fail = $expect($read(), '250');
+    $send('QUIT');
+    fclose($socket);
+
+    return $fail ? "gonderim: $fail" : null;
 }
 
 // IP başına basit hız sınırı
@@ -55,7 +144,7 @@ function rate_limited(): bool
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
-    respond(false, 'Geçersiz istek.', 405);
+    respond(false, 'Geçersiz istek (' . ($_SERVER['REQUEST_METHOD'] ?? '?') . ').', 405);
 }
 
 // Bot tuzağı: gizli kutu doluysa sessizce başarılı göster
@@ -170,11 +259,34 @@ if ($attachment) {
     $body = chunk_split(base64_encode($text));
 }
 
-$sent = mail(MAIL_TO, encode_header($subject), $body, implode("\r\n", $headers), '-f' . MAIL_FROM);
+$encodedSubject = encode_header($subject);
+$headerString = implode("\r\n", $headers);
+
+if (is_array($smtpConfig)) {
+    $message = 'Date: ' . date('r') . "\r\n"
+        . 'Message-ID: <' . bin2hex(random_bytes(12)) . '@sayda.com.tr>' . "\r\n"
+        . 'To: ' . MAIL_TO . "\r\n"
+        . 'Subject: ' . $encodedSubject . "\r\n"
+        . $headerString . "\r\n\r\n" . $body;
+    $error = smtp_send($smtpConfig, MAIL_FROM, MAIL_TO, $message);
+    $sent = $error === null;
+    $failDetail = 'SMTP: ' . $error;
+    if (!$sent) {
+        error_log('Sayda form: SMTP basarisiz, form=' . $type . ' hata=' . $error);
+    }
+} else {
+    // Önce zarf göndericisiyle (-f), olmazsa onsuz dene: bazı sunucular -f parametresini reddediyor
+    $sent = @mail(MAIL_TO, $encodedSubject, $body, $headerString, '-f' . MAIL_FROM)
+        || @mail(MAIL_TO, $encodedSubject, $body, $headerString);
+    if (!$sent) {
+        $lastError = error_get_last();
+        $failDetail = 'mail(): ' . ($lastError['message'] ?? 'hata mesaji yok') . ' | disable_functions=' . ini_get('disable_functions');
+        error_log('Sayda form: mail() basarisiz, form=' . $type . ' hata=' . ($lastError['message'] ?? 'yok'));
+    }
+}
 
 if (!$sent) {
-    error_log('Sayda form: mail() başarısız, form=' . $type);
-    respond(false, 'Gönderilemedi.', 500);
+    respond(false, 'Gönderilemedi.', 500, $failDetail ?? null);
 }
 
 respond(true, 'OK');

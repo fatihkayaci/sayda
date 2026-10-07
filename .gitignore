@@ -17,6 +17,13 @@ pnpm-debug.log*
 .env
 .env.production
 
+# SMTP password for form.php (lives only on the server)
+public/form-config.php
+dist/form-config.php
+
+# local screenshots
+image.png
+
 # macOS-specific files
 .DS_Store
 
