@@ -20,7 +20,7 @@ const phones = ['+90 212 223 88 12', '+90 212 299 42 92', '+90 212 299 42 93', '
     <div class="container contact">
       <div>
         <form id="contactForm" class="contact__form">
-          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+          <input type="hidden" name="form_type" value="contact" />
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
 
           <input type="text" name="name" placeholder="Ad Soyad" required autocomplete="name" aria-label="Ad Soyad" />
@@ -191,23 +191,16 @@ const phones = ['+90 212 223 88 12', '+90 212 299 42 92', '+90 212 299 42 93', '
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
         });
         const result = await res.json();
 

@@ -41,7 +41,7 @@ const { id = 'quote-form' } = Astro.props;
     </div>
 
     <form class="quote-form__form" id="quoteForm">
-      <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+      <input type="hidden" name="form_type" value="quote" />
       <input type="checkbox" name="botcheck" class="quote-form__honeypot" tabindex="-1" autocomplete="off" />
 
       <div class="quote-form__row">
@@ -292,23 +292,16 @@ const { id = 'quote-form' } = Astro.props;
     e.preventDefault();
     if (!status) return;
 
-    const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-    if (!accessKey) {
-      status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
-      status.setAttribute('data-state', 'error');
-      return;
-    }
-
     const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     submitButton.disabled = true;
     status.textContent = 'Gönderiliyor...';
     status.removeAttribute('data-state');
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/form.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
       });
       const result = await res.json();
 

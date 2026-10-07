@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import site from '../../data/site.json';
 ---
 
 <Layout
@@ -12,7 +11,7 @@ import site from '../../data/site.json';
   <section class="page">
     <div class="container">
       <form id="ikForm" class="ik" enctype="multipart/form-data">
-        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="form_type" value="career" />
         <input type="hidden" name="subject" value="İK Başvurusu" />
         <input type="hidden" name="position_type" id="ikPositionType" value="Beyaz Yakalı" />
         <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
@@ -110,18 +109,12 @@ import site from '../../data/site.json';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
       const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submit.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(form),
