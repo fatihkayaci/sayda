@@ -91,7 +91,7 @@ const flow = [
       <div class="ik-layout">
         <div class="ik-form-card">
           <form id="ikForm">
-            <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+            <input type="hidden" name="form_type" value="career" />
             <input type="hidden" name="subject" value="İK Başvurusu" />
             <input type="hidden" name="position_type" id="ikPositionType" value="Beyaz Yaka" />
             <input type="checkbox" name="botcheck" class="ik-honeypot" tabindex="-1" autocomplete="off" />
@@ -277,20 +277,13 @@ const flow = [
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
           headers: { Accept: 'application/json' },
           body: new FormData(form),
@@ -343,11 +336,11 @@ const flow = [
     display: block;
     width: 36px;
     height: 2px;
-    background: currentColor;
+    background: var(--color-orange);
   }
 
   .eyebrow--light {
-    color: #8589e6;
+    color: #fff;
   }
 
   /* Hero */
@@ -374,7 +367,7 @@ const flow = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(13, 21, 51, 0.6) 40%, rgba(13, 21, 51, 0.2) 100%);
+    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.6) 40%, rgba(35, 35, 35, 0.2) 100%);
   }
 
   .ik-hero__inner {
@@ -398,7 +391,7 @@ const flow = [
   }
 
   .ik-hero__breadcrumb span[aria-current] {
-    color: #f6f7fb;
+    color: var(--color-bg-light);
   }
 
   .ik-hero h1 {
@@ -415,7 +408,7 @@ const flow = [
 
   .ik-hero__accent {
     font-weight: 300;
-    color: #8589e6;
+    color: var(--color-orange);
   }
 
   .ik-hero__lead {
@@ -449,7 +442,7 @@ const flow = [
     font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.12em;
-    color: #8589e6;
+    color: var(--color-on-dark-muted);
   }
 
   .ik-perks__title {
@@ -525,7 +518,7 @@ const flow = [
   }
 
   .ik-tab.is-active .ik-tab__num {
-    color: #8589e6;
+    color: var(--color-orange);
   }
 
   .ik-tab__mark {
@@ -540,7 +533,7 @@ const flow = [
   }
 
   .ik-tab.is-active .ik-tab__mark {
-    border-color: #8589e6;
+    border-color: var(--color-orange);
   }
 
   .ik-tab__title {
@@ -746,7 +739,7 @@ const flow = [
     margin-top: 28px;
     height: 58px;
     padding: 0 32px;
-    background: #3e43b8;
+    background: var(--color-navy);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -758,7 +751,7 @@ const flow = [
   }
 
   .ik-submit:hover {
-    background: #4e53d0;
+    background: var(--color-orange);
   }
 
   .ik-submit:disabled {
@@ -773,7 +766,7 @@ const flow = [
   }
 
   .ik-status[data-state='error'] {
-    color: #b3261e;
+    color: var(--color-error);
   }
 
   .ik-honeypot {
@@ -860,7 +853,7 @@ const flow = [
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.22em;
-    color: #8589e6;
+    color: var(--color-on-dark-muted);
   }
 
   .ik-flow__item {
@@ -876,7 +869,7 @@ const flow = [
     font-stretch: 118%;
     font-size: 1.25rem;
     font-weight: 800;
-    color: #8589e6;
+    color: var(--color-on-dark-muted);
   }
 
   .ik-flow__title {

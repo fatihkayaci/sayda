@@ -2,24 +2,26 @@
   /* Color */
   --color-navy: #2f3091; /* brand primary */
   --color-navy-dark: #262873; /* hover */
-  --color-navy-deep: #0d1533; /* footer background */
+  --color-navy-deep: #232323; /* dark surfaces: header, footer, dark sections (matches old site) */
   --color-text: #111318;
   --color-text-muted: #4a4c58;
   --color-text-faint: #8a8c98;
   --color-bg: #ffffff;
-  --color-bg-light: #f4f5fa;
-  --color-border: #e2e3ec;
+  --color-bg-light: #e9eff2;
+  --color-border: #d9e0e5;
   --color-on-dark: #ffffff;
-  --color-on-dark-muted: #b7b8d6;
+  --color-on-dark-muted: #bcbec2;
   --color-orange: #f5a21b; /* homepage highlight: eyebrow dashes, hero underline, arrow buttons */
-  --color-accent: #6d78f6; /* light brand accent on dark surfaces (nav CTA, headline highlights) */
+  --color-border-strong: #c3ccd3;
+  --color-error: #b3261e;
+  --color-success: #1f7a4d;
 
   /* Typography */
-  --font-body: 'Archivo', sans-serif;
-  --font-heading: 'Archivo Black', sans-serif;
+  --font-body: 'Questrial', 'Century Gothic', sans-serif;
+  --font-heading: 'Questrial', 'Century Gothic', sans-serif;
   --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
   --font-script: 'Caveat', cursive; /* handwritten quote accents */
-  --font-display: 'Archivo Variable', sans-serif; /* stretch-axis display type, homepage sections */
+  --font-display: 'Questrial', 'Century Gothic', sans-serif; /* display type, homepage sections */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
   --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);

@@ -22,7 +22,7 @@ const {
 ---
 
 <form class:list={['news-band', { 'news-band--icon': icon }]} id="newsBandForm">
-  <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+  <input type="hidden" name="form_type" value="newsletter" />
   <input type="hidden" name="subject" value={subject} />
   <input type="checkbox" name="botcheck" class="news-band__honeypot" tabindex="-1" autocomplete="off" />
 
@@ -62,23 +62,16 @@ const {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Abonelik şu an kapalı, lütfen daha sonra tekrar deneyin.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
         });
         const result = await res.json();
         if (!result.success) throw new Error(result.message ?? 'Unknown error');
@@ -194,7 +187,7 @@ const {
   }
 
   .news-band button:hover {
-    background: #e8e9f5;
+    background: var(--color-border);
   }
 
   .news-band button:disabled {

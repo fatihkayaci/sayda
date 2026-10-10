@@ -100,7 +100,7 @@ const cards = [
           <p class="ct-form__lead">Aşağıdaki formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
 
           <form id="contactForm">
-            <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+            <input type="hidden" name="form_type" value="contact" />
             <input type="checkbox" name="botcheck" class="ct-form__honeypot" tabindex="-1" autocomplete="off" />
 
             <div class="ct-form__row">
@@ -204,23 +204,16 @@ const cards = [
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Form şu an gönderime kapalı, lütfen telefonla ulaşın.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
         });
         const result = await res.json();
 
@@ -258,7 +251,7 @@ const cards = [
     display: block;
     width: 36px;
     height: 2px;
-    background: currentColor;
+    background: var(--color-orange);
   }
 
   .ct-eyebrow--small {
@@ -270,7 +263,7 @@ const cards = [
   .ct-hero {
     position: relative;
     overflow: hidden;
-    background: #eef2f9;
+    background: var(--color-border);
   }
 
   .ct-hero__media {
@@ -290,7 +283,7 @@ const cards = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, #eef2f9 0%, rgba(238, 242, 249, 0) 48%);
+    background: linear-gradient(to right, var(--color-border) 0%, rgba(238, 242, 249, 0) 48%);
   }
 
   .ct-hero__inner {
@@ -333,14 +326,14 @@ const cards = [
     font-size: 1.26rem;
     line-height: 1.6;
     color: #fff;
-    text-shadow: 0 2px 12px rgba(19, 21, 74, 0.5);
+    text-shadow: 0 2px 12px rgba(35, 35, 35, 0.5);
     transform: translateY(-50%);
   }
 
   /* Main */
   .ct-main {
     padding-block: 21px 36px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .ct-cards {
@@ -402,7 +395,7 @@ const cards = [
     min-height: 470px;
     overflow: hidden;
     border-radius: 4px;
-    background: #e3e8f2;
+    background: var(--color-border);
   }
 
   .ct-map iframe {
@@ -602,17 +595,17 @@ const cards = [
   }
 
   .ct-form__status[data-state='success'] {
-    color: #1f7a4d;
+    color: var(--color-success);
   }
 
   .ct-form__status[data-state='error'] {
-    color: #b3261e;
+    color: var(--color-error);
   }
 
   /* Offices */
   .ct-offices {
     padding-block: 13px 63px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .ct-offices__head {

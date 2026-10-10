@@ -145,7 +145,7 @@ const stats = [
     display: block;
     width: 28px;
     height: 2px;
-    background: currentColor;
+    background: var(--color-orange);
   }
 
   .eyebrow--light {
@@ -186,7 +186,7 @@ const stats = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(25, 27, 74, 0.55) 35%, rgba(25, 27, 74, 0.15) 100%);
+    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.55) 35%, rgba(35, 35, 35, 0.15) 100%);
   }
 
   .kh-hero__inner {
@@ -242,12 +242,12 @@ const stats = [
   }
 
   .kh-hero .eyebrow--light {
-    color: #8589e6;
+    color: #fff;
   }
 
   .kh-hero__title-accent {
     font-weight: 300;
-    color: #8589e6;
+    color: var(--color-orange);
   }
 
   .kh-hero__lead {
@@ -267,7 +267,7 @@ const stats = [
     max-width: 380px;
     margin: 0;
     padding: 4px 0 4px 26px;
-    border-left: 2px solid #8589e6;
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
     font-family: var(--font-display);
     font-stretch: 112%;
     font-weight: 600;
@@ -280,7 +280,7 @@ const stats = [
 
   /* Stats band */
   .kh-stats {
-    background: var(--color-navy);
+    background: var(--color-navy-deep);
     color: #fff;
   }
 
@@ -291,7 +291,7 @@ const stats = [
 
   .kh-stats__item {
     padding: 40px 28px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
   }
 
   .kh-stats__value {
@@ -311,7 +311,7 @@ const stats = [
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--color-on-dark-muted);
   }
 
   /* Cards */
@@ -336,15 +336,18 @@ const stats = [
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
+    border-bottom: 3px solid transparent;
     overflow: hidden;
     color: var(--color-text);
     transition:
       box-shadow var(--transition),
-      transform var(--transition);
+      transform var(--transition),
+      border-color var(--transition);
   }
 
   .kh-card:hover {
-    box-shadow: 0 24px 48px -24px rgba(13, 21, 51, 0.35);
+    border-bottom-color: var(--color-orange);
+    box-shadow: 0 24px 48px -24px rgba(35, 35, 35, 0.35);
     transform: translateY(-4px);
   }
 
@@ -375,7 +378,7 @@ const stats = [
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(19, 21, 74, 0.55);
+    background: rgba(35, 35, 35, 0.6);
     backdrop-filter: blur(4px);
     color: #fff;
   }
@@ -439,8 +442,8 @@ const stats = [
       background: linear-gradient(
         90deg,
         var(--color-navy-deep) 0%,
-        rgba(25, 27, 74, 0.75) 55%,
-        rgba(25, 27, 74, 0.35) 100%
+        rgba(35, 35, 35, 0.75) 55%,
+        rgba(35, 35, 35, 0.35) 100%
       );
     }
 

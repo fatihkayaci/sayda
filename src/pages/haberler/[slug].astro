@@ -243,7 +243,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
   .haber-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(19, 21, 74, 0.9) 0%, rgba(19, 21, 74, 0.55) 55%, rgba(19, 21, 74, 0.15) 100%);
+    background: linear-gradient(to right, rgba(35, 35, 35, 0.9) 0%, rgba(35, 35, 35, 0.55) 55%, rgba(35, 35, 35, 0.15) 100%);
   }
 
   .haber-hero__inner {
@@ -283,7 +283,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
   .haber-hero__eyebrow span {
     width: 31px;
     height: 2px;
-    background: #fff;
+    background: var(--color-orange);
   }
 
   .haber-hero h1 {
@@ -419,7 +419,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
   .haber-share__btn--x {
     border-color: var(--color-border);
     background: #fff;
-    color: #111;
+    color: var(--color-text);
   }
 
   .haber-share__btn--facebook {
@@ -432,7 +432,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
 
   .haber-share__btn--copy {
     border-color: var(--color-border);
-    background: #f4f6fb;
+    background: var(--color-bg-light);
     color: var(--color-text-muted);
   }
 
@@ -457,14 +457,14 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
     justify-content: space-between;
     padding: 13px 16px;
     border-radius: 3px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
     font-size: 0.84rem;
     color: var(--color-navy-deep);
     transition: background var(--transition);
   }
 
   .haber-cats a:hover {
-    background: #eceefa;
+    background: var(--color-border);
   }
 
   .haber-cats a.is-active {
@@ -479,7 +479,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
     height: 22px;
     padding: 0 7px;
     border-radius: 10px;
-    background: #e3e6f3;
+    background: var(--color-border);
     font-size: 0.7rem;
     font-weight: 700;
   }
@@ -493,7 +493,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
   }
 
   .haber-latest li + li {
-    border-top: 1px solid #eef0f6;
+    border-top: 1px solid var(--color-border);
   }
 
   .haber-latest a {
@@ -534,7 +534,7 @@ const more = [...sameCategory, ...others.filter((item) => item.category !== habe
   /* More */
   .haber-more {
     padding-block: 45px 54px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .haber-more__head {

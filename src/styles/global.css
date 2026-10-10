@@ -1,16 +1,7 @@
 @import './tokens.css';
 
-/* Archivo (body text) */
-@import '@fontsource/archivo/400.css';
-@import '@fontsource/archivo/500.css';
-@import '@fontsource/archivo/600.css';
-@import '@fontsource/archivo/700.css';
-
-/* Archivo Black (headings) */
-@import '@fontsource/archivo-black/400.css';
-
-/* Archivo Variable (stretch-axis display type, homepage sections) */
-@import '@fontsource-variable/archivo/wdth.css';
+/* Questrial (body, headings and display type; closest free match to the old site's Century Gothic) */
+@import '@fontsource/questrial/400.css';
 
 /* Caveat (handwritten quote accents) */
 @import '@fontsource/caveat/400.css';
@@ -39,6 +30,7 @@ body {
   background: var(--color-bg);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  font-synthesis-weight: none; /* Questrial has a single weight, don't fake-bold it */
 }
 
 body.menu-open {

@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# SMTP password for form.php (lives only on the server)
+public/form-config.php

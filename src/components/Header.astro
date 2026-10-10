@@ -380,14 +380,14 @@ const isPathActive = (href?: string) => {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #6d6bf0, #5142e6);
+    background: var(--color-navy);
     color: #fff;
     padding: 12px 22px;
     border-radius: 10px;
     font-size: var(--fs-small);
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(81, 66, 230, 0.35);
+    box-shadow: 0 8px 20px rgba(35, 35, 35, 0.25);
     transition:
       background var(--transition),
       box-shadow var(--transition),
@@ -395,8 +395,8 @@ const isPathActive = (href?: string) => {
   }
 
   .header__cta:hover {
-    background: linear-gradient(135deg, #7a78f5, #5c4eef);
-    box-shadow: 0 10px 24px rgba(81, 66, 230, 0.45);
+    background: var(--color-orange);
+    box-shadow: 0 10px 24px rgba(245, 162, 27, 0.4);
     transform: translateY(-1px);
   }
 
@@ -416,7 +416,7 @@ const isPathActive = (href?: string) => {
       left: 0;
       right: 0;
       width: 100%;
-      background: #0d1533;
+      background: #232323;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
@@ -444,7 +444,7 @@ const isPathActive = (href?: string) => {
       z-index: 1;
       margin-left: 0;
       overflow-y: auto;
-      background: #0d1533;
+      background: #232323;
       padding: calc(var(--header-h-compact) + var(--space-l)) var(--edge-mobile) var(--space-l);
       transform: translateX(100%);
       visibility: hidden;
@@ -531,7 +531,7 @@ const isPathActive = (href?: string) => {
       justify-content: center;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #6d6bf0, #5142e6);
+      background: var(--color-navy);
       color: #fff;
       padding: 12px 24px;
       border-radius: 10px;
@@ -540,7 +540,7 @@ const isPathActive = (href?: string) => {
     }
 
     .header__nav-cta-link:hover {
-      background: linear-gradient(135deg, #7a78f5, #5c4eef);
+      background: var(--color-orange);
       color: #fff;
     }
   }

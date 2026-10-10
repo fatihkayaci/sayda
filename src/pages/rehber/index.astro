@@ -137,7 +137,7 @@ const popular = sorted.slice(0, 5);
 
     <div class="container">
       <form class="rehber-news" id="rehberNewsForm">
-        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="form_type" value="newsletter" />
         <input type="hidden" name="subject" value="Rehber bülteni aboneliği" />
         <input type="checkbox" name="botcheck" class="rehber-news__honeypot" tabindex="-1" autocomplete="off" />
 
@@ -284,23 +284,16 @@ const popular = sorted.slice(0, 5);
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Abonelik şu an kapalı, lütfen daha sonra tekrar deneyin.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
         });
         const result = await res.json();
         if (!result.success) throw new Error(result.message ?? 'Unknown error');
@@ -353,7 +346,7 @@ const popular = sorted.slice(0, 5);
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(25, 27, 74, 0.92) 0%, rgba(25, 27, 74, 0.7) 60%, rgba(25, 27, 74, 0.85) 100%);
+    background: linear-gradient(to right, rgba(35, 35, 35, 0.92) 0%, rgba(35, 35, 35, 0.7) 60%, rgba(35, 35, 35, 0.85) 100%);
   }
 
   .rehber-hero__inner {
@@ -397,7 +390,7 @@ const popular = sorted.slice(0, 5);
     display: block;
     width: 31px;
     height: 2px;
-    background: #fff;
+    background: var(--color-orange);
   }
 
   .rehber-hero__eyebrow span:last-child {
@@ -457,7 +450,7 @@ const popular = sorted.slice(0, 5);
   /* Layout */
   .rehber-page {
     padding-block: 31px 72px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .rehber-page__layout {
@@ -500,7 +493,7 @@ const popular = sorted.slice(0, 5);
     gap: 16px;
     padding: 14px 16px;
     border: 0;
-    border-bottom: 1px solid #eef0f6;
+    border-bottom: 1px solid var(--color-border);
     border-radius: 3px;
     background: transparent;
     font: inherit;
@@ -517,7 +510,7 @@ const popular = sorted.slice(0, 5);
   }
 
   .rehber-side__btn:hover {
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .rehber-side__btn[aria-current='true'] {
@@ -532,7 +525,7 @@ const popular = sorted.slice(0, 5);
   }
 
   .rehber-popular li + li {
-    border-top: 1px solid #eef0f6;
+    border-top: 1px solid var(--color-border);
   }
 
   .rehber-popular a {
@@ -687,7 +680,7 @@ const popular = sorted.slice(0, 5);
   .rehber-card__tag {
     padding: 4px 12px;
     border-radius: 3px;
-    background: #eceefa;
+    background: var(--color-border);
     color: var(--color-navy);
     font-size: 0.63rem;
     font-weight: 700;
@@ -805,7 +798,7 @@ const popular = sorted.slice(0, 5);
   .rehber-news__eyebrow span {
     width: 31px;
     height: 2px;
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--color-orange);
   }
 
   .rehber-news__intro h2 {
@@ -837,7 +830,7 @@ const popular = sorted.slice(0, 5);
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: #eceefa;
+    background: var(--color-border);
     color: var(--color-navy);
   }
 
@@ -925,11 +918,11 @@ const popular = sorted.slice(0, 5);
   }
 
   .rehber-news__status[data-state='success'] {
-    color: #1f7a4d;
+    color: var(--color-success);
   }
 
   .rehber-news__status[data-state='error'] {
-    color: #b3261e;
+    color: var(--color-error);
   }
 
   @media (max-width: 1200px) {

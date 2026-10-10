@@ -116,7 +116,7 @@ const tabs = [
       </div>
 
       <form class="haberler-side__card haberler-news" id="newsletterForm">
-        <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+        <input type="hidden" name="form_type" value="newsletter" />
         <input type="hidden" name="subject" value="Bülten aboneliği" />
         <input type="checkbox" name="botcheck" class="haberler-news__honeypot" tabindex="-1" autocomplete="off" />
         <span class="haberler-news__icon">
@@ -244,23 +244,16 @@ const tabs = [
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement)?.value;
-      if (!accessKey) {
-        status.textContent = 'Abonelik şu an kapalı, lütfen daha sonra tekrar deneyin.';
-        status.setAttribute('data-state', 'error');
-        return;
-      }
-
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       submitButton.disabled = true;
       status.textContent = 'Gönderiliyor...';
       status.removeAttribute('data-state');
 
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        const res = await fetch('/form.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          headers: { Accept: 'application/json' },
+          body: new FormData(form),
         });
         const result = await res.json();
         if (!result.success) throw new Error(result.message ?? 'Unknown error');
@@ -313,7 +306,7 @@ const tabs = [
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(25, 27, 74, 0.92) 0%, rgba(25, 27, 74, 0.7) 60%, rgba(25, 27, 74, 0.85) 100%);
+    background: linear-gradient(to right, rgba(35, 35, 35, 0.92) 0%, rgba(35, 35, 35, 0.7) 60%, rgba(35, 35, 35, 0.85) 100%);
   }
 
   .haberler-hero__inner {
@@ -357,7 +350,7 @@ const tabs = [
     display: block;
     width: 36px;
     height: 2px;
-    background: #fff;
+    background: var(--color-orange);
   }
 
   .haberler-hero__eyebrow span:last-child {
@@ -417,7 +410,7 @@ const tabs = [
     left: 0;
     width: 31px;
     height: 2px;
-    background: #8da2ff;
+    background: var(--color-orange);
   }
 
   .haberler-hero__quote strong {
@@ -427,7 +420,7 @@ const tabs = [
   /* Layout */
   .haberler-page {
     padding-block: 31px 81px;
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .haberler-page__layout {
@@ -478,7 +471,7 @@ const tabs = [
     gap: 16px;
     padding: 14px 16px;
     border: 0;
-    border-bottom: 1px solid #eef0f6;
+    border-bottom: 1px solid var(--color-border);
     border-radius: 3px;
     background: transparent;
     font: inherit;
@@ -495,7 +488,7 @@ const tabs = [
   }
 
   .haberler-side__btn:hover {
-    background: #f4f6fb;
+    background: var(--color-bg-light);
   }
 
   .haberler-side__btn[aria-current='true'] {
@@ -508,7 +501,7 @@ const tabs = [
     display: grid;
     gap: 12px;
     padding: 27px 18px 22px;
-    background: #eef1f9;
+    background: var(--color-border);
     box-shadow: none;
   }
 
@@ -589,11 +582,11 @@ const tabs = [
   }
 
   .haberler-news__status[data-state='success'] {
-    color: #1f7a4d;
+    color: var(--color-success);
   }
 
   .haberler-news__status[data-state='error'] {
-    color: #b3261e;
+    color: var(--color-error);
   }
 
   /* Toolbar */
@@ -725,7 +718,7 @@ const tabs = [
   .haber-card__tag {
     padding: 4px 12px;
     border-radius: 3px;
-    background: #eceefa;
+    background: var(--color-border);
     color: var(--color-navy);
     font-size: 0.63rem;
     font-weight: 700;
