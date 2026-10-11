@@ -1,6 +1,7 @@
 ---
 import Icon from '../Icon.astro';
 import services from '../../data/services.json';
+import { variant } from '../../utils/image';
 ---
 
 <section class="svc">
@@ -22,7 +23,7 @@ import services from '../../data/services.json';
                 <h3>{s.title}</h3>
                 <p>{s.description}</p>
               </span>
-              <img src={s.image} alt="" loading="lazy" />
+              <img src={variant(s.image, 240)} alt="" width="120" height="90" loading="lazy" />
               <i class="svc__arrow">
                 <Icon name="arrow" size={14} />
               </i>

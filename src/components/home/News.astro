@@ -2,6 +2,7 @@
 import Icon from '../Icon.astro';
 import news from '../../data/haberler.json';
 import site from '../../data/site.json';
+import { variant } from '../../utils/image';
 
 const images = ['/img/home/gold-towers.webp', '/img/home/garden-day.webp', '/img/home/site-team.webp'];
 const items = [...news]
@@ -36,7 +37,7 @@ const fmt = (iso: string) => {
         {
           items.map((n) => (
             <a href={`/haberler/${n.slug}`} class="news__card">
-              <img src={n.image} alt="" loading="lazy" />
+              <img src={variant(n.image, 640)} alt="" width="640" height="480" loading="lazy" />
               <div>
                 <time>{fmt(n.date)}</time>
                 <h3>{n.title}</h3>
@@ -59,7 +60,7 @@ const fmt = (iso: string) => {
       </div>
       <div class="certs__body">
         <div class="certs__card">
-          <img src="/img/home/belge1.webp" alt="Sertifika" loading="lazy" />
+          <img src="/img/home/belge1-240.webp" alt="Sertifika" width="240" height="300" loading="lazy" />
           <p>Kalite ve güven standartlarımızı belgeleyen sertifikalarımız.</p>
         </div>
         <ul class="certs__docs">
@@ -67,7 +68,7 @@ const fmt = (iso: string) => {
             docs.map((d) => (
               <li>
                 <a href={d.href} {...(d.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                  <img class="certs__thumb" src={d.image} alt="" loading="lazy" />
+                  <img class="certs__thumb" src={variant(d.image, 240)} alt="" loading="lazy" />
                   <span>{d.title}</span>
                   <Icon name="arrow" size={13} />
                 </a>
