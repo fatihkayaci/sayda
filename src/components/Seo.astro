@@ -10,7 +10,13 @@ interface Props {
   jsonLd?: object[];
 }
 
-const { title, description, organizationSchema = false, ogImage, jsonLd = [] } = Astro.props;
+const { title, organizationSchema = false, ogImage, jsonLd = [] } = Astro.props;
+
+// Google cuts snippets at ~160 characters; trim long ones at a word boundary instead.
+const description =
+  Astro.props.description.length > 160
+    ? `${Astro.props.description.slice(0, 157).replace(/\s+\S*$/, '')}…`
+    : Astro.props.description;
 
 const canonical = new URL(Astro.url.pathname, site.url).toString();
 const ogImageUrl = new URL(ogImage ?? '/img/og-default.jpg', site.url).toString();

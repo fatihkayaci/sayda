@@ -1,4 +1,6 @@
 ---
+import { srcset } from '../../utils/image';
+
 // Wikimedia Commons photos: their licences require the author credit to stay visible.
 const slides = [
   {
@@ -32,7 +34,12 @@ const slides = [
   {
     slides.map((slide, i) => (
       <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
-        <img src={slide.image} alt="" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
+        {i === 0 ? (
+          <img src={slide.image} srcset={srcset(slide.image, 960, 1920)} sizes="100vw" alt="" fetchpriority="high" />
+        ) : (
+          // Later slides wait for the page to load so they don't compete with the first image.
+          <img data-src={slide.image} data-srcset={srcset(slide.image, 960, 1920)} sizes="100vw" alt="" />
+        )}
         {slide.credit && (
           <a class="hero__credit" href={slide.creditHref} target="_blank" rel="noopener noreferrer">
             {slide.credit}
@@ -98,6 +105,15 @@ const slides = [
         show(current + 1);
         start();
       });
+      const loadRest = () =>
+        hero.querySelectorAll<HTMLImageElement>('img[data-src]').forEach((img) => {
+          img.srcset = img.dataset.srcset ?? '';
+          img.src = img.dataset.src ?? '';
+          img.removeAttribute('data-src');
+        });
+      if (document.readyState === 'complete') loadRest();
+      else window.addEventListener('load', loadRest, { once: true });
+
       start();
     });
   }

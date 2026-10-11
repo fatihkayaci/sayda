@@ -48,6 +48,10 @@ const activeChildHref = (children?: { href: string }[]) =>
   children
     ?.filter((child) => isPathActive(child.href))
     .sort((a, b) => b.href.length - a.href.length)[0]?.href;
+
+// A child listed under another menu (İş Bitirme under Kurumsal, path /projeler/...)
+// owns the page, so Projeler doesn't light up as well.
+const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
 ---
 
 <header class="header" transition:persist="sayda-header">
@@ -62,7 +66,7 @@ const activeChildHref = (children?: { href: string }[]) =>
           navLinks.map((item, i) => {
             const activeChild = activeChildHref(item.children);
             const childActive = Boolean(activeChild);
-            const itemActive = isPathActive(item.href) || childActive;
+            const itemActive = childActive || (!claimedByChild && isPathActive(item.href));
             return (
               <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
                 {item.children ? (
@@ -591,20 +595,26 @@ const activeChildHref = (children?: { href: string }[]) =>
       return current === h || current.startsWith(`${h}/`);
     };
 
-    document.querySelectorAll<HTMLElement>('.header__nav-item').forEach((item) => {
+    const items = [...document.querySelectorAll<HTMLElement>('.header__nav-item')].map((item) => {
       // Only the longest matching child href wins (see activeChildHref above).
       const children = [...item.querySelectorAll<HTMLAnchorElement>('.header__dropdown a')];
       const best = children
         .filter((child) => isPathActive(child.getAttribute('href')))
         .sort((a, b) => (b.getAttribute('href') ?? '').length - (a.getAttribute('href') ?? '').length)[0];
       children.forEach((child) => child.classList.toggle('is-active', child === best));
-      const childActive = Boolean(best);
+      return { item, childActive: Boolean(best) };
+    });
+    const claimedByChild = items.some(({ childActive }) => childActive);
 
+    items.forEach(({ item, childActive }) => {
       const topLink = item.querySelector<HTMLElement>(
         '.header__nav-item-row > .header__nav-link, :scope > a.header__nav-link'
       );
       if (topLink) {
-        topLink.classList.toggle('is-active', childActive || isPathActive(topLink.getAttribute('href')));
+        topLink.classList.toggle(
+          'is-active',
+          childActive || (!claimedByChild && isPathActive(topLink.getAttribute('href')))
+        );
       }
     });
   };

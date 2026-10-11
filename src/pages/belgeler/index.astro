@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
 import site from '../../data/site.json';
+import { srcset } from '../../utils/image';
 
 const certs = site.certifications;
 const validUntil = certs[0]?.validUntil;
@@ -21,7 +22,7 @@ const downloads = [
     text: 'Sekiz sertifikamız tek dosyada.',
     meta: '8 sayfa · PDF · 4,7 MB',
     href: site.documents.certificate,
-    image: '/img/belgeler/iso-9001.webp',
+    image: '/img/belgeler/iso-9001-360.webp',
     file: true,
   },
   {
@@ -71,7 +72,15 @@ const downloads = [
             <li>
               <a class="bl-cert" href={cert.file} target="_blank" rel="noopener noreferrer">
                 <span class="bl-cert__paper">
-                  <img src={cert.image} alt={`${cert.name} sertifikası - Sayda İnşaat`} loading="lazy" />
+                  <img
+                    src={cert.image}
+                    srcset={srcset(cert.image, 360, 720)}
+                    sizes="(max-width: 800px) 45vw, 280px"
+                    alt={`${cert.name} sertifikası - Sayda İnşaat`}
+                    width="720"
+                    height="1017"
+                    loading="lazy"
+                  />
                 </span>
                 <span class="bl-cert__name">{cert.name}</span>
                 <span class="bl-cert__title">{cert.title}</span>
@@ -99,7 +108,7 @@ const downloads = [
           downloads.map((doc) => (
             <li>
               <a class="bl-doc" href={doc.href} {...(doc.file ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                <img class="bl-doc__thumb" src={doc.image} alt="" loading="lazy" />
+                <img class="bl-doc__thumb" src={doc.image} alt="" width="72" height="102" loading="lazy" />
                 <span class="bl-doc__text">
                   <span class="bl-doc__title">{doc.title}</span>
                   <span class="bl-doc__desc">{doc.text}</span>

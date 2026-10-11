@@ -3,6 +3,7 @@
 // The h1 comes from the default slot so a word can be highlighted with <em>.
 import Icon from '../Icon.astro';
 import site from '../../data/site.json';
+import { srcset } from '../../utils/image';
 
 interface Props {
   eyebrow: string;
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const { eyebrow, name, text, points, image } = Astro.props;
+// /img/home photos are 1400px wide with a -960 copy beside them.
+const hasVariants = image.startsWith('/img/home/');
 ---
 
 <section class="svc-hero">
@@ -53,7 +56,13 @@ const { eyebrow, name, text, points, image } = Astro.props;
     </div>
 
     <div class="svc-hero__media">
-      <img src={image} alt="" fetchpriority="high" />
+      <img
+        src={image}
+        srcset={hasVariants ? srcset(image, 960, 1400) : undefined}
+        sizes="(max-width: 1024px) 100vw, 45vw"
+        alt=""
+        fetchpriority="high"
+      />
     </div>
   </div>
 </section>

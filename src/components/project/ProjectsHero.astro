@@ -66,11 +66,9 @@ const stats = [
     <dl>
       {
         stats.map((stat) => (
-          <div>
-            <span class="projects-stats__text">
-              <dd>{stat.value}</dd>
-              <dt>{stat.label}</dt>
-            </span>
+          <div class="projects-stats__text">
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
           </div>
         ))
       }
@@ -329,7 +327,9 @@ const stats = [
     min-width: 0;
   }
 
+  /* dt must come first in the markup; the number still shows on top */
   .projects-stats dd {
+    order: -1;
     margin: 0;
     font-family: var(--font-display);
     font-stretch: 125%;

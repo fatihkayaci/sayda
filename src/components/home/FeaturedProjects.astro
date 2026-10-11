@@ -2,6 +2,7 @@
 import Icon from '../Icon.astro';
 import allProjects from '../../data/projects.json';
 import { shortProjectTitle } from '../../utils/project';
+import { srcset } from '../../utils/image';
 
 const picks = [
   { slug: 'terrace-bahce-konut', image: '/img/home/residence-sunset.webp' },
@@ -28,7 +29,13 @@ const projects = picks.flatMap(({ slug, image }) => {
       {
         projects.map((p) => (
           <a href={p.href} class="fp__card">
-            <img src={p.image} alt={`${p.name} - Sayda İnşaat`} loading="lazy" />
+            <img
+              src={p.image}
+              srcset={srcset(p.image, 960, 1400)}
+              sizes="(max-width: 900px) 100vw, 50vw"
+              alt={`${p.name} - Sayda İnşaat`}
+              loading="lazy"
+            />
             <div class="fp__body">
               <div>
                 <span class="fp__type">{p.type}</span>

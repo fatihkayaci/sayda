@@ -3,13 +3,6 @@
 /* Archivo (variable weight 100-900 + width 62-125%, so font-weight and font-stretch both render) */
 @import '@fontsource-variable/archivo/wdth.css';
 
-/* Caveat (handwritten quote accents) */
-@import '@fontsource/caveat/400.css';
-
-/* Syne (SAYDA logotype only) */
-@import '@fontsource/syne/700.css';
-@import '@fontsource/syne/800.css';
-
 *,
 *::before,
 *::after {

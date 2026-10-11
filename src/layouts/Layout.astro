@@ -7,6 +7,9 @@ import CtaBanner from '../components/CtaBanner.astro';
 import Footer from '../components/Footer.astro';
 import Splash from '../components/Splash.astro';
 import site from '../data/site.json';
+// Preloaded so headings don't reflow when the font swaps in (latin-ext carries ş, ğ, İ, ı).
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import archivoLatinExt from '@fontsource-variable/archivo/files/archivo-latin-ext-wdth-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -28,6 +31,8 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={archivoLatinExt} as="font" type="font/woff2" crossorigin />
     <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
     <ClientRouter />
     {

@@ -13,6 +13,7 @@
   --color-on-dark-muted: #bcbec2;
   --color-orange: #f5a21b;
   --color-orange-dark: #e08e0b; /* hover for orange buttons */ /* accent + conversion CTAs (Teklif Al); always with navy-deep text */
+  --color-orange-text: #a86400; /* orange for text on light backgrounds (4.7:1 on white) */
   --color-border-strong: #c3ccd3;
   --color-error: #b3261e;
   --color-success: #1f7a4d;
@@ -20,8 +21,6 @@
   /* Typography */
   --font-body: 'Archivo Variable', 'Archivo', sans-serif;
   --font-heading: 'Archivo Variable', 'Archivo', sans-serif;
-  --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
-  --font-script: 'Caveat', cursive; /* handwritten quote accents */
   --font-display: 'Archivo Variable', 'Archivo', sans-serif; /* display type, homepage sections */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);

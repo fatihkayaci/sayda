@@ -23,12 +23,24 @@ import site from '../data/site.json';
       el.remove();
       return;
     }
-    setTimeout(function () {
+    // The page loads underneath. Leave once it has loaded, but not before the logo
+    // animation finishes (1.3s) and never later than 1.7s (+0.3s fade).
+    var start = Date.now();
+    var gone = false;
+    var leave = function () {
+      if (gone) return;
+      gone = true;
       el.classList.add('is-leaving');
-    }, 1700);
-    setTimeout(function () {
-      el.remove();
-    }, 2000);
+      setTimeout(function () {
+        el.remove();
+      }, 300);
+    };
+    var whenLoaded = function () {
+      setTimeout(leave, Math.max(0, 1300 - (Date.now() - start)));
+    };
+    if (document.readyState === 'complete') whenLoaded();
+    else window.addEventListener('load', whenLoaded, { once: true });
+    setTimeout(leave, 1700);
   })();
 </script>
 
@@ -63,7 +75,7 @@ import site from '../data/site.json';
     height: auto;
     clip-path: inset(0 100% 0 0);
     transform: scale(0.94);
-    animation: splash-reveal 900ms 150ms cubic-bezier(0.65, 0, 0.25, 1) forwards;
+    animation: splash-reveal 800ms 100ms cubic-bezier(0.65, 0, 0.25, 1) forwards;
   }
 
   .splash__line {
@@ -72,7 +84,7 @@ import site from '../data/site.json';
     background: linear-gradient(90deg, transparent, var(--color-navy), transparent);
     transform: scaleX(0);
     opacity: 0;
-    animation: splash-line 800ms 700ms ease-out forwards;
+    animation: splash-line 700ms 550ms ease-out forwards;
   }
 
   @keyframes splash-reveal {
