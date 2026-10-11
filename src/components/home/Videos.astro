@@ -1,34 +1,97 @@
 ---
 import Icon from '../Icon.astro';
+import site from '../../data/site.json';
 
-// Placeholder: gerçek video (YouTube) verisi eklenince `id` alanı doldurulup linke çevrilebilir.
+// Videos from the company's YouTube channel; the player iframe is only created on click.
 const videos = [
-  { title: 'Gaziantep Şehir Hastanesi', image: '/img/home/hospital.webp' },
-  { title: 'Capital Tower', image: '/img/home/twin-towers.webp' },
-  { title: 'Atlas Park AVM', image: '/img/home/mall.webp' },
-  { title: 'Referans Güneşli Projesi', image: '/img/home/site-team.webp' },
+  { id: 'psFESHJLIF0', title: 'Gaziantep Şehir Hastanesi' },
+  { id: 'C0xP_C6Ryww', title: 'Capital Tower' },
+  { id: '2YJHZTCjf3U', title: 'Atlas Park AVM' },
+  { id: 'ipKgWjCjOjU', title: 'Referans Güneşli Projesi' },
 ];
+const [first] = videos;
 ---
 
-<section class="vid">
+<section class="vid" data-videos>
   <div class="container">
     <div class="vid__head">
-      <h2>Proje Videolarımız</h2>
-      <a href="/projeler">Tüm Videolar <Icon name="arrow" size={14} /></a>
+      <div>
+        <span class="eyebrow"><i></i>Sahadan</span>
+        <h2>Proje Videolarımız</h2>
+      </div>
+      <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">
+        Tüm Videolar <Icon name="arrow" size={14} />
+      </a>
     </div>
     <div class="vid__grid">
-      {
-        videos.map((v) => (
-          <div class="vid__card">
-            <img src={v.image} alt="" loading="lazy" />
-            <h3>{v.title}</h3>
-            <span class="vid__play" aria-hidden="true"></span>
-          </div>
-        ))
-      }
+      <div class="vid__player" data-player>
+        <button type="button" class="vid__cover" data-play aria-label={`${first.title} videosunu oynat`}>
+          <img src={`/img/videos/${first.id}.webp`} alt="" data-cover-img />
+          <span class="vid__play" aria-hidden="true"></span>
+          <span class="vid__title" data-cover-title>{first.title}</span>
+        </button>
+      </div>
+
+      <ol class="vid__list">
+        {
+          videos.map((v, i) => (
+            <li>
+              <button
+                type="button"
+                class:list={['vid__item', { 'is-active': i === 0 }]}
+                data-video={v.id}
+                data-title={v.title}
+              >
+                <span class="vid__thumb">
+                  <img src={`/img/videos/${v.id}.webp`} alt="" loading="lazy" />
+                </span>
+                <span class="vid__name">{v.title}</span>
+              </button>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </div>
 </section>
+
+<script>
+  function initVideos() {
+    document.querySelectorAll<HTMLElement>('[data-videos]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const player = root.querySelector<HTMLElement>('[data-player]')!;
+      const cover = player.innerHTML;
+      const items = [...root.querySelectorAll<HTMLButtonElement>('[data-video]')];
+      let current = items[0];
+
+      const play = (item: HTMLButtonElement) => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${item.dataset.video}?autoplay=1&rel=0`;
+        iframe.title = item.dataset.title ?? '';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allowFullscreen = true;
+        player.replaceChildren(iframe);
+      };
+
+      player.addEventListener('click', (event) => {
+        if ((event.target as HTMLElement).closest('[data-play]')) play(current);
+      });
+
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          current = item;
+          items.forEach((it) => it.classList.toggle('is-active', it === item));
+          player.innerHTML = cover;
+          play(item);
+        });
+      });
+    });
+  }
+
+  initVideos();
+  document.addEventListener('astro:page-load', initVideos);
+</script>
 
 <style>
   .vid {
@@ -38,17 +101,20 @@ const videos = [
 
   .vid__head {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: var(--space-s);
-    margin-bottom: 18px;
+    align-items: flex-end;
+    margin-bottom: 40px;
   }
 
   .vid__head h2 {
-    font-family: var(--font-body);
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
     color: var(--color-navy-deep);
   }
 
@@ -56,7 +122,7 @@ const videos = [
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-navy);
     white-space: nowrap;
@@ -64,88 +130,85 @@ const videos = [
 
   .vid__grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
     gap: 16px;
+    align-items: stretch;
   }
 
-  .vid__card {
+  /* Player */
+  .vid__player {
     position: relative;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: var(--color-navy-deep);
   }
 
-  .vid__card:nth-child(1) {
-    grid-row: 1 / 4;
-    min-height: 400px;
+  .vid__player :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 
-  .vid__card:nth-child(1) h3 {
-    font-size: 1.1rem;
-    bottom: 18px;
-    left: 20px;
+  .vid__cover {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
   }
 
-  .vid__card:nth-child(1) .vid__play {
-    top: 50%;
-    width: 72px;
-    height: 72px;
-  }
-
-  .vid__card:nth-child(n + 2) .vid__play {
-    top: 50%;
-    width: 36px;
-    height: 36px;
-    border-width: 1.5px;
-  }
-
-  .vid__card:nth-child(n + 2) .vid__play::after {
-    border-left-width: 9px;
-    border-top-width: 6px;
-    border-bottom-width: 6px;
-  }
-
-  .vid__card img {
+  .vid__cover img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.7;
+    opacity: 0.8;
+    transition: opacity var(--transition);
   }
 
-  .vid__card h3 {
-    position: absolute;
-    bottom: 10px;
-    left: 12px;
-    right: 12px;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #fff;
-    z-index: 1;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-  }
-
-  .vid__card::after {
+  .vid__cover::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(10, 14, 28, 0) 50%, rgba(10, 14, 28, 0.8) 100%);
+    background: linear-gradient(180deg, rgba(28, 29, 46, 0) 50%, rgba(28, 29, 46, 0.85) 100%);
+  }
+
+  .vid__cover:hover img {
+    opacity: 1;
+  }
+
+  .vid__title {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 20px;
+    z-index: 1;
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
   }
 
   .vid__play {
-    z-index: 1;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
-    width: 48px;
-    height: 48px;
+    z-index: 1;
+    width: 76px;
+    height: 76px;
     transform: translate(-50%, -50%);
     border: 2px solid #fff;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.15);
+    transition:
+      background var(--transition),
+      border-color var(--transition);
   }
 
   .vid__play::after {
@@ -154,46 +217,122 @@ const videos = [
     top: 50%;
     left: 50%;
     transform: translate(-40%, -50%);
-    border-left: 13px solid #fff;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
+    border-left: 18px solid #fff;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
   }
 
-  @media (max-width: 800px) {
+  .vid__cover:hover .vid__play {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+  }
+
+  /* Playlist */
+  /* the player's 16:9 sets the row height; the list just fills it */
+  .vid__list {
+    display: grid;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    height: 0;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .vid__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      border-color var(--transition);
+  }
+
+  .vid__item:hover {
+    border-color: var(--color-border-strong);
+    background: var(--color-bg-light);
+  }
+
+  .vid__item.is-active {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+  }
+
+  .vid__thumb {
+    position: relative;
+    display: block;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+  }
+
+  .vid__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .vid__name {
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--color-navy-deep);
+  }
+
+  .vid__item.is-active .vid__name {
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
     .vid__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr;
+    }
+
+    .vid__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: none;
-      gap: 10px;
+      height: auto;
     }
 
-    .vid__card:nth-child(1) {
-      grid-column: 1 / 4;
-      grid-row: auto;
-      min-height: 0;
-      aspect-ratio: 16 / 9;
+    .vid__item {
+      grid-template-columns: minmax(0, 46%) 1fr;
     }
 
-    .vid__card:nth-child(n + 2) {
-      aspect-ratio: 4 / 3;
+    .vid__thumb {
+      height: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .vid__item {
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
-    .vid__card:nth-child(n + 2) h3 {
-      bottom: 6px;
-      left: 8px;
-      right: 8px;
-      font-size: 0.6rem;
-      line-height: 1.2;
+    .vid__name {
+      font-size: 0.75rem;
     }
 
-    .vid__card:nth-child(n + 2) .vid__play {
-      width: 28px;
-      height: 28px;
+    .vid__play {
+      width: 56px;
+      height: 56px;
     }
 
-    .vid__card:nth-child(n + 2) .vid__play::after {
-      border-left-width: 7px;
-      border-top-width: 5px;
-      border-bottom-width: 5px;
+    .vid__title {
+      font-size: 1rem;
+      left: 16px;
+      bottom: 14px;
     }
   }
 </style>

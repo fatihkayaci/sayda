@@ -1,18 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import SvcSteps from '../../components/service/SvcSteps.astro';
 import site from '../../data/site.json';
 
 const perks = [
-  { num: '01', title: 'Büyük ölçekli projeler', text: 'Vadistanbul, Büyükyalı, şehir hastaneleri gibi prestijli işler.' },
-  { num: '02', title: 'Güçlü iş ortakları', text: "Türkiye'nin önde gelen yatırımcı ve yüklenicileriyle çalışma." },
-  { num: '03', title: 'Süreklilik', text: '30 yıla yakın geçmiş ve uzun soluklu iş birlikleri.' },
-  { num: '04', title: 'İş güvenliği', text: 'ISO standartlarında, güvenliği önceleyen şantiyeler.' },
+  { title: 'Büyük ölçekli projeler', description: 'Vadistanbul, Büyükyalı, şehir hastaneleri gibi prestijli işler.' },
+  { title: 'Güçlü iş ortakları', description: "Türkiye'nin önde gelen yatırımcı ve yüklenicileriyle çalışma." },
+  { title: 'Süreklilik', description: '30 yıla yakın geçmiş ve uzun soluklu iş birlikleri.' },
+  { title: 'İş güvenliği', description: 'ISO standartlarında, güvenliği önceleyen şantiyeler.' },
 ];
 
 const flow = [
-  { num: '01', title: 'Başvuru', text: 'Formu doldurup gönderin.' },
-  { num: '02', title: 'Ön değerlendirme', text: 'İK ekibimiz başvurunuzu inceler.' },
-  { num: '03', title: 'Görüşme', text: 'Uygun adaylarla ofiste veya şantiyede görüşülür.' },
+  { title: 'Başvuru', description: 'Formu doldurup gönderin.' },
+  { title: 'Ön değerlendirme', description: 'İK ekibimiz başvurunuzu inceler.' },
+  { title: 'Görüşme', description: 'Uygun adaylarla ofiste veya şantiyede görüşülür.' },
 ];
 ---
 
@@ -21,68 +25,32 @@ const flow = [
   description="Sayda İnşaat ekibine katılın: Beyaz Yaka ve Kalfa (Ekipli) pozisyonları için başvuru formu."
   hideCtaBanner
 >
-  <section class="ik-hero">
-    <div class="ik-hero__media" aria-hidden="true">
-      <img src="/img/projects/buyukyali/buyukyali.webp" alt="" fetchpriority="high" />
-    </div>
+  <PageHero
+    eyebrow="İnsan Kaynakları"
+    breadcrumbs={[
+      { label: 'Ana Sayfa', href: '/' },
+      { label: 'İnsan Kaynakları' },
+    ]}
+    image="/img/projects/buyukyali/buyukyali.webp"
+    size="short"
+  >
+    Ekibimize <em>katılın.</em>
+  </PageHero>
 
-    <div class="container ik-hero__inner">
-      <nav class="ik-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Ana Sayfa</a>
-        <span>/</span>
-        <span>İnsan Kaynakları</span>
-        <span>/</span>
-        <span aria-current="page" id="ikTabLabel">Beyaz Yaka</span>
-      </nav>
-
-      <div class="ik-hero__content">
-        <div class="eyebrow eyebrow--light">
-          <span class="eyebrow__bar"></span>
-          <span>İnsan Kaynakları</span>
-        </div>
-        <h1>
-          Ekibimize<br />
-          <span class="ik-hero__accent">katılın</span>
-        </h1>
-        <p class="ik-hero__lead">1996'dan bu yana İstanbul'un en büyük projelerinde birlikte çalıştığımız ekibimizi büyütüyoruz.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="ik-perks">
-    <ul class="container ik-perks__grid">
-      {
-        perks.map((p) => (
-          <li>
-            <span class="ik-perks__num">{p.num}</span>
-            <div class="ik-perks__title">{p.title}</div>
-            <div class="ik-perks__text">{p.text}</div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="ik-apply">
+  <section class="ik-apply" id="basvuru">
     <div class="container">
-      <div class="ik-apply__head">
-        <div class="eyebrow">
-          <span class="eyebrow__bar"></span>
-          <span>Başvuru Formu</span>
-        </div>
-        <h2>Hangi pozisyon için başvuruyorsunuz?</h2>
-      </div>
+      <SectionHead label="Başvuru Formu" title="Hangi pozisyon için başvuruyorsunuz?" />
 
       <div class="ik-tabs">
         <button type="button" class="ik-tab" data-tab="beyaz">
           <span class="ik-tab__num">01</span>
-          <span class="ik-tab__mark" aria-hidden="true">✓</span>
+          <span class="ik-tab__mark" aria-hidden="true"><Icon name="check" size={22} /></span>
           <span class="ik-tab__title">Beyaz Yaka</span>
           <span class="ik-tab__desc">Mühendis, mimar, şantiye şefi, teknik ofis ve idari pozisyonlar.</span>
         </button>
         <button type="button" class="ik-tab" data-tab="kalfa">
           <span class="ik-tab__num">02</span>
-          <span class="ik-tab__mark" aria-hidden="true">→</span>
+          <span class="ik-tab__mark" aria-hidden="true"><Icon name="check" size={22} /></span>
           <span class="ik-tab__title">Kalfa (Ekipli)</span>
           <span class="ik-tab__desc">Sıva, şap, seramik, alçı, boya ve ince işlerde ekibiyle çalışan ustalar.</span>
         </button>
@@ -128,7 +96,7 @@ const flow = [
               <div class="ik-section-label ik-section-label--spaced">02 · ÖZGEÇMİŞ</div>
               <label class="ik-upload">
                 <input type="file" name="cv" accept=".pdf,.doc,.docx" required />
-                <span class="ik-upload__icon" aria-hidden="true">↑</span>
+                <span class="ik-upload__icon" aria-hidden="true"><Icon name="download" size={22} /></span>
                 <span class="ik-upload__text">
                   <b id="ikCvLabel">CV yükleyin *</b>
                   <span>PDF veya Word · en fazla 5 MB</span>
@@ -178,16 +146,16 @@ const flow = [
             </label>
 
             <button type="submit" class="ik-submit">
-              BAŞVURUYU GÖNDER <span aria-hidden="true">→</span>
+              Başvuruyu Gönder <Icon name="arrow" size={18} />
             </button>
             <p class="ik-status" id="ikStatus" role="status" aria-live="polite"></p>
           </form>
 
           <div class="ik-success" id="ikSuccess" hidden>
-            <span class="ik-success__icon" aria-hidden="true">✓</span>
+            <span class="ik-success__icon" aria-hidden="true"><Icon name="check" size={28} /></span>
             <h3>Başvurunuz alındı.</h3>
             <p>İnsan kaynakları ekibimiz başvurunuzu inceleyip sizinle iletişime geçecek.</p>
-            <button type="button" class="ik-reset" id="ikReset">YENİ BAŞVURU</button>
+            <button type="button" class="ik-reset" id="ikReset">Yeni Başvuru</button>
           </div>
         </div>
 
@@ -195,12 +163,12 @@ const flow = [
           <div class="ik-flow">
             <div class="ik-flow__label">BAŞVURU SÜRECİ</div>
             {
-              flow.map((f) => (
+              flow.map((f, i) => (
                 <div class="ik-flow__item">
-                  <span class="ik-flow__num">{f.num}</span>
+                  <span class="ik-flow__num">{String(i + 1).padStart(2, '0')}</span>
                   <div>
                     <div class="ik-flow__title">{f.title}</div>
-                    <div class="ik-flow__text">{f.text}</div>
+                    <div class="ik-flow__text">{f.description}</div>
                   </div>
                 </div>
               ))
@@ -215,6 +183,13 @@ const flow = [
       </div>
     </div>
   </section>
+
+  <SvcSteps
+    label="Neden Sayda?"
+    title="Büyük işlerde, güçlü bir ekip."
+    text={`${site.foundedYear}'dan bu yana İstanbul'un en büyük projelerinde birlikte çalıştığımız ekibimizi büyütüyoruz.`}
+    steps={perks}
+  />
 </Layout>
 
 <script>
@@ -320,168 +295,16 @@ const flow = [
 </script>
 
 <style>
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-navy);
-  }
-
-  .eyebrow__bar {
-    display: block;
-    width: 36px;
-    height: 2px;
-    background: var(--color-orange);
-  }
-
-  .eyebrow--light {
-    color: #fff;
-  }
-
-  /* Hero */
-  .ik-hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .ik-hero__media {
-    position: absolute;
-    inset: 0 0 0 auto;
-    width: 50%;
-  }
-
-  .ik-hero__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .ik-hero__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.6) 40%, rgba(35, 35, 35, 0.2) 100%);
-  }
-
-  .ik-hero__inner {
-    position: relative;
-    z-index: 1;
-    min-height: 480px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 48px;
-    padding-block: 56px 72px;
-  }
-
-  .ik-hero__breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .ik-hero__breadcrumb span[aria-current] {
-    color: var(--color-bg-light);
-  }
-
-  .ik-hero h1 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-stretch: 125%;
-    font-weight: 800;
-    font-size: clamp(2.75rem, 6vw, 5.75rem);
-    line-height: 0.95;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  .ik-hero__accent {
-    font-weight: 300;
-    color: var(--color-orange);
-  }
-
-  .ik-hero__lead {
-    margin-top: 24px;
-    max-width: 540px;
-    font-size: 1.125rem;
-    line-height: 1.65;
-    color: rgba(246, 247, 251, 0.8);
-  }
-
-  /* Perks */
-  .ik-perks {
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  .ik-perks__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-  }
-
-  .ik-perks__grid li {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 40px 28px;
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .ik-perks__num {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--color-on-dark-muted);
-  }
-
-  .ik-perks__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-stretch: 110%;
-    line-height: 1.2;
-  }
-
-  .ik-perks__text {
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
   /* Apply */
   .ik-apply {
-    padding-block: 96px 120px;
+    padding-block: clamp(48px, 5vw, 80px) clamp(80px, 9vw, 140px);
     background: var(--color-bg-light);
-  }
-
-  .ik-apply__head {
-    margin-bottom: 40px;
-  }
-
-  .ik-apply__head h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-stretch: 112%;
-    font-size: clamp(1.875rem, 3.6vw, 2.625rem);
-    line-height: 1.05;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    color: var(--color-text);
+    scroll-margin-top: var(--header-h);
   }
 
   .ik-tabs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
     margin-bottom: 40px;
   }
@@ -490,64 +313,80 @@ const flow = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: start;
-    gap: 8px 20px;
-    padding: 30px 30px 32px;
+    gap: 10px 20px;
+    padding: 32px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius);
     background: #fff;
-    border: 1px solid rgba(20, 22, 58, 0.12);
     text-align: left;
     font-family: inherit;
+    color: var(--color-navy-deep);
     cursor: pointer;
-    color: var(--color-text);
     transition:
       background 0.25s,
       color 0.25s,
       border-color 0.25s;
   }
 
+  .ik-tab:hover {
+    border-color: var(--color-navy-deep);
+  }
+
   .ik-tab.is-active {
-    background: var(--color-navy);
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
     color: #fff;
-    border-color: var(--color-navy);
   }
 
   .ik-tab__num {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    color: var(--color-navy);
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-navy);
   }
 
   .ik-tab.is-active .ik-tab__num {
-    color: var(--color-orange);
+    -webkit-text-stroke-color: var(--color-orange);
   }
 
   .ik-tab__mark {
     grid-row: span 3;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid var(--color-navy);
-    font-size: 1.125rem;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 50%;
+    color: transparent;
+    transition:
+      background 0.25s,
+      border-color 0.25s,
+      color 0.25s;
   }
 
   .ik-tab.is-active .ik-tab__mark {
     border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
   }
 
   .ik-tab__title {
+    margin-top: 8px;
     font-family: var(--font-display);
     font-stretch: 112%;
-    font-size: 1.625rem;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 1vw + 1rem, 2rem);
     line-height: 1.1;
+    letter-spacing: -0.015em;
   }
 
   .ik-tab__desc {
     font-size: 0.9375rem;
     line-height: 1.55;
-    opacity: 0.8;
+    opacity: 0.75;
   }
 
   .ik-layout {
@@ -558,32 +397,46 @@ const flow = [
   }
 
   .ik-form-card {
-    background: #fff;
-    border: 1px solid rgba(20, 22, 58, 0.08);
-    padding: 44px 44px 48px;
     min-width: 0;
+    padding: clamp(28px, 4vw, 48px);
+    border-radius: var(--radius);
+    background: #fff;
   }
 
   .ik-section-label {
-    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     color: var(--color-navy);
   }
 
+  .ik-section-label::before {
+    content: '';
+    width: 28px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
   .ik-section-label--spaced {
-    margin-top: 40px;
+    margin-top: 44px;
   }
 
   .ik-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
-    gap: 18px;
-    margin-top: 16px;
+    gap: 20px;
+    margin-top: 20px;
   }
 
   .ik-grid__full {
     grid-column: 1 / -1;
+  }
+
+  .ik-form-card [hidden] {
+    display: none !important;
   }
 
   .ik-form-card label {
@@ -592,37 +445,44 @@ const flow = [
     gap: 8px;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-navy-deep);
   }
 
   .ik-form-card input[type='text'],
   .ik-form-card input[type='tel'],
   .ik-form-card input[type='email'] {
+    width: 100%;
     height: 54px;
     padding: 0 16px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius);
     background: #fff;
-    border: 1px solid rgba(20, 22, 58, 0.18);
     font-family: inherit;
     font-size: 0.9375rem;
     color: var(--color-text);
-    width: 100%;
+    transition: border-color var(--transition);
   }
 
   .ik-form-card input:focus {
-    outline: 2px solid var(--color-navy);
-    outline-offset: 1px;
+    outline: none;
+    border-color: var(--color-navy);
   }
 
   .ik-upload {
-    margin-top: 16px;
-    display: flex;
+    flex-direction: row !important;
     align-items: center;
-    gap: 20px;
+    gap: 20px !important;
+    margin-top: 20px;
     padding: 26px 24px;
-    border: 1.5px dashed rgba(47, 48, 145, 0.35);
+    border: 1.5px dashed var(--color-border-strong);
+    border-radius: var(--radius);
     background: var(--color-bg-light);
     cursor: pointer;
     transition: border-color var(--transition);
+  }
+
+  .ik-upload:hover {
+    border-color: var(--color-navy);
   }
 
   .ik-upload input[type='file'] {
@@ -630,15 +490,15 @@ const flow = [
   }
 
   .ik-upload__icon {
+    display: grid;
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-navy);
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--color-navy-deep);
     color: #fff;
-    font-size: 1.25rem;
+    transform: rotate(180deg);
   }
 
   .ik-upload__text {
@@ -649,31 +509,32 @@ const flow = [
   }
 
   .ik-upload__text b {
-    font-size: 1rem;
-    color: var(--color-text);
     overflow: hidden;
+    font-size: 1rem;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--color-navy-deep);
   }
 
   .ik-upload__text > span {
     font-size: 0.8125rem;
+    font-weight: 500;
     color: var(--color-text-muted);
   }
 
   .ik-experiences {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-top: 16px;
+    margin-top: 20px;
+    border-top: 2px solid var(--color-navy-deep);
   }
 
   .ik-experience {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding: 22px 22px 24px;
-    border: 1px solid rgba(20, 22, 58, 0.12);
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border-strong);
   }
 
   .ik-experience__head {
@@ -682,19 +543,14 @@ const flow = [
     gap: 12px;
     font-size: 0.9375rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--color-navy-deep);
   }
 
   .ik-experience__num {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-bg-light);
-    border: 1px solid rgba(47, 48, 145, 0.2);
-    font-size: 0.8125rem;
-    color: var(--color-navy);
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    color: var(--color-orange-dark);
   }
 
   .ik-experience__grid {
@@ -704,27 +560,27 @@ const flow = [
   }
 
   .ik-team {
-    margin-top: 18px;
+    margin-top: 20px;
   }
 
   .ik-consent {
     flex-direction: row !important;
     align-items: flex-start;
     gap: 12px !important;
-    margin-top: 28px;
+    margin-top: 32px;
     font-size: 0.875rem !important;
     font-weight: 400 !important;
     line-height: 1.5;
-    color: var(--color-text-muted);
+    color: var(--color-text-muted) !important;
     cursor: pointer;
   }
 
   .ik-consent input {
+    flex-shrink: 0;
     width: 18px;
     height: 18px;
     margin-top: 2px;
     accent-color: var(--color-navy);
-    flex-shrink: 0;
   }
 
   .ik-consent a {
@@ -735,23 +591,23 @@ const flow = [
   .ik-submit {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
-    margin-top: 28px;
+    gap: 12px;
     height: 58px;
+    margin-top: 28px;
     padding: 0 32px;
-    background: var(--color-navy);
-    color: #fff;
     border: none;
-    cursor: pointer;
+    border-radius: var(--radius);
+    background: var(--color-orange);
     font-family: inherit;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    color: var(--color-navy-deep);
+    cursor: pointer;
     transition: background var(--transition);
   }
 
   .ik-submit:hover {
-    background: var(--color-orange);
+    background: var(--color-orange-dark);
   }
 
   .ik-submit:disabled {
@@ -777,11 +633,11 @@ const flow = [
   }
 
   .ik-success {
-    padding: 40px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+    padding: 40px 0;
   }
 
   .ik-success[hidden] {
@@ -789,91 +645,97 @@ const flow = [
   }
 
   .ik-success__icon {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-navy);
-    color: #fff;
-    font-size: 1.625rem;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
   }
 
   .ik-success h3 {
-    margin: 0;
     font-family: var(--font-display);
     font-stretch: 112%;
-    font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.5vw + 1rem, 2.5rem);
+    color: var(--color-navy-deep);
   }
 
   .ik-success p {
-    margin: 0;
     font-size: 1.0625rem;
     line-height: 1.65;
     color: var(--color-text-muted);
   }
 
   .ik-reset {
-    margin-top: 8px;
     height: 50px;
+    margin-top: 8px;
     padding: 0 24px;
-    background: var(--color-navy);
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    border: 1.5px solid var(--color-navy-deep);
+    border-radius: var(--radius);
+    background: transparent;
     font-family: inherit;
-    font-size: 0.8125rem;
+    font-size: 0.9375rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    transition: background var(--transition);
+    color: var(--color-navy-deep);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      color var(--transition);
   }
 
   .ik-reset:hover {
-    background: var(--color-navy-dark);
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
   /* Sidebar */
   .ik-sidebar {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   .ik-flow {
-    background: var(--color-navy-deep);
-    color: #fff;
-    padding: 32px 30px;
     display: flex;
     flex-direction: column;
     gap: 18px;
+    padding: 32px 30px;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
-  .ik-flow__label {
+  .ik-flow__label,
+  .ik-contact-card__label {
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.22em;
-    color: var(--color-on-dark-muted);
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
   }
 
   .ik-flow__item {
     display: grid;
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 44px 1fr;
     gap: 14px;
-    padding-top: 16px;
+    padding-top: 18px;
     border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
 
   .ik-flow__num {
     font-family: var(--font-display);
-    font-stretch: 118%;
-    font-size: 1.25rem;
+    font-stretch: 125%;
     font-weight: 800;
-    color: var(--color-on-dark-muted);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--color-orange);
   }
 
   .ik-flow__title {
-    font-size: 1rem;
     font-weight: 700;
   }
 
@@ -885,58 +747,49 @@ const flow = [
   }
 
   .ik-contact-card {
-    background: #fff;
-    border: 1px solid rgba(20, 22, 58, 0.08);
-    padding: 28px 30px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    font-size: 0.9375rem;
+    padding: 28px 30px;
+    border-radius: var(--radius);
+    background: #fff;
   }
 
   .ik-contact-card__label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
     color: var(--color-text-muted);
   }
 
   .ik-contact-card__email {
     font-family: var(--font-display);
     font-stretch: 110%;
+    font-weight: 800;
     font-size: 1.25rem;
-    font-weight: 700;
     color: var(--color-navy);
+    overflow-wrap: anywhere;
   }
 
   .ik-contact-card__phone {
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-navy-deep);
   }
 
-  /* Responsive */
   @media (max-width: 1024px) {
-    .ik-hero__media {
-      width: 100%;
-      opacity: 0.4;
-    }
-
     .ik-layout {
       grid-template-columns: 1fr;
     }
+
+    .ik-sidebar {
+      position: static;
+    }
   }
 
-  @media (max-width: 640px) {
-    .ik-hero__inner {
-      padding-block: 32px 48px;
-    }
-
-    .ik-form-card {
-      padding: 32px 24px 36px;
+  @media (max-width: 720px) {
+    .ik-tabs {
+      grid-template-columns: 1fr;
     }
 
     .ik-tab {
-      grid-template-columns: 1fr auto;
+      padding: 24px;
     }
   }
 </style>

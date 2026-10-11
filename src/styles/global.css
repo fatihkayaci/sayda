@@ -1,7 +1,7 @@
 @import './tokens.css';
 
-/* Questrial (body, headings and display type; closest free match to the old site's Century Gothic) */
-@import '@fontsource/questrial/400.css';
+/* Archivo (variable weight 100-900 + width 62-125%, so font-weight and font-stretch both render) */
+@import '@fontsource-variable/archivo/wdth.css';
 
 /* Caveat (handwritten quote accents) */
 @import '@fontsource/caveat/400.css';
@@ -30,7 +30,6 @@ body {
   background: var(--color-bg);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-synthesis-weight: none; /* Questrial has a single weight, don't fake-bold it */
 }
 
 body.menu-open {
@@ -68,8 +67,9 @@ h3,
 h4 {
   margin: 0;
   font-family: var(--font-heading);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
 p {
@@ -116,12 +116,12 @@ button {
 }
 
 .button--primary {
-  background: var(--color-navy);
-  color: #fff;
+  background: var(--color-orange);
+  color: var(--color-navy-deep);
 }
 
 .button--primary:hover {
-  background: var(--color-navy-dark);
+  background: var(--color-orange-dark);
 }
 
 .header__hamburger-icon--close {
@@ -206,9 +206,9 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.72rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #3a4a7a;
 }

@@ -1,58 +1,77 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
 import site from '../../data/site.json';
 
-const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000;
-const areaValue = `${areaInMillions.toFixed(2)}M`;
-
-const stats = [
-  { icon: 'building', value: areaValue, unit: ' m²', label: 'Tamamlanan Alan' },
-  { icon: 'team', value: String(site.stats.employeeCount), unit: '+', label: 'Çalışan' },
-  { icon: 'document', value: String(site.completionCertificatesCount), unit: '', label: 'İş Bitirme Belgesi' },
-  { icon: 'shield', value: site.contractorLicenseGroup, unit: '', label: 'Yüklenici Yetki Belgesi Grubu' },
-];
-
 const values = [
-  { icon: 'shield', title: 'Güven', text: 'Söz verdiğimiz gibi, zamanında ve kaliteli işler teslim ederiz.' },
-  {
-    icon: 'user',
-    title: 'İnsan Odaklılık',
-    text: 'Çalışanlarımız, iş ortaklarımız ve müşterilerimiz bizim için değerlidir.',
-  },
-  { icon: 'gear', title: 'Sürdürülebilirlik', text: 'Gelecek nesiller için daha iyi yaşam alanları inşa ederiz.' },
-  { icon: 'diamond', title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
+  { title: 'Güven', text: 'Söz verdiğimiz gibi, zamanında ve kaliteli işler teslim ederiz.' },
+  { title: 'İnsan Odaklılık', text: 'Çalışanlarımız, iş ortaklarımız ve müşterilerimiz bizim için değerlidir.' },
+  { title: 'Sürdürülebilirlik', text: 'Gelecek nesiller için daha iyi yaşam alanları inşa ederiz.' },
+  { title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
 ];
 
 const timeline = [
-  { year: String(site.foundedYear), text: 'Sayda İnşaat kuruldu.' },
-  { year: '2000+', text: 'İlk büyük ölçekli projeler.' },
-  { year: '2010+', text: 'Farklı proje tiplerinde faaliyet alanı genişletildi.' },
-  { year: '2020+', text: 'Türkiye genelinde projeler.' },
-  { year: '2026', text: 'Bugün, yeni hedeflerle yolumuza devam ediyoruz.' },
+  { year: String(site.foundedYear), title: 'Kuruluş', text: 'Sayda İnşaat kuruldu.' },
+  { year: '2000+', title: 'İlk Büyük Projeler', text: 'İlk büyük ölçekli projeler hayata geçirildi.' },
+  { year: '2010+', title: 'Faaliyet Alanı Genişledi', text: 'Farklı proje tiplerinde faaliyet alanı genişletildi.' },
+  { year: '2020+', title: 'Türkiye Geneli', text: 'Türkiye genelinde projeler üstlenilmeye başlandı.' },
+  { year: '2026', title: 'Bugün', text: 'Yeni hedeflerle yolumuza devam ediyoruz.' },
 ];
 
 const expertise = [
-  { title: 'Konut Projeleri', image: '/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp' },
-  { title: 'Ticari Yapılar', image: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp' },
-  { title: 'Sağlık Kampüsleri', image: '/img/projects/capital-tower-ofis/capital-tower-ofis.webp' },
-  { title: 'Otel Projeleri', image: '/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp' },
+  {
+    title: 'Konut Projeleri',
+    text: 'Konut ve rezidans projelerinde taahhüt ve ince işler.',
+    image: '/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp',
+    href: '/projeler?tur=Konut',
+  },
+  {
+    title: 'Ticari Yapılar',
+    text: 'AVM, ofis ve iş merkezlerinde uçtan uca uygulama.',
+    image: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp',
+    href: '/projeler?tur=Ticari',
+  },
+  {
+    title: 'Sağlık Kampüsleri',
+    text: 'Hastane ve sağlık kampüslerinde ince işler.',
+    image: '/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp',
+    href: '/projeler?tur=Sağlık',
+  },
+  {
+    title: 'Otel Projeleri',
+    text: 'Otel ve tatil köylerinde yapım ve renovasyon.',
+    image: '/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp',
+    href: '/projeler?tur=Otel',
+  },
 ];
 
+// Logos live in /img/refs; a ref without a logo falls back to its name.
 const refs = [
-  ['Çırağan Palace Kempinski', 'Otel taahhüt'],
-  ['Nestlé Gıda San. A.Ş.', 'Taahhüt işleri'],
-  ['Visa International EU', 'Taahhüt işleri'],
-  ['Isısan – Buderus', 'Bölge binası & showroom'],
-  ['Rönesans İnşaat', 'Samsun AVM & Otel'],
-  ['Akkök – Akiş GYO', 'Akbatı AVM & Yaşam Merkezi'],
-  ['Varyap İnşaat', 'Varyap Meridian'],
-  ['Oyak İnşaat', 'Oyakkent'],
-  ['Yapı Kredi – Koray GYO', 'İstanbul-İstanbul'],
-  ['Süzer Grubu', 'The Ritz-Carlton İstanbul'],
-  ['Acarlar Şirketler Grubu', 'Acarkent'],
-  ['Sinpaş Yapı', 'Aqua Manors'],
-].map(([name, project]) => ({ name, project }));
+  ['Çırağan Palace Kempinski', 'Otel taahhüt', 'kempinski.svg'],
+  ['Nestlé Gıda San. A.Ş.', 'Taahhüt işleri', 'nestle.svg'],
+  ['Visa International EU', 'Taahhüt işleri', 'visa.svg'],
+  ['Isısan – Buderus', 'Bölge binası & showroom', 'buderus.svg'],
+  ['Rönesans İnşaat', 'Samsun AVM & Otel', 'ronesans.svg'],
+  ['Akkök – Akiş GYO', 'Akbatı AVM & Yaşam Merkezi', 'akkok.png'],
+  ['Varyap İnşaat', 'Varyap Meridian', 'varyap.svg'],
+  ['Oyak İnşaat', 'Oyakkent', 'oyak.svg'],
+  ['Yapı Kredi – Koray GYO', 'İstanbul-İstanbul', 'yapikredi.png'],
+  ['Süzer Grubu', 'The Ritz-Carlton İstanbul', 'suzer.png'],
+  ['Acarlar Şirketler Grubu', 'Acarkent', 'acarlar.png'],
+  ['Sinpaş Yapı', 'Aqua Manors', ''],
+].map(([name, project, logo]) => ({ name, project, logo: logo ? `/img/refs/${logo}` : '' }));
+
+const refRows = [refs.slice(0, 6), refs.slice(6)];
+
+const sectors = [
+  { icon: 'home', title: 'Konut' },
+  { icon: 'building', title: 'Ticari Yapılar' },
+  { icon: 'shield', title: 'Sağlık Kampüsleri' },
+  { icon: 'star', title: 'Otel' },
+];
+
+const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
 ---
 
 <Layout
@@ -60,146 +79,80 @@ const refs = [
   description="Sayda İnşaat'ın hikayesi, deneyimi ve çalışma prensipleri."
   organizationSchema
 >
-  <section class="about-hero">
-    <div class="about-hero__media" aria-hidden="true">
-      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
-    </div>
+  <PageHero
+    eyebrow="Hakkımızda"
+    breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Kurumsal', href: '/kurumsal' }, { label: 'Hakkımızda' }]}
+    image="/img/sayda-insaat-hero03.webp"
+    backdrop={String(site.foundedYear)}
+    facts={[
+      { value: String(site.foundedYear), label: 'Kuruluş' },
+      { value: 'İstanbul', label: 'Merkez' },
+      { value: 'Taahhüt & İnce İşler', label: 'Uzmanlık' },
+    ]}
+  >
+    Yapının her aşamasında <em>deneyim</em> ve güven.
+  </PageHero>
 
-    <div class="container about-hero__inner">
-      <nav class="about-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Ana Sayfa</a>
-        <span>/</span>
-        <a href="/kurumsal">Kurumsal</a>
-        <span>/</span>
-        <span aria-current="page">Hakkımızda</span>
-      </nav>
-
-      <div class="about-hero__row">
-        <div class="about-hero__content">
-          <div class="eyebrow eyebrow--light">
-            <span class="eyebrow__bar"></span>
-            <span>KURUMSAL</span>
-          </div>
-          <h1>
-            Hakkımızda
-            <span class="about-hero__since">Since {site.foundedYear}</span>
-          </h1>
-          <p class="about-hero__lead">{site.foundedYear}’dan bugüne, daha iyi yaşam alanları için çalışıyoruz.</p>
-          <p class="about-hero__text">
-            Sayda İnşaat; konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde taahhüt ve ince işler
-            hizmetleri sunan, deneyimi ve uzman ekibiyle sektörde güvenilir bir çözüm ortağıdır.
-          </p>
-        </div>
-
-        <p class="about-hero__quote" aria-hidden="true">
-          “Daha iyi yarınlar için sağlam yapılar”
-          <span></span>
+  <!-- 2. Who we are: statement + sectors beside a large photo -->
+  <section class="ab-who">
+    <div class="container ab-who__inner">
+      <div class="ab-who__content">
+        <p class="ab-label ab-label--light">Biz Kimiz?</p>
+        <h2>Konuttan otele, dört alanda <span>taahhüt ve ince işler.</span></h2>
+        <p class="ab-who__text">
+          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı ölçeklerde
+          birçok projeye imza atmıştır. Edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya
+          devam ediyoruz.
         </p>
-      </div>
-    </div>
-  </section>
 
-  <section class="about-who">
-    <div class="container about-who__inner">
-      <div class="about-who__content reveal">
-        <div class="eyebrow">
-          <span class="eyebrow__bar"></span>
-          <span>BİZ KİMİZ?</span>
-        </div>
-        <h2>Yapının Her Aşamasında Deneyim ve Güven</h2>
-        <p>
-          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı
-          ölçeklerde birçok projeye imza atmıştır.
-        </p>
-        <p>
-          Konut, ticari yapılar, sağlık kampüsleri ve otel projelerinde uzman ekibimizle taahhüt ve ince işler
-          hizmetleri sunuyor, edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya devam
-          ediyoruz.
-        </p>
-        <div class="about-who__founder">
-          <span class="about-who__founder-avatar">AO</span>
+        <ul class="ab-who__sectors">
+          {
+            sectors.map((sector) => (
+              <li>
+                <Icon name={sector.icon} size={26} />
+                {sector.title}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="ab-who__founder">
+          <span class="ab-who__avatar">AO</span>
           <div>
-            <p class="about-who__founder-name">Ali Orhan Onur</p>
-            <p class="about-who__founder-title">Kurucu &amp; Genel Müdür · İTÜ İnşaat Fakültesi, 1990</p>
+            <p class="ab-who__name">Ali Orhan Onur</p>
+            <p class="ab-who__role">Kurucu &amp; Genel Müdür · İTÜ İnşaat Fakültesi, 1990</p>
           </div>
         </div>
       </div>
 
-      <div class="about-who__media reveal reveal-d1">
+      <figure class="ab-who__media">
         <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
-        <div class="about-who__since">
-          <span class="about-who__since-label">Since</span>
-          <span class="about-who__since-value">{site.foundedYear}</span>
+        <figcaption class="ab-who__badge">
+          <b>{yearsOfExperience}+</b>
+          <span>Yıllık<br />deneyim</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 3. Journey: sticky giant year + milestones -->
+  <section class="ab-journey">
+    <div class="container ab-journey__inner">
+      <div class="ab-journey__aside">
+        <p class="ab-label">Yolculuğumuz</p>
+        <div class="ab-journey__sticky">
+          <span class="ab-journey__current" data-journey-year>{timeline[0].year}</span>
+          <span class="ab-journey__caption">{site.foundedYear}'dan bugüne</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="about-stats">
-    <div class="container">
-      <ul class="about-stats__grid">
+      <ol class="ab-journey__list">
         {
-          stats.map((stat) => (
-            <li class="about-stat">
-              <span class="about-stat__value">
-                {stat.value}
-                {stat.unit && <span class="about-stat__unit">{stat.unit}</span>}
-              </span>
-              <span class="about-stat__label">{stat.label}</span>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="about-values">
-    <div class="container">
-      <div class="eyebrow about-values__eyebrow">
-        <span class="eyebrow__bar"></span>
-        <span>DEĞERLERİMİZ</span>
-      </div>
-      <h2 class="about-values__title">“Yaşam alanlarına değer katmak için çalışıyoruz.”</h2>
-      <ul class="about-values__grid">
-        {
-          values.map((value, index) => (
-            <li class="about-value reveal">
-              <div class="about-value__head">
-                <span class="about-value__marker" aria-hidden="true"></span>
-                <span class="about-value__num">{String(index + 1).padStart(2, '0')}</span>
-              </div>
-              <span class="about-value__icon">
-                <Icon name={value.icon} size={26} />
-              </span>
-              <h3>{value.title}</h3>
-              <p>{value.text}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="about-journey">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow eyebrow--light">
-            <span class="eyebrow__bar"></span>
-            <span>YOLCULUĞUMUZ</span>
-          </div>
-          <h2>{site.foundedYear}’dan Bugüne</h2>
-        </div>
-        <p>Her projede daha iyisini hedefleyerek, sektörde kalıcı ve sürdürülebilir değerler üretmeye devam ediyoruz.</p>
-      </div>
-
-      <ol class="timeline reveal">
-        {
-          timeline.map((item, index) => (
-            <li class:list={['timeline__item', { 'timeline__item--first': index === 0 }]}>
-              <span class="timeline__marker" aria-hidden="true"></span>
-              <span class="timeline__year">{item.year}</span>
-              <span class="timeline__text">{item.text}</span>
+          timeline.map((item, i) => (
+            <li class:list={['ab-journey__item', { 'is-active': i === 0 }]} data-year={item.year}>
+              <span class="ab-journey__item-year">{item.year}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </li>
           ))
         }
@@ -207,29 +160,49 @@ const refs = [
     </div>
   </section>
 
-  <section class="about-expertise">
+  <!-- 4. Values: full-width rows -->
+  <section class="ab-values">
     <div class="container">
-      <div class="section-head">
+      <div class="ab-head">
+        <p class="ab-label">Değerlerimiz</p>
+        <h2>Yaşam alanlarına değer katmak için çalışıyoruz.</h2>
+      </div>
+      <ol class="ab-values__list">
+        {
+          values.map((value, i) => (
+            <li class="ab-values__row">
+              <span class="ab-values__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Expertise: expanding image panels -->
+  <section class="ab-expertise">
+    <div class="container">
+      <div class="ab-head ab-head--split">
         <div>
-          <div class="eyebrow">
-            <span class="eyebrow__bar"></span>
-            <span>UZMANLIK ALANLARIMIZ</span>
-          </div>
-          <h2>Güçlü Yapılar, Güvenli Yarınlar</h2>
+          <p class="ab-label ab-label--light">Uzmanlık Alanlarımız</p>
+          <h2>Güçlü yapılar, güvenli yarınlar.</h2>
         </div>
-        <p>Farklı sektörlerde edindiğimiz deneyimle, yaşam alanlarına değer katıyoruz.</p>
+        <a class="ab-link" href="/projeler">Tüm Projeler <Icon name="arrow" size={18} /></a>
       </div>
 
-      <ul class="about-expertise__grid">
+      <ul class="ab-panels">
         {
-          expertise.map((item, index) => (
-            <li class={`reveal reveal-d${index}`}>
-              <a class="expertise-card" href="/projeler">
+          expertise.map((item, i) => (
+            <li class:list={['ab-panel', { 'is-open': i === 0 }]}>
+              <a href={item.href}>
                 <img src={item.image} alt="" loading="lazy" />
-                <span class="expertise-card__num">{String(index + 1).padStart(2, '0')}</span>
-                <span class="expertise-card__title">{item.title}</span>
-                <span class="expertise-card__arrow">
-                  <Icon name="arrow" size={20} />
+                <span class="ab-panel__num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="ab-panel__tab">{item.title}</span>
+                <span class="ab-panel__body">
+                  <span class="ab-panel__title">{item.title}</span>
+                  <span class="ab-panel__text">{item.text}</span>
                 </span>
               </a>
             </li>
@@ -239,816 +212,825 @@ const refs = [
     </div>
   </section>
 
-  <section class="about-refs">
+  <!-- 6. References: marquee -->
+  <section class="ab-refs" aria-labelledby="ab-refs-title">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">
-            <span class="eyebrow__bar"></span>
-            <span>ÇALIŞTIĞIMIZ KURUMLAR</span>
-          </div>
-          <h2>Müteahhit ve alt müteahhit olarak yer aldığımız projeler</h2>
-        </div>
+      <div class="ab-head">
+        <p class="ab-label">Çalıştığımız Kurumlar</p>
+        <h2 id="ab-refs-title">Müteahhit ve alt müteahhit olarak yer aldığımız projeler.</h2>
       </div>
-
-      <ul class="about-refs__grid">
-        {
-          refs.map((r) => (
-            <li class="ref-card">
-              <span class="ref-card__name">{r.name}</span>
-              <span class="ref-card__project">{r.project}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
+
+    {
+      refRows.map((row, r) => (
+        <div class:list={['ab-marquee', { 'ab-marquee--reverse': r === 1 }]}>
+          {[0, 1].map((copy) => (
+            <ul class="ab-marquee__track" aria-hidden={copy === 1 ? 'true' : undefined}>
+              {row.map((ref) => (
+                <li>
+                  <span class="ab-marquee__logo">
+                    {ref.logo ? (
+                      <img src={ref.logo} alt={ref.name} loading="lazy" />
+                    ) : (
+                      <span class="ab-marquee__name">{ref.name}</span>
+                    )}
+                  </span>
+                  <span class="ab-marquee__project">{ref.project}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      ))
+    }
   </section>
-
-
 </Layout>
 
+<script>
+  function initAbout() {
+    // Journey: the sticky year follows whichever milestone is in the middle of the viewport.
+    const yearEl = document.querySelector<HTMLElement>('[data-journey-year]');
+    const items = document.querySelectorAll<HTMLElement>('.ab-journey__item');
+    if (yearEl && items.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            items.forEach((el) => el.classList.toggle('is-active', el === entry.target));
+            const year = (entry.target as HTMLElement).dataset.year ?? '';
+            if (yearEl.textContent !== year) {
+              yearEl.classList.remove('is-swap');
+              void yearEl.offsetWidth;
+              yearEl.textContent = year;
+              yearEl.classList.add('is-swap');
+            }
+          });
+        },
+        { rootMargin: '-45% 0px -45% 0px' }
+      );
+      items.forEach((el) => observer.observe(el));
+    }
+
+    // Expertise: the hovered/focused panel opens.
+    const panels = document.querySelectorAll<HTMLElement>('.ab-panel');
+    panels.forEach((panel) => {
+      const open = () => panels.forEach((p) => p.classList.toggle('is-open', p === panel));
+      panel.addEventListener('mouseenter', open);
+      panel.addEventListener('focusin', open);
+    });
+  }
+
+  initAbout();
+  document.addEventListener('astro:page-load', initAbout);
+</script>
+
 <style>
-  /* Shared bits */
-  .eyebrow {
+  /* Shared */
+  .ab-label {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 18px;
-    font-size: 0.75rem;
+    margin: 0;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-navy);
   }
 
-  .eyebrow__bar {
-    display: block;
-    width: 32px;
-    height: 2px;
+  .ab-label::before {
+    content: '';
+    width: 40px;
+    height: 3px;
     background: var(--color-orange);
   }
 
-  .eyebrow--light {
-    color: var(--color-on-dark-muted);
+  .ab-label--light {
+    color: rgba(255, 255, 255, 0.85);
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 28px;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition:
-      background var(--transition),
-      color var(--transition);
-  }
-
-  .btn--navy {
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .btn--navy:hover {
-    background: var(--color-navy);
-  }
-
-  .btn--white {
-    background: #fff;
-    color: var(--color-navy-deep);
-  }
-
-  .btn--white:hover {
-    background: var(--color-border);
-  }
-
-  h1,
-  h2 {
-    font-family: var(--font-display);
-    font-stretch: 112%;
-  }
-
-  h2 {
-    font-size: clamp(1.875rem, 2.4vw + 1rem, 2.75rem);
-    line-height: 1.08;
-    letter-spacing: -0.01em;
-    color: var(--color-navy-deep);
-  }
-
-  .section-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: var(--space-l);
-    margin-bottom: 48px;
-  }
-
-  .section-head p {
-    max-width: 34ch;
-    font-size: var(--fs-small);
-    line-height: 1.7;
-    color: var(--color-text-muted);
-  }
-
-  .about-journey .section-head p {
-    color: var(--color-on-dark-muted);
-  }
-
-  .section-head .eyebrow {
-    margin-bottom: 14px;
-  }
-
-  /* Hero */
-  .about-hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-navy-deep);
-  }
-
-  .about-hero__media {
-    position: absolute;
-    inset: 0 0 0 auto;
-    width: 52%;
-  }
-
-  .about-hero__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 75% center;
-  }
-
-  .about-hero__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.15) 50%, rgba(35, 35, 35, 0) 100%),
-      linear-gradient(to top, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0) 30%);
-  }
-
-  .about-hero__inner {
-    position: relative;
-    z-index: 1;
-    min-height: 560px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-block: 40px 64px;
-  }
-
-  .about-hero__breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 56px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.55);
-  }
-
-  .about-hero__breadcrumb a:hover {
-    color: #fff;
-  }
-
-  .about-hero__breadcrumb span[aria-current] {
-    color: #fff;
-  }
-
-  .about-hero__row {
+  .ab-head {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: var(--space-xl);
+    gap: 20px;
+    margin-bottom: 64px;
+  }
+
+  .ab-head h2 {
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 3vw + 1rem, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-deep);
+  }
+
+  .ab-head--split {
+    grid-template-columns: 1fr auto;
     align-items: end;
   }
 
-  .about-hero__content {
-    max-width: 560px;
-  }
-
-  .about-hero h1 {
-    margin: 0;
-    font-weight: 800;
-    font-size: clamp(2.5rem, 5.2vw, 4.5rem);
-    line-height: 0.98;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  .about-hero__since {
-    display: block;
-    font-weight: 300;
-    color: var(--color-on-dark-muted);
-  }
-
-  .about-hero__lead {
-    margin-top: 22px;
-    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
-    line-height: 1.4;
-    color: rgba(255, 255, 255, 0.92);
-  }
-
-  .about-hero__text {
-    margin-top: 18px;
-    max-width: 48ch;
-    font-size: var(--fs-small);
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .about-hero .btn {
-    margin-top: 30px;
-  }
-
-  .about-hero__quote {
-    max-width: 300px;
-    margin: 0;
-    padding: 4px 0 4px 26px;
-    border-left: 2px solid var(--color-on-dark-muted);
-    font-family: var(--font-display);
-    font-stretch: 112%;
-    font-weight: 600;
-    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-    line-height: 1.25;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
-  /* Stats */
-  .about-stats {
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  .about-stats__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .about-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 44px var(--space-m);
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .about-stat:first-child {
-    border-left: 0;
-  }
-
-  .about-stat__value {
-    font-family: var(--font-display);
-    font-stretch: 118%;
-    font-weight: 700;
-    font-size: clamp(1.875rem, 2.2vw + 0.5rem, 2.5rem);
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
-
-  .about-stat__unit {
-    margin-left: 4px;
-    font-size: 1.0625rem;
-    font-weight: 500;
-  }
-
-  .about-stat__label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  /* Who we are */
-  .about-who {
-    padding-block: 96px;
-    background: var(--color-bg);
-  }
-
-  .about-who__inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 88px;
-    align-items: center;
-  }
-
-  .about-who__content {
+  .ab-head--split > div {
     display: grid;
     gap: 20px;
-    justify-items: start;
   }
 
-  .about-who__content h2 {
-    max-width: 16ch;
-  }
-
-  .about-who__content p {
-    font-size: var(--fs-body);
-    line-height: 1.75;
-    color: var(--color-text-muted);
-  }
-
-  .about-who__content .btn {
-    margin-top: 8px;
-  }
-
-  .about-who__founder {
-    display: flex;
+  .ab-link {
+    display: inline-flex;
     align-items: center;
-    gap: 20px;
-    margin-top: 12px;
-    padding: 26px 28px;
-    background: var(--color-bg-light);
-  }
-
-  .about-who__founder-avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 60px;
-    height: 60px;
-    background: var(--color-navy);
-    color: #fff;
-    font-family: var(--font-display);
-    font-stretch: 115%;
-    font-size: 1.25rem;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-orange);
     font-weight: 700;
-  }
-
-  .about-who__founder-name {
-    font-family: var(--font-display);
-    font-stretch: 108%;
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--color-navy-deep);
-  }
-
-  .about-who__founder-title {
-    margin-top: 4px;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--color-text-muted);
-  }
-
-  .about-who__media {
-    position: relative;
-    margin-left: 28px;
-    padding-bottom: 24px;
-  }
-
-  .about-who__media img {
-    width: 100%;
-    height: 380px;
-    object-fit: cover;
-  }
-
-  .about-who__since {
-    position: absolute;
-    left: -28px;
-    top: 32px;
-    display: grid;
-    gap: 2px;
-    padding: 22px 26px;
-    background: var(--color-navy);
     color: #fff;
-    box-shadow: var(--shadow);
+    white-space: nowrap;
   }
 
-  .about-who__since-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  .about-who__since-value {
-    font-family: var(--font-display);
-    font-stretch: 120%;
-    font-weight: 800;
-    font-size: 2.5rem;
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-
-  /* Values */
-  .about-values {
-    padding-block: 88px;
-    background: var(--color-bg-light);
-  }
-
-  .about-values__eyebrow {
-    margin-bottom: 40px;
-  }
-
-  .about-values__title {
-    max-width: 20ch;
-    margin: 0 0 48px;
-    text-transform: none;
-  }
-
-  .about-values__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
-  }
-
-  .about-value {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 32px 28px 34px;
-    background: #fff;
-    border: 1px solid var(--color-border);
-  }
-
-  .about-value__head {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .about-value__marker {
-    display: block;
-    width: 9px;
-    height: 9px;
-    background: var(--color-navy);
-    transform: rotate(45deg);
-    flex-shrink: 0;
-  }
-
-  .about-value__num {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--color-navy);
-  }
-
-  .about-value__icon {
-    display: grid;
-    place-items: center;
-    width: 56px;
-    height: 56px;
-    margin-top: 4px;
-    border-radius: 50%;
-    background: var(--color-bg-light);
-    color: var(--color-navy-deep);
-  }
-
-  .about-value h3 {
-    margin-top: 4px;
-    font-family: var(--font-display);
-    font-stretch: 108%;
-    font-size: 1.25rem;
-    color: var(--color-navy-deep);
-  }
-
-  .about-value p {
-    font-size: 0.875rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-  }
-
-  /* Journey */
-  .about-journey {
-    padding-block: 96px;
-    background: var(--color-navy-dark);
-    color: #fff;
-  }
-
-  .about-journey h2 {
-    color: #fff;
-  }
-
-  .timeline {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--space-m);
-  }
-
-  .timeline__item {
-    position: relative;
-    display: grid;
-    gap: 16px;
-    align-content: start;
-    padding-top: 32px;
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .timeline__marker {
-    position: absolute;
-    top: -7px;
-    left: 0;
-    width: 12px;
-    height: 12px;
-    background: var(--color-on-dark-muted);
-    transform: rotate(45deg);
-  }
-
-  .timeline__item--first .timeline__marker {
-    background: #fff;
-  }
-
-  .timeline__year {
-    font-family: var(--font-display);
-    font-stretch: 115%;
-    font-weight: 700;
-    font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
-    line-height: 1;
-    letter-spacing: -0.01em;
-  }
-
-  .timeline__text {
-    max-width: 22ch;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  /* Expertise */
-  .about-expertise {
-    padding-block: 96px;
-  }
-
-  .about-expertise__grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
-  }
-
-  .expertise-card {
-    position: relative;
-    display: block;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
+  /* 2. Who we are */
+  .ab-who {
+    padding-block: clamp(80px, 9vw, 140px);
     background: var(--color-navy-deep);
     color: #fff;
   }
 
-  .expertise-card img {
+  .ab-who__inner {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    align-items: center;
+    gap: clamp(48px, 6vw, 112px);
+  }
+
+  .ab-who__content {
+    display: grid;
+    gap: 28px;
+    justify-items: start;
+  }
+
+  .ab-who h2 {
+    max-width: 18ch;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 2.8vw + 1rem, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+  }
+
+  .ab-who h2 span {
+    color: var(--color-orange);
+  }
+
+  .ab-who__text {
+    max-width: 54ch;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .ab-who__sectors {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ab-who__sectors li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-left: 3px solid var(--color-orange);
+    background: rgba(255, 255, 255, 0.04);
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: 1.0625rem;
+  }
+
+  .ab-who__sectors :global(svg) {
+    flex: none;
+    color: var(--color-orange);
+  }
+
+  .ab-who__founder {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .ab-who__avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: 1.125rem;
+  }
+
+  .ab-who__name {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 800;
+    font-size: 1.125rem;
+  }
+
+  .ab-who__role {
+    margin-top: 4px;
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* image sits on the left, text on the right */
+  .ab-who__media {
+    position: relative;
+    order: -1;
+    margin: 0 auto 0 0;
+    width: 100%;
+  }
+
+  .ab-who__media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .ab-who__badge {
+    position: absolute;
+    right: -40px;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 28px;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.45);
+  }
+
+  .ab-who__badge b {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: 3.25rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .ab-who__badge span {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  /* 3. Journey */
+  .ab-journey {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg);
+  }
+
+  /* minmax(0, …) keeps the columns fixed so a wider year ("2000+") can't push the timeline line */
+  .ab-journey__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 80px;
+  }
+
+  .ab-journey__sticky {
+    position: sticky;
+    top: calc(var(--header-h) + 80px);
+    display: grid;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .ab-journey__current {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(4rem, 8vw, 9rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: var(--color-navy);
+  }
+
+  .ab-journey__current.is-swap {
+    animation: ab-year-in 500ms ease;
+  }
+
+  @keyframes ab-year-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
+
+  .ab-journey__caption {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .ab-journey__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 2px solid var(--color-border);
+  }
+
+  .ab-journey__item {
+    position: relative;
+    display: grid;
+    align-content: center;
+    gap: 12px;
+    min-height: 44vh;
+    padding-left: 48px;
+    opacity: 0.35;
+    transition: opacity 400ms ease;
+  }
+
+  .ab-journey__item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 3px solid var(--color-border-strong);
+    transform: translateY(-50%);
+    transition:
+      background 300ms,
+      border-color 300ms;
+  }
+
+  .ab-journey__item.is-active {
+    opacity: 1;
+  }
+
+  .ab-journey__item.is-active::before {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+  }
+
+  .ab-journey__item-year {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--color-orange);
+  }
+
+  .ab-journey__item h3 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.8vw + 1rem, 2.75rem);
+    line-height: 1.05;
+    color: var(--color-navy-deep);
+  }
+
+  .ab-journey__item p {
+    max-width: 40ch;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  /* 4. Values */
+  .ab-values {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
+  }
+
+  .ab-values__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .ab-values__row {
+    position: relative;
+    display: grid;
+    /* minmax(0, …) so a long title can't widen its column and push the text right */
+    grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--color-border-strong);
+    isolation: isolate;
+    transition: color 300ms ease;
+  }
+
+  .ab-values__row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--color-navy);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 400ms ease;
+  }
+
+  .ab-values__row:hover {
+    color: #fff;
+  }
+
+  .ab-values__row:hover::before {
+    transform: scaleY(1);
+  }
+
+  .ab-values__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--color-orange);
+  }
+
+  .ab-values__row h3 {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 2.4vw + 0.75rem, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+    transition: color 300ms ease;
+  }
+
+  /* fixed width so short and long texts start at the same left edge */
+  .ab-values__row p {
+    width: min(100%, 42ch);
+    justify-self: end;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    transition: color 300ms ease;
+  }
+
+  .ab-values__row:hover h3 {
+    color: #fff;
+  }
+
+  .ab-values__row:hover p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* 5. Expertise */
+  .ab-expertise {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-navy-deep);
+  }
+
+  .ab-expertise .ab-head h2 {
+    color: #fff;
+  }
+
+  .ab-panels {
+    display: flex;
+    gap: 12px;
+    height: clamp(420px, 42vw, 620px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ab-panel {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    transition: flex 600ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .ab-panel.is-open {
+    flex: 3.4;
+  }
+
+  .ab-panel a {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: #fff;
+  }
+
+  .ab-panel img {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 500ms ease;
+    filter: grayscale(0.7) brightness(0.7);
+    transition:
+      filter 600ms ease,
+      transform 900ms ease;
   }
 
-  .expertise-card::after {
+  .ab-panel.is-open img {
+    filter: none;
+    transform: scale(1.03);
+  }
+
+  .ab-panel a::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(35, 35, 35, 0.92) 0%, rgba(35, 35, 35, 0.1) 55%);
+    background: linear-gradient(to top, rgba(28, 29, 46, 0.92) 0%, rgba(28, 29, 46, 0.1) 55%);
   }
 
-  .expertise-card:hover img {
-    transform: scale(1.06);
-  }
-
-  .expertise-card__num {
+  .ab-panel__num {
     position: absolute;
-    left: 22px;
-    top: 22px;
-    z-index: 1;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--color-on-dark-muted);
-  }
-
-  .expertise-card__title {
-    position: absolute;
-    left: 22px;
-    right: 60px;
-    bottom: 22px;
+    top: 24px;
+    left: 24px;
     z-index: 1;
     font-family: var(--font-display);
-    font-stretch: 108%;
-    font-weight: 700;
-    font-size: 1.1875rem;
-    line-height: 1.2;
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--color-orange);
   }
 
-  .expertise-card__arrow {
+  .ab-panel__tab {
     position: absolute;
-    right: 18px;
-    bottom: 18px;
+    left: 50%;
+    bottom: 32px;
     z-index: 1;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: translateX(-50%) rotate(180deg);
+    transition: opacity 300ms ease;
+  }
+
+  .ab-panel.is-open .ab-panel__tab {
+    opacity: 0;
+  }
+
+  .ab-panel__body {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    bottom: 32px;
+    z-index: 1;
+    display: grid;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 400ms ease,
+      transform 400ms ease;
+  }
+
+  .ab-panel.is-open .ab-panel__body {
+    opacity: 1;
+    transform: none;
+    transition-delay: 250ms;
+  }
+
+  .ab-panel__title {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 2vw + 0.75rem, 2.75rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .ab-panel__text {
+    max-width: 36ch;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* 6. References */
+  .ab-refs {
+    padding-block: clamp(80px, 9vw, 140px);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .ab-marquee {
+    display: flex;
+    width: max-content;
+    padding-block: 18px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .ab-marquee:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ab-marquee:hover .ab-marquee__track {
+    animation-play-state: paused;
+  }
+
+  .ab-marquee__track {
+    display: flex;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: ab-marquee 28s linear infinite;
+  }
+
+  .ab-marquee--reverse .ab-marquee__track {
+    animation-direction: reverse;
+  }
+
+  .ab-marquee__track li {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    padding-inline: 48px;
+    border-right: 1px solid var(--color-border);
+  }
+
+  /* logos share one box height; grey until hovered */
+  .ab-marquee__logo {
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
+    height: 72px;
+  }
+
+  .ab-marquee__logo img {
+    width: auto;
+    max-width: 200px;
+    height: auto;
+    max-height: 72px;
+    filter: grayscale(1);
+    opacity: 0.7;
     transition:
-      background var(--transition),
-      color var(--transition);
+      filter 300ms ease,
+      opacity 300ms ease;
   }
 
-  .expertise-card:hover .expertise-card__arrow {
-    background: #fff;
-    color: var(--color-navy);
+  .ab-marquee__track li:hover .ab-marquee__logo img {
+    filter: none;
+    opacity: 1;
   }
 
-  /* References */
-  .about-refs {
-    padding-block: 96px;
-    background: var(--color-bg-light);
-  }
-
-  .about-refs__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
-    gap: 1px;
-    background: var(--color-border);
-    border: 1px solid var(--color-border);
-  }
-
-  .ref-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 12px;
-    min-height: 112px;
-    padding: 28px 26px;
-    background: #fff;
-  }
-
-  .ref-card__name {
+  .ab-marquee__name {
     font-family: var(--font-display);
-    font-stretch: 108%;
-    font-size: 1.0625rem;
-    font-weight: 700;
-    line-height: 1.25;
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    white-space: nowrap;
     color: var(--color-navy-deep);
   }
 
-  .ref-card__project {
-    font-size: 0.75rem;
+  .ab-marquee__project {
+    font-size: 0.8125rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--color-text-muted);
+  }
+
+  @keyframes ab-marquee {
+    to {
+      transform: translateX(-100%);
+    }
   }
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .about-hero__media {
-      width: 100%;
-      opacity: 0.5;
-    }
-
-    .about-hero__media::after {
-      background: linear-gradient(to right, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.75) 55%, rgba(35, 35, 35, 0.35) 100%);
-    }
-
-    .about-hero__row {
+    .ab-who__inner {
       grid-template-columns: 1fr;
-      align-items: start;
-      gap: var(--space-l);
     }
 
-    .about-hero__quote {
+    .ab-who__media {
+      max-width: 560px;
+      margin: 0;
+    }
+
+    .ab-who__badge {
+      left: 16px;
+      right: auto;
+      bottom: 16px;
+    }
+
+    .ab-journey__inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .ab-journey__sticky {
       display: none;
     }
 
-    .about-who__inner {
-      grid-template-columns: 1fr;
-      gap: var(--space-l);
+    .ab-journey__item {
+      min-height: 0;
+      padding-block: 28px;
+      opacity: 1;
     }
 
-    .about-who__media {
-      margin-left: 0;
+    .ab-journey__item::before {
+      top: 36px;
+      transform: none;
+      background: var(--color-orange);
+      border-color: var(--color-orange);
     }
 
-    .about-values__grid,
-    .about-expertise__grid {
-      grid-template-columns: 1fr 1fr;
+    .ab-values__row {
+      grid-template-columns: 64px 1fr;
+      gap: 12px 20px;
+      padding: 32px 0;
     }
 
-    .expertise-card__title {
-      font-size: 0.875rem;
+    .ab-values__row p {
+      grid-column: 2;
+      justify-self: start;
+      width: auto;
+      max-width: 42ch;
     }
 
-    .timeline {
-      grid-template-columns: repeat(3, 1fr);
-      row-gap: var(--space-l);
+    .ab-panels {
+      flex-direction: column;
+      height: auto;
+    }
+
+    .ab-panel,
+    .ab-panel.is-open {
+      flex: none;
+      height: 280px;
+    }
+
+    .ab-panel img {
+      filter: none;
+    }
+
+    .ab-panel__tab {
+      display: none;
+    }
+
+    .ab-panel__body {
+      opacity: 1;
+      transform: none;
     }
   }
 
   @media (max-width: 640px) {
-    .about-hero__inner {
-      padding-block: 24px 48px;
-    }
-
-    .about-hero__breadcrumb {
-      margin-bottom: 36px;
-    }
-
-    .about-stats__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .about-stat {
-      border-left: 0;
-      padding: 28px var(--space-s);
-    }
-
-    .about-stat:nth-child(odd) {
-      border-right: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .section-head {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-s);
-    }
-
-    .about-who__since {
-      left: 0;
-      top: -20px;
-      padding: 16px 20px;
-    }
-
-    .about-who__since-value {
-      font-size: 2rem;
-    }
-
-    .about-who__media img {
-      height: 260px;
-    }
-
-    .about-values__grid {
+    .ab-head--split {
       grid-template-columns: 1fr;
     }
 
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .timeline__item {
+    .ab-who__sectors {
       grid-template-columns: 1fr;
-      padding: 0 0 var(--space-l) 28px;
-      border-top: none;
     }
 
-    .timeline__item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline__item::before {
-      content: '';
-      position: absolute;
-      top: 4px;
-      bottom: 0;
-      left: 5px;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .timeline__item:last-child::before {
-      content: none;
-    }
-
-    .timeline__marker {
-      top: 0;
-    }
-
-    .timeline__text {
-      max-width: none;
+    .ab-marquee__track li {
+      padding-inline: 24px;
     }
   }
 
-  @media (max-width: 420px) {
-    .about-expertise__grid {
-      grid-template-columns: none;
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-padding-inline-start: calc(var(--edge-mobile) + 24px);
-      gap: var(--space-m);
-      margin: 0 calc(var(--edge-mobile) * -1);
-      padding: 0 var(--edge-mobile) 8px calc(var(--edge-mobile) + 24px);
-      -webkit-overflow-scrolling: touch;
+  @media (prefers-reduced-motion: reduce) {
+    .ab-marquee__track {
+      animation: none;
     }
 
-    .about-expertise__grid > li {
-      flex: 0 0 70%;
-      scroll-snap-align: start;
+    .ab-marquee {
+      width: auto;
+      flex-wrap: wrap;
     }
 
-    .expertise-card__title {
-      font-size: 1.1875rem;
+    .ab-marquee__track[aria-hidden] {
+      display: none;
+    }
+
+    .ab-marquee__track {
+      flex-wrap: wrap;
     }
   }
 </style>

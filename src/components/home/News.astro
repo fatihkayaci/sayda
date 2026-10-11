@@ -12,7 +12,7 @@ const items = [...news]
 const docs = [
   { title: 'Sertifikalarımız', href: site.documents.certificate, image: '/img/home/belge1.webp', external: true },
   { title: 'Tanıtım Kataloğu', href: site.documents.catalog, image: '/img/home/sayda-hq.webp', external: true },
-  { title: 'İş Bitirme Belgelerimiz', href: '/projeler/tamamlanan', image: '/img/home/belge3.webp', external: false },
+  { title: 'İş Bitirme Belgelerimiz', href: '/projeler/is-bitirme-belgeleri', image: '/img/home/belge3.webp', external: false },
 ];
 
 const fmt = (iso: string) => {
@@ -25,8 +25,11 @@ const fmt = (iso: string) => {
 <section class="news">
   <div class="container news__layout">
     <div>
-      <div class="news__head">
-        <h2>Bizden Haberler</h2>
+      <div class="news__head news__head--main">
+        <div>
+          <span class="eyebrow"><i></i>Güncel</span>
+          <h2>Bizden Haberler</h2>
+        </div>
         <a href="/haberler">Tüm Haberler <Icon name="arrow" size={14} /></a>
       </div>
       <div class="news__grid">
@@ -47,29 +50,32 @@ const fmt = (iso: string) => {
       </div>
     </div>
     <aside class="certs">
-      <div class="news__head">
-        <h2>Sertifika ve Belgeler</h2>
-      </div>
-      <div class="certs__card">
-        <img src="/img/home/belge1.webp" alt="Sertifika" loading="lazy" />
+      <div class="news__head news__head--main">
         <div>
-          <p>Kalite ve güven standartlarımızı belgeleyen sertifikalarımız.</p>
-          <a class="certs__btn" href="/belgeler">Belgelerimiz</a>
+          <span class="eyebrow"><i></i>Sertifika ve Belgeler</span>
+          <h2>Belgelerimiz</h2>
         </div>
+        <a href="/belgeler">Tümü <Icon name="arrow" size={14} /></a>
       </div>
-      <ul class="certs__docs">
-        {
-          docs.map((d) => (
-            <li>
-              <a href={d.href} {...(d.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-                <img class="certs__thumb" src={d.image} alt="" loading="lazy" />
-                <span>{d.title}</span>
-                <Icon name="arrow" size={13} />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="certs__body">
+        <div class="certs__card">
+          <img src="/img/home/belge1.webp" alt="Sertifika" loading="lazy" />
+          <p>Kalite ve güven standartlarımızı belgeleyen sertifikalarımız.</p>
+        </div>
+        <ul class="certs__docs">
+          {
+            docs.map((d) => (
+              <li>
+                <a href={d.href} {...(d.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  <img class="certs__thumb" src={d.image} alt="" loading="lazy" />
+                  <span>{d.title}</span>
+                  <Icon name="arrow" size={13} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </aside>
   </div>
 </section>
@@ -83,7 +89,15 @@ const fmt = (iso: string) => {
   .news__layout {
     display: grid;
     grid-template-columns: 2.2fr 1fr;
-    gap: var(--space-l);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-l);
+  }
+
+  /* both columns share the heading row and the content row so they line up */
+  .news__layout > * {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
   }
 
   .news__head {
@@ -103,11 +117,27 @@ const fmt = (iso: string) => {
     color: var(--color-navy-deep);
   }
 
+  .news__head--main {
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+
+  .news__head--main h2 {
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
   .news__head > a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-navy);
     white-space: nowrap;
@@ -156,7 +186,7 @@ const fmt = (iso: string) => {
   }
 
   .news__card:nth-child(1) h3 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 
   .news__card:nth-child(n + 2) {
@@ -177,7 +207,7 @@ const fmt = (iso: string) => {
   }
 
   .news time {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-orange);
   }
@@ -185,7 +215,7 @@ const fmt = (iso: string) => {
   .news h3 {
     margin-block: 8px 12px;
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.9375rem;
     font-weight: 700;
     line-height: 1.35;
     color: var(--color-navy-deep);
@@ -195,43 +225,52 @@ const fmt = (iso: string) => {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--color-navy);
+  }
+
+  .certs__body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .certs__card {
     display: flex;
     align-items: center;
     gap: 18px;
-    padding: 18px;
+    padding: 16px;
     background: #fff;
     box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
   }
 
   .certs__card img {
     flex: none;
-    width: 110px;
+    width: 100px;
     aspect-ratio: 3 / 4;
     object-fit: cover;
   }
 
   .certs__card p {
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 600;
     line-height: 1.5;
     color: var(--color-navy-deep);
   }
 
   .certs__docs {
+    flex: 1;
     display: grid;
+    grid-auto-rows: 1fr;
     gap: 8px;
-    margin: 12px 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .certs__docs a {
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -239,7 +278,7 @@ const fmt = (iso: string) => {
     background: #fff;
     border-left: 3px solid var(--color-orange);
     box-shadow: 0 4px 16px rgba(20, 27, 46, 0.06);
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--color-navy-deep);
     transition: transform var(--transition);
@@ -255,30 +294,24 @@ const fmt = (iso: string) => {
 
   .certs__thumb {
     flex: none;
-    width: 40px;
-    height: 52px;
+    align-self: stretch;
+    width: 64px;
+    height: auto;
+    min-height: 72px;
     object-fit: cover;
     border: 1px solid #d9e0e5;
-  }
-
-  .certs__btn {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 11px 20px;
-    background: var(--color-navy-deep);
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #fff;
-    transition: background var(--transition);
-  }
-
-  .certs__btn:hover {
-    background: var(--color-navy);
   }
 
   @media (max-width: 1100px) {
     .news__layout {
       grid-template-columns: 1fr;
+      grid-template-rows: none;
+      row-gap: var(--space-l);
+    }
+
+    .news__layout > * {
+      display: block;
+      grid-row: auto;
     }
   }
 

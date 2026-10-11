@@ -1,0 +1,156 @@
+---
+// "What we do" section: compact two-column list of included work, with an optional dark side card.
+import Icon from '../Icon.astro';
+import SectionHead from '../SectionHead.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  items: (string | { title: string; text: string })[];
+  aside?: { title: string; items: string[] };
+}
+
+const { label, title, items, aside } = Astro.props;
+---
+
+<section class="svc-scope">
+  <div class:list={['container', 'svc-scope__inner', { 'svc-scope__inner--aside': aside }]}>
+    <div>
+      <SectionHead label={label} title={title} />
+      <ul class="svc-scope__list">
+        {
+          items.map((item) => (
+            <li>
+              <Icon name="check" size={18} />
+              {typeof item === 'string' ? (
+                item
+              ) : (
+                <span class="svc-scope__body">
+                  {item.title}
+                  <small>{item.text}</small>
+                </span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      aside && (
+        <aside class="svc-scope__aside">
+          <h3>{aside.title}</h3>
+          <ul>
+            {aside.items.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .svc-scope {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg);
+  }
+
+  .svc-scope__inner--aside {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: clamp(40px, 5vw, 80px);
+    align-items: start;
+  }
+
+  .svc-scope__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .svc-scope__list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-scope__list :global(svg) {
+    flex: none;
+    color: var(--color-orange-dark);
+  }
+
+  .svc-scope__body {
+    display: grid;
+    gap: 4px;
+  }
+
+  .svc-scope__body small {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .svc-scope__aside {
+    padding: 36px 32px;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .svc-scope__aside h3 {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+
+  .svc-scope__aside ul {
+    display: grid;
+    gap: 14px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .svc-scope__aside li {
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .svc-scope__aside li::before {
+    content: '';
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 10px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  @media (max-width: 1024px) {
+    .svc-scope__inner--aside {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .svc-scope__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

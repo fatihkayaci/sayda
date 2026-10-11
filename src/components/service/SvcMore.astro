@@ -1,0 +1,107 @@
+---
+// Compact row of all six services at the end of a service page; the current one is marked.
+import Icon from '../Icon.astro';
+import services from '../../data/services.json';
+
+interface Props {
+  current: string;
+}
+
+const { current } = Astro.props;
+---
+
+<section class="svc-more">
+  <div class="container svc-more__inner">
+    <p class="svc-more__label">Hizmetlerimiz</p>
+    <ul>
+      {
+        services.map((service) =>
+          service.href === current ? (
+            <li>
+              <span class="svc-more__current" aria-current="page">
+                {service.title}
+              </span>
+            </li>
+          ) : (
+            <li>
+              <a href={service.href}>
+                {service.title} <Icon name="arrow" size={16} />
+              </a>
+            </li>
+          )
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .svc-more {
+    padding-block: 48px;
+    border-top: 1px solid var(--color-border-strong);
+    background: var(--color-bg);
+  }
+
+  .svc-more__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 32px;
+  }
+
+  .svc-more__label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .svc-more__label::before {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .svc-more ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .svc-more a,
+  .svc-more__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .svc-more a:hover {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .svc-more__current {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+// Section label (orange rule + uppercase) with an oversized heading and optional side text.
+interface Props {
+  label: string;
+  title: string;
+  text?: string;
+  tone?: 'light' | 'dark';
+}
+
+const { label, title, text, tone = 'light' } = Astro.props;
+---
+
+<div class:list={['section-head', `section-head--${tone}`, { 'section-head--split': text }]}>
+  <div class="section-head__main">
+    <p class="section-head__label">{label}</p>
+    <h2>{title}</h2>
+  </div>
+  {text && <p class="section-head__text">{text}</p>}
+</div>
+
+<style>
+  .section-head {
+    display: grid;
+    gap: 24px 64px;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+
+  .section-head--split {
+    grid-template-columns: 1fr minmax(0, 420px);
+    align-items: end;
+  }
+
+  .section-head__main {
+    display: grid;
+    gap: 20px;
+  }
+
+  .section-head__label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .section-head__label::before {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .section-head h2 {
+    max-width: 20ch;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 3vw + 1rem, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-deep);
+  }
+
+  .section-head__text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .section-head--dark .section-head__label {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .section-head--dark h2 {
+    color: #fff;
+  }
+
+  .section-head--dark .section-head__text {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  @media (max-width: 900px) {
+    .section-head--split {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-head h2 {
+      font-stretch: 100%;
+      font-size: clamp(1.875rem, 8.5vw, 2.25rem);
+      overflow-wrap: break-word;
+    }
+  }
+</style>

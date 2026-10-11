@@ -1,0 +1,233 @@
+---
+// Service page hero: title, one-paragraph summary, key points and a quote button beside a tall photo.
+// The h1 comes from the default slot so a word can be highlighted with <em>.
+import Icon from '../Icon.astro';
+import site from '../../data/site.json';
+
+interface Props {
+  eyebrow: string;
+  name: string;
+  text: string;
+  points: string[];
+  image: string;
+}
+
+const { eyebrow, name, text, points, image } = Astro.props;
+---
+
+<section class="svc-hero">
+  <div class="container svc-hero__inner">
+    <div class="svc-hero__text">
+      <nav class="svc-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span aria-hidden="true">/</span>
+        <a href="/hizmetler">Hizmetler</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{name}</span>
+      </nav>
+
+      <p class="svc-hero__eyebrow"><span></span>{eyebrow}</p>
+      <h1><slot /></h1>
+      <p class="svc-hero__lead">{text}</p>
+
+      <ul class="svc-hero__points">
+        {
+          points.map((point) => (
+            <li>
+              <Icon name="check" size={16} />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="svc-hero__actions">
+        <a class="svc-hero__btn" href="/iletisim#quote-form">
+          Teklif Al <Icon name="arrow" size={18} />
+        </a>
+        <a class="svc-hero__phone" href={site.phoneHref}>
+          <Icon name="phone" size={18} />
+          {site.phone}
+        </a>
+      </div>
+    </div>
+
+    <div class="svc-hero__media">
+      <img src={image} alt="" fetchpriority="high" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .svc-hero {
+    background: var(--color-bg-light);
+  }
+
+  .svc-hero__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    gap: clamp(40px, 5vw, 88px);
+    align-items: center;
+    padding-block: 32px clamp(56px, 6vw, 88px);
+  }
+
+  .svc-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: clamp(32px, 4vw, 56px);
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .svc-hero__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .svc-hero__breadcrumb [aria-current] {
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .svc-hero__eyebrow span {
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .svc-hero h1 {
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 3.6vw + 0.75rem, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-hero h1 :global(em) {
+    font-style: normal;
+    color: var(--color-navy);
+    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.55);
+  }
+
+  .svc-hero__lead {
+    max-width: 56ch;
+    margin-top: 24px;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  .svc-hero__points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .svc-hero__points li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-hero__points :global(svg) {
+    color: var(--color-orange-dark);
+  }
+
+  .svc-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    margin-top: 36px;
+  }
+
+  .svc-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 58px;
+    padding: 0 30px;
+    border-radius: var(--radius);
+    background: var(--color-orange);
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition: background var(--transition);
+  }
+
+  .svc-hero__btn:hover {
+    background: var(--color-orange-dark);
+  }
+
+  .svc-hero__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-hero__phone :global(svg) {
+    color: var(--color-orange-dark);
+  }
+
+  .svc-hero__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .svc-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 6px;
+    background: var(--color-orange);
+  }
+
+  .svc-hero__media img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: 640px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    .svc-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .svc-hero__media img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .svc-hero h1 {
+      font-stretch: 100%;
+      font-size: clamp(2.25rem, 10vw, 2.75rem);
+    }
+  }
+</style>

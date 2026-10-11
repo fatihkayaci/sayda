@@ -1,0 +1,711 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
+import posts from '../../data/blog.json';
+import site from '../../data/site.json';
+import { blogCategoryLabel, readMinutes as postReadMinutes, type BlogBlock } from '../../utils/blog';
+import { formatNewsDate } from '../../utils/news';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const sorted = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1));
+const others = sorted.filter((item) => item.slug !== post.slug);
+const more = [
+  ...others.filter((item) => item.category === post.category),
+  ...others.filter((item) => item.category !== post.category),
+].slice(0, 3);
+
+const blocks = post.blocks as BlogBlock[];
+const readMinutes = postReadMinutes(post);
+
+const slugify = (text: string) =>
+  text
+    .toLocaleLowerCase('tr')
+    .replace(/ç/g, 'c')
+    .replace(/ğ/g, 'g')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ş/g, 's')
+    .replace(/ü/g, 'u')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+const headings = blocks.flatMap((block) => (block.type === 'heading' ? [{ text: block.text, id: slugify(block.text) }] : []));
+
+const url = new URL(`/blog/${post.slug}`, site.url).toString();
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(post.title);
+const shares = [
+  { name: 'LinkedIn', icon: 'linkedin', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
+  { name: 'X', icon: 'x', href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}` },
+  { name: 'Facebook', icon: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+  { name: 'WhatsApp', icon: 'whatsapp', href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
+];
+---
+
+<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image}>
+  <article>
+    <header class="gd-head">
+      <div class="container">
+        <nav class="gd-head__breadcrumb" aria-label="Konum">
+          <a href="/">Ana Sayfa</a>
+          <span aria-hidden="true">/</span>
+          <a href="/blog">Blog</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{post.title}</span>
+        </nav>
+
+        <p class="gd-head__category"><span></span>Blog · {blogCategoryLabel[post.category]}</p>
+        <h1>{post.title}</h1>
+        <p class="gd-head__excerpt">{post.excerpt}</p>
+
+        <ul class="gd-head__meta">
+          <li>
+            <Icon name="calendar" size={18} />
+            <time datetime={post.date}>{formatNewsDate(post.date)}</time>
+          </li>
+          <li>
+            <Icon name="clock" size={18} />
+            {readMinutes} dk okuma
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="gd-figure">
+      <div class="container">
+        <img src={post.image} alt={post.title} fetchpriority="high" />
+      </div>
+    </div>
+
+    <section class="gd-body">
+      <div class="container gd-body__inner">
+        <aside class="gd-aside">
+          {
+            headings.length > 0 && (
+              <nav class="gd-toc" aria-label="İçindekiler">
+                <p>İçindekiler</p>
+                <ol>
+                  {headings.map((heading, i) => (
+                    <li>
+                      <a href={`#${heading.id}`}>
+                        <span>{String(i + 1).padStart(2, '0')}</span>
+                        {heading.text}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )
+          }
+
+          <div class="gd-share">
+            <p>Paylaş</p>
+            <div class="gd-share__list">
+              {
+                shares.map((share) => (
+                  <a href={share.href} target="_blank" rel="noopener noreferrer" aria-label={`${share.name} ile paylaş`}>
+                    <Icon name={share.icon} size={18} />
+                  </a>
+                ))
+              }
+              <button type="button" data-copy-link={url} aria-label="Bağlantıyı kopyala">
+                <Icon name="link" size={18} />
+              </button>
+            </div>
+            <p class="gd-share__status" data-copy-status role="status" aria-live="polite"></p>
+          </div>
+        </aside>
+
+        <div class="gd-content">
+          {
+            blocks.map((block) => {
+              switch (block.type) {
+                case 'lead':
+                  return <p class="gd-content__lead">{block.text}</p>;
+                case 'heading':
+                  return (
+                    <h2 id={slugify(block.text)} class="gd-content__heading">
+                      {block.text}
+                    </h2>
+                  );
+                case 'quote':
+                  return (
+                    <blockquote class="gd-quote">
+                      <p>{block.text}</p>
+                      {block.author && <cite>— {block.author}</cite>}
+                    </blockquote>
+                  );
+                case 'note':
+                  return (
+                    <div class="gd-note">
+                      <span class="gd-note__label">Not</span>
+                      <p>{block.text}</p>
+                    </div>
+                  );
+                case 'steps':
+                  return (
+                    <ol class="gd-steps">
+                      {block.items.map((item, index) => (
+                        <li>
+                          <span class="gd-steps__num">{String(index + 1).padStart(2, '0')}</span>
+                          <span>
+                            {item.title && <strong>{item.title}</strong>}
+                            {item.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  );
+                default:
+                  return <p>{block.text}</p>;
+              }
+            })
+          }
+
+          <div class="gd-cta">
+            <div>
+              <strong>Sürecinizi birlikte planlayalım.</strong>
+              <span>Binanız için ücretsiz ön değerlendirme talep edin.</span>
+            </div>
+            <a href="/iletisim#quote-form">
+              Ön Değerlendirme <Icon name="arrow" size={18} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  {
+    more.length > 0 && (
+      <section class="gd-more">
+        <div class="container">
+          <div class="gd-more__head">
+            <SectionHead label="Diğer Yazılar" title="Okumaya devam edin." />
+            <a href="/blog">
+              Tüm Yazılar <Icon name="arrow" size={18} />
+            </a>
+          </div>
+          <div class="gd-more__grid">
+            {more.map((item) => (
+              <a class="gd-card" href={`/blog/${item.slug}`}>
+                <span class="gd-card__media">
+                  <img src={item.image} alt="" loading="lazy" />
+                </span>
+                <span class="gd-card__meta">{blogCategoryLabel[item.category]}</span>
+                <span class="gd-card__title">{item.title}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <NewsletterBand
+    eyebrow="Blog Bülteni"
+    title="Yeni yazıları kaçırmayın."
+    text="Kentsel dönüşüm, inşaat süreçleri ve güncel düzenlemeler hakkındaki yeni yazılar gelen kutunuza gelsin."
+    subject="Blog bülteni aboneliği"
+  />
+</Layout>
+
+<script>
+  function initCopyLink() {
+    const button = document.querySelector<HTMLButtonElement>('[data-copy-link]');
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    if (!button || !status || button.dataset.ready) return;
+    button.dataset.ready = 'true';
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyLink ?? location.href);
+        status.textContent = 'Bağlantı kopyalandı.';
+      } catch {
+        status.textContent = 'Bağlantı kopyalanamadı.';
+      }
+    });
+  }
+
+  initCopyLink();
+  document.addEventListener('astro:page-load', initCopyLink);
+</script>
+
+<style>
+  /* Header */
+  .gd-head {
+    padding-block: 40px 160px;
+    background: var(--color-bg-light);
+  }
+
+  .gd-head__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .gd-head__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .gd-head__breadcrumb [aria-current] {
+    max-width: 40ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-head__category {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .gd-head__category span {
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .gd-head h1 {
+    max-width: 22ch;
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 3.6vw + 1rem, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-head__excerpt {
+    max-width: 60ch;
+    margin-top: 28px;
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .gd-head__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .gd-head__meta li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .gd-head__meta :global(svg) {
+    color: var(--color-orange-dark);
+  }
+
+  .gd-figure {
+    margin-top: -120px;
+  }
+
+  .gd-figure img {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  /* Body */
+  .gd-body {
+    padding-block: clamp(56px, 6vw, 96px) clamp(80px, 9vw, 140px);
+  }
+
+  .gd-body__inner {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 760px);
+    gap: clamp(32px, 6vw, 96px);
+  }
+
+  .gd-aside {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+    display: grid;
+    gap: 40px;
+  }
+
+  .gd-toc > p,
+  .gd-share > p:first-child {
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .gd-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .gd-toc a {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-navy-deep);
+    transition: color var(--transition);
+  }
+
+  .gd-toc a span {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 0.8125rem;
+    color: var(--color-orange-dark);
+  }
+
+  .gd-toc a:hover {
+    color: var(--color-navy);
+  }
+
+  .gd-share__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gd-share__list a,
+  .gd-share__list button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .gd-share__list a:hover,
+  .gd-share__list button:hover {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .gd-share__status {
+    margin-top: 12px;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Content blocks */
+  .gd-content > * + * {
+    margin-top: 24px;
+  }
+
+  .gd-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .gd-content .gd-content__lead {
+    font-size: clamp(1.25rem, 0.6vw + 1rem, 1.625rem);
+    font-weight: 500;
+    line-height: 1.55;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-content__heading {
+    scroll-margin-top: calc(var(--header-h) + 24px);
+    padding-top: 24px;
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: clamp(1.625rem, 1vw + 1.125rem, 2.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-content .gd-content__heading {
+    margin-top: 48px;
+  }
+
+  .gd-quote {
+    margin-block: 40px;
+    margin-inline: 0;
+    padding: 8px 0 8px 32px;
+    border-left: 4px solid var(--color-orange);
+  }
+
+  .gd-content .gd-quote p {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 0.8vw + 1rem, 1.75rem);
+    line-height: 1.35;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-quote cite {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .gd-note {
+    display: grid;
+    gap: 8px;
+    padding: 24px 28px;
+    border-radius: var(--radius);
+    background: var(--color-bg-light);
+  }
+
+  .gd-note__label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .gd-content .gd-note p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .gd-steps li {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .gd-steps__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-orange-dark);
+  }
+
+  .gd-steps strong {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    margin-top: 64px !important;
+    padding: 28px 32px;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .gd-cta div {
+    display: grid;
+    gap: 6px;
+  }
+
+  .gd-cta strong {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.375rem;
+  }
+
+  .gd-cta span {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .gd-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border-radius: var(--radius);
+    background: var(--color-orange);
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition: background var(--transition);
+  }
+
+  .gd-cta a:hover {
+    background: var(--color-orange-dark);
+  }
+
+  /* More */
+  .gd-more {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
+  }
+
+  .gd-more__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .gd-more__head > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: clamp(40px, 5vw, 64px);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-orange);
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--color-navy-deep);
+  }
+
+  .gd-more__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .gd-card {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+  }
+
+  .gd-card__media {
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .gd-card img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: transform 700ms ease;
+  }
+
+  .gd-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .gd-card__meta {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .gd-card__title {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 800;
+    font-size: clamp(1.25rem, 0.6vw + 1rem, 1.5rem);
+    line-height: 1.15;
+    color: var(--color-navy-deep);
+    transition: color var(--transition);
+  }
+
+  .gd-card:hover .gd-card__title {
+    color: var(--color-navy);
+  }
+
+  @media (max-width: 1024px) {
+    .gd-body__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .gd-aside {
+      position: static;
+    }
+
+    .gd-share {
+      order: 2;
+    }
+
+    .gd-more__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gd-head {
+      padding-bottom: 96px;
+    }
+
+    .gd-figure {
+      margin-top: -64px;
+    }
+
+    .gd-figure img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .gd-more__head > a {
+      display: none;
+    }
+  }
+</style>

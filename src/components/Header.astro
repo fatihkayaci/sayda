@@ -11,38 +11,25 @@ const navLinks = [
       { label: 'Hakkımızda', href: '/hakkimizda' },
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
       { label: 'Belgelerimiz', href: '/belgeler' },
+      { label: 'İş Bitirme Belgeleri', href: '/projeler/is-bitirme-belgeleri' },
     ],
   },
   {
     label: 'Hizmetler',
     href: '/hizmetler',
     children: [
+      { label: 'Kentsel Dönüşüm', href: '/hizmetler/kentsel-donusum' },
+      { label: 'Kat Karşılığı İnşaat', href: '/hizmetler/kat-karsiligi-insaat' },
       { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
       { label: 'Anahtar Teslim Müteahhitlik', href: '/hizmetler/anahtar-teslim-muteahhitlik' },
-      { label: 'Kat Karşılığı İnşaat', href: '/hizmetler/kat-karsiligi-insaat' },
       { label: 'Proje Yönetimi & Danışmanlık', href: '/hizmetler/proje-yonetimi-danismanlik' },
       { label: 'Tesis Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
     ],
   },
-  {
-    label: 'Projeler',
-    href: '/projeler',
-    children: [
-      { label: 'Devam Eden', href: '/projeler/devam-eden' },
-      { label: 'Tamamlanan', href: '/projeler/tamamlanan' },
-    ],
-  },
-  { label: 'Kentsel Dönüşüm', href: '/kentsel-donusum' },
+  { label: 'Projeler', href: '/projeler' },
   { label: 'Haberler', href: '/haberler' },
-  { label: 'Rehber', href: '/rehber' },
-  {
-    label: 'İK',
-    href: '/kariyer',
-    children: [
-      { label: 'Beyaz Yaka', href: '/kariyer' },
-      { label: 'Kalfa (Ekipli)', href: '/kariyer#kalfa-ekipli' },
-    ],
-  },
+  { label: 'Blog', href: '/blog' },
+  { label: 'İK', href: '/kariyer' },
 ];
 
 const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
@@ -54,6 +41,13 @@ const isPathActive = (href?: string) => {
   if (h === '/') return currentPath === '/';
   return currentPath === h || currentPath.startsWith(`${h}/`);
 };
+
+// Only the most specific matching child is active, so /hakkimizda/vizyon-misyon
+// doesn't also light up /hakkimizda.
+const activeChildHref = (children?: { href: string }[]) =>
+  children
+    ?.filter((child) => isPathActive(child.href))
+    .sort((a, b) => b.href.length - a.href.length)[0]?.href;
 ---
 
 <header class="header" transition:persist="sayda-header">
@@ -66,7 +60,8 @@ const isPathActive = (href?: string) => {
       <ul>
         {
           navLinks.map((item, i) => {
-            const childActive = item.children?.some((child) => isPathActive(child.href)) ?? false;
+            const activeChild = activeChildHref(item.children);
+            const childActive = Boolean(activeChild);
             const itemActive = isPathActive(item.href) || childActive;
             return (
               <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
@@ -106,7 +101,7 @@ const isPathActive = (href?: string) => {
                   <ul class="header__dropdown" id={`dropdown-${i}`}>
                     {item.children.map((child) => (
                       <li>
-                        <a href={child.href} class:list={{ 'is-active': isPathActive(child.href) }}>
+                        <a href={child.href} class:list={{ 'is-active': child.href === activeChild }}>
                           {child.label}
                         </a>
                       </li>
@@ -144,17 +139,14 @@ const isPathActive = (href?: string) => {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(24, 29, 41, 0.96);
+    background: rgba(28, 29, 46, 0.96);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    transition:
-      background 300ms,
-      box-shadow 300ms;
+    transition: transform 300ms ease;
   }
 
-  .header.is-scrolled {
-    background: rgba(24, 29, 41, 0.55);
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.15);
+  .header.is-hidden {
+    transform: translateY(-100%);
   }
 
   .header__inner {
@@ -189,11 +181,6 @@ const isPathActive = (href?: string) => {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
-    transition: background 300ms;
-  }
-
-  .header.is-scrolled .header__logo::before {
-    background: rgba(255, 255, 255, 0.7);
   }
 
   .header__logo img {
@@ -380,14 +367,14 @@ const isPathActive = (href?: string) => {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--color-navy);
-    color: #fff;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
     padding: 12px 22px;
     border-radius: 10px;
     font-size: var(--fs-small);
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(35, 35, 35, 0.25);
+    box-shadow: 0 8px 20px rgba(245, 162, 27, 0.3);
     transition:
       background var(--transition),
       box-shadow var(--transition),
@@ -395,8 +382,8 @@ const isPathActive = (href?: string) => {
   }
 
   .header__cta:hover {
-    background: var(--color-orange);
-    box-shadow: 0 10px 24px rgba(245, 162, 27, 0.4);
+    background: var(--color-orange-dark);
+    box-shadow: 0 10px 24px rgba(245, 162, 27, 0.45);
     transform: translateY(-1px);
   }
 
@@ -416,7 +403,7 @@ const isPathActive = (href?: string) => {
       left: 0;
       right: 0;
       width: 100%;
-      background: #232323;
+      background: #1c1d2e;
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
@@ -444,7 +431,7 @@ const isPathActive = (href?: string) => {
       z-index: 1;
       margin-left: 0;
       overflow-y: auto;
-      background: #232323;
+      background: #1c1d2e;
       padding: calc(var(--header-h-compact) + var(--space-l)) var(--edge-mobile) var(--space-l);
       transform: translateX(100%);
       visibility: hidden;
@@ -531,8 +518,8 @@ const isPathActive = (href?: string) => {
       justify-content: center;
       align-items: center;
       gap: 8px;
-      background: var(--color-navy);
-      color: #fff;
+      background: var(--color-orange);
+      color: var(--color-navy-deep);
       padding: 12px 24px;
       border-radius: 10px;
       font-weight: 700;
@@ -540,8 +527,8 @@ const isPathActive = (href?: string) => {
     }
 
     .header__nav-cta-link:hover {
-      background: var(--color-orange);
-      color: #fff;
+      background: var(--color-orange-dark);
+      color: var(--color-navy-deep);
     }
   }
 
@@ -579,8 +566,18 @@ const isPathActive = (href?: string) => {
     if (!open) closeDropdowns();
   };
 
+  let lastScrollY = window.scrollY;
+
   const updateHeaderBackground = () => {
-    els().header?.classList.toggle('is-scrolled', window.scrollY > 40);
+    const { header, menu } = els();
+    const y = window.scrollY;
+    const menuOpen = menu?.classList.contains('is-open');
+    const scrollingDown = y > lastScrollY;
+    const hide = y > 80 && scrollingDown && !menuOpen;
+    if (Math.abs(y - lastScrollY) > 4 || y <= 80) {
+      header?.classList.toggle('is-hidden', hide);
+      lastScrollY = y;
+    }
   };
 
   const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
@@ -595,12 +592,13 @@ const isPathActive = (href?: string) => {
     };
 
     document.querySelectorAll<HTMLElement>('.header__nav-item').forEach((item) => {
-      let childActive = false;
-      item.querySelectorAll<HTMLAnchorElement>('.header__dropdown a').forEach((child) => {
-        const active = isPathActive(child.getAttribute('href'));
-        child.classList.toggle('is-active', active);
-        if (active) childActive = true;
-      });
+      // Only the longest matching child href wins (see activeChildHref above).
+      const children = [...item.querySelectorAll<HTMLAnchorElement>('.header__dropdown a')];
+      const best = children
+        .filter((child) => isPathActive(child.getAttribute('href')))
+        .sort((a, b) => (b.getAttribute('href') ?? '').length - (a.getAttribute('href') ?? '').length)[0];
+      children.forEach((child) => child.classList.toggle('is-active', child === best));
+      const childActive = Boolean(best);
 
       const topLink = item.querySelector<HTMLElement>(
         '.header__nav-item-row > .header__nav-link, :scope > a.header__nav-link'

@@ -1,9 +1,30 @@
 ---
+// Wikimedia Commons photos: their licences require the author credit to stay visible.
 const slides = [
-  { image: '/img/sayda-insaat-hero01.webp', title: 'Yüksek Kalitede Uygulamalar' },
-  { image: '/img/sayda-insaat-hero02.webp', title: 'Profesyonel Çözümler' },
-  { image: '/img/sayda-insaat-hero03.webp', title: 'Güvenilir Takvim, Adil Fiyat' },
-  { image: '/img/sayda-insaat-hero04.webp', title: 'Kentsel Dönüşüm Çözümleri' },
+  {
+    image: '/img/home/hero-ciragan.webp',
+    title: 'Yüksek Kalitede Uygulamalar',
+    credit: 'Çırağan Palace · Foto: A.Savin, FAL',
+    creditHref: 'https://commons.wikimedia.org/wiki/File:Istanbul_asv2020-02_img59_%C3%87%C4%B1ra%C4%9Fan_Palace.jpg',
+  },
+  {
+    image: '/img/home/hero-vadistanbul.webp',
+    title: 'Profesyonel Çözümler',
+    credit: 'Vadistanbul · Foto: Keizers, CC BY-SA 4.0',
+    creditHref: 'https://commons.wikimedia.org/wiki/File:Vadistanbul_AVM-mall_4.jpg',
+  },
+  {
+    image: '/img/home/hero-suzer-plaza.webp',
+    title: 'Güvenilir Takvim, Adil Fiyat',
+    credit: 'Süzer Plaza · Foto: flowcomm, CC BY 2.0',
+    creditHref: 'https://commons.wikimedia.org/wiki/File:Dolmabah%C3%A7e_Mosque_and_S%C3%BCzer_Plaza_in_the_background.jpg',
+  },
+  {
+    image: '/img/home/hero-buyukyali.webp',
+    title: 'Kentsel Dönüşüm Çözümleri',
+    credit: 'Büyükyalı · Görsel: Chapman Taylor',
+    creditHref: 'https://www.chapmantaylor.com/news/buyukyali-residential-mega-project-in-istanbul-progressing-well',
+  },
 ];
 ---
 
@@ -12,13 +33,36 @@ const slides = [
     slides.map((slide, i) => (
       <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
         <img src={slide.image} alt="" fetchpriority={i === 0 ? 'high' : undefined} loading={i === 0 ? undefined : 'lazy'} />
-        {i === 0 ? <h1 class="hero__title">{slide.title}</h1> : <p class="hero__title">{slide.title}</p>}
+        {slide.credit && (
+          <a class="hero__credit" href={slide.creditHref} target="_blank" rel="noopener noreferrer">
+            {slide.credit}
+          </a>
+        )}
       </div>
     ))
   }
   <div class="hero__shade"></div>
-  <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Önceki slayt">‹</button>
-  <button class="hero__arrow hero__arrow--next" type="button" aria-label="Sonraki slayt">›</button>
+
+  <div class="container hero__content">
+    {
+      slides.map((slide, i) =>
+        i === 0 ? (
+          <h1 class="hero__title is-on">{slide.title}</h1>
+        ) : (
+          <p class="hero__title" aria-hidden="true">
+            {slide.title}
+          </p>
+        )
+      )
+    }
+  </div>
+
+  <button class="hero__arrow hero__arrow--prev" type="button" aria-label="Önceki resim">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6" /></svg>
+  </button>
+  <button class="hero__arrow hero__arrow--next" type="button" aria-label="Sonraki resim">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6" /></svg>
+  </button>
 </section>
 
 <script>
@@ -26,25 +70,32 @@ const slides = [
 
   function initHero() {
     document.querySelectorAll<HTMLElement>('.hero').forEach((hero) => {
+      if (hero.dataset.ready) return;
+      hero.dataset.ready = 'true';
+
       const slides = [...hero.querySelectorAll('.hero__slide')];
+      const titles = [...hero.querySelectorAll('.hero__title')];
       const dur = Number(hero.dataset.interval) || 6000;
       let current = 0;
-      const go = (step: number) => {
-        slides[current].classList.remove('is-on');
-        current = (current + step + slides.length) % slides.length;
-        slides[current].classList.add('is-on');
+
+      const show = (next: number) => {
+        current = (next + slides.length) % slides.length;
+        [slides, titles].forEach((list) => list.forEach((el, i) => el.classList.toggle('is-on', i === current)));
       };
+
+      // Restart the timer after a manual step so the new image gets its full time.
       const start = () => {
         const prev = heroTimers.get(hero);
         if (prev) clearInterval(prev);
-        heroTimers.set(hero, window.setInterval(() => go(1), dur));
+        heroTimers.set(hero, window.setInterval(() => show(current + 1), dur));
       };
+
       hero.querySelector('.hero__arrow--prev')!.addEventListener('click', () => {
-        go(-1);
+        show(current - 1);
         start();
       });
       hero.querySelector('.hero__arrow--next')!.addEventListener('click', () => {
-        go(1);
+        show(current + 1);
         start();
       });
       start();
@@ -58,11 +109,14 @@ const slides = [
 <style>
   .hero {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: calc(100vh - var(--header-h));
     height: calc(100svh - var(--header-h));
-    min-height: 480px;
+    min-height: 600px;
     overflow: hidden;
-    background: #232323;
+    background: var(--color-navy-deep);
     color: #fff;
   }
 
@@ -82,73 +136,136 @@ const slides = [
     height: 100%;
     object-fit: cover;
     object-position: center;
+    transform: scale(1.06);
+    transition: transform 7s ease-out;
   }
 
-  .hero__shade {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(13, 17, 28, 0.45) 0%, rgba(13, 17, 28, 0.1) 35%, rgba(13, 17, 28, 0.25) 100%);
+  .hero__slide.is-on img {
+    transform: scale(1);
+  }
+
+  .hero__slide:not(.is-on) {
     pointer-events: none;
   }
 
-  .hero__title {
+  .hero__credit {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0 var(--edge-mobile);
-    text-align: center;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-stretch: 112%;
-    font-size: clamp(26px, 3.4vw, 46px);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    right: 12px;
+    bottom: 8px;
+    z-index: 3;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
-  .hero__title::after {
-    content: '';
+  .hero__credit:hover {
+    color: #fff;
+  }
+
+  /* only a soft centre glow so the slogan stays readable */
+  .hero__shade {
     position: absolute;
-    top: calc(50% + 1.6em);
-    width: 90px;
-    height: 4px;
-    background: var(--color-orange);
+    inset: 0;
+    background: radial-gradient(ellipse 60% 45% at 50% 50%, rgba(28, 29, 46, 0.6) 0%, rgba(28, 29, 46, 0.2) 60%, rgba(28, 29, 46, 0) 100%);
+    pointer-events: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+
+  /* all slogans share one cell; only the active one is visible */
+  .hero__title {
+    grid-area: 1 / 1;
+    max-width: 16ch;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+
+  .hero__title.is-on {
+    opacity: 1;
+    transform: none;
+    transition-delay: 200ms;
   }
 
   .hero__arrow {
     position: absolute;
     top: 50%;
     z-index: 2;
-    width: 36px;
-    height: 36px;
-    transform: translateY(-50%);
-    border: 0;
-    background: rgba(13, 17, 28, 0.45);
-    font-size: 1.6rem;
-    line-height: 1;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    background: rgba(28, 29, 46, 0.25);
     color: #fff;
-    transition: background var(--transition);
-  }
-
-  .hero__arrow:hover {
-    background: rgba(13, 17, 28, 0.8);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
   }
 
   .hero__arrow--prev {
-    left: 12px;
+    left: clamp(16px, 3vw, 48px);
   }
 
   .hero__arrow--next {
-    right: 12px;
+    right: clamp(16px, 3vw, 48px);
+  }
+
+  .hero__arrow:hover {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 480px;
+    }
+
+    .hero__arrow {
+      top: auto;
+      bottom: 24px;
+      width: 44px;
+      height: 44px;
+      transform: none;
+    }
+
+    .hero__title {
+      font-stretch: 105%;
+      font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__slide {
+    .hero__slide,
+    .hero__slide img,
+    .hero__title {
       transition: none;
+    }
+
+    .hero__slide img {
+      transform: none;
     }
   }
 </style>

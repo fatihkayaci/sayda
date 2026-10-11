@@ -1,0 +1,44 @@
+{
+  "_source": "Eski site (sayda.com.tr Kurumsal.aspx, faaliyet.aspx — Wayback) ve şirket yönetiminin ilettiği özet.",
+  "philosophy": ["Uzman ekip", "Zamanında teslim", "Yüksek kalite", "Düşük maliyet"],
+  "buildingTypes": [
+    "AVM, iş merkezi",
+    "Hastane, sağlık merkezi",
+    "Otel, tatil köyü",
+    "Konut, residence",
+    "Fabrika, depo",
+    "Ofis, plaza, idare binası",
+    "Satış ofisi, showroom"
+  ],
+  "workItems": [
+    { "title": "Kaba yapı", "text": "Bina karkas yapıları, istinat duvarları, saha betonları, sert zemin uygulamaları" },
+    { "title": "Çatı", "text": "Çatı konstrüksiyonu, shingle, membran, kiremit, metal kaplama uygulamaları" },
+    { "title": "İnce yapı", "text": "Duvar, sıva, şap, seramik, mermer, epoksi, boya işleri" },
+    {
+      "title": "Asma tavan & bölme duvar",
+      "text": "Alçıpan, metal ve gergi asma tavan; alçıpan, dekoratif ve cam bölme duvar; alçıpan, ahşap ve metal duvar giydirme"
+    },
+    { "title": "Cephe, metal & cam", "text": "Kompozit ve cam cephe giydirme, mantolama, paslanmaz ve cam korkuluklar" },
+    { "title": "Dekorasyon", "text": "Ahşap işleri ve dekorasyon uygulamaları" }
+  ],
+  "contractorClients": [
+    "Çırağan Palace Hotel Kempinski",
+    "Enternasyonal Turizm Yatırım A.Ş.",
+    "Visa International EU",
+    "Nestle Gıda Sanayi A.Ş.",
+    "Isısan-Buderus",
+    "Yasmin-Bodrum Hotel"
+  ],
+  "subcontractorProjects": [
+    { "employer": "Rönesans İnşaat A.Ş.", "project": "Samsun AVM Otel" },
+    { "employer": "Akkök Grubu – Akiş G.M.Y.O. A.Ş.", "project": "Akbatı AVM Yaşam Merkezi" },
+    { "employer": "Varyap İnşaat A.Ş.", "project": "Varyap Meridian" },
+    { "employer": "Oyak İnşaat A.Ş.", "project": "Oyakkent" },
+    { "employer": "Yapı Kredi-Koray G.M.Y.O.", "project": "İstanbul-İstanbul" },
+    { "employer": "Süzer Grubu", "project": "Gökkafes – The Ritz-Carlton İstanbul" },
+    { "employer": "Acarlar Şirketler Grubu", "project": "Acarkent" },
+    { "employer": "İş-Koray G.M.Y.O.", "project": "Kasaba" },
+    { "employer": "Maya İnşaat A.Ş.", "project": "Etiler Residence" },
+    { "employer": "Sinpaş Yapı Endüstri A.Ş.", "project": "Aqua Manors" }
+  ]
+}

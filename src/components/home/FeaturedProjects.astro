@@ -54,15 +54,18 @@ const projects = picks.flatMap(({ slug, image }) => {
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-s);
-    margin-bottom: 22px;
+    margin-bottom: 40px;
   }
 
   .fp__head h2 {
+    margin-top: 12px;
     font-family: var(--font-display);
+    font-stretch: 115%;
     font-weight: 800;
-    font-size: 1.7rem;
-    line-height: 1.15;
-    color: var(--color-navy);
+    font-size: clamp(2rem, 2.6vw + 1rem, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
   }
 
   .fp__head > a {
@@ -71,7 +74,7 @@ const projects = picks.flatMap(({ slug, image }) => {
     gap: 10px;
     padding: 10px 16px;
     border: 1.5px solid var(--color-navy-deep);
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 700;
     color: var(--color-navy-deep);
     white-space: nowrap;
@@ -115,7 +118,7 @@ const projects = picks.flatMap(({ slug, image }) => {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(35, 35, 35, 0) 40%, rgba(35, 35, 35, 0.9) 100%);
+    background: linear-gradient(180deg, rgba(28, 29, 46, 0) 40%, rgba(28, 29, 46, 0.9) 100%);
     pointer-events: none;
   }
 
@@ -132,7 +135,7 @@ const projects = picks.flatMap(({ slug, image }) => {
 
   .fp__type {
     display: block;
-    font-size: 0.66rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -142,13 +145,13 @@ const projects = picks.flatMap(({ slug, image }) => {
   .fp__body h3 {
     margin-top: 4px;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.25;
   }
 
   .fp__card:nth-child(1) h3 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .fp__body i {
@@ -184,7 +187,7 @@ const projects = picks.flatMap(({ slug, image }) => {
     }
 
     .fp__head h2 {
-      font-size: 1.4rem;
+      font-size: 2rem;
     }
 
     .fp__grid {

@@ -2,37 +2,38 @@
   /* Color */
   --color-navy: #2f3091; /* brand primary */
   --color-navy-dark: #262873; /* hover */
-  --color-navy-deep: #232323; /* dark surfaces: header, footer, dark sections (matches old site) */
+  --color-navy-deep: #1c1d2e; /* dark surfaces: header, footer, dark sections (indigo-tinted to match brand) */
   --color-text: #111318;
   --color-text-muted: #4a4c58;
   --color-text-faint: #8a8c98;
   --color-bg: #ffffff;
-  --color-bg-light: #e9eff2;
+  --color-bg-light: #ecedf4;
   --color-border: #d9e0e5;
   --color-on-dark: #ffffff;
   --color-on-dark-muted: #bcbec2;
-  --color-orange: #f5a21b; /* homepage highlight: eyebrow dashes, hero underline, arrow buttons */
+  --color-orange: #f5a21b;
+  --color-orange-dark: #e08e0b; /* hover for orange buttons */ /* accent + conversion CTAs (Teklif Al); always with navy-deep text */
   --color-border-strong: #c3ccd3;
   --color-error: #b3261e;
   --color-success: #1f7a4d;
 
   /* Typography */
-  --font-body: 'Questrial', 'Century Gothic', sans-serif;
-  --font-heading: 'Questrial', 'Century Gothic', sans-serif;
+  --font-body: 'Archivo Variable', 'Archivo', sans-serif;
+  --font-heading: 'Archivo Variable', 'Archivo', sans-serif;
   --font-accent: 'Syne', sans-serif; /* SAYDA logotype only */
   --font-script: 'Caveat', cursive; /* handwritten quote accents */
-  --font-display: 'Questrial', 'Century Gothic', sans-serif; /* display type, homepage sections */
+  --font-display: 'Archivo Variable', 'Archivo', sans-serif; /* display type, homepage sections */
 
   --fs-h1: clamp(2.25rem, 4vw + 1rem, 4rem);
   --fs-h2: clamp(1.75rem, 2.5vw + 1rem, 2.75rem);
   --fs-h3: 1.375rem;
   --fs-body: 1rem;
-  --fs-small: 0.875rem;
+  --fs-small: 0.9375rem;
 
   /* Layout */
   --edge: 48px;
   --edge-mobile: 20px;
-  --max-width: 1400px;
+  --max-width: 1520px;
   --radius: 4px;
   --header-h: 100px;
   --header-h-compact: 64px;

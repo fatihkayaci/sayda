@@ -14,12 +14,10 @@ interface Props {
   organizationSchema?: boolean;
   ogImage?: string;
   hideCtaBanner?: boolean;
-  ctaHeading?: string;
-  ctaEyebrow?: string;
   jsonLd?: object[];
 }
 
-const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeading, ctaEyebrow, jsonLd } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -50,7 +48,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, ctaHeadi
     <main>
       <slot />
     </main>
-    {!hideCtaBanner && <CtaBanner heading={ctaHeading} eyebrow={ctaEyebrow} />}
+    {!hideCtaBanner && <CtaBanner />}
     <Footer transition:persist />
 
     <script>

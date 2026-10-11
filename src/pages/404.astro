@@ -3,30 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 
 const links = [
-  {
-    icon: 'building',
-    title: 'Projelerimiz',
-    description: 'Devam eden ve tamamlanan projelerimizi inceleyin.',
-    href: '/projeler',
-  },
-  {
-    icon: 'document',
-    title: 'Haberler',
-    description: 'Güncel gelişmeleri takip edin.',
-    href: '/haberler',
-  },
-  {
-    icon: 'bulb',
-    title: 'Rehber',
-    description: 'Kentsel dönüşüm hakkında faydalı içerikler.',
-    href: '/rehber',
-  },
-  {
-    icon: 'mail',
-    title: 'İletişim',
-    description: 'Bizimle iletişime geçin, sorularınızı yanıtlayalım.',
-    href: '/iletisim',
-  },
+  { title: 'Hizmetlerimiz', description: 'Kentsel dönüşümden anahtar teslime tüm hizmetler.', href: '/hizmetler' },
+  { title: 'Projelerimiz', description: 'Devam eden ve tamamlanan projelerimiz.', href: '/projeler' },
+  { title: 'Haberler', description: 'Sahadan güncel gelişmeler.', href: '/haberler' },
+  { title: 'Blog', description: 'Kentsel dönüşüm hakkında faydalı içerikler.', href: '/blog' },
 ];
 ---
 
@@ -35,287 +15,236 @@ const links = [
   description="Aradığınız sayfa bulunamadı. Sayda İnşaat ana sayfasına dönebilir, projelerimizi inceleyebilir veya bizimle iletişime geçebilirsiniz."
   hideCtaBanner
 >
-  <section class="not-found">
-    <div class="not-found__media">
-      <img
-        class="not-found__image"
-        src="/img/sayda-insaat-hero01.webp"
-        alt="Sayda İnşaat proje görünümü"
-        fetchpriority="high"
-      />
-      <div class="not-found__overlay"></div>
-      <p class="not-found__script">Daha iyi yaşam alanları için...</p>
-    </div>
+  <section class="nf">
+    <span class="nf__code" aria-hidden="true">404</span>
 
-    <div class="container not-found__inner reveal">
-      <div class="not-found__text">
-        <div class="not-found__eyebrow">
-          <span class="not-found__eyebrow-bar"></span>
-          <span>ÜZGÜNÜZ</span>
-        </div>
-        <p class="not-found__code">404</p>
-        <h1>Sayfa bulunamadı</h1>
-        <p class="not-found__lead">
-          Aradığınız sayfa taşınmış, silinmiş ya da adres yanlış yazılmış olabilir. Size yardımcı
-          olabilecek bağlantılar aşağıda.
+    <div class="container nf__inner">
+      <div class="nf__text">
+        <p class="nf__eyebrow"><span></span>Sayfa Bulunamadı</p>
+        <h1>Bu adreste henüz <em>bir yapı yok.</em></h1>
+        <p class="nf__lead">
+          Aradığınız sayfa taşınmış, silinmiş ya da adres yanlış yazılmış olabilir. Aşağıdaki bağlantılar size
+          yardımcı olabilir.
         </p>
-        <div class="not-found__actions">
-          <a class="not-found__btn not-found__btn--primary" href="/">
-            <Icon name="home" size={19} />
-            Ana Sayfaya Dön
+        <div class="nf__actions">
+          <a class="nf__btn nf__btn--primary" href="/">
+            Ana Sayfaya Dön <Icon name="arrow" size={18} />
           </a>
-          <a class="not-found__btn not-found__btn--outline" href="/iletisim">
-            <Icon name="mail" size={19} />
-            Bize Ulaşın
-          </a>
+          <a class="nf__btn" href="/iletisim">Bize Ulaşın</a>
         </div>
       </div>
 
-      <div class="not-found__grid">
+      <ol class="nf__links">
         {
-          links.map((link) => (
-            <a class="nf-card" href={link.href}>
-              <span class="nf-card__icon">
-                <Icon name={link.icon} size={26} />
-              </span>
-              <h3>{link.title}</h3>
-              <p>{link.description}</p>
-              <span class="nf-card__arrow">
-                <Icon name="arrow" size={16} />
-              </span>
-            </a>
+          links.map((link, i) => (
+            <li>
+              <a href={link.href}>
+                <span class="nf__num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="nf__body">
+                  <strong>{link.title}</strong>
+                  <span>{link.description}</span>
+                </span>
+                <span class="nf__arrow" aria-hidden="true">
+                  <Icon name="arrow" size={20} />
+                </span>
+              </a>
+            </li>
           ))
         }
-      </div>
+      </ol>
     </div>
   </section>
 </Layout>
 
 <style>
-  .not-found {
+  .nf {
     position: relative;
-    padding-top: calc(var(--header-h) + var(--space-xxl));
-    padding-bottom: var(--space-xxl);
-    color: #fff;
     overflow: hidden;
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
   }
 
-  .not-found__media {
+  .nf__code {
     position: absolute;
-    inset: 0;
-    z-index: 0;
+    right: -0.04em;
+    bottom: -0.12em;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(12rem, 34vw, 36rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(47, 48, 145, 0.12);
+    pointer-events: none;
+    user-select: none;
   }
 
-  .not-found__image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .not-found__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      rgba(35, 35, 35, 0.92) 0%,
-      rgba(35, 35, 35, 0.68) 45%,
-      rgba(35, 35, 35, 0.35) 100%
-    );
-  }
-
-  .not-found__script {
-    position: absolute;
-    top: 32px;
-    right: 5%;
-    max-width: 220px;
-    font-family: var(--font-script);
-    font-size: clamp(1.375rem, 2vw, 1.75rem);
-    line-height: 1.15;
-    text-align: right;
-    color: rgba(255, 255, 255, 0.9);
-    transform: rotate(-4deg);
-    text-shadow: 0 2px 12px rgba(35, 35, 35, 0.45);
-  }
-
-  .not-found__inner {
+  .nf__inner {
     position: relative;
-    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(48px, 6vw, 96px);
+    align-items: center;
   }
 
-  .not-found__text {
-    max-width: 720px;
-  }
-
-  .not-found__eyebrow {
+  .nf__eyebrow {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: var(--space-s);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
   }
 
-  .not-found__eyebrow-bar {
-    display: block;
-    width: 44px;
+  .nf__eyebrow span {
+    width: 40px;
     height: 3px;
     background: var(--color-orange);
   }
 
-  .not-found__eyebrow span:last-child {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.85);
+  .nf h1 {
+    max-width: 14ch;
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 4.4vw + 0.5rem, 5.75rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--color-navy-deep);
   }
 
-  .not-found__code {
-    font-family: var(--font-heading);
-    font-size: clamp(4rem, 9vw, 7.5rem);
-    line-height: 0.95;
-    color: #fff;
+  .nf h1 em {
+    font-style: normal;
+    color: var(--color-navy);
+    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.55);
   }
 
-  .not-found h1 {
-    margin-top: var(--space-xs);
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: clamp(28px, 3.5vw, 40px);
-    line-height: 1.1;
-    color: #fff;
+  .nf__lead {
+    max-width: 50ch;
+    margin-top: 28px;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
   }
 
-  .not-found__lead {
-    margin-top: var(--space-m);
-    font-size: 1.0625rem;
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 46ch;
-  }
-
-  .not-found__actions {
-    margin-top: var(--space-l);
+  .nf__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-s);
+    gap: 12px;
+    margin-top: 40px;
   }
 
-  .not-found__btn {
+  .nf__btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 28px;
+    height: 56px;
+    padding: 0 28px;
+    border: 1.5px solid var(--color-navy-deep);
     border-radius: var(--radius);
-    font-size: var(--fs-small);
     font-weight: 700;
+    color: var(--color-navy-deep);
     transition:
       background var(--transition),
-      color var(--transition),
-      border-color var(--transition);
+      color var(--transition);
   }
 
-  .not-found__btn--primary {
-    background: #fff;
+  .nf__btn:hover {
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .nf__btn--primary {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+  }
+
+  .nf__btn--primary:hover {
+    border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+    color: var(--color-navy-deep);
+  }
+
+  .nf__links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .nf__links a {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-navy-deep);
+  }
+
+  .nf__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    color: var(--color-orange-dark);
+  }
+
+  .nf__body {
+    display: grid;
+    gap: 4px;
+  }
+
+  .nf__body strong {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.375rem;
+    line-height: 1.1;
+    transition: color var(--transition);
+  }
+
+  .nf__body span {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+
+  .nf__arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 50%;
+    transition:
+      background 300ms ease,
+      border-color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .nf__links a:hover strong {
     color: var(--color-navy);
   }
 
-  .not-found__btn--primary:hover {
-    background: var(--color-border);
-  }
-
-  .not-found__btn--outline {
-    color: #fff;
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
-  }
-
-  .not-found__btn--outline:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: #fff;
-  }
-
-  .not-found__grid {
-    margin-top: var(--space-xxl);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-s);
-  }
-
-  .nf-card {
-    position: relative;
-    display: block;
-    padding: 26px 24px 30px;
-    border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition:
-      border-color 200ms,
-      background 200ms,
-      transform 200ms;
-  }
-
-  .nf-card:hover {
-    border-color: rgba(255, 255, 255, 0.45);
-    background: rgba(255, 255, 255, 0.14);
-    transform: translateY(-4px);
-  }
-
-  .nf-card__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    margin-bottom: var(--space-s);
-  }
-
-  .nf-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-
-  .nf-card p {
-    font-size: var(--fs-small);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  .nf-card__arrow {
-    display: inline-flex;
-    margin-top: 16px;
-    color: #fff;
+  .nf__links a:hover .nf__arrow {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    transform: rotate(-45deg);
   }
 
   @media (max-width: 1024px) {
-    .not-found__grid {
-      grid-template-columns: repeat(2, 1fr);
+    .nf__inner {
+      grid-template-columns: 1fr;
     }
   }
 
-  @media (max-width: 700px) {
-    .not-found {
-      padding-top: calc(var(--header-h) + var(--space-l));
-      padding-bottom: var(--space-l);
-    }
-
-    .not-found__script {
-      display: none;
-    }
-
-    .not-found__actions .not-found__btn {
-      flex: 1 1 auto;
-      justify-content: center;
-    }
-
-    .not-found__grid {
-      margin-top: var(--space-xl);
-      grid-template-columns: 1fr;
+  @media (max-width: 480px) {
+    .nf h1 {
+      font-stretch: 100%;
+      font-size: clamp(2.25rem, 10vw, 2.75rem);
     }
   }
 </style>

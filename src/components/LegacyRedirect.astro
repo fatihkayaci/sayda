@@ -1,0 +1,30 @@
+---
+import redirects from '../data/legacy-redirects.json';
+
+interface Props {
+  page: keyof typeof redirects;
+}
+
+const { page } = Astro.props;
+const config = redirects[page];
+---
+
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Yönlendiriliyor | Sayda İnşaat</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={`https://www.sayda.com.tr${config.fallback}`} />
+    <meta http-equiv="refresh" content={`1;url=${config.fallback}`} />
+    <script
+      is:inline
+      define:vars={{ config }}
+      >
+      var value = new URLSearchParams(location.search).get(config.param);
+      location.replace((value !== null && config.map[value]) || config.fallback);
+    </script>
+  </head>
+  <body>
+    <p><a href={config.fallback}>Yeni sayfaya gitmek için tıklayın.</a></p>
+  </body>
+</html>

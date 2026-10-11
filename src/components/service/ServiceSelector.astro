@@ -1,0 +1,316 @@
+---
+// All services on one screen: a numbered list on the left switches the detail panel on the right.
+// Below 900px the list is dropped and every panel is shown as a stacked card.
+import Icon from '../Icon.astro';
+import services from '../../data/services.json';
+---
+
+<div class="sel" data-service-selector>
+  <ol class="sel__list">
+    {
+      services.map((service, i) => (
+        <li>
+          <a class:list={['sel__item', { 'is-active': i === 0 }]} href={service.href} data-index={i}>
+            <span class="sel__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="sel__name">{service.title}</span>
+            <Icon name="arrow" size={22} />
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="sel__panels">
+    {
+      services.map((service, i) => (
+        <article class:list={['sel__panel', { 'is-active': i === 0 }]} data-panel={i}>
+          <div class="sel__media">
+            <img src={service.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+            <span class="sel__badge">Hizmet {String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="sel__body">
+            <h2>{service.title}</h2>
+            <p>{service.description}</p>
+            <ul>
+              {service.points.map((point) => (
+                <li>
+                  <Icon name="check" size={16} />
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <div class="sel__actions">
+              <a class="sel__btn sel__btn--primary" href={service.href}>
+                Detaylı İncele <Icon name="arrow" size={18} />
+              </a>
+              <a class="sel__btn" href="/iletisim#quote-form">
+                Teklif Al
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function initServiceSelector() {
+    document.querySelectorAll<HTMLElement>('[data-service-selector]').forEach((root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const items = root.querySelectorAll<HTMLElement>('.sel__item');
+      const panels = root.querySelectorAll<HTMLElement>('.sel__panel');
+
+      items.forEach((item) => {
+        const activate = () => {
+          const index = Number(item.dataset.index);
+          items.forEach((it) => it.classList.toggle('is-active', it === item));
+          panels.forEach((panel, i) => panel.classList.toggle('is-active', i === index));
+        };
+        item.addEventListener('mouseenter', activate);
+        item.addEventListener('focus', activate);
+      });
+    });
+  }
+
+  initServiceSelector();
+  document.addEventListener('astro:page-load', initServiceSelector);
+</script>
+
+<style>
+  .sel {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(32px, 5vw, 80px);
+    align-items: stretch;
+  }
+
+  /* the list stretches to the panel's height; rows share it equally */
+  .sel__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .sel__list > li {
+    display: flex;
+    flex: 1;
+  }
+
+  .sel__item {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 26px 8px 26px 0;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-text-faint);
+    transition: color 250ms ease;
+  }
+
+  .sel__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    color: var(--color-orange-dark);
+  }
+
+  .sel__name {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: clamp(1.25rem, 1vw + 0.9rem, 1.875rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  .sel__item :global(svg) {
+    opacity: 0;
+    transform: translateX(-8px);
+    transition:
+      opacity 250ms ease,
+      transform 250ms ease;
+  }
+
+  .sel__item.is-active {
+    color: var(--color-navy-deep);
+  }
+
+  .sel__item.is-active :global(svg) {
+    opacity: 1;
+    transform: none;
+    color: var(--color-orange-dark);
+  }
+
+  .sel__panels {
+    display: grid;
+  }
+
+  .sel__panel {
+    grid-area: 1 / 1;
+    display: grid;
+    gap: 28px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition:
+      opacity 350ms ease,
+      transform 350ms ease,
+      visibility 0s linear 350ms;
+  }
+
+  .sel__panel.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 350ms ease,
+      transform 350ms ease;
+  }
+
+  .sel__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .sel__media::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 6px;
+    background: var(--color-orange);
+  }
+
+  .sel__media img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .sel__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-navy-deep);
+  }
+
+  .sel__body {
+    display: grid;
+    gap: 18px;
+  }
+
+  .sel__body h2 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.6vw + 1rem, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-deep);
+  }
+
+  .sel__body > p {
+    max-width: 60ch;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .sel__body ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sel__body li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--color-bg-light);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .sel__body li :global(svg) {
+    color: var(--color-orange-dark);
+  }
+
+  .sel__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  .sel__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 54px;
+    padding: 0 26px;
+    border: 1.5px solid var(--color-orange);
+    border-radius: var(--radius);
+    background: var(--color-orange);
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition:
+      background var(--transition),
+      border-color var(--transition);
+  }
+
+  .sel__btn:hover {
+    border-color: var(--color-orange-dark);
+    background: var(--color-orange-dark);
+  }
+
+  .sel__btn--primary {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .sel__btn--primary:hover {
+    background: var(--color-navy);
+  }
+
+  @media (max-width: 900px) {
+    .sel {
+      grid-template-columns: 1fr;
+    }
+
+    .sel__list {
+      display: none;
+    }
+
+    .sel__panels {
+      position: static;
+      gap: 56px;
+    }
+
+    .sel__panel {
+      grid-area: auto;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+  }
+</style>

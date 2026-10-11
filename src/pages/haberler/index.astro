@@ -1,640 +1,501 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import NewsletterBand from '../../components/NewsletterBand.astro';
 import haberlerData from '../../data/haberler.json';
-import site from '../../data/site.json';
-
-const categories: { key: string; label: string; icon: string }[] = [
-  { key: 'teslim', label: 'Teslim & Açılış', icon: 'key' },
-  { key: 'devam-eden', label: 'Devam Eden İşler', icon: 'helmet' },
-  { key: 'satis-ofisi', label: 'Satış Ofisi', icon: 'building' },
-  { key: 'kurumsal', label: 'Kurumsal', icon: 'star' },
-];
-const categoryLabels = Object.fromEntries(categories.map((c) => [c.key, c.label]));
+import { formatNewsDate, newsCategories, newsCategoryLabel } from '../../utils/news';
 
 const sorted = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
-const formatter = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+const [featured] = sorted;
 
-const tabs = [
-  { key: 'all', label: 'Tümü', icon: 'list', count: sorted.length },
-  ...categories.map((c) => ({ ...c, count: sorted.filter((h) => h.category === c.key).length })),
+const years = [...new Set(sorted.map((h) => h.date.slice(0, 4)))];
+const groups = years.map((year) => ({ year, items: sorted.filter((h) => h.date.startsWith(year)) }));
+
+const chips = [
+  { key: 'all', label: 'Tümü', count: sorted.length },
+  ...newsCategories
+    .map((c) => ({ ...c, count: sorted.filter((h) => h.category === c.key).length }))
+    .filter((c) => c.count > 0),
 ];
 ---
 
 <Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler ve duyurular.">
-  <section class="haberler-hero">
-    <div class="haberler-hero__media" aria-hidden="true">
-      <img src="/img/projects/dimas-antrepo/dimas-antrepo-01.webp" alt="" fetchpriority="high" />
-    </div>
-    <div class="container haberler-hero__inner reveal">
-      <nav class="haberler-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Anasayfa</a>
-        <span>/</span>
-        <span aria-current="page">Haberler</span>
-      </nav>
+  <PageHero
+    eyebrow="Haberler"
+    breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Haberler' }]}
+    image="/img/projects/dimas-antrepo/dimas-antrepo-01.webp"
+    imagePosition="center 35%"
+    backdrop={years[0]}
+    facts={[
+      { value: String(sorted.length), label: 'Haber' },
+      { value: String(chips.length - 1), label: 'Kategori' },
+      { value: `${years[years.length - 1]} – ${years[0]}`, label: 'Arşiv' },
+    ]}
+    size="compact"
+  >
+    Sahadan <em>haberler.</em>
+  </PageHero>
 
-      <div class="haberler-hero__eyebrow">
-        <span class="haberler-hero__eyebrow-bar"></span>
-        <span>GÜNCEL</span>
-      </div>
-
-      <h1>Haberler <span class="haberler-hero__count">{sorted.length}</span></h1>
-      <p class="haberler-hero__lead">
-        Sayda İnşaat'tan güncel haberler, projelerimizdeki gelişmeler ve sektöre dair duyurular.
-      </p>
-
-      <p class="haberler-hero__quote" aria-hidden="true">
-        Daha sağlam <strong>yapılar</strong>, daha güçlü <strong>yarınlar.</strong>
-      </p>
-    </div>
-  </section>
-
-  <section class="haberler-page">
-    <div class="container haberler-page__layout">
-      <aside class="haberler-side">
-        <div class="haberler-side__card">
-          <h2>Kategoriler</h2>
-          <nav aria-label="Haber kategorisi">
-            {
-              tabs.map((tab) => (
-                <button type="button" class="haberler-side__btn" data-filter={tab.key} aria-current={tab.key === 'all' ? 'true' : undefined}>
-                  <Icon name={tab.icon} size={21} />
-                  {tab.label} ({tab.count})
-                </button>
-              ))
-            }
-          </nav>
+  {
+    featured && (
+      <section class="nw-featured">
+        <div class="container nw-featured__inner">
+          <a class="nw-featured__media" href={`/haberler/${featured.slug}`} tabindex="-1" aria-hidden="true">
+            <img src={featured.image} alt="" loading="lazy" />
+          </a>
+          <div class="nw-featured__text">
+            <p class="nw-label">Son Haber</p>
+            <p class="nw-featured__meta">
+              {formatNewsDate(featured.date)} <span>·</span> {newsCategoryLabel[featured.category]}
+            </p>
+            <h2>
+              <a href={`/haberler/${featured.slug}`}>{featured.title}</a>
+            </h2>
+            <p class="nw-featured__excerpt">{featured.excerpt}</p>
+            <a class="nw-featured__link" href={`/haberler/${featured.slug}`}>
+              Haberi Oku <Icon name="arrow" size={20} />
+            </a>
+          </div>
         </div>
-      </aside>
+      </section>
+    )
+  }
 
-      <div class="haberler-main">
-        <div class="haberler-toolbar">
-          <label class="haberler-toolbar__search">
-            <span class="sr-only">Haberlerde ara</span>
-            <Icon name="search" size={21} />
-            <input type="search" placeholder="Haberlerde ara..." data-news-search autocomplete="off" />
-          </label>
-          <label class="haberler-toolbar__sort">
-            <span class="sr-only">Sırala</span>
-            <select data-news-sort>
-              <option value="newest">En Yeni</option>
-              <option value="oldest">En Eski</option>
-            </select>
-          </label>
-        </div>
+  <section class="nw-archive" data-news>
+    <div class="container">
+      <SectionHead label="Arşiv" title="Tüm haberler." />
 
-        <div class="haberler-page__grid" data-news-grid>
+      <div class="nw-toolbar">
+        <div class="nw-chips" role="group" aria-label="Haber kategorisi">
           {
-            sorted.map((haber) => (
-              <a
-                class="haber-card"
-                href={`/haberler/${haber.slug}`}
-                data-category={haber.category}
-                data-date={haber.date}
-                data-search={`${haber.title} ${haber.excerpt}`}
-              >
-                <div class="haber-card__image">
-                  <img src={haber.image} alt={haber.title} loading="lazy" />
-                </div>
-                <div class="haber-card__body">
-                  <div class="haber-card__top">
-                    <span class="haber-card__date">{formatter.format(new Date(haber.date))}</span>
-                    <span class="haber-card__tag">{categoryLabels[haber.category]}</span>
-                  </div>
-                  <h2>{haber.title}</h2>
-                  <p>{haber.excerpt}</p>
-                  <span class="haber-card__more">Devamını Oku →</span>
-                </div>
-              </a>
+            chips.map((chip) => (
+              <button type="button" class="nw-chip" data-category-chip={chip.key} aria-pressed={chip.key === 'all' ? 'true' : 'false'}>
+                {chip.label} <span>{chip.count}</span>
+              </button>
             ))
           }
         </div>
-
-        <p class="haberler-empty" data-news-empty hidden>Aramanıza uygun haber bulunamadı.</p>
-
-        <nav class="haberler-pager" aria-label="Sayfalar" data-news-pager></nav>
+        <label class="nw-search">
+          <span class="sr-only">Haberlerde ara</span>
+          <Icon name="search" size={20} />
+          <input type="search" placeholder="Haberlerde ara" data-news-search autocomplete="off" />
+        </label>
       </div>
 
-      <form class="haberler-side__card haberler-news" id="newsletterForm">
-        <input type="hidden" name="form_type" value="newsletter" />
-        <input type="hidden" name="subject" value="Bülten aboneliği" />
-        <input type="checkbox" name="botcheck" class="haberler-news__honeypot" tabindex="-1" autocomplete="off" />
-        <span class="haberler-news__icon">
-          <Icon name="bell" size={30} />
-        </span>
-        <h2>Gelişmeleri kaçırmayın</h2>
-        <p>En yeni haberler ve duyurular için e-posta bültenimize abone olun.</p>
-        <input type="email" name="email" placeholder="E-posta adresiniz" required aria-label="E-posta adresiniz" />
-        <button type="submit">
-          Abone Ol <Icon name="arrow" size={18} />
-        </button>
-        <p class="haberler-news__status" id="newsletterStatus" role="status" aria-live="polite"></p>
-      </form>
+      {
+        groups.map((group) => (
+          <div class="nw-year" data-year-group>
+            <p class="nw-year__label" aria-hidden="true">
+              {group.year}
+            </p>
+            <ol class="nw-list">
+              {group.items.map((item) => (
+                <li data-news-item data-category={item.category} data-search={`${item.title} ${item.excerpt}`}>
+                  <a class="nw-row" href={`/haberler/${item.slug}`}>
+                    <img src={item.image} alt="" loading="lazy" />
+                    <span class="nw-row__body">
+                      <span class="nw-row__meta">
+                        <time datetime={item.date}>{formatNewsDate(item.date)}</time>
+                        <span>{newsCategoryLabel[item.category]}</span>
+                      </span>
+                      <span class="nw-row__title">{item.title}</span>
+                      <span class="nw-row__excerpt">{item.excerpt}</span>
+                    </span>
+                    <span class="nw-row__arrow" aria-hidden="true">
+                      <Icon name="arrow" size={22} />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))
+      }
+
+      <p class="nw-empty" data-news-empty hidden>Aramanıza uygun haber bulunamadı.</p>
     </div>
   </section>
+
+  <NewsletterBand />
 </Layout>
 
 <script>
-  const PAGE_SIZE = 9;
-
   function initNews() {
-    const grid = document.querySelector<HTMLElement>('[data-news-grid]');
-    if (!grid) return;
+    const root = document.querySelector<HTMLElement>('[data-news]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = 'true';
 
-    const cards = [...grid.querySelectorAll<HTMLElement>('.haber-card')];
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.haberler-side__btn');
-    const search = document.querySelector<HTMLInputElement>('[data-news-search]');
-    const sort = document.querySelector<HTMLSelectElement>('[data-news-sort]');
-    const pager = document.querySelector<HTMLElement>('[data-news-pager]');
-    const empty = document.querySelector<HTMLElement>('[data-news-empty]');
-    if (!search || !sort || !pager) return;
-
+    const chips = root.querySelectorAll<HTMLButtonElement>('[data-category-chip]');
+    const search = root.querySelector<HTMLInputElement>('[data-news-search]')!;
+    const items = root.querySelectorAll<HTMLElement>('[data-news-item]');
+    const groups = root.querySelectorAll<HTMLElement>('[data-year-group]');
+    const empty = root.querySelector<HTMLElement>('[data-news-empty]')!;
     const normalize = (value: string) => value.toLocaleLowerCase('tr').trim();
     let category = 'all';
-    let page = 1;
 
-    const render = () => {
+    const apply = () => {
       const query = normalize(search.value);
-      const ordered = [...cards].sort((a, b) => {
-        const diff = (a.dataset.date ?? '').localeCompare(b.dataset.date ?? '');
-        return sort.value === 'oldest' ? diff : -diff;
+      let visible = 0;
+      items.forEach((item) => {
+        const show =
+          (category === 'all' || item.dataset.category === category) &&
+          (!query || normalize(item.dataset.search ?? '').includes(query));
+        item.hidden = !show;
+        if (show) visible++;
       });
-      ordered.forEach((card) => grid.appendChild(card));
-
-      const matches = ordered.filter(
-        (card) =>
-          (category === 'all' || card.dataset.category === category) &&
-          (!query || normalize(card.dataset.search ?? '').includes(query)),
-      );
-
-      const pageCount = Math.max(1, Math.ceil(matches.length / PAGE_SIZE));
-      page = Math.min(page, pageCount);
-      const start = (page - 1) * PAGE_SIZE;
-      const visible = new Set(matches.slice(start, start + PAGE_SIZE));
-      cards.forEach((card) => (card.hidden = !visible.has(card)));
-      if (empty) empty.hidden = matches.length > 0;
-
-      pager.replaceChildren();
-      pager.hidden = pageCount <= 1;
-      if (pageCount <= 1) return;
-
-      const add = (label: string, target: number | null, opts: { active?: boolean; aria?: string } = {}) => {
-        const el = document.createElement(target === null ? 'span' : 'button');
-        el.textContent = label;
-        el.className = 'haberler-pager__btn';
-        if (opts.aria) el.setAttribute('aria-label', opts.aria);
-        if (opts.active) el.classList.add('is-active');
-        if (target === null) {
-          el.classList.add('is-gap');
-        } else {
-          (el as HTMLButtonElement).type = 'button';
-          el.addEventListener('click', () => {
-            page = target;
-            render();
-            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-        }
-        pager.appendChild(el);
-      };
-
-      if (page > 1) add('‹', page - 1, { aria: 'Önceki sayfa' });
-      for (let i = 1; i <= pageCount; i++) {
-        const near = i === 1 || i === pageCount || Math.abs(i - page) <= 1;
-        if (near) add(String(i), i, { active: i === page });
-        else if (i === 2 || i === pageCount - 1) add('…', null);
-      }
-      if (page < pageCount) add('›', page + 1, { aria: 'Sonraki sayfa' });
+      groups.forEach((group) => (group.hidden = !group.querySelector('[data-news-item]:not([hidden])')));
+      empty.hidden = visible > 0;
     };
 
-    buttons.forEach((btn) =>
-      btn.addEventListener('click', () => {
-        category = btn.dataset.filter ?? 'all';
-        page = 1;
-        buttons.forEach((b) => b.removeAttribute('aria-current'));
-        btn.setAttribute('aria-current', 'true');
-        render();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }),
-    );
-    search.addEventListener('input', () => {
-      page = 1;
-      render();
-    });
-    sort.addEventListener('change', () => {
-      page = 1;
-      render();
-    });
+    const select = (key: string) => {
+      category = key;
+      chips.forEach((chip) => chip.setAttribute('aria-pressed', String(chip.dataset.categoryChip === key)));
+      apply();
+    };
 
+    chips.forEach((chip) => chip.addEventListener('click', () => select(chip.dataset.categoryChip ?? 'all')));
     search.value = '';
-    sort.value = 'newest';
+    search.addEventListener('input', apply);
 
     const requested = new URLSearchParams(location.search).get('kategori');
-    const requestedButton = requested
-      ? [...buttons].find((btn) => btn.dataset.filter === requested)
-      : undefined;
-    if (requestedButton) requestedButton.click();
-    else render();
+    const known = [...chips].some((chip) => chip.dataset.categoryChip === requested);
+    select(requested && known ? requested : 'all');
+    if (requested && known) root.scrollIntoView();
   }
 
-  function initNewsletter() {
-    const form = document.getElementById('newsletterForm') as HTMLFormElement | null;
-    const status = document.getElementById('newsletterStatus');
-    if (!form || !status) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      submitButton.disabled = true;
-      status.textContent = 'Gönderiliyor...';
-      status.removeAttribute('data-state');
-
-      try {
-        const res = await fetch('/form.php', {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: new FormData(form),
-        });
-        const result = await res.json();
-        if (!result.success) throw new Error(result.message ?? 'Unknown error');
-        status.textContent = 'Teşekkürler, aboneliğiniz alındı.';
-        status.setAttribute('data-state', 'success');
-        form.reset();
-      } catch {
-        status.textContent = 'Gönderilemedi, lütfen daha sonra tekrar deneyin.';
-        status.setAttribute('data-state', 'error');
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-  }
-
-  function init() {
-    initNews();
-    initNewsletter();
-  }
-
-  init();
-  document.addEventListener('astro:page-load', init);
+  initNews();
+  document.addEventListener('astro:page-load', initNews);
 </script>
 
 <style>
-
-  /* Hero */
-  .haberler-hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-navy-deep);
-    color: #fff;
-  }
-
-  .haberler-hero__media {
-    position: absolute;
-    inset: 0;
-  }
-
-  .haberler-hero__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 35%;
-    opacity: 0.35;
-    mix-blend-mode: luminosity;
-  }
-
-  .haberler-hero__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, rgba(35, 35, 35, 0.92) 0%, rgba(35, 35, 35, 0.7) 60%, rgba(35, 35, 35, 0.85) 100%);
-  }
-
-  .haberler-hero__inner {
-    position: relative;
-    padding-block: 58px 63px;
-  }
-
-  .haberler-hero__breadcrumb {
+  .nw-label {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
-    font-size: 0.84rem;
-  }
-
-  .haberler-hero__breadcrumb a {
-    color: rgba(255, 255, 255, 0.75);
-    transition: color var(--transition);
-  }
-
-  .haberler-hero__breadcrumb a:hover {
-    color: #fff;
-  }
-
-  .haberler-hero__breadcrumb span:first-of-type {
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  .haberler-hero__breadcrumb span[aria-current] {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .haberler-hero__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .haberler-hero__eyebrow-bar {
-    display: block;
-    width: 36px;
-    height: 2px;
-    background: var(--color-orange);
-  }
-
-  .haberler-hero__eyebrow span:last-child {
-    font-size: 0.7rem;
+    gap: 14px;
+    font-size: 0.8125rem;
     font-weight: 700;
-    letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .haberler-hero h1 {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 22px;
-    font-size: clamp(2.52rem, 5.152vw, 3.92rem);
-    line-height: 1.05;
-    color: #fff;
-  }
-
-  .haberler-hero__count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 13px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    font-family: var(--font-body);
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .haberler-hero__lead {
-    max-width: 44ch;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .haberler-hero__quote {
-    position: absolute;
-    top: 50%;
-    right: clamp(20px, 4vw, 72px);
-    max-width: 14ch;
-    padding-top: 21px;
-    font-size: 1.26rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
-    transform: translateY(-50%);
-  }
-
-  .haberler-hero__quote::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 31px;
-    height: 2px;
-    background: var(--color-orange);
-  }
-
-  .haberler-hero__quote strong {
-    color: #fff;
-  }
-
-  /* Layout */
-  .haberler-page {
-    padding-block: 31px 81px;
-    background: var(--color-bg-light);
-  }
-
-  .haberler-page__layout {
-    display: grid;
-    grid-template-columns: 269px minmax(0, 1fr);
-    grid-template-areas: 'side main' 'news main';
-    gap: 27px;
-    align-items: start;
-  }
-
-  .haberler-side {
-    grid-area: side;
-    position: sticky;
-    top: calc(var(--header-h) + 18px);
-  }
-
-  .haberler-news {
-    grid-area: news;
-  }
-
-  .haberler-main {
-    grid-area: main;
-  }
-
-  .haberler-side__card {
-    padding: 25px 13px 16px;
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
-  }
-
-  .haberler-side__card h2 {
-    margin-bottom: 16px;
-    padding-inline: 4px;
-    font-family: var(--font-body);
-    font-size: 1.12rem;
-    font-weight: 700;
-    color: var(--color-navy-deep);
-  }
-
-  .haberler-side nav {
-    display: grid;
-  }
-
-  .haberler-side__btn {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 16px;
-    border: 0;
-    border-bottom: 1px solid var(--color-border);
-    border-radius: 3px;
-    background: transparent;
-    font: inherit;
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--color-navy-deep);
-    text-align: left;
-    cursor: pointer;
-    transition: background var(--transition);
-  }
-
-  .haberler-side__btn:last-child {
-    border-bottom: 0;
-  }
-
-  .haberler-side__btn:hover {
-    background: var(--color-bg-light);
-  }
-
-  .haberler-side__btn[aria-current='true'] {
-    background: var(--color-navy);
-    color: #fff;
-    border-bottom-color: transparent;
-  }
-
-  .haberler-news {
-    display: grid;
-    gap: 12px;
-    padding: 27px 18px 22px;
-    background: var(--color-border);
-    box-shadow: none;
-  }
-
-  .haberler-news__honeypot {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-  }
-
-  .haberler-news__icon {
-    display: grid;
-    place-items: center;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: #fff;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--color-navy);
   }
 
-  .haberler-news h2 {
-    margin: 12px 0 0;
-    padding: 0;
-    font-size: 1.19rem;
-    line-height: 1.3;
+  .nw-label::before {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
   }
 
-  .haberler-news p {
-    font-size: 0.84rem;
+  /* Featured */
+  .nw-featured {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg);
+  }
+
+  .nw-featured__inner {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: center;
+    gap: clamp(40px, 6vw, 96px);
+  }
+
+  .nw-featured__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .nw-featured__media::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 6px;
+    background: var(--color-orange);
+  }
+
+  .nw-featured__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms ease;
+  }
+
+  .nw-featured__media:hover img {
+    transform: scale(1.05);
+  }
+
+  .nw-featured__text {
+    display: grid;
+    justify-items: start;
+    gap: 24px;
+  }
+
+  .nw-featured__meta {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .nw-featured__meta span {
+    margin-inline: 6px;
+    color: var(--color-orange);
+  }
+
+  .nw-featured h2 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2rem, 2.4vw + 1rem, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-deep);
+  }
+
+  .nw-featured h2 a:hover {
+    color: var(--color-navy);
+  }
+
+  .nw-featured__excerpt {
+    max-width: 46ch;
+    font-size: 1.125rem;
     line-height: 1.6;
     color: var(--color-text-muted);
   }
 
-  .haberler-news input[type='email'] {
-    height: 45px;
-    margin-top: 7px;
-    padding: 0 13px;
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-    background: #fff;
-    font: inherit;
-    font-size: 0.84rem;
+  .nw-featured__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-orange);
+    font-weight: 700;
+    color: var(--color-navy-deep);
   }
 
-  .haberler-news input[type='email']:focus {
-    outline: none;
+  .nw-featured__link:hover {
+    color: var(--color-navy);
+  }
+
+  /* Archive */
+  .nw-archive {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
+  }
+
+  .nw-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    margin-bottom: 56px;
+    padding-block: 24px;
+    border-block: 1px solid var(--color-border-strong);
+  }
+
+  .nw-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .nw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 999px;
+    background: #fff;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .nw-chip span {
+    font-size: 0.75rem;
+    color: var(--color-text-faint);
+  }
+
+  .nw-chip:hover {
     border-color: var(--color-navy);
   }
 
-  .haberler-news button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    height: 45px;
-    border: 0;
-    border-radius: 3px;
-    background: var(--color-navy);
+  .nw-chip[aria-pressed='true'] {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
     color: #fff;
-    font: inherit;
-    font-size: 0.84rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background var(--transition);
   }
 
-  .haberler-news button:hover {
-    background: var(--color-navy-dark);
+  .nw-chip[aria-pressed='true'] span {
+    color: var(--color-orange);
   }
 
-  .haberler-news button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-  }
-
-  .haberler-news__status {
-    min-height: 1em;
-    font-size: 0.77rem;
-  }
-
-  .haberler-news__status[data-state='success'] {
-    color: var(--color-success);
-  }
-
-  .haberler-news__status[data-state='error'] {
-    color: var(--color-error);
-  }
-
-  /* Toolbar */
-  .haberler-toolbar {
-    display: flex;
-    gap: 18px;
-    margin-bottom: 22px;
-  }
-
-  .haberler-toolbar__search {
+  .nw-search {
     display: flex;
     align-items: center;
-    flex: 1;
-    gap: 13px;
-    padding: 0 18px;
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
+    gap: 12px;
+    width: min(320px, 100%);
+    padding: 0 16px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 999px;
     background: #fff;
     color: var(--color-navy);
   }
 
-  .haberler-toolbar__search:focus-within {
+  .nw-search:focus-within {
     border-color: var(--color-navy);
   }
 
-  .haberler-toolbar__search input {
+  .nw-search input {
     flex: 1;
     min-width: 0;
-    height: 49px;
+    height: 44px;
     border: 0;
     background: transparent;
     font: inherit;
-    font-size: 0.84rem;
-    color: var(--color-text);
+    font-size: 0.875rem;
     outline: none;
   }
 
-  .haberler-toolbar__sort select {
-    height: 52px;
-    min-width: 168px;
-    padding: 0 16px;
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-    background: #fff;
-    font: inherit;
-    font-size: 0.84rem;
+  .nw-year {
+    display: grid;
+    grid-template-columns: minmax(0, 240px) 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .nw-year + .nw-year {
+    margin-top: 72px;
+  }
+
+  .nw-year[hidden],
+  [data-news-item][hidden] {
+    display: none;
+  }
+
+  .nw-year__label {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 3vw + 1.5rem, 5.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--color-navy);
+  }
+
+  .nw-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .nw-row {
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--color-border-strong);
     color: var(--color-navy-deep);
-    cursor: pointer;
+  }
+
+  .nw-row img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius);
+    filter: grayscale(0.35);
+    transition: filter 400ms ease;
+  }
+
+  .nw-row:hover img {
+    filter: none;
+  }
+
+  .nw-row__body {
+    display: grid;
+    gap: 10px;
+  }
+
+  .nw-row__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .nw-row__meta span {
+    color: var(--color-navy);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nw-row__title {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 800;
+    font-size: clamp(1.25rem, 0.8vw + 1rem, 1.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    transition: color var(--transition);
+  }
+
+  .nw-row:hover .nw-row__title {
+    color: var(--color-navy);
+  }
+
+  .nw-row__excerpt {
+    max-width: 70ch;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .nw-row__arrow {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 50%;
+    transition:
+      background 300ms ease,
+      border-color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .nw-row:hover .nw-row__arrow {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    transform: rotate(-45deg);
+  }
+
+  .nw-empty {
+    padding-block: 48px;
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
   }
 
   .sr-only {
@@ -649,184 +510,31 @@ const tabs = [
     border: 0;
   }
 
-  /* Grid */
-  .haberler-page__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 21px;
-    align-items: start;
-  }
-
-  .haber-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 3px;
-    background: #fff;
-    box-shadow: 0 2px 14px rgba(43, 46, 131, 0.06);
-    transition:
-      transform 220ms ease,
-      box-shadow 220ms ease;
-  }
-
-  .haber-card[hidden] {
-    display: none;
-  }
-
-  .haber-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 40px rgba(43, 46, 131, 0.14);
-  }
-
-  .haber-card__image {
-    height: 202px;
-    overflow: hidden;
-  }
-
-  .haber-card__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 500ms ease;
-  }
-
-  .haber-card:hover .haber-card__image img {
-    transform: scale(1.05);
-  }
-
-  .haber-card__body {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    gap: 12px;
-    padding: 18px 22px 22px;
-  }
-
-  .haber-card__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 9px;
-  }
-
-  .haber-card__date {
-    font-size: 0.77rem;
-    color: var(--color-text-faint);
-  }
-
-  .haber-card__tag {
-    padding: 4px 12px;
-    border-radius: 3px;
-    background: var(--color-border);
-    color: var(--color-navy);
-    font-size: 0.63rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .haber-card__body h2 {
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    font-weight: 800;
-    line-height: 1.35;
-    color: var(--color-navy-deep);
-  }
-
-  .haber-card__body p {
-    font-size: 0.84rem;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .haber-card__more {
-    margin-top: auto;
-    padding-top: 12px;
-    font-size: 0.77rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--color-navy);
-  }
-
-  .haberler-empty {
-    padding: 54px 0;
-    text-align: center;
-    color: var(--color-text-muted);
-  }
-
-  .haberler-pager {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 36px;
-  }
-
-  .haberler-pager[hidden] {
-    display: none;
-  }
-
-  :global(.haberler-pager__btn) {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-    background: #fff;
-    font: inherit;
-    font-size: 0.84rem;
-    font-weight: 700;
-    color: var(--color-navy-deep);
-    cursor: pointer;
-  }
-
-  :global(.haberler-pager__btn.is-active) {
-    border-color: var(--color-navy);
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  :global(.haberler-pager__btn.is-gap) {
-    border-color: transparent;
-    background: transparent;
-    cursor: default;
-  }
-
-  @media (max-width: 1200px) {
-    .haberler-page__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .haberler-page__layout {
+  @media (max-width: 1024px) {
+    .nw-featured__inner {
       grid-template-columns: 1fr;
-      grid-template-areas: 'side' 'main' 'news';
     }
 
-    .haberler-side {
+    .nw-year {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .nw-year__label {
       position: static;
     }
-
-    .haberler-hero__quote {
-      display: none;
-    }
   }
 
-  @media (max-width: 640px) {
-    .haberler-page__grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+    .nw-row {
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: start;
     }
 
-    .haberler-toolbar {
-      flex-direction: column;
+    .nw-row__arrow,
+    .nw-row__excerpt {
+      display: none;
     }
   }
 </style>

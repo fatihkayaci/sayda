@@ -1,96 +1,39 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ServiceHero from '../../components/service/ServiceHero.astro';
-import ServiceSidebar from '../../components/service/ServiceSidebar.astro';
-import ServicePanel from '../../components/service/ServicePanel.astro';
-import ProcessSteps from '../../components/service/ProcessSteps.astro';
-import ChecklistBox from '../../components/service/ChecklistBox.astro';
-import ServiceMedia from '../../components/service/ServiceMedia.astro';
-import ServiceWhy from '../../components/service/ServiceWhy.astro';
-
-const steps = [
-  { title: 'Arsa / Bina Değerleme', description: 'Arsanın imar durumu, tapu analizi ve piyasa değeri incelenir; fizibilite raporu hazırlanır.' },
-  { title: 'Kat Karşılığı Sözleşmesi', description: 'Noterde resmi sözleşme imzalanır; paylaşım oranları ve teslim tarihleri netleştirilir.' },
-  { title: 'Proje & Ruhsat', description: 'Mimari ve statik proje, belediye ruhsatı ve tüm izinler Sayda tarafından alınır.' },
-  { title: 'İnşaat & İnce İşler', description: 'Kaba yapıdan ince işlere, iç mekân bitimine kadar tüm inşaat Sayda ekibiyle yürütülür.' },
-  { title: 'Teslim & İskan', description: 'İskan belgesi ve anahtarlar, belirlenen paylaşım planına göre sahiplerine teslim edilir.' },
-];
-
-const kapsam = [
-  { label: 'Arsa analizi ve fizibilite', icon: 'document' },
-  { label: 'Mimari & statik proje', icon: 'area' },
-  { label: 'Belediye ruhsat işlemleri', icon: 'building' },
-  { label: 'Kaba yapı', icon: 'gear' },
-  { label: 'İnce işler (sıva, şap, seramik)', icon: 'check' },
-  { label: 'Boya & duvar kağıdı', icon: 'photo' },
-  { label: 'Elektro-mekanik altyapı', icon: 'bolt' },
-  { label: 'İskan belgesi temini', icon: 'shield' },
-];
-
-const ozellikler = [
-  { icon: 'chart', text: 'Arsa değerinize değer katar' },
-  { icon: 'gear', text: 'Tüm süreci biz yönetiriz' },
-  { icon: 'shield', text: 'Şeffaf ve güvenilir ortaklık' },
-  { icon: 'building', text: 'Modern ve nitelikli yapılar' },
-];
-
-const nedenler = [
-  'Arsa sahipleri için yüksek değer potansiyeli',
-  'Tüm teknik ve idari süreçlerin profesyonel yönetimi',
-  'Deneyimli ve güvenilir ekip',
-  'Zamanında teslimat',
-  'Modern ve nitelikli yaşam alanları',
-];
+import SvcHero from '../../components/service/SvcHero.astro';
+import SvcScope from '../../components/service/SvcScope.astro';
+import SvcPartners from '../../components/service/SvcPartners.astro';
+import SvcMore from '../../components/service/SvcMore.astro';
+import company from '../../data/company.json';
 ---
 
 <Layout
   title="Kat Karşılığı İnşaat | Sayda İnşaat"
-  description="Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç."
+  description="Arsa ve bina sahipleriyle iş birliği içinde kat karşılığı inşaat."
 >
-  <ServiceHero />
+  <SvcHero
+    eyebrow="Hizmet 02"
+    name="Kat Karşılığı İnşaat"
+    text="Arsa ve bina sahipleriyle iş birliği yaparak kat karşılığı inşaat projelerini üstleniyoruz. 1996'dan bu yana otel, ofis, villa ve konut projelerinde edindiğimiz müteahhitlik deneyimini arsanıza taşıyoruz."
+    points={company.philosophy}
+    image="/img/home/residence-sunset.webp"
+  >
+    Kat Karşılığı <em>İnşaat</em>
+  </SvcHero>
 
-  <section class="svc-main">
-    <div class="container svc-main__layout">
-      <ServiceSidebar active={0} />
+  <SvcScope label="Uygulama Alanlarımız" title="Kaba yapıdan dekorasyona." items={company.workItems} />
 
-      <ServicePanel
-        number="01"
-        title="Kat Karşılığı İnşaat"
-        lead="Arsa veya bina sahipleriyle kat karşılığı anlaşma yaparak, projenin tamamını üstleniyoruz. Tasarım, ruhsat, inşaat ve teslim süreçlerini eksiksiz yönetiyoruz — siz sadece anahtarınızı teslim alıyorsunuz."
-        tagline="Arsanızın potansiyelini birlikte değerlendiriyor, ortak değer üretiyoruz."
-      >
-        <ServiceMedia image="/img/projects/vadistanbul/vadistanbul.webp" features={ozellikler} />
+  <SvcPartners
+    label="Konut Deneyimimiz"
+    items={[
+      { title: 'Büyükyalı', slug: 'buyukyali' },
+      { title: 'Oyakkent', slug: 'oyakkent-konut' },
+      { title: 'Varyap Meridian', slug: 'varyap-meridien-konut' },
+      { title: 'Referans Güneşli', slug: 'referans-gunesli' },
+      { title: 'Acarkent', slug: 'acarlar-acar-kent' },
+      { title: 'Kasaba Konut & Residance', slug: 'kasaba-konut-residance' },
+    ]}
+  />
 
-        <div class="kat-split">
-          <div>
-            <ProcessSteps heading="Çalışma Süreci" steps={steps} />
-          </div>
-          <ServiceWhy
-            title="Neden Kat Karşılığı?"
-            items={nedenler}
-            quote="Arsanızın potansiyelini güvenle geleceğe taşıyoruz."
-          />
-        </div>
-
-        <ChecklistBox heading="Kapsama Dahil İşler" items={kapsam} />
-      </ServicePanel>
-    </div>
-  </section>
-
-
+  <SvcMore current="/hizmetler/kat-karsiligi-insaat" />
 </Layout>
-
-<style>
-  .kat-split {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: 36px;
-    align-items: start;
-  }
-
-  @media (max-width: 1100px) {
-    .kat-split {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

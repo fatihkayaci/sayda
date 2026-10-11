@@ -1,0 +1,173 @@
+---
+// Dark grid of projects a service was delivered on; items with a slug link to the project page.
+import Icon from '../Icon.astro';
+import SectionHead from '../SectionHead.astro';
+import allProjects from '../../data/projects.json';
+
+interface Item {
+  title: string;
+  slug?: string;
+  employer?: string;
+}
+
+interface Props {
+  label: string;
+  title?: string;
+  items: Item[];
+}
+
+const { label, title = 'Hizmet verdiğimiz projelerden bazıları.', items } = Astro.props;
+const rows = items.map((item) => {
+  const project = item.slug ? allProjects.find((p) => p.slug === item.slug) : undefined;
+  return { title: item.title, employer: item.employer ?? project?.employer ?? '', href: project?.href };
+});
+---
+
+<section class="svc-partners">
+  <div class="container">
+    <div class="svc-partners__head">
+      <SectionHead label={label} title={title} tone="dark" />
+      <a href="/projeler">
+        Tüm Projeler <Icon name="arrow" size={18} />
+      </a>
+    </div>
+    <ul class="svc-partners__grid">
+      {
+        rows.map((row) => (
+          <li>
+            {row.href ? (
+              <a href={row.href}>
+                <strong>{row.title}</strong>
+                <span>{row.employer}</span>
+                <Icon name="arrow" size={22} />
+              </a>
+            ) : (
+              <div>
+                <strong>{row.title}</strong>
+                <span>{row.employer}</span>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .svc-partners {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-navy-deep);
+  }
+
+  .svc-partners__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .svc-partners__head > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: clamp(40px, 5vw, 64px);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-orange);
+    font-weight: 700;
+    white-space: nowrap;
+    color: #fff;
+  }
+
+  .svc-partners__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .svc-partners__grid li {
+    display: flex;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .svc-partners__grid li > * {
+    position: relative;
+    flex: 1;
+    display: grid;
+    align-content: center;
+    gap: 8px;
+    min-height: 120px;
+    padding: 24px 64px 24px 32px;
+    color: #fff;
+    transition:
+      background 300ms ease,
+      color 300ms ease;
+  }
+
+  .svc-partners__grid strong {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.25rem, 1vw + 0.875rem, 1.75rem);
+    line-height: 1.1;
+  }
+
+  .svc-partners__grid span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 300ms ease;
+  }
+
+  .svc-partners__grid a :global(svg) {
+    position: absolute;
+    top: 50%;
+    right: 28px;
+    color: var(--color-orange);
+    transform: translateY(-50%);
+    transition:
+      color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .svc-partners__grid li > *:hover {
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  .svc-partners__grid li > *:hover span,
+  .svc-partners__grid a:hover :global(svg) {
+    color: var(--color-navy-deep);
+  }
+
+  .svc-partners__grid a:hover :global(svg) {
+    transform: translate(4px, -50%);
+  }
+
+  @media (max-width: 900px) {
+    .svc-partners__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .svc-partners__head > a {
+      display: none;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .svc-partners__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .svc-partners__grid li > * {
+      min-height: 0;
+    }
+  }
+</style>

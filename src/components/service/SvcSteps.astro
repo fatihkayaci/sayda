@@ -1,0 +1,106 @@
+---
+// Numbered process steps on a dark band, connected by a line.
+import SectionHead from '../SectionHead.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  text?: string;
+  steps: { title: string; description: string }[];
+}
+
+const { label, title, text, steps } = Astro.props;
+---
+
+<section class="svc-steps">
+  <div class="container">
+    <SectionHead label={label} title={title} text={text} tone="dark" />
+    <ol class="svc-steps__list" style={`--steps: ${steps.length}`}>
+      {
+        steps.map((step, i) => (
+          <li>
+            <span class="svc-steps__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .svc-steps {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .svc-steps__list {
+    display: grid;
+    grid-template-columns: repeat(var(--steps), minmax(0, 1fr));
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .svc-steps__list li {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 14px;
+    padding-top: 36px;
+    border-top: 2px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .svc-steps__list li::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-orange);
+  }
+
+  .svc-steps__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(3rem, 3vw + 1rem, 4.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--color-orange);
+  }
+
+  .svc-steps h3 {
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .svc-steps p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  @media (max-width: 1100px) {
+    .svc-steps__list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 48px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .svc-steps__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

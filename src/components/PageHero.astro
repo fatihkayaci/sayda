@@ -1,0 +1,251 @@
+---
+// Light, typographic page hero with a slanted photo panel. The h1 content comes from the default slot,
+// so a page can highlight a word with <em>.
+interface Props {
+  eyebrow: string;
+  breadcrumbs: { label: string; href?: string }[];
+  image: string;
+  imagePosition?: string;
+  /** Large outlined text behind the title, e.g. a year. */
+  backdrop?: string;
+  facts?: { value: string; label: string }[];
+  /** 'short' keeps the hero low so the page's main content (e.g. a form) starts on the first screen. */
+  size?: 'full' | 'compact' | 'short';
+}
+
+const { eyebrow, breadcrumbs, image, imagePosition = '40% center', backdrop, facts = [], size = 'full' } = Astro.props;
+---
+
+<section class:list={['page-hero', `page-hero--${size}`]}>
+  <div class="page-hero__photo" aria-hidden="true">
+    <img src={image} alt="" fetchpriority="high" style={`object-position: ${imagePosition}`} />
+  </div>
+
+  <div class="container page-hero__inner">
+    <nav class="page-hero__breadcrumb" aria-label="Konum">
+      {
+        breadcrumbs.map((crumb, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">/</span>}
+            {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}
+          </>
+        ))
+      }
+    </nav>
+
+    {backdrop && <span class="page-hero__backdrop" aria-hidden="true">{backdrop}</span>}
+
+    <div class="page-hero__text">
+      <p class="page-hero__eyebrow"><span></span>{eyebrow}</p>
+      <h1><slot /></h1>
+      {
+        facts.length > 0 && (
+          <ul class="page-hero__facts">
+            {facts.map((fact) => (
+              <li>
+                <b>{fact.value}</b>
+                {fact.label}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg-light);
+  }
+
+  .page-hero__photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 46%;
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .page-hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .page-hero__inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding-block: 40px 72px;
+  }
+
+  .page-hero--full .page-hero__inner {
+    min-height: calc(100svh - var(--header-h));
+    max-height: 920px;
+  }
+
+  .page-hero--compact .page-hero__inner {
+    min-height: 580px;
+  }
+
+  .page-hero--short .page-hero__inner {
+    padding-block: 32px 56px;
+  }
+
+  .page-hero--short .page-hero__text {
+    padding-top: 40px;
+  }
+
+  .page-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .page-hero__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .page-hero__breadcrumb [aria-current] {
+    color: var(--color-navy-deep);
+    font-weight: 600;
+  }
+
+  .page-hero__backdrop {
+    position: absolute;
+    left: calc(var(--edge) - 0.06em);
+    bottom: 0.02em;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(9rem, 22vw, 24rem);
+    line-height: 0.75;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(47, 48, 145, 0.12);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .page-hero__text {
+    position: relative;
+    margin-block: auto;
+    max-width: 58%;
+    padding-top: 32px;
+  }
+
+  .page-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .page-hero__eyebrow span {
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .page-hero h1 {
+    margin-top: 28px;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 5.4vw + 0.5rem, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--color-navy-deep);
+  }
+
+  .page-hero--compact h1 {
+    font-size: clamp(2.5rem, 4.4vw + 0.5rem, 5.75rem);
+  }
+
+  .page-hero--short h1 {
+    font-size: clamp(2.5rem, 3.4vw + 0.5rem, 4.5rem);
+  }
+
+  .page-hero h1 :global(em) {
+    font-style: normal;
+    color: var(--color-navy);
+    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.55);
+  }
+
+  .page-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 48px;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .page-hero__facts li {
+    display: grid;
+    gap: 6px;
+    padding-left: 18px;
+    border-left: 3px solid var(--color-orange);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .page-hero__facts b {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 1.375rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: var(--color-navy-deep);
+  }
+
+  @media (max-width: 1024px) {
+    .page-hero__photo {
+      width: 100%;
+      clip-path: none;
+      opacity: 0.18;
+    }
+
+    .page-hero__text {
+      max-width: none;
+    }
+
+    .page-hero--compact .page-hero__inner {
+      min-height: 480px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page-hero__backdrop {
+      left: var(--edge-mobile);
+    }
+
+    .page-hero__facts {
+      gap: 20px 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-hero h1,
+    .page-hero--compact h1,
+    .page-hero--short h1 {
+      font-stretch: 100%;
+      font-size: clamp(2.25rem, 10vw, 2.75rem);
+    }
+  }
+</style>

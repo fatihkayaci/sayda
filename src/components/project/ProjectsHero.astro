@@ -23,13 +23,13 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
 const types = [...new Set(projects.map((p) => p.type).filter((t): t is string => Boolean(t)))].sort(sortTr);
 
 const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000;
-const areaValue = `${areaInMillions.toFixed(2)}M m²`;
+const areaValue = `${areaInMillions.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}M m²`;
 
 const stats = [
-  { icon: 'area', value: areaValue, label: 'Toplam Alan' },
-  { icon: 'check', value: String(tamamlananCount), label: 'Tamamlanan Proje' },
-  { icon: 'user', value: String(devamEdenCount), label: 'Devam Eden Proje' },
-  { icon: 'document', value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
+  { value: areaValue, label: 'Toplam Alan' },
+  { value: String(tamamlananCount), label: 'Tamamlanan Proje' },
+  { value: String(devamEdenCount), label: 'Devam Eden Proje' },
+  { value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
 ];
 ---
 
@@ -67,9 +67,6 @@ const stats = [
       {
         stats.map((stat) => (
           <div>
-            <span class="projects-stats__icon">
-              <Icon name={stat.icon} size={25} />
-            </span>
             <span class="projects-stats__text">
               <dd>{stat.value}</dd>
               <dt>{stat.label}</dt>
@@ -149,6 +146,12 @@ const stats = [
         card.hidden = !(matchesQuery && matchesDistrict && matchesType);
       });
 
+      // The ongoing-projects slider hides when the chosen type isn't among its projects.
+      document.querySelectorAll<HTMLElement>('[data-featured]').forEach((featured) => {
+        const types = (featured.dataset.types ?? '').split(',');
+        featured.hidden = typeValue !== 'all' && !types.includes(typeValue);
+      });
+
       document.querySelectorAll<HTMLElement>('[data-project-group]').forEach((group) => {
         const visible = group.querySelectorAll('.project-card:not([hidden])').length;
         group.hidden = visible === 0;
@@ -157,9 +160,13 @@ const stats = [
       });
     };
 
+    // ?tur=Otel preselects the type filter (used by the Hakkımızda expertise panels).
+    const typeParam = new URLSearchParams(window.location.search).get('tur');
+    const hasTypeOption = Boolean(type && typeParam && [...type.options].some((o) => o.value === typeParam));
+
     search.value = '';
     if (district) district.value = 'all';
-    if (type) type.value = 'all';
+    if (type) type.value = hasTypeOption ? typeParam! : 'all';
     apply();
 
     search.addEventListener('input', apply);
@@ -198,8 +205,8 @@ const stats = [
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(35, 35, 35, 0.35) 55%, rgba(35, 35, 35, 0.55) 100%),
-      rgba(35, 35, 35, 0.25);
+      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(28, 29, 46, 0.35) 55%, rgba(28, 29, 46, 0.55) 100%),
+      rgba(28, 29, 46, 0.25);
   }
 
   .projects-hero__inner {
@@ -247,17 +254,22 @@ const stats = [
   }
 
   .projects-hero__eyebrow span:last-child {
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.3em;
     color: rgba(255, 255, 255, 0.75);
   }
 
   .projects-hero h1 {
-    font-size: clamp(1.96rem, 3.584vw, 3.08rem);
-    line-height: 1.15;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    font-size: clamp(2.25rem, 4.4vw, 4.25rem);
+    line-height: 0.98;
     color: #fff;
-    margin-bottom: 21px;
+    margin-bottom: 24px;
   }
 
   .projects-hero__lead {
@@ -273,7 +285,7 @@ const stats = [
     right: clamp(20px, 4vw, 72px);
     padding-left: 25px;
     border-left: 1px solid rgba(255, 255, 255, 0.85);
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.28em;
     line-height: 2;
@@ -287,53 +299,54 @@ const stats = [
 
   .projects-stats dl {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
-    padding-block: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-l);
+    margin: 0;
+    padding-block: 56px;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .projects-stats dl > div {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    position: relative;
     min-width: 0;
-    padding: 16px 18px;
-    border-radius: 10px;
-    background: var(--color-bg-light);
+    padding-top: 24px;
   }
 
-  .projects-stats__icon {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 8px;
-    background: #fff;
-    color: var(--color-navy);
+  .projects-stats dl > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: var(--color-orange);
   }
+
 
   .projects-stats__text {
     display: grid;
-    gap: 4px;
+    gap: 12px;
     min-width: 0;
   }
 
   .projects-stats dd {
     margin: 0;
-    font-family: var(--font-heading);
-    font-size: clamp(1.05rem, 1vw + 0.85rem, 1.68rem);
-    line-height: 1.15;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 2.6vw + 1rem, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
     overflow-wrap: anywhere;
     color: var(--color-navy-deep);
   }
 
   .projects-stats dt {
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-text-faint);
+    color: var(--color-text-muted);
   }
 
   /* Filters */
@@ -444,5 +457,13 @@ const stats = [
       display: none;
     }
 
+  }
+
+  /* Wide uppercase titles: narrow the width axis on phones so long words fit */
+  @media (max-width: 480px) {
+    .projects-hero h1 {
+      font-stretch: 100%;
+      font-size: clamp(1.75rem, 9vw, 2.5rem);
+    }
   }
 </style>

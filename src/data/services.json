@@ -1,44 +1,80 @@
 [
   {
     "title": "Kentsel Dönüşüm",
-    "description": "Riskli yapı tespiti sonrası süreç yönetimi, kat karşılığı anlaşma ve inşaatın anahtar teslim tamamlanması.",
-    "href": "/kentsel-donusum",
+    "description": "6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesi.",
+    "href": "/hizmetler/kentsel-donusum",
+    "points": [
+      "6306 sayılı kanun çerçevesinde",
+      "Riskli yapıların yenilenmesi",
+      "1996'dan bu yana müteahhitlik deneyimi"
+    ],
     "icon": "building",
-    "audience": "bina-sahipleri"
+    "audience": "bina-sahipleri",
+    "image": "/img/home/gold-towers.webp"
   },
   {
     "title": "Kat Karşılığı İnşaat",
-    "description": "Arsa veya bina sahipleriyle kat karşılığı anlaşma; tasarımdan teslim aşamasına kadar tüm süreç.",
+    "description": "Arsa ve bina sahipleriyle iş birliği içinde kat karşılığı inşaat.",
     "href": "/hizmetler/kat-karsiligi-insaat",
+    "points": [
+      "Arsa sahipleriyle iş birliği",
+      "Uzman ekip",
+      "Zamanında teslim"
+    ],
     "icon": "key",
-    "audience": "bina-sahipleri"
+    "audience": "bina-sahipleri",
+    "image": "/img/home/residence-sunset.webp"
   },
   {
     "title": "Alt Müteahhitlik",
-    "description": "Kısmi yüklenici / uzman ekip olarak, ana yükleniciye bağlı kaba veya ince yapı işlerinin taşeronluğu.",
+    "description": "Ana yüklenicilerin projelerinde kaba yapı, ince işler, cephe ve dekorasyon işlerinde uzman ekip hizmeti.",
     "href": "/hizmetler/alt-muteahhitlik",
+    "points": [
+      "Kaba yapı ve ince işler",
+      "Cephe ve dekorasyon",
+      "Akbatı, Oyakkent, Varyap Meridian"
+    ],
     "icon": "helmet",
-    "audience": "ana-yukleniciler"
+    "audience": "ana-yukleniciler",
+    "image": "/img/home/sayda-hq.webp"
   },
   {
     "title": "Anahtar Teslim Müteahhitlik",
-    "description": "Ana yüklenici olarak, projelendirmeden teslime kadar tüm inşaat sürecinin tek elden yürütülmesi.",
+    "description": "Otel, ofis, villa ve konut projelerinde inşaat, dekorasyon ve renovasyon taahhütlerinin anahtar teslim yapılması.",
     "href": "/hizmetler/anahtar-teslim-muteahhitlik",
+    "points": [
+      "Otel, ofis, villa, konut",
+      "İnşaat, dekorasyon, renovasyon",
+      "Çırağan Palace, Nestle, Yasmin-Bodrum"
+    ],
     "icon": "door",
-    "audience": "ana-yukleniciler"
+    "audience": "ana-yukleniciler",
+    "image": "/img/home/site-team.webp"
   },
   {
     "title": "Proje Yönetimi & Danışmanlık",
-    "description": "Bağımsız proje yönetimi, maliyet kontrolü ve teknik danışmanlık hizmetleri.",
+    "description": "Bütçe, ihale, maliyet ve kalite kontrol süreçlerinde proje yönetimi ve danışmanlık.",
     "href": "/hizmetler/proje-yonetimi-danismanlik",
+    "points": [
+      "Bütçe ve maliyet",
+      "İhale süreçleri",
+      "Kalite kontrol"
+    ],
     "icon": "chart",
-    "audience": "ana-yukleniciler"
+    "audience": "ana-yukleniciler",
+    "image": "/img/home/twin-towers.webp"
   },
   {
     "title": "Tesis Renovasyonu",
-    "description": "Otel, fabrika, hastane ve benzeri tesislerde, işletme faaliyetini aksatmadan planlanan kapsamlı yenileme ve modernizasyon projeleri.",
+    "description": "Otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütleri.",
     "href": "/hizmetler/otel-renovasyonu",
+    "points": [
+      "Çırağan Palace Kempinski",
+      "Renovasyon ve dekorasyon",
+      "Anahtar teslim uygulama"
+    ],
     "icon": "star",
-    "audience": "ana-yukleniciler"
+    "audience": "ana-yukleniciler",
+    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp"
   }
 ]

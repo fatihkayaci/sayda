@@ -60,7 +60,7 @@ const lead = project.tagline ?? project.description?.[0];
   .project-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(35, 35, 35, 0.85) 0%, rgba(35, 35, 35, 0.45) 55%, rgba(35, 35, 35, 0.2) 100%);
+    background: linear-gradient(to right, rgba(28, 29, 46, 0.85) 0%, rgba(28, 29, 46, 0.45) 55%, rgba(28, 29, 46, 0.2) 100%);
   }
 
   .project-hero__inner {
@@ -100,8 +100,12 @@ const lead = project.tagline ?? project.description?.[0];
   }
 
   .project-hero h1 {
-    font-size: clamp(1.96rem, 4.032vw, 3.08rem);
-    line-height: 1.1;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 3.8vw, 3.75rem);
+    line-height: 1.02;
     color: #fff;
   }
 

@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+
+// Canlı sitedeki iş bitirme belgesi görselleri (25 adet), sırası canlıdaki gibi.
+const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, '0'));
+---
+
+<Layout
+  title="İş Bitirme Belgeleri | Sayda İnşaat"
+  description="Sayda İnşaat'ın tamamlanan projelerine ait iş bitirme belgeleri."
+>
+  <PageHero
+    eyebrow="Belgelerimiz"
+    breadcrumbs={[
+      { label: 'Ana Sayfa', href: '/' },
+      { label: 'Projeler', href: '/projeler' },
+      { label: 'İş Bitirme Belgeleri' },
+    ]}
+    image="/img/projects/vadistanbul/vadistanbul.webp"
+    size="short"
+  >
+    İş Bitirme <em>Belgeleri</em>
+  </PageHero>
+
+  <section class="ib">
+    <div class="container">
+      <ul class="ib__grid">
+        {
+          belgeler.map((n, i) => (
+            <li>
+              <a href={`/img/is-bitirme/is-bitirme-${n}-buyuk.webp`} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={`/img/is-bitirme/is-bitirme-${n}.webp`}
+                  alt={`Sayda İnşaat iş bitirme belgesi ${i + 1}`}
+                  width="360"
+                  height="480"
+                  loading={i < 3 ? undefined : 'lazy'}
+                />
+                <span>Belge {n}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .ib {
+    padding-block: clamp(48px, 5vw, 80px) clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
+  }
+
+  .ib__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ib__grid a {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+    border-radius: var(--radius);
+    background: #fff;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .ib__grid a:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+
+  .ib__grid img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .ib__grid span {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .ib__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .ib__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+  }
+</style>

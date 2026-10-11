@@ -12,6 +12,7 @@ interface Project {
   endDate: string;
   image: string;
   href: string;
+  type?: string;
 }
 
 interface Props {
@@ -25,7 +26,7 @@ const many = projects.length > 1;
 
 {
   projects.length > 0 && (
-    <section class="featured" data-featured>
+    <section class="featured" data-featured data-types={[...new Set(projects.map((p) => p.type).filter(Boolean))].join(',')}>
       {projects.map((project, index) => (
         <article class="featured__slide" data-slide hidden={index !== 0}>
           <div class="featured__text">
@@ -130,7 +131,7 @@ const many = projects.length > 1;
     display: flex;
     align-items: center;
     gap: 16px;
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.24em;
     color: var(--color-navy);
@@ -228,7 +229,7 @@ const many = projects.length > 1;
     border-radius: 3px;
     background: var(--color-navy-deep);
     color: #fff;
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.12em;
   }
@@ -258,9 +259,9 @@ const many = projects.length > 1;
     padding: 8px 13px;
     border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 3px;
-    background: rgba(35, 35, 35, 0.7);
+    background: rgba(28, 29, 46, 0.7);
     color: #fff;
-    font-size: 0.77rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     letter-spacing: 0.08em;
   }

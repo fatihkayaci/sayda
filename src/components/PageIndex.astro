@@ -1,0 +1,249 @@
+---
+// Large numbered link rows with a sticky image preview that follows the hovered row.
+import Icon from './Icon.astro';
+
+interface Props {
+  label?: string;
+  items: { title: string; description: string; href: string; image: string }[];
+  /** Number shown for the first row; lets several lists on a page keep counting. */
+  start?: number;
+}
+
+const { label, items, start = 1 } = Astro.props;
+---
+
+<div class="page-index" data-page-index>
+  <div>
+    {label && <p class="page-index__label">{label}</p>}
+    <ol class="page-index__list">
+      {
+        items.map((item, i) => (
+          <li>
+            <a class:list={['page-index__row', { 'is-active': i === 0 }]} href={item.href} data-preview={i}>
+              <span class="page-index__num">{String(start + i).padStart(2, '0')}</span>
+              <span class="page-index__body">
+                <span class="page-index__title">{item.title}</span>
+                <span class="page-index__text">{item.description}</span>
+              </span>
+              <span class="page-index__arrow">
+                <Icon name="arrow" size={26} />
+              </span>
+              <img class="page-index__thumb" src={item.image} alt="" loading="lazy" />
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="page-index__preview" aria-hidden="true">
+    {items.map((item, i) => <img class:list={{ 'is-active': i === 0 }} src={item.image} alt="" loading="lazy" />)}
+  </div>
+</div>
+
+<script>
+  function initPageIndex() {
+    document.querySelectorAll<HTMLElement>('[data-page-index]').forEach((index) => {
+      if (index.dataset.ready) return;
+      index.dataset.ready = 'true';
+      const rows = index.querySelectorAll<HTMLElement>('.page-index__row');
+      const images = index.querySelectorAll<HTMLElement>('.page-index__preview img');
+      rows.forEach((row) => {
+        const activate = () => {
+          const active = Number(row.dataset.preview);
+          rows.forEach((r) => r.classList.toggle('is-active', r === row));
+          images.forEach((img, i) => img.classList.toggle('is-active', i === active));
+        };
+        row.addEventListener('mouseenter', activate);
+        row.addEventListener('focus', activate);
+      });
+    });
+  }
+
+  initPageIndex();
+  document.addEventListener('astro:page-load', initPageIndex);
+</script>
+
+<style>
+  .page-index {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+
+  .page-index__label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 32px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .page-index__label::before {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .page-index__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .page-index__row {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 36px 8px;
+    border-bottom: 1px solid var(--color-border-strong);
+    color: var(--color-navy-deep);
+  }
+
+  .page-index__num {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--color-orange);
+  }
+
+  .page-index__body {
+    display: grid;
+    gap: 10px;
+  }
+
+  .page-index__title {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.875rem, 2.4vw + 1rem, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--color-text-faint);
+    transition: color 300ms ease;
+  }
+
+  .page-index__text {
+    max-width: 50ch;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+  }
+
+  .page-index__arrow {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 50%;
+    transition:
+      background 300ms ease,
+      border-color 300ms ease,
+      transform 300ms ease;
+  }
+
+  .page-index__row.is-active .page-index__title {
+    color: var(--color-navy-deep);
+  }
+
+  .page-index__row.is-active .page-index__arrow {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    transform: rotate(-45deg);
+  }
+
+  .page-index__thumb {
+    display: none;
+  }
+
+  .page-index__preview {
+    position: sticky;
+    top: calc(var(--header-h) + 40px);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-bg-light);
+  }
+
+  .page-index__preview::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 6px;
+    background: var(--color-orange);
+  }
+
+  .page-index__preview img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.06);
+    transition:
+      opacity 500ms ease,
+      transform 900ms ease;
+  }
+
+  .page-index__preview img.is-active {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 1024px) {
+    .page-index {
+      grid-template-columns: 1fr;
+    }
+
+    .page-index__preview {
+      display: none;
+    }
+
+    .page-index__row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        'thumb thumb'
+        'body arrow';
+      gap: 20px;
+      padding: 32px 0;
+    }
+
+    .page-index__num {
+      display: none;
+    }
+
+    .page-index__body {
+      grid-area: body;
+    }
+
+    .page-index__arrow {
+      grid-area: arrow;
+      width: 52px;
+      height: 52px;
+    }
+
+    .page-index__title {
+      color: var(--color-navy-deep);
+    }
+
+    .page-index__thumb {
+      grid-area: thumb;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+  }
+</style>

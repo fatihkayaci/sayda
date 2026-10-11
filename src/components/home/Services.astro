@@ -1,9 +1,6 @@
 ---
 import Icon from '../Icon.astro';
 import services from '../../data/services.json';
-
-const images = ['/img/home/gold-towers.webp', '/img/home/residence-sunset.webp', '/img/home/sayda-hq.webp', '/img/home/site-team.webp'];
-const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
 ---
 
 <section class="svc">
@@ -17,7 +14,7 @@ const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
 
     <ol class="svc__list">
       {
-        items.map((s, i) => (
+        services.map((s, i) => (
           <li>
             <a href={s.href} class="svc__row">
               <span class="svc__num">{String(i + 1).padStart(2, '0')}</span>
@@ -62,16 +59,18 @@ const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
   }
 
   .svc__intro h2 {
-    margin-block: 8px 16px;
+    margin-block: 12px 20px;
     font-family: var(--font-display);
+    font-stretch: 115%;
     font-weight: 800;
-    font-size: clamp(1.7rem, 2vw + 0.8rem, 2.3rem);
-    line-height: 1.15;
+    font-size: clamp(2rem, 2.6vw + 1rem, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
   .svc__intro p {
     max-width: 34ch;
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.7;
     color: var(--color-on-dark-muted);
   }
@@ -83,7 +82,7 @@ const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
     margin-top: 24px;
     padding: 12px 20px;
     border: 1.5px solid rgba(255, 255, 255, 0.4);
-    font-size: 0.8rem;
+    font-size: 0.875rem;
     font-weight: 700;
     transition:
       background var(--transition),
@@ -91,7 +90,8 @@ const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
   }
 
   .svc__all:hover {
-    background: #fff;
+    border-color: var(--color-orange);
+    background: var(--color-orange);
     color: var(--color-navy-deep);
   }
 
@@ -122,20 +122,20 @@ const items = services.slice(0, 4).map((s, i) => ({ ...s, image: images[i] }));
   .svc__num {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--color-orange);
   }
 
   .svc__text h3 {
     font-family: var(--font-body);
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 700;
   }
 
   .svc__text p {
     max-width: 52ch;
     margin-top: 6px;
-    font-size: 0.82rem;
+    font-size: 0.9375rem;
     line-height: 1.55;
     color: var(--color-on-dark-muted);
   }

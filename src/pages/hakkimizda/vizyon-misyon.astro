@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
 
 const items = [
   {
+    id: 'misyon',
     icon: 'target',
     title: 'Misyon',
     text: 'Toplum ve çevre bilincinde, ahlaki değerler doğrultusunda, müşteri ve çalışanlarımızın memnuniyetini temel alarak, en yüksek verim ve kaliteyle hizmet ve ürünleri sunmaktır.',
@@ -11,6 +13,7 @@ const items = [
     caption: 'Değer üretmek için çalışıyoruz',
   },
   {
+    id: 'vizyon',
     icon: 'binoculars',
     title: 'Vizyon',
     text: 'Araştırmacı ve teknolojik gelişimlerin takipçisi olarak daha verimli sistemler oluşturmak, sektörde yenilikçi ve güvenilir bir marka olarak tercih edilmektir.',
@@ -18,10 +21,11 @@ const items = [
     caption: 'Daima daha iyisi için gelişiyoruz',
   },
   {
+    id: 'hedef',
     icon: 'chart',
     title: 'Hedef',
     text: 'Türkiye ve uluslararası platformda sektöründe öne gelen şirketlerden biri olmak, sürdürülebilir projelerle yaşam alanlarına kalıcı değerler kazandırmaktır.',
-    image: '/img/sayda-insaat-hero01.webp',
+    image: '/img/sayda-insaat-hero02.webp',
     caption: 'Daha güçlü yarınlar için',
   },
 ];
@@ -31,292 +35,236 @@ const items = [
   title="Vizyon & Misyon | Sayda İnşaat"
   description="Sayda İnşaat'ın vizyonu ve misyonu."
 >
-  <section class="vm-hero">
-    <div class="vm-hero__media" aria-hidden="true">
-      <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+  <PageHero
+    eyebrow="Vizyon & Misyon"
+    breadcrumbs={[
+      { label: 'Ana Sayfa', href: '/' },
+      { label: 'Kurumsal', href: '/kurumsal' },
+      { label: 'Vizyon & Misyon' },
+    ]}
+    image="/img/projects/vadistanbul/vadistanbul-03.webp"
+    imagePosition="35% center"
+    size="compact"
+  >
+    Bugünün ihtiyaçları, geleceğin <em>değerleri.</em>
+  </PageHero>
+
+  <nav class="vm-jump" aria-label="Bölümler">
+    <div class="container vm-jump__inner">
+      {
+        items.map((item, i) => (
+          <a href={`#${item.id}`}>
+            <span>{String(i + 1).padStart(2, '0')}</span>
+            {item.title}
+          </a>
+        ))
+      }
     </div>
+  </nav>
 
-    <div class="container vm-hero__inner">
-      <nav class="vm-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Ana Sayfa</a>
-        <span>/</span>
-        <a href="/kurumsal">Kurumsal</a>
-        <span>/</span>
-        <span aria-current="page">Vizyon &amp; Misyon</span>
-      </nav>
-
-      <div class="eyebrow">
-        <span class="eyebrow__bar"></span>
-        <span>KURUMSAL</span>
-      </div>
-      <h1>Vizyon &amp; Misyon</h1>
-      <p class="vm-hero__lead">
-        Daha iyi yaşam alanları için, bugünün ihtiyaçlarını geleceğin değerleriyle birleştiriyoruz.
-      </p>
-
-      <p class="vm-hero__script" aria-hidden="true">
-        “Yaşam alanlarına<br />değer katıyoruz”
-        <span></span>
-      </p>
-    </div>
-  </section>
-
-  <section class="vm-cards">
-    <div class="container">
-      <ul class="vm-cards__grid">
-        {
-          items.map((item, index) => (
-            <li class={`vm-card reveal reveal-d${index}`}>
-              <div class="vm-card__head">
-                <span class="vm-card__icon">
-                  <Icon name={item.icon} size={36} />
-                </span>
-                <div>
-                  <h2>{item.title}</h2>
-                  <p>{item.text}</p>
-                </div>
-              </div>
-              <img src={item.image} alt="" loading="lazy" />
-              <div class="vm-card__foot">
-                <span class="vm-card__number">{String(index + 1).padStart(2, '0')}</span>
-                <span class="vm-card__line"></span>
-                <span class="vm-card__caption">{item.caption}</span>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-
+  {
+    items.map((item, i) => (
+      <section class:list={['vm-chapter', `vm-chapter--${i % 3}`]} id={item.id}>
+        <div class="vm-chapter__media">
+          <img src={item.image} alt="" loading="lazy" />
+        </div>
+        <div class="vm-chapter__body">
+          <span class="vm-chapter__num" aria-hidden="true">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <p class="vm-chapter__label">
+            <Icon name={item.icon} size={22} />
+            {item.caption}
+          </p>
+          <h2 class="vm-chapter__title">{item.title}</h2>
+          <p class="vm-chapter__text">{item.text}</p>
+        </div>
+      </section>
+    ))
+  }
 </Layout>
 
 <style>
-  .eyebrow {
+  /* Jump nav */
+  .vm-jump {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .vm-jump__inner {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: clamp(24px, 4vw, 64px);
+    overflow-x: auto;
+  }
+
+  .vm-jump a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-block: 22px;
+    border-bottom: 3px solid transparent;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    white-space: nowrap;
+    color: var(--color-navy-deep);
+    transition: border-color var(--transition);
+  }
+
+  .vm-jump a span {
     font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    color: var(--color-text-muted);
+    color: var(--color-orange);
   }
 
-  .eyebrow__bar {
-    display: block;
-    width: 48px;
-    height: 2px;
-    background: var(--color-orange);
+  .vm-jump a:hover {
+    border-color: var(--color-orange);
   }
 
-  .eyebrow--light {
-    color: rgba(255, 255, 255, 0.85);
+  /* Chapters */
+  .vm-chapter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: min(88vh, 820px);
+    scroll-margin-top: var(--header-h);
   }
 
-  .eyebrow--light .eyebrow__bar {
-    background: var(--color-orange);
+  .vm-chapter--0 {
+    background: var(--color-bg);
   }
 
-  /* Hero */
-  .vm-hero {
+  .vm-chapter--1 {
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .vm-chapter--2 {
+    background: var(--color-bg-light);
+  }
+
+  .vm-chapter:nth-of-type(even) .vm-chapter__media {
+    order: 2;
+  }
+
+  .vm-chapter__media {
     position: relative;
     overflow: hidden;
-    background: var(--color-border);
   }
 
-  .vm-hero__media {
+  .vm-chapter__media img {
     position: absolute;
-    inset: 0 0 0 auto;
-    width: 62%;
-  }
-
-  .vm-hero__media img {
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 75% top;
   }
 
-  .vm-hero__media::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to right, var(--color-border) 0%, rgba(238, 242, 249, 0) 50%);
-  }
-
-  .vm-hero__inner {
+  .vm-chapter__body {
     position: relative;
-    z-index: 1;
-    min-height: 340px;
-    padding-block: 32px 56px;
-  }
-
-  .vm-hero__breadcrumb {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 28px;
-    font-size: 0.75rem;
-    color: var(--color-text-faint);
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: clamp(56px, 7vw, 120px) clamp(28px, 6vw, 112px);
+    overflow: hidden;
   }
 
-  .vm-hero__breadcrumb a:hover {
+  .vm-chapter__num {
+    position: absolute;
+    right: clamp(16px, 3vw, 48px);
+    top: clamp(16px, 3vw, 40px);
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(6rem, 12vw, 13rem);
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(47, 48, 145, 0.14);
+    pointer-events: none;
+  }
+
+  .vm-chapter--1 .vm-chapter__num {
+    -webkit-text-stroke-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .vm-chapter__label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-navy);
   }
 
-  .vm-hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    letter-spacing: -0.02em;
-    color: var(--color-navy-deep);
+  .vm-chapter__label :global(svg) {
+    color: var(--color-orange);
   }
 
-  .vm-hero__lead {
-    max-width: 30ch;
-    margin-top: 18px;
-    font-size: clamp(1.0625rem, 1.4vw, 1.375rem);
-    line-height: 1.55;
-    color: var(--color-text-muted);
+  .vm-chapter--1 .vm-chapter__label {
+    color: rgba(255, 255, 255, 0.85);
   }
 
-  .vm-hero__script {
-    font-family: var(--font-script);
-    line-height: 1.1;
-    position: absolute;
-    top: 56px;
-    right: var(--edge);
-    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-    color: #fff;
-    text-shadow: 0 2px 14px rgba(35, 35, 35, 0.45);
-    transform: rotate(-7deg);
-  }
-
-  .vm-hero__script span {
-    display: block;
-    width: 90px;
-    height: 2px;
-    margin: 18px auto 0;
-    background: #fff;
-  }
-
-  /* Cards */
-  .vm-cards {
-    padding-block: 32px 40px;
-  }
-
-  .vm-cards__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
-  }
-
-  .vm-card {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 20px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background: #fff;
-  }
-
-  .vm-card__head {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 20px;
-    align-items: start;
-    flex: 1;
-  }
-
-  .vm-card__icon {
-    display: grid;
-    place-items: center;
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    background: var(--color-bg-light);
-    color: var(--color-navy-deep);
-  }
-
-  .vm-card h2 {
-    margin-top: 12px;
-    font-size: 1.5rem;
-    color: var(--color-navy-deep);
-  }
-
-  .vm-card p {
-    margin-top: 16px;
-    font-size: var(--fs-small);
-    line-height: 1.75;
-    color: var(--color-text-muted);
-  }
-
-  .vm-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 2px;
-  }
-
-  .vm-card__foot {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .vm-card__number {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    line-height: 1;
-    color: var(--color-text-faint);
-  }
-
-  .vm-card__line {
-    flex: 1;
-    height: 1px;
-    background: var(--color-navy);
-    opacity: 0.4;
-  }
-
-  .vm-card__caption {
-    flex: none;
-    width: 170px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.5;
-    letter-spacing: 0.04em;
+  .vm-chapter__title {
+    position: relative;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(3.5rem, 6.5vw + 0.5rem, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
+    color: var(--color-navy-deep);
+  }
+
+  .vm-chapter__title::after {
+    content: '.';
+    color: var(--color-orange);
+  }
+
+  .vm-chapter--1 .vm-chapter__title {
+    color: #fff;
+  }
+
+  .vm-chapter__text {
+    position: relative;
+    max-width: 34ch;
+    padding-left: 24px;
+    border-left: 4px solid var(--color-orange);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.25rem, 0.8vw + 1rem, 1.75rem);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
     color: var(--color-text-muted);
   }
 
-  /* Responsive */
-  @media (max-width: 1024px) {
-    .vm-hero__media {
-      width: 100%;
-    }
+  .vm-chapter--1 .vm-chapter__text {
+    color: rgba(255, 255, 255, 0.82);
+  }
 
-    .vm-hero__media::after {
-      background: linear-gradient(to right, var(--color-border) 0%, rgba(238, 242, 249, 0.75) 55%, rgba(238, 242, 249, 0.25) 100%);
-    }
-
-    .vm-hero__script {
-      display: none;
-    }
-
-    .vm-cards__grid {
+  @media (max-width: 900px) {
+    .vm-chapter {
       grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .vm-chapter:nth-of-type(even) .vm-chapter__media {
+      order: 0;
+    }
+
+    .vm-chapter__media {
+      height: 320px;
     }
   }
 
-  @media (max-width: 640px) {
-    .vm-hero__inner {
-      min-height: 0;
-      padding-block: 24px 40px;
-    }
-
-    .vm-card__head {
-      grid-template-columns: 1fr;
+  @media (max-width: 480px) {
+    .vm-chapter__title {
+      font-stretch: 100%;
+      font-size: clamp(2.75rem, 13vw, 3.5rem);
     }
   }
 </style>

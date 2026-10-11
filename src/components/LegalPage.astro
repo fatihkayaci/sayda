@@ -1,0 +1,243 @@
+---
+// Shared shell for legal documents: light header, sibling-document nav and a readable text column.
+interface Props {
+  title: string;
+  lastUpdated: string;
+  current: string;
+}
+
+const { title, lastUpdated, current } = Astro.props;
+
+const docs = [
+  { label: 'KVKK Aydınlatma Metni', href: '/kvkk-aydinlatma-metni' },
+  { label: 'Gizlilik Politikası', href: '/gizlilik-politikasi' },
+  { label: 'Çerez Politikası', href: '/cerez-politikasi' },
+];
+---
+
+<header class="legal-head">
+  <div class="container">
+    <nav class="legal-head__breadcrumb" aria-label="Konum">
+      <a href="/">Ana Sayfa</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{title}</span>
+    </nav>
+    <p class="legal-head__eyebrow"><span></span>Yasal Bilgilendirme</p>
+    <h1>{title}</h1>
+    <p class="legal-head__updated">Son güncelleme: {lastUpdated}</p>
+  </div>
+</header>
+
+<section class="legal">
+  <div class="container legal__inner">
+    <nav class="legal__docs" aria-label="Yasal metinler">
+      <p>Yasal Metinler</p>
+      <ul>
+        {
+          docs.map((doc) => (
+            <li>
+              <a href={doc.href} aria-current={doc.href === current ? 'page' : undefined}>
+                {doc.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="legal__body">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .legal-head {
+    padding-block: 40px clamp(56px, 6vw, 96px);
+    background: var(--color-bg-light);
+  }
+
+  .legal-head__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: clamp(40px, 5vw, 72px);
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  .legal-head__breadcrumb a:hover {
+    color: var(--color-navy);
+  }
+
+  .legal-head__breadcrumb [aria-current] {
+    font-weight: 600;
+    color: var(--color-navy-deep);
+  }
+
+  .legal-head__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-navy);
+  }
+
+  .legal-head__eyebrow span {
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .legal-head h1 {
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 3.6vw + 1rem, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--color-navy-deep);
+  }
+
+  .legal-head__updated {
+    margin-top: 24px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .legal {
+    padding-block: clamp(56px, 6vw, 96px) clamp(80px, 9vw, 140px);
+  }
+
+  .legal__inner {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 800px);
+    gap: clamp(32px, 6vw, 96px);
+  }
+
+  .legal__docs {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+  }
+
+  .legal__docs > p {
+    margin-bottom: 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .legal__docs ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--color-navy-deep);
+  }
+
+  .legal__docs a {
+    display: block;
+    padding: 14px 0 14px 16px;
+    border-bottom: 1px solid var(--color-border-strong);
+    border-left: 3px solid transparent;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    transition:
+      color var(--transition),
+      border-color var(--transition);
+  }
+
+  .legal__docs a:hover {
+    color: var(--color-navy-deep);
+  }
+
+  .legal__docs a[aria-current='page'] {
+    border-left-color: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  .legal__body :global(h2) {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-strong);
+    font-family: var(--font-display);
+    font-stretch: 108%;
+    font-weight: 800;
+    font-size: clamp(1.375rem, 0.6vw + 1.1rem, 1.75rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--color-navy-deep);
+  }
+
+  .legal__body > :global(:first-child) {
+    margin-top: 0;
+  }
+
+  .legal__body > :global(h2:first-child) {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .legal__body :global(p) {
+    margin-top: 14px;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+  }
+
+  .legal__body :global(ul) {
+    display: grid;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal__body :global(li) {
+    position: relative;
+    padding-left: 24px;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+  }
+
+  .legal__body :global(li)::before {
+    content: '';
+    position: absolute;
+    top: 0.75em;
+    left: 0;
+    width: 10px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .legal__body :global(strong) {
+    color: var(--color-navy-deep);
+  }
+
+  .legal__body :global(a) {
+    font-weight: 700;
+    color: var(--color-navy);
+    text-decoration: underline;
+    text-decoration-color: var(--color-orange);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 1024px) {
+    .legal__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .legal__docs {
+      position: static;
+    }
+  }
+</style>
