@@ -3,6 +3,8 @@
 // Below 900px the list is dropped and every panel is shown as a stacked card.
 import Icon from '../Icon.astro';
 import services from '../../data/services.json';
+import { variant } from '../../utils/image';
+import { hasCoverVariants } from '../../utils/project';
 ---
 
 <div class="sel" data-service-selector>
@@ -25,7 +27,7 @@ import services from '../../data/services.json';
       services.map((service, i) => (
         <article class:list={['sel__panel', { 'is-active': i === 0 }]} data-panel={i}>
           <div class="sel__media">
-            <img src={service.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
+            <img src={hasCoverVariants(service.image) ? variant(service.image, 960) : service.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
             <span class="sel__badge">Hizmet {String(i + 1).padStart(2, '0')}</span>
           </div>
           <div class="sel__body">

@@ -2,14 +2,22 @@
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
+import projects from '../../data/projects.json';
+import { srcset } from '../../utils/image';
 
-const items = [
+const coverOf = (slug: string) => {
+  const project = projects.find((p) => p.slug === slug)!;
+  return { image: project.image, credit: 'imageCredit' in project ? project.imageCredit : undefined };
+};
+const hero = coverOf('buyukyali');
+
+const chapters = [
   {
     id: 'misyon',
     icon: 'target',
     title: 'Misyon',
     text: 'Toplum ve çevre bilincinde, ahlaki değerler doğrultusunda, müşteri ve çalışanlarımızın memnuniyetini temel alarak, en yüksek verim ve kaliteyle hizmet ve ürünleri sunmaktır.',
-    image: '/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp',
+    slug: 'varyap-meridien-konut',
     caption: 'Değer üretmek için çalışıyoruz',
   },
   {
@@ -17,7 +25,7 @@ const items = [
     icon: 'binoculars',
     title: 'Vizyon',
     text: 'Araştırmacı ve teknolojik gelişimlerin takipçisi olarak daha verimli sistemler oluşturmak, sektörde yenilikçi ve güvenilir bir marka olarak tercih edilmektir.',
-    image: '/img/projects/vadistanbul/vadistanbul.webp',
+    slug: 'vadistanbul',
     caption: 'Daima daha iyisi için gelişiyoruz',
   },
   {
@@ -25,26 +33,30 @@ const items = [
     icon: 'chart',
     title: 'Hedef',
     text: 'Türkiye ve uluslararası platformda sektöründe öne gelen şirketlerden biri olmak, sürdürülebilir projelerle yaşam alanlarına kalıcı değerler kazandırmaktır.',
-    image: '/img/sayda-insaat-hero02.webp',
+    slug: 'piazza-avm-anamon-otel',
     caption: 'Daha güçlü yarınlar için',
   },
 ];
+const items = chapters.map((chapter) => ({ ...chapter, ...coverOf(chapter.slug) }));
 ---
 
 <Layout
-  title="Vizyon & Misyon | Sayda İnşaat"
+  title="Vizyon, Misyon ve Hedeflerimiz | Sayda İnşaat"
   description="Sayda İnşaat'ın misyonu, vizyonu ve hedefi: müşteri memnuniyetini temel almak, teknolojik gelişmeleri takip etmek ve sektörün öne çıkan şirketlerinden biri olmak."
+  ogImage={hero.image}
 >
   <PageHero
+    variant="photo"
     eyebrow="Vizyon & Misyon"
     breadcrumbs={[
       { label: 'Ana Sayfa', href: '/' },
       { label: 'Kurumsal', href: '/kurumsal' },
       { label: 'Vizyon & Misyon' },
     ]}
-    image="/img/projects/vadistanbul/vadistanbul-03.webp"
-    imagePosition="35% center"
+    image={hero.image}
+    imagePosition="center"
     size="compact"
+    credit={hero.credit}
   >
     Bugünün ihtiyaçları, geleceğin <em>değerleri.</em>
   </PageHero>
@@ -66,7 +78,8 @@ const items = [
     items.map((item, i) => (
       <section class:list={['vm-chapter', `vm-chapter--${i % 3}`]} id={item.id}>
         <div class="vm-chapter__media">
-          <img src={item.image} alt="" loading="lazy" />
+          <img src={item.image} srcset={srcset(item.image, 960, 1920)} sizes="(max-width: 1024px) 100vw, 50vw" alt="" loading="lazy" />
+          {item.credit && <span class="vm-chapter__credit">{item.credit.label}</span>}
         </div>
         <div class="vm-chapter__body">
           <span class="vm-chapter__num" aria-hidden="true">
@@ -82,6 +95,7 @@ const items = [
       </section>
     ))
   }
+
 </Layout>
 
 <style>
@@ -157,6 +171,20 @@ const items = [
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .vm-chapter:hover .vm-chapter__media img {
+    transform: scale(1.04);
+  }
+
+  .vm-chapter__credit {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
   }
 
   .vm-chapter__body {

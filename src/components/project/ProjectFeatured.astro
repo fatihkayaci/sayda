@@ -1,16 +1,14 @@
 ---
 import Icon from '../Icon.astro';
-import { formatDateRange } from '../../utils/project';
+import { projectDisplayName } from '../../utils/project';
 
 interface Project {
   name: string;
-  employer: string;
   location: string;
-  description: string[];
   area: string;
-  startDate: string;
-  endDate: string;
   image: string;
+  imageCredit?: { label: string; href: string };
+  district?: string;
   href: string;
   type?: string;
 }
@@ -34,24 +32,19 @@ const many = projects.length > 1;
               <span />
               DEVAM EDEN PROJE
             </div>
-            <h2>{project.name}</h2>
-            <p class="featured__location">
-              <Icon name="pin" size={21} />
-              {project.location.replace(' - ', ' · ')}
-            </p>
-            <p class="featured__desc">{project.description[0]}</p>
-            <ul class="featured__meta">
-              {project.area && (
-                <li>
-                  <Icon name="area" size={22} />
-                  {project.area}
-                </li>
-              )}
-              <li>
-                <Icon name="calendar" size={22} />
-                {formatDateRange(project.startDate, project.endDate)}
-              </li>
-            </ul>
+            <h2>{projectDisplayName(project.name)}</h2>
+            {(project.location || project.district) && (
+              <p class="featured__location">
+                <Icon name="pin" size={21} />
+                {project.location.replace(' - ', ' · ') || project.district}
+              </p>
+            )}
+            {project.area && (
+              <p class="featured__area">
+                <Icon name="area" size={20} />
+                {project.area}
+              </p>
+            )}
             <a class="featured__button" href={project.href}>
               Projeyi İncele <Icon name="arrow" size={18} />
             </a>
@@ -60,6 +53,11 @@ const many = projects.length > 1;
           <div class="featured__media">
             <img src={project.image || fallbackImage} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
             <span class="featured__badge">DEVAM EDİYOR</span>
+            {project.imageCredit && (
+              <a class="featured__credit" href={project.imageCredit.href} target="_blank" rel="noopener noreferrer">
+                {project.imageCredit.label}
+              </a>
+            )}
             {many && (
               <div class="featured__controls">
                 <button type="button" data-prev aria-label="Önceki proje">
@@ -110,7 +108,7 @@ const many = projects.length > 1;
 
   .featured__slide {
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.6fr);
     gap: 45px;
     align-items: center;
     padding: 27px;
@@ -158,34 +156,30 @@ const many = projects.length > 1;
     color: var(--color-navy-deep);
   }
 
-  .featured__desc {
-    max-width: 40ch;
-    font-size: 1.05rem;
-    line-height: 1.65;
-    color: var(--color-text-muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .featured__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 13px 31px;
-    font-size: 0.98rem;
-    color: var(--color-text-muted);
-  }
-
-  .featured__meta li {
+  .featured__area {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
   }
 
-  .featured__meta :global(svg) {
+  .featured__area :global(svg) {
     color: var(--color-navy);
+  }
+
+  .featured__credit {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .featured__credit:hover {
+    color: #fff;
   }
 
   .featured__button {
@@ -216,9 +210,14 @@ const many = projects.length > 1;
   .featured__media img {
     width: 100%;
     height: 100%;
-    min-height: 381px;
-    max-height: 420px;
+    min-height: 420px;
+    max-height: 500px;
     object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .featured__media:hover img {
+    transform: scale(1.04);
   }
 
   .featured__badge {

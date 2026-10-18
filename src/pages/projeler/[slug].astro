@@ -74,8 +74,13 @@ const serviceLd = {
       <div class="container">
         <div class="proje-detail__grid">
           <div class="proje-detail__content">
-            <ProjectGallery title={title} images={project.gallery} project={project} />
             <ProjectOverview description={project.description} works={project.works} />
+            <ProjectGallery
+              title={title}
+              images={project.gallery}
+              project={project}
+              credits={'galleryCredits' in project ? project.galleryCredits : undefined}
+            />
           </div>
           <ProjectSidebar project={project} />
         </div>

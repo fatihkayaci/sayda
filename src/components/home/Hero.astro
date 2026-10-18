@@ -1,31 +1,38 @@
 ---
 import { srcset } from '../../utils/image';
 
-// Wikimedia Commons photos: their licences require the author credit to stay visible.
+// Photos of projects Sayda worked on, taken from the developers' / architects' sites.
+// Usage permission is still pending — see HERO-IMAGE-LICENSES.md. Keep the credit visible.
 const slides = [
   {
-    image: '/img/home/hero-ciragan.webp',
+    image: '/img/home/hero-buyukyali-tower.webp',
     title: 'Yüksek Kalitede Uygulamalar',
-    credit: 'Çırağan Palace · Foto: A.Savin, FAL',
-    creditHref: 'https://commons.wikimedia.org/wiki/File:Istanbul_asv2020-02_img59_%C3%87%C4%B1ra%C4%9Fan_Palace.jpg',
-  },
-  {
-    image: '/img/home/hero-vadistanbul.webp',
-    title: 'Profesyonel Çözümler',
-    credit: 'Vadistanbul · Foto: Keizers, CC BY-SA 4.0',
-    creditHref: 'https://commons.wikimedia.org/wiki/File:Vadistanbul_AVM-mall_4.jpg',
-  },
-  {
-    image: '/img/home/hero-suzer-plaza.webp',
-    title: 'Güvenilir Takvim, Adil Fiyat',
-    credit: 'Süzer Plaza · Foto: flowcomm, CC BY 2.0',
-    creditHref: 'https://commons.wikimedia.org/wiki/File:Dolmabah%C3%A7e_Mosque_and_S%C3%BCzer_Plaza_in_the_background.jpg',
-  },
-  {
-    image: '/img/home/hero-buyukyali.webp',
-    title: 'Kentsel Dönüşüm Çözümleri',
     credit: 'Büyükyalı · Görsel: Chapman Taylor',
-    creditHref: 'https://www.chapmantaylor.com/news/buyukyali-residential-mega-project-in-istanbul-progressing-well',
+    creditHref: 'https://www.chapmantaylor.com/projects/buyukyali',
+  },
+  {
+    image: '/img/home/hero-vadistanbul-bulvar.webp',
+    title: 'Profesyonel Çözümler',
+    credit: 'Vadistanbul · Görsel: Artaş Holding',
+    creditHref: 'https://www.artasholding.com/tr-tr/proje/vadistanbul-bulvar/',
+  },
+  {
+    image: '/img/home/hero-gaziantep-hospital.webp',
+    title: 'Güvenilir Takvim, Adil Fiyat',
+    credit: 'Gaziantep Şehir Hastanesi · Görsel: Meridiam',
+    creditHref: 'https://www.meridiam.com/assets/gaziantep-hospital-turkey/',
+  },
+  {
+    image: '/img/home/hero-referans-besiktas.webp',
+    title: 'Kentsel Dönüşüm Çözümleri',
+    credit: 'Referans Beşiktaş · Görsel: Kiler GYO',
+    creditHref: 'https://www.referansbesiktas.com/',
+  },
+  {
+    image: '/img/home/hero-referans-kartal-loca.webp',
+    title: 'Nitelikli Yapılar, Güvenilir Çözümler',
+    credit: 'Referans Kartal Loca · Görsel: Kiler GYO',
+    creditHref: 'https://referanskartalloca.com.tr/',
   },
 ];
 ---
@@ -114,7 +121,17 @@ const slides = [
       if (document.readyState === 'complete') loadRest();
       else window.addEventListener('load', loadRest, { once: true });
 
-      start();
+      // Start the first zoom (and the slide timer) when the splash is gone; the timeout is a safety net.
+      const ready = () => {
+        if (hero.classList.contains('is-ready')) return;
+        hero.classList.add('is-ready');
+        start();
+      };
+      if (!document.getElementById('splash') || (window as { __saydaSplashDone?: boolean }).__saydaSplashDone) ready();
+      else {
+        window.addEventListener('sayda:splash-done', ready, { once: true });
+        setTimeout(ready, 2500);
+      }
     });
   }
 
@@ -152,12 +169,25 @@ const slides = [
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transform: scale(1.06);
-    transition: transform 7s ease-out;
   }
 
-  .hero__slide.is-on img {
-    transform: scale(1);
+  /* Slow zoom-out on the active slide. A keyframe animation (not a transition) so it also plays on the
+     first slide, which is already active when the page loads; it starts once the splash has gone. */
+  .hero:not(.is-ready) .hero__slide.is-on img {
+    transform: scale(1.08);
+  }
+
+  .hero.is-ready .hero__slide.is-on img {
+    animation: hero-zoom 7s ease-out both;
+  }
+
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 
   .hero__slide:not(.is-on) {
@@ -280,8 +310,11 @@ const slides = [
       transition: none;
     }
 
-    .hero__slide img {
+    .hero__slide img,
+    .hero:not(.is-ready) .hero__slide.is-on img,
+    .hero.is-ready .hero__slide.is-on img {
       transform: none;
+      animation: none;
     }
   }
 </style>

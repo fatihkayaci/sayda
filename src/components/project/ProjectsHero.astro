@@ -2,6 +2,9 @@
 import Icon from '../Icon.astro';
 import site from '../../data/site.json';
 import projects from '../../data/projects.json';
+import { shortProjectTitle } from '../../utils/project';
+import { srcset } from '../../utils/image';
+import { breadcrumbLd } from '../../utils/schema';
 
 interface Props {
   active: 'all' | 'devam-eden' | 'tamamlanan';
@@ -25,6 +28,17 @@ const types = [...new Set(projects.map((p) => p.type).filter((t): t is string =>
 const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000;
 const areaValue = `${areaInMillions.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}M m²`;
 
+// Background slides: projects whose covers are sharp at full screen width (≈1900px+).
+const slideSlugs = ['vadistanbul', 'yasmin-resort-hotel', 'ciragan-otel-renovasyonu', 'buyukyali', 'akbati-avm-konut'];
+const slides = slideSlugs
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p): p is (typeof projects)[number] => Boolean(p?.imageCredit))
+  .map((p) => ({ image: p.image, name: shortProjectTitle(p.name), href: p.href, credit: p.imageCredit! }));
+
+const crumbs = [{ label: 'Anasayfa', href: '/' }, { label: 'Projeler', href: active === 'all' ? undefined : '/projeler' }];
+if (active !== 'all') crumbs.push({ label: active === 'devam-eden' ? 'Devam Eden' : 'Tamamlanan', href: undefined });
+const breadcrumbData = breadcrumbLd(crumbs, Astro.url.pathname);
+
 const stats = [
   { value: areaValue, label: 'Toplam Alan' },
   { value: String(tamamlananCount), label: 'Tamamlanan Proje' },
@@ -33,10 +47,39 @@ const stats = [
 ];
 ---
 
-<section class="projects-hero">
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
+
+<section class="projects-hero" data-projects-hero>
   <div class="projects-hero__media" aria-hidden="true">
-    <img src="/img/sayda-insaat-hero01.webp" alt="" fetchpriority="high" />
+    {
+      slides.map((slide, i) => (
+        <img
+          class:list={{ 'is-on': i === 0 }}
+          src={slide.image}
+          srcset={srcset(slide.image, 960, 1920)}
+          sizes="100vw"
+          alt=""
+          fetchpriority={i === 0 ? 'high' : undefined}
+          loading={i === 0 ? undefined : 'lazy'}
+        />
+      ))
+    }
   </div>
+
+  {
+    slides.length > 0 && (
+      <div class="projects-hero__captions">
+        {slides.map((slide, i) => (
+          <p class:list={['projects-hero__caption', { 'is-on': i === 0 }]}>
+            <a href={slide.href}>{slide.name}</a>
+            <a class="projects-hero__credit" href={slide.credit.href} target="_blank" rel="noopener noreferrer">
+              {slide.credit.label}
+            </a>
+          </p>
+        ))}
+      </div>
+    )
+  }
 
   <div class="container projects-hero__inner reveal">
     <nav class="projects-hero__breadcrumb" aria-label="Konum">
@@ -174,6 +217,29 @@ const stats = [
 
   initProjectFilters();
   document.addEventListener('astro:page-load', initProjectFilters);
+
+  const heroTimers = new WeakMap<HTMLElement, number>();
+
+  function initProjectsHero() {
+    document.querySelectorAll<HTMLElement>('[data-projects-hero]').forEach((hero) => {
+      const images = [...hero.querySelectorAll('.projects-hero__media img')];
+      const captions = [...hero.querySelectorAll('.projects-hero__caption')];
+      if (images.length < 2 || heroTimers.has(hero)) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      let current = 0;
+      heroTimers.set(
+        hero,
+        window.setInterval(() => {
+          current = (current + 1) % images.length;
+          [images, captions].forEach((list) => list.forEach((el, i) => el.classList.toggle('is-on', i === current)));
+        }, 5500)
+      );
+    });
+  }
+
+  initProjectsHero();
+  document.addEventListener('astro:page-load', initProjectsHero);
 </script>
 
 <style>
@@ -187,15 +253,26 @@ const stats = [
 
   .projects-hero__media {
     position: absolute;
-    inset: 0 0 0 auto;
-    width: 65%;
+    inset: 0;
   }
 
+  /* slides crossfade; the active one slowly zooms out */
   .projects-hero__media img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 70% center;
+    opacity: 0;
+    transform: scale(1.08);
+    transition:
+      opacity 1.4s ease,
+      transform 7s ease-out;
+  }
+
+  .projects-hero__media img.is-on {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .projects-hero__media::after {
@@ -203,13 +280,64 @@ const stats = [
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, var(--color-navy-deep) 0%, rgba(28, 29, 46, 0.35) 55%, rgba(28, 29, 46, 0.55) 100%),
-      rgba(28, 29, 46, 0.25);
+      linear-gradient(to right, rgba(28, 29, 46, 0.92) 0%, rgba(28, 29, 46, 0.55) 45%, rgba(28, 29, 46, 0.15) 100%),
+      linear-gradient(to top, rgba(28, 29, 46, 0.6) 0%, rgba(28, 29, 46, 0) 35%);
   }
 
   .projects-hero__inner {
     position: relative;
-    padding-block: 54px 63px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: clamp(460px, 62vh, 640px);
+    padding-block: 54px 80px;
+  }
+
+  .projects-hero__captions {
+    position: absolute;
+    right: clamp(20px, 4vw, 72px);
+    bottom: 22px;
+    z-index: 1;
+    display: grid;
+    justify-items: end;
+  }
+
+  .projects-hero__caption {
+    grid-area: 1 / 1;
+    display: grid;
+    justify-items: end;
+    gap: 2px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+    pointer-events: none;
+  }
+
+  .projects-hero__caption.is-on {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .projects-hero__caption a:first-child {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .projects-hero__caption a:first-child:hover {
+    color: var(--color-orange);
+  }
+
+  .projects-hero__credit {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .projects-hero__credit:hover {
+    color: #fff;
   }
 
   .projects-hero__breadcrumb {
@@ -448,15 +576,24 @@ const stats = [
   }
 
   @media (max-width: 1024px) {
-    .projects-hero__media {
-      width: 100%;
-      opacity: 0.55;
-    }
-
     .projects-hero__slogan {
       display: none;
     }
 
+    .projects-hero__media::after {
+      background: rgba(28, 29, 46, 0.6);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-hero__media img,
+    .projects-hero__caption {
+      transition: none;
+    }
+
+    .projects-hero__media img {
+      transform: none;
+    }
   }
 
   /* Wide uppercase titles: narrow the width axis on phones so long words fit */

@@ -6,8 +6,11 @@ import NewsletterBand from '../../components/NewsletterBand.astro';
 import haberlerData from '../../data/haberler.json';
 import projects from '../../data/projects.json';
 import site from '../../data/site.json';
+import { articleLd as buildArticleLd, breadcrumbLd as buildBreadcrumbLd } from '../../utils/schema';
 import { formatNewsDate, newsCategoryLabel } from '../../utils/news';
-import { shortProjectTitle } from '../../utils/project';
+import { shortProjectTitle, hasCoverVariants } from '../../utils/project';
+import { variant } from '../../utils/image';
+import { imageSize } from '../../utils/image-size';
 
 export function getStaticPaths() {
   return haberlerData.map((haber) => ({
@@ -40,6 +43,13 @@ const readMinutes = Math.max(1, Math.round(words / 200));
 
 const related = 'relatedProject' in haber ? projects.find((p) => p.slug === haber.relatedProject) : undefined;
 
+// Sharp photos of the related project, shown under the article.
+const projectPhotos = related
+  ? [related.image, ...related.gallery]
+      .filter((src, i, all) => all.indexOf(src) === i && src !== haber.image && (imageSize(src)?.width ?? 0) >= 700)
+      .slice(0, 6)
+  : [];
+
 const url = new URL(`/haberler/${haber.slug}`, site.url).toString();
 const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(haber.title);
@@ -49,9 +59,28 @@ const shares = [
   { name: 'Facebook', icon: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
   { name: 'WhatsApp', icon: 'whatsapp', href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
 ];
+
+const pagePath = `/haberler/${haber.slug}`;
+const articleLd = buildArticleLd({
+  type: 'NewsArticle',
+  headline: haber.title,
+  description: 'seoDescription' in haber && haber.seoDescription ? haber.seoDescription : haber.excerpt,
+  image: haber.image,
+  datePublished: haber.date,
+  path: pagePath,
+});
+const breadcrumbLd = buildBreadcrumbLd(
+  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Haberler', href: '/haberler' }, { label: haber.title }],
+  pagePath
+);
 ---
 
-<Layout title={`${haber.title} | Sayda İnşaat`} description={haber.excerpt} ogImage={haber.image}>
+<Layout
+  title={'seoTitle' in haber && haber.seoTitle ? haber.seoTitle : `${haber.title} | Sayda İnşaat`}
+  description={'seoDescription' in haber && haber.seoDescription ? haber.seoDescription : haber.excerpt}
+  ogImage={haber.image}
+  jsonLd={[articleLd, breadcrumbLd]}
+>
   <article>
     <header class="nd-head">
       <div class="container">
@@ -113,7 +142,7 @@ const shares = [
           {
             related && (
               <a class="nd-related" href={related.href}>
-                <img src={related.image} alt="" loading="lazy" />
+                <img src={hasCoverVariants(related.image) ? variant(related.image, 640) : related.image} alt="" loading="lazy" />
                 <span class="nd-related__text">
                   <small>İlgili Proje</small>
                   <strong>{shortProjectTitle(related.name)}</strong>
@@ -123,6 +152,23 @@ const shares = [
                   <Icon name="arrow" size={20} />
                 </span>
               </a>
+            )
+          }
+
+          {
+            projectPhotos.length >= 3 && related && (
+              <div class="nd-photos">
+                <p class="nd-photos__label">Projeden Fotoğraflar</p>
+                <ul>
+                  {projectPhotos.map((src) => (
+                    <li>
+                      <a href={related.href}>
+                        <img src={hasCoverVariants(src) ? variant(src, 640) : src} alt={`${shortProjectTitle(related.name)} projesi`} loading="lazy" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )
           }
 
@@ -168,7 +214,7 @@ const shares = [
           more.map((item) => (
             <a class="nd-card" href={`/haberler/${item.slug}`}>
               <span class="nd-card__media">
-                <img src={item.image} alt="" loading="lazy" />
+                <img src={variant(item.image, 640)} alt="" loading="lazy" />
               </span>
               <span class="nd-card__meta">
                 {formatNewsDate(item.date)} · {newsCategoryLabel[item.category]}
@@ -391,6 +437,52 @@ const shares = [
 
   .nd-related:hover {
     border-color: var(--color-navy-deep);
+  }
+
+  .nd-photos {
+    margin-top: 40px;
+  }
+
+  .nd-photos__label {
+    margin-bottom: 14px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .nd-photos ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nd-photos a {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .nd-photos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms ease;
+  }
+
+  .nd-photos a:hover img {
+    transform: scale(1.06);
+  }
+
+  @media (max-width: 520px) {
+    .nd-photos ul {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .nd-related img {

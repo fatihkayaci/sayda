@@ -1,0 +1,141 @@
+---
+// "Sahadan" strip: Sayda's own site photos (crew at work) from the old site's project galleries.
+// They're ~500px, so tiles stay small enough to remain sharp.
+const photos = [
+  { src: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-11.webp', project: 'Atlas Park AVM', href: '/projeler/atlas-park-avm-ofis' },
+  { src: '/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-10.webp', project: 'Piazza AVM', href: '/projeler/piazza-avm-anamon-otel' },
+  { src: '/img/projects/oyakkent-konut/oyakkent-konut-eski-13.webp', project: 'Oyakkent', href: '/projeler/oyakkent-konut' },
+  { src: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-07.webp', project: 'Atlas Park AVM', href: '/projeler/atlas-park-avm-ofis' },
+  { src: '/img/projects/capital-tower-ofis/capital-tower-ofis-eski-15.webp', project: 'Capital Tower', href: '/projeler/capital-tower-ofis' },
+  { src: '/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-12.webp', project: 'Piazza AVM', href: '/projeler/piazza-avm-anamon-otel' },
+  { src: '/img/projects/oyakkent-konut/oyakkent-konut-eski-16.webp', project: 'Oyakkent', href: '/projeler/oyakkent-konut' },
+  { src: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-04.webp', project: 'Atlas Park AVM', href: '/projeler/atlas-park-avm-ofis' },
+  { src: '/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-11.webp', project: 'Piazza AVM', href: '/projeler/piazza-avm-anamon-otel' },
+  { src: '/img/projects/oyakkent-konut/oyakkent-konut-eski-09.webp', project: 'Oyakkent', href: '/projeler/oyakkent-konut' },
+];
+---
+
+<section class="svc-field" aria-labelledby="svc-field-title">
+  <div class="container svc-field__head">
+    <span class="eyebrow"><i></i>Sahadan</span>
+    <h2 id="svc-field-title">İşi şantiyede, kendi ekibimizle yapıyoruz.</h2>
+  </div>
+
+  <div class="svc-field__marquee">
+    {
+      [0, 1].map((copy) => (
+        <ul class="svc-field__track" aria-hidden={copy === 1 ? 'true' : undefined}>
+          {photos.map((photo) => (
+            <li>
+              <a href={photo.href} tabindex={copy === 1 ? -1 : undefined}>
+                <img src={photo.src} alt={copy === 1 ? '' : `${photo.project} şantiyesinde Sayda İnşaat ekibi`} loading="lazy" />
+                <span>{photo.project}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .svc-field {
+    padding-block: clamp(72px, 8vw, 120px);
+    background: var(--color-bg-light);
+    overflow: hidden;
+  }
+
+  .svc-field__head {
+    margin-bottom: 40px;
+  }
+
+  .svc-field h2 {
+    max-width: 22ch;
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 2.2vw + 1rem, 3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+  }
+
+  /* endless slow scroll; pauses on hover */
+  .svc-field__marquee {
+    display: flex;
+    width: max-content;
+  }
+
+  .svc-field__marquee:hover .svc-field__track {
+    animation-play-state: paused;
+  }
+
+  .svc-field__track {
+    display: flex;
+    gap: 14px;
+    margin: 0;
+    padding: 0 7px;
+    list-style: none;
+    animation: svc-field-scroll 60s linear infinite;
+  }
+
+  @keyframes svc-field-scroll {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .svc-field__track a {
+    position: relative;
+    display: block;
+    width: 300px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .svc-field__track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms ease;
+  }
+
+  .svc-field__track a:hover img {
+    transform: scale(1.05);
+  }
+
+  .svc-field__track span {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 4px 10px;
+    background: rgba(20, 21, 34, 0.8);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .svc-field__track a {
+      width: 230px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-field__marquee {
+      width: auto;
+      overflow-x: auto;
+    }
+
+    .svc-field__track {
+      animation: none;
+    }
+
+    .svc-field__track[aria-hidden] {
+      display: none;
+    }
+  }
+</style>

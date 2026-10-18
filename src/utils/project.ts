@@ -2,6 +2,26 @@ export function shortProjectTitle(name: string): string {
   return name.replace(/^Referans\s+/, '').replace(/\s+Projesi$/, '');
 }
 
+// Legacy names are often ALL CAPS ("CAVİAR BAR VE RESTAURANT PROJESİ"); show those in Turkish title case.
+// Names that already have lowercase letters are left as written.
+const KEEP_UPPER = new Set(['AVM', 'GYO', 'GMYO', 'M1', 'ŞTİ', 'A.Ş.', 'LTD.']);
+const KEEP_LOWER = new Set(['ve', 'ile', 'de', 'da']);
+// English words in legacy names, where a Turkish lowercase would turn I into ı
+const FOREIGN: Record<string, string> = { RESIDANCE: 'Residance', RESIDENCE: 'Residence', RESORT: 'Resort', CITY: 'City', PRINT: 'Print' };
+export function projectDisplayName(name: string): string {
+  if (name !== name.toLocaleUpperCase('tr')) return name;
+  return name
+    .split(/(\s+|[-/()])/)
+    .map((raw, i) => {
+      if (FOREIGN[raw]) return FOREIGN[raw];
+      const word = raw.toLocaleLowerCase('tr');
+      if (KEEP_UPPER.has(raw)) return raw;
+      if (i > 0 && KEEP_LOWER.has(word)) return word;
+      return word.charAt(0).toLocaleUpperCase('tr') + word.slice(1);
+    })
+    .join('');
+}
+
 export function statusLabel(status: string): string {
   return status === 'devam-eden' ? 'DEVAM EDEN' : 'TAMAMLANDI';
 }
@@ -10,6 +30,11 @@ export function formatDateRange(startDate: string, endDate: string): string {
   if (startDate && endDate) return `${startDate} — ${endDate}`;
   if (startDate) return `${startDate} — Devam Ediyor`;
   return '';
+}
+
+// Covers found for the redesign (`*-cover.webp`) come with -640 / -960 copies; older photos don't.
+export function hasCoverVariants(image: string): boolean {
+  return image.endsWith('-cover.webp');
 }
 
 export function splitLocation(location: string): { short: string; full: string } {

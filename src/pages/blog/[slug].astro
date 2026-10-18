@@ -5,6 +5,7 @@ import SectionHead from '../../components/SectionHead.astro';
 import NewsletterBand from '../../components/NewsletterBand.astro';
 import posts from '../../data/blog.json';
 import site from '../../data/site.json';
+import { articleLd as buildArticleLd, breadcrumbLd as buildBreadcrumbLd } from '../../utils/schema';
 import { blogCategoryLabel, readMinutes as postReadMinutes, type BlogBlock } from '../../utils/blog';
 import { formatNewsDate } from '../../utils/news';
 
@@ -49,9 +50,28 @@ const shares = [
   { name: 'Facebook', icon: 'facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
   { name: 'WhatsApp', icon: 'whatsapp', href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
 ];
+
+const pagePath = `/blog/${post.slug}`;
+const articleLd = buildArticleLd({
+  type: 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  image: post.image,
+  datePublished: post.date,
+  path: pagePath,
+});
+const breadcrumbLd = buildBreadcrumbLd(
+  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Blog', href: '/blog' }, { label: post.title }],
+  pagePath
+);
 ---
 
-<Layout title={`${post.title} | Sayda İnşaat`} description={post.excerpt} ogImage={post.image}>
+<Layout
+  title={'seoTitle' in post && post.seoTitle ? post.seoTitle : `${post.title} | Sayda İnşaat`}
+  description={post.excerpt}
+  ogImage={post.image}
+  jsonLd={[articleLd, breadcrumbLd]}
+>
   <article>
     <header class="gd-head">
       <div class="container">

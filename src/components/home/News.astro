@@ -4,16 +4,13 @@ import news from '../../data/haberler.json';
 import site from '../../data/site.json';
 import { variant } from '../../utils/image';
 
-const images = ['/img/home/gold-towers.webp', '/img/home/garden-day.webp', '/img/home/site-team.webp'];
-const items = [...news]
-  .sort((a, b) => b.date.localeCompare(a.date))
-  .slice(0, 3)
-  .map((n, i) => ({ ...n, image: images[i] }));
+// Each card shows the news item's own photo (all have a -640 copy).
+const items = [...news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
 const docs = [
-  { title: 'Sertifikalarımız', href: site.documents.certificate, image: '/img/home/belge1.webp', external: true },
-  { title: 'Tanıtım Kataloğu', href: site.documents.catalog, image: '/img/home/sayda-hq.webp', external: true },
-  { title: 'İş Bitirme Belgelerimiz', href: '/projeler/is-bitirme-belgeleri', image: '/img/home/belge3.webp', external: false },
+  { title: 'Sertifikalarımız', href: site.documents.certificate, image: '/img/belgeler/iso-9001.webp', external: true },
+  { title: 'Tanıtım Kataloğu', href: site.documents.catalog, image: '/img/belgeler/katalog-kapak.webp', external: true },
+  { title: 'İş Bitirme Belgelerimiz', href: '/projeler/is-bitirme-belgeleri', image: '/img/is-bitirme/is-bitirme-01.webp', external: false },
 ];
 
 const fmt = (iso: string) => {
@@ -60,7 +57,7 @@ const fmt = (iso: string) => {
       </div>
       <div class="certs__body">
         <div class="certs__card">
-          <img src="/img/home/belge1-240.webp" alt="Sertifika" width="240" height="300" loading="lazy" />
+          <img src="/img/belgeler/iso-9001-360.webp" alt="Sertifika" width="240" height="300" loading="lazy" />
           <p>Kalite ve güven standartlarımızı belgeleyen sertifikalarımız.</p>
         </div>
         <ul class="certs__docs">

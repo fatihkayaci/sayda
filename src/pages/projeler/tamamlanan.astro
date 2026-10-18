@@ -7,8 +7,8 @@ import allProjects from '../../data/projects.json';
 const projects = allProjects.filter((project) => project.status === 'tamamlanan');
 ---
 
-<Layout
-  title="Tamamlanan Projeler | Sayda İnşaat"
+<Layout ogImage={'/img/projects/vadistanbul/vadistanbul-cover.webp'}
+  title="Tamamlanan İnşaat Projelerimiz | Sayda İnşaat"
   description="Sayda İnşaat'ın tamamlayıp teslim ettiği konut, ofis, AVM, otel ve endüstriyel projeler; konum ve işveren bilgileriyle."
 >
   <ProjectsHero active="tamamlanan" />

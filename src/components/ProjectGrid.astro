@@ -1,6 +1,8 @@
 ---
 import Icon from './Icon.astro';
-import { statusLabel, formatDateRange } from '../utils/project';
+import { statusLabel, hasCoverVariants, projectDisplayName } from '../utils/project';
+import { variant } from '../utils/image';
+import { imageSize } from '../utils/image-size';
 
 interface Project {
   slug: string;
@@ -14,6 +16,7 @@ interface Project {
   startDate: string;
   endDate: string;
   image: string;
+  gallery?: string[];
   href: string;
 }
 
@@ -22,6 +25,12 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+// Sharpest covers first; the old 222–500px thumbnails end up last. Ties keep the data order.
+const coverWidth = (project: Project) => (project.image ? (imageSize(project.image)?.width ?? 0) : 0);
+const ordered = projects
+  .map((project, i) => ({ project, i, width: coverWidth(project) }))
+  .sort((a, b) => b.width - a.width || a.i - b.i)
+  .map(({ project }) => project);
 
 const searchText = (project: Project) =>
   [project.name, project.location, project.employer, project.district, project.type].filter(Boolean).join(' ');
@@ -29,46 +38,54 @@ const searchText = (project: Project) =>
 
 <div class="project-grid">
   {
-    projects.map((project, i) => (
+    ordered.map((project, i) => (
       <a
-        class={`project-card reveal reveal-d${(i % 4) + 1}`}
+        class={`project-card reveal reveal-d${(i % 3) + 1}`}
         href={project.href}
         data-district={project.district || ''}
         data-type={project.type || ''}
         data-search={searchText(project)}
       >
-        <div class="project-card__media">
-          {project.image ? (
-            <img src={project.image} alt={`${project.name} - Sayda İnşaat`} loading="lazy" />
-          ) : (
-            <div class="project-card__media-empty">
-              <Icon name="photo" size={36} />
-            </div>
-          )}
-          <span class={`project-card__badge project-card__badge--${project.status}`}>{statusLabel(project.status)}</span>
-          {project.district && <span class="project-card__district-badge">{project.district}</span>}
-        </div>
-        <div class="project-card__info">
-          <h2>{project.name}</h2>
-          <span class="project-card__location">{project.location.replace(' - ', ' · ')}</span>
-          {project.employer && <span class="project-card__employer">{project.employer}</span>}
-          <div class="project-card__meta">
-            {
-              project.area && (
-                <span class="project-card__stat project-card__area">
-                  <Icon name="area" size={18} />
-                  {project.area}
-                </span>
-              )
+        {project.image && coverWidth(project) < 480 && (
+          // tiny old thumbnails: a blurred copy fills the card, the photo itself is shown whole on top
+          <img class="project-card__blur" src={project.image} alt="" aria-hidden="true" loading="lazy" />
+        )}
+        {project.image ? (
+          <img
+            class:list={{ 'project-card__img--small': coverWidth(project) < 480 }}
+            src={hasCoverVariants(project.image) ? variant(project.image, 960) : project.image}
+            srcset={
+              hasCoverVariants(project.image)
+                ? `${variant(project.image, 640)} 640w, ${variant(project.image, 960)} 960w`
+                : undefined
             }
-            <span class="project-card__stat project-card__date">
-              <Icon name="calendar" size={18} />
-              {formatDateRange(project.startDate, project.endDate)}
-            </span>
-            <span class="project-card__arrow" aria-hidden="true">
-              <Icon name="arrow" size={18} />
-            </span>
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            alt={`${project.name} - Sayda İnşaat`}
+            loading="lazy"
+          />
+        ) : (
+          <div class="project-card__empty">
+            <Icon name="photo" size={36} />
           </div>
+        )}
+        <span class="project-card__shade" aria-hidden="true" />
+
+        <div class="project-card__top">
+          {project.type && <span class="project-card__type">{project.type}</span>}
+          {project.status === 'devam-eden' && <span class="project-card__status">{statusLabel(project.status)}</span>}
+        </div>
+
+        <div class="project-card__info">
+          <h2>{projectDisplayName(project.name)}</h2>
+          {(project.location || project.district) && (
+            <span class="project-card__location">
+              <Icon name="pin" size={16} />
+              {project.location.replace(' - ', ' · ') || project.district}
+            </span>
+          )}
+          <span class="project-card__more">
+            Projeyi İncele <Icon name="arrow" size={16} />
+          </span>
         </div>
       </a>
     ))
@@ -83,158 +100,164 @@ const searchText = (project: Project) =>
   }
 
   .project-card {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
     border-radius: 6px;
     overflow: hidden;
-    background: var(--color-bg);
-    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
-    transition:
-      transform var(--transition),
-      box-shadow var(--transition);
+    background: var(--color-navy-deep);
+    color: #fff;
+    isolation: isolate;
   }
 
   .project-card[hidden] {
     display: none;
   }
 
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-  }
-
-  .project-card__media {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card__media img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    transition: transform 500ms ease;
-  }
-
-  .project-card__media-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: var(--color-bg-light);
-    color: var(--color-border);
-  }
-
-  .project-card:hover .project-card__media img {
-    transform: scale(1.05);
-  }
-
-  .project-card__badge {
+  .project-card img,
+  .project-card__empty {
     position: absolute;
-    top: 13px;
-    left: 12px;
-    z-index: 1;
-    padding: 5px 13px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .project-card__blur {
+    filter: blur(18px) brightness(0.7);
+    transform: scale(1.2);
+  }
+
+  .project-card img.project-card__img--small {
+    inset: 10% 12% 30%;
+    width: 76%;
+    height: 60%;
+    object-fit: contain;
+  }
+
+  .project-card:hover img.project-card__img--small {
+    transform: scale(1.03);
+  }
+
+  .project-card:hover img.project-card__blur {
+    transform: scale(1.2);
+  }
+
+  .project-card__empty {
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .project-card:hover img {
+    transform: scale(1.07);
+  }
+
+  .project-card__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 21, 34, 0.92) 0%, rgba(20, 21, 34, 0.45) 38%, rgba(20, 21, 34, 0) 65%);
+    transition: background var(--transition);
+  }
+
+  .project-card:hover .project-card__shade {
+    background: linear-gradient(to top, rgba(20, 21, 34, 0.95) 0%, rgba(20, 21, 34, 0.6) 50%, rgba(20, 21, 34, 0.1) 85%);
+  }
+
+  .project-card__top {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .project-card__type,
+  .project-card__status {
+    padding: 5px 12px;
     border-radius: 3px;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
-  .project-card__badge--devam-eden {
-    background: var(--color-navy);
-    color: #fff;
-  }
-
-  .project-card__badge--tamamlanan {
-    background: rgba(255, 255, 255, 0.85);
+  .project-card__type {
+    background: rgba(255, 255, 255, 0.9);
     color: var(--color-navy-deep);
     backdrop-filter: blur(4px);
   }
 
-  .project-card__district-badge {
-    position: absolute;
-    top: 13px;
-    right: 12px;
-    z-index: 1;
-    padding: 5px 13px;
-    border-radius: 3px;
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--color-navy-deep);
+  .project-card__status {
+    margin-left: auto;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
   }
 
   .project-card__info {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    flex: 1;
-    padding: 21px 22px 18px;
+    position: absolute;
+    inset: auto 0 0;
+    display: grid;
+    gap: 8px;
+    padding: 22px 22px 20px;
   }
 
   .project-card h2 {
     font-family: var(--font-body);
     font-weight: 700;
-    font-size: 1.19rem;
+    font-size: 1.125rem;
     line-height: 1.3;
-    color: var(--color-navy-deep);
+    color: #fff;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .project-card__location {
-    font-size: 0.91rem;
-    color: var(--color-text-muted);
-  }
-
-  .project-card__employer {
-    font-size: 0.84rem;
-    line-height: 1.5;
-    color: var(--color-text-faint);
-  }
-
-  .project-card__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    row-gap: 8px;
-    gap: 18px;
-    margin-top: auto;
-    padding-top: 16px;
-  }
-
-  .project-card__stat {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    white-space: nowrap;
-    font-size: 0.84rem;
-    color: var(--color-text-muted);
+    gap: 6px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
   }
 
-  .project-card__stat :global(svg) {
-    color: var(--color-navy);
-  }
-
-  .project-card__area {
-    font-weight: 700;
-    color: var(--color-navy-deep);
-  }
-
-  .project-card__arrow {
-    display: grid;
-    place-items: center;
+  .project-card__location :global(svg) {
     flex: none;
-    width: 34px;
-    height: 34px;
-    margin-left: auto;
-    border-radius: 50%;
-    background: var(--color-navy);
-    color: #fff;
-    transition: background var(--transition);
+    color: var(--color-orange);
   }
 
-  .project-card:hover .project-card__arrow {
-    background: var(--color-navy-deep);
+  /* slides up under the title on hover */
+  .project-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-orange);
+    transition:
+      max-height 400ms ease,
+      opacity 300ms ease;
+  }
+
+  .project-card:hover .project-card__more,
+  .project-card:focus-visible .project-card__more {
+    max-height: 24px;
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .project-card__more {
+      max-height: none;
+      opacity: 1;
+    }
   }
 
   @media (max-width: 1024px) {
@@ -246,6 +269,17 @@ const searchText = (project: Project) =>
   @media (max-width: 640px) {
     .project-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card img,
+    .project-card__more {
+      transition: none;
+    }
+
+    .project-card:hover img {
+      transform: none;
     }
   }
 </style>

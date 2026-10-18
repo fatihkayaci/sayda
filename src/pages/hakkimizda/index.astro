@@ -2,49 +2,85 @@
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
+import Intro from '../../components/home/Intro.astro';
 import site from '../../data/site.json';
+import projects from '../../data/projects.json';
+import { variant } from '../../utils/image';
+import { hasCoverVariants } from '../../utils/project';
+
+const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug)!;
+const coverOf = (slug: string) => {
+  const project = projectBySlug(slug);
+  const image = hasCoverVariants(project.image) ? variant(project.image, 960) : project.image;
+  return { image, href: project.href, credit: 'imageCredit' in project ? project.imageCredit : undefined };
+};
 
 const values = [
-  { title: 'Güven', text: 'Söz verdiğimiz gibi, zamanında ve kaliteli işler teslim ederiz.' },
-  { title: 'İnsan Odaklılık', text: 'Çalışanlarımız, iş ortaklarımız ve müşterilerimiz bizim için değerlidir.' },
-  { title: 'Sürdürülebilirlik', text: 'Gelecek nesiller için daha iyi yaşam alanları inşa ederiz.' },
-  { title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
+  { icon: 'shield', title: 'Güven', text: 'Söz verdiğimiz gibi, zamanında ve kaliteli işler teslim ederiz.' },
+  { icon: 'team', title: 'İnsan Odaklılık', text: 'Çalışanlarımız, iş ortaklarımız ve müşterilerimiz bizim için değerlidir.' },
+  { icon: 'leaf', title: 'Sürdürülebilirlik', text: 'Gelecek nesiller için daha iyi yaşam alanları inşa ederiz.' },
+  { icon: 'diamond', title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
 ];
 
+// Every milestone is sourced: founding year, project records (projects.json) and the old site's news
+// (haberler.json). No invented "phases" — add new entries only from a real date.
 const timeline = [
-  { year: String(site.foundedYear), title: 'Kuruluş', text: 'Sayda İnşaat kuruldu.' },
-  { year: '2000+', title: 'İlk Büyük Projeler', text: 'İlk büyük ölçekli projeler hayata geçirildi.' },
-  { year: '2010+', title: 'Faaliyet Alanı Genişledi', text: 'Farklı proje tiplerinde faaliyet alanı genişletildi.' },
-  { year: '2020+', title: 'Türkiye Geneli', text: 'Türkiye genelinde projeler üstlenilmeye başlandı.' },
-  { year: '2026', title: 'Bugün', text: 'Yeni hedeflerle yolumuza devam ediyoruz.' },
+  {
+    year: String(site.foundedYear),
+    title: 'Kuruluş',
+    text: `${site.legalName} İstanbul'da kuruldu.`,
+  },
+  {
+    year: '2013',
+    title: 'Torun Tower',
+    text: '40 katlık Torun Tower ofis kulesinin shell & core ince işlerini üstlendik.',
+    ...coverOf('torun-tower-ofis'),
+  },
+  {
+    year: '2018',
+    title: 'Büyükyalı, Vadistanbul ve Gaziantep',
+    text: 'Büyükyalı, Vadistanbul 3. etap ve Gaziantep Entegre Sağlık Kampüsü projelerinin ince işlerine başladık.',
+    ...coverOf('vadistanbul'),
+  },
+  {
+    year: '2021',
+    title: 'Referans Kartal Loca',
+    text: 'Kiler GYO’nun Referans Kartal Loca projesinin ince işlerini üstlendik; 2. etap 2022’de eklendi.',
+    ...coverOf('referans-kartal-loca-2'),
+  },
+  {
+    year: '2022',
+    title: 'Süslü Karakol',
+    text: '1866 tarihli Aziziye Karakolu’nun satış ofisine dönüşümünde renovasyon ve ince işleri yaptık.',
+    ...coverOf('kiler-besiktas-abbasaga-satis-ofisi'),
+  },
+  {
+    year: '2024',
+    title: 'Referans Beşiktaş',
+    text: 'Referans Loca 1’i teslim ettik; Referans Beşiktaş projesinin ince işlerine başladık.',
+    ...coverOf('referans-besiktas-abbasaga'),
+  },
+  {
+    year: '2025',
+    title: `${site.certifications.length} ISO sertifikası`,
+    text: 'Kalite, çevre, iş sağlığı ve güvenliği başta olmak üzere yönetim sistemlerimizi belgelendirdik.',
+    image: site.certifications[0].image,
+    href: '/belgeler',
+    certificate: true,
+  },
 ];
 
 const expertise = [
-  {
-    title: 'Konut Projeleri',
-    text: 'Konut ve rezidans projelerinde taahhüt ve ince işler.',
-    image: '/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp',
-    href: '/projeler?tur=Konut',
-  },
-  {
-    title: 'Ticari Yapılar',
-    text: 'AVM, ofis ve iş merkezlerinde uçtan uca uygulama.',
-    image: '/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp',
-    href: '/projeler?tur=Ticari',
-  },
-  {
-    title: 'Sağlık Kampüsleri',
-    text: 'Hastane ve sağlık kampüslerinde ince işler.',
-    image: '/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp',
-    href: '/projeler?tur=Sağlık',
-  },
-  {
-    title: 'Otel Projeleri',
-    text: 'Otel ve tatil köylerinde yapım ve renovasyon.',
-    image: '/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp',
-    href: '/projeler?tur=Otel',
-  },
-];
+  { title: 'Konut Projeleri', text: 'Konut ve rezidans projelerinde taahhüt ve ince işler.', slug: 'terrace-bahce-konut', href: '/projeler?tur=Konut' },
+  { title: 'Ticari Yapılar', text: 'AVM, ofis ve iş merkezlerinde uçtan uca uygulama.', slug: 'atlas-park-avm-ofis', href: '/projeler?tur=Ticari' },
+  { title: 'Sağlık Kampüsleri', text: 'Hastane ve sağlık kampüslerinde ince işler.', slug: 'gaziantep-sehir-hastanesi', href: '/projeler?tur=Sağlık' },
+  { title: 'Otel Projeleri', text: 'Otel ve tatil köylerinde yapım ve renovasyon.', slug: 'yasmin-resort-hotel', href: '/projeler?tur=Otel' },
+].map((item) => ({ ...item, image: coverOf(item.slug).image }));
+
+// "Who we are" photo collage
+const collage = ['atlas-park-avm-ofis', 'buyukyali', 'yasmin-resort-hotel'].map(coverOf);
+const hero = coverOf('ciragan-otel-renovasyonu');
+const heroImage = projectBySlug('ciragan-otel-renovasyonu').image;
 
 // Logos live in /img/refs; a ref without a logo falls back to its name.
 const refs = [
@@ -75,14 +111,19 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
 ---
 
 <Layout
-  title="Hakkımızda | Sayda İnşaat"
+  title="Hakkımızda: 1996'dan Beri Taahhüt ve İnce İşler | Sayda"
   description="1996'da kurulan Sayda İnşaat'ın hikayesi, uzmanlık alanları ve birlikte çalıştığımız kurumlar: konut, ticari, otel ve sağlık projeleri."
+  ogImage={heroImage}
   organizationSchema
 >
   <PageHero
+    variant="photo"
     eyebrow="Hakkımızda"
     breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Kurumsal', href: '/kurumsal' }, { label: 'Hakkımızda' }]}
-    image="/img/sayda-insaat-hero03.webp"
+    image={heroImage}
+    imagePosition="center"
+    size="compact"
+    credit={hero.credit}
     backdrop={String(site.foundedYear)}
     facts={[
       { value: String(site.foundedYear), label: 'Kuruluş' },
@@ -92,6 +133,8 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
   >
     Yapının her aşamasında <em>deneyim</em> ve güven.
   </PageHero>
+
+  <Intro />
 
   <!-- 2. Who we are: statement + sectors beside a large photo -->
   <section class="ab-who">
@@ -126,7 +169,15 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       </div>
 
       <figure class="ab-who__media">
-        <img src="/img/projects/oyakkent-konut/oyakkent-konut.webp" alt="Sayda İnşaat projelerinden bir konut yapısı" loading="lazy" />
+        <div class="ab-who__collage">
+          {
+            collage.map((item, i) => (
+              <a href={item.href} class={`ab-who__shot ab-who__shot--${i + 1}`}>
+                <img src={item.image} alt="Sayda İnşaat'ın ince işlerini yaptığı bir proje" loading="lazy" />
+              </a>
+            ))
+          }
+        </div>
         <figcaption class="ab-who__badge">
           <b>{yearsOfExperience}+</b>
           <span>Yıllık<br />deneyim</span>
@@ -153,6 +204,17 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
               <span class="ab-journey__item-year">{item.year}</span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
+              {item.image && (
+                <a
+                  href={item.href}
+                  class:list={['ab-journey__photo', { 'ab-journey__photo--cert': 'certificate' in item }]}
+                >
+                  <img src={item.image} alt="" loading="lazy" />
+                  <span>
+                    {'certificate' in item ? 'Belgelerimiz' : 'Projeyi incele'} <Icon name="arrow" size={14} />
+                  </span>
+                </a>
+              )}
             </li>
           ))
         }
@@ -170,7 +232,10 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       <ol class="ab-values__list">
         {
           values.map((value, i) => (
-            <li class="ab-values__row">
+            <li class={`ab-values__card reveal reveal-d${i + 1}`}>
+              <span class="ab-values__icon">
+                <Icon name={value.icon} size={28} />
+              </span>
               <span class="ab-values__num">{String(i + 1).padStart(2, '0')}</span>
               <h3>{value.title}</h3>
               <p>{value.text}</p>
@@ -244,6 +309,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       ))
     }
   </section>
+
 </Layout>
 
 <script>
@@ -465,11 +531,34 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     width: 100%;
   }
 
-  .ab-who__media img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
+  /* one tall photo with two stacked beside it */
+  .ab-who__collage {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 12px;
+    aspect-ratio: 5 / 5.2;
+  }
+
+  .ab-who__shot {
+    overflow: hidden;
     border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .ab-who__shot--1 {
+    grid-row: 1 / 3;
+  }
+
+  .ab-who__shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .ab-who__shot:hover img {
+    transform: scale(1.06);
   }
 
   .ab-who__badge {
@@ -566,7 +655,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     align-content: center;
     gap: 12px;
     min-height: 44vh;
-    padding-left: 48px;
+    padding: 56px 0 56px 48px;
     opacity: 0.35;
     transition: opacity 400ms ease;
   }
@@ -619,6 +708,58 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     color: var(--color-text-muted);
   }
 
+  .ab-journey__photo {
+    position: relative;
+    display: block;
+    max-width: 520px;
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--color-navy-deep);
+  }
+
+  .ab-journey__photo img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  /* certificate scans are portrait: show the top of the page on navy */
+  .ab-journey__photo--cert img {
+    object-fit: contain;
+    padding: 18px;
+  }
+
+  .ab-journey__photo span {
+    position: absolute;
+    left: 14px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity var(--transition),
+      transform var(--transition);
+  }
+
+  .ab-journey__photo:hover img {
+    transform: scale(1.05);
+  }
+
+  .ab-journey__photo:hover span,
+  .ab-journey__photo:focus-visible span {
+    opacity: 1;
+    transform: none;
+  }
+
   /* 4. Values */
   .ab-values {
     padding-block: clamp(80px, 9vw, 140px);
@@ -626,26 +767,29 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
   }
 
   .ab-values__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 2px solid var(--color-navy-deep);
   }
 
-  .ab-values__row {
+  /* card fills navy from the bottom on hover */
+  .ab-values__card {
     position: relative;
     display: grid;
-    /* minmax(0, …) so a long title can't widen its column and push the text right */
-    grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 32px;
-    padding: 40px 32px;
-    border-bottom: 1px solid var(--color-border-strong);
+    align-content: start;
+    gap: 14px;
+    padding: 32px 28px 36px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(43, 46, 131, 0.07);
+    overflow: hidden;
     isolation: isolate;
-    transition: color 300ms ease;
   }
 
-  .ab-values__row::before {
+  .ab-values__card::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -656,48 +800,65 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     transition: transform 400ms ease;
   }
 
-  .ab-values__row:hover {
-    color: #fff;
-  }
-
-  .ab-values__row:hover::before {
+  .ab-values__card:hover::before {
     transform: scaleY(1);
   }
 
+  .ab-values__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+    background: rgba(245, 162, 27, 0.14);
+    color: var(--color-orange-text);
+    transition:
+      background 300ms ease,
+      color 300ms ease;
+  }
+
   .ab-values__num {
+    position: absolute;
+    top: 26px;
+    right: 26px;
     font-family: var(--font-display);
     font-stretch: 125%;
     font-weight: 800;
-    font-size: 1.125rem;
-    color: var(--color-orange);
+    font-size: 1rem;
+    color: var(--color-border-strong);
+    transition: color 300ms ease;
   }
 
-  .ab-values__row h3 {
+  .ab-values__card h3 {
     font-family: var(--font-display);
-    font-stretch: 115%;
+    font-stretch: 112%;
     font-weight: 800;
-    font-size: clamp(1.75rem, 2.4vw + 0.75rem, 3.5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
     color: var(--color-navy-deep);
     transition: color 300ms ease;
   }
 
-  /* fixed width so short and long texts start at the same left edge */
-  .ab-values__row p {
-    width: min(100%, 42ch);
-    justify-self: end;
-    font-size: 1.0625rem;
+  .ab-values__card p {
+    font-size: 0.9875rem;
     line-height: 1.6;
     color: var(--color-text-muted);
     transition: color 300ms ease;
   }
 
-  .ab-values__row:hover h3 {
+  .ab-values__card:hover .ab-values__icon {
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  .ab-values__card:hover h3,
+  .ab-values__card:hover .ab-values__num {
     color: #fff;
   }
 
-  .ab-values__row:hover p {
+  .ab-values__card:hover p {
     color: rgba(255, 255, 255, 0.85);
   }
 
@@ -963,17 +1124,8 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       border-color: var(--color-orange);
     }
 
-    .ab-values__row {
-      grid-template-columns: 64px 1fr;
-      gap: 12px 20px;
-      padding: 32px 0;
-    }
-
-    .ab-values__row p {
-      grid-column: 2;
-      justify-self: start;
-      width: auto;
-      max-width: 42ch;
+    .ab-values__list {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     .ab-panels {
@@ -1007,6 +1159,10 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     }
 
     .ab-who__sectors {
+      grid-template-columns: 1fr;
+    }
+
+    .ab-values__list {
       grid-template-columns: 1fr;
     }
 

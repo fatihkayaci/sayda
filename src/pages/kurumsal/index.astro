@@ -1,41 +1,63 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
-import PageIndex from '../../components/PageIndex.astro';
+import Intro from '../../components/home/Intro.astro';
 import site from '../../data/site.json';
+import projects from '../../data/projects.json';
+import { variant } from '../../utils/image';
+import { hasCoverVariants } from '../../utils/project';
+
+// Cover photo (and its credit) of a project, used as the background of a card or the hero.
+const cover = (slug: string) => {
+  const project = projects.find((p) => p.slug === slug)!;
+  const credit = 'imageCredit' in project ? project.imageCredit : undefined;
+  return { image: project.image, credit };
+};
+
+const hero = cover('vadistanbul');
 
 const pages = [
   {
     title: 'Hakkımızda',
-    description: `${site.foundedYear}'dan bu yana deneyimimiz, ekibimiz ve çalışma prensiplerimiz.`,
+    description: `${site.foundedYear}'dan bu yana yolculuğumuz, uzmanlık alanlarımız ve çalıştığımız kurumlar.`,
     href: '/hakkimizda',
-    image: '/img/hakkimizda.png',
+    ...cover('ciragan-otel-renovasyonu'),
   },
   {
     title: 'Vizyon & Misyon',
     description: 'Bugünün ihtiyaçlarını geleceğin değerleriyle birleştiren yaklaşımımız.',
     href: '/hakkimizda/vizyon-misyon',
-    image: '/img/projects/vadistanbul/vadistanbul.webp',
+    ...cover('buyukyali'),
   },
   {
     title: 'Belgelerimiz',
-    description: 'ISO sertifikalarımız, iş bitirme belgelerimiz ve e-katalog.',
+    description: 'ISO sertifikalarımız ve e-katalog.',
     href: '/belgeler',
-    image: '/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp',
+    ...cover('gaziantep-sehir-hastanesi'),
+  },
+  {
+    title: 'İş Bitirme Belgeleri',
+    description: 'İşverenlerimizden aldığımız iş bitirme belgeleri.',
+    href: '/projeler/is-bitirme-belgeleri',
+    ...cover('varyap-meridien-konut'),
   },
 ];
 ---
 
 <Layout
-  title="Kurumsal | Sayda İnşaat"
-  description="Sayda İnşaat hakkında, vizyon ve misyonumuz, belgelerimiz ve haberler."
+  title="Kurumsal: Hakkımızda, Vizyon ve Belgeler | Sayda İnşaat"
+  description="Sayda İnşaat hakkında, vizyon ve misyonumuz, belgelerimiz ve iş bitirme belgelerimiz."
+  ogImage={hero.image}
 >
   <PageHero
+    variant="photo"
     eyebrow="Kurumsal"
     breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Kurumsal' }]}
-    image="/img/sayda-insaat-hero04.webp"
-    imagePosition="30% center"
+    image={hero.image}
+    imagePosition="center"
     size="compact"
+    credit={hero.credit}
     facts={[
       { value: String(site.foundedYear), label: 'Kuruluş' },
       { value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
@@ -45,16 +67,169 @@ const pages = [
     Sayda İnşaat'ı <em>tanıyın.</em>
   </PageHero>
 
-  <section class="kr-index">
+  <Intro />
+
+  <section class="kr-pages">
     <div class="container">
-      <PageIndex label="Kurumsal Sayfalar" items={pages} />
+      <span class="eyebrow"><i></i>Kurumsal Sayfalar</span>
+      <ul class="kr-pages__grid">
+        {
+          pages.map((page, i) => (
+            <li class={`reveal reveal-d${(i % 2) + 1}`}>
+              <a href={page.href} class="kr-card">
+                <img
+                  src={hasCoverVariants(page.image) ? variant(page.image, 960) : page.image}
+                  alt=""
+                  loading="lazy"
+                />
+                <span class="kr-card__num">{String(i + 1).padStart(2, '0')}</span>
+                <span class="kr-card__body">
+                  <span class="kr-card__title">{page.title}</span>
+                  <span class="kr-card__text">{page.description}</span>
+                </span>
+                <span class="kr-card__arrow" aria-hidden="true">
+                  <Icon name="arrow" size={20} />
+                </span>
+                {page.credit && <span class="kr-card__credit">{page.credit.label}</span>}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
+
 </Layout>
 
 <style>
-  .kr-index {
-    padding-block: clamp(80px, 9vw, 140px);
-    background: var(--color-bg);
+  .kr-pages {
+    padding-block: clamp(72px, 8vw, 120px);
+    background: var(--color-bg-light);
+  }
+
+  .kr-pages__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .kr-card {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--color-navy-deep);
+    color: #fff;
+    isolation: isolate;
+  }
+
+  .kr-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .kr-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 21, 34, 0.92) 0%, rgba(20, 21, 34, 0.35) 55%, rgba(20, 21, 34, 0.1) 100%);
+    transition: background var(--transition);
+  }
+
+  .kr-card:hover img {
+    transform: scale(1.06);
+  }
+
+  .kr-card__num {
+    position: absolute;
+    top: 22px;
+    left: 26px;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--color-orange);
+  }
+
+  .kr-card__body {
+    position: absolute;
+    inset: auto 90px 26px 26px;
+    z-index: 1;
+    display: grid;
+    gap: 8px;
+  }
+
+  .kr-card__title {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 1.6vw + 0.75rem, 2.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .kr-card__text {
+    max-width: 44ch;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .kr-card__arrow {
+    position: absolute;
+    right: 26px;
+    bottom: 26px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .kr-card:hover .kr-card__arrow {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  .kr-card__credit {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 1;
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.65);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
+  @media (max-width: 760px) {
+    .kr-pages__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .kr-card {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kr-card img {
+      transition: none;
+    }
   }
 </style>

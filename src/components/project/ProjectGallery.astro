@@ -1,124 +1,183 @@
 ---
-import Icon from '../Icon.astro';
 import { projectImageAlt } from '../../utils/project';
+import { imageSize } from '../../utils/image-size';
+
+interface Credit {
+  label: string;
+  href: string;
+}
 
 interface Props {
   title: string;
   images: string[];
   project?: { name: string; location: string; works?: string[] };
+  // Photos taken from other sites, keyed by image path; shown in the lightbox.
+  credits?: Record<string, Credit | undefined>;
 }
 
-const { title, images, project } = Astro.props;
-const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : `${title} proje fotoğrafı ${i + 1}`));
+const { title, images, project, credits = {} } = Astro.props;
+
+// Sharp photos (≥700px) go in the mosaic. The old site's 222–500px archive photos get their own strip of
+// small tiles below, where they stay crisp; if a project has nothing sharper, they fill the mosaic instead.
+const widths = new Map(images.map((src) => [src, imageSize(src)?.width ?? 0]));
+const large = images.filter((src) => widths.get(src)! >= 700);
+const small = images.filter((src) => widths.get(src)! < 700);
+const main = large.length ? large : small;
+const archive = large.length ? small : [];
+const all = [...main, ...archive];
+
+const imageCredits = all.map((src) => credits[src] ?? null);
+const imageAlts = all.map((_, i) => (project ? projectImageAlt(project, i) : `${title} proje fotoğrafı ${i + 1}`));
+
+// The first photo only gets the big 2×2 tile when it's sharp enough for it.
+const flat = (widths.get(main[0]) ?? 0) < 900;
+const layout = flat ? 'flat' : Math.min(main.length, 5);
+
+// Long galleries show the first photos and reveal the rest on demand: three full rows of four
+// (plus the big lead photo, which takes the place of four), and two rows of the small archive tiles.
+const initial = flat ? 12 : 13;
+const archiveInitial = 12;
+
+// The last photo stretches over whatever the final row leaves empty (4 columns; the big tile takes 4 cells).
+// Small photos (flat layout) aren't stretched — a short last row is better than a blurry one.
+const emptyCells = !flat && main.length >= 5 ? (4 - ((main.length + 3) % 4)) % 4 : 0;
+const lastSpan = emptyCells ? `--last-span: ${emptyCells + 1}` : undefined;
+// Same on phones (2 columns).
+const evenOnPhone = !flat && main.length >= 5 && main.length % 2 === 0;
+const hasMore = main.length > initial || archive.length > archiveInitial;
 ---
 
-{images.length === 0 ? (
-  <div class="project-gallery project-gallery--empty reveal">
-    <div class="project-gallery__main project-gallery__main--empty">
-      <Icon name="photo" size={45} />
-    </div>
-  </div>
-) : (
-<div class="project-gallery reveal">
-  <div class="project-gallery__main">
-    <img data-gallery-main src={images[0]} alt={imageAlts[0]} />
-    {
-      images.length > 1 && (
-        <>
-          <button type="button" class="project-gallery__arrow project-gallery__arrow--prev" data-gallery-prev aria-label="Önceki fotoğraf">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
-          </button>
-          <button type="button" class="project-gallery__arrow project-gallery__arrow--next" data-gallery-next aria-label="Sonraki fotoğraf">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
-          </button>
-          <span class="project-gallery__counter" data-gallery-counter>1 / {images.length}</span>
-        </>
-      )
-    }
-  </div>
-  {
-    images.length > 1 && (
-      <div class="project-gallery__thumbs">
-        <div class="project-gallery__thumbs-track" data-gallery-track>
-          {images.map((src, i) => (
-            <button
-              type="button"
-              class="project-gallery__thumb"
-              class:list={{ 'is-active': i === 0 }}
-              data-gallery-thumb
-              data-src={src}
-              data-alt={imageAlts[i]}
-              aria-label={`${title} fotoğrafı ${i + 1}`}
-            >
-              <img src={src} alt={imageAlts[i]} loading="lazy" />
-            </button>
-          ))}
-        </div>
+{
+  all.length > 0 && (
+    <section class="project-gallery reveal" data-gallery data-images={JSON.stringify(all)} data-alts={JSON.stringify(imageAlts)} data-credits={JSON.stringify(imageCredits)}>
+      <div class="project-gallery__heading">
+        <h2>Proje Fotoğrafları</h2>
+        <span>{all.length} FOTOĞRAF</span>
       </div>
-    )
-  }
-  <p class="project-gallery__caption">* Görseller temsili niteliktedir.</p>
-</div>
-)}
+
+      <div class="project-gallery__grid" data-count={layout} data-even-phone={evenOnPhone ? '' : undefined}>
+        {main.map((src, i) => (
+          <button
+            type="button"
+            class="project-gallery__tile"
+            data-open={i}
+            hidden={i >= initial}
+            style={i === main.length - 1 ? lastSpan : undefined}
+            aria-label={`${title} fotoğrafı ${i + 1} / ${all.length} — büyüt`}
+          >
+            <img src={src} alt={imageAlts[i]} loading="lazy" />
+          </button>
+        ))}
+      </div>
+
+      {archive.length > 0 && (
+        <div class="project-gallery__archive">
+          <h3>
+            Arşiv Fotoğrafları <span>{archive.length}</span>
+          </h3>
+          <div class="project-gallery__archive-grid">
+            {archive.map((src, j) => (
+              <button
+                type="button"
+                class="project-gallery__thumb"
+                data-open={main.length + j}
+                hidden={j >= archiveInitial}
+                aria-label={`${title} fotoğrafı ${main.length + j + 1} / ${all.length} — büyüt`}
+              >
+                <img src={src} alt={imageAlts[main.length + j]} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {hasMore && (
+        <button type="button" class="project-gallery__more" data-show-all>
+          Tüm Fotoğrafları Göster ({all.length})
+        </button>
+      )}
+      <p class="project-gallery__caption">* Görseller temsili niteliktedir.</p>
+
+      <dialog class="lightbox" aria-label={`${title} fotoğrafları`}>
+        <img class="lightbox__img" alt="" />
+        <button type="button" class="lightbox__close" data-close aria-label="Kapat">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
+        {images.length > 1 && (
+          <>
+            <button type="button" class="lightbox__arrow lightbox__arrow--prev" data-prev aria-label="Önceki fotoğraf">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            <button type="button" class="lightbox__arrow lightbox__arrow--next" data-next aria-label="Sonraki fotoğraf">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6" /></svg>
+            </button>
+          </>
+        )}
+        <span class="lightbox__counter" data-counter />
+        <a class="lightbox__credit" data-credit target="_blank" rel="noopener noreferrer" hidden />
+
+      </dialog>
+    </section>
+  )
+}
 
 <script>
   function initGalleries() {
-    document.querySelectorAll<HTMLElement>('.project-gallery').forEach((gallery) => {
-      const main = gallery.querySelector<HTMLImageElement>('[data-gallery-main]');
-      const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]');
-      const thumbsEl = gallery.querySelector<HTMLElement>('.project-gallery__thumbs');
-      const track = gallery.querySelector<HTMLElement>('[data-gallery-track]');
-      const thumbs = Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-thumb]'));
-      const prevBtn = gallery.querySelector<HTMLButtonElement>('[data-gallery-prev]');
-      const nextBtn = gallery.querySelector<HTMLButtonElement>('[data-gallery-next]');
-      if (!main || thumbs.length === 0) return;
+    document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((gallery) => {
+      if (gallery.dataset.ready) return;
+      gallery.dataset.ready = 'true';
 
-      const gap = 10;
-      let visible = 5;
+      const images: string[] = JSON.parse(gallery.dataset.images ?? '[]');
+      const alts: string[] = JSON.parse(gallery.dataset.alts ?? '[]');
+      const dialog = gallery.querySelector<HTMLDialogElement>('.lightbox');
+      const img = dialog?.querySelector<HTMLImageElement>('.lightbox__img');
+      const credits: ({ label: string; href: string } | null)[] = JSON.parse(gallery.dataset.credits ?? '[]');
+      const counter = dialog?.querySelector<HTMLElement>('[data-counter]');
+      const creditLink = dialog?.querySelector<HTMLAnchorElement>('[data-credit]');
+      if (!dialog || !img || images.length === 0) return;
+
+      // Scale small photos up a little, but never past 1.5× — beyond that they turn to mush.
+      img.addEventListener('load', () => {
+        img.style.width = `${Math.min(img.naturalWidth * 1.5, window.innerWidth * 0.88, 1200)}px`;
+      });
+
       let index = 0;
-      let thumbStep = 0;
-
-      const windowStart = () => Math.min(Math.max(index, 0), Math.max(thumbs.length - visible, 0));
-
-      // Penceredeki son küçük resmin üzerinde kalan fotoğraf sayısını göster (+8 gibi).
-      const updateMore = () => {
-        const remaining = thumbs.length - (windowStart() + visible);
-        thumbs.forEach((t) => t.removeAttribute('data-more'));
-        if (remaining > 0) thumbs[windowStart() + visible - 1]?.setAttribute('data-more', `+${remaining}`);
+      const show = (next: number) => {
+        index = (next + images.length) % images.length;
+        img.src = images[index];
+        img.alt = alts[index] ?? '';
+        if (counter) counter.textContent = `${index + 1} / ${images.length}`;
+        if (creditLink) {
+          const credit = credits[index];
+          creditLink.hidden = !credit;
+          if (credit) {
+            creditLink.textContent = credit.label;
+            creditLink.href = credit.href;
+          }
+        }
       };
 
-      const layout = () => {
-        if (!thumbsEl) return;
-        visible = window.innerWidth < 640 ? 3 : 5;
-        const width = (thumbsEl.clientWidth - gap * (visible - 1)) / visible;
-        thumbStep = width + gap;
-        thumbs.forEach((t) => (t.style.flex = `0 0 ${width}px`));
-        if (track) track.style.transform = `translateX(-${windowStart() * thumbStep}px)`;
-        updateMore();
-      };
-
-      const show = (nextIndex: number) => {
-        index = (nextIndex + thumbs.length) % thumbs.length;
-        const src = thumbs[index].getAttribute('data-src');
-        if (!src) return;
-        const alt = thumbs[index].getAttribute('data-alt');
-        main.style.opacity = '0';
-        setTimeout(() => {
-          main.src = src;
-          if (alt) main.alt = alt;
-          main.style.opacity = '1';
-        }, 150);
-        thumbs.forEach((t, i) => t.classList.toggle('is-active', i === index));
-        if (counter) counter.textContent = `${index + 1} / ${thumbs.length}`;
-        if (track) track.style.transform = `translateX(-${windowStart() * thumbStep}px)`;
-        updateMore();
-      };
-
-      thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => show(i)));
-      prevBtn?.addEventListener('click', () => show(index - 1));
-      nextBtn?.addEventListener('click', () => show(index + 1));
-      layout();
-      window.addEventListener('resize', layout);
+      gallery.querySelectorAll<HTMLButtonElement>('[data-open]').forEach((tile) =>
+        tile.addEventListener('click', () => {
+          show(Number(tile.dataset.open));
+          dialog.showModal();
+        })
+      );
+      gallery.querySelector('[data-show-all]')?.addEventListener('click', (event) => {
+        gallery.querySelectorAll<HTMLElement>('[data-open][hidden]').forEach((tile) => (tile.hidden = false));
+        (event.currentTarget as HTMLElement).remove();
+      });
+      dialog.querySelector('[data-close]')?.addEventListener('click', () => dialog.close());
+      dialog.querySelector('[data-prev]')?.addEventListener('click', () => show(index - 1));
+      dialog.querySelector('[data-next]')?.addEventListener('click', () => show(index + 1));
+      // clicking the dark backdrop (the dialog itself, not its children) closes it
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') show(index - 1);
+        if (event.key === 'ArrowRight') show(index + 1);
+      });
     });
   }
 
@@ -127,129 +186,364 @@ const imageAlts = images.map((_, i) => (project ? projectImageAlt(project, i) : 
 </script>
 
 <style>
-  .project-gallery__main {
-    position: relative;
-    height: 448px;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--color-bg-light);
+  .project-gallery {
+    margin-top: 56px;
   }
 
-  .project-gallery__main--empty {
+  .project-gallery__heading {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--color-border);
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
   }
 
-  .project-gallery__main img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 300ms;
+  .project-gallery__heading h2 {
+    padding-left: 16px;
+    border-left: 4px solid var(--color-orange);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.4vw + 1rem, 2.5rem);
+    line-height: 1.2;
+    color: var(--color-navy-deep);
   }
 
-  .project-gallery__arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 49px;
-    height: 49px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: var(--color-navy-deep);
-    color: #fff;
-    cursor: pointer;
-    transition: background 150ms;
-  }
-
-  .project-gallery__arrow:hover {
-    background: var(--color-navy);
-  }
-
-  .project-gallery__arrow--prev {
-    left: 20px;
-  }
-
-  .project-gallery__arrow--next {
-    right: 20px;
-  }
-
-  .project-gallery__counter {
-    position: absolute;
-    bottom: 14px;
-    right: 16px;
-    padding: 5px 13px;
-    border-radius: 3px;
-    background: rgba(35, 35, 35, 0.8);
-    color: #fff;
-    font-size: 0.84rem;
+  .project-gallery__heading span {
+    padding: 6px 14px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 20px;
+    background: #fff;
+    font-size: 0.75rem;
     font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-navy);
   }
 
-  .project-gallery__thumbs {
-    width: 100%;
-    margin-top: 12px;
-    overflow: hidden;
-  }
-
-  .project-gallery__thumbs-track {
-    display: flex;
+  .project-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
     gap: 12px;
-    transition: transform 250ms ease;
+  }
+
+  .project-gallery__tile[hidden] {
+    display: none;
+  }
+
+  .project-gallery__tile:last-child {
+    grid-column: span var(--last-span, 1);
+  }
+
+  .project-gallery__archive {
+    margin-top: 36px;
+  }
+
+  .project-gallery__archive h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .project-gallery__archive h3 span {
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: var(--color-border);
+    font-size: 0.6875rem;
+    color: var(--color-navy-deep);
+  }
+
+  /* tiles stay near the photos' own size (~500px), so they look sharp even on retina screens */
+  .project-gallery__archive-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
   }
 
   .project-gallery__thumb {
-    position: relative;
-    height: 94px;
+    aspect-ratio: 4 / 3;
     padding: 0;
     border: 0;
     border-radius: 3px;
     overflow: hidden;
-    cursor: pointer;
-    transition: box-shadow 180ms;
+    background: var(--color-navy-deep);
+    cursor: zoom-in;
+  }
+
+  .project-gallery__thumb[hidden] {
+    display: none;
   }
 
   .project-gallery__thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity var(--transition);
   }
 
-  .project-gallery__thumb[data-more]::after {
-    content: attr(data-more);
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    background: rgba(35, 35, 35, 0.72);
+  .project-gallery__thumb:hover img {
+    opacity: 0.8;
+  }
+
+  .project-gallery__more {
+    display: block;
+    margin: 28px auto 0;
+    padding: 15px 30px;
+    border: 1.5px solid var(--color-navy);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--color-navy);
+    font: inherit;
+    font-size: 0.91rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      color var(--transition);
+  }
+
+  .project-gallery__more:hover {
+    background: var(--color-navy);
     color: #fff;
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
   }
 
-  .project-gallery__thumb.is-active {
-    box-shadow: 0 0 0 2px var(--color-navy);
+  .project-gallery__tile {
+    position: relative;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+    cursor: zoom-in;
+  }
+
+  .project-gallery__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity var(--transition);
+  }
+
+  .project-gallery__tile:hover img {
+    transform: scale(1.06);
+    opacity: 0.9;
+  }
+
+  /* first photo leads big; small galleries spread out so there are no gaps */
+  .project-gallery__tile:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  [data-count='flat'] .project-gallery__tile:first-child {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  [data-count='1'] .project-gallery__tile:first-child {
+    grid-column: span 4;
+  }
+
+  [data-count='2'] .project-gallery__tile {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  [data-count='3'] .project-gallery__tile:not(:first-child),
+  [data-count='4'] .project-gallery__tile:nth-child(2) {
+    grid-column: span 2;
   }
 
   .project-gallery__caption {
     margin-top: 13px;
     font-size: 0.84rem;
     color: var(--color-text-faint);
-    font-style: italic;
+  }
+
+  .lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+  }
+
+  .lightbox::backdrop {
+    background: rgba(14, 15, 24, 0.94);
+  }
+
+  /* width is set from the photo's real size on load (see script) */
+  .lightbox__img {
+    width: auto;
+    max-width: min(88vw, 1200px);
+    height: auto;
+    max-height: 84vh;
+    object-fit: contain;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+
+  .lightbox__close,
+  .lightbox__arrow {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    background: rgba(28, 29, 46, 0.4);
+    color: #fff;
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .lightbox__close:hover,
+  .lightbox__arrow:hover {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+  }
+
+  .lightbox__close {
+    top: 20px;
+    right: 20px;
+  }
+
+  .lightbox__arrow {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox__arrow--prev {
+    left: clamp(12px, 3vw, 40px);
+  }
+
+  .lightbox__arrow--next {
+    right: clamp(12px, 3vw, 40px);
+  }
+
+  .lightbox__counter {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .lightbox__credit {
+    position: fixed;
+    right: 20px;
+    bottom: 22px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .lightbox__credit:hover {
+    color: #fff;
+  }
+
+  .lightbox__credit[hidden] {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .project-gallery__grid {
+      grid-auto-rows: 170px;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .project-gallery__archive-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   @media (max-width: 640px) {
-    .project-gallery__main {
-      height: 291px;
+    .project-gallery {
+      margin-top: var(--space-xl);
     }
 
-    .project-gallery__thumb {
-      height: 72px;
+    .project-gallery__archive-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .project-gallery__grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 130px;
+      gap: 8px;
+    }
+
+    .project-gallery__tile:last-child {
+      grid-column: span 1;
+    }
+
+    [data-even-phone] .project-gallery__tile:last-child {
+      grid-column: span 2;
+    }
+
+    [data-count='flat'] .project-gallery__tile:first-child {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .project-gallery__tile:first-child,
+    [data-count='1'] .project-gallery__tile:first-child,
+    [data-count='3'] .project-gallery__tile:not(:first-child),
+    [data-count='4'] .project-gallery__tile:nth-child(2) {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .project-gallery__tile:first-child {
+      grid-row: span 2;
+    }
+
+    [data-count='2'] .project-gallery__tile {
+      grid-column: span 1;
+      grid-row: span 2;
+    }
+
+    .lightbox__arrow {
+      top: auto;
+      bottom: 14px;
+      transform: none;
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-gallery__tile img {
+      transition: none;
+    }
+
+    .project-gallery__tile:hover img {
+      transform: none;
     }
   }
 </style>

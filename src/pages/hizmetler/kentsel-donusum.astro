@@ -3,8 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import SvcHero from '../../components/service/SvcHero.astro';
+import services from '../../data/services.json';
+import { serviceLd, faqLd } from '../../utils/schema';
 import SvcScope from '../../components/service/SvcScope.astro';
 import SvcPartners from '../../components/service/SvcPartners.astro';
+import SvcField from '../../components/service/SvcField.astro';
 import SvcMore from '../../components/service/SvcMore.astro';
 import site from '../../data/site.json';
 import company from '../../data/company.json';
@@ -42,18 +45,26 @@ const faqs = [
       'Binanın deprem güvenliği, lisanslı kuruluşlar tarafından yapılan inceleme ve analizlerle belirlenir; sonuç risk raporu olarak düzenlenir. Ayrıntılar için blogumuzdaki yazıya göz atabilirsiniz.',
   },
 ];
+
+const service = services.find((s) => s.href === '/hizmetler/kentsel-donusum')!;
+const schema = [
+  serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
+  faqLd(faqs),
+];
 ---
 
 <Layout
-  title="Kentsel Dönüşüm | Sayda İnşaat"
+  title="Kentsel Dönüşüm Müteahhidi İstanbul | Sayda İnşaat"
   description="6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesi: kentsel dönüşüm süreci, sık sorulan sorular ve Sayda İnşaat deneyimi."
+  ogImage={service.image}
+  jsonLd={schema}
 >
   <SvcHero
     eyebrow="Hizmet 01"
     name="Kentsel Dönüşüm"
     text="6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesinde, 1996'dan bu yana müteahhit ve alt müteahhit olarak edindiğimiz deneyimle hizmet veriyoruz."
     points={points}
-    image="/img/home/gold-towers.webp"
+    project="referans-besiktas-abbasaga"
   >
     Kentsel <em>Dönüşüm</em>
   </SvcHero>
@@ -110,6 +121,8 @@ const faqs = [
       { title: 'Büyükyalı', slug: 'buyukyali' },
     ]}
   />
+
+  <SvcField />
 
   <SvcMore current="/hizmetler/kentsel-donusum" />
 </Layout>

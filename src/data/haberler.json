@@ -2,6 +2,7 @@
   {
     "slug": "referans-loca-1-teslim",
     "title": "Referans Loca 1 Projesini Teslim Ettik",
+    "seoTitle": "Referans Loca 1 Projesini Teslim Ettik | Sayda İnşaat",
     "date": "2024-09-06",
     "image": "/img/haberler/referans-loca-1-teslim.webp",
     "excerpt": "Teslimler yapılmış olup, 205 daire ve 25 dükkanda yaşam başlamıştır.",
@@ -15,11 +16,13 @@
       "date": "6.9.2024",
       "image": "Admin/yuklenenler/1320307020.jpeg",
       "text": "Teslimler yapılmış olup, 205 daire ve 25 dükkanda yaşam başlamıştır."
-    }
+    },
+    "seoDescription": "İnce işlerini Sayda İnşaat'ın yaptığı Kiler GYO Referans Kartal Loca 1. etap teslim edildi; 205 daire ve 25 dükkanda yaşam başladı."
   },
   {
     "slug": "referans-besiktas-ince-isler",
     "title": "Referans Beşiktaş Projesi İnce İşleri Biz Yapıyoruz",
+    "seoTitle": "Referans Beşiktaş İnce İşlerini Yapıyoruz | Sayda İnşaat",
     "date": "2024-04-02",
     "image": "/img/haberler/referans-besiktas-ince-isler.webp",
     "excerpt": "Kiler GYO tarafından hayata geçirilen Referans Beşiktaş projesi; 16.655 m² arazi üzerine 10 blok, 295 ünite olarak hazırlanmış.",
@@ -37,6 +40,7 @@
   {
     "slug": "kiler-referans-pendik-satis-ofisi",
     "title": "Kiler Referans Pendik Projesi Satış Ofisini Biz Yaptık",
+    "seoTitle": "Referans Pendik Satış Ofisini Yaptık | Sayda İnşaat",
     "date": "2023-04-27",
     "image": "/img/haberler/kiler-referans-pendik-satis-ofisi.webp",
     "excerpt": "Yaklaşık 900 m² alana sahip Satış Ofisi, 2 ay gibi kısa zamanda tamamlanarak 15 Nisan 2023'te hizmete girmiştir.",
@@ -55,6 +59,7 @@
   {
     "slug": "kiler-besiktas-abbasaga-satis-ofisi",
     "title": "Kiler Beşiktaş Abbasağa Konut Projesi Satış Ofisi Biz Yapıyoruz",
+    "seoTitle": "Kiler Beşiktaş Satış Ofisi Renovasyonu | Sayda İnşaat",
     "date": "2022-07-27",
     "image": "/img/haberler/kiler-besiktas-abbasaga-satis-ofisi.webp",
     "excerpt": "1866'da Sultan Abdülaziz zamanında yapılmış tarihi Aziziye Karakolu (Süslü Karakol), Kiler Holding'in Beşiktaş Abbasağa konut projesinin satış ofisine dönüştürülüyor.",
@@ -72,6 +77,7 @@
   {
     "slug": "referans-kartal-loca-2-etap-ince-isler",
     "title": "Referans Kartal Loca Projesi 2. Etap İnce İşlerini de Biz Yapıyoruz",
+    "seoTitle": "Kartal Loca 2. Etap İnce İşleri Bizde | Sayda İnşaat",
     "date": "2022-06-08",
     "image": "/img/haberler/referans-kartal-loca-2-etap-ince-isler.webp",
     "excerpt": "Devam etmekte olan Referans Kartal Loca Projesi'nin 2. Etap ince işleri firmamız tarafından yapılmaktadır.",
@@ -90,8 +96,9 @@
   {
     "slug": "referans-kartal-loca-ince-isler",
     "title": "Referans Kartal Loca Projesi İnce İşleri Biz Yapıyoruz",
+    "seoTitle": "Referans Kartal Loca İnce İşleri | Sayda İnşaat",
     "date": "2021-12-20",
-    "image": "/img/haberler/referans-kartal-loca-ince-isler.webp",
+    "image": "/img/haberler/referans-kartal-loca-ince-isler-kapak.webp",
     "excerpt": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36.000 m² arazi üzerine 2 blok, 33 mağaza, 202 daire olarak tasarlanmıştır.",
     "content": "Kiler GYO tarafından hayata geçirilen Referans Kartal Loca projesi; 36.000 m² arazi üzerine 2 blok, sokak dükkan konseptinde 33 mağaza, 202 daire olarak tasarlanmıştır. 25 katlı A blokta 176 daire, 4 katlı B blokta 14 daire, 4 katlı C blokta 12 daire olmak üzere brüt alanları 107 m² ile 357 m² arasında değişmektedir. İnce işlerinde; Kilsan tuğla, Dalsan Alçı ve Levha sistemleri, Çanakkale Seramik, Entegre sıva, Polisan ve Permolit boya, Rockwool ısı yalıtım sistemi, Proco ses yalıtım sistemleri kullanılarak Sayda İnşaat kalitesinde yapılmaktadır. Projenin inşaat süresi 12 ay olup 2022 Aralık'ta hayata geçirilecektir.",
     "category": "devam-eden",
@@ -108,8 +115,9 @@
   {
     "slug": "gaziantep-saglik-kampusu-ince-isler",
     "title": "Gaziantep Entegre Sağlık Kampüsü'nün İnce İşlerini Biz Yapıyoruz",
+    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşleri | Sayda İnşaat",
     "date": "2018-03-05",
-    "image": "/img/haberler/gaziantep-saglik-kampusu-ince-isler.webp",
+    "image": "/img/haberler/gaziantep-saglik-kampusu-ince-isler-kapak.webp",
     "excerpt": "Firmamızca ince işleri yapılmakta olan Entegre Sağlık Kampüsü, 1875 yatak kapasitesi ve 580.000 m² inşaat alanı ile Türkiye'nin 4. en büyük hastanesi olacaktır.",
     "content": "Firmamızca ince işleri yapılmakta olan Entegre Sağlık Kampüsü projesi, 1875 yatak kapasitesi, 580.000 m² inşaat alanı ile Türkiye'nin 4. en büyük hastanesi olacaktır.\n\nKamu-özel işbirliği kapsamında 600.000.000 Euro yatırım değerindeki proje Samsung-Salini-Kayı ortaklığı ile yapılmaktadır. Sağlık kampüsünde il sağlık müdürlüğü binası, il kamu sağlığı müdürlüğü binası, kamu hastaneleri birliğinin genel sekreterliği, 112 acil hizmet binası, sosyal tesis ve çok amaçlı alanlar, otoparklar ve helikopter pisti de bulunmaktadır. Proje sağlık sektörüne üstün kalite anlayışı getirerek Gaziantep'i Orta Doğu bölgesinin sağlık merkezi yapacaktır.",
     "category": "devam-eden",
@@ -125,8 +133,9 @@
   {
     "slug": "buyukyali-ince-isler",
     "title": "Büyükyalı Projesi'nin İnce İşlerini Biz Yapıyoruz",
+    "seoTitle": "Büyükyalı İnce İşlerini Yapıyoruz | Sayda İnşaat",
     "date": "2018-03-05",
-    "image": "/img/haberler/buyukyali-ince-isler.webp",
+    "image": "/img/haberler/buyukyali-ince-isler-kapak.webp",
     "excerpt": "İleri kaba işlerini yapmakta olduğumuz Büyükyalı Projesi, Marmara Denizi kıyısındaki Kazlıçeşme sahil yolunda 560.000 m² inşaat alanını kapsamaktadır.",
     "content": "İleri kaba işlerini yapmakta olduğumuz Büyükyalı Projesi, Özak GYO, Ziylan Gayrimenkul ve Yenigün İnşaat ortaklığı ile Marmara Denizi kıyısındaki Kazlıçeşme sahil yolunda 560.000 m² inşaat alanını kapsamaktadır.\n\nFarklı konsept ve büyüklüklerde ultra lüks konutlar, otel ve otelle birlikte işletilecek markalı rezidans konutlar yer alıyor. Projede sanatsal ve kültürel alanlar, çocuk alanları ve sosyal tesislerin yanı sıra ticari alanlar da bulunuyor.",
     "category": "devam-eden",
@@ -142,6 +151,7 @@
   {
     "slug": "vadistanbul-3-etap-ince-isler",
     "title": "Vadistanbul Projesi 3. Etap İnce İşlerini Biz Yapıyoruz",
+    "seoTitle": "Vadistanbul 3. Etap İnce İşleri | Sayda İnşaat",
     "date": "2018-04-14",
     "image": "/img/haberler/vadistanbul-3-etap-ince-isler.webp",
     "excerpt": "Firmamızın 3. etabı 'Park' ince işlerini yapmakta olduğu Vadistanbul Projesi; Teras, Bulvar ve Park olmak üzere 3 etaptan oluşmaktadır.",
@@ -159,6 +169,7 @@
   {
     "slug": "bilsem-besiktas-sosyal-sorumluluk",
     "title": "Sosyal Sorumluluk Projesi Kapsamında Yapılan Sınıflar Hizmete Girdi",
+    "seoTitle": "BİLSEM Beşiktaş Sınıfları Hizmete Girdi | Sayda İnşaat",
     "date": "2016-06-22",
     "image": "/img/haberler/bilsem-besiktas-sosyal-sorumluluk.webp",
     "excerpt": "Firmamız, Sosyal Sorumluluk Projesi kapsamında BİLSEM Beşiktaş Bilim ve Sanat Merkezi Okulu'nun 2 sınıfını bitirip, miniklerin hizmetine sunmuştur.",
@@ -176,6 +187,7 @@
   {
     "slug": "referans-gunesli-ince-islere-basladik",
     "title": "Kiler GYO'nun Referans Güneşli Projesi'nin İnce İşlerine Başladık",
+    "seoTitle": "Referans Güneşli İnce İşlerine Başladık | Sayda İnşaat",
     "date": "2016-06-22",
     "image": "/img/haberler/referans-gunesli-ince-islere-basladik.webp",
     "excerpt": "26.04.2016 tarihli sözleşme ile Referans Güneşli Projesi'nin ince işleri firmamızca üstlenilmiş olup imalatlar başlamıştır.",
@@ -194,6 +206,7 @@
   {
     "slug": "kapital-tower-10-kat-ofis-teslim",
     "title": "Capital Tower 10. Kat Ofisleri Teslim Edildi",
+    "seoTitle": "Capital Tower 10. Kat Ofisleri Teslim Edildi | Sayda İnşaat",
     "date": "2016-06-22",
     "image": "/img/haberler/kapital-tower-10-kat-ofis-teslim.webp",
     "excerpt": "Projesi tamamlanan Capital Tower 10. Kat Ofisleri, Uzman İnşaat ve Mesturkuaz Madencilik A.Ş.'ye teslim edilmiştir.",
@@ -211,6 +224,7 @@
   {
     "slug": "atlas-park-avm-hizmete-girdi",
     "title": "Atlas Park AVM Hizmete Girdi",
+    "seoTitle": "Atlas Park AVM Hizmete Girdi | Sayda İnşaat",
     "date": "2016-06-22",
     "image": "/img/haberler/atlas-park-avm-hizmete-girdi.webp",
     "excerpt": "Proje kapsamındaki ince işleri firmamızca yapılan Sultanbeyli Atlas Park AVM hizmete girmiştir.",

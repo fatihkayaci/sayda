@@ -1,34 +1,58 @@
 ---
-// Service page hero: title, one-paragraph summary, key points and a quote button beside a tall photo.
-// The h1 comes from the default slot so a word can be highlighted with <em>.
+// Service page hero: full-width photo of a project where the service was delivered, with title, summary,
+// key points and a quote button over a dark gradient. The h1 comes from the default slot so a word can be
+// highlighted with <em>.
 import Icon from '../Icon.astro';
 import site from '../../data/site.json';
+import projects from '../../data/projects.json';
 import { srcset } from '../../utils/image';
+import { hasCoverVariants, shortProjectTitle } from '../../utils/project';
+import { breadcrumbLd } from '../../utils/schema';
 
 interface Props {
   eyebrow: string;
   name: string;
   text: string;
   points: string[];
-  image: string;
+  /** Slug of the project whose cover is the background; it's also linked in the corner. */
+  project: string;
 }
 
-const { eyebrow, name, text, points, image } = Astro.props;
-// /img/home photos are 1400px wide with a -960 copy beside them.
-const hasVariants = image.startsWith('/img/home/');
+const { eyebrow, name, text, points, project: slug } = Astro.props;
+const project = projects.find((p) => p.slug === slug)!;
+const image = project.image;
+const credit = 'imageCredit' in project ? project.imageCredit : undefined;
+// Some legacy names carry a news-style tail ("… İNCE İŞLERİ BİZ YAPIYORUZ"); keep just the project name.
+const projectName = shortProjectTitle(project.name).replace(/\s+(İNCE İŞLERİ|SATIŞ OFİSİ)?\s*BİZ YAPIYORUZ$/i, '').replace(/\s+İNCE İŞLERİ$/i, '');
+const breadcrumbData = breadcrumbLd(
+  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Hizmetler', href: '/hizmetler' }, { label: name }],
+  Astro.url.pathname
+);
 ---
 
-<section class="svc-hero">
-  <div class="container svc-hero__inner">
-    <div class="svc-hero__text">
-      <nav class="svc-hero__breadcrumb" aria-label="Konum">
-        <a href="/">Ana Sayfa</a>
-        <span aria-hidden="true">/</span>
-        <a href="/hizmetler">Hizmetler</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">{name}</span>
-      </nav>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
 
+<section class="svc-hero">
+  <img
+    class="svc-hero__bg"
+    src={image}
+    srcset={hasCoverVariants(image) ? srcset(image, 960, 1920) : undefined}
+    sizes="100vw"
+    alt=""
+    fetchpriority="high"
+  />
+  <div class="svc-hero__shade"></div>
+
+  <div class="container svc-hero__inner">
+    <nav class="svc-hero__breadcrumb" aria-label="Konum">
+      <a href="/">Ana Sayfa</a>
+      <span aria-hidden="true">/</span>
+      <a href="/hizmetler">Hizmetler</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{name}</span>
+    </nav>
+
+    <div class="svc-hero__text">
       <p class="svc-hero__eyebrow"><span></span>{eyebrow}</p>
       <h1><slot /></h1>
       <p class="svc-hero__lead">{text}</p>
@@ -54,48 +78,85 @@ const hasVariants = image.startsWith('/img/home/');
         </a>
       </div>
     </div>
-
-    <div class="svc-hero__media">
-      <img
-        src={image}
-        srcset={hasVariants ? srcset(image, 960, 1400) : undefined}
-        sizes="(max-width: 1024px) 100vw, 45vw"
-        alt=""
-        fetchpriority="high"
-      />
-    </div>
   </div>
+
+  <a class="svc-hero__project" href={project.href}>
+    <span>Fotoğraftaki proje</span>
+    {projectName}
+    <Icon name="arrow" size={14} />
+  </a>
+  {
+    credit && (
+      <a class="svc-hero__credit" href={credit.href} target="_blank" rel="noopener noreferrer">
+        {credit.label}
+      </a>
+    )
+  }
 </section>
 
 <style>
   .svc-hero {
-    background: var(--color-bg-light);
+    position: relative;
+    overflow: hidden;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .svc-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: svc-hero-zoom 9s ease-out both;
+  }
+
+  @keyframes svc-hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .svc-hero__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(20, 21, 34, 0.92) 0%, rgba(20, 21, 34, 0.7) 45%, rgba(20, 21, 34, 0.2) 100%),
+      linear-gradient(to top, rgba(20, 21, 34, 0.6) 0%, rgba(20, 21, 34, 0) 40%);
   }
 
   .svc-hero__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    gap: clamp(40px, 5vw, 88px);
-    align-items: center;
-    padding-block: 32px clamp(56px, 6vw, 88px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: clamp(560px, 78vh, 760px);
+    padding-block: 32px 96px;
   }
 
   .svc-hero__breadcrumb {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: clamp(32px, 4vw, 56px);
     font-size: var(--fs-small);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.7);
   }
 
-  .svc-hero__breadcrumb a:hover {
-    color: var(--color-navy);
+  .svc-hero__breadcrumb a:hover,
+  .svc-hero__breadcrumb [aria-current] {
+    color: #fff;
   }
 
   .svc-hero__breadcrumb [aria-current] {
     font-weight: 600;
-    color: var(--color-navy-deep);
+  }
+
+  .svc-hero__text {
+    max-width: 680px;
+    margin-block: auto 0;
+    padding-top: 48px;
   }
 
   .svc-hero__eyebrow {
@@ -106,7 +167,7 @@ const hasVariants = image.startsWith('/img/home/');
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-navy);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .svc-hero__eyebrow span {
@@ -123,13 +184,12 @@ const hasVariants = image.startsWith('/img/home/');
     font-size: clamp(2.5rem, 3.6vw + 0.75rem, 5rem);
     line-height: 0.98;
     letter-spacing: -0.035em;
-    color: var(--color-navy-deep);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
   }
 
   .svc-hero h1 :global(em) {
     font-style: normal;
-    color: var(--color-navy);
-    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.55);
+    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.85);
   }
 
   .svc-hero__lead {
@@ -137,7 +197,7 @@ const hasVariants = image.startsWith('/img/home/');
     margin-top: 24px;
     font-size: 1.125rem;
     line-height: 1.65;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .svc-hero__points {
@@ -154,15 +214,16 @@ const hasVariants = image.startsWith('/img/home/');
     align-items: center;
     gap: 8px;
     padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 999px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
     font-size: 0.875rem;
     font-weight: 600;
-    color: var(--color-navy-deep);
   }
 
   .svc-hero__points :global(svg) {
-    color: var(--color-orange-dark);
+    color: var(--color-orange);
   }
 
   .svc-hero__actions {
@@ -195,41 +256,64 @@ const hasVariants = image.startsWith('/img/home/');
     align-items: center;
     gap: 10px;
     font-weight: 700;
-    color: var(--color-navy-deep);
   }
 
   .svc-hero__phone :global(svg) {
-    color: var(--color-orange-dark);
+    color: var(--color-orange);
   }
 
-  .svc-hero__media {
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius);
-  }
-
-  .svc-hero__media::after {
-    content: '';
+  /* which project the photo shows, bottom right */
+  .svc-hero__project {
     position: absolute;
-    inset: auto 0 0 0;
-    height: 6px;
-    background: var(--color-orange);
+    right: clamp(20px, 4vw, 72px);
+    bottom: 32px;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    column-gap: 8px;
+    padding-left: 16px;
+    border-left: 3px solid var(--color-orange);
+    font-size: 0.9375rem;
+    font-weight: 700;
   }
 
-  .svc-hero__media img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    max-height: 640px;
-    object-fit: cover;
+  .svc-hero__project span {
+    grid-column: 1 / -1;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .svc-hero__project :global(svg) {
+    color: var(--color-orange);
+    transition: transform var(--transition);
+  }
+
+  .svc-hero__project:hover :global(svg) {
+    transform: translateX(4px);
+  }
+
+  .svc-hero__credit {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .svc-hero__credit:hover {
+    color: #fff;
   }
 
   @media (max-width: 1024px) {
-    .svc-hero__inner {
-      grid-template-columns: 1fr;
+    .svc-hero__shade {
+      background: rgba(20, 21, 34, 0.7);
     }
 
-    .svc-hero__media img {
-      aspect-ratio: 16 / 9;
+    .svc-hero__project {
+      display: none;
     }
   }
 
@@ -237,6 +321,12 @@ const hasVariants = image.startsWith('/img/home/');
     .svc-hero h1 {
       font-stretch: 100%;
       font-size: clamp(2.25rem, 10vw, 2.75rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-hero__bg {
+      animation: none;
     }
   }
 </style>

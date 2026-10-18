@@ -1,6 +1,11 @@
 ---
 // Light, typographic page hero with a slanted photo panel. The h1 content comes from the default slot,
 // so a page can highlight a word with <em>.
+// variant="photo" is the corporate pages' version: a full-width project photo under a dark gradient.
+import { srcset } from '../utils/image';
+import { hasCoverVariants } from '../utils/project';
+import { breadcrumbLd } from '../utils/schema';
+
 interface Props {
   eyebrow: string;
   breadcrumbs: { label: string; href?: string }[];
@@ -11,15 +16,45 @@ interface Props {
   facts?: { value: string; label: string }[];
   /** 'short' keeps the hero low so the page's main content (e.g. a form) starts on the first screen. */
   size?: 'full' | 'compact' | 'short';
+  variant?: 'light' | 'photo';
+  /** Source of a photo taken from another site, shown in the corner. */
+  credit?: { label: string; href: string };
 }
 
-const { eyebrow, breadcrumbs, image, imagePosition = '40% center', backdrop, facts = [], size = 'full' } = Astro.props;
+const {
+  eyebrow,
+  breadcrumbs,
+  image,
+  imagePosition = '40% center',
+  backdrop,
+  facts = [],
+  size = 'full',
+  variant = 'light',
+  credit,
+} = Astro.props;
+const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
 ---
 
-<section class:list={['page-hero', `page-hero--${size}`]}>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
+
+<section class:list={['page-hero', `page-hero--${size}`, `page-hero--${variant}`]}>
   <div class="page-hero__photo" aria-hidden="true">
-    <img src={image} alt="" fetchpriority="high" style={`object-position: ${imagePosition}`} />
+    <img
+      src={image}
+      srcset={hasCoverVariants(image) ? srcset(image, 960, 1920) : undefined}
+      sizes={variant === 'photo' ? '100vw' : '46vw'}
+      alt=""
+      fetchpriority="high"
+      style={`object-position: ${imagePosition}`}
+    />
   </div>
+  {
+    credit && (
+      <a class="page-hero__credit" href={credit.href} target="_blank" rel="noopener noreferrer">
+        {credit.label}
+      </a>
+    )
+  }
 
   <div class="container page-hero__inner">
     <nav class="page-hero__breadcrumb" aria-label="Konum">
@@ -214,11 +249,105 @@ const { eyebrow, breadcrumbs, image, imagePosition = '40% center', backdrop, fac
     color: var(--color-navy-deep);
   }
 
+  /* Photo variant: full-width photo, dark gradient, white type */
+  .page-hero--photo {
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .page-hero--photo .page-hero__photo {
+    left: 0;
+    width: 100%;
+    clip-path: none;
+  }
+
+  .page-hero--photo .page-hero__photo img {
+    animation: page-hero-zoom 9s ease-out both;
+  }
+
+  @keyframes page-hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .page-hero--photo .page-hero__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(20, 21, 34, 0.88) 0%, rgba(20, 21, 34, 0.55) 50%, rgba(20, 21, 34, 0.2) 100%),
+      linear-gradient(to top, rgba(20, 21, 34, 0.7) 0%, rgba(20, 21, 34, 0) 45%);
+  }
+
+  .page-hero--photo .page-hero__breadcrumb,
+  .page-hero--photo .page-hero__breadcrumb a {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .page-hero--photo .page-hero__breadcrumb a:hover,
+  .page-hero--photo .page-hero__breadcrumb [aria-current] {
+    color: #fff;
+  }
+
+  .page-hero--photo .page-hero__eyebrow {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .page-hero--photo h1 {
+    color: #fff;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .page-hero--photo h1 :global(em) {
+    color: #fff;
+    box-shadow: inset 0 -0.18em 0 rgba(245, 162, 27, 0.85);
+  }
+
+  .page-hero--photo .page-hero__backdrop {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.12);
+  }
+
+  .page-hero--photo .page-hero__facts li {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .page-hero--photo .page-hero__facts b {
+    color: #fff;
+  }
+
+  .page-hero__credit {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    z-index: 1;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .page-hero__credit:hover {
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-hero--photo .page-hero__photo img {
+      animation: none;
+    }
+  }
+
   @media (max-width: 1024px) {
-    .page-hero__photo {
+    .page-hero--light .page-hero__photo {
       width: 100%;
       clip-path: none;
       opacity: 0.18;
+    }
+
+    .page-hero--photo .page-hero__photo::after {
+      background: rgba(20, 21, 34, 0.65);
     }
 
     .page-hero__text {

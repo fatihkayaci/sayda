@@ -2,6 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
+import projects from '../../data/projects.json';
+
+const hero = projects.find((p) => p.slug === 'atlas-park-avm-ofis')!;
 import SectionHead from '../../components/SectionHead.astro';
 import services from '../../data/services.json';
 import site from '../../data/site.json';
@@ -13,8 +16,8 @@ const mapSrc = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
 const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${site.address.city} ${site.address.postalCode}`;
 ---
 
-<Layout
-  title="İletişim | Sayda İnşaat"
+<Layout ogImage={hero.image}
+  title="İletişim ve Teklif Talebi | Sayda İnşaat Tarabya"
   description="Sayda İnşaat Tarabya / Sarıyer ofis adresi, telefon ve e-posta bilgileri. Projeniz için teklif formunu doldurun, size dönüş yapalım."
   organizationSchema
   hideCtaBanner
@@ -22,8 +25,11 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
   <PageHero
     eyebrow="Bize Ulaşın"
     breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'İletişim' }]}
-    image="/img/home/sayda-hq.webp"
+    variant="photo"
+    image={hero.image}
+    imagePosition="center"
     size="short"
+    credit={'imageCredit' in hero ? hero.imageCredit : undefined}
   >
     Projenizi <em>konuşalım.</em>
   </PageHero>

@@ -10,7 +10,8 @@
     ],
     "icon": "building",
     "audience": "bina-sahipleri",
-    "image": "/img/home/gold-towers.webp"
+    "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-cover.webp",
+    "project": "referans-besiktas-abbasaga"
   },
   {
     "title": "Kat Karşılığı İnşaat",
@@ -23,7 +24,8 @@
     ],
     "icon": "key",
     "audience": "bina-sahipleri",
-    "image": "/img/home/residence-sunset.webp"
+    "image": "/img/projects/buyukyali/buyukyali-cover.webp",
+    "project": "buyukyali"
   },
   {
     "title": "Alt Müteahhitlik",
@@ -36,7 +38,8 @@
     ],
     "icon": "helmet",
     "audience": "ana-yukleniciler",
-    "image": "/img/home/sayda-hq.webp"
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp",
+    "project": "atlas-park-avm-ofis"
   },
   {
     "title": "Anahtar Teslim Müteahhitlik",
@@ -49,7 +52,8 @@
     ],
     "icon": "door",
     "audience": "ana-yukleniciler",
-    "image": "/img/home/site-team.webp"
+    "image": "/img/projects/capital-tower-ofis/capital-tower-ofis-cover.webp",
+    "project": "capital-tower-ofis"
   },
   {
     "title": "Proje Yönetimi & Danışmanlık",
@@ -62,7 +66,8 @@
     ],
     "icon": "chart",
     "audience": "ana-yukleniciler",
-    "image": "/img/home/twin-towers.webp"
+    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-cover.webp",
+    "project": "gaziantep-sehir-hastanesi"
   },
   {
     "title": "Tesis Renovasyonu",
@@ -75,6 +80,7 @@
     ],
     "icon": "star",
     "audience": "ana-yukleniciler",
-    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp"
+    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-cover.webp",
+    "project": "ciragan-otel-renovasyonu"
   }
 ]

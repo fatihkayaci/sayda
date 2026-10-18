@@ -1,14 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
+import projects from '../../data/projects.json';
+
+const hero = projects.find((p) => p.slug === 'varyap-meridien-konut')!;
 
 // Canlı sitedeki iş bitirme belgesi görselleri (25 adet), sırası canlıdaki gibi.
 const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, '0'));
 ---
 
 <Layout
-  title="İş Bitirme Belgeleri | Sayda İnşaat"
+  title="İş Bitirme Belgelerimiz | Sayda İnşaat"
   description="Sayda İnşaat'ın tamamlanan projeleri için işverenlerinden aldığı iş bitirme belgeleri; proje, işveren ve yapılan işlerle birlikte."
+  ogImage={hero.image}
 >
   <PageHero
     eyebrow="Belgelerimiz"
@@ -17,8 +21,11 @@ const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, 
       { label: 'Projeler', href: '/projeler' },
       { label: 'İş Bitirme Belgeleri' },
     ]}
-    image="/img/projects/vadistanbul/vadistanbul.webp"
+    variant="photo"
+    image={hero.image}
+    imagePosition="center"
     size="short"
+    credit={'imageCredit' in hero ? hero.imageCredit : undefined}
   >
     İş Bitirme <em>Belgeleri</em>
   </PageHero>

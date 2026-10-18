@@ -5,8 +5,11 @@ import PageHero from '../../components/PageHero.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import NewsletterBand from '../../components/NewsletterBand.astro';
 import haberlerData from '../../data/haberler.json';
+import projects from '../../data/projects.json';
+import { variant } from '../../utils/image';
 import { formatNewsDate, newsCategories, newsCategoryLabel } from '../../utils/news';
 
+const hero = projects.find((p) => p.slug === 'referans-kartal-loca-2')!;
 const sorted = [...haberlerData].sort((a, b) => (a.date < b.date ? 1 : -1));
 const [featured] = sorted;
 
@@ -21,12 +24,14 @@ const chips = [
 ];
 ---
 
-<Layout title="Haberler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler: başlayan ve teslim edilen projeler, ince işler uygulamaları ve şirket duyuruları.">
+<Layout ogImage={hero.image} title="Haberler: Projelerimizden Son Gelişmeler | Sayda İnşaat" description="Sayda İnşaat'tan güncel haberler: başlayan ve teslim edilen projeler, ince işler uygulamaları ve şirket duyuruları.">
   <PageHero
     eyebrow="Haberler"
     breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Haberler' }]}
-    image="/img/projects/dimas-antrepo/dimas-antrepo-01.webp"
-    imagePosition="center 35%"
+    variant="photo"
+    image={hero.image}
+    imagePosition="center"
+    credit={'imageCredit' in hero ? hero.imageCredit : undefined}
     backdrop={years[0]}
     facts={[
       { value: String(sorted.length), label: 'Haber' },
@@ -94,7 +99,7 @@ const chips = [
               {group.items.map((item) => (
                 <li data-news-item data-category={item.category} data-search={`${item.title} ${item.excerpt}`}>
                   <a class="nw-row" href={`/haberler/${item.slug}`}>
-                    <img src={item.image} alt="" loading="lazy" />
+                    <img src={variant(item.image, 640)} alt="" loading="lazy" />
                     <span class="nw-row__body">
                       <span class="nw-row__meta">
                         <time datetime={item.date}>{formatNewsDate(item.date)}</time>

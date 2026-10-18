@@ -20,8 +20,18 @@
     "featured": false,
     "seoTitle": "Beşiktaş Abbasağa İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Beşiktaş Abbasağa'da 79.000 m² lüks rezidans projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat yürütüyor; Kiler GYO'yla 2024'ten beri sahada.",
-    "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga.webp",
-    "gallery": [],
+    "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kiler GYO",
+      "href": "https://www.referansbesiktas.com/"
+    },
+    "gallery": [
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-01.webp",
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-02.webp",
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-03.webp",
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-04.webp",
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga.webp"
+    ],
     "href": "/projeler/referans-besiktas-abbasaga",
     "district": "Beşiktaş",
     "legacy": {
@@ -38,6 +48,24 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-01.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://www.referansbesiktas.com/"
+      },
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-02.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://www.referansbesiktas.com/"
+      },
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-03.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://www.referansbesiktas.com/"
+      },
+      "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-ext-04.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://www.referansbesiktas.com/"
+      }
     }
   },
   {
@@ -59,8 +87,27 @@
     "featured": true,
     "seoTitle": "Atlas Park AVM ve Ofis İnce İşleri | Sayda İnşaat",
     "seoDescription": "Sultanbeyli / İstanbul'da 160.000 m² Atlas Park AVM ve ofis projesinde bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı; 2013-2015 arası sahada.",
-    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Ergün Mimarlık",
+      "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+    },
     "gallery": [
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-01.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-02.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-03.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-04.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-05.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-06.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-07.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-08.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-09.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-10.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-11.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-12.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-13.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-14.webp",
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis.webp",
       "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-01.webp",
       "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-02.webp",
       "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-eski-03.webp",
@@ -107,6 +154,64 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-01.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-02.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-03.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-04.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-05.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-06.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-07.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-08.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-09.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-10.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-11.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-12.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-13.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      },
+      "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-hd-14.webp": {
+        "label": "Görsel: Ergün Mimarlık",
+        "href": "https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM"
+      }
     }
   },
   {
@@ -128,8 +233,18 @@
     "featured": true,
     "seoTitle": "Capital Tower Ofis Dekorasyonu | Sayda İnşaat",
     "seoDescription": "Güneşli / İstanbul'da Capital Tower 10. kat ofisinde anahtar teslim dekorasyon; elektro-mekanik, mermer, ahşap, metal ve cam işlerini Sayda İnşaat tamamladı; 2013-2014 arası sahada.",
-    "image": "/img/projects/capital-tower-ofis/capital-tower-ofis.webp",
+    "image": "/img/projects/capital-tower-ofis/capital-tower-ofis-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Mutlu İnşaat",
+      "href": "https://mutluinsaat.com/Projeler/tamamlanan-projeler/Capital-Tower"
+    },
     "gallery": [
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-01.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-02.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-03.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-04.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-05.webp",
+      "/img/projects/capital-tower-ofis/capital-tower-ofis.webp",
       "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-01.webp",
       "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-02.webp",
       "/img/projects/capital-tower-ofis/capital-tower-ofis-eski-03.webp",
@@ -189,6 +304,28 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-01.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-02.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-03.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-04.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-ofis/capital-tower-ofis-hd-05.webp": {
+        "label": "Görsel: Mutlu İnşaat",
+        "href": "https://mutluinsaat.com/Projeler/tamamlanan-projeler/Capital-Tower"
+      }
     }
   },
   {
@@ -210,8 +347,17 @@
     "featured": false,
     "seoTitle": "Capital Tower Spor Kompleksi Dekorasyonu | Sayda İnşaat",
     "seoDescription": "Basın Ekspres / İstanbul'da 800 m² Capital Tower Spor Kompleksi'nde ahşap işleri, duvar-zemin kaplama ve mobilya-aksesuar dekorasyonunu Sayda İnşaat tamamladı.",
-    "image": "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-01.webp",
+    "image": "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Mutlu İnşaat",
+      "href": "https://mutluinsaat.com/Projeler/tamamlanan-projeler/Capital-Tower"
+    },
     "gallery": [
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-01.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-02.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-03.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-04.webp",
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-01.webp",
       "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-01.webp",
       "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-02.webp",
       "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-eski-03.webp",
@@ -257,6 +403,24 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-01.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-02.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-03.webp": {
+        "label": "Görsel: Miltaş İnşaat",
+        "href": "https://www.miltasinsaat.com.tr/urun/Capital-Tower"
+      },
+      "/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-hd-04.webp": {
+        "label": "Görsel: Mutlu İnşaat",
+        "href": "https://mutluinsaat.com/Projeler/tamamlanan-projeler/Capital-Tower"
+      }
     }
   },
   {
@@ -280,8 +444,27 @@
     "featured": false,
     "seoTitle": "Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
     "seoDescription": "Canik / Samsun'da 135.000 m² Piazza AVM ve Anamon Otel projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Rönesans Teknik ile 2012-2013 arası sahada.",
-    "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel.webp",
+    "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Rönesans Gayrimenkul",
+      "href": "https://rgy.com.tr/portfoy/samsun-piazza"
+    },
     "gallery": [
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-02.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-03.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-04.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-05.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-06.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-07.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-08.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-09.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-10.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-11.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-12.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-13.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-14.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-15.webp",
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel.webp",
       "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-01.webp",
       "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-02.webp",
       "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-eski-03.webp",
@@ -376,6 +559,64 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-02.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-03.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-04.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-05.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-06.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-07.webp": {
+        "label": "Görsel: Rönesans",
+        "href": "https://ronesans.com/projeler/gayrimenkul-grubu/samsun-piazza-alisveris-ve-yasam-merkezi"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-08.webp": {
+        "label": "Görsel: Rönesans Gayrimenkul",
+        "href": "https://rgy.com.tr/portfoy/samsun-piazza"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-09.webp": {
+        "label": "Görsel: Rönesans Gayrimenkul",
+        "href": "https://rgy.com.tr/portfoy/samsun-piazza"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-10.webp": {
+        "label": "Görsel: Rönesans Gayrimenkul",
+        "href": "https://rgy.com.tr/portfoy/samsun-piazza"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-11.webp": {
+        "label": "Görsel: Rönesans Gayrimenkul",
+        "href": "https://rgy.com.tr/portfoy/samsun-piazza"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-12.webp": {
+        "label": "Görsel: Piazza AVM",
+        "href": "https://samsunpiazzaavm.com/tr/hakkimizda"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-13.webp": {
+        "label": "Görsel: Piazza AVM",
+        "href": "https://samsunpiazzaavm.com/tr/hakkimizda"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-14.webp": {
+        "label": "Görsel: Piazza AVM",
+        "href": "https://samsunpiazzaavm.com/tr/hakkimizda"
+      },
+      "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-hd-15.webp": {
+        "label": "Görsel: Piazza AVM",
+        "href": "https://samsunpiazzaavm.com/tr/hakkimizda"
+      }
     }
   },
   {
@@ -398,8 +639,15 @@
     "featured": false,
     "seoTitle": "Akbatı AVM ve Konut İnce İşleri | Sayda İnşaat",
     "seoDescription": "Bahçeşehir / İstanbul'da 250.000 m² Akbatı AVM ve otopark projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Akiş Gayrimenkul ile 2011 yılında sahada.",
-    "image": "/img/projects/akbati-avm-konut/akbati-avm-konut.webp",
+    "image": "/img/projects/akbati-avm-konut/akbati-avm-konut-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Birleşim",
+      "href": "https://www.birlesim.com/tr/projelerimiz/is-ve-yasam-merkezleri/akbati-residence"
+    },
     "gallery": [
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-hd-01.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-hd-02.webp",
+      "/img/projects/akbati-avm-konut/akbati-avm-konut.webp",
       "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-01.webp",
       "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-02.webp",
       "/img/projects/akbati-avm-konut/akbati-avm-konut-eski-03.webp",
@@ -453,6 +701,16 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-hd-01.webp": {
+        "label": "Görsel: Birleşim",
+        "href": "https://www.birlesim.com/tr/projelerimiz/is-ve-yasam-merkezleri/akbati-residence"
+      },
+      "/img/projects/akbati-avm-konut/akbati-avm-konut-hd-02.webp": {
+        "label": "Görsel: yeniemlak.com",
+        "href": "https://www.yeniemlak.com/akbati-avm-residence-projesi"
+      }
     }
   },
   {
@@ -475,8 +733,25 @@
     "featured": false,
     "seoTitle": "Varyap Meridien Konut İnce İşleri | Sayda İnşaat",
     "seoDescription": "Batı Ataşehir / İstanbul'da 150.000 m² Varyap Meridien E Blok residence projesinde gazbeton duvar, sıva ve şap işini Sayda İnşaat tamamladı; 2010-2011 arası sahada.",
-    "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp",
+    "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Emlak Konut",
+      "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+    },
     "gallery": [
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-01.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-02.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-03.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-04.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-05.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-06.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-07.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-08.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-09.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-10.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-11.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-12.webp",
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp",
       "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-01.webp",
       "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-02.webp",
       "/img/projects/varyap-meridien-konut/varyap-meridien-konut-eski-03.webp",
@@ -540,6 +815,56 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-01.webp": {
+        "label": "Görsel: BGZ Holding",
+        "href": "https://www.bgzholding.com.tr/en/project/varyap-meridyen/"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-02.webp": {
+        "label": "Görsel: Varyap",
+        "href": "https://www.varyap.com/proje/varyap-meridian"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-03.webp": {
+        "label": "Görsel: Varyap",
+        "href": "https://www.varyap.com/proje/varyap-meridian"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-04.webp": {
+        "label": "Görsel: BGZ Holding",
+        "href": "https://www.bgzholding.com.tr/en/project/varyap-meridyen/"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-05.webp": {
+        "label": "Görsel: BGZ Holding",
+        "href": "https://www.bgzholding.com.tr/en/project/varyap-meridyen/"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-06.webp": {
+        "label": "Görsel: BGZ Holding",
+        "href": "https://www.bgzholding.com.tr/en/project/varyap-meridyen/"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-07.webp": {
+        "label": "Görsel: BGZ Holding",
+        "href": "https://www.bgzholding.com.tr/en/project/varyap-meridyen/"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-08.webp": {
+        "label": "Görsel: Emlak Konut",
+        "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-09.webp": {
+        "label": "Görsel: Emlak Konut",
+        "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-10.webp": {
+        "label": "Görsel: Emlak Konut",
+        "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-11.webp": {
+        "label": "Görsel: Emlak Konut",
+        "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+      },
+      "/img/projects/varyap-meridien-konut/varyap-meridien-konut-hd-12.webp": {
+        "label": "Görsel: Emlak Konut",
+        "href": "https://www.emlakkonut.com.tr/en-US/varyap-meridian-en"
+      }
     }
   },
   {
@@ -561,8 +886,19 @@
     "featured": false,
     "seoTitle": "Terrace Bahçe Konut İnce İşleri | Sayda İnşaat",
     "seoDescription": "Sarıyer / İstanbul'da 14.000 m² Terrace Bahçe 60 konutluk residence projesinde duvar, sıva, şap, seramik ve alçı-levha asma tavan işini Sayda İnşaat tamamladı; 2010 yılında sahada.",
-    "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp",
+    "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Tiba",
+      "href": "https://tiba.com.tr/projeler/inanlar-insaat-a-s-2/"
+    },
     "gallery": [
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-01.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-02.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-03.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-04.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-05.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-06.webp",
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut.webp",
       "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-01.webp",
       "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-02.webp",
       "/img/projects/terrace-bahce-konut/terrace-bahce-konut-eski-03.webp",
@@ -601,6 +937,32 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-01.webp": {
+        "label": "Görsel: Arden Yapı",
+        "href": "https://www.ardenyapiinsaat.com.tr/inanlar-insaat-as-terrace-bahce"
+      },
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-02.webp": {
+        "label": "Görsel: Tiba",
+        "href": "https://tiba.com.tr/projeler/inanlar-insaat-a-s-2/"
+      },
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-03.webp": {
+        "label": "Görsel: Tiba",
+        "href": "https://tiba.com.tr/projeler/inanlar-insaat-a-s-2/"
+      },
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-04.webp": {
+        "label": "Görsel: Arden Yapı",
+        "href": "https://www.ardenyapiinsaat.com.tr/inanlar-insaat-as-terrace-bahce"
+      },
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-05.webp": {
+        "label": "Görsel: Arden Yapı",
+        "href": "https://www.ardenyapiinsaat.com.tr/inanlar-insaat-as-terrace-bahce"
+      },
+      "/img/projects/terrace-bahce-konut/terrace-bahce-konut-hd-06.webp": {
+        "label": "Görsel: Arden Yapı",
+        "href": "https://www.ardenyapiinsaat.com.tr/inanlar-insaat-as-terrace-bahce"
+      }
     }
   },
   {
@@ -621,7 +983,7 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Isısan-Buderus Bursa Bölge Binası Kaba Yapı İşleri | Sayda İnşaat",
+    "seoTitle": "Isısan-Buderus Bursa Bölge Binası | Sayda İnşaat",
     "seoDescription": "Ovaakça / Bursa'da 6.000 m² Isısan-Buderus showroom ve depo binasında çelik güçlendirme, çatı kaplama, cephe mantolama ve cam işini Sayda İnşaat tamamladı.",
     "image": "/img/projects/isisan-buderus-bursa/isisan-buderus-bursa.webp",
     "gallery": [
@@ -703,10 +1065,19 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Omsan Depo ve Lojistik Merkezi İnce İşleri | Sayda İnşaat",
+    "seoTitle": "Omsan Lojistik Merkezi İnce İşleri | Sayda İnşaat",
     "seoDescription": "Tuzla / İstanbul'da 100.000 m² Omsan Depo, ek binalar ve yönetim binaları projesinde tuğla duvar, sıva, şap, seramik ve mermer işini Sayda İnşaat tamamladı; Oyak Konut ile 2006-2008 arası sahada.",
-    "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi.webp",
+    "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Akyürek Elmas Mimarlık",
+      "href": "https://www.caglaakyurek.com/portfolio/omsan-lojistik-merkezi/"
+    },
     "gallery": [
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-01.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-02.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-03.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-04.webp",
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi.webp",
       "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-01.webp",
       "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-02.webp",
       "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-eski-03.webp",
@@ -755,6 +1126,24 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-01.webp": {
+        "label": "Görsel: Akyürek Elmas Mimarlık",
+        "href": "https://www.caglaakyurek.com/portfolio/omsan-lojistik-merkezi/"
+      },
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-02.webp": {
+        "label": "Görsel: Akyürek Elmas Mimarlık",
+        "href": "https://www.caglaakyurek.com/portfolio/omsan-lojistik-merkezi/"
+      },
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-03.webp": {
+        "label": "Görsel: Akyürek Elmas Mimarlık",
+        "href": "https://www.caglaakyurek.com/portfolio/omsan-lojistik-merkezi/"
+      },
+      "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-hd-04.webp": {
+        "label": "Görsel: Akyürek Elmas Mimarlık",
+        "href": "https://www.caglaakyurek.com/portfolio/omsan-lojistik-merkezi/"
+      }
     }
   },
   {
@@ -778,8 +1167,21 @@
     "featured": false,
     "seoTitle": "Yasmin Resort Hotel Proje Koordinasyonu | Sayda İnşaat",
     "seoDescription": "Bodrum / Muğla'da 29.000 m² Yasmin Resort Hotel'de otel, club binaları ve sosyal tesis proje koordinasyonu, çatı, cephe mantolama ve ince yapı işini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp",
+    "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Yasmin Bodrum Resort",
+      "href": "https://yasminbodrum.com/"
+    },
     "gallery": [
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-01.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-02.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-03.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-04.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-05.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-06.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-07.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-08.webp",
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-01.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-02.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-eski-03.webp",
@@ -828,6 +1230,40 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-01.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminbodrum.com/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-02.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminbodrum.com/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-03.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminbodrum.com/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-04.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminbodrum.com/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-05.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminresort-turgutreis.mybodrumhotels.com/tr/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-06.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminresort-turgutreis.mybodrumhotels.com/tr/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-07.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminresort-turgutreis.mybodrumhotels.com/tr/"
+      },
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-08.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminresort-turgutreis.mybodrumhotels.com/tr/"
+      }
     }
   },
   {
@@ -850,8 +1286,23 @@
     "featured": false,
     "seoTitle": "Çırağan Otel Renovasyon Projesi | Sayda İnşaat",
     "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski Otel restoranlarında 650 m² demir konstrüksiyon ve alçıpan kaplama renovasyon işini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp",
+    "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kempinski",
+      "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+    },
     "gallery": [
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-01.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-02.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-03.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-04.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-05.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-06.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-07.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-08.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-09.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-10.webp",
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu.webp",
       "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-01.webp",
       "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-02.webp",
       "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-eski-03.webp",
@@ -880,6 +1331,48 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-01.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-02.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-03.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-04.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-05.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-06.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-07.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-08.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-09.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-hd-10.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      }
     }
   },
   {
@@ -901,8 +1394,23 @@
     "featured": false,
     "seoTitle": "Executive Hall Kaba İnşaat Projesi | Sayda İnşaat",
     "seoDescription": "Ortaköy / İstanbul'da Çırağan Palace Kempinski bünyesindeki Executive Hall binasında brüt beton kaba inşaat ve istinat duvarı işlerini Sayda İnşaat tamamladı.",
-    "image": "/img/projects/executive-hall/executive-hall.webp",
-    "gallery": [],
+    "image": "/img/projects/executive-hall/executive-hall-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kempinski",
+      "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+    },
+    "gallery": [
+      "/img/projects/executive-hall/executive-hall-ext-01.webp",
+      "/img/projects/executive-hall/executive-hall-ext-02.webp",
+      "/img/projects/executive-hall/executive-hall-ext-03.webp",
+      "/img/projects/executive-hall/executive-hall-ext-04.webp",
+      "/img/projects/executive-hall/executive-hall-ext-05.webp",
+      "/img/projects/executive-hall/executive-hall-ext-06.webp",
+      "/img/projects/executive-hall/executive-hall-ext-07.webp",
+      "/img/projects/executive-hall/executive-hall-ext-08.webp",
+      "/img/projects/executive-hall/executive-hall-ext-09.webp",
+      "/img/projects/executive-hall/executive-hall.webp"
+    ],
     "href": "/projeler/executive-hall",
     "district": "Beşiktaş",
     "legacy": {
@@ -919,6 +1427,44 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/executive-hall/executive-hall-ext-01.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-02.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-03.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-04.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-05.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-06.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-07.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-08.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/executive-hall/executive-hall-ext-09.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      }
     }
   },
   {
@@ -937,10 +1483,26 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant.webp",
-    "gallery": [],
+    "seoTitle": "Caviar Bar & Restaurant Dekorasyonu | Sayda İnşaat",
+    "seoDescription": "Çırağan Palace Kempinski için Ortaköy'deki Caviar Bar ve Restaurant'ın dekorasyon ve ince yapı işlerini Sayda İnşaat yaptı.",
+    "image": "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kempinski",
+      "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+    },
+    "gallery": [
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-01.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-02.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-03.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-04.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-05.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-06.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-07.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-08.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-09.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-10.webp",
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant.webp"
+    ],
     "href": "/projeler/caviar-bar-restaurant",
     "district": "Beşiktaş",
     "type": "Otel",
@@ -958,6 +1520,48 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-01.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-02.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-03.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-04.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-05.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-06.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-07.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace/image-gallery"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-08.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-09.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace"
+      },
+      "/img/projects/caviar-bar-restaurant/caviar-bar-restaurant-ext-10.webp": {
+        "label": "Görsel: Kempinski",
+        "href": "https://www.kempinski.com/en/ciragan-palace"
+      }
     }
   },
   {
@@ -977,7 +1581,7 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Genel Müdürlük, Kumköy ve Atik Ali Paşa Oteli Projeleri | Sayda İnşaat",
+    "seoTitle": "Kumköy ve Atik Ali Paşa Oteli İnce İşleri | Sayda İnşaat",
     "seoDescription": "Enternasyonel Turizm Yatırımları için Gayrettepe genel müdürlük katı dekorasyonu, Kilyos Kumköy ve Beşiktaş Atik Ali Paşa Oteli idari binalarının kaba-ince yapı işlerini Sayda İnşaat tamamladı.",
     "image": "/img/projects/genel-mudurluk-kum-koy-atik-ali-pasa/genel-mudurluk-kum-koy-atik-ali-pasa.webp",
     "gallery": [],
@@ -1018,7 +1622,7 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Mis Süt Dudullu Üretim Tesisleri İnşaat İşleri | Sayda İnşaat",
+    "seoTitle": "Mis Süt Dudullu Üretim Tesisleri | Sayda İnşaat",
     "seoDescription": "Dudullu / İstanbul'da Mis Süt üretim tesislerinde soğuk depo, üretim ve personel binaları kaba-ince yapı işlerini Sayda İnşaat tamamladı; Nestle Süt Ürünleri için sahada.",
     "image": "/img/projects/mis-sut-dudullu-uretim-tesisleri/mis-sut-dudullu-uretim-tesisleri.webp",
     "gallery": [],
@@ -1061,14 +1665,22 @@
     "featured": false,
     "seoTitle": "Referans Güneşli İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Güneşli / İstanbul'da Referans Güneşli konut, mağaza ve sosyal tesis projesinde gazbeton duvar, sıva, şap, seramik ve alçıpan işlerini Sayda İnşaat tamamladı; Kiler GYO için sahada.",
-    "image": "/img/projects/referans-gunesli/referans-gunesli-01.webp",
+    "image": "/img/projects/referans-gunesli/referans-gunesli-hd-01.webp",
     "gallery": [
-      "/img/projects/referans-gunesli/referans-gunesli-eski-01.webp",
-      "/img/projects/referans-gunesli/referans-gunesli-eski-02.webp",
-      "/img/projects/referans-gunesli/referans-gunesli-eski-03.webp",
-      "/img/projects/referans-gunesli/referans-gunesli-eski-04.webp",
-      "/img/projects/referans-gunesli/referans-gunesli-eski-05.webp",
-      "/img/projects/referans-gunesli/referans-gunesli-eski-06.webp"
+      "/img/projects/referans-gunesli/referans-gunesli-hd-11.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-02.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-03.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-04.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-05.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-06.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-07.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-08.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-09.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-10.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-12.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-13.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-14.webp",
+      "/img/projects/referans-gunesli/referans-gunesli-hd-15.webp"
     ],
     "href": "/projeler/referans-gunesli",
     "district": "Bağcılar",
@@ -1093,6 +1705,72 @@
           ]
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/referans-gunesli/referans-gunesli-hd-01.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-02.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-03.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-04.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-05.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-06.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-07.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-08.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-09.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-10.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-11.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-12.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-13.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-14.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      },
+      "/img/projects/referans-gunesli/referans-gunesli-hd-15.webp": {
+        "label": "Görsel: Projede Fırsat",
+        "href": "https://www.projedefirsat.com/referans-gunesli"
+      }
+    },
+    "imageCredit": {
+      "label": "Görsel: Projede Fırsat",
+      "href": "https://www.projedefirsat.com/referans-gunesli"
     }
   },
   {
@@ -1153,8 +1831,13 @@
     "featured": true,
     "seoTitle": "Vadistanbul İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Ayazağa / İstanbul'da 450.000 m² Vadistanbul G Blok, otel, konut ve ofis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Artaş-İnvest ortaklığıyla 2017-2018 arası sahada.",
-    "image": "/img/projects/vadistanbul/vadistanbul.webp",
+    "image": "/img/projects/vadistanbul/vadistanbul-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Artaş Holding",
+      "href": "https://www.artasholding.com/tr-tr/proje/vadistanbul-bulvar/"
+    },
     "gallery": [
+      "/img/projects/vadistanbul/vadistanbul.webp",
       "/img/projects/vadistanbul/vadistanbul-eski-01.webp",
       "/img/projects/vadistanbul/vadistanbul-eski-02.webp",
       "/img/projects/vadistanbul/vadistanbul-eski-03.webp",
@@ -1215,10 +1898,11 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "M1 Real AVM Genişletme Projesi Kaba Yapı İşleri | Sayda İnşaat",
+    "seoTitle": "M1 Real AVM Genişletme Kaba İşleri | Sayda İnşaat",
     "seoDescription": "M1 Real AVM genişletme projesinde 18.000 m² alanda J, K ve L blokları kaba yapı ve su yalıtımı işlerini Sayda İnşaat tamamladı; Metro Properties ve Fi-Ba Group ortaklığı için sahada.",
-    "image": "/img/projects/m1-real-avm/m1-real-avm-01.webp",
+    "image": "/img/projects/m1-real-avm/m1-real-avm-cover.webp",
     "gallery": [
+      "/img/projects/m1-real-avm/m1-real-avm-hd-01.webp",
       "/img/projects/m1-real-avm/m1-real-avm-eski-01.webp",
       "/img/projects/m1-real-avm/m1-real-avm-eski-02.webp",
       "/img/projects/m1-real-avm/m1-real-avm-eski-03.webp",
@@ -1227,7 +1911,8 @@
       "/img/projects/m1-real-avm/m1-real-avm-eski-06.webp",
       "/img/projects/m1-real-avm/m1-real-avm-eski-07.webp",
       "/img/projects/m1-real-avm/m1-real-avm-eski-08.webp",
-      "/img/projects/m1-real-avm/m1-real-avm-eski-09.webp"
+      "/img/projects/m1-real-avm/m1-real-avm-eski-09.webp",
+      "/img/projects/m1-real-avm/m1-real-avm-01.webp"
     ],
     "href": "/projeler/m1-real-avm",
     "legacy": {
@@ -1254,6 +1939,16 @@
           ]
         }
       ]
+    },
+    "imageCredit": {
+      "label": "Görsel: Fiba Commercial Properties",
+      "href": "https://fibacp.com.tr/portfolio/m1-adana-avm/"
+    },
+    "galleryCredits": {
+      "/img/projects/m1-real-avm/m1-real-avm-hd-01.webp": {
+        "label": "Görsel: Fiba Commercial Properties",
+        "href": "https://fibacp.com.tr/portfolio/m1-adana-avm/"
+      }
     }
   },
   {
@@ -1280,7 +1975,7 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Levent Print Center İş Merkezi İnşaat İşleri | Sayda İnşaat",
+    "seoTitle": "Levent Print Center İş Merkezi | Sayda İnşaat",
     "seoDescription": "Levent / İstanbul'da 8.500 m² Levent Print Center iş merkezinde kaba yapı, su yalıtımı ve ince yapı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
     "image": "/img/projects/levent-print-center-is-merkezi/levent-print-center-is-merkezi-01.webp",
     "gallery": [
@@ -1332,10 +2027,11 @@
     "featured": false,
     "seoTitle": "Dimaş Antrepo Kaba Yapı İşleri | Sayda İnşaat",
     "seoDescription": "26.400 m² Dimaş Antrepo depo ve yönetim binalarında kalıp, demir, beton ve su yalıtımı işlerini Sayda İnşaat tamamladı; Ran İnşaat ile sahada.",
-    "image": "/img/projects/dimas-antrepo/dimas-antrepo-01.webp",
+    "image": "/img/projects/dimas-antrepo/dimas-antrepo-cover.webp",
     "gallery": [
       "/img/projects/dimas-antrepo/dimas-antrepo-eski-01.webp",
-      "/img/projects/dimas-antrepo/dimas-antrepo-eski-02.webp"
+      "/img/projects/dimas-antrepo/dimas-antrepo-eski-02.webp",
+      "/img/projects/dimas-antrepo/dimas-antrepo-01.webp"
     ],
     "href": "/projeler/dimas-antrepo",
     "legacy": {
@@ -1355,6 +2051,10 @@
           ]
         }
       ]
+    },
+    "imageCredit": {
+      "label": "Görsel: DEA Yapı",
+      "href": "https://deayapi.com/projeler/dimas-tepeoren-lojistik-antrepo-anahtar-teslimi-i-nsaati/"
     }
   },
   {
@@ -1373,10 +2073,25 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp",
-    "gallery": [],
+    "seoTitle": "Gaziantep Şehir Hastanesi İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Gaziantep Şehir Hastanesi ana bina kulelerinde 638.000 m² sıva, şap, seramik, boya, asma tavan ve alçıpan işlerini Sayda İnşaat üstlendi.",
+    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Meridiam",
+      "href": "https://www.meridiam.com/assets/gaziantep-hospital-turkey/"
+    },
+    "gallery": [
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-01.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-02.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-03.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-04.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-05.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-06.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-07.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-08.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-09.webp",
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi.webp"
+    ],
     "href": "/projeler/gaziantep-sehir-hastanesi",
     "legacy": {
       "ids": [
@@ -1392,6 +2107,44 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-01.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2259.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-02.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2262.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-03.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2265.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-04.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2268.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-05.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2270.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-06.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2273.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-07.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2276.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-08.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2261.jpg"
+      },
+      "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-ext-09.webp": {
+        "label": "Görsel: TPF",
+        "href": "https://tpf.eu/node/186"
+      }
     }
   },
   {
@@ -1417,8 +2170,21 @@
     "featured": false,
     "seoTitle": "Büyükyalı İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Zeytinburnu / İstanbul'da 560.000 m² Büyükyalı Garden Zone konut ve sosyal tesis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Özak-Yenigün-Ziylan ortaklığıyla 2018-2020 arası sahada.",
-    "image": "/img/projects/buyukyali/buyukyali.webp",
-    "gallery": [],
+    "image": "/img/projects/buyukyali/buyukyali-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Chapman Taylor",
+      "href": "https://www.chapmantaylor.com/projects/buyukyali"
+    },
+    "gallery": [
+      "/img/projects/buyukyali/buyukyali-ext-01.webp",
+      "/img/projects/buyukyali/buyukyali-ext-02.webp",
+      "/img/projects/buyukyali/buyukyali-ext-03.webp",
+      "/img/projects/buyukyali/buyukyali-ext-04.webp",
+      "/img/projects/buyukyali/buyukyali-ext-05.webp",
+      "/img/projects/buyukyali/buyukyali-ext-06.webp",
+      "/img/projects/buyukyali/buyukyali-ext-07.webp",
+      "/img/projects/buyukyali/buyukyali.webp"
+    ],
     "href": "/projeler/buyukyali",
     "district": "Zeytinburnu",
     "legacy": {
@@ -1435,6 +2201,36 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/buyukyali/buyukyali-ext-01.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-02.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-03.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-04.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-05.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-06.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      },
+      "/img/projects/buyukyali/buyukyali-ext-07.webp": {
+        "label": "Görsel: Chapman Taylor",
+        "href": "https://www.chapmantaylor.com/projects/buyukyali"
+      }
     }
   },
   {
@@ -1453,10 +2249,17 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/kasaba-konut-residance/kasaba-konut-residance.webp",
-    "gallery": [],
+    "seoTitle": "Kasaba Konut & Residance İnce İşleri | Sayda İnşaat",
+    "seoDescription": "İş-Koray GYO'nun Kasaba Konut & Residance projesinde ince yapı işlerini Sayda İnşaat gerçekleştirdi.",
+    "image": "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-06.webp",
+    "gallery": [
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-01.webp",
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-02.webp",
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-03.webp",
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-04.webp",
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-05.webp",
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance.webp"
+    ],
     "href": "/projeler/kasaba-konut-residance",
     "legacy": {
       "ids": [
@@ -1472,6 +2275,36 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-01.webp": {
+        "label": "Görsel: Anel Grup",
+        "href": "https://anelgroup.com/tr/project/casaba-is-koray-villalari/"
+      },
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-02.webp": {
+        "label": "Görsel: Anel Grup",
+        "href": "https://anelgroup.com/tr/project/casaba-is-koray-villalari/"
+      },
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-03.webp": {
+        "label": "Görsel: Anel Grup",
+        "href": "https://anelgroup.com/tr/project/casaba-is-koray-villalari/"
+      },
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-04.webp": {
+        "label": "Görsel: Anel Grup",
+        "href": "https://anelgroup.com/tr/project/casaba-is-koray-villalari/"
+      },
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-05.webp": {
+        "label": "Görsel: Anel Grup",
+        "href": "https://anelgroup.com/tr/project/casaba-is-koray-villalari/"
+      },
+      "/img/projects/kasaba-konut-residance/kasaba-konut-residance-ext-06.webp": {
+        "label": "Görsel: Koray",
+        "href": "https://koray.com/tr/kasaba"
+      }
+    },
+    "imageCredit": {
+      "label": "Görsel: Koray",
+      "href": "https://koray.com/tr/kasaba"
     }
   },
   {
@@ -1490,10 +2323,14 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/istanbul-projesi/istanbul-projesi.webp",
-    "gallery": [],
+    "seoTitle": "İstanbul İstanbul Projesi İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Yapı Kredi-Koray GYO'nun İstanbul İstanbul konut projesinde ince yapı işlerini Sayda İnşaat gerçekleştirdi.",
+    "image": "/img/projects/istanbul-projesi/istanbul-projesi-ext-01.webp",
+    "gallery": [
+      "/img/projects/istanbul-projesi/istanbul-projesi-ext-02.webp",
+      "/img/projects/istanbul-projesi/istanbul-projesi-ext-03.webp",
+      "/img/projects/istanbul-projesi/istanbul-projesi.webp"
+    ],
     "href": "/projeler/istanbul-projesi",
     "legacy": {
       "ids": [
@@ -1509,6 +2346,24 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/istanbul-projesi/istanbul-projesi-ext-01.webp": {
+        "label": "Görsel: Koray GYO",
+        "href": "https://koraygyo.com/tr/istanbul-istanbul"
+      },
+      "/img/projects/istanbul-projesi/istanbul-projesi-ext-02.webp": {
+        "label": "Görsel: Koray GYO",
+        "href": "https://koraygyo.com/tr/istanbul-istanbul"
+      },
+      "/img/projects/istanbul-projesi/istanbul-projesi-ext-03.webp": {
+        "label": "Görsel: Koray GYO",
+        "href": "https://koraygyo.com/tr/istanbul-istanbul"
+      }
+    },
+    "imageCredit": {
+      "label": "Görsel: Koray GYO",
+      "href": "https://koraygyo.com/tr/istanbul-istanbul"
     }
   },
   {
@@ -1527,10 +2382,22 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "",
-    "seoDescription": "",
-    "image": "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis.webp",
-    "gallery": [],
+    "seoTitle": "Süzer Plaza Ofis İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Dolmabahçe'deki Süzer Plaza ofis projesinde ince işleri Sayda İnşaat gerçekleştirdi.",
+    "image": "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: flowcomm, CC BY 2.0",
+      "href": "https://commons.wikimedia.org/wiki/File:Dolmabah%C3%A7e_Mosque_and_S%C3%BCzer_Plaza_in_the_background.jpg"
+    },
+    "gallery": [
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-01.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-02.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-03.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-04.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-05.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-06.webp",
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis.webp"
+    ],
     "href": "/projeler/suzer-plaza-ofis",
     "legacy": {
       "ids": [
@@ -1546,6 +2413,32 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-01.webp": {
+        "label": "Foto: Mimar77, CC BY-SA 3.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Suzer_2.jpg"
+      },
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-02.webp": {
+        "label": "Foto: Matti Blume, CC BY-SA 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Suzer_Plaza,_Istanbul_(P1100211).jpg"
+      },
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-03.webp": {
+        "label": "Foto: Николай Максимович, CC BY 3.0",
+        "href": "https://commons.wikimedia.org/wiki/File:S%C3%BCzer_Plaza,_Istanbul,_Turkey_-_panoramio.jpg"
+      },
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-04.webp": {
+        "label": "Foto: Francesco Bini, CC BY-SA 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Veduta_dal_bosforo,_moschea_di_Dolmabah%C3%A7e_e_grattacielo_di_S%C3%BCzer_Plaza_Ritz-Carlton.jpg"
+      },
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-05.webp": {
+        "label": "Foto: TheRunnerUp, CC BY-SA 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:2014-04-12_Dolmabah%C3%A7e-Palast_Hotel_Ritz-Carlton.jpg"
+      },
+      "/img/projects/suzer-plaza-ofis/suzer-plaza-ofis-ext-06.webp": {
+        "label": "Foto: Maurice Flesier, CC BY-SA 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:S%C3%BCzer_Plaza.jpg"
+      }
     }
   },
   {
@@ -1575,8 +2468,21 @@
     "featured": false,
     "seoTitle": "Kartal Loca 2 İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Kartal / İstanbul'da 40.437 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2021-2023 arası sahada.",
-    "image": "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2.webp",
-    "gallery": [],
+    "image": "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kiler GYO",
+      "href": "https://referanskartalloca.com.tr/"
+    },
+    "gallery": [
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-01.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-02.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-03.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-04.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-05.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-06.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-07.webp",
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2.webp"
+    ],
     "href": "/projeler/referans-kartal-loca-2",
     "district": "Kartal",
     "legacy": {
@@ -1593,6 +2499,36 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-01.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-02.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-03.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-04.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-05.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-06.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-ext-07.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      }
     }
   },
   {
@@ -1611,10 +2547,14 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Beşiktaş Abbasağa Satış Ofisi Renovasyonu | Sayda İnşaat",
+    "seoTitle": "Süslü Karakol Satış Ofisi Renovasyonu | Sayda İnşaat",
     "seoDescription": "Beşiktaş'ta tarihi Aziziye Karakolu'nun Kiler Holding satış ofisine dönüştürülmesi kapsamında renovasyon ve ince işleri Sayda İnşaat tamamladı.",
-    "image": "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi.webp",
-    "gallery": [],
+    "image": "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi-cover.webp",
+    "gallery": [
+      "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi-ext-01.webp",
+      "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi-ext-02.webp",
+      "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi.webp"
+    ],
     "href": "/projeler/kiler-besiktas-abbasaga-satis-ofisi",
     "district": "Beşiktaş",
     "legacy": {
@@ -1631,6 +2571,20 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi-ext-01.webp": {
+        "label": "Görsel: Odak Dergisi",
+        "href": "https://odakdergisi2.com/1866-yilinda-aziziye-karakolu-ismiyle-insa-edilen-tarihi-bina-kile-gyonun-konut-pazarlama-ofisi-yapilmis/"
+      },
+      "/img/projects/kiler-besiktas-abbasaga-satis-ofisi/kiler-besiktas-abbasaga-satis-ofisi-ext-02.webp": {
+        "label": "Görsel: Gayrettepe Emlak",
+        "href": "https://gayrettepeemlak.com.tr/blog/suslu-karakol"
+      }
+    },
+    "imageCredit": {
+      "label": "Görsel: Kültür Envanteri",
+      "href": "https://kulturenvanteri.com/yer/suslu-karakol/"
     }
   },
   {
@@ -1774,10 +2728,27 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Nidapark İstinye Satış Ofisi İnce İşleri | Sayda İnşaat",
+    "seoTitle": "Nidapark İstinye Satış Ofisi | Sayda İnşaat",
     "seoDescription": "İstinye / İstanbul'da Nidapark satış ofisi projesinin ince işlerini Sayda İnşaat tamamladı; Nida İnşaat için sahada.",
-    "image": "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi.webp",
-    "gallery": [],
+    "image": "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Nidapark İstinye",
+      "href": "https://www.nidaparkistinye.com/tr"
+    },
+    "gallery": [
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-01.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-02.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-03.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-04.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-05.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-06.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-07.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-08.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-09.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-10.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-11.webp",
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi.webp"
+    ],
     "href": "/projeler/nidapark-istinye-satis-ofisi",
     "district": "Sarıyer",
     "legacy": {
@@ -1794,6 +2765,52 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-01.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-02.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-03.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-04.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-05.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-06.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-07.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-08.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-09.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-10.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      },
+      "/img/projects/nidapark-istinye-satis-ofisi/nidapark-istinye-satis-ofisi-ext-11.webp": {
+        "label": "Görsel: Nidapark İstinye",
+        "href": "https://www.nidaparkistinye.com/tr"
+      }
     }
   },
   {
@@ -1814,8 +2831,21 @@
     "featured": false,
     "seoTitle": "Kartal Loca 1 İnce İşler Projesi | Sayda İnşaat",
     "seoDescription": "Kartal / İstanbul'da 35.672 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2022-2024 arası sahada.",
-    "image": "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1.webp",
-    "gallery": [],
+    "image": "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: Kiler GYO",
+      "href": "https://referanskartalloca.com.tr/"
+    },
+    "gallery": [
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-01.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-02.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-03.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-04.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-05.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-06.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1.webp",
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-07.webp"
+    ],
     "href": "/projeler/referans-kartal-loca-1",
     "district": "Kartal",
     "legacy": {
@@ -1832,6 +2862,36 @@
           "images": []
         }
       ]
+    },
+    "galleryCredits": {
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-01.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-02.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-03.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-04.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-05.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-06.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      },
+      "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-ext-07.webp": {
+        "label": "Görsel: Kiler GYO",
+        "href": "https://referanskartalloca.com.tr/"
+      }
     }
   },
   {
@@ -1857,12 +2917,45 @@
     "startDate": "Şubat 2018",
     "endDate": "Haziran 2019",
     "featured": false,
-    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşler Projesi | Sayda İnşaat",
+    "seoTitle": "Gaziantep Sağlık Kampüsü İnce İşleri | Sayda İnşaat",
     "seoDescription": "Gaziantep'te 640.000 m² Entegre Sağlık Kampüsü T1 Kardiyovasküler Cerrahi Hastanesi'nde alçı-levha, sıva, şap ve seramik işini Sayda İnşaat tamamladı; CCN Altyapı ile 2018-2019 arası sahada.",
-    "image": "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu.webp",
-    "gallery": [],
+    "image": "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: TPF",
+      "href": "https://tpf.eu/node/186"
+    },
+    "gallery": [
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-01.webp",
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-02.webp",
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-03.webp",
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-04.webp",
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-05.webp",
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu.webp"
+    ],
     "href": "/projeler/gaziantep-entegre-saglik-kampusu",
-    "legacy": null
+    "legacy": null,
+    "galleryCredits": {
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-01.webp": {
+        "label": "Görsel: Meridiam",
+        "href": "https://www.meridiam.com/assets/gaziantep-hospital-turkey/"
+      },
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-02.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2262.jpg"
+      },
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-03.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2268.jpg"
+      },
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-04.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2273.jpg"
+      },
+      "/img/projects/gaziantep-entegre-saglik-kampusu/gaziantep-entegre-saglik-kampusu-ext-05.webp": {
+        "label": "Foto: YG01, CC BY 4.0",
+        "href": "https://commons.wikimedia.org/wiki/File:Gaziantep_City_Hospital.IMG_2261.jpg"
+      }
+    }
   },
   {
     "slug": "torun-tower-ofis",
@@ -1889,10 +2982,53 @@
     "featured": false,
     "seoTitle": "Torun Tower Ofis İnce İşleri | Sayda İnşaat",
     "seoDescription": "Gayrettepe / İstanbul'da 97.000 m² Torun Tower 40 katlık kulede shell & core ince işlerini; gazbeton, sıva, şap, seramik ve alçı-levha uygulamalarını Sayda İnşaat tamamladı; 2013 yılında sahada.",
-    "image": "/img/projects/torun-tower-ofis/torun-tower-ofis.webp",
-    "gallery": [],
+    "image": "/img/projects/torun-tower-ofis/torun-tower-ofis-cover.webp",
+    "imageCredit": {
+      "label": "Görsel: PMO",
+      "href": "https://www.pmo.com.tr/torun-tower"
+    },
+    "gallery": [
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-01.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-02.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-03.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-04.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-05.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-06.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-07.webp",
+      "/img/projects/torun-tower-ofis/torun-tower-ofis.webp"
+    ],
     "href": "/projeler/torun-tower-ofis",
     "district": "Beşiktaş",
-    "legacy": null
+    "legacy": null,
+    "galleryCredits": {
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-01.webp": {
+        "label": "Görsel: Torunlar GYO",
+        "href": "https://www.torunlargyo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-02.webp": {
+        "label": "Görsel: Torunlar GYO",
+        "href": "https://www.torunlargyo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-03.webp": {
+        "label": "Görsel: Torunlar GYO",
+        "href": "https://www.torunlargyo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-04.webp": {
+        "label": "Görsel: Torunlar GYO",
+        "href": "https://www.torunlargyo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-05.webp": {
+        "label": "Görsel: Torunlar GYO",
+        "href": "https://www.torunlargyo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-06.webp": {
+        "label": "Görsel: PMO",
+        "href": "https://www.pmo.com.tr/torun-tower"
+      },
+      "/img/projects/torun-tower-ofis/torun-tower-ofis-ext-07.webp": {
+        "label": "Görsel: PMO",
+        "href": "https://www.pmo.com.tr/torun-tower"
+      }
+    }
   }
 ]

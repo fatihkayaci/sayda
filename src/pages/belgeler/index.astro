@@ -3,8 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
 import site from '../../data/site.json';
+import projects from '../../data/projects.json';
 import { srcset } from '../../utils/image';
 
+const hero = projects.find((p) => p.slug === 'gaziantep-sehir-hastanesi')!;
 const certs = site.certifications;
 const validUntil = certs[0]?.validUntil;
 
@@ -30,22 +32,25 @@ const downloads = [
     text: 'İşverenlerimizden aldığımız iş bitirme belgeleri.',
     meta: 'Belge galerisi',
     href: '/projeler/is-bitirme-belgeleri',
-    image: '/img/home/belge3.webp',
+    image: '/img/is-bitirme/is-bitirme-01.webp',
     file: false,
   },
 ];
 ---
 
 <Layout
-  title="Belgelerimiz | Sayda İnşaat"
+  title="ISO Sertifikaları ve Belgelerimiz | Sayda İnşaat"
   description="Sayda İnşaat'ın ISO sertifikaları, iş bitirme belgeleri ve tanıtım kataloğu."
+  ogImage={hero.image}
 >
   <PageHero
+    variant="photo"
     eyebrow="Belgelerimiz"
     breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'Kurumsal', href: '/kurumsal' }, { label: 'Belgelerimiz' }]}
-    image="/img/projects/varyap-meridien-konut/varyap-meridien-konut.webp"
-    imagePosition="50% center"
+    image={hero.image}
+    imagePosition="center"
     size="compact"
+    credit={'imageCredit' in hero ? hero.imageCredit : undefined}
   >
     Uluslararası <em>standartlarda</em> çalışıyoruz.
   </PageHero>

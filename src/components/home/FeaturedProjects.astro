@@ -1,18 +1,14 @@
 ---
 import Icon from '../Icon.astro';
 import allProjects from '../../data/projects.json';
-import { shortProjectTitle } from '../../utils/project';
+import { shortProjectTitle, hasCoverVariants } from '../../utils/project';
 import { srcset } from '../../utils/image';
 
-const picks = [
-  { slug: 'terrace-bahce-konut', image: '/img/home/residence-sunset.webp' },
-  { slug: 'capital-tower-ofis', image: '/img/home/twin-towers.webp' },
-  { slug: 'gaziantep-sehir-hastanesi', image: '/img/home/hospital.webp' },
-  { slug: 'atlas-park-avm-ofis', image: '/img/home/mall.webp' },
-];
-const projects = picks.flatMap(({ slug, image }) => {
+// Each card shows the project's own cover (the same photo as on its detail page). The first one is the big tile.
+const picks = ['atlas-park-avm-ofis', 'terrace-bahce-konut', 'capital-tower-ofis', 'gaziantep-sehir-hastanesi'];
+const projects = picks.flatMap((slug) => {
   const project = allProjects.find((p) => p.slug === slug);
-  return project ? [{ ...project, image }] : [];
+  return project ? [project] : [];
 });
 ---
 
@@ -31,7 +27,7 @@ const projects = picks.flatMap(({ slug, image }) => {
           <a href={p.href} class="fp__card">
             <img
               src={p.image}
-              srcset={srcset(p.image, 960, 1400)}
+              srcset={hasCoverVariants(p.image) ? srcset(p.image, 960, 1920) : undefined}
               sizes="(max-width: 900px) 100vw, 50vw"
               alt={`${p.name} - Sayda İnşaat`}
               loading="lazy"
@@ -40,9 +36,11 @@ const projects = picks.flatMap(({ slug, image }) => {
               <div>
                 <span class="fp__type">{p.type}</span>
                 <h3>{shortProjectTitle(p.name)}</h3>
+                {p.location && <span class="fp__loc">{p.location.replace(' - ', ' · ')}</span>}
               </div>
               <i><Icon name="arrow" size={16} /></i>
             </div>
+            {'imageCredit' in p && p.imageCredit && <span class="fp__credit">{p.imageCredit.label}</span>}
           </a>
         ))
       }
@@ -114,11 +112,18 @@ const projects = picks.flatMap(({ slug, image }) => {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 500ms ease;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .fp__card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fp__card img,
+    .fp__loc {
+      transition: none;
+    }
   }
 
   .fp__card::after {
@@ -159,6 +164,44 @@ const projects = picks.flatMap(({ slug, image }) => {
 
   .fp__card:nth-child(1) h3 {
     font-size: 1.75rem;
+  }
+
+  /* location slides in under the title on hover */
+  .fp__loc {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 4px;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition:
+      max-height 400ms ease,
+      opacity 300ms ease;
+  }
+
+  .fp__card:hover .fp__loc,
+  .fp__card:focus-visible .fp__loc {
+    max-height: 20px;
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    .fp__loc {
+      max-height: none;
+      opacity: 1;
+    }
+  }
+
+  /* photo credit, kept visible until usage permissions are settled (see HERO-IMAGE-LICENSES.md) */
+  .fp__credit {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 1;
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
   }
 
   .fp__body i {

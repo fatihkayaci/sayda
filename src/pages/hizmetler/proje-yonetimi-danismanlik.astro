@@ -1,22 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SvcHero from '../../components/service/SvcHero.astro';
+import services from '../../data/services.json';
+import { serviceLd } from '../../utils/schema';
 import SvcScope from '../../components/service/SvcScope.astro';
 import SvcPartners from '../../components/service/SvcPartners.astro';
+import SvcField from '../../components/service/SvcField.astro';
 import SvcMore from '../../components/service/SvcMore.astro';
 import company from '../../data/company.json';
+
+const service = services.find((s) => s.href === '/hizmetler/proje-yonetimi-danismanlik')!;
+const schema = [
+  serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
+];
 ---
 
 <Layout
   title="Proje Yönetimi & Danışmanlık | Sayda İnşaat"
   description="Bütçe, ihale, maliyet ve kalite kontrol süreçlerinde proje yönetimi ve danışmanlık."
+  ogImage={service.image}
+  jsonLd={schema}
 >
   <SvcHero
     eyebrow="Hizmet 05"
     name="Proje Yönetimi & Danışmanlık"
     text="Bina ve üst yapıların anahtar teslim müteahhitliğinin yanı sıra proje yönetimi işleri yapıyoruz. Bütçe, ihale, maliyet ve kalite kontrol süreçlerinde danışmanlık veriyoruz."
     points={['Bütçe', 'İhale', 'Maliyet', 'Kalite kontrol']}
-    image="/img/home/twin-towers.webp"
+    project="gaziantep-sehir-hastanesi"
   >
     Proje Yönetimi &amp; <em>Danışmanlık</em>
   </SvcHero>
@@ -39,6 +49,8 @@ import company from '../../data/company.json';
       { title: 'M1 Real AVM Genişletme', slug: 'm1-real-avm' },
     ]}
   />
+
+  <SvcField />
 
   <SvcMore current="/hizmetler/proje-yonetimi-danismanlik" />
 </Layout>

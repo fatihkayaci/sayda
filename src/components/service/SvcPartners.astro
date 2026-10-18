@@ -1,8 +1,12 @@
 ---
-// Dark grid of projects a service was delivered on; items with a slug link to the project page.
+// Projects a service was delivered on. Items with a slug become photo cards (the project's cover) linking
+// to the project page; items without one (old references with no page) are listed as names underneath.
 import Icon from '../Icon.astro';
 import SectionHead from '../SectionHead.astro';
 import allProjects from '../../data/projects.json';
+import { variant } from '../../utils/image';
+import { hasCoverVariants, shortProjectTitle } from '../../utils/project';
+import { imageSize } from '../../utils/image-size';
 
 interface Item {
   title: string;
@@ -17,10 +21,30 @@ interface Props {
 }
 
 const { label, title = 'Hizmet verdiğimiz projelerden bazıları.', items } = Astro.props;
-const rows = items.map((item) => {
+
+const resolved = items.map((item) => {
   const project = item.slug ? allProjects.find((p) => p.slug === item.slug) : undefined;
-  return { title: item.title, employer: item.employer ?? project?.employer ?? '', href: project?.href };
+  return { ...item, project, employer: item.employer ?? project?.employer ?? '' };
 });
+
+const cards = resolved
+  .filter((item) => item.project)
+  .map(({ title, project, employer }) => {
+    const p = project!;
+    const image = hasCoverVariants(p.image) ? variant(p.image, 640) : p.image;
+    return {
+      title: title || shortProjectTitle(p.name),
+      employer,
+      href: p.href,
+      type: p.type,
+      image,
+      // old 222–500px covers stay sharp only when shown small and whole
+      small: (imageSize(p.image)?.width ?? 0) < 480,
+    };
+  });
+const names = resolved.filter((item) => !item.project);
+// The last card stretches over whatever the final row of three leaves empty.
+const lastSpan = cards.length % 3 ? 3 - (cards.length % 3) + 1 : 1;
 ---
 
 <section class="svc-partners">
@@ -31,26 +55,45 @@ const rows = items.map((item) => {
         Tüm Projeler <Icon name="arrow" size={18} />
       </a>
     </div>
-    <ul class="svc-partners__grid">
-      {
-        rows.map((row) => (
-          <li>
-            {row.href ? (
-              <a href={row.href}>
-                <strong>{row.title}</strong>
-                <span>{row.employer}</span>
-                <Icon name="arrow" size={22} />
+
+    {
+      cards.length > 0 && (
+        <ul class="svc-partners__cards">
+          {cards.map((card, i) => (
+            <li
+              class={`reveal reveal-d${(i % 3) + 1}`}
+              style={i === cards.length - 1 && lastSpan > 1 ? `--span: ${lastSpan}` : undefined}
+            >
+              <a href={card.href} class="svc-card">
+                {card.small && <img class="svc-card__blur" src={card.image} alt="" aria-hidden="true" loading="lazy" />}
+                <img class:list={{ 'svc-card__img--small': card.small }} src={card.image} alt="" loading="lazy" />
+                {card.type && <span class="svc-card__type">{card.type}</span>}
+                <span class="svc-card__body">
+                  <strong>{card.title}</strong>
+                  <span>{card.employer}</span>
+                </span>
+                <span class="svc-card__arrow" aria-hidden="true">
+                  <Icon name="arrow" size={18} />
+                </span>
               </a>
-            ) : (
-              <div>
-                <strong>{row.title}</strong>
-                <span>{row.employer}</span>
-              </div>
-            )}
-          </li>
-        ))
-      }
-    </ul>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      names.length > 0 && (
+        <ul class="svc-partners__names">
+          {names.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <span>{item.employer}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
   </div>
 </section>
 
@@ -79,78 +122,154 @@ const rows = items.map((item) => {
     color: #fff;
   }
 
-  .svc-partners__grid {
+  .svc-partners__cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: clamp(240px, 22vw, 300px);
+    gap: 16px;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
   }
 
-  .svc-partners__grid li {
-    display: flex;
-    border-right: 1px solid rgba(255, 255, 255, 0.18);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  .svc-partners__cards li {
+    grid-column: span var(--span, 1);
   }
 
-  .svc-partners__grid li > * {
+  .svc-card {
     position: relative;
-    flex: 1;
-    display: grid;
-    align-content: center;
-    gap: 8px;
-    min-height: 120px;
-    padding: 24px 64px 24px 32px;
+    display: block;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #12131f;
     color: #fff;
-    transition:
-      background 300ms ease,
-      color 300ms ease;
+    isolation: isolate;
   }
 
-  .svc-partners__grid strong {
-    font-family: var(--font-display);
-    font-stretch: 115%;
-    font-weight: 800;
-    font-size: clamp(1.25rem, 1vw + 0.875rem, 1.75rem);
-    line-height: 1.1;
-  }
-
-  .svc-partners__grid span {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 300ms ease;
-  }
-
-  .svc-partners__grid a :global(svg) {
+  .svc-card img {
     position: absolute;
-    top: 50%;
-    right: 28px;
-    color: var(--color-orange);
-    transform: translateY(-50%);
-    transition:
-      color 300ms ease,
-      transform 300ms ease;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
-  .svc-partners__grid li > *:hover {
+  .svc-card__blur {
+    filter: blur(18px) brightness(0.7);
+    transform: scale(1.2);
+  }
+
+  .svc-card img.svc-card__img--small {
+    inset: 10% 12% 32%;
+    width: 76%;
+    height: 58%;
+    object-fit: contain;
+  }
+
+  .svc-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to top, rgba(20, 21, 34, 0.95) 0%, rgba(20, 21, 34, 0.4) 45%, rgba(20, 21, 34, 0) 70%);
+  }
+
+  .svc-card:hover img:not(.svc-card__blur, .svc-card__img--small) {
+    transform: scale(1.07);
+  }
+
+  .svc-card__type {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 1;
+    padding: 5px 12px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-navy-deep);
+  }
+
+  .svc-card__body {
+    position: absolute;
+    inset: auto 72px 20px 22px;
+    z-index: 1;
+    display: grid;
+    gap: 6px;
+  }
+
+  .svc-card strong {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.15;
+  }
+
+  .svc-card__body span {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .svc-card__arrow {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: var(--color-orange);
     color: var(--color-navy-deep);
+    transition: transform var(--transition);
   }
 
-  .svc-partners__grid li > *:hover span,
-  .svc-partners__grid a:hover :global(svg) {
-    color: var(--color-navy-deep);
+  .svc-card:hover .svc-card__arrow {
+    transform: translateX(4px);
   }
 
-  .svc-partners__grid a:hover :global(svg) {
-    transform: translate(4px, -50%);
+  /* references without a project page */
+  .svc-partners__names {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .svc-partners__names li {
+    display: grid;
+    gap: 4px;
+    padding: 18px 20px 18px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+  }
+
+  .svc-partners__names strong {
+    font-weight: 700;
+  }
+
+  .svc-partners__names span {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.6);
   }
 
   @media (max-width: 900px) {
-    .svc-partners__grid {
+    .svc-partners__cards li {
+      grid-column: auto;
+    }
+
+    .svc-partners__cards,
+    .svc-partners__names {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -162,12 +281,15 @@ const rows = items.map((item) => {
   }
 
   @media (max-width: 520px) {
-    .svc-partners__grid {
+    .svc-partners__cards,
+    .svc-partners__names {
       grid-template-columns: 1fr;
     }
+  }
 
-    .svc-partners__grid li > * {
-      min-height: 0;
+  @media (prefers-reduced-motion: reduce) {
+    .svc-card img {
+      transition: none;
     }
   }
 </style>

@@ -19,8 +19,14 @@ import site from '../data/site.json';
       seen = !!sessionStorage.getItem('sayda-splash');
       sessionStorage.setItem('sayda-splash', '1');
     } catch (e) {}
+    // The hero waits for this before starting its first zoom, so it isn't spent behind the splash.
+    var done = function () {
+      window.__saydaSplashDone = true;
+      window.dispatchEvent(new Event('sayda:splash-done'));
+    };
     if (seen) {
       el.remove();
+      done();
       return;
     }
     // The page loads underneath. Leave once it has loaded, but not before the logo
@@ -31,6 +37,7 @@ import site from '../data/site.json';
       if (gone) return;
       gone = true;
       el.classList.add('is-leaving');
+      done();
       setTimeout(function () {
         el.remove();
       }, 300);

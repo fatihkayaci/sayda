@@ -1,26 +1,52 @@
 ---
-import { shortProjectTitle, projectImageAlt } from '../../utils/project';
+import Icon from '../Icon.astro';
+import { shortProjectTitle, projectImageAlt, hasCoverVariants, projectDisplayName } from '../../utils/project';
+import { srcset } from '../../utils/image';
+import { imageSize } from '../../utils/image-size';
 
 interface Props {
   project: {
     name: string;
     status: string;
     image: string;
+    imageCredit?: { label: string; href: string };
     location: string;
+    district?: string;
+    type?: string;
+    area?: string;
     works?: string[];
-    tagline?: string;
-    description?: string[];
   };
 }
 
 const { project } = Astro.props;
 const title = shortProjectTitle(project.name);
 const heroAlt = projectImageAlt(project);
-const lead = project.tagline ?? project.description?.[0];
+const ongoing = project.status === 'devam-eden';
+
+// Photos narrower than this turn to visible pixels when stretched across the screen; those
+// (a handful of old projects with no better photo found) become a soft, blurred backdrop instead.
+const size = project.image ? imageSize(project.image) : null;
+const soft = Boolean(size && size.width < 1400);
+
+const facts = [
+  { icon: 'pin', value: project.location.replace(' - ', ' · ') || project.district },
+  { icon: 'area', value: project.area },
+].filter((fact) => fact.value);
 ---
 
-<section class="project-hero">
-  {project.image && <img src={project.image} alt={heroAlt} fetchpriority="high" />}
+<section class:list={['project-hero', { 'project-hero--soft': soft }]}>
+  {
+    project.image && (
+      <img
+        class="project-hero__bg"
+        src={project.image}
+        srcset={hasCoverVariants(project.image) ? srcset(project.image, 960, 1920) : undefined}
+        sizes="100vw"
+        alt={heroAlt}
+        fetchpriority="high"
+      />
+    )
+  }
   <div class="project-hero__overlay"></div>
 
   <div class="container project-hero__inner">
@@ -32,48 +58,88 @@ const lead = project.tagline ?? project.description?.[0];
       <span aria-current="page">{title}</span>
     </nav>
 
-    <span class="project-hero__rule"></span>
-    <h1>{project.name}</h1>
-    {lead && <p>{lead}</p>}
+    <div class="project-hero__text">
+      <div class="project-hero__tags">
+        {project.type && <span>{project.type}</span>}
+        <span class:list={{ 'is-ongoing': ongoing }}>{ongoing ? 'Devam Ediyor' : 'Tamamlandı'}</span>
+      </div>
+      <h1>{projectDisplayName(project.name)}</h1>
+
+      {
+        facts.length > 0 && (
+          <ul class="project-hero__facts">
+            {facts.map((fact) => (
+              <li>
+                <Icon name={fact.icon} size={18} />
+                {fact.value}
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
   </div>
+
+  {
+    project.imageCredit && (
+      <a class="project-hero__credit" href={project.imageCredit.href} target="_blank" rel="noopener noreferrer">
+        {project.imageCredit.label}
+      </a>
+    )
+  }
 </section>
 
 <style>
-
   .project-hero {
     position: relative;
     overflow: hidden;
-    min-height: 269px;
     background: var(--color-navy-deep);
     color: #fff;
   }
 
-  .project-hero img {
+  .project-hero__bg {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 40%;
+    object-position: center 45%;
+    animation: project-hero-zoom 9s ease-out both;
+  }
+
+  @keyframes project-hero-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 
   .project-hero__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(28, 29, 46, 0.85) 0%, rgba(28, 29, 46, 0.45) 55%, rgba(28, 29, 46, 0.2) 100%);
+    background:
+      linear-gradient(to top, rgba(20, 21, 34, 0.9) 0%, rgba(20, 21, 34, 0.35) 45%, rgba(20, 21, 34, 0.15) 100%),
+      linear-gradient(to right, rgba(20, 21, 34, 0.55) 0%, rgba(20, 21, 34, 0) 60%);
   }
 
   .project-hero__inner {
     position: relative;
-    padding-block: 40px 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: clamp(420px, 64vh, 640px);
+    padding-block: 40px 52px;
   }
 
   .project-hero__breadcrumb {
+    position: absolute;
+    top: 32px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
-    margin-bottom: 18px;
     font-size: 0.84rem;
     color: rgba(255, 255, 255, 0.9);
   }
@@ -91,15 +157,33 @@ const lead = project.tagline ?? project.description?.[0];
     color: rgba(255, 255, 255, 0.5);
   }
 
-  .project-hero__rule {
-    display: block;
-    width: 54px;
-    height: 2px;
+  .project-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 18px;
-    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .project-hero__tags span {
+    padding: 6px 13px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-hero__tags span.is-ongoing {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: var(--color-navy-deep);
   }
 
   .project-hero h1 {
+    max-width: 22ch;
     font-family: var(--font-display);
     font-stretch: 112%;
     font-weight: 800;
@@ -107,24 +191,73 @@ const lead = project.tagline ?? project.description?.[0];
     font-size: clamp(2rem, 3.8vw, 3.75rem);
     line-height: 1.02;
     color: #fff;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
   }
 
-  .project-hero p {
-    max-width: 52ch;
-    margin-top: 16px;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.92);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .project-hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 22px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .project-hero__facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .project-hero__facts :global(svg) {
+    color: var(--color-orange);
+  }
+
+  /* Soft mode: a low-res photo is blurred into a colour backdrop so no pixels show */
+  .project-hero--soft .project-hero__bg {
+    filter: blur(14px) saturate(1.15);
+    transform: scale(1.08);
+    animation: none;
+  }
+
+  .project-hero--soft .project-hero__overlay {
+    background:
+      linear-gradient(to top, rgba(20, 21, 34, 0.9) 0%, rgba(20, 21, 34, 0.5) 60%, rgba(20, 21, 34, 0.35) 100%),
+      linear-gradient(to right, rgba(20, 21, 34, 0.6) 0%, rgba(20, 21, 34, 0) 70%);
+  }
+
+  .project-hero--soft .project-hero__inner {
+    min-height: clamp(360px, 48vh, 480px);
+  }
+
+  .project-hero__credit {
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  .project-hero__credit:hover {
+    color: #fff;
   }
 
   @media (max-width: 640px) {
     .project-hero__inner {
-      padding-block: 31px 36px;
+      min-height: 380px;
+      padding-block: 80px 36px;
+    }
+
+    .project-hero__breadcrumb {
+      top: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-hero__bg {
+      animation: none;
     }
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import Icon from '../Icon.astro';
-import { shortProjectTitle } from '../../utils/project';
+import { shortProjectTitle, hasCoverVariants } from '../../utils/project';
+import { variant } from '../../utils/image';
 
 interface RelatedProject {
   href: string;
@@ -32,7 +33,11 @@ const { projects } = Astro.props;
           <a class="related-card" href={project.href}>
             <div class="related-card__media">
               {project.image ? (
-                <img src={project.image} alt={`${shortProjectTitle(project.name)} - Sayda İnşaat`} loading="lazy" />
+                <img
+                  src={hasCoverVariants(project.image) ? variant(project.image, 640) : project.image}
+                  alt={`${shortProjectTitle(project.name)} - Sayda İnşaat`}
+                  loading="lazy"
+                />
               ) : (
                 <div class="related-card__media-empty">
                   <Icon name="photo" size={31} />
