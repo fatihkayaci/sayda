@@ -18,9 +18,10 @@ interface Props {
   ogImage?: string;
   hideCtaBanner?: boolean;
   jsonLd?: object[];
+  publishedTime?: string;
 }
 
-const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd } = Astro.props;
+const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd, publishedTime } = Astro.props;
 ---
 
 <!doctype html>
@@ -33,7 +34,7 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd }
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={archivoLatinExt} as="font" type="font/woff2" crossorigin />
-    <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} />
+    <Seo title={title} description={description} organizationSchema={organizationSchema} ogImage={ogImage} jsonLd={jsonLd} publishedTime={publishedTime} />
     <ClientRouter />
     {
       site.gaMeasurementId && (

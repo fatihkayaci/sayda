@@ -71,6 +71,7 @@ const breadcrumbLd = buildBreadcrumbLd(
   title={'seoTitle' in post && post.seoTitle ? post.seoTitle : `${post.title} | Sayda İnşaat`}
   description={seoDescription}
   ogImage={post.image}
+  publishedTime={post.date}
   jsonLd={[articleLd, breadcrumbLd]}
 >
   <article>

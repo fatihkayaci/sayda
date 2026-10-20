@@ -79,6 +79,7 @@ const breadcrumbLd = buildBreadcrumbLd(
   title={'seoTitle' in haber && haber.seoTitle ? haber.seoTitle : `${haber.title} | Sayda İnşaat`}
   description={'seoDescription' in haber && haber.seoDescription ? haber.seoDescription : haber.excerpt}
   ogImage={haber.image}
+  publishedTime={haber.date}
   jsonLd={[articleLd, breadcrumbLd]}
 >
   <article>
