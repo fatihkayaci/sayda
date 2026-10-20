@@ -41,7 +41,7 @@ const slugify = (text: string) =>
     .replace(/^-|-$/g, '');
 const headings = blocks.flatMap((block) => (block.type === 'heading' ? [{ text: block.text, id: slugify(block.text) }] : []));
 
-const url = new URL(`/blog/${post.slug}`, site.url).toString();
+const url = new URL(`/blog/${post.slug}/`, site.url).toString();
 const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(post.title);
 const shares = [
@@ -52,10 +52,11 @@ const shares = [
 ];
 
 const pagePath = `/blog/${post.slug}`;
+const seoDescription = 'seoDescription' in post && post.seoDescription ? post.seoDescription : post.excerpt;
 const articleLd = buildArticleLd({
   type: 'BlogPosting',
   headline: post.title,
-  description: post.excerpt,
+  description: seoDescription,
   image: post.image,
   datePublished: post.date,
   path: pagePath,
@@ -68,7 +69,7 @@ const breadcrumbLd = buildBreadcrumbLd(
 
 <Layout
   title={'seoTitle' in post && post.seoTitle ? post.seoTitle : `${post.title} | Sayda İnşaat`}
-  description={post.excerpt}
+  description={seoDescription}
   ogImage={post.image}
   jsonLd={[articleLd, breadcrumbLd]}
 >

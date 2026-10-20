@@ -6,7 +6,14 @@ interface Props {
 }
 
 const { page } = Astro.props;
-const config = redirects[page];
+// Point straight at the served /path/ form so the old URL doesn't chain into a second redirect.
+const slash = (path: string) => (path.endsWith('/') ? path : `${path}/`);
+const source = redirects[page];
+const config = {
+  ...source,
+  fallback: slash(source.fallback),
+  map: Object.fromEntries(Object.entries(source.map).map(([key, path]) => [key, slash(path)])),
+};
 ---
 
 <html lang="tr">

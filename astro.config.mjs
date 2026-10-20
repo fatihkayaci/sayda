@@ -1,5 +1,7 @@
 // @ts-check
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
@@ -14,6 +16,32 @@ const dated = (file, base) =>
   );
 const lastmod = new Map([...dated('./src/data/haberler.json', '/haberler'), ...dated('./src/data/blog.json', '/blog')]);
 
+/** @param {string} dir @returns {string[]} */
+const htmlFiles = (dir) =>
+  readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(dir, entry.name);
+    return entry.isDirectory() ? htmlFiles(path) : entry.name.endsWith('.html') ? [path] : [];
+  });
+
+// Pages are served from /path/ (canonical and sitemap use that form); the server 301s /path to /path/.
+// Source links are written without the slash, so add it at build time and save crawlers a redirect per link.
+/** @returns {import('astro').AstroIntegration} */
+const trailingSlashLinks = () => ({
+  name: 'trailing-slash-links',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      const root = fileURLToPath(dir);
+      for (const file of htmlFiles(root)) {
+        const html = readFileSync(file, 'utf-8');
+        const fixed = html.replace(/href="(\/[^"?#]*[^/"?#])([?#][^"]*)?"/g, (match, path, rest = '') =>
+          existsSync(join(root, decodeURI(path), 'index.html')) ? `href="${path}/${rest}"` : match
+        );
+        if (fixed !== html) writeFileSync(file, fixed);
+      }
+    },
+  },
+});
+
 // https://astro.build/config
 export default defineConfig({
   site,
@@ -26,5 +54,6 @@ export default defineConfig({
         return date ? { ...item, lastmod: new Date(date).toISOString() } : item;
       },
     }),
+    trailingSlashLinks(),
   ],
 });

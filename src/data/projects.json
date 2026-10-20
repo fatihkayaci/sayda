@@ -19,7 +19,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Beşiktaş Abbasağa İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Beşiktaş Abbasağa'da 79.000 m² lüks rezidans projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat yürütüyor; Kiler GYO'yla 2024'ten beri sahada.",
+    "seoDescription": "Beşiktaş Abbasağa'da 16.655 m² arazide 10 blok, 295 üniteli rezidans projesinin duvar, sıva, şap, seramik ve alçı-levha işlerini Kiler GYO için yürütüyoruz.",
     "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-cover.webp",
     "imageCredit": {
       "label": "Görsel: Kiler GYO",
@@ -85,8 +85,8 @@
     "startDate": "",
     "endDate": "",
     "featured": true,
-    "seoTitle": "Atlas Park AVM ve Ofis İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Sultanbeyli / İstanbul'da 160.000 m² Atlas Park AVM ve ofis projesinde bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı; 2013-2015 arası sahada.",
+    "seoTitle": "Atlas Park AVM Sultanbeyli İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Sultanbeyli / İstanbul'da Atlas Park AVM bloklarının 150.000 m² 1. etap ince işleri: bims duvar, sıva, şap ve alçı-levha işini Sayda İnşaat tamamladı.",
     "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp",
     "imageCredit": {
       "label": "Görsel: Ergün Mimarlık",
@@ -442,8 +442,8 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Canik / Samsun'da 135.000 m² Piazza AVM ve Anamon Otel projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Rönesans Teknik ile 2012-2013 arası sahada.",
+    "seoTitle": "Samsun Piazza AVM ve Anamon Otel İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Canik / Samsun'da Piazza AVM (140.000 m²) ve Anamon Otel (14.000 m²) projesinde alçı-levha, asma tavan, sıva ve boya işlerini Sayda İnşaat tamamladı.",
     "image": "/img/projects/piazza-avm-anamon-otel/piazza-avm-anamon-otel-cover.webp",
     "imageCredit": {
       "label": "Görsel: Rönesans Gayrimenkul",
@@ -638,7 +638,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Akbatı AVM ve Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Bahçeşehir / İstanbul'da 250.000 m² Akbatı AVM ve otopark projesinde alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı; Akiş Gayrimenkul ile 2011 yılında sahada.",
+    "seoDescription": "Bahçeşehir / İstanbul'da Akbatı AVM ve otoparklarının 160.000 m² ince işleri: alçı-levha bölme duvar, asma tavan, sıva ve boya işini Sayda İnşaat tamamladı.",
     "image": "/img/projects/akbati-avm-konut/akbati-avm-konut-cover.webp",
     "imageCredit": {
       "label": "Görsel: Birleşim",
@@ -731,8 +731,8 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Varyap Meridien Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Batı Ataşehir / İstanbul'da 150.000 m² Varyap Meridien E Blok residence projesinde gazbeton duvar, sıva ve şap işini Sayda İnşaat tamamladı; 2010-2011 arası sahada.",
+    "seoTitle": "Varyap Meridian E Blok İnce İşleri | Sayda İnşaat",
+    "seoDescription": "Batı Ataşehir / İstanbul'da 44 katlı Varyap Meridian E Blok'un 65.000 m² ince işleri: gazbeton duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat yaptı.",
     "image": "/img/projects/varyap-meridien-konut/varyap-meridien-konut-cover.webp",
     "imageCredit": {
       "label": "Görsel: Emlak Konut",
@@ -885,7 +885,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Terrace Bahçe Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Sarıyer / İstanbul'da 14.000 m² Terrace Bahçe 60 konutluk residence projesinde duvar, sıva, şap, seramik ve alçı-levha asma tavan işini Sayda İnşaat tamamladı; 2010 yılında sahada.",
+    "seoDescription": "Sarıyer / İstanbul'da Terrace Bahçe B Blok 25 daire ve numune dairelerin 6.000 m² ince işleri: duvar, sıva, şap, seramik ve asma tavan işini Sayda İnşaat yaptı.",
     "image": "/img/projects/terrace-bahce-konut/terrace-bahce-konut-cover.webp",
     "imageCredit": {
       "label": "Görsel: Tiba",
@@ -1066,7 +1066,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Omsan Lojistik Merkezi İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Tuzla / İstanbul'da 100.000 m² Omsan Depo, ek binalar ve yönetim binaları projesinde tuğla duvar, sıva, şap, seramik ve mermer işini Sayda İnşaat tamamladı; Oyak Konut ile 2006-2008 arası sahada.",
+    "seoDescription": "Tuzla / İstanbul'da 65.000 m² Omsan Lojistik Merkezi ve yardımcı tesislerinde duvar, sıva, şap, seramik ve kompozit giydirme işlerini Sayda İnşaat tamamladı.",
     "image": "/img/projects/omsan-depo-lojistik-merkezi/omsan-depo-lojistik-merkezi-cover.webp",
     "imageCredit": {
       "label": "Görsel: Akyürek Elmas Mimarlık",
@@ -1622,8 +1622,8 @@
     "startDate": "",
     "endDate": "",
     "featured": false,
-    "seoTitle": "Mis Süt Dudullu Üretim Tesisleri | Sayda İnşaat",
-    "seoDescription": "Dudullu / İstanbul'da Mis Süt üretim tesislerinde soğuk depo, üretim ve personel binaları kaba-ince yapı işlerini Sayda İnşaat tamamladı; Nestle Süt Ürünleri için sahada.",
+    "seoTitle": "Mis Süt Dudullu (Ümraniye) Üretim Tesisleri | Sayda İnşaat",
+    "seoDescription": "Mis Süt'ün Dudullu / Ümraniye, İstanbul'daki üretim tesisleri: soğuk depo, üretim ve personel binalarının kaba-ince yapı işlerini Nestle Süt Ürünleri için Sayda İnşaat yaptı.",
     "image": "/img/projects/mis-sut-dudullu-uretim-tesisleri/mis-sut-dudullu-uretim-tesisleri.webp",
     "gallery": [],
     "href": "/projeler/mis-sut-dudullu-uretim-tesisleri",
@@ -1830,7 +1830,7 @@
     "endDate": "",
     "featured": true,
     "seoTitle": "Vadistanbul İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Ayazağa / İstanbul'da 450.000 m² Vadistanbul G Blok, otel, konut ve ofis projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Artaş-İnvest ortaklığıyla 2017-2018 arası sahada.",
+    "seoDescription": "Ayazağa / İstanbul'da Vadistanbul 3. etap ofis blokları ve kapalı otoparkların 205.000 m² duvar, şap, seramik, sıva ve alçı-levha işlerini Sayda İnşaat yaptı.",
     "image": "/img/projects/vadistanbul/vadistanbul-cover.webp",
     "imageCredit": {
       "label": "Görsel: Artaş Holding",
@@ -2467,7 +2467,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Kartal Loca 2 İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Kartal / İstanbul'da 40.437 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2021-2023 arası sahada.",
+    "seoDescription": "Kartal / İstanbul'da Referans Kartal Loca 2. etap konut ve dükkân projesinin kaba ve ince işlerini (duvar, sıva, şap, seramik) Kiler GYO için üstlendik.",
     "image": "/img/projects/referans-kartal-loca-2/referans-kartal-loca-2-cover.webp",
     "imageCredit": {
       "label": "Görsel: Kiler GYO",
@@ -2616,7 +2616,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Oyakkent Konut İnce İşleri | Sayda İnşaat",
-    "seoDescription": "Başakşehir / İstanbul'da 650.000 m² Oyakkent 33 blok 1.581 konutluk projede tuğla duvar, teras şap ve çatı işini Sayda İnşaat tamamladı; Oyak İnşaat ile 2007-2009 arası sahada.",
+    "seoDescription": "Başakşehir / İstanbul'da Oyakkent 1. etap (288.000 m²) ve 2. etap (108.000 m²) konut projesinde duvar, şap ve ince yapı işlerini Sayda İnşaat tamamladı.",
     "image": "/img/projects/oyakkent-konut/oyakkent-konut.webp",
     "gallery": [
       "/img/projects/oyakkent-konut/oyakkent-konut-eski-01.webp",
@@ -2830,7 +2830,7 @@
     "endDate": "",
     "featured": false,
     "seoTitle": "Kartal Loca 1 İnce İşler Projesi | Sayda İnşaat",
-    "seoDescription": "Kartal / İstanbul'da 35.672 m² konut ve cadde dükkânı projesinde duvar, sıva, şap, seramik ve alçı-levha işini Sayda İnşaat tamamladı; Kiler GYO ile 2022-2024 arası sahada.",
+    "seoDescription": "Kartal / İstanbul'da 36.000 m² arazide 202 daire ve 33 mağazalı Referans Kartal Loca 1. etabın duvar, sıva, şap, seramik ve alçı-levha işlerini yaptık.",
     "image": "/img/projects/referans-kartal-loca-1/referans-kartal-loca-1-cover.webp",
     "imageCredit": {
       "label": "Görsel: Kiler GYO",

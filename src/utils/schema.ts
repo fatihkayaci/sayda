@@ -2,6 +2,8 @@
 import site from '../data/site.json';
 
 const abs = (path: string) => new URL(path, site.url).toString();
+/** Absolute URL of a page in its served (and canonical) form: with a trailing slash. */
+export const pageUrl = (path: string) => abs(path.endsWith('/') ? path : `${path}/`);
 const organization = { '@type': 'Organization', '@id': `${site.url}/#organization`, name: site.name, url: site.url };
 
 /** Breadcrumb trail; the last item may omit href (the current page). */
@@ -13,7 +15,7 @@ export function breadcrumbLd(items: { label: string; href?: string }[], currentP
       '@type': 'ListItem',
       position: i + 1,
       name: item.label,
-      item: abs(item.href ?? currentPath),
+      item: pageUrl(item.href ?? currentPath),
     })),
   };
 }
@@ -33,7 +35,7 @@ export function articleLd(opts: {
     description: opts.description,
     image: [abs(opts.image)],
     datePublished: opts.datePublished,
-    mainEntityOfPage: abs(opts.path),
+    mainEntityOfPage: pageUrl(opts.path),
     author: organization,
     publisher: { ...organization, logo: { '@type': 'ImageObject', url: abs(site.logo) } },
   };
@@ -46,7 +48,7 @@ export function serviceLd(opts: { name: string; description: string; path: strin
     name: opts.name,
     serviceType: opts.name,
     description: opts.description,
-    url: abs(opts.path),
+    url: pageUrl(opts.path),
     ...(opts.image ? { image: abs(opts.image) } : {}),
     provider: organization,
     areaServed: { '@type': 'Country', name: 'Türkiye' },

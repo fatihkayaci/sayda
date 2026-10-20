@@ -50,7 +50,7 @@ const projectPhotos = related
       .slice(0, 6)
   : [];
 
-const url = new URL(`/haberler/${haber.slug}`, site.url).toString();
+const url = new URL(`/haberler/${haber.slug}/`, site.url).toString();
 const encodedUrl = encodeURIComponent(url);
 const encodedTitle = encodeURIComponent(haber.title);
 const shares = [

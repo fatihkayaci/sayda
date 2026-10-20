@@ -8,7 +8,8 @@ import ProjectFeatures from '../../components/project/ProjectFeatures.astro';
 import ProjectNavigation from '../../components/project/ProjectNavigation.astro';
 import projects from '../../data/projects.json';
 import site from '../../data/site.json';
-import { shortProjectTitle, projectSeoTitle, projectSeoDescription, pickRelatedProjects } from '../../utils/project';
+import { pageUrl } from '../../utils/schema';
+import { shortProjectTitle, projectDisplayName, projectSeoTitle, projectSeoDescription, pickRelatedProjects } from '../../utils/project';
 
 export function getStaticPaths() {
   return projects.map((project) => {
@@ -31,32 +32,37 @@ const { project, related } = Astro.props;
 const title = shortProjectTitle(project.name);
 const seoTitle = projectSeoTitle(project);
 const seoDescription = projectSeoDescription(project);
-const canonical = new URL(project.href, site.url).toString();
+const canonical = pageUrl(project.href);
 
 const breadcrumbLd = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Anasayfa', item: site.url },
-    { '@type': 'ListItem', position: 2, name: 'Projeler', item: new URL('/projeler', site.url).toString() },
-    { '@type': 'ListItem', position: 3, name: project.name, item: canonical },
+    { '@type': 'ListItem', position: 1, name: 'Anasayfa', item: pageUrl('/') },
+    { '@type': 'ListItem', position: 2, name: 'Projeler', item: pageUrl('/projeler') },
+    { '@type': 'ListItem', position: 3, name: projectDisplayName(project.name), item: canonical },
   ],
 };
 
 const serviceLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: project.name,
+  name: projectDisplayName(project.name),
   serviceType: project.works?.length ? project.works.join(', ') : 'İnce İşler',
   description: seoDescription,
-  provider: { '@type': 'Organization', name: site.name, url: site.url },
-  areaServed: {
-    '@type': 'Place',
-    name: project.location,
-    ...(project.district
-      ? { address: { '@type': 'PostalAddress', addressLocality: project.district, addressCountry: 'TR' } }
-      : {}),
-  },
+  url: canonical,
+  provider: { '@type': 'Organization', '@id': `${site.url}/#organization`, name: site.name, url: site.url },
+  ...(project.location || project.district
+    ? {
+        areaServed: {
+          '@type': 'Place',
+          ...(project.location ? { name: project.location } : {}),
+          ...(project.district
+            ? { address: { '@type': 'PostalAddress', addressLocality: project.district, addressCountry: 'TR' } }
+            : {}),
+        },
+      }
+    : {}),
   ...(project.image ? { image: new URL(project.image, site.url).toString() } : {}),
 };
 ---

@@ -50,7 +50,7 @@
   {
     "slug": "riskli-yapi-tespiti-nasil-yapilir",
     "title": "Riskli Yapı Tespiti Nasıl Yapılır, Kaç Gün Sürer?",
-    "seoTitle": "Riskli Yapı Tespiti Nasıl Yapılır? | Sayda İnşaat",
+    "seoTitle": "Riskli Yapı Tespiti Nasıl Yapılır, Ne Kadar Sürer? | Sayda İnşaat",
     "date": "2025-02-14",
     "image": "/img/sayda-insaat-hero02.webp",
     "excerpt": "Riskli yapı tespiti sürecinin adımları, gerekli evraklar ve ortalama süre.",
@@ -105,7 +105,8 @@
         "type": "p",
         "text": "Risk raporu çıktıktan sonraki adım, kat maliklerinin bir araya gelerek süreç hakkında karar almasıdır — kat karşılığı inşaat veya diğer dönüşüm seçenekleri bu aşamada değerlendirilir."
       }
-    ]
+    ],
+    "seoDescription": "Riskli yapı tespiti adım adım: başvuru, zemin ve yapı incelemesi, rapor ve tebliğ. Gerekli evraklar ve raporun genellikle birkaç hafta ile 1-2 ayda çıkması."
   },
   {
     "slug": "kat-karsiligi-insaat-sozlesmesinde-dikkat-edilmesi-gerekenler",
