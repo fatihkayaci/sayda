@@ -56,20 +56,22 @@ function isOnScreen(el: Element) {
   return rect.bottom > 0 && rect.top < window.innerHeight && rect.height > 0;
 }
 
+// Count-up numbers ([data-countup], not [data-count]: the project gallery uses that for its layout).
+// The real value stays in the HTML until the number is on screen, then it counts up in 0.6s,
+// so a page that is read or captured before the animation never shows a half-way figure.
 function initCounters() {
-  const counters = document.querySelectorAll<HTMLElement>('[data-count]:not([data-counted])');
+  const counters = document.querySelectorAll<HTMLElement>('[data-countup]:not([data-counted])');
   counters.forEach((el) => (el.dataset.counted = ''));
   if (reducedMotion()) return;
 
   const format = (n: number, decimals: number) =>
     n.toLocaleString('tr-TR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: false });
 
-  counters.forEach((el) => (el.textContent = format(0, Number(el.dataset.decimals ?? 0))));
   onVisible(counters, 0.6, (target) => {
     const el = target as HTMLElement;
-    const goal = Number(el.dataset.count);
+    const goal = Number(el.dataset.countup);
     const decimals = Number(el.dataset.decimals ?? 0);
-    const duration = 1400;
+    const duration = 600;
     const start = performance.now();
     const tick = (now: number) => {
       const t = Math.min((now - start) / duration, 1);

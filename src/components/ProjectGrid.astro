@@ -25,12 +25,9 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-// Sharpest covers first; the old 222–500px thumbnails end up last. Ties keep the data order.
+// Data order = the old site's order (its record numbers, ascending); see projects.json.
+const ordered = projects;
 const coverWidth = (project: Project) => (project.image ? (imageSize(project.image)?.width ?? 0) : 0);
-const ordered = projects
-  .map((project, i) => ({ project, i, width: coverWidth(project) }))
-  .sort((a, b) => b.width - a.width || a.i - b.i)
-  .map(({ project }) => project);
 
 const searchText = (project: Project) =>
   [project.name, project.location, project.employer, project.district, project.type].filter(Boolean).join(' ');

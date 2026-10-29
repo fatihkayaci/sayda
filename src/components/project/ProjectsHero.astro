@@ -115,7 +115,7 @@ const format = (n: number, decimals: number) =>
           <div class="projects-stats__text">
             <dt>{stat.label}</dt>
             <dd>
-              <span data-count={stat.value} data-decimals={stat.decimals}>{format(stat.value, stat.decimals)}</span>{stat.suffix}
+              <span data-countup={stat.value} data-decimals={stat.decimals}>{format(stat.value, stat.decimals)}</span>{stat.suffix}
             </dd>
           </div>
         ))

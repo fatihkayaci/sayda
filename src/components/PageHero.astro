@@ -80,7 +80,7 @@ const isCountable = (value: string) => /^\d{1,3}$/.test(value);
           <ul class="page-hero__facts">
             {facts.map((fact) => (
               <li>
-                <b>{isCountable(fact.value) ? <span data-count={fact.value}>{fact.value}</span> : fact.value}</b>
+                <b>{isCountable(fact.value) ? <span data-countup={fact.value}>{fact.value}</span> : fact.value}</b>
                 {fact.label}
               </li>
             ))}

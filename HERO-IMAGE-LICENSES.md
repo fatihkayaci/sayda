@@ -217,7 +217,7 @@ yukarıdaki kapak tablosunda aynı projeye ait satırların yerine geçer.**
 
 | Proje | Dosya | Görselin sahibi | Kaynak sayfa | Orijinal dosya | İzin |
 |-------|-------|-----------------|--------------|----------------|------|
-| CAPİTAL TOWER SPOR KOMPLEKSİ | `public/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-cover.webp` | Mutlu İnşaat | https://mutluinsaat.com/Projeler/tamamlanan-projeler/Capital-Tower | https://mutluinsaat.com/img/proje/capital-tower.jpg?v=1 | Bekliyor |
+| CAPİTAL TOWER SPOR KOMPLEKSİ | `public/img/projects/capital-tower-spor-kompleksi/capital-tower-spor-kompleksi-cover.webp` | Miltaş İnşaat | https://www.miltasinsaat.com.tr/urun/Capital-Tower | https://www.miltasinsaat.com.tr/upload/67556-capital-tower-basinekspres.jpg | Bekliyor |
 | SULTANBEYLİ AVM & OFİS PROJESİ (ATLAS PARK AVM) | `public/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp` | Ergün Mimarlık | https://www.ergunmimarlik.com.tr/proje-detay/AtlasAVM | https://www.ergunmimarlik.com.tr/upload/orta_atlas_2.jpg | Bekliyor |
 | VARYAP MERİDİAN PROJESİ | `public/img/projects/varyap-meridien-konut/varyap-meridien-konut-cover.webp` | Emlak Konut | https://www.emlakkonut.com.tr/en-US/varyap-meridian-en | https://www.emlakkonut.com.tr/images/uploads/1919x600/3dfbf83277514b1bb341bf3c58e192f7.jpg | Bekliyor |
 | Torun Tower Ofis Projesi | `public/img/projects/torun-tower-ofis/torun-tower-ofis-cover.webp` | PMO | https://www.pmo.com.tr/torun-tower | https://static.wixstatic.com/media/e69d95_df9490392633431e9b86d04d4816e46e~mv2_d_1500_1726_s_2.jpg | Bekliyor |

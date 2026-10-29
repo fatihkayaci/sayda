@@ -126,6 +126,22 @@ const items = chapters.map((chapter) => ({ ...chapter, ...coverOf(chapter.slug) 
     transition: border-color var(--transition);
   }
 
+  @media (max-width: 420px) {
+    .vm-jump__inner {
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .vm-jump a {
+      gap: 5px;
+      font-size: 0.9375rem;
+    }
+
+    .vm-jump__inner a span {
+      font-size: 0.75rem;
+    }
+  }
+
   .vm-jump a span {
     font-size: 0.8125rem;
     color: var(--color-orange);

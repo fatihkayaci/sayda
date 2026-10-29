@@ -7,6 +7,7 @@ const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, ''
 const stats = [
   { value: site.foundedYear, decimals: 0, count: false, suffix: '', label: 'Yılından Beri' },
   { value: site.stats.completedProjects, decimals: 0, count: true, suffix: '+', label: 'Tamamlanan Proje' },
+  { value: site.stats.ongoingProjects, decimals: 0, count: true, suffix: '+', label: 'Devam Eden Proje' },
   { value: areaInMillions, decimals: 2, count: true, suffix: 'M+', label: 'm² Uygulama Alanı' },
 ];
 
@@ -22,7 +23,7 @@ const format = (n: number, decimals: number) =>
           <div class="intro__stat">
             <b>
               <span
-                data-count={s.count ? s.value : undefined}
+                data-countup={s.count ? s.value : undefined}
                 data-decimals={s.decimals}
               >
                 {format(s.value, s.decimals)}
@@ -46,7 +47,7 @@ const format = (n: number, decimals: number) =>
 
   .intro__stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-l);
   }
 
@@ -115,14 +116,17 @@ const format = (n: number, decimals: number) =>
     }
   }
 
-  @media (max-width: 560px) {
+  /* Tablet and phone: 2 × 2 */
+  @media (max-width: 900px) {
     .intro__stats {
-      grid-template-columns: 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      row-gap: 36px;
     }
+  }
 
+  @media (max-width: 560px) {
     .intro__stat b {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
   }
 </style>

@@ -10,6 +10,12 @@ const projects = picks.flatMap((slug) => {
   const project = allProjects.find((p) => p.slug === slug);
   return project ? [project] : [];
 });
+
+// Category chips open the projects page with that type preselected (?tur=, read by ProjectsHero).
+const categories = [
+  { label: 'Tümü', href: '/projeler' },
+  ...['Konut', 'Ticari', 'Sağlık', 'Otel'].map((type) => ({ label: type, href: `/projeler?tur=${encodeURIComponent(type)}` })),
+];
 ---
 
 <section class="fp">
@@ -17,10 +23,13 @@ const projects = picks.flatMap((slug) => {
     <div class="fp__head">
       <div>
         <span class="eyebrow"><i></i>Öne Çıkan Projeler</span>
-        <h2 data-words>Yaşam Alanlarına Değer Katıyoruz</h2>
+        <h2>Yaşam Alanlarına Değer Katıyoruz</h2>
       </div>
       <a href="/projeler">Tüm Projeler <Icon name="arrow" size={14} /></a>
     </div>
+    <nav class="fp__chips" aria-label="Proje kategorileri">
+      {categories.map((c) => <a href={c.href}>{c.label}</a>)}
+    </nav>
     <div class="fp__grid">
       {
         projects.map((p) => (
@@ -59,7 +68,37 @@ const projects = picks.flatMap((slug) => {
     align-items: flex-end;
     justify-content: space-between;
     gap: var(--space-s);
-    margin-bottom: 40px;
+    margin-bottom: 24px;
+  }
+
+  .fp__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .fp__chips a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 20px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-navy-deep);
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .fp__chips a:first-child,
+  .fp__chips a:hover {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: #fff;
   }
 
   .fp__head h2 {

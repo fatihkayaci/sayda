@@ -874,15 +874,31 @@ const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
       margin-top: -96px;
     }
 
-    .ct-tabs,
     .ct-types,
     .ct-form__row {
       grid-template-columns: 1fr;
     }
 
-    .ct-tabs__tab + .ct-tabs__tab {
-      border-left: 0;
-      border-top: 1px solid var(--color-border);
+    /* Tabs stay side by side; only the titles fit. */
+    .ct-tabs {
+      margin-bottom: 28px;
+    }
+
+    .ct-tabs__tab {
+      padding: 16px 14px;
+      text-align: center;
+    }
+
+    .ct-tabs__tab b {
+      font-size: 1rem;
+    }
+
+    .ct-tabs__tab span {
+      display: none;
+    }
+
+    .ct-card__forms {
+      padding: 24px 20px;
     }
   }
 </style>

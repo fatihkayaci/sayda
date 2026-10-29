@@ -38,7 +38,6 @@ const year = new Date().getFullYear();
         <li><a href="/hakkimizda">Kurumsal</a></li>
         <li><a href="/faaliyet-alanlari">Faaliyet Alanları</a></li>
         <li><a href="/projeler">Projeler</a></li>
-        <li><a href="/sertifikalar">E-Katalog</a></li>
         <li><a href="/iletisim">İletişim</a></li>
       </ul>
     </nav>
@@ -74,7 +73,7 @@ const year = new Date().getFullYear();
   </div>
 
   <div class="footer__bottom container">
-    <p>&copy; {year} {site.legalName}. Tüm hakları saklıdır.</p>
+    <p>&copy; {year} {site.legalName.replace(/\.$/, '')}. Tüm hakları saklıdır.</p>
     <nav class="footer__legal" aria-label="Yasal">
       <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
       <a href="/kvkk-aydinlatma-metni">KVKK Aydınlatma Metni</a>

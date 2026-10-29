@@ -12,7 +12,8 @@ const videos = [
 const [first] = videos;
 ---
 
-<section class="vid" data-videos>
+<!-- data-no-reveal: thumbnails and poster show straight away (no scroll wipe), they are small. -->
+<section class="vid" data-videos data-no-reveal>
   <div class="container">
     <div class="vid__head">
       <div>
@@ -43,7 +44,7 @@ const [first] = videos;
                 data-title={v.title}
               >
                 <span class="vid__thumb">
-                  <img src={`/img/videos/${v.id}.webp`} alt="" loading="lazy" />
+                  <img src={`/img/videos/${v.id}.webp`} alt="" />
                 </span>
                 <span class="vid__name">{v.title}</span>
               </button>

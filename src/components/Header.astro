@@ -124,20 +124,10 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
             );
           })
         }
-        <li class="header__nav-item header__nav-cta-item">
-          <a href="/iletisim#quote-form" class="header__nav-link header__nav-cta-link">
-            Teklif Al
-            <Icon name="arrow" size={16} />
-          </a>
-        </li>
       </ul>
     </nav>
 
     <div class="header__actions">
-      <a class="header__cta" href="/iletisim#quote-form">
-        Teklif Al
-        <Icon name="arrow" size={16} />
-      </a>
       <button class="header__hamburger" id="menuButton" aria-expanded="false" aria-controls="mainMenu" aria-label="Menüyü aç">
         <Icon name="menu" class="header__hamburger-icon header__hamburger-icon--open" />
         <Icon name="close" class="header__hamburger-icon header__hamburger-icon--close" />
@@ -248,10 +238,6 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
     position: relative;
   }
 
-  .header__nav-cta-item {
-    display: none;
-  }
-
   .header__nav-item-row {
     display: flex;
     align-items: center;
@@ -259,7 +245,7 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
     line-height: 1;
   }
 
-  .header__nav-item:not(.header__nav-cta-item) {
+  .header__nav-item {
     display: flex;
     align-items: center;
   }
@@ -375,30 +361,6 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
     gap: var(--space-m);
   }
 
-  .header__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--color-orange);
-    color: var(--color-navy-deep);
-    padding: 12px 22px;
-    border-radius: 10px;
-    font-size: var(--fs-small);
-    font-weight: 700;
-    white-space: nowrap;
-    box-shadow: 0 8px 20px rgba(245, 162, 27, 0.3);
-    transition:
-      background var(--transition),
-      box-shadow var(--transition),
-      transform var(--transition);
-  }
-
-  .header__cta:hover {
-    background: var(--color-orange-dark);
-    box-shadow: 0 10px 24px rgba(245, 162, 27, 0.45);
-    transform: translateY(-1px);
-  }
-
   .header__hamburger {
     display: none;
     background: none;
@@ -502,10 +464,6 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
       display: block;
     }
 
-    .header__cta {
-      padding: 10px 16px;
-    }
-
     .header__hamburger {
       display: block;
     }
@@ -514,36 +472,6 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
       margin-left: auto;
     }
   }
-
-  @media (max-width: 470px) {
-    .header__cta {
-      display: none;
-    }
-
-    .header__nav-cta-item {
-      display: block;
-      margin-top: var(--space-s);
-    }
-
-    .header__nav-cta-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      background: var(--color-orange);
-      color: var(--color-navy-deep);
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-weight: 700;
-      transition: background var(--transition);
-    }
-
-    .header__nav-cta-link:hover {
-      background: var(--color-orange-dark);
-      color: var(--color-navy-deep);
-    }
-  }
-
 </style>
 
 <script>

@@ -503,6 +503,7 @@ const breadcrumbLd = buildBreadcrumbLd(
   .nd-related__text {
     display: grid;
     gap: 6px;
+    min-width: 0;
   }
 
   .nd-related__text small {
@@ -678,7 +679,7 @@ const breadcrumbLd = buildBreadcrumbLd(
 
   @media (max-width: 1024px) {
     .nd-body__inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .nd-share {
@@ -705,7 +706,12 @@ const breadcrumbLd = buildBreadcrumbLd(
     }
 
     .nd-related {
-      grid-template-columns: 96px 1fr;
+      grid-template-columns: 96px minmax(0, 1fr);
+    }
+
+    .nd-related__text strong {
+      font-size: 1.125rem;
+      overflow-wrap: anywhere;
     }
 
     .nd-related__arrow {
