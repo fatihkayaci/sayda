@@ -1168,11 +1168,8 @@
     "seoTitle": "Yasmin Resort Hotel Proje Koordinasyonu | Sayda İnşaat",
     "seoDescription": "Bodrum / Muğla'da 29.000 m² Yasmin Resort Hotel'de otel, club binaları ve sosyal tesis proje koordinasyonu, çatı, cephe mantolama ve ince yapı işini Sayda İnşaat tamamladı.",
     "image": "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-cover.webp",
-    "imageCredit": {
-      "label": "Görsel: Yasmin Bodrum Resort",
-      "href": "https://yasminbodrum.com/"
-    },
     "gallery": [
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-00.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-01.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-02.webp",
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-03.webp",
@@ -1232,6 +1229,10 @@
       ]
     },
     "galleryCredits": {
+      "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-00.webp": {
+        "label": "Görsel: Yasmin Bodrum Resort",
+        "href": "https://yasminbodrum.com/"
+      },
       "/img/projects/yasmin-resort-hotel/yasmin-resort-hotel-hd-01.webp": {
         "label": "Görsel: Yasmin Bodrum Resort",
         "href": "https://yasminbodrum.com/"

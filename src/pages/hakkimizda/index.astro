@@ -22,13 +22,38 @@ const values = [
   { icon: 'diamond', title: 'Kalite', text: 'Her projede en yüksek standartları hedefleriz.' },
 ];
 
-// Every milestone is sourced: founding year, project records (projects.json) and the old site's news
-// (haberler.json). No invented "phases" — add new entries only from a real date.
+// Every milestone is sourced: founding year, project records (projects.json), the old site's news
+// (haberler.json) and the reference letters in the 2010 catalogue (public/katalog.pdf).
+// No invented "phases" or "first ever" claims — add new entries only from a real date.
 const timeline = [
   {
     year: String(site.foundedYear),
     title: 'Kuruluş',
     text: `${site.legalName} İstanbul'da kuruldu.`,
+  },
+  {
+    year: '1999',
+    title: 'Plaza ve otel ölçeğinde',
+    text: 'Süzer Plaza ve The Ritz-Carlton İstanbul’un duvar, şap, alçı sıva, seramik ve alçıpan işlerini yaptık.',
+    ...coverOf('suzer-plaza-ofis'),
+  },
+  {
+    year: '2003',
+    title: 'Otel ve dekorasyon',
+    text: 'Çırağan Palace Kempinski’de Caviar Bar, Laledan ve Gazebo restoranlarının dekorasyon ve alçıpan işlerini, otel bahçesi ve kıyı duvarı inşaatını üstlendik.',
+    ...coverOf('ciragan-otel-renovasyonu'),
+  },
+  {
+    year: '2007',
+    title: 'Cepheden ince işe',
+    text: 'Isısan-Buderus Bursa bölge binasında cephe giydirme, çatı, çelik güçlendirme ve ince işleri birlikte yaptık.',
+    ...coverOf('isisan-buderus-bursa'),
+  },
+  {
+    year: '2011',
+    title: 'AVM ölçeğinde',
+    text: 'Akiş GYO’nun Akbatı Alışveriş ve Yaşam Merkezi’nin ince işlerini tamamladık.',
+    ...coverOf('akbati-avm-konut'),
   },
   {
     year: '2013',
@@ -65,7 +90,7 @@ const timeline = [
     title: `${site.certifications.length} ISO sertifikası`,
     text: 'Kalite, çevre, iş sağlığı ve güvenliği başta olmak üzere yönetim sistemlerimizi belgelendirdik.',
     image: site.certifications[0].image,
-    href: '/belgeler',
+    href: '/sertifikalar',
     certificate: true,
   },
 ];
@@ -79,8 +104,8 @@ const expertise = [
 
 // "Who we are" photo collage
 const collage = ['atlas-park-avm-ofis', 'buyukyali', 'yasmin-resort-hotel'].map(coverOf);
-const hero = coverOf('ciragan-otel-renovasyonu');
-const heroImage = projectBySlug('ciragan-otel-renovasyonu').image;
+const hero = coverOf('varyap-meridien-konut');
+const heroImage = projectBySlug('varyap-meridien-konut').image;
 
 // Logos live in /img/refs; a ref without a logo falls back to its name.
 const refs = [
@@ -108,6 +133,19 @@ const sectors = [
 ];
 
 const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
+
+// Founder bio and career, from the old site's Hakkımızda page (Kurumsal.aspx?P=hakkimizda).
+const founderCareer = [
+  { years: '1990', role: 'Mezuniyet', place: 'İstanbul Teknik Üniversitesi İnşaat Fakültesi' },
+  {
+    years: '1991–1993',
+    role: 'Precast Saha ve Viyadük İnşası Saha Şefi',
+    place: 'Tekfen-İmpresit Ortak Girişimi · T.A.G. Otoyol projesi',
+  },
+  { years: '1993–1995', role: 'Mozaik Çarşı TUS Kaba Yapı Şefi', place: 'Baytur İnşaat A.Ş. · Ataşehir projesi' },
+  { years: '1995–1996', role: 'TUS Şantiye Şefi', place: 'Maya İnşaat A.Ş. · Akatlar Mayadrom projesi' },
+  { years: `${site.foundedYear}–`, role: 'Kurucu & Genel Müdür', place: site.legalName },
+];
 ---
 
 <Layout
@@ -141,11 +179,23 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     <div class="container ab-who__inner">
       <div class="ab-who__content">
         <p class="ab-label ab-label--light">Biz Kimiz?</p>
-        <h2>Konuttan otele, dört alanda <span>taahhüt ve ince işler.</span></h2>
+        <h2 data-words>Konuttan otele, dört alanda <span>taahhüt ve ince işler.</span></h2>
         <p class="ab-who__text">
-          {site.legalName}, {site.foundedYear} yılında kurulmuş olup, İstanbul ve Türkiye genelinde farklı ölçeklerde
-          birçok projeye imza atmıştır. Edindiğimiz deneyimi her yeni projede müşterilerimizin yanında kullanmaya
-          devam ediyoruz.
+          {site.legalName} {site.foundedYear} yılında kurulmuş ve bu tarihten beri birçok büyük proje için çeşitli
+          müteahhitlik ve alt müteahhitlik “uzman ekip” hizmetleri yüklenmiş, bunları başarıyla teslim etmiştir.
+        </p>
+        <p class="ab-who__more">
+          Çırağan Palace Hotel Kempinski, Enternasyonal Turizm Yatırım A.Ş., Visa International EU, Nestlé Gıda Sanayi
+          A.Ş., Isısan-Buderus ve Yasmin-Bodrum Hotel gibi kuruluşların taahhüt işlerinde müteahhit olarak hizmet
+          vermiştir. Ayrıca birçok otel, ofis, villa ve konut projesinin inşaat, dekorasyon ve renovasyon taahhütlerini
+          anahtar teslim olarak yapmıştır.
+        </p>
+        <p class="ab-who__more">
+          Rönesans İnşaat’ın Samsun AVM &amp; Otel, Akiş GYO’nun Akbatı AVM &amp; Yaşam Merkezi, Varyap İnşaat’ın
+          Varyap Meridian, Oyak İnşaat’ın Oyakkent, Yapı Kredi-Koray GYO’nun İstanbul-İstanbul, Süzer Grubu’nun “The
+          Ritz-Carlton İstanbul”, Acarlar Şirketler Grubu’nun Acarkent, İş-Koray GYO’nun Kasaba, Maya İnşaat’ın Etiler
+          Residence ve Sinpaş Yapı’nın Aqua Manors projeleri, alt müteahhit olarak hizmet verdiği projelerden
+          bazılarıdır.
         </p>
 
         <ul class="ab-who__sectors">
@@ -158,14 +208,6 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
             ))
           }
         </ul>
-
-        <div class="ab-who__founder">
-          <span class="ab-who__avatar">AO</span>
-          <div>
-            <p class="ab-who__name">Ali Orhan Onur</p>
-            <p class="ab-who__role">Kurucu &amp; Genel Müdür · İTÜ İnşaat Fakültesi, 1990</p>
-          </div>
-        </div>
       </div>
 
       <figure class="ab-who__media">
@@ -183,6 +225,48 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
           <span>Yıllık<br />deneyim</span>
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- 2b. Founder: bio + career -->
+  <section class="ab-founder" aria-labelledby="ab-founder-title">
+    <div class="container ab-founder__inner">
+      <div class="ab-founder__intro">
+        <p class="ab-label">Kurucumuz</p>
+        <div class="ab-founder__person">
+          <span class="ab-founder__avatar">AO</span>
+          <div>
+            <h2 id="ab-founder-title">Ali Orhan Onur</h2>
+            <p class="ab-founder__role">Kurucu &amp; Genel Müdür</p>
+          </div>
+        </div>
+        <p class="ab-founder__text">
+          Şirketin kurucusu ve genel müdürü Ali Orhan Onur, 1990 yılında İstanbul Teknik Üniversitesi İnşaat
+          Fakültesi’nden mezun olmuştur. Yurt dışında dil ve iş idaresi eğitiminin ardından askerlik hizmetini
+          yapmıştır.
+        </p>
+        <p class="ab-founder__text">
+          1991–1993 yılları arasında Tekfen-İmpresit Ortak Girişimi’nin T.A.G. Otoyol projesinde Precast Saha ve
+          Viyadük inşası Saha Şefi olarak çalışmış, ardından 1993–1995 yılları arasında Baytur İnşaat A.Ş.’nin
+          Ataşehir projesinde Mozaik Çarşı TUS Kaba Yapı Şefi, 1995–1996 yılları arasında ise Maya İnşaat A.Ş.’nin
+          Akatlar Mayadrom projesinde TUS Şantiye Şefi olarak görev yapmıştır. {site.foundedYear} yılından beri kurucusu olduğu firmada çalışmalarına devam
+          etmektedir.
+        </p>
+      </div>
+
+      <ol class="ab-founder__career">
+        {
+          founderCareer.map((step) => (
+            <li>
+              <span class="ab-founder__years">{step.years}</span>
+              <span class="ab-founder__step">
+                <b>{step.role}</b>
+                {step.place}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
     </div>
   </section>
 
@@ -211,7 +295,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
                 >
                   <img src={item.image} alt="" loading="lazy" />
                   <span>
-                    {'certificate' in item ? 'Belgelerimiz' : 'Projeyi incele'} <Icon name="arrow" size={14} />
+                    {'certificate' in item ? 'Sertifikalar' : 'Projeyi incele'} <Icon name="arrow" size={14} />
                   </span>
                 </a>
               )}
@@ -227,7 +311,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     <div class="container">
       <div class="ab-head">
         <p class="ab-label">Değerlerimiz</p>
-        <h2>Yaşam alanlarına değer katmak için çalışıyoruz.</h2>
+        <h2 data-words>Yaşam alanlarına değer katmak için çalışıyoruz.</h2>
       </div>
       <ol class="ab-values__list">
         {
@@ -252,7 +336,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       <div class="ab-head ab-head--split">
         <div>
           <p class="ab-label ab-label--light">Uzmanlık Alanlarımız</p>
-          <h2>Güçlü yapılar, güvenli yarınlar.</h2>
+          <h2 data-words>Güçlü yapılar, güvenli yarınlar.</h2>
         </div>
         <a class="ab-link" href="/projeler">Tüm Projeler <Icon name="arrow" size={18} /></a>
       </div>
@@ -282,7 +366,7 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     <div class="container">
       <div class="ab-head">
         <p class="ab-label">Çalıştığımız Kurumlar</p>
-        <h2 id="ab-refs-title">Müteahhit ve alt müteahhit olarak yer aldığımız projeler.</h2>
+        <h2 id="ab-refs-title" data-words>Müteahhit ve alt müteahhit olarak yer aldığımız projeler.</h2>
       </div>
     </div>
 
@@ -484,43 +568,134 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
     color: var(--color-orange);
   }
 
-  .ab-who__founder {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 12px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.16);
-    width: 100%;
-    max-width: 560px;
+  .ab-who__more {
+    max-width: 60ch;
+    margin-top: -12px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.66);
   }
 
-  .ab-who__avatar {
+  /* 2b. Founder */
+  .ab-founder {
+    padding-block: clamp(80px, 9vw, 140px);
+    background: var(--color-bg-light);
+  }
+
+  .ab-founder__inner {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    align-items: start;
+    gap: clamp(48px, 6vw, 112px);
+  }
+
+  .ab-founder__intro {
+    display: grid;
+    gap: 24px;
+  }
+
+  .ab-founder__person {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .ab-founder__avatar {
     display: grid;
     place-items: center;
     flex: none;
-    width: 56px;
-    height: 56px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     background: var(--color-orange);
     color: var(--color-navy-deep);
     font-family: var(--font-display);
     font-stretch: 115%;
     font-weight: 800;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
   }
 
-  .ab-who__name {
+  .ab-founder h2 {
     font-family: var(--font-display);
-    font-stretch: 108%;
+    font-stretch: 115%;
     font-weight: 800;
-    font-size: 1.125rem;
+    font-size: clamp(2rem, 2.4vw + 1rem, 3.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--color-navy-deep);
   }
 
-  .ab-who__role {
-    margin-top: 4px;
+  .ab-founder__role {
+    margin-top: 6px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orange-text);
+  }
+
+  .ab-founder__text {
+    max-width: 60ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .ab-founder__career {
+    margin: 0;
+    padding: 8px 0 0;
+    list-style: none;
+    border-left: 2px solid var(--color-border);
+  }
+
+  .ab-founder__career li {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 0 0 32px 32px;
+  }
+
+  .ab-founder__career li:last-child {
+    padding-bottom: 0;
+  }
+
+  .ab-founder__career li::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    border: 2px solid var(--color-orange);
+  }
+
+  .ab-founder__career li:last-child::before {
+    background: var(--color-orange);
+  }
+
+  .ab-founder__years {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-navy-deep);
+  }
+
+  .ab-founder__step {
+    display: grid;
+    gap: 2px;
     font-size: 0.9375rem;
-    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    color: var(--color-text-muted);
+  }
+
+  .ab-founder__step b {
+    font-size: 1rem;
+    color: var(--color-text);
   }
 
   /* image sits on the left, text on the right */
@@ -1100,6 +1275,10 @@ const yearsOfExperience = new Date().getFullYear() - site.foundedYear;
       left: 16px;
       right: auto;
       bottom: 16px;
+    }
+
+    .ab-founder__inner {
+      grid-template-columns: 1fr;
     }
 
     .ab-journey__inner {

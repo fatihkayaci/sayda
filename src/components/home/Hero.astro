@@ -1,56 +1,139 @@
 ---
+import Icon from '../Icon.astro';
+import projects from '../../data/projects.json';
 import { srcset } from '../../utils/image';
 
-// Photos of projects Sayda worked on, taken from the developers' / architects' sites.
-// Usage permission is still pending — see HERO-IMAGE-LICENSES.md. Keep the credit visible.
-const slides = [
+interface Slide {
+  image: string;
+  title: string;
+  /** Project slug: the slide gets a tag linking to that project's page. */
+  project?: string;
+  /** Short project name shown on the tag. */
+  name?: string;
+  /** Shown on the tag when the project has no district. */
+  place?: string;
+  credit?: string;
+  creditHref?: string;
+}
+
+// Two kinds of photos:
+// - Sayda's own slider photos from the old site (sayda.com.tr); no credit needed.
+// - Photos taken from the developers' / architects' sites. Usage permission is still pending —
+//   see HERO-IMAGE-LICENSES.md. Keep the credit visible.
+const slideData: Slide[] = [
   {
     image: '/img/home/hero-buyukyali-tower.webp',
-    title: 'Yüksek Kalitede Uygulamalar',
-    credit: 'Büyükyalı · Görsel: Chapman Taylor',
+    title: 'Geleceği Birlikte İnşa Ediyoruz',
+    project: 'buyukyali',
+    name: 'Büyükyalı',
+    credit: 'Görsel: Chapman Taylor',
     creditHref: 'https://www.chapmantaylor.com/projects/buyukyali',
   },
   {
+    image: '/img/home/hero-referans-gunesli.webp',
+    title: 'Şehre Değer Katan Yapılar',
+    project: 'referans-gunesli',
+    name: 'Referans Güneşli',
+  },
+  {
     image: '/img/home/hero-vadistanbul-bulvar.webp',
-    title: 'Profesyonel Çözümler',
-    credit: 'Vadistanbul · Görsel: Artaş Holding',
+    title: 'Projeden Teslime Yanınızdayız',
+    project: 'vadistanbul',
+    name: 'Vadistanbul',
+    credit: 'Görsel: Artaş Holding',
     creditHref: 'https://www.artasholding.com/tr-tr/proje/vadistanbul-bulvar/',
   },
   {
+    image: '/img/home/hero-varyap-meridian.webp',
+    title: 'Her Detayda Ustalık',
+    project: 'varyap-meridien-konut',
+    name: 'Varyap Meridian',
+  },
+  {
     image: '/img/home/hero-gaziantep-hospital.webp',
-    title: 'Güvenilir Takvim, Adil Fiyat',
-    credit: 'Gaziantep Şehir Hastanesi · Görsel: Meridiam',
+    title: 'Büyük Projelerin Güvenilir Ortağı',
+    project: 'gaziantep-sehir-hastanesi',
+    name: 'Gaziantep Şehir Hastanesi',
+    place: 'Gaziantep',
+    credit: 'Görsel: Meridiam',
     creditHref: 'https://www.meridiam.com/assets/gaziantep-hospital-turkey/',
   },
   {
+    image: '/img/home/hero-terrace-bahce.webp',
+    title: 'Planlandığı Gibi, Zamanında',
+    project: 'terrace-bahce-konut',
+    name: 'Terrace Bahçe',
+  },
+  {
+    image: '/img/home/hero-yasmin-resort.webp',
+    title: 'Profesyonel Çözümler',
+    project: 'yasmin-resort-hotel',
+    name: 'Yasmin Resort',
+  },
+  {
     image: '/img/home/hero-referans-besiktas.webp',
-    title: 'Kentsel Dönüşüm Çözümleri',
-    credit: 'Referans Beşiktaş · Görsel: Kiler GYO',
+    title: 'Kentsel Dönüşümde Güvenilir Çözüm',
+    project: 'referans-besiktas-abbasaga',
+    name: 'Referans Beşiktaş',
+    credit: 'Görsel: Kiler GYO',
     creditHref: 'https://www.referansbesiktas.com/',
   },
   {
     image: '/img/home/hero-referans-kartal-loca.webp',
-    title: 'Nitelikli Yapılar, Güvenilir Çözümler',
-    credit: 'Referans Kartal Loca · Görsel: Kiler GYO',
+    title: 'Sağlam Temeller, Kalıcı Değerler',
+    project: 'referans-kartal-loca-2',
+    name: 'Referans Kartal Loca',
+    credit: 'Görsel: Kiler GYO',
     creditHref: 'https://referanskartalloca.com.tr/',
   },
 ];
+
+const slides = slideData.map((slide) => {
+  const project = slide.project ? projects.find((p) => p.slug === slide.project)! : undefined;
+  const tag = project && {
+    href: project.href,
+    name: slide.name ?? project.name,
+    meta: [project.type, slide.place ?? project.district].filter(Boolean).join(' · '),
+    ongoing: project.status === 'devam-eden',
+  };
+  return { ...slide, tag };
+});
 ---
 
 <section class="hero" data-interval="6000">
   {
     slides.map((slide, i) => (
-      <div class:list={['hero__slide', { 'is-on': i === 0 }]}>
+      // Hidden slides are inert so their links can't be tabbed to.
+      <div class:list={['hero__slide', { 'is-on': i === 0 }]} inert={i !== 0}>
         {i === 0 ? (
           <img src={slide.image} srcset={srcset(slide.image, 960, 1920)} sizes="100vw" alt="" fetchpriority="high" />
         ) : (
           // Later slides wait for the page to load so they don't compete with the first image.
           <img data-src={slide.image} data-srcset={srcset(slide.image, 960, 1920)} sizes="100vw" alt="" />
         )}
-        {slide.credit && (
-          <a class="hero__credit" href={slide.creditHref} target="_blank" rel="noopener noreferrer">
-            {slide.credit}
-          </a>
+        {(slide.tag || slide.credit) && (
+          <div class="hero__project">
+            {slide.tag && (
+              <a class="hero__tag" href={slide.tag.href} aria-label={`${slide.tag.name} projesini incele`}>
+                <span class="hero__tag-text">
+                  <span class="hero__tag-meta">
+                    {slide.tag.meta}
+                    {slide.tag.ongoing && <em>Devam Ediyor</em>}
+                  </span>
+                  <span class="hero__tag-name">{slide.tag.name}</span>
+                </span>
+                <span class="hero__tag-arrow" aria-hidden="true">
+                  <Icon name="arrow" size={18} />
+                </span>
+                <span class="hero__tag-progress" aria-hidden="true"></span>
+              </a>
+            )}
+            {slide.credit && (
+              <a class="hero__credit" href={slide.creditHref} target="_blank" rel="noopener noreferrer">
+                {slide.credit}
+              </a>
+            )}
+          </div>
         )}
       </div>
     ))
@@ -93,8 +176,14 @@ const slides = [
       let current = 0;
 
       const show = (next: number) => {
+        // Freeze the outgoing photo at its current zoom; dropping the animation would snap it to full size mid-fade.
+        const leaving = slides[current].querySelector('img')!;
+        leaving.style.transform = getComputedStyle(leaving).transform;
         current = (next + slides.length) % slides.length;
+        // The incoming photo starts its zoom from the beginning (the animation overrides this inline value anyway).
+        slides[current].querySelector('img')!.style.transform = '';
         [slides, titles].forEach((list) => list.forEach((el, i) => el.classList.toggle('is-on', i === current)));
+        slides.forEach((el, i) => ((el as HTMLElement).inert = i !== current));
       };
 
       // Restart the timer after a manual step so the new image gets its full time.
@@ -194,11 +283,123 @@ const slides = [
     pointer-events: none;
   }
 
-  .hero__credit {
+  /* Project tag in the bottom-right corner: links to the project; the photo credit sits under it */
+  .hero__project {
     position: absolute;
-    right: 12px;
-    bottom: 8px;
+    right: clamp(16px, 3vw, 48px);
+    bottom: clamp(20px, 4vh, 40px);
     z-index: 3;
+    display: grid;
+    justify-items: end;
+    gap: 8px;
+  }
+
+  .hero__tag {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 260px;
+    padding: 14px 14px 14px 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-left: 3px solid var(--color-orange);
+    background: rgba(28, 29, 46, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    opacity: 0;
+    transform: translateX(24px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease,
+      background var(--transition);
+  }
+
+  .hero__slide.is-on .hero__tag {
+    opacity: 1;
+    transform: none;
+    transition-delay: 400ms, 400ms, 0ms;
+  }
+
+  .hero__tag:hover {
+    background: rgba(28, 29, 46, 0.85);
+  }
+
+  .hero__tag-text {
+    display: grid;
+    gap: 4px;
+    margin-right: auto;
+  }
+
+  .hero__tag-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .hero__tag-meta em {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+    font-style: normal;
+    letter-spacing: 0.08em;
+  }
+
+  .hero__tag-name {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .hero__tag-arrow {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    color: var(--color-navy-deep);
+    transition: transform var(--transition);
+  }
+
+  .hero__tag:hover .hero__tag-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Fills over the slide's time on screen (matches data-interval) */
+  .hero__tag-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--color-orange);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .hero.is-ready .hero__slide.is-on .hero__tag-progress {
+    animation: hero-progress 6s linear both;
+  }
+
+  @keyframes hero-progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  .hero__credit {
     font-size: 0.6875rem;
     color: rgba(255, 255, 255, 0.6);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
@@ -301,13 +502,52 @@ const slides = [
       font-stretch: 105%;
       font-size: clamp(1.75rem, 8vw, 2.25rem);
     }
+
+    /* Between the two arrows at the bottom */
+    .hero__project {
+      right: 72px;
+      bottom: 12px;
+      left: 72px;
+      justify-items: stretch;
+      gap: 4px;
+    }
+
+    .hero__tag {
+      min-width: 0;
+      gap: 10px;
+      padding: 10px 10px 10px 12px;
+    }
+
+    .hero__tag-name {
+      font-size: 0.9375rem;
+    }
+
+    .hero__tag-meta {
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+    }
+
+    .hero__tag-arrow {
+      width: 32px;
+      height: 32px;
+    }
+
+    .hero__credit {
+      justify-self: center;
+      font-size: 0.625rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero__slide,
     .hero__slide img,
-    .hero__title {
+    .hero__title,
+    .hero__tag {
       transition: none;
+    }
+
+    .hero.is-ready .hero__slide.is-on .hero__tag-progress {
+      animation: none;
     }
 
     .hero__slide img,

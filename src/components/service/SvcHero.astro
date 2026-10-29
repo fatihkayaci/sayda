@@ -25,7 +25,7 @@ const credit = 'imageCredit' in project ? project.imageCredit : undefined;
 // Some legacy names carry a news-style tail ("… İNCE İŞLERİ BİZ YAPIYORUZ"); keep just the project name.
 const projectName = shortProjectTitle(project.name).replace(/\s+(İNCE İŞLERİ|SATIŞ OFİSİ)?\s*BİZ YAPIYORUZ$/i, '').replace(/\s+İNCE İŞLERİ$/i, '');
 const breadcrumbData = breadcrumbLd(
-  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Hizmetler', href: '/hizmetler' }, { label: name }],
+  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Faaliyet Alanları', href: '/faaliyet-alanlari' }, { label: name }],
   Astro.url.pathname
 );
 ---
@@ -47,14 +47,14 @@ const breadcrumbData = breadcrumbLd(
     <nav class="svc-hero__breadcrumb" aria-label="Konum">
       <a href="/">Ana Sayfa</a>
       <span aria-hidden="true">/</span>
-      <a href="/hizmetler">Hizmetler</a>
+      <a href="/faaliyet-alanlari">Faaliyet Alanları</a>
       <span aria-hidden="true">/</span>
       <span aria-current="page">{name}</span>
     </nav>
 
     <div class="svc-hero__text">
       <p class="svc-hero__eyebrow"><span></span>{eyebrow}</p>
-      <h1><slot /></h1>
+      <h1 data-words><slot /></h1>
       <p class="svc-hero__lead">{text}</p>
 
       <ul class="svc-hero__points">
@@ -108,24 +108,21 @@ const breadcrumbData = breadcrumbLd(
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: svc-hero-zoom 9s ease-out both;
-  }
-
-  @keyframes svc-hero-zoom {
-    from {
-      transform: scale(1.08);
-    }
-    to {
-      transform: scale(1);
-    }
   }
 
   .svc-hero__shade {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to right, rgba(20, 21, 34, 0.92) 0%, rgba(20, 21, 34, 0.7) 45%, rgba(20, 21, 34, 0.2) 100%),
-      linear-gradient(to top, rgba(20, 21, 34, 0.6) 0%, rgba(20, 21, 34, 0) 40%);
+    /* Solid behind the text, fading out to the right so the photo shows on that side. */
+    background: linear-gradient(
+        to right,
+        var(--color-navy-deep) 0%,
+        var(--color-navy-deep) 40%,
+        rgba(28, 29, 46, 0.85) 48%,
+        rgba(28, 29, 46, 0.55) 58%,
+        rgba(28, 29, 46, 0.25) 68%,
+        rgba(28, 29, 46, 0) 80%
+      );
   }
 
   .svc-hero__inner {
@@ -321,12 +318,6 @@ const breadcrumbData = breadcrumbLd(
     .svc-hero h1 {
       font-stretch: 100%;
       font-size: clamp(2.25rem, 10vw, 2.75rem);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .svc-hero__bg {
-      animation: none;
     }
   }
 </style>

@@ -10,26 +10,27 @@ const navLinks = [
     children: [
       { label: 'Hakkımızda', href: '/hakkimizda' },
       { label: 'Vizyon & Misyon', href: '/hakkimizda/vizyon-misyon' },
-      { label: 'Belgelerimiz', href: '/belgeler' },
+      { label: 'Haberler', href: '/haberler' },
+      { label: 'Sertifikalar', href: '/sertifikalar' },
       { label: 'İş Bitirme Belgeleri', href: '/projeler/is-bitirme-belgeleri' },
     ],
   },
   {
-    label: 'Hizmetler',
-    href: '/hizmetler',
+    label: 'Faaliyet Alanları',
+    href: '/faaliyet-alanlari',
     children: [
-      { label: 'Kentsel Dönüşüm', href: '/hizmetler/kentsel-donusum' },
-      { label: 'Kat Karşılığı İnşaat', href: '/hizmetler/kat-karsiligi-insaat' },
-      { label: 'Alt Müteahhitlik', href: '/hizmetler/alt-muteahhitlik' },
-      { label: 'Anahtar Teslim Müteahhitlik', href: '/hizmetler/anahtar-teslim-muteahhitlik' },
-      { label: 'Proje Yönetimi & Danışmanlık', href: '/hizmetler/proje-yonetimi-danismanlik' },
-      { label: 'Tesis Renovasyonu', href: '/hizmetler/otel-renovasyonu' },
+      { label: 'Anahtar Teslim Müteahhitlik', href: '/faaliyet-alanlari/anahtar-teslim-muteahhitlik' },
+      { label: 'Alt Müteahhitlik', href: '/faaliyet-alanlari/alt-muteahhitlik' },
+      { label: 'Kat Karşılığı İnşaat', href: '/faaliyet-alanlari/kat-karsiligi-insaat' },
+      { label: 'Kentsel Dönüşüm', href: '/faaliyet-alanlari/kentsel-donusum' },
+      { label: 'Bina ve Tesis Renovasyonu', href: '/faaliyet-alanlari/bina-ve-tesis-renovasyonu' },
+      { label: 'Proje Yönetimi & Danışmanlık', href: '/faaliyet-alanlari/proje-yonetimi-danismanlik' },
     ],
   },
   { label: 'Projeler', href: '/projeler' },
-  { label: 'Haberler', href: '/haberler' },
   { label: 'Blog', href: '/blog' },
-  { label: 'İK', href: '/kariyer' },
+  // İnsan Kaynakları (/kariyer) is reached from the contact page, so İletişim stays lit there.
+  { label: 'İletişim', href: '/iletisim', alsoActiveOn: ['/kariyer'] },
 ];
 
 const normalizePath = (path: string) => (path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path);
@@ -66,7 +67,9 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
           navLinks.map((item, i) => {
             const activeChild = activeChildHref(item.children);
             const childActive = Boolean(activeChild);
-            const itemActive = childActive || (!claimedByChild && isPathActive(item.href));
+            const itemActive =
+              childActive ||
+              (!claimedByChild && (isPathActive(item.href) || Boolean(item.alsoActiveOn?.some(isPathActive))));
             return (
               <li class="header__nav-item" class:list={{ 'has-dropdown': item.children }}>
                 {item.children ? (
@@ -97,7 +100,12 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
                     </button>
                   </div>
                 ) : (
-                  <a href={item.href} class="header__nav-link" class:list={{ 'is-active': itemActive }}>
+                  <a
+                    href={item.href}
+                    class="header__nav-link"
+                    class:list={{ 'is-active': itemActive }}
+                    data-also-active={item.alsoActiveOn?.join(' ')}
+                  >
                     {item.label}
                   </a>
                 )}
@@ -613,7 +621,9 @@ const claimedByChild = navLinks.some((item) => activeChildHref(item.children));
       if (topLink) {
         topLink.classList.toggle(
           'is-active',
-          childActive || (!claimedByChild && isPathActive(topLink.getAttribute('href')))
+          childActive ||
+            (!claimedByChild &&
+              [topLink.getAttribute('href'), ...(topLink.dataset.alsoActive?.split(' ') ?? [])].some(isPathActive))
         );
       }
     });

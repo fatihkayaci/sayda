@@ -26,7 +26,6 @@ const districts = [...new Set(projects.map((p) => p.district).filter((d): d is s
 const types = [...new Set(projects.map((p) => p.type).filter((t): t is string => Boolean(t)))].sort(sortTr);
 
 const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, '')) / 1_000_000;
-const areaValue = `${areaInMillions.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}M m²`;
 
 // Background slides: projects whose covers are sharp at full screen width (≈1900px+).
 const slideSlugs = ['vadistanbul', 'yasmin-resort-hotel', 'ciragan-otel-renovasyonu', 'buyukyali', 'akbati-avm-konut'];
@@ -39,12 +38,16 @@ const crumbs = [{ label: 'Anasayfa', href: '/' }, { label: 'Projeler', href: act
 if (active !== 'all') crumbs.push({ label: active === 'devam-eden' ? 'Devam Eden' : 'Tamamlanan', href: undefined });
 const breadcrumbData = breadcrumbLd(crumbs, Astro.url.pathname);
 
+// The numeric part counts up from zero when the strip scrolls into view. Project totals are the
+// company's own figures (site.json), not the count of projects listed on the site.
 const stats = [
-  { value: areaValue, label: 'Toplam Alan' },
-  { value: String(tamamlananCount), label: 'Tamamlanan Proje' },
-  { value: String(devamEdenCount), label: 'Devam Eden Proje' },
-  { value: String(site.completionCertificatesCount), label: 'İş Bitirme Belgesi' },
+  { value: areaInMillions, decimals: 2, suffix: 'M m²', label: 'Toplam Alan' },
+  { value: site.stats.completedProjects, decimals: 0, suffix: '+', label: 'Tamamlanan Proje' },
+  { value: site.stats.ongoingProjects, decimals: 0, suffix: '+', label: 'Devam Eden Proje' },
+  { value: site.completionCertificatesCount, decimals: 0, suffix: '', label: 'İş Bitirme Belgesi' },
 ];
+const format = (n: number, decimals: number) =>
+  n.toLocaleString('tr-TR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: false });
 ---
 
 <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
@@ -93,7 +96,7 @@ const stats = [
       <span>REFERANSLARIMIZ</span>
     </div>
 
-    <h1>Geçmişten Bugüne<br />Hayata Geçirdiğimiz Projeler</h1>
+    <h1 data-words>Geçmişten Bugüne<br />Hayata Geçirdiğimiz Projeler</h1>
     <p class="projects-hero__lead">
       {site.foundedYear}'dan bu yana İstanbul ve Türkiye genelinde tamamladığımız ve devam eden projeleri keşfedin.
     </p>
@@ -111,7 +114,9 @@ const stats = [
         stats.map((stat) => (
           <div class="projects-stats__text">
             <dt>{stat.label}</dt>
-            <dd>{stat.value}</dd>
+            <dd>
+              <span data-count={stat.value} data-decimals={stat.decimals}>{format(stat.value, stat.decimals)}</span>{stat.suffix}
+            </dd>
           </div>
         ))
       }
@@ -279,9 +284,16 @@ const stats = [
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to right, rgba(28, 29, 46, 0.92) 0%, rgba(28, 29, 46, 0.55) 45%, rgba(28, 29, 46, 0.15) 100%),
-      linear-gradient(to top, rgba(28, 29, 46, 0.6) 0%, rgba(28, 29, 46, 0) 35%);
+    /* Solid behind the text, fading out to the right so the photo shows on that side. */
+    background: linear-gradient(
+        to right,
+        var(--color-navy-deep) 0%,
+        var(--color-navy-deep) 40%,
+        rgba(28, 29, 46, 0.85) 48%,
+        rgba(28, 29, 46, 0.55) 58%,
+        rgba(28, 29, 46, 0.25) 68%,
+        rgba(28, 29, 46, 0) 80%
+      );
   }
 
   .projects-hero__inner {

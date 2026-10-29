@@ -46,7 +46,7 @@ const faqs = [
   },
 ];
 
-const service = services.find((s) => s.href === '/hizmetler/kentsel-donusum')!;
+const service = services.find((s) => s.href === '/faaliyet-alanlari/kentsel-donusum')!;
 const schema = [
   serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
   faqLd(faqs),
@@ -60,7 +60,7 @@ const schema = [
   jsonLd={schema}
 >
   <SvcHero
-    eyebrow="Hizmet 01"
+    eyebrow="Faaliyet Alanı 01"
     name="Kentsel Dönüşüm"
     text="6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesinde, 1996'dan bu yana müteahhit ve alt müteahhit olarak edindiğimiz deneyimle hizmet veriyoruz."
     points={points}
@@ -124,7 +124,7 @@ const schema = [
 
   <SvcField />
 
-  <SvcMore current="/hizmetler/kentsel-donusum" />
+  <SvcMore current="/faaliyet-alanlari/kentsel-donusum" />
 </Layout>
 
 <style>

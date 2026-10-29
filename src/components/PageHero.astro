@@ -33,6 +33,8 @@ const {
   credit,
 } = Astro.props;
 const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
+// Small counts tick up from zero; years and words are shown as they are.
+const isCountable = (value: string) => /^\d{1,3}$/.test(value);
 ---
 
 <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
@@ -72,13 +74,13 @@ const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
 
     <div class="page-hero__text">
       <p class="page-hero__eyebrow"><span></span>{eyebrow}</p>
-      <h1><slot /></h1>
+      <h1 data-words><slot /></h1>
       {
         facts.length > 0 && (
           <ul class="page-hero__facts">
             {facts.map((fact) => (
               <li>
-                <b>{fact.value}</b>
+                <b>{isCountable(fact.value) ? <span data-count={fact.value}>{fact.value}</span> : fact.value}</b>
                 {fact.label}
               </li>
             ))}
@@ -261,26 +263,21 @@ const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
     clip-path: none;
   }
 
-  .page-hero--photo .page-hero__photo img {
-    animation: page-hero-zoom 9s ease-out both;
-  }
-
-  @keyframes page-hero-zoom {
-    from {
-      transform: scale(1.08);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
 
   .page-hero--photo .page-hero__photo::after {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to right, rgba(20, 21, 34, 0.88) 0%, rgba(20, 21, 34, 0.55) 50%, rgba(20, 21, 34, 0.2) 100%),
-      linear-gradient(to top, rgba(20, 21, 34, 0.7) 0%, rgba(20, 21, 34, 0) 45%);
+    /* Solid behind the text, fading out to the right so the photo shows on that side. */
+    background: linear-gradient(
+        to right,
+        var(--color-navy-deep) 0%,
+        var(--color-navy-deep) 40%,
+        rgba(28, 29, 46, 0.85) 48%,
+        rgba(28, 29, 46, 0.55) 58%,
+        rgba(28, 29, 46, 0.25) 68%,
+        rgba(28, 29, 46, 0) 80%
+      );
   }
 
   .page-hero--photo .page-hero__breadcrumb,
@@ -331,12 +328,6 @@ const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
 
   .page-hero__credit:hover {
     color: #fff;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .page-hero--photo .page-hero__photo img {
-      animation: none;
-    }
   }
 
   @media (max-width: 1024px) {

@@ -28,7 +28,7 @@ import { hasCoverVariants } from '../../utils/project';
         <article class:list={['sel__panel', { 'is-active': i === 0 }]} data-panel={i}>
           <div class="sel__media">
             <img src={hasCoverVariants(service.image) ? variant(service.image, 960) : service.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
-            <span class="sel__badge">Hizmet {String(i + 1).padStart(2, '0')}</span>
+            <span class="sel__badge">Alan {String(i + 1).padStart(2, '0')}</span>
           </div>
           <div class="sel__body">
             <h2>{service.title}</h2>

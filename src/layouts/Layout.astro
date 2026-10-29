@@ -25,7 +25,8 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd, 
 ---
 
 <!doctype html>
-<html lang="tr">
+<!-- The page-change curtain replaces the router's default cross-fade. -->
+<html lang="tr" transition:animate="none">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,25 +58,12 @@ const { title, description, organizationSchema, ogImage, hideCtaBanner, jsonLd, 
     {!hideCtaBanner && <CtaBanner />}
     <Footer transition:persist />
 
-    <script>
-      function initReveal() {
-        const targets = document.querySelectorAll('.reveal:not(.in)');
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('in');
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.1 },
-        );
-        targets.forEach((el) => io.observe(el));
-      }
+    <div class="curtain" aria-hidden="true" transition:persist="sayda-curtain">
+      <img class="curtain__logo" src={site.logo} alt="" width="287" height="66" />
+    </div>
 
-      initReveal();
-      document.addEventListener('astro:page-load', initReveal);
+    <script>
+      import '../scripts/motion';
 
       // Sekme geçişlerinde (proje kategorisi) scroll konumunu koru (üste atlamasın, sayfa yenilenmiş gibi görünmesin).
       let preserveScrollY: number | null = null;

@@ -89,7 +89,7 @@ const items = chapters.map((chapter) => ({ ...chapter, ...coverOf(chapter.slug) 
             <Icon name={item.icon} size={22} />
             {item.caption}
           </p>
-          <h2 class="vm-chapter__title">{item.title}</h2>
+          <h2 class="vm-chapter__title" data-words>{item.title}</h2>
           <p class="vm-chapter__text">{item.text}</p>
         </div>
       </section>

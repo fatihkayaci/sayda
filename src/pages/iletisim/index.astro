@@ -1,130 +1,190 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Icon from '../../components/Icon.astro';
-import PageHero from '../../components/PageHero.astro';
+import CareerForm from '../../components/CareerForm.astro';
 import projects from '../../data/projects.json';
-
-const hero = projects.find((p) => p.slug === 'atlas-park-avm-ofis')!;
-import SectionHead from '../../components/SectionHead.astro';
 import services from '../../data/services.json';
 import site from '../../data/site.json';
+import { breadcrumbLd } from '../../utils/schema';
+import { srcset } from '../../utils/image';
+
+const hero = projects.find((p) => p.slug === 'atlas-park-avm-ofis')!;
+
+// Same photo and credit as the Vadistanbul slide on the home hero.
+const heroPhoto = {
+  image: '/img/home/hero-vadistanbul-bulvar.webp',
+  credit: { label: 'Görsel: Artaş Holding', href: 'https://www.artasholding.com/tr-tr/proje/vadistanbul-bulvar/' },
+};
 
 const mapsQuery = encodeURIComponent('SAYDA, Tarabya, Kaydırak Sk. No:3, 34457 Sarıyer/İstanbul');
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-const mapSrc = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
+const mapSrc = `https://www.google.com/maps?q=${mapsQuery}&z=15&output=embed`;
 
 const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${site.address.city} ${site.address.postalCode}`;
+
+const breadcrumbs = [{ label: 'Ana Sayfa', href: '/' }, { label: 'İletişim' }];
+const breadcrumbData = breadcrumbLd(breadcrumbs, Astro.url.pathname);
 ---
 
 <Layout ogImage={hero.image}
   title="İletişim ve Teklif Talebi | Sayda İnşaat Tarabya"
-  description="Sayda İnşaat Tarabya / Sarıyer ofis adresi, telefon ve e-posta bilgileri. Projeniz için teklif formunu doldurun, size dönüş yapalım."
+  description="Sayda İnşaat Tarabya / Sarıyer ofis adresi, telefon ve e-posta bilgileri. Teklif formunu doldurun ya da iş başvurunuzu gönderin."
   organizationSchema
   hideCtaBanner
 >
-  <PageHero
-    eyebrow="Bize Ulaşın"
-    breadcrumbs={[{ label: 'Ana Sayfa', href: '/' }, { label: 'İletişim' }]}
-    variant="photo"
-    image={hero.image}
-    imagePosition="center"
-    size="short"
-    credit={'imageCredit' in hero ? hero.imageCredit : undefined}
-  >
-    Projenizi <em>konuşalım.</em>
-  </PageHero>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumbData)} />
 
+  <!-- Hero: text on navy at left, a large photo cut on a diagonal at right. -->
+  <section class="ct-hero">
+    <figure class="ct-hero__photo">
+      <img
+        src={heroPhoto.image}
+        srcset={srcset(heroPhoto.image, 960, 1920)}
+        sizes="(max-width: 900px) 100vw, 64vw"
+        alt="Vadistanbul, gün batımında"
+        fetchpriority="high"
+      />
+      <a class="ct-hero__credit" href={heroPhoto.credit.href} target="_blank" rel="noopener noreferrer">
+        {heroPhoto.credit.label}
+      </a>
+    </figure>
+
+    <div class="container ct-hero__text">
+      <nav class="ct-hero__breadcrumb" aria-label="Konum">
+        <a href="/">Ana Sayfa</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">İletişim</span>
+      </nav>
+      <p class="ct-hero__eyebrow"><span></span>Bize Ulaşın</p>
+      <h1 data-words>Projenizi <em>konuşalım.</em></h1>
+      <p class="ct-hero__lead">Teklif almak, ekibimize katılmak ya da bir konuyu sormak için bize yazın.</p>
+    </div>
+  </section>
+
+  <!-- Form card overlapping the hero: quote / job application tabs + direct contact column. -->
   <section class="ct-main">
-    <div class="container ct-main__inner">
-      <div class="ct-form" id="quote-form">
-        <SectionHead label="Mesaj Gönderin" title="Teklif ve bilgi talebi." />
-        <p class="ct-form__lead">Formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
-
-        <form id="contactForm">
-          <input type="hidden" name="form_type" value="contact" />
-          <input type="checkbox" name="botcheck" class="ct-form__honeypot" tabindex="-1" autocomplete="off" />
-
-          <fieldset class="ct-form__services">
-            <legend>Hangi hizmetle ilgileniyorsunuz?</legend>
-            <div>
-              {
-                services.map((service) => (
-                  <label class="ct-pill">
-                    <input type="radio" name="service" value={service.title} />
-                    <span>{service.title}</span>
-                  </label>
-                ))
-              }
-              <label class="ct-pill">
-                <input type="radio" name="service" value="Diğer" />
-                <span>Diğer</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <div class="ct-form__row">
-            <label>
-              <span>Ad Soyad *</span>
-              <input type="text" name="name" placeholder="Adınız ve soyadınız" required autocomplete="name" />
-            </label>
-            <label>
-              <span>Telefon *</span>
-              <input type="tel" name="phone" placeholder="+90 5XX XXX XX XX" required autocomplete="tel" />
-            </label>
-          </div>
-
-          <label>
-            <span>E-posta *</span>
-            <input type="email" name="email" placeholder="ornek@mail.com" required autocomplete="email" />
-          </label>
-
-          <label>
-            <span>Mesajınız *</span>
-            <textarea name="message" rows="5" placeholder="Projenizden kısaca bahsedin: konum, alan, ihtiyaç..." required></textarea>
-          </label>
-
-          <label class="ct-form__consent">
-            <input type="checkbox" name="kvkk" required />
-            <span>
-              <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni
-              okudum, kişisel verilerimin işlenmesini kabul ediyorum.
-            </span>
-          </label>
-
-          <div class="ct-form__actions">
-            <button type="submit">
-              Mesaj Gönder <Icon name="arrow" size={18} />
+    <div class="container">
+      <div class="ct-card" id="quote-form">
+        <div class="ct-card__forms">
+          <div class="ct-tabs" role="tablist" aria-label="Form türü">
+            <button type="button" class="ct-tabs__tab is-active" role="tab" aria-selected="true" aria-controls="ct-panel-quote" id="ct-tab-quote" data-ct-tab="quote">
+              <b>Teklif Al</b>
+              <span>Projeniz için teklif ve bilgi</span>
             </button>
-            <p class="ct-form__secure">
-              <Icon name="lock" size={16} />
-              Bilgileriniz güvenle saklanır.
-            </p>
+            <button type="button" class="ct-tabs__tab" role="tab" aria-selected="false" aria-controls="ct-panel-career" id="ct-tab-career" data-ct-tab="career">
+              <b>İş Başvurusu</b>
+              <span>Beyaz yaka veya ekipli kalfa</span>
+            </button>
           </div>
 
-          <p class="ct-form__status" id="contactStatus" role="status" aria-live="polite"></p>
-        </form>
-      </div>
+          <div class="ct-panel ct-form" id="ct-panel-quote" role="tabpanel" aria-labelledby="ct-tab-quote">
+            <h2>Teklif ve bilgi talebi.</h2>
+            <p class="ct-form__lead">Formu doldurun, ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
 
-      <aside class="ct-side">
-        <div class="ct-direct">
-          <a class="ct-direct__item ct-direct__item--big" href={site.phoneHref}>
-            <span class="ct-direct__label"><Icon name="phone" size={18} /> Telefon</span>
+            <form id="contactForm">
+              <input type="hidden" name="form_type" value="contact" />
+              <input type="checkbox" name="botcheck" class="ct-form__honeypot" tabindex="-1" autocomplete="off" />
+
+              <fieldset class="ct-form__services">
+                <legend>Hangi hizmetle ilgileniyorsunuz?</legend>
+                <div>
+                  {
+                    services.map((service) => (
+                      <label class="ct-pill">
+                        <input type="radio" name="service" value={service.title} />
+                        <span>{service.title}</span>
+                      </label>
+                    ))
+                  }
+                  <label class="ct-pill">
+                    <input type="radio" name="service" value="Diğer" />
+                    <span>Diğer</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="ct-form__row">
+                <label>
+                  <span>Ad Soyad *</span>
+                  <input type="text" name="name" placeholder="Adınız ve soyadınız" required autocomplete="name" />
+                </label>
+                <label>
+                  <span>Telefon *</span>
+                  <input type="tel" name="phone" placeholder="+90 5XX XXX XX XX" required autocomplete="tel" />
+                </label>
+              </div>
+
+              <label>
+                <span>E-posta *</span>
+                <input type="email" name="email" placeholder="ornek@mail.com" required autocomplete="email" />
+              </label>
+
+              <label>
+                <span>Mesajınız *</span>
+                <textarea name="message" rows="5" placeholder="Projenizden kısaca bahsedin: konum, alan, ihtiyaç..." required></textarea>
+              </label>
+
+              <label class="ct-form__consent">
+                <input type="checkbox" name="kvkk" required />
+                <span>
+                  <a href="/kvkk-aydinlatma-metni" target="_blank" rel="noopener noreferrer">KVKK Aydınlatma Metni</a>'ni
+                  okudum, kişisel verilerimin işlenmesini kabul ediyorum.
+                </span>
+              </label>
+
+              <div class="ct-form__actions">
+                <button type="submit">
+                  Mesaj Gönder <Icon name="arrow" size={18} />
+                </button>
+                <p class="ct-form__secure">
+                  <Icon name="lock" size={16} />
+                  Bilgileriniz güvenle saklanır.
+                </p>
+              </div>
+
+              <p class="ct-form__status" id="contactStatus" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="ct-panel" id="ct-panel-career" role="tabpanel" aria-labelledby="ct-tab-career" hidden>
+            <h2>Ekibimize katılın.</h2>
+            <p class="ct-form__lead">Hangi pozisyon için başvuruyorsunuz?</p>
+
+            <!-- `.ik-tab` buttons drive the CareerForm's position type. -->
+            <div class="ct-types">
+              <button type="button" class="ik-tab ct-types__item" data-tab="beyaz">
+                <b>Beyaz Yaka</b>
+                <span>Mühendis, mimar, şantiye şefi, teknik ofis ve idari pozisyonlar.</span>
+              </button>
+              <button type="button" class="ik-tab ct-types__item" data-tab="kalfa">
+                <b>Kalfa (Ekipli)</b>
+                <span>Sıva, şap, seramik, alçı, boya ve ince işlerde ekibiyle çalışan ustalar.</span>
+              </button>
+            </div>
+
+            <CareerForm bare />
+          </div>
+        </div>
+
+        <aside class="ct-side">
+          <a class="ct-side__item" href={site.phoneHref}>
+            <span class="ct-side__label"><Icon name="phone" size={16} /> Telefon</span>
             <strong>{site.phone}</strong>
           </a>
-          <a class="ct-direct__item ct-direct__item--big" href={`mailto:${site.email}`}>
-            <span class="ct-direct__label"><Icon name="mail" size={18} /> E-posta</span>
+          <a class="ct-side__item" href={`mailto:${site.email}`}>
+            <span class="ct-side__label"><Icon name="mail" size={16} /> E-posta</span>
             <strong>{site.email}</strong>
           </a>
-          <a class="ct-direct__item" href={mapsUrl} target="_blank" rel="noopener noreferrer">
-            <span class="ct-direct__label"><Icon name="pin" size={18} /> Adres</span>
+          <a class="ct-side__item" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            <span class="ct-side__label"><Icon name="pin" size={16} /> Adres</span>
             <span>
               {site.address.street}
               <br />
               {addressLine}
             </span>
           </a>
-          <div class="ct-direct__item">
-            <span class="ct-direct__label"><Icon name="clock" size={18} /> Çalışma Saatleri</span>
+          <div class="ct-side__item">
+            <span class="ct-side__label"><Icon name="clock" size={16} /> Çalışma Saatleri</span>
             <span>
               {
                 site.workingHours.map((line, i) => (
@@ -136,20 +196,56 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
               }
             </span>
           </div>
-        </div>
-
-        <div class="ct-map">
-          <iframe title="Sayda İnşaat konumu" src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          <a class="ct-map__link" href={mapsUrl} target="_blank" rel="noopener noreferrer">
-            Yol Tarifi Al <Icon name="arrow" size={16} />
+          <div class="ct-side__map">
+            <iframe title="Sayda İnşaat konumu" src={mapSrc} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a class="ct-side__route" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            Yol Tarifi Al <Icon name="arrow" size={18} />
           </a>
-        </div>
-      </aside>
+        </aside>
+      </div>
     </div>
   </section>
 </Layout>
 
 <script>
+  // Teklif Al / İş Başvurusu tabs. #is-basvurusu (or a position hash) opens the application tab.
+  const CAREER_HASHES = ['is-basvurusu', 'beyaz-yaka', 'kalfa-ekipli'];
+
+  function initContactTabs() {
+    const tabs = document.querySelectorAll<HTMLButtonElement>('[data-ct-tab]');
+    if (!tabs.length) return;
+
+    const show = (name: string) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.ctTab === name;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', String(active));
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? '');
+        if (panel) panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab) =>
+      tab.addEventListener('click', () => {
+        const name = tab.dataset.ctTab ?? 'quote';
+        show(name);
+        try {
+          history.replaceState(null, '', name === 'career' ? '#is-basvurusu' : '#quote-form');
+        } catch {
+          /* noop */
+        }
+      })
+    );
+
+    const applyHash = () => {
+      if (CAREER_HASHES.includes(location.hash.slice(1))) show('career');
+      else if (location.hash === '#quote-form') show('quote');
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+  }
+
   function initContactForm() {
     const form = document.getElementById('contactForm') as HTMLFormElement | null;
     const status = document.getElementById('contactStatus');
@@ -185,51 +281,314 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
     });
   }
 
-  initContactForm();
-  document.addEventListener('astro:page-load', initContactForm);
+  function init() {
+    initContactTabs();
+    initContactForm();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
 </script>
 
 <style>
-  /* Sidebar: direct contact + map */
-  .ct-side {
-    position: sticky;
-    top: calc(var(--header-h) + 24px);
-    align-self: start;
-    display: grid;
-    gap: 16px;
-  }
-
-  .ct-direct {
-    display: grid;
-    padding: 8px 32px;
-    border-radius: var(--radius);
+  /* Hero */
+  .ct-hero {
+    position: relative;
+    min-height: clamp(520px, 70vh, 660px);
+    overflow: hidden;
     background: var(--color-navy-deep);
     color: #fff;
   }
 
-  .ct-direct__item {
+  .ct-hero__photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 64%;
+    margin: 0;
+    clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .ct-hero__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  /* Darkens the photo's left edge into the navy and its bottom under the card. */
+  .ct-hero__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(28, 29, 46, 0.55) 0%, rgba(28, 29, 46, 0) 45%),
+      linear-gradient(0deg, rgba(28, 29, 46, 0.5) 0%, rgba(28, 29, 46, 0) 35%);
+    pointer-events: none;
+  }
+
+  .ct-hero__credit {
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    right: 20px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .ct-hero__credit:hover {
+    color: #fff;
+  }
+
+  .ct-hero__text {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-content: start;
+    gap: 20px;
+    padding-top: clamp(32px, 4vw, 56px);
+    padding-bottom: clamp(200px, 18vw, 280px);
+  }
+
+  .ct-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: var(--fs-small);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ct-hero__breadcrumb a:hover {
+    color: #fff;
+  }
+
+  .ct-hero__breadcrumb [aria-current] {
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .ct-hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: clamp(24px, 4vw, 56px);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .ct-hero__eyebrow span {
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+  }
+
+  .ct-hero h1 {
+    max-width: 8ch;
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(2.75rem, 4.4vw + 1rem, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+  }
+
+  .ct-hero h1 em {
+    font-style: normal;
+    color: var(--color-orange);
+  }
+
+  .ct-hero__lead {
+    max-width: 30ch;
+    font-size: 1.125rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* Card over the hero */
+  .ct-main {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(-200px, -13vw, -120px);
+    padding-bottom: clamp(80px, 9vw, 140px);
+    pointer-events: none;
+  }
+
+  .ct-card {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 40px 80px -30px rgba(28, 29, 46, 0.45);
+    scroll-margin-top: calc(var(--header-h) + 16px);
+    pointer-events: auto;
+  }
+
+  .ct-card__forms {
+    min-width: 0;
+    padding: clamp(28px, 4vw, 56px);
+  }
+
+  /* Teklif Al / İş Başvurusu */
+  .ct-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 40px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .ct-tabs__tab {
+    display: grid;
+    gap: 4px;
+    padding: 20px 24px;
+    border: 0;
+    background: var(--color-bg-light);
+    font: inherit;
+    text-align: left;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      box-shadow var(--transition);
+  }
+
+  .ct-tabs__tab + .ct-tabs__tab {
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ct-tabs__tab b {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-tabs__tab span {
+    font-size: 0.875rem;
+  }
+
+  .ct-tabs__tab:hover {
+    background: #f4f5f9;
+  }
+
+  .ct-tabs__tab.is-active {
+    background: #fff;
+    box-shadow: inset 0 4px 0 var(--color-orange);
+  }
+
+  .ct-tabs__tab:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: -2px;
+  }
+
+  .ct-panel[hidden] {
+    display: none;
+  }
+
+  .ct-panel h2 {
+    font-family: var(--font-display);
+    font-stretch: 115%;
+    font-weight: 800;
+    font-size: clamp(1.875rem, 1.6vw + 1rem, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-form__lead {
+    margin: 12px 0 32px;
+    font-size: 1.0625rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Position type for the job application */
+  .ct-types {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  .ct-types__item {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 20px 22px;
+    border: 1.5px solid var(--color-border-strong);
+    border-radius: var(--radius);
+    background: #fff;
+    font: inherit;
+    text-align: left;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition:
+      background var(--transition),
+      border-color var(--transition),
+      color var(--transition);
+  }
+
+  .ct-types__item b {
+    font-family: var(--font-display);
+    font-stretch: 110%;
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: var(--color-navy-deep);
+  }
+
+  .ct-types__item span {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .ct-types__item:hover {
+    border-color: var(--color-navy-deep);
+  }
+
+  .ct-types__item.is-active {
+    border-color: var(--color-navy-deep);
+    background: var(--color-navy-deep);
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .ct-types__item.is-active b {
+    color: #fff;
+  }
+
+  /* Direct contact column */
+  /* Contact rows on top, the map takes the remaining height, route button at the bottom. */
+  .ct-side {
+    display: grid;
+    grid-template-rows: repeat(4, auto) minmax(260px, 1fr) auto;
+    background: var(--color-navy-deep);
+    color: #fff;
+  }
+
+  .ct-side__item {
     display: grid;
     gap: 10px;
-    padding: 24px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 30px clamp(24px, 3vw, 40px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     font-size: 0.9375rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
   }
 
-  .ct-direct__item:first-child {
-    border-top: 0;
-  }
-
-  a.ct-direct__item:hover {
+  a.ct-side__item:hover {
     color: #fff;
   }
 
-  a.ct-direct__item:hover strong {
+  a.ct-side__item:hover strong {
     color: var(--color-orange);
   }
 
-  .ct-direct__label {
+  .ct-side__label {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -240,15 +599,15 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
     color: rgba(255, 255, 255, 0.55);
   }
 
-  .ct-direct__label :global(svg) {
+  .ct-side__label :global(svg) {
     color: var(--color-orange);
   }
 
-  .ct-direct__item strong {
+  .ct-side__item strong {
     font-family: var(--font-display);
     font-stretch: 110%;
     font-weight: 800;
-    font-size: clamp(1.375rem, 1vw + 0.9rem, 2rem);
+    font-size: clamp(1.375rem, 1vw + 0.9rem, 1.875rem);
     line-height: 1.1;
     letter-spacing: -0.01em;
     overflow-wrap: anywhere;
@@ -256,33 +615,37 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
     transition: color var(--transition);
   }
 
-  /* Form + map */
-  .ct-main {
-    padding-block: clamp(48px, 5vw, 80px) clamp(80px, 9vw, 140px);
-    background: var(--color-bg);
+  .ct-side__map {
+    position: relative;
+    min-height: 260px;
+    background: var(--color-navy);
   }
 
-  .ct-main__inner {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-    gap: clamp(32px, 5vw, 80px);
-    align-items: start;
+  .ct-side__map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(0.35) contrast(1.05);
   }
 
-  .ct-form {
-    scroll-margin-top: var(--header-h);
+  .ct-side__route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px clamp(24px, 3vw, 40px);
+    background: var(--color-orange);
+    font-weight: 800;
+    color: var(--color-navy-deep);
+    transition: background var(--transition);
   }
 
-  .ct-form :global(.section-head) {
-    margin-bottom: 20px;
+  .ct-side__route:hover {
+    background: var(--color-orange-dark);
   }
 
-  .ct-form__lead {
-    margin-bottom: 40px;
-    font-size: 1.0625rem;
-    color: var(--color-text-muted);
-  }
-
+  /* Quote form fields */
   .ct-form form {
     display: grid;
     gap: 22px;
@@ -399,7 +762,8 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
     border-color: var(--color-navy);
   }
 
-  .ct-form .ct-form__consent {
+  /* label.ct-form__consent outranks `.ct-form label:not(.ct-pill)`, which would stack it as a grid */
+  .ct-form label.ct-form__consent {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -483,60 +847,42 @@ const addressLine = `${site.address.neighborhood} / ${site.address.district}, ${
     color: var(--color-error);
   }
 
-  .ct-map {
-    position: relative;
-    height: 280px;
-    overflow: hidden;
-    border-radius: var(--radius);
-    background: var(--color-border);
-  }
-
-  .ct-map iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    filter: grayscale(0.6);
-  }
-
-  .ct-map__link {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    padding: 12px 18px;
-    border-radius: var(--radius);
-    background: var(--color-navy-deep);
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #fff;
-    transition: background var(--transition);
-  }
-
-  .ct-map__link:hover {
-    background: var(--color-navy);
-  }
-
   @media (max-width: 1100px) {
-    .ct-main__inner {
+    .ct-card {
       grid-template-columns: 1fr;
     }
+  }
 
-    .ct-side {
-      position: static;
+  /* Small screens: the photo becomes the full background behind the text. */
+  @media (max-width: 900px) {
+    .ct-hero__photo {
+      width: 100%;
+      clip-path: none;
+    }
+
+    .ct-hero__photo::after {
+      background: linear-gradient(180deg, rgba(28, 29, 46, 0.9) 0%, rgba(28, 29, 46, 0.55) 60%, rgba(28, 29, 46, 0.75) 100%);
+    }
+
+    .ct-hero h1 {
+      max-width: none;
     }
   }
 
   @media (max-width: 640px) {
+    .ct-main {
+      margin-top: -96px;
+    }
+
+    .ct-tabs,
+    .ct-types,
     .ct-form__row {
       grid-template-columns: 1fr;
     }
 
-    .ct-direct {
-      padding-inline: 24px;
+    .ct-tabs__tab + .ct-tabs__tab {
+      border-left: 0;
+      border-top: 1px solid var(--color-border);
     }
   }
 </style>

@@ -13,7 +13,7 @@ const { label, title, text, tone = 'light' } = Astro.props;
 <div class:list={['section-head', `section-head--${tone}`, { 'section-head--split': text }]}>
   <div class="section-head__main">
     <p class="section-head__label">{label}</p>
-    <h2>{title}</h2>
+    <h2 data-words>{title}</h2>
   </div>
   {text && <p class="section-head__text">{text}</p>}
 </div>

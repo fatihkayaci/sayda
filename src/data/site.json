@@ -33,6 +33,8 @@
   "stats": {
     "employeeCount": 30,
     "avgAnnualProjects": 2,
+    "completedProjects": 40,
+    "ongoingProjects": 2,
     "totalCompletedArea": "4.250.000 m²"
   },
   "certifications": [

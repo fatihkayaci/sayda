@@ -9,7 +9,7 @@ import SvcField from '../../components/service/SvcField.astro';
 import SvcMore from '../../components/service/SvcMore.astro';
 import company from '../../data/company.json';
 
-const service = services.find((s) => s.href === '/hizmetler/kat-karsiligi-insaat')!;
+const service = services.find((s) => s.href === '/faaliyet-alanlari/kat-karsiligi-insaat')!;
 const schema = [
   serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
 ];
@@ -22,7 +22,7 @@ const schema = [
   jsonLd={schema}
 >
   <SvcHero
-    eyebrow="Hizmet 02"
+    eyebrow="Faaliyet Alanı 02"
     name="Kat Karşılığı İnşaat"
     text="Arsa ve bina sahipleriyle iş birliği yaparak kat karşılığı inşaat projelerini üstleniyoruz. 1996'dan bu yana otel, ofis, villa ve konut projelerinde edindiğimiz müteahhitlik deneyimini arsanıza taşıyoruz."
     points={company.philosophy}
@@ -47,5 +47,5 @@ const schema = [
 
   <SvcField />
 
-  <SvcMore current="/hizmetler/kat-karsiligi-insaat" />
+  <SvcMore current="/faaliyet-alanlari/kat-karsiligi-insaat" />
 </Layout>

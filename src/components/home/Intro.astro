@@ -6,7 +6,7 @@ const areaInMillions = Number(site.stats.totalCompletedArea.replace(/[^\d]/g, ''
 // count: animated numeric part; decimals: digits kept while counting; suffix renders in orange.
 const stats = [
   { value: site.foundedYear, decimals: 0, count: false, suffix: '', label: 'Yılından Beri' },
-  { value: 30, decimals: 0, count: true, suffix: '+', label: 'Tamamlanan Proje' },
+  { value: site.stats.completedProjects, decimals: 0, count: true, suffix: '+', label: 'Tamamlanan Proje' },
   { value: areaInMillions, decimals: 2, count: true, suffix: 'M+', label: 'm² Uygulama Alanı' },
 ];
 
@@ -36,45 +36,6 @@ const format = (n: number, decimals: number) =>
     </div>
   </div>
 </section>
-
-<script>
-  function initCounters() {
-    const counters = document.querySelectorAll<HTMLElement>('.intro [data-count]');
-    if (!counters.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const run = (el: HTMLElement) => {
-      const target = Number(el.dataset.count);
-      const decimals = Number(el.dataset.decimals ?? 0);
-      const fmt = (n: number) =>
-        n.toLocaleString('tr-TR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: false });
-      const duration = 1400;
-      const start = performance.now();
-      const tick = (now: number) => {
-        const t = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = fmt(target * eased);
-        if (t < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          run(entry.target as HTMLElement);
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.6 }
-    );
-    counters.forEach((el) => observer.observe(el));
-  }
-
-  initCounters();
-  document.addEventListener('astro:page-load', initCounters);
-</script>
 
 <style>
   .intro {

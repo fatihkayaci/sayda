@@ -13,26 +13,26 @@ const interiorWork = company.workItems.filter((item) =>
   ['İnce yapı', 'Asma tavan & bölme duvar', 'Cephe, metal & cam', 'Dekorasyon'].includes(item.title)
 );
 
-const service = services.find((s) => s.href === '/hizmetler/otel-renovasyonu')!;
+const service = services.find((s) => s.href === '/faaliyet-alanlari/bina-ve-tesis-renovasyonu')!;
 const schema = [
   serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
 ];
 ---
 
 <Layout
-  title="Otel ve Tesis Renovasyonu | Sayda İnşaat"
-  description="Otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütleri."
+  title="Bina ve Tesis Tadilatları ve Renovasyonları | Sayda İnşaat"
+  description="Bina ve tesis tadilatları; otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütleri."
   ogImage={service.image}
   jsonLd={schema}
 >
   <SvcHero
-    eyebrow="Hizmet 06"
-    name="Tesis Renovasyonu"
-    text="Otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütlerini anahtar teslim yapıyoruz. Çırağan Palace Hotel Kempinski'nin otel binası renovasyonu bu işlerden biridir."
-    points={['Renovasyon', 'Dekorasyon', 'Anahtar teslim']}
+    eyebrow="Faaliyet Alanı 06"
+    name="Bina ve Tesis Tadilatları ve Renovasyonları"
+    text="Bina ve tesislerde tadilat ve renovasyon işleri yapıyoruz. Otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütlerini anahtar teslim yapıyoruz. Çırağan Palace Hotel Kempinski'nin otel binası renovasyonu bu işlerden biridir."
+    points={['Tadilat', 'Renovasyon', 'Dekorasyon', 'Anahtar teslim']}
     project="ciragan-otel-renovasyonu"
   >
-    Tesis <em>Renovasyonu</em>
+    Bina ve Tesis Tadilatları ve <em>Renovasyonları</em>
   </SvcHero>
 
   <SvcScope label="Uygulama Alanlarımız" title="İç mekândan cepheye." items={interiorWork} />
@@ -51,5 +51,5 @@ const schema = [
 
   <SvcField />
 
-  <SvcMore current="/hizmetler/otel-renovasyonu" />
+  <SvcMore current="/faaliyet-alanlari/bina-ve-tesis-renovasyonu" />
 </Layout>

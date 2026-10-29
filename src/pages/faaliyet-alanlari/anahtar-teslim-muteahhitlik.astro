@@ -9,7 +9,7 @@ import SvcField from '../../components/service/SvcField.astro';
 import SvcMore from '../../components/service/SvcMore.astro';
 import company from '../../data/company.json';
 
-const service = services.find((s) => s.href === '/hizmetler/anahtar-teslim-muteahhitlik')!;
+const service = services.find((s) => s.href === '/faaliyet-alanlari/anahtar-teslim-muteahhitlik')!;
 const schema = [
   serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
 ];
@@ -22,7 +22,7 @@ const schema = [
   jsonLd={schema}
 >
   <SvcHero
-    eyebrow="Hizmet 04"
+    eyebrow="Faaliyet Alanı 04"
     name="Anahtar Teslim Müteahhitlik"
     text="Çırağan Palace Hotel Kempinski, Enternasyonal Turizm Yatırım A.Ş., Visa International EU, Nestle Gıda Sanayi A.Ş., Isısan-Buderus ve Yasmin-Bodrum Hotel gibi kuruluşların taahhüt işlerinde müteahhit olarak hizmet verdik. Otel, ofis, villa ve konut projelerinin inşaat, dekorasyon ve renovasyon taahhütlerini anahtar teslim yapıyoruz."
     points={['Otel', 'Ofis', 'Villa', 'Konut']}
@@ -52,5 +52,5 @@ const schema = [
 
   <SvcField />
 
-  <SvcMore current="/hizmetler/anahtar-teslim-muteahhitlik" />
+  <SvcMore current="/faaliyet-alanlari/anahtar-teslim-muteahhitlik" />
 </Layout>

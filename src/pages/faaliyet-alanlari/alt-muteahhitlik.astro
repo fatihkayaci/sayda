@@ -20,7 +20,7 @@ const projectSlugs: Record<string, string> = {
   Kasaba: 'kasaba-konut-residance',
 };
 
-const service = services.find((s) => s.href === '/hizmetler/alt-muteahhitlik')!;
+const service = services.find((s) => s.href === '/faaliyet-alanlari/alt-muteahhitlik')!;
 const schema = [
   serviceLd({ name: service.title, description: service.description, path: service.href, image: service.image }),
 ];
@@ -33,7 +33,7 @@ const schema = [
   jsonLd={schema}
 >
   <SvcHero
-    eyebrow="Hizmet 03"
+    eyebrow="Faaliyet Alanı 03"
     name="Alt Müteahhitlik"
     text="1996'dan bu yana birçok büyük projede alt müteahhit olarak “uzman ekip” hizmetleri yüklendik ve başarıyla teslim ettik. Kaba yapı, ince işler, cephe ve dekorasyon işlerinde ana yüklenicilerin yanındayız."
     points={['Kaba yapı', 'İnce işler', 'Cephe', 'Dekorasyon']}
@@ -55,5 +55,5 @@ const schema = [
 
   <SvcField />
 
-  <SvcMore current="/hizmetler/alt-muteahhitlik" />
+  <SvcMore current="/faaliyet-alanlari/alt-muteahhitlik" />
 </Layout>

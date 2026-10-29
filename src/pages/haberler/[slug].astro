@@ -70,7 +70,12 @@ const articleLd = buildArticleLd({
   path: pagePath,
 });
 const breadcrumbLd = buildBreadcrumbLd(
-  [{ label: 'Ana Sayfa', href: '/' }, { label: 'Haberler', href: '/haberler' }, { label: haber.title }],
+  [
+    { label: 'Ana Sayfa', href: '/' },
+    { label: 'Kurumsal', href: '/kurumsal' },
+    { label: 'Haberler', href: '/haberler' },
+    { label: haber.title },
+  ],
   pagePath
 );
 ---
@@ -87,6 +92,8 @@ const breadcrumbLd = buildBreadcrumbLd(
       <div class="container">
         <nav class="nd-head__breadcrumb" aria-label="Konum">
           <a href="/">Ana Sayfa</a>
+          <span aria-hidden="true">/</span>
+          <a href="/kurumsal">Kurumsal</a>
           <span aria-hidden="true">/</span>
           <a href="/haberler">Haberler</a>
           <span aria-hidden="true">/</span>

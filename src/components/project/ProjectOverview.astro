@@ -8,7 +8,7 @@ const { description, works } = Astro.props;
 ---
 
 <section class="project-scope reveal">
-  <h2>İş Kapsamı</h2>
+  <h2 data-words>İş Kapsamı</h2>
   {description.map((paragraph) => <p>{paragraph}</p>)}
   {
     works.length > 0 && (

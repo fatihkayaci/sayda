@@ -1,50 +1,8 @@
 [
   {
-    "title": "Kentsel Dönüşüm",
-    "description": "6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesi.",
-    "href": "/hizmetler/kentsel-donusum",
-    "points": [
-      "6306 sayılı kanun çerçevesinde",
-      "Riskli yapıların yenilenmesi",
-      "1996'dan bu yana müteahhitlik deneyimi"
-    ],
-    "icon": "building",
-    "audience": "bina-sahipleri",
-    "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-cover.webp",
-    "project": "referans-besiktas-abbasaga"
-  },
-  {
-    "title": "Kat Karşılığı İnşaat",
-    "description": "Arsa ve bina sahipleriyle iş birliği içinde kat karşılığı inşaat.",
-    "href": "/hizmetler/kat-karsiligi-insaat",
-    "points": [
-      "Arsa sahipleriyle iş birliği",
-      "Uzman ekip",
-      "Zamanında teslim"
-    ],
-    "icon": "key",
-    "audience": "bina-sahipleri",
-    "image": "/img/projects/buyukyali/buyukyali-cover.webp",
-    "project": "buyukyali"
-  },
-  {
-    "title": "Alt Müteahhitlik",
-    "description": "Ana yüklenicilerin projelerinde kaba yapı, ince işler, cephe ve dekorasyon işlerinde uzman ekip hizmeti.",
-    "href": "/hizmetler/alt-muteahhitlik",
-    "points": [
-      "Kaba yapı ve ince işler",
-      "Cephe ve dekorasyon",
-      "Akbatı, Oyakkent, Varyap Meridian"
-    ],
-    "icon": "helmet",
-    "audience": "ana-yukleniciler",
-    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp",
-    "project": "atlas-park-avm-ofis"
-  },
-  {
     "title": "Anahtar Teslim Müteahhitlik",
     "description": "Otel, ofis, villa ve konut projelerinde inşaat, dekorasyon ve renovasyon taahhütlerinin anahtar teslim yapılması.",
-    "href": "/hizmetler/anahtar-teslim-muteahhitlik",
+    "href": "/faaliyet-alanlari/anahtar-teslim-muteahhitlik",
     "points": [
       "Otel, ofis, villa, konut",
       "İnşaat, dekorasyon, renovasyon",
@@ -56,23 +14,51 @@
     "project": "capital-tower-ofis"
   },
   {
-    "title": "Proje Yönetimi & Danışmanlık",
-    "description": "Bütçe, ihale, maliyet ve kalite kontrol süreçlerinde proje yönetimi ve danışmanlık.",
-    "href": "/hizmetler/proje-yonetimi-danismanlik",
+    "title": "Alt Müteahhitlik",
+    "description": "Ana yüklenicilerin projelerinde kaba yapı, ince işler, cephe ve dekorasyon işlerinde uzman ekip hizmeti.",
+    "href": "/faaliyet-alanlari/alt-muteahhitlik",
     "points": [
-      "Bütçe ve maliyet",
-      "İhale süreçleri",
-      "Kalite kontrol"
+      "Kaba yapı ve ince işler",
+      "Cephe ve dekorasyon",
+      "Akbatı, Oyakkent, Varyap Meridian"
     ],
-    "icon": "chart",
+    "icon": "helmet",
     "audience": "ana-yukleniciler",
-    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-cover.webp",
-    "project": "gaziantep-sehir-hastanesi"
+    "image": "/img/projects/atlas-park-avm-ofis/atlas-park-avm-ofis-cover.webp",
+    "project": "atlas-park-avm-ofis"
   },
   {
-    "title": "Tesis Renovasyonu",
-    "description": "Otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütleri.",
-    "href": "/hizmetler/otel-renovasyonu",
+    "title": "Kat Karşılığı İnşaat",
+    "description": "Arsa ve bina sahipleriyle iş birliği içinde kat karşılığı inşaat.",
+    "href": "/faaliyet-alanlari/kat-karsiligi-insaat",
+    "points": [
+      "Arsa sahipleriyle iş birliği",
+      "Uzman ekip",
+      "Zamanında teslim"
+    ],
+    "icon": "key",
+    "audience": "bina-sahipleri",
+    "image": "/img/projects/buyukyali/buyukyali-cover.webp",
+    "project": "buyukyali"
+  },
+  {
+    "title": "Kentsel Dönüşüm",
+    "description": "6306 sayılı kanun çerçevesinde riskli yapıların yenilenmesi.",
+    "href": "/faaliyet-alanlari/kentsel-donusum",
+    "points": [
+      "6306 sayılı kanun çerçevesinde",
+      "Riskli yapıların yenilenmesi",
+      "1996'dan bu yana müteahhitlik deneyimi"
+    ],
+    "icon": "building",
+    "audience": "bina-sahipleri",
+    "image": "/img/projects/referans-besiktas-abbasaga/referans-besiktas-abbasaga-cover.webp",
+    "project": "referans-besiktas-abbasaga"
+  },
+  {
+    "title": "Bina ve Tesis Renovasyonu",
+    "description": "Bina ve tesis tadilatları; otel, ofis, villa ve konut projelerinde renovasyon ve dekorasyon taahhütleri.",
+    "href": "/faaliyet-alanlari/bina-ve-tesis-renovasyonu",
     "points": [
       "Çırağan Palace Kempinski",
       "Renovasyon ve dekorasyon",
@@ -82,5 +68,19 @@
     "audience": "ana-yukleniciler",
     "image": "/img/projects/ciragan-otel-renovasyonu/ciragan-otel-renovasyonu-cover.webp",
     "project": "ciragan-otel-renovasyonu"
+  },
+  {
+    "title": "Proje Yönetimi & Danışmanlık",
+    "description": "Bütçe, ihale, maliyet ve kalite kontrol süreçlerinde proje yönetimi ve danışmanlık.",
+    "href": "/faaliyet-alanlari/proje-yonetimi-danismanlik",
+    "points": [
+      "Bütçe ve maliyet",
+      "İhale süreçleri",
+      "Kalite kontrol"
+    ],
+    "icon": "chart",
+    "audience": "ana-yukleniciler",
+    "image": "/img/projects/gaziantep-sehir-hastanesi/gaziantep-sehir-hastanesi-cover.webp",
+    "project": "gaziantep-sehir-hastanesi"
   }
 ]

@@ -63,7 +63,7 @@ const facts = [
         {project.type && <span>{project.type}</span>}
         <span class:list={{ 'is-ongoing': ongoing }}>{ongoing ? 'Devam Ediyor' : 'Tamamlandı'}</span>
       </div>
-      <h1>{projectDisplayName(project.name)}</h1>
+      <h1 data-words>{projectDisplayName(project.name)}</h1>
 
       {
         facts.length > 0 && (

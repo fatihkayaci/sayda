@@ -21,7 +21,15 @@ RewriteRule ^(.*)$ https://www.sayda.com.tr/$1 [R=301,L]
 # Eski blog yolu
 RewriteRule ^rehber/?$ /blog [R=301,L]
 RewriteRule ^rehber/(.*)$ /blog/$1 [R=301,L]
-RewriteRule ^kentsel-donusum/?$ /hizmetler/kentsel-donusum [R=301,L]
+RewriteRule ^kentsel-donusum/?$ /faaliyet-alanlari/kentsel-donusum [R=301,L]
+
+# Hizmetler bölümü Faaliyet Alanları adını aldı (2026-10)
+RewriteRule ^hizmetler/otel-renovasyonu/?$ /faaliyet-alanlari/bina-ve-tesis-renovasyonu [R=301,L]
+RewriteRule ^hizmetler/?$ /faaliyet-alanlari [R=301,L]
+RewriteRule ^hizmetler/(.*)$ /faaliyet-alanlari/$1 [R=301,L]
+
+# Belgelerimiz sayfası Sertifikalar adını aldı (2026-10)
+RewriteRule ^belgeler/?$ /sertifikalar [R=301,L]
 
 # Eski ASP.NET sitesi (query string'li adresler)
 RewriteCond %{QUERY_STRING} (^|&)PNR=3(&|$)
@@ -149,12 +157,12 @@ RewriteRule ^ik.aspx/?$ /kariyer? [R=301,L,NC]
 # Eski ASP.NET sitesi (düz adresler)
 RewriteRule ^Anasayfa.aspx$ / [R=301,L,NC]
 RewriteRule ^Haberler.aspx$ /haberler [R=301,L,NC]
-RewriteRule ^belgelerimiz.aspx$ /belgeler [R=301,L,NC]
+RewriteRule ^belgelerimiz.aspx$ /sertifikalar [R=301,L,NC]
 RewriteRule ^is_bitirme.aspx$ /projeler/is-bitirme-belgeleri [R=301,L,NC]
 RewriteRule ^iletisim.aspx$ /iletisim [R=301,L,NC]
-RewriteRule ^kentseldonusum.html$ /hizmetler/kentsel-donusum [R=301,L,NC]
-RewriteRule ^muteahitlik.html$ /hizmetler/anahtar-teslim-muteahhitlik [R=301,L,NC]
-RewriteRule ^prpjeyonetimi.html$ /hizmetler/proje-yonetimi-danismanlik [R=301,L,NC]
+RewriteRule ^kentseldonusum.html$ /faaliyet-alanlari/kentsel-donusum [R=301,L,NC]
+RewriteRule ^muteahitlik.html$ /faaliyet-alanlari/anahtar-teslim-muteahhitlik [R=301,L,NC]
+RewriteRule ^prpjeyonetimi.html$ /faaliyet-alanlari/proje-yonetimi-danismanlik [R=301,L,NC]
 </IfModule>
 
 <IfModule mod_headers.c>
