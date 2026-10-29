@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ProjectHero from '../../components/project/ProjectHero.astro';
 import ProjectGallery from '../../components/project/ProjectGallery.astro';
+import ProjectCertificates from '../../components/project/ProjectCertificates.astro';
 import ProjectOverview from '../../components/project/ProjectOverview.astro';
 import ProjectSidebar from '../../components/project/ProjectSidebar.astro';
 import ProjectFeatures from '../../components/project/ProjectFeatures.astro';
@@ -87,6 +88,7 @@ const serviceLd = {
               project={project}
               credits={'galleryCredits' in project ? project.galleryCredits : undefined}
             />
+            <ProjectCertificates slug={project.slug} />
           </div>
           <ProjectSidebar project={project} />
         </div>

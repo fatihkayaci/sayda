@@ -2,11 +2,17 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import projects from '../../data/projects.json';
+import certificates from '../../data/certificates.json';
+import { projectDisplayName } from '../../utils/project';
 
 const hero = projects.find((p) => p.slug === 'varyap-meridien-konut')!;
 
-// Canlı sitedeki iş bitirme belgesi görselleri (25 adet), sırası canlıdaki gibi.
-const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, '0'));
+// Scans from the client's reference folder (old site's order, new ones last); a certificate
+// without a project on the site (Visa, Seba) has project: null.
+const items = certificates.map((c) => {
+  const project = c.project ? projects.find((p) => p.slug === c.project) : undefined;
+  return { ...c, projectName: project ? projectDisplayName(project.name) : '', projectHref: project?.href };
+});
 ---
 
 <Layout
@@ -34,18 +40,29 @@ const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, 
     <div class="container">
       <ul class="ib__grid">
         {
-          belgeler.map((n, i) => (
-            <li>
-              <a href={`/img/is-bitirme/is-bitirme-${n}-buyuk.webp`} target="_blank" rel="noopener noreferrer">
+          items.map((c, i) => (
+            <li class="ib__card">
+              <a class="ib__doc" href={c.large} target="_blank" rel="noopener noreferrer">
                 <img
-                  src={`/img/is-bitirme/is-bitirme-${n}.webp`}
-                  alt={`Sayda İnşaat iş bitirme belgesi ${i + 1}`}
-                  width="360"
-                  height="480"
-                  loading={i < 3 ? undefined : 'lazy'}
+                  src={c.image}
+                  alt={`${c.issuer} tarafından verilen belge: ${c.title}`}
+                  width="480"
+                  height="640"
+                  loading={i < 4 ? undefined : 'lazy'}
                 />
-                <span>Belge {n}</span>
               </a>
+              <div class="ib__info">
+                <p class="ib__meta">
+                  {c.issuer}
+                  {c.date && <> · {c.date}</>}
+                </p>
+                <h2>{c.title}</h2>
+                {c.projectHref && (
+                  <a class="ib__project" href={c.projectHref}>
+                    {c.projectName}
+                  </a>
+                )}
+              </div>
             </li>
           ))
         }
@@ -69,35 +86,66 @@ const belgeler = Array.from({ length: 25 }, (_, i) => String(i + 1).padStart(2, 
     list-style: none;
   }
 
-  .ib__grid a {
+  .ib__card {
     display: grid;
-    gap: 12px;
-    padding: 12px;
+    grid-template-rows: auto 1fr;
     border-radius: var(--radius);
     background: #fff;
+    overflow: hidden;
     transition:
       transform var(--transition),
       box-shadow var(--transition);
   }
 
-  .ib__grid a:hover {
+  .ib__card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow);
   }
 
-  .ib__grid img {
+  .ib__doc {
+    display: block;
+    padding: 12px 12px 0;
+  }
+
+  .ib__doc img {
     width: 100%;
     height: auto;
     aspect-ratio: 3 / 4;
     object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--color-border);
   }
 
-  .ib__grid span {
-    font-size: 0.8125rem;
+  .ib__info {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 14px 16px 18px;
+  }
+
+  .ib__meta {
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-text-muted);
+    color: var(--color-orange-text);
+  }
+
+  .ib__info h2 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-navy-deep);
+  }
+
+  .ib__project {
+    justify-self: start;
+    margin-top: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid var(--color-orange);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-navy);
   }
 
   @media (max-width: 1024px) {
